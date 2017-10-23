@@ -1,0 +1,7 @@
+stages:
+  - deploy
+
+Git MIRROR:
+  stage: deploy
+  script:
+    - git push --mirror https://Singgee:nextplusplus@bitbucket.org/wellnessai/demoapp.git
