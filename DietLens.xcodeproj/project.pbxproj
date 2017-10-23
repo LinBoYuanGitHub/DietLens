@@ -3,144 +3,230 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D2FEB111F0CEFDB00F95019 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2FEB101F0CEFDB00F95019 /* AppDelegate.swift */; };
-		4D2FEB131F0CEFDB00F95019 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2FEB121F0CEFDB00F95019 /* FirstViewController.swift */; };
-		4D2FEB151F0CEFDB00F95019 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2FEB141F0CEFDB00F95019 /* SecondViewController.swift */; };
-		4D2FEB181F0CEFDB00F95019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D2FEB161F0CEFDB00F95019 /* Main.storyboard */; };
-		4D2FEB1A1F0CEFDB00F95019 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2FEB191F0CEFDB00F95019 /* Assets.xcassets */; };
-		4D2FEB1D1F0CEFDB00F95019 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D2FEB1B1F0CEFDB00F95019 /* LaunchScreen.storyboard */; };
-		4D2FEB281F0CEFDB00F95019 /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2FEB271F0CEFDB00F95019 /* DietLensTests.swift */; };
-		4D2FEB331F0CEFDB00F95019 /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2FEB321F0CEFDB00F95019 /* DietLensUITests.swift */; };
-		4D6931101F1CBE0F0072CBB7 /* foodListViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D69310F1F1CBE0F0072CBB7 /* foodListViewCellTableViewCell.swift */; };
+		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
+		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
+		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
+		5877CF8A1F9D82BF0022B51E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF891F9D82BF0022B51E /* ViewController.swift */; };
+		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
+		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
+		5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF911F9D82BF0022B51E /* Assets.xcassets */; };
+		5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */; };
+		5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
+		5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
+		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
+		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
+		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4D2FEB241F0CEFDB00F95019 /* PBXContainerItemProxy */ = {
+		5877CF9C1F9D82BF0022B51E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4D2FEB051F0CEFDB00F95019 /* Project object */;
+			containerPortal = 5877CF7C1F9D82BF0022B51E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4D2FEB0C1F0CEFDB00F95019;
+			remoteGlobalIDString = 5877CF831F9D82BF0022B51E;
 			remoteInfo = DietLens;
 		};
-		4D2FEB2F1F0CEFDB00F95019 /* PBXContainerItemProxy */ = {
+		5877CFA71F9D82BF0022B51E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4D2FEB051F0CEFDB00F95019 /* Project object */;
+			containerPortal = 5877CF7C1F9D82BF0022B51E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4D2FEB0C1F0CEFDB00F95019;
+			remoteGlobalIDString = 5877CF831F9D82BF0022B51E;
 			remoteInfo = DietLens;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4D2FEB0D1F0CEFDB00F95019 /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D2FEB101F0CEFDB00F95019 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4D2FEB121F0CEFDB00F95019 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		4D2FEB141F0CEFDB00F95019 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		4D2FEB171F0CEFDB00F95019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4D2FEB191F0CEFDB00F95019 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4D2FEB1C1F0CEFDB00F95019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4D2FEB1E1F0CEFDB00F95019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D2FEB231F0CEFDB00F95019 /* DietLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D2FEB271F0CEFDB00F95019 /* DietLensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensTests.swift; sourceTree = "<group>"; };
-		4D2FEB291F0CEFDB00F95019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D2FEB2E1F0CEFDB00F95019 /* DietLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D2FEB321F0CEFDB00F95019 /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
-		4D2FEB341F0CEFDB00F95019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D69310F1F1CBE0F0072CBB7 /* foodListViewCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodListViewCellTableViewCell.swift; sourceTree = "<group>"; };
+		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5877CF891F9D82BF0022B51E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DietLens.xcdatamodel; sourceTree = "<group>"; };
+		5877CF911F9D82BF0022B51E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5877CF941F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5877CF961F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensTests.swift; sourceTree = "<group>"; };
+		5877CFA11F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
+		5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
+		7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.release.xcconfig"; sourceTree = "<group>"; };
+		9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.release.xcconfig"; sourceTree = "<group>"; };
+		B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
+		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4D2FEB0A1F0CEFDB00F95019 /* Frameworks */ = {
+		5877CF811F9D82BF0022B51E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D2FEB201F0CEFDB00F95019 /* Frameworks */ = {
+		5877CF981F9D82BF0022B51E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D2FEB2B1F0CEFDB00F95019 /* Frameworks */ = {
+		5877CFA31F9D82BF0022B51E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4D2FEB041F0CEFDB00F95019 = {
+		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
-				4D2FEB0F1F0CEFDB00F95019 /* DietLens */,
-				4D2FEB261F0CEFDB00F95019 /* DietLensTests */,
-				4D2FEB311F0CEFDB00F95019 /* DietLensUITests */,
-				4D2FEB0E1F0CEFDB00F95019 /* Products */,
+				5877CF861F9D82BF0022B51E /* DietLens */,
+				5877CF9E1F9D82BF0022B51E /* DietLensTests */,
+				5877CFA91F9D82BF0022B51E /* DietLensUITests */,
+				5877CF851F9D82BF0022B51E /* Products */,
+				C8B155BF22F4DE7D186C083D /* Pods */,
+				D17C6477152A12102B087091 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		4D2FEB0E1F0CEFDB00F95019 /* Products */ = {
+		5877CF851F9D82BF0022B51E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4D2FEB0D1F0CEFDB00F95019 /* DietLens.app */,
-				4D2FEB231F0CEFDB00F95019 /* DietLensTests.xctest */,
-				4D2FEB2E1F0CEFDB00F95019 /* DietLensUITests.xctest */,
+				5877CF841F9D82BF0022B51E /* DietLens.app */,
+				5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */,
+				5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4D2FEB0F1F0CEFDB00F95019 /* DietLens */ = {
+		5877CF861F9D82BF0022B51E /* DietLens */ = {
 			isa = PBXGroup;
 			children = (
-				4D2FEB101F0CEFDB00F95019 /* AppDelegate.swift */,
-				4D2FEB121F0CEFDB00F95019 /* FirstViewController.swift */,
-				4D2FEB141F0CEFDB00F95019 /* SecondViewController.swift */,
-				4D2FEB161F0CEFDB00F95019 /* Main.storyboard */,
-				4D2FEB191F0CEFDB00F95019 /* Assets.xcassets */,
-				4D2FEB1B1F0CEFDB00F95019 /* LaunchScreen.storyboard */,
-				4D2FEB1E1F0CEFDB00F95019 /* Info.plist */,
-				4D69310F1F1CBE0F0072CBB7 /* foodListViewCellTableViewCell.swift */,
+				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
+				58FCCFED1F9D886E00E4F421 /* Controller */,
+				58FCCFEC1F9D886900E4F421 /* View */,
+				58FCCFEB1F9D886400E4F421 /* Model */,
+				5877CF871F9D82BF0022B51E /* AppDelegate.swift */,
+				5877CF8B1F9D82BF0022B51E /* Main.storyboard */,
+				5877CF911F9D82BF0022B51E /* Assets.xcassets */,
+				5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */,
+				5877CF961F9D82BF0022B51E /* Info.plist */,
+				5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */,
 			);
 			path = DietLens;
 			sourceTree = "<group>";
 		};
-		4D2FEB261F0CEFDB00F95019 /* DietLensTests */ = {
+		5877CF9E1F9D82BF0022B51E /* DietLensTests */ = {
 			isa = PBXGroup;
 			children = (
-				4D2FEB271F0CEFDB00F95019 /* DietLensTests.swift */,
-				4D2FEB291F0CEFDB00F95019 /* Info.plist */,
+				5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */,
+				5877CFA11F9D82BF0022B51E /* Info.plist */,
 			);
 			path = DietLensTests;
 			sourceTree = "<group>";
 		};
-		4D2FEB311F0CEFDB00F95019 /* DietLensUITests */ = {
+		5877CFA91F9D82BF0022B51E /* DietLensUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4D2FEB321F0CEFDB00F95019 /* DietLensUITests.swift */,
-				4D2FEB341F0CEFDB00F95019 /* Info.plist */,
+				5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */,
+				5877CFAC1F9D82BF0022B51E /* Info.plist */,
 			);
 			path = DietLensUITests;
+			sourceTree = "<group>";
+		};
+		58FCCFEB1F9D886400E4F421 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		58FCCFEC1F9D886900E4F421 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		58FCCFED1F9D886E00E4F421 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5877CF891F9D82BF0022B51E /* ViewController.swift */,
+				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		58FCCFF01F9D8A4F00E4F421 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				58FCCFF11F9D8A5900E4F421 /* Fonts */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		58FCCFF11F9D8A5900E4F421 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C8B155BF22F4DE7D186C083D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */,
+				934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */,
+				EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */,
+				7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */,
+				9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */,
+				B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D17C6477152A12102B087091 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */,
+				B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */,
+				C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4D2FEB0C1F0CEFDB00F95019 /* DietLens */ = {
+		5877CF831F9D82BF0022B51E /* DietLens */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4D2FEB371F0CEFDB00F95019 /* Build configuration list for PBXNativeTarget "DietLens" */;
+			buildConfigurationList = 5877CFAF1F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLens" */;
 			buildPhases = (
-				4D2FEB091F0CEFDB00F95019 /* Sources */,
-				4D2FEB0A1F0CEFDB00F95019 /* Frameworks */,
-				4D2FEB0B1F0CEFDB00F95019 /* Resources */,
+				5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */,
+				5877CF801F9D82BF0022B51E /* Sources */,
+				5877CF811F9D82BF0022B51E /* Frameworks */,
+				5877CF821F9D82BF0022B51E /* Resources */,
+				297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
+				D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,111 +234,117 @@
 			);
 			name = DietLens;
 			productName = DietLens;
-			productReference = 4D2FEB0D1F0CEFDB00F95019 /* DietLens.app */;
+			productReference = 5877CF841F9D82BF0022B51E /* DietLens.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4D2FEB221F0CEFDB00F95019 /* DietLensTests */ = {
+		5877CF9A1F9D82BF0022B51E /* DietLensTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4D2FEB3A1F0CEFDB00F95019 /* Build configuration list for PBXNativeTarget "DietLensTests" */;
+			buildConfigurationList = 5877CFB21F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensTests" */;
 			buildPhases = (
-				4D2FEB1F1F0CEFDB00F95019 /* Sources */,
-				4D2FEB201F0CEFDB00F95019 /* Frameworks */,
-				4D2FEB211F0CEFDB00F95019 /* Resources */,
+				A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */,
+				5877CF971F9D82BF0022B51E /* Sources */,
+				5877CF981F9D82BF0022B51E /* Frameworks */,
+				5877CF991F9D82BF0022B51E /* Resources */,
+				7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */,
+				9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4D2FEB251F0CEFDB00F95019 /* PBXTargetDependency */,
+				5877CF9D1F9D82BF0022B51E /* PBXTargetDependency */,
 			);
 			name = DietLensTests;
 			productName = DietLensTests;
-			productReference = 4D2FEB231F0CEFDB00F95019 /* DietLensTests.xctest */;
+			productReference = 5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4D2FEB2D1F0CEFDB00F95019 /* DietLensUITests */ = {
+		5877CFA51F9D82BF0022B51E /* DietLensUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4D2FEB3D1F0CEFDB00F95019 /* Build configuration list for PBXNativeTarget "DietLensUITests" */;
+			buildConfigurationList = 5877CFB51F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensUITests" */;
 			buildPhases = (
-				4D2FEB2A1F0CEFDB00F95019 /* Sources */,
-				4D2FEB2B1F0CEFDB00F95019 /* Frameworks */,
-				4D2FEB2C1F0CEFDB00F95019 /* Resources */,
+				D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */,
+				5877CFA21F9D82BF0022B51E /* Sources */,
+				5877CFA31F9D82BF0022B51E /* Frameworks */,
+				5877CFA41F9D82BF0022B51E /* Resources */,
+				0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */,
+				F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4D2FEB301F0CEFDB00F95019 /* PBXTargetDependency */,
+				5877CFA81F9D82BF0022B51E /* PBXTargetDependency */,
 			);
 			name = DietLensUITests;
 			productName = DietLensUITests;
-			productReference = 4D2FEB2E1F0CEFDB00F95019 /* DietLensUITests.xctest */;
+			productReference = 5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4D2FEB051F0CEFDB00F95019 /* Project object */ = {
+		5877CF7C1F9D82BF0022B51E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = wellnessNext;
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "NExT++";
 				TargetAttributes = {
-					4D2FEB0C1F0CEFDB00F95019 = {
-						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = BCQF4SHM2R;
+					5877CF831F9D82BF0022B51E = {
+						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
-					4D2FEB221F0CEFDB00F95019 = {
-						CreatedOnToolsVersion = 8.3.3;
+					5877CF9A1F9D82BF0022B51E = {
+						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 4D2FEB0C1F0CEFDB00F95019;
+						TestTargetID = 5877CF831F9D82BF0022B51E;
 					};
-					4D2FEB2D1F0CEFDB00F95019 = {
-						CreatedOnToolsVersion = 8.3.3;
+					5877CFA51F9D82BF0022B51E = {
+						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 4D2FEB0C1F0CEFDB00F95019;
+						TestTargetID = 5877CF831F9D82BF0022B51E;
 					};
 				};
 			};
-			buildConfigurationList = 4D2FEB081F0CEFDB00F95019 /* Build configuration list for PBXProject "DietLens" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			buildConfigurationList = 5877CF7F1F9D82BF0022B51E /* Build configuration list for PBXProject "DietLens" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 4D2FEB041F0CEFDB00F95019;
-			productRefGroup = 4D2FEB0E1F0CEFDB00F95019 /* Products */;
+			mainGroup = 5877CF7B1F9D82BF0022B51E;
+			productRefGroup = 5877CF851F9D82BF0022B51E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4D2FEB0C1F0CEFDB00F95019 /* DietLens */,
-				4D2FEB221F0CEFDB00F95019 /* DietLensTests */,
-				4D2FEB2D1F0CEFDB00F95019 /* DietLensUITests */,
+				5877CF831F9D82BF0022B51E /* DietLens */,
+				5877CF9A1F9D82BF0022B51E /* DietLensTests */,
+				5877CFA51F9D82BF0022B51E /* DietLensUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4D2FEB0B1F0CEFDB00F95019 /* Resources */ = {
+		5877CF821F9D82BF0022B51E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D2FEB1D1F0CEFDB00F95019 /* LaunchScreen.storyboard in Resources */,
-				4D2FEB1A1F0CEFDB00F95019 /* Assets.xcassets in Resources */,
-				4D2FEB181F0CEFDB00F95019 /* Main.storyboard in Resources */,
+				5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */,
+				5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */,
+				58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */,
+				5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D2FEB211F0CEFDB00F95019 /* Resources */ = {
+		5877CF991F9D82BF0022B51E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D2FEB2C1F0CEFDB00F95019 /* Resources */ = {
+		5877CFA41F9D82BF0022B51E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -261,62 +353,200 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		4D2FEB091F0CEFDB00F95019 /* Sources */ = {
+		5877CF801F9D82BF0022B51E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D6931101F1CBE0F0072CBB7 /* foodListViewCellTableViewCell.swift in Sources */,
-				4D2FEB151F0CEFDB00F95019 /* SecondViewController.swift in Sources */,
-				4D2FEB111F0CEFDB00F95019 /* AppDelegate.swift in Sources */,
-				4D2FEB131F0CEFDB00F95019 /* FirstViewController.swift in Sources */,
+				5877CF8A1F9D82BF0022B51E /* ViewController.swift in Sources */,
+				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
+				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
+				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D2FEB1F1F0CEFDB00F95019 /* Sources */ = {
+		5877CF971F9D82BF0022B51E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D2FEB281F0CEFDB00F95019 /* DietLensTests.swift in Sources */,
+				5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D2FEB2A1F0CEFDB00F95019 /* Sources */ = {
+		5877CFA21F9D82BF0022B51E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D2FEB331F0CEFDB00F95019 /* DietLensUITests.swift in Sources */,
+				5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4D2FEB251F0CEFDB00F95019 /* PBXTargetDependency */ = {
+		5877CF9D1F9D82BF0022B51E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4D2FEB0C1F0CEFDB00F95019 /* DietLens */;
-			targetProxy = 4D2FEB241F0CEFDB00F95019 /* PBXContainerItemProxy */;
+			target = 5877CF831F9D82BF0022B51E /* DietLens */;
+			targetProxy = 5877CF9C1F9D82BF0022B51E /* PBXContainerItemProxy */;
 		};
-		4D2FEB301F0CEFDB00F95019 /* PBXTargetDependency */ = {
+		5877CFA81F9D82BF0022B51E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4D2FEB0C1F0CEFDB00F95019 /* DietLens */;
-			targetProxy = 4D2FEB2F1F0CEFDB00F95019 /* PBXContainerItemProxy */;
+			target = 5877CF831F9D82BF0022B51E /* DietLens */;
+			targetProxy = 5877CFA71F9D82BF0022B51E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4D2FEB161F0CEFDB00F95019 /* Main.storyboard */ = {
+		5877CF8B1F9D82BF0022B51E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4D2FEB171F0CEFDB00F95019 /* Base */,
+				5877CF8C1F9D82BF0022B51E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		4D2FEB1B1F0CEFDB00F95019 /* LaunchScreen.storyboard */ = {
+		5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4D2FEB1C1F0CEFDB00F95019 /* Base */,
+				5877CF941F9D82BF0022B51E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -324,17 +554,19 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4D2FEB351F0CEFDB00F95019 /* Debug */ = {
+		5877CFAD1F9D82BF0022B51E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -342,16 +574,21 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -365,27 +602,28 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		4D2FEB361F0CEFDB00F95019 /* Release */ = {
+		5877CFAE1F9D82BF0022B51E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -393,16 +631,21 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -410,93 +653,108 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		4D2FEB381F0CEFDB00F95019 /* Debug */ = {
+		5877CFB01F9D82BF0022B51E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BCQF4SHM2R;
 				INFOPLIST_FILE = DietLens/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WellnessNext.DietLens;
+				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		4D2FEB391F0CEFDB00F95019 /* Release */ = {
+		5877CFB11F9D82BF0022B51E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BCQF4SHM2R;
 				INFOPLIST_FILE = DietLens/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WellnessNext.DietLens;
+				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		4D2FEB3B1F0CEFDB00F95019 /* Debug */ = {
+		5877CFB31F9D82BF0022B51E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DietLensTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WellnessNext.DietLensTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietLens.app/DietLens";
 			};
 			name = Debug;
 		};
-		4D2FEB3C1F0CEFDB00F95019 /* Release */ = {
+		5877CFB41F9D82BF0022B51E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DietLensTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WellnessNext.DietLensTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietLens.app/DietLens";
 			};
 			name = Release;
 		};
-		4D2FEB3E1F0CEFDB00F95019 /* Debug */ = {
+		5877CFB61F9D82BF0022B51E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DietLensUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WellnessNext.DietLensUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = DietLens;
 			};
 			name = Debug;
 		};
-		4D2FEB3F1F0CEFDB00F95019 /* Release */ = {
+		5877CFB71F9D82BF0022B51E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DietLensUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WellnessNext.DietLensUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = DietLens;
 			};
 			name = Release;
@@ -504,43 +762,56 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4D2FEB081F0CEFDB00F95019 /* Build configuration list for PBXProject "DietLens" */ = {
+		5877CF7F1F9D82BF0022B51E /* Build configuration list for PBXProject "DietLens" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D2FEB351F0CEFDB00F95019 /* Debug */,
-				4D2FEB361F0CEFDB00F95019 /* Release */,
+				5877CFAD1F9D82BF0022B51E /* Debug */,
+				5877CFAE1F9D82BF0022B51E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4D2FEB371F0CEFDB00F95019 /* Build configuration list for PBXNativeTarget "DietLens" */ = {
+		5877CFAF1F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLens" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D2FEB381F0CEFDB00F95019 /* Debug */,
-				4D2FEB391F0CEFDB00F95019 /* Release */,
+				5877CFB01F9D82BF0022B51E /* Debug */,
+				5877CFB11F9D82BF0022B51E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4D2FEB3A1F0CEFDB00F95019 /* Build configuration list for PBXNativeTarget "DietLensTests" */ = {
+		5877CFB21F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D2FEB3B1F0CEFDB00F95019 /* Debug */,
-				4D2FEB3C1F0CEFDB00F95019 /* Release */,
+				5877CFB31F9D82BF0022B51E /* Debug */,
+				5877CFB41F9D82BF0022B51E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4D2FEB3D1F0CEFDB00F95019 /* Build configuration list for PBXNativeTarget "DietLensUITests" */ = {
+		5877CFB51F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D2FEB3E1F0CEFDB00F95019 /* Debug */,
-				4D2FEB3F1F0CEFDB00F95019 /* Release */,
+				5877CFB61F9D82BF0022B51E /* Debug */,
+				5877CFB71F9D82BF0022B51E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */,
+			);
+			currentVersion = 5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */;
+			path = DietLens.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
-	rootObject = 4D2FEB051F0CEFDB00F95019 /* Project object */;
+	rootObject = 5877CF7C1F9D82BF0022B51E /* Project object */;
 }

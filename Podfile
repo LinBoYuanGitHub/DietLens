@@ -1,11 +1,25 @@
+project 'DietLens.xcodeproj'
+
 # Uncomment the next line to define a global platform for your project
-source ‘https://github.com/CocoaPods/Specs.git’
-platform :ios, '9.0'
-use_frameworks!
+# platform :ios, '9.0'
 
 target 'DietLens' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  pod ‘Alamofire’,
-	:git => ‘https://github.com/Alamofire/Alamofire.git’,
-	:branch => ‘swift3’
+  use_frameworks!
+
+  # Pods for DietLens
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'Socket.IO-Client-Swift'
+
+  target 'DietLensTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'DietLensUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
 end

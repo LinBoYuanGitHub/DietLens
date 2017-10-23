@@ -2,8 +2,8 @@
 //  DietLensUITests.swift
 //  DietLensUITests
 //
-//  Created by singgee on 5/7/17.
-//  Copyright © 2017 wellnessNext. All rights reserved.
+//  Created by next on 23/10/17.
+//  Copyright © 2017 NExT++. All rights reserved.
 //
 
 import XCTest
