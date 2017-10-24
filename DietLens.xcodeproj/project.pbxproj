@@ -10,13 +10,18 @@
 		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
 		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
-		5877CF8A1F9D82BF0022B51E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF891F9D82BF0022B51E /* ViewController.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
 		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
 		5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF911F9D82BF0022B51E /* Assets.xcassets */; };
 		5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */; };
 		5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
 		5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
+		58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
+		58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */; };
+		58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */; };
+		58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF261F9F437100FF3A95 /* NewsFeed.swift */; };
+		58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF291F9F439100FF3A95 /* DataService.swift */; };
+		58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
 		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
 		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
 		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
@@ -43,7 +48,6 @@
 		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5877CF891F9D82BF0022B51E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DietLens.xcdatamodel; sourceTree = "<group>"; };
 		5877CF911F9D82BF0022B51E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,6 +59,12 @@
 		5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
 		5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBorderClearButton.swift; sourceTree = "<group>"; };
+		58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		58F2DF261F9F437100FF3A95 /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
+		58F2DF291F9F439100FF3A95 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
 		7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +130,7 @@
 		5877CF861F9D82BF0022B51E /* DietLens */ = {
 			isa = PBXGroup;
 			children = (
+				58F2DF281F9F437F00FF3A95 /* Services */,
 				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
 				58FCCFED1F9D886E00E4F421 /* Controller */,
 				58FCCFEC1F9D886900E4F421 /* View */,
@@ -152,9 +163,18 @@
 			path = DietLensUITests;
 			sourceTree = "<group>";
 		};
+		58F2DF281F9F437F00FF3A95 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				58F2DF291F9F439100FF3A95 /* DataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		58FCCFEB1F9D886400E4F421 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				58F2DF261F9F437100FF3A95 /* NewsFeed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -162,6 +182,9 @@
 		58FCCFEC1F9D886900E4F421 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
+				58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,
+				58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,8 +192,8 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5877CF891F9D82BF0022B51E /* ViewController.swift */,
 				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
+				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -496,10 +519,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5877CF8A1F9D82BF0022B51E /* ViewController.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
+				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
+				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
+				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
+				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
+				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
+				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
