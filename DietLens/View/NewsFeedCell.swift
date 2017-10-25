@@ -11,7 +11,8 @@ import UIKit
 class NewsFeedCell: UITableViewCell {
     
     
-
+    @IBOutlet weak var NewsArticleRow: UICollectionView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
