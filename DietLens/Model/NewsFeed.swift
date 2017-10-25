@@ -8,3 +8,8 @@
 
 import Foundation
 
+struct NewsFeed{
+    var newsArticles = [NewsArticle]()
+    
+    
+}

@@ -11,6 +11,7 @@ target 'DietLens' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'Socket.IO-Client-Swift'
+  pod 'SlideMenuControllerSwift'
 
   target 'DietLensTests' do
     inherit! :search_paths

@@ -12,10 +12,12 @@ import UIKit
 struct NewsArticle{
     private(set) public var newsImage: UIImage
     private(set) public var newsTitle: String
+    private(set) public var articleID: String
     
-    init(title: String, image: UIImage)
+    init(title: String, image: UIImage, articleID: String)
     {
         self.newsImage = image
         self.newsTitle = title
+        self.articleID = articleID
     }
 }

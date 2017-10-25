@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
 		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
+		58212B301FA0D1BB001BF89A /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58212B2F1FA0D1BB001BF89A /* SlideMenuController.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
 		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58212B2F1FA0D1BB001BF89A /* SlideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58212B2E1FA0D18A001BF89A /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				58212B2F1FA0D1BB001BF89A /* SlideMenuController.swift */,
+			);
+			path = "Side Menu";
+			sourceTree = "<group>";
+		};
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +217,7 @@
 		58FCCFF01F9D8A4F00E4F421 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				58212B2E1FA0D18A001BF89A /* Side Menu */,
 				58FCCFF11F9D8A5900E4F421 /* Fonts */,
 			);
 			path = "Supporting Files";
@@ -535,6 +546,7 @@
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
+				58212B301FA0D1BB001BF89A /* SlideMenuController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+class DataService
+{
+    static var instance = DataService()
+    private init()
+    {
+        
+    }
+    
+    func test()
+    {
+        print("me")
+    }
+}
