@@ -40,6 +40,14 @@ class GradientView: UIView{
         self.layer.insertSublayer(gradLayer, at: 0)
     }
 
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        self.setNeedsLayout()
+    }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.setNeedsLayout()
+    }
 
 }

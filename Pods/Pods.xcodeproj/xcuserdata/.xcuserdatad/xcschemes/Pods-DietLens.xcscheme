@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F4FC0C1912DC13B5CABD2DCF412C96EC'
+               BlueprintIdentifier = '1D7AE8D66DF519E85F8491F641E8B510'
                BlueprintName = 'Pods-DietLens'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods-DietLens.framework'>

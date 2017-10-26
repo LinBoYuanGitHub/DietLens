@@ -18,18 +18,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedRow") as? NewsFeedCell
+        if indexPath.row == 0
         {
-            return cell
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedRow") as? NewsFeedCell
+            {
+                return cell
+            }
         }
-        else if let cell = tableView.dequeueReusableCell(withIdentifier: "otherFeedRow") as? UITableViewCell
+        else if indexPath.row == 1
         {
-            return cell
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "otherFeedRow") //as? UITableViewCell
+            {
+                return cell
+            }
         }
-        else
-        {
-            return NewsFeedCell()
-        }
+    
+        return UITableViewCell()
     }
     
     override func viewDidLoad()
@@ -37,7 +41,31 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         newsFeedTable.dataSource = self
         newsFeedTable.delegate = self
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(),for:.default)
+        
+        newsFeedTable.estimatedRowHeight = 240
+        newsFeedTable.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0
+        {
+            return CGFloat(240)
+        }
+        else if indexPath.row == 1
+        {
+            return CGFloat(320)
+        }
+        else
+        {
+            return UITableViewAutomaticDimension
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
+        cell.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 0)
     }
 
     override func didReceiveMemoryWarning()
