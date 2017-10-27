@@ -715,7 +715,6 @@ open class SlideMenuController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     open func changeLeftViewController(_ leftViewController: UIViewController, closeLeft:Bool) {
-        
         removeViewController(self.leftViewController)
         self.leftViewController = leftViewController
         setUpViewController(leftContainerView, targetViewController: leftViewController)
