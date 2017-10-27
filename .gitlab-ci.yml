@@ -4,4 +4,4 @@ stages:
 Git MIRROR:
   stage: deploy
   script:
-    - git push --mirror https://Singgee:nextplusplus@bitbucket.org/wellnessai/demoapp.git
+    - git push --mirror https://Singgee:$bitbucketPassword@bitbucket.org/wellnessai/demoapp.git
