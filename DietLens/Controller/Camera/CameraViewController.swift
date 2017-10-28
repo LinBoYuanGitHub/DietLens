@@ -179,6 +179,13 @@ class CameraViewController: UIViewController {
                 defaultVideoDevice = backCameraDevice
             }
 
+            // Set autofocus
+            if defaultVideoDevice!.isFocusModeSupported(.continuousAutoFocus) {
+                try defaultVideoDevice!.lockForConfiguration()
+                defaultVideoDevice?.focusMode = .continuousAutoFocus
+                defaultVideoDevice?.unlockForConfiguration()
+            }
+
             let videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice!)
 
             if session.canAddInput(videoDeviceInput) {
@@ -319,8 +326,7 @@ class CameraViewController: UIViewController {
                 self.sessionQueue.async {
                     self.inProgressPhotoCaptureDelegates[photoCaptureProcessor.requestedPhotoSettings.uniqueID] = nil
                 }
-            }
-            )
+            })
 
             /*
              The Photo Output keeps a weak reference to the photo capture delegate so
