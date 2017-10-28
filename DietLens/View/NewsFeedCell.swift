@@ -8,42 +8,32 @@
 
 import UIKit
 
-class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate
-{
+class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var NewsArticleRow: UICollectionView!
-    
-    override func awakeFromNib()
-    {
+
+    override func awakeFromNib() {
         super.awakeFromNib()
         NewsArticleRow.dataSource = self
         NewsArticleRow.delegate = self
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool)
-    {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsArticleCell
-        {
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsArticleCell {
             return cell
-        }
-        else
-        {
+        } else {
             return NewsArticleCell()
         }
     }
-    
-    
+
+
 }
-
-

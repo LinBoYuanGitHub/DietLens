@@ -9,13 +9,12 @@
 import UIKit
 
 class NewsArticleCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var newsTitle: UILabel!
-    
-    public func updateNewsArticle()
-    {
-        
+
+    public func updateNewsArticle() {
+
     }
-    
+
 }

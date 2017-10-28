@@ -18,10 +18,8 @@ class HomeProgressView: UIProgressView {
         // Drawing code
     }
     */
-    @IBInspectable var cornerRadius: Double = 2.0
-    {
-        didSet
-        {
+    @IBInspectable var cornerRadius: Double = 2.0 {
+        didSet {
             self.setNeedsLayout()
         }
     }

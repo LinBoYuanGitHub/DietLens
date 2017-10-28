@@ -8,16 +8,13 @@
 
 import Foundation
 
-class DataService
-{
+class DataService {
     static var instance = DataService()
-    private init()
-    {
-        
+    private init() {
+
     }
-    
-    func test()
-    {
+
+    func test() {
         print("me")
     }
 }

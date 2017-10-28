@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct ServerConfig
-{
+struct ServerConfig {
     let base_URL = ""
-    
+
 }

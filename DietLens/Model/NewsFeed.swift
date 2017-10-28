@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct NewsFeed{
+struct NewsFeed {
     var newsArticles = [NewsArticle]()
-    
-    
+
+
 }
