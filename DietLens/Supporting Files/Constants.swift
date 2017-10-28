@@ -9,6 +9,6 @@
 import Foundation
 
 struct ServerConfig {
-    let base_URL = ""
+    let baseURL = ""
 
 }

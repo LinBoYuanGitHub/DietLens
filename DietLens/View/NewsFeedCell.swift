@@ -9,12 +9,12 @@
 import UIKit
 
 class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
-    @IBOutlet weak var NewsArticleRow: UICollectionView!
+    @IBOutlet weak var newsArticleRow: UICollectionView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        NewsArticleRow.dataSource = self
-        NewsArticleRow.delegate = self
+        newsArticleRow.dataSource = self
+        newsArticleRow.delegate = self
         // Initialization code
     }
 
