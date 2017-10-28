@@ -36,7 +36,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         newsFeedTable.dataSource = self
         newsFeedTable.delegate = self
         UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for:.default)
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
 
         newsFeedTable.estimatedRowHeight = 240
         newsFeedTable.rowHeight = UITableViewAutomaticDimension

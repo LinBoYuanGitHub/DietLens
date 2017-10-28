@@ -26,7 +26,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         diaryTable.dataSource = self
@@ -35,7 +34,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         diaryTable.rowHeight = UITableViewAutomaticDimension
 
         UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for:.default)
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         // Do any additional setup after loading the view.
     }
 
@@ -43,7 +42,5 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 
 }

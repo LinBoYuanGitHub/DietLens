@@ -35,5 +35,4 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         }
     }
 
-
 }
