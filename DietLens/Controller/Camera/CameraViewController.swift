@@ -83,16 +83,18 @@ class CameraViewController: UIViewController {
                 DispatchQueue.main.async {
                     let changePrivacySetting = "DietLens doesn't have permission to use the camera, please change privacy settings"
                     let message = NSLocalizedString(changePrivacySetting, comment: "Alert message when the user has denied access to the camera")
-                    let alertController = UIAlertController(title: "AVCam", message: message, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
 
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
                                                             style: .cancel,
                                                             handler: nil))
 
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"),
-                                                            style: .`default`,
-                                                            handler: { _ in
-                                                                UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+                    alertController.addAction(
+                        UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"),
+                                      style: .`default`,
+                                      handler: { _ in
+                                        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
+                                                                  options: [:], completionHandler: nil)
                     }))
 
                     self.present(alertController, animated: true, completion: nil)
@@ -102,7 +104,7 @@ class CameraViewController: UIViewController {
                 DispatchQueue.main.async {
                     let alertMsg = "Alert message when something goes wrong during capture session configuration"
                     let message = NSLocalizedString("Unable to capture media", comment: alertMsg)
-                    let alertController = UIAlertController(title: "AVCam", message: message, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
 
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
                                                             style: .cancel,
@@ -247,7 +249,7 @@ class CameraViewController: UIViewController {
             if !self.session.isRunning {
                 DispatchQueue.main.async {
                     let message = NSLocalizedString("Unable to resume", comment: "Alert message when unable to resume the session running")
-                    let alertController = UIAlertController(title: "AVCam", message: message, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil)
                     alertController.addAction(cancelAction)
                     self.present(alertController, animated: true, completion: nil)
@@ -259,38 +261,6 @@ class CameraViewController: UIViewController {
     private enum CaptureMode: Int {
         case photo = 0
         case movie = 1
-    }
-
-    @IBOutlet private weak var captureModeControl: UISegmentedControl!
-
-    @IBAction private func toggleCaptureMode(_ captureModeControl: UISegmentedControl) {
-        captureModeControl.isEnabled = false
-
-        if captureModeControl.selectedSegmentIndex == CaptureMode.photo.rawValue {
-
-            sessionQueue.async {
-                /*
-                 Remove the AVCaptureMovieFileOutput from the session because movie recording is
-                 not supported with AVCaptureSession.Preset.Photo. Additionally, Live Photo
-                 capture is not supported when an AVCaptureMovieFileOutput is connected to the session.
-                 */
-                self.session.beginConfiguration()
-                self.session.sessionPreset = .photo
-
-                self.session.commitConfiguration()
-            }
-        } else if captureModeControl.selectedSegmentIndex == CaptureMode.movie.rawValue {
-
-            sessionQueue.async {
-                let movieFileOutput = AVCaptureMovieFileOutput()
-
-                if self.session.canAddOutput(movieFileOutput) {
-                    self.session.beginConfiguration()
-                    self.session.sessionPreset = .high
-                    self.session.commitConfiguration()
-                }
-            }
-        }
     }
 
     // MARK: Device Configuration
@@ -332,7 +302,8 @@ class CameraViewController: UIViewController {
 
             photoSettings.isHighResolutionPhotoEnabled = true
             if !photoSettings.__availablePreviewPhotoPixelFormatTypes.isEmpty {
-                photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: photoSettings.__availablePreviewPhotoPixelFormatTypes.first!]
+                photoSettings.previewPhotoFormat =
+                    [kCVPixelBufferPixelFormatTypeKey as String: photoSettings.__availablePreviewPhotoPixelFormatTypes.first!]
             }
 
             // Use a separate object for the photo capture delegate to isolate each capture life cycle.
@@ -343,7 +314,6 @@ class CameraViewController: UIViewController {
                         self.previewView.videoPreviewLayer.opacity = 1
                     }
                 }
-            }, livePhotoCaptureHandler: { _ in
             }, completionHandler: { photoCaptureProcessor in
                 // When the capture is complete, remove a reference to the photo capture delegate so it can be deallocated.
                 self.sessionQueue.async {
@@ -388,8 +358,10 @@ class CameraViewController: UIViewController {
         }
         keyValueObservations.append(keyValueObservation)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted), name: .AVCaptureSessionWasInterrupted, object: session)
-        NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded), name: .AVCaptureSessionInterruptionEnded, object: session)
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted),
+                                               name: .AVCaptureSessionWasInterrupted, object: session)
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded),
+                                               name: .AVCaptureSessionInterruptionEnded, object: session)
     }
 
     private func removeObservers() {
@@ -406,7 +378,7 @@ class CameraViewController: UIViewController {
         /*
          In some scenarios we want to enable the user to resume the session running.
          For example, if music playback is initiated via control center while
-         using AVCam, then the user can let AVCam resume
+         using DietLens, then the user can let DietLens resume
          the session running, which will stop music playback. Note that stopping
          music playback in control center will not automatically resume the session
          running. Also note that it is not always possible to resume, see `resumeInterruptedSession(_:)`.

@@ -225,8 +225,7 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				BF7894001FA4518200DA1667 /* CameraViewController.swift */,
-				BF7894011FA4518200DA1667 /* PhotoCaptureDelegate.swift */,
+				BF794BB01FA46D7100D30550 /* Camera */,
 				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
 				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
 				58AA52181FA1BA420072779C /* DiaryViewController.swift */,
@@ -250,6 +249,15 @@
 				58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BF794BB01FA46D7100D30550 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				BF7894001FA4518200DA1667 /* CameraViewController.swift */,
+				BF7894011FA4518200DA1667 /* PhotoCaptureDelegate.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		C8B155BF22F4DE7D186C083D /* Pods */ = {
