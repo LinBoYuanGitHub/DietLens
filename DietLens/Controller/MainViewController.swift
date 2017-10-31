@@ -9,6 +9,8 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    
+    @IBAction func unwindToMainPage(segue:UIStoryboardSegue) {}
 
     override func viewDidLoad() {
         super.viewDidLoad()

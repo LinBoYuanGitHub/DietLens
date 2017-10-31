@@ -35,6 +35,7 @@ class GradientView: UIView {
         gradLayer.endPoint = CGPoint(x: 0.5, y: 1)
         gradLayer.frame = self.bounds
         self.layer.insertSublayer(gradLayer, at: 0)
+        self.layer.masksToBounds = true
     }
 
     override func prepareForInterfaceBuilder() {
