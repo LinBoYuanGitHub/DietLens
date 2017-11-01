@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//        let leftViewController = mainStoryboard.instantiateViewController(withIdentifier: "SideViewController") as! SideMenuViewController
+//
+//        let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController)
+//        self.window?.rootViewController = slideMenuController
+//        self.window?.makeKeyAndVisible()
         return true
     }
 

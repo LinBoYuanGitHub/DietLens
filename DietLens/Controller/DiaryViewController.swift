@@ -9,7 +9,7 @@
 import UIKit
 
 class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var diaryTable: UITableView!
+    //@IBOutlet weak var diaryTable: UITableView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -28,10 +28,10 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        diaryTable.dataSource = self
-        diaryTable.delegate = self
-        diaryTable.estimatedRowHeight = 90
-        diaryTable.rowHeight = UITableViewAutomaticDimension
+//        diaryTable.dataSource = self
+//        diaryTable.delegate = self
+//        diaryTable.estimatedRowHeight = 90
+//        diaryTable.rowHeight = UITableViewAutomaticDimension
 
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)

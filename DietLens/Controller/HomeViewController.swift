@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import PBRevealViewController
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    @IBOutlet weak var sideMenuButton: UIBarButtonItem!
+   
     @IBOutlet weak var newsFeedTable: UITableView!
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,14 +34,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         return UITableViewCell()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         newsFeedTable.dataSource = self
         newsFeedTable.delegate = self
         UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for:.default)
+        sideMenuButton.target = self.revealViewController()
+        sideMenuButton.action = #selector(PBRevealViewController.revealLeftView)
+        revealViewController()?.leftViewBlurEffectStyle = .light
+        //self.addLeftBarButtonWithImage(<#T##buttonImage: UIImage##UIImage#>)
         newsFeedTable.estimatedRowHeight = 240
         newsFeedTable.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.

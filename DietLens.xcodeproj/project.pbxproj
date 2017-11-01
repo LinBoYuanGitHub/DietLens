@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
 		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
-		58212B301FA0D1BB001BF89A /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58212B2F1FA0D1BB001BF89A /* SlideMenuController.swift */; };
+		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
+		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
 		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
@@ -20,6 +21,8 @@
 		58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
 		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
 		58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
+		58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */; };
+		58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */; };
 		58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E71FA0915500C542D9 /* NewsArticleCell.swift */; };
 		58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E91FA0993B00C542D9 /* NewsArticle.swift */; };
 		58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
@@ -56,7 +59,8 @@
 
 /* Begin PBXFileReference section */
 		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		58212B2F1FA0D1BB001BF89A /* SlideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
+		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 		58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
 		58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideMenuViewController.swift; sourceTree = "<group>"; };
 		58E425E71FA0915500C542D9 /* NewsArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleCell.swift; sourceTree = "<group>"; };
 		58E425E91FA0993B00C542D9 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
 		58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -125,14 +131,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		58212B2E1FA0D18A001BF89A /* Side Menu */ = {
-			isa = PBXGroup;
-			children = (
-				58212B2F1FA0D1BB001BF89A /* SlideMenuController.swift */,
-			);
-			path = "Side Menu";
-			sourceTree = "<group>";
-		};
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +216,8 @@
 				58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */,
 				58E425E71FA0915500C542D9 /* NewsArticleCell.swift */,
 				58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */,
+				581809AF1FA868E000373763 /* ProfileImageView.swift */,
+				581809B11FA877D700373763 /* SideMenuCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,6 +229,8 @@
 				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
 				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
 				58AA52181FA1BA420072779C /* DiaryViewController.swift */,
+				58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */,
+				58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -236,7 +238,6 @@
 		58FCCFF01F9D8A4F00E4F421 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				58212B2E1FA0D18A001BF89A /* Side Menu */,
 				58FCCFF11F9D8A5900E4F421 /* Fonts */,
 				58AA521C1FA2D1AA0072779C /* Constants.swift */,
 			);
@@ -479,7 +480,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */ = {
@@ -527,7 +528,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		BF8441171FA435B200D5018F /* ShellScript */ = {
@@ -573,7 +574,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */ = {
@@ -598,13 +599,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
+				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
+				581809B21FA877D700373763 /* SideMenuCell.swift in Sources */,
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureDelegate.swift in Sources */,
+				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
