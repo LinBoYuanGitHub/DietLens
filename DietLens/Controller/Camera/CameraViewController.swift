@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import Photos
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     // MARK: View Controller Life Cycle
 
     override func viewDidLoad() {
@@ -17,6 +17,7 @@ class CameraViewController: UIViewController {
 
         // Disable UI. The UI is enabled if and only if the session starts running.
         photoButton.isEnabled = false
+        barcodeButton.isEnabled = true
 
         // Set up the video preview view.
         previewView.session = session
@@ -227,47 +228,11 @@ class CameraViewController: UIViewController {
         }
 
         // Add photo output.
-        if session.canAddOutput(photoOutput) {
-            session.addOutput(photoOutput)
-
-            photoOutput.isHighResolutionCaptureEnabled = true
-
-        } else {
-            print("Could not add photo output to the session")
+        if !addPhotoOutput(session: session) {
             setupResult = .configurationFailed
-            session.commitConfiguration()
-            return
         }
 
         session.commitConfiguration()
-    }
-
-    @IBAction private func resumeInterruptedSession(_ resumeButton: UIButton) {
-        sessionQueue.async {
-            /*
-             The session might fail to start running, e.g., if a phone or FaceTime call is still
-             using audio or video. A failure to start the session running will be communicated via
-             a session runtime error notification. To avoid repeatedly failing to start the session
-             running, we only try to restart the session running in the session runtime error handler
-             if we aren't trying to resume the session running.
-             */
-            self.session.startRunning()
-            self.isSessionRunning = self.session.isRunning
-            if !self.session.isRunning {
-                DispatchQueue.main.async {
-                    let message = NSLocalizedString("Unable to resume", comment: "Alert message when unable to resume the session running")
-                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil)
-                    alertController.addAction(cancelAction)
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            }
-        }
-    }
-
-    private enum CaptureMode: Int {
-        case photo = 0
-        case movie = 1
     }
 
     // MARK: Device Configuration
@@ -279,6 +244,18 @@ class CameraViewController: UIViewController {
     private let photoOutput = AVCapturePhotoOutput()
 
     private var inProgressPhotoCaptureDelegates = [Int64: PhotoCaptureProcessor]()
+
+    private func addPhotoOutput(session: AVCaptureSession) -> Bool {
+        if session.canAddOutput(photoOutput) {
+            session.addOutput(photoOutput)
+
+            photoOutput.isHighResolutionCaptureEnabled = true
+            return true
+        } else {
+            print("Could not add photo output to the session")
+            return false
+        }
+    }
 
     @IBOutlet private weak var photoButton: UIButton!
     @IBAction private func capturePhoto(_ photoButton: UIButton) {
@@ -338,9 +315,54 @@ class CameraViewController: UIViewController {
         }
     }
 
-    // MARK: Recording Movies
+    // MARK: Scanning barcodes
 
-    private var backgroundRecordingID: UIBackgroundTaskIdentifier?
+    private let metadataOutput = AVCaptureMetadataOutput()
+
+    @IBAction func toggleBarcodeScanner(_ sender: UIButton) {
+        barcodeButton.isEnabled = false
+        photoButton.isEnabled = false
+
+        sessionQueue.async {
+            print("try adding barcode scanner")
+            self.session.removeOutput(self.photoOutput)
+            self.addBarcodeScanner(session: self.session)
+        }
+    }
+
+    private func addBarcodeScanner(session: AVCaptureSession) {
+        if session.canAddOutput(metadataOutput) {
+            session.addOutput(metadataOutput)
+            print("barcode scanner added")
+            // Send captured data to the delegate object via a serial queue.
+            metadataOutput.setMetadataObjectsDelegate(self, queue: sessionQueue)
+
+            // Set barcode type for which to scan
+            metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
+        }
+    }
+
+    @IBOutlet weak var barcodeButton: UIButton!
+
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject],
+                        from connection: AVCaptureConnection) {
+        // Get the first object from the metadataObjects array.
+        if let barcodeData = metadataObjects.first {
+            // Turn it into machine readable code
+            let barcodeReadable = barcodeData as? AVMetadataMachineReadableCodeObject
+            if let readableCode = barcodeReadable {
+                // Send the barcode as a string to barcodeDetected()
+                barcodeDetected(code: readableCode.stringValue!)
+            }
+        }
+    }
+
+    private func barcodeDetected(code: String) {
+
+        // Let the user know we've found something.
+        let trimmedCode = code.trimmingCharacters(in: .whitespaces)
+        print("Bar code", trimmedCode)
+    }
 
     // MARK: KVO and Notifications
 
