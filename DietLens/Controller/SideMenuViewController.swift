@@ -18,6 +18,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     let labels:[String] = ["Report", "Steps Taken", "Notifications", "Settings", "About Us", "Logout"]
     let iconNames:[String] = ["Report", "Steps", "Notification", "Settings", "About", "Logout"]
+    let storyboardIDs:[String] = ["DietLens","StepsPage","NotificationsPage","SettingsPage","AboutPage","MainViewController"]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,7 +32,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
-         self.revealViewController()!.delegate = self
+        self.revealViewController()!.delegate = self
+        self.revealViewController()!.toggleAnimationType = .crossDissolve
         // Do any additional setup after loading the view.
     }
 
@@ -63,6 +65,21 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.deselectRow(at: indexPath, animated: true)
         self.revealViewController()!.revealLeftView()
         DataService.instance.screenUserIsIn = indexPath.row
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var controller: UIViewController?
+        
+        if labels[indexPath.row] == "Logout"
+        {
+            controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+            revealViewController()?.setMainViewController(controller!, animated:true)
+            DataService.instance.screenUserIsIn = 0
+        }
+        else
+        {
+            controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
+            let nc = UINavigationController(rootViewController: controller!)
+            revealViewController()?.pushMainViewController(nc, animated:true)
+        }
     }
 
     func revealController(_ revealController: PBRevealViewController, willShowLeft viewController:UIViewController)
