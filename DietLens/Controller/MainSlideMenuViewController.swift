@@ -9,14 +9,12 @@
 import UIKit
 import PBRevealViewController
 
-class MainSlideMenuViewController: PBRevealViewController, PBRevealViewControllerDelegate {
+class MainSlideMenuViewController: PBRevealViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.delegate = self
         self.leftViewRevealWidth = 250.0
-        self.leftViewBlurEffectStyle = .extraLight
+        self.leftViewBlurEffectStyle = .none
     }
 
     override func didReceiveMemoryWarning() {

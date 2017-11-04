@@ -7,10 +7,10 @@
 //
 
 import UIKit
+import PBRevealViewController
 
 
-
-class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PBRevealViewControllerDelegate
 {
     
     
@@ -20,7 +20,6 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     let iconNames:[String] = ["Report", "Steps", "Notification", "Settings", "About", "Logout"]
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
     }
 
@@ -32,6 +31,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
+         self.revealViewController()!.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -49,15 +49,39 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         if let cell = tableView.dequeueReusableCell(withIdentifier: "menuButtonCell") as? SideMenuCell
         {
             cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!)
+            if(indexPath.row == DataService.instance.screenUserIsIn)
+            {
+                cell.cellSelected()
+            }
             return cell
         }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print ("item \(indexPath.row) was selected!")
+        print ("item \(labels[indexPath.row]) was selected!")
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.revealViewController()!.revealLeftView()
+        DataService.instance.screenUserIsIn = indexPath.row
     }
 
+    func revealController(_ revealController: PBRevealViewController, willShowLeft viewController:UIViewController)
+    {
+        print ("user was in \(labels[DataService.instance.screenUserIsIn]) and side menu was selected!")
+        
+        for i in 0..<labels.count
+        {
+            if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: i, section: 0)) as? SideMenuCell
+            {
+                cell.cellUnselected()
+            }
+        }
+        
+        if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: DataService.instance.screenUserIsIn, section: 0)) as? SideMenuCell
+        {
+            cell.cellSelected()
+        }
+    }
     /*
     // MARK: - Navigation
 
