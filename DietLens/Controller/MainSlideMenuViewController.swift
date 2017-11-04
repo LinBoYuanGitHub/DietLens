@@ -13,7 +13,7 @@ class MainSlideMenuViewController: PBRevealViewController, PBRevealViewControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.delegate = self
         self.leftViewRevealWidth = 250.0
         self.leftViewBlurEffectStyle = .extraLight
@@ -23,7 +23,7 @@ class MainSlideMenuViewController: PBRevealViewController, PBRevealViewControlle
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 //    func revealController(_ revealController: PBRevealViewController, shouldShowLeft viewController: UIViewController) -> Bool {
 //        if viewController as? DiaryViewController != nil
 //        {
@@ -31,7 +31,5 @@ class MainSlideMenuViewController: PBRevealViewController, PBRevealViewControlle
 //        }
 //        return true
 //    }
-    
-    
 
 }

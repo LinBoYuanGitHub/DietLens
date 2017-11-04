@@ -18,26 +18,21 @@ class ProfileImageView: UIImageView {
         // Drawing code
     }
     */
-    @IBInspectable var cornerRadius: CGFloat = 2.0
-    {
-        didSet
-        {
+    @IBInspectable var cornerRadius: CGFloat = 2.0 {
+        didSet {
             self.layer.cornerRadius = cornerRadius
         }
     }
-    
-    override func awakeFromNib()
-    {
+
+    override func awakeFromNib() {
         self.setupView()
     }
-    
-    func setupView()
-    {
+
+    func setupView() {
         self.layer.cornerRadius = cornerRadius
     }
-    
-    override func prepareForInterfaceBuilder()
-    {
+
+    override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         self.setupView()
     }

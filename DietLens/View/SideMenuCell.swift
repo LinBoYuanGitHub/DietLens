@@ -12,7 +12,7 @@ class SideMenuCell: UITableViewCell {
 
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var buttonName: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,9 +23,8 @@ class SideMenuCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func setupSideMenuCell(buttonName name:String, iconImage image: UIImage)
-    {
+
+    func setupSideMenuCell(buttonName name: String, iconImage image: UIImage) {
         icon.image = image
         buttonName.text = name
     }
