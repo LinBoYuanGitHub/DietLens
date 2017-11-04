@@ -1,0 +1,294 @@
+//
+//  CameraSessionManager.swift
+//  DietLens
+//
+//  Created by louis on 1/11/17.
+//  Copyright © 2017 NExT++. All rights reserved.
+//
+
+import Foundation
+import AVFoundation
+
+protocol CameraViewControllerDelegate: class {
+    func onConfigureSession(withResult result: CameraSessionManager.SessionSetupResult)
+    func onEnableSwitchTo(captureModel: CameraSessionManager.CameraCaptureMode)
+    func onCameraInput(isAvailable: Bool)
+    func onWillCapturePhoto()
+    func onDidFinishCapturePhoto()
+}
+
+class CameraSessionManager {
+
+    enum CameraCaptureMode {
+        case photo
+        case barcode
+    }
+
+    enum SessionSetupResult {
+        case success
+        case notAuthorized
+        case configurationFailed
+    }
+
+    var previewView: PreviewView!
+    weak var viewControllerDelegate: CameraViewControllerDelegate!
+
+    // Communicate with the session and other session objects on this queue.
+    private let sessionQueue = DispatchQueue(label: "session queue")
+    private let session = AVCaptureSession()
+    private var photoProcessor: PhotoCaptureProcessor!
+    private let barcodeProcessor = BarcodeScannerProcessor()
+
+    private var captureMode: CameraCaptureMode = .photo
+    private var isSessionRunning = false
+    private var setupResult: SessionSetupResult = .success
+    private var videoInput: AVCaptureDeviceInput!
+
+    private var keyValueObservations: [NSKeyValueObservation] = []
+
+    private var photoOutput: AVCapturePhotoOutput {
+        let output = AVCapturePhotoOutput()
+        output.isHighResolutionCaptureEnabled = true
+        return output
+    }
+    private var metadataOutput: AVCaptureMetadataOutput {
+        let output = AVCaptureMetadataOutput()
+        output.setMetadataObjectsDelegate(barcodeProcessor, queue: sessionQueue)
+
+        // Set barcode type for which to scan
+        output.metadataObjectTypes = output.availableMetadataObjectTypes
+        return output
+    }
+
+    func setup() -> Bool {
+        previewView.session = session
+        authorizeCamera()
+        configureProcessors()
+        sessionQueue.async { [weak self] in
+            guard let wSelf = self else { return }
+            wSelf.configureSession()
+        }
+
+        switch setupResult {
+        case .success: return true
+        default: return false
+        }
+    }
+
+    private func authorizeCamera() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            // The user has previously granted access to the camera.
+            break
+        case .notDetermined:
+            /*
+             The user has not yet been presented with the option to grant
+             video access. We suspend the session queue to delay session
+             setup until the access request has completed.
+             */
+            sessionQueue.suspend()
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: { [weak self] granted in
+                guard let wSelf = self else { return }
+
+                if !granted {
+                    wSelf.setupResult = .notAuthorized
+                }
+                wSelf.sessionQueue.resume()
+            })
+
+        default:
+            // The user has previously denied access.
+            setupResult = .notAuthorized
+        }
+    }
+
+    // Call this on sessionQueue
+    private func configureSession() {
+        if setupResult != .success {
+            return
+        }
+
+        session.beginConfiguration()
+        session.sessionPreset = .photo
+
+        guard configureVideoInput() else {
+            print("Could not create video device input")
+            setupResult = .configurationFailed
+            session.commitConfiguration()
+            return
+        }
+
+        session.commitConfiguration()
+    }
+
+    private func configureProcessors() {
+        photoProcessor = PhotoCaptureProcessor(photoOutput: photoOutput)
+    }
+
+    private func configureVideoInput() -> Bool {
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
+            let videoInput = try? AVCaptureDeviceInput(device: device) else {
+                return false
+        }
+
+        // Set autofocus
+        if device.isFocusModeSupported(.continuousAutoFocus),
+            (try? device.lockForConfiguration()) != nil {
+                device.focusMode = .continuousAutoFocus
+                device.unlockForConfiguration()
+        }
+
+        guard session.canAddInput(videoInput) else {
+            return false
+        }
+
+        session.addInput(videoInput)
+        self.videoInput = videoInput
+        return true
+    }
+}
+
+// MARK: To support view delegate
+extension CameraSessionManager {
+    func onViewWillAppear() {
+        sessionQueue.async { [weak self] in
+            guard let wSelf = self else {
+                return
+            }
+
+            if wSelf.setupResult == .success {
+                // Only setup observers and start the session running if setup succeeded.
+                wSelf.addObservers()
+                wSelf.session.startRunning()
+                wSelf.isSessionRunning = wSelf.session.isRunning
+            }
+        }
+    }
+
+    func onViewWillDisappear() {
+        sessionQueue.async { [weak self] in
+            guard let wSelf = self else {
+                return
+            }
+            if wSelf.setupResult == .success {
+                wSelf.session.stopRunning()
+                wSelf.isSessionRunning = wSelf.session.isRunning
+                wSelf.removeObservers()
+            }
+        }
+    }
+
+    // MARK: KVO and Notifications
+
+    private func addObservers() {
+
+        /*
+         A session can only run when the app is full screen. It will be interrupted
+         in a multi-app layout, introduced in iOS 9, see also the documentation of
+         AVCaptureSessionInterruptionReason. Add observers to handle these session
+         interruptions and show a preview is paused message. See the documentation
+         of AVCaptureSessionWasInterruptedNotification for other interruption reasons.
+         */
+        let keyValueObservation = session.observe(\.isRunning, options: .new) { _, change in
+            guard let isSessionRunning = change.newValue else { return }
+
+            DispatchQueue.main.async { [weak self] in
+                guard let wSelf = self else {
+                    return
+                }
+
+                if isSessionRunning && wSelf.captureMode != .photo {
+                    wSelf.viewControllerDelegate.onEnableSwitchTo(captureModel: .photo)
+                }
+                if isSessionRunning && wSelf.captureMode != .barcode {
+                    wSelf.viewControllerDelegate.onEnableSwitchTo(captureModel: .barcode)
+                }
+            }
+        }
+        keyValueObservations.append(keyValueObservation)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted),
+                                               name: .AVCaptureSessionWasInterrupted, object: session)
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded),
+                                               name: .AVCaptureSessionInterruptionEnded, object: session)
+    }
+
+    private func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
+
+        for keyValueObservation in keyValueObservations {
+            keyValueObservation.invalidate()
+        }
+        keyValueObservations.removeAll()
+    }
+
+    @objc
+    func sessionWasInterrupted(notification: NSNotification) {
+        /*
+         In some scenarios we want to enable the user to resume the session running.
+         For example, if music playback is initiated via control center while
+         using DietLens, then the user can let DietLens resume
+         the session running, which will stop music playback. Note that stopping
+         music playback in control center will not automatically resume the session
+         running. Also note that it is not always possible to resume, see `resumeInterruptedSession(_:)`.
+         */
+        if let userInfoValue = notification.userInfo?[AVCaptureSessionInterruptionReasonKey] as AnyObject?,
+            let reasonIntegerValue = userInfoValue.integerValue,
+            let reason = AVCaptureSession.InterruptionReason(rawValue: reasonIntegerValue) {
+            print("Capture session was interrupted with reason \(reason)")
+
+            if reason == .videoDeviceNotAvailableWithMultipleForegroundApps {
+                viewControllerDelegate.onCameraInput(isAvailable: false)
+            }
+        }
+    }
+
+    @objc
+    func sessionInterruptionEnded(notification: NSNotification) {
+        print("Capture session interruption ended")
+        viewControllerDelegate.onCameraInput(isAvailable: true)
+    }
+}
+
+// MARK: Capturing methods
+extension CameraSessionManager {
+    func capturePhoto() {
+
+        guard captureMode == .photo else {
+            return
+        }
+
+        sessionQueue.async { [weak self] in
+            guard let wSelf = self else {
+                return
+            }
+
+            let photoSettings = wSelf.getPhotoSettingsForCapturing()
+            wSelf.photoProcessor.capture(photoSettings: photoSettings,
+                                   willCapturePhotoAnimation: wSelf.viewControllerDelegate.onWillCapturePhoto,
+                                   completionHandler: wSelf.viewControllerDelegate.onDidFinishCapturePhoto)
+        }
+    }
+
+    private func getPhotoSettingsForCapturing() -> AVCapturePhotoSettings {
+        var photoSettings = AVCapturePhotoSettings()
+        // Capture HEIF photo when supported, with flash set to auto and high resolution photo enabled.
+        if #available(iOS 11.0, *) {
+            if photoOutput.availablePhotoCodecTypes.contains(.hevc) {
+                photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+            }
+        }
+
+        if videoInput.device.isFlashAvailable {
+            photoSettings.flashMode = .auto
+        }
+
+        photoSettings.isHighResolutionPhotoEnabled = true
+
+        if let format = photoSettings.__availablePreviewPhotoPixelFormatTypes.first {
+            photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: format]
+        }
+
+        return photoSettings
+    }
+}

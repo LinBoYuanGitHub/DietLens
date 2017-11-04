@@ -1,34 +1,30 @@
-/*
-See LICENSE.txt for this sample’s licensing information.
-
-Abstract:
-Photo capture delegate.
-*/
-
 import AVFoundation
 import Photos
 
 class PhotoCaptureProcessor: NSObject {
-	private(set) var requestedPhotoSettings: AVCapturePhotoSettings
 
-	private let willCapturePhotoAnimation: () -> Void
-
-	private let completionHandler: (PhotoCaptureProcessor) -> Void
-
+	private var willCapturePhotoAnimation: (() -> Void)!
+	private var completionHandler: (() -> Void)!
+    private var requestedPhotoSettings: AVCapturePhotoSettings!
 	private var photoData: Data?
+    private let photoOutput: AVCapturePhotoOutput
 
-	init(with requestedPhotoSettings: AVCapturePhotoSettings,
-	     willCapturePhotoAnimation: @escaping () -> Void,
-	     completionHandler: @escaping (PhotoCaptureProcessor) -> Void) {
-		self.requestedPhotoSettings = requestedPhotoSettings
-		self.willCapturePhotoAnimation = willCapturePhotoAnimation
-		self.completionHandler = completionHandler
-	}
+    init(photoOutput: AVCapturePhotoOutput) {
+        self.photoOutput = photoOutput
+        super.init()
+    }
 
 	private func didFinish() {
-		completionHandler(self)
+		completionHandler()
 	}
 
+    func capture(photoSettings: AVCapturePhotoSettings, willCapturePhotoAnimation: @escaping () -> Void,
+                 completionHandler: @escaping () -> Void) {
+        self.requestedPhotoSettings = photoSettings
+        self.willCapturePhotoAnimation = willCapturePhotoAnimation
+        self.completionHandler = completionHandler
+        photoOutput.capturePhoto(with: photoSettings, delegate: self)
+    }
 }
 
 extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
@@ -50,6 +46,7 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
         }
     }
 
+    // iOS 10
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?,
                      previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings,
                      bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
@@ -87,8 +84,6 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
                     let creationRequest = PHAssetCreationRequest.forAsset()
                     if #available(iOS 11.0, *) {
                         options.uniformTypeIdentifier = self.requestedPhotoSettings.processedFileType.map { $0.rawValue }
-                    } else {
-                        // Fallback on earlier versions
                     }
                     creationRequest.addResource(with: .photo, data: photoData, options: options)
 
