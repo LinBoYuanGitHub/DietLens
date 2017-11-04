@@ -9,7 +9,13 @@
 import Foundation
 import AVFoundation
 
+protocol BarcodeScannerDelegate: class {
+    func onDetect(barcode: String)
+}
+
 class BarcodeScannerProcessor: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+
+    weak var delegate: BarcodeScannerDelegate!
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject],
                         from connection: AVCaptureConnection) {
@@ -34,11 +40,6 @@ class BarcodeScannerProcessor: NSObject, AVCaptureMetadataOutputObjectsDelegate 
 
         barcode = barcode.trimmingCharacters(in: .whitespaces)
 
-        barcodeDetected(code: barcode)
-    }
-
-    private func barcodeDetected(code: String) {
-        // Let the user know we've found something.
-        print("Bar code", code)
+        delegate.onDetect(barcode: barcode)
     }
 }

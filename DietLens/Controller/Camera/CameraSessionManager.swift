@@ -11,10 +11,11 @@ import AVFoundation
 
 protocol CameraViewControllerDelegate: class {
     func onConfigureSession(withResult result: CameraSessionManager.SessionSetupResult)
-    func onEnableSwitchTo(captureModel: CameraSessionManager.CameraCaptureMode)
+    func onSwitchTo(captureMode: CameraSessionManager.CameraCaptureMode)
     func onCameraInput(isAvailable: Bool)
     func onWillCapturePhoto()
     func onDidFinishCapturePhoto()
+    func onDetect(barcode: String)
 }
 
 class CameraSessionManager {
@@ -36,7 +37,7 @@ class CameraSessionManager {
     // Communicate with the session and other session objects on this queue.
     private let sessionQueue = DispatchQueue(label: "session queue")
     private let session = AVCaptureSession()
-    private var photoProcessor: PhotoCaptureProcessor!
+    private var photoProcessor = PhotoCaptureProcessor()
     private let barcodeProcessor = BarcodeScannerProcessor()
 
     private var captureMode: CameraCaptureMode = .photo
@@ -46,32 +47,44 @@ class CameraSessionManager {
 
     private var keyValueObservations: [NSKeyValueObservation] = []
 
-    private var photoOutput: AVCapturePhotoOutput {
-        let output = AVCapturePhotoOutput()
-        output.isHighResolutionCaptureEnabled = true
-        return output
-    }
-    private var metadataOutput: AVCaptureMetadataOutput {
-        let output = AVCaptureMetadataOutput()
-        output.setMetadataObjectsDelegate(barcodeProcessor, queue: sessionQueue)
+    private var photoOutput = AVCapturePhotoOutput()
 
-        // Set barcode type for which to scan
-        output.metadataObjectTypes = output.availableMetadataObjectTypes
-        return output
-    }
+    private var metadataOutput = AVCaptureMetadataOutput()
 
-    func setup() -> Bool {
+    func setup() {
         previewView.session = session
         authorizeCamera()
         configureProcessors()
         sessionQueue.async { [weak self] in
             guard let wSelf = self else { return }
+            wSelf.set(captureMode: .photo)
             wSelf.configureSession()
         }
+    }
 
-        switch setupResult {
-        case .success: return true
-        default: return false
+    func set(captureMode: CameraCaptureMode) {
+        var output: AVCaptureOutput
+        switch captureMode {
+        case .photo:
+            output = photoOutput
+        case .barcode:
+            output = metadataOutput
+        }
+
+        session.beginConfiguration()
+        session.removeOutput(photoOutput)
+        session.removeOutput(metadataOutput)
+        if session.canAddOutput(output) {
+            session.addOutput(output)
+            configureOutputs()
+        }
+        session.commitConfiguration()
+        self.captureMode = captureMode
+        DispatchQueue.main.async { [weak self] in
+            guard let wSelf = self else {
+                return
+            }
+            wSelf.viewControllerDelegate.onSwitchTo(captureMode: captureMode)
         }
     }
 
@@ -102,9 +115,17 @@ class CameraSessionManager {
         }
     }
 
+    private func configureOutputs() {
+        photoOutput.isHighResolutionCaptureEnabled = true
+        metadataOutput.setMetadataObjectsDelegate(barcodeProcessor, queue: sessionQueue)
+
+        // Set barcode type for which to scan
+        metadataOutput.metadataObjectTypes = metadataOutput.availableMetadataObjectTypes
+    }
+
     // Call this on sessionQueue
     private func configureSession() {
-        if setupResult != .success {
+        guard setupResult == .success else {
             return
         }
 
@@ -122,7 +143,8 @@ class CameraSessionManager {
     }
 
     private func configureProcessors() {
-        photoProcessor = PhotoCaptureProcessor(photoOutput: photoOutput)
+        photoProcessor.delegate = self
+        barcodeProcessor.delegate = self
     }
 
     private func configureVideoInput() -> Bool {
@@ -197,11 +219,15 @@ extension CameraSessionManager {
                     return
                 }
 
-                if isSessionRunning && wSelf.captureMode != .photo {
-                    wSelf.viewControllerDelegate.onEnableSwitchTo(captureModel: .photo)
+                if isSessionRunning && wSelf.captureMode == .photo {
+                    DispatchQueue.main.async {
+                        wSelf.viewControllerDelegate.onSwitchTo(captureMode: .photo)
+                    }
                 }
-                if isSessionRunning && wSelf.captureMode != .barcode {
-                    wSelf.viewControllerDelegate.onEnableSwitchTo(captureModel: .barcode)
+                if isSessionRunning && wSelf.captureMode == .barcode {
+                    DispatchQueue.main.async {
+                        wSelf.viewControllerDelegate.onSwitchTo(captureMode: .barcode)
+                    }
                 }
             }
         }
@@ -238,7 +264,7 @@ extension CameraSessionManager {
             print("Capture session was interrupted with reason \(reason)")
 
             if reason == .videoDeviceNotAvailableWithMultipleForegroundApps {
-                viewControllerDelegate.onCameraInput(isAvailable: false)
+                viewControllerDelegate.onCameraInput(isAvailable: true)
             }
         }
     }
@@ -253,7 +279,6 @@ extension CameraSessionManager {
 // MARK: Capturing methods
 extension CameraSessionManager {
     func capturePhoto() {
-
         guard captureMode == .photo else {
             return
         }
@@ -262,11 +287,8 @@ extension CameraSessionManager {
             guard let wSelf = self else {
                 return
             }
-
             let photoSettings = wSelf.getPhotoSettingsForCapturing()
-            wSelf.photoProcessor.capture(photoSettings: photoSettings,
-                                   willCapturePhotoAnimation: wSelf.viewControllerDelegate.onWillCapturePhoto,
-                                   completionHandler: wSelf.viewControllerDelegate.onDidFinishCapturePhoto)
+            wSelf.photoProcessor.capture(photoOutput: wSelf.photoOutput, photoSettings: photoSettings)
         }
     }
 
@@ -290,5 +312,35 @@ extension CameraSessionManager {
         }
 
         return photoSettings
+    }
+}
+
+extension CameraSessionManager: BarcodeScannerDelegate {
+    func onDetect(barcode: String) {
+        viewControllerDelegate.onDetect(barcode: barcode)
+    }
+}
+
+extension CameraSessionManager: PhotoCaptureDelegate {
+    func onWillCapturePhoto() {
+        DispatchQueue.main.async { [weak self] in
+            guard let wSelf = self else {
+                return
+            }
+            wSelf.viewControllerDelegate.onWillCapturePhoto()
+        }
+    }
+
+    func onDidCapturePhoto() {
+        DispatchQueue.main.async { [weak self] in
+            guard let wSelf = self else {
+                return
+            }
+            wSelf.viewControllerDelegate.onDidFinishCapturePhoto()
+        }
+    }
+
+    func onCaptureError() {
+
     }
 }

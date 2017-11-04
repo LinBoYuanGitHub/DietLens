@@ -79,6 +79,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="capturePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o5K-SC-fYn"/>
+                                    <action selector="switchToPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mdk-ii-az0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUJ-G6-RPv" userLabel="Camera">
@@ -94,7 +95,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="toggleBarcodeScanner:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6zq-OI-EVX"/>
+                                    <action selector="switchToBarcode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h5t-6I-WZb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -130,6 +131,7 @@
                     <connections>
                         <outlet property="barcodeButton" destination="rUJ-G6-RPv" id="r5c-if-mLf"/>
                         <outlet property="cameraUnavailableLabel" destination="zf0-db-esM" id="P9W-lb-Pb8"/>
+                        <outlet property="capturePhotoButton" destination="diM-8N-scT" id="VOS-ps-Gm6"/>
                         <outlet property="photoButton" destination="uCj-6P-mHF" id="Ha8-ua-hxy"/>
                         <outlet property="previewView" destination="3eR-Rn-XpZ" id="Opb-IU-ivn"/>
                     </connections>

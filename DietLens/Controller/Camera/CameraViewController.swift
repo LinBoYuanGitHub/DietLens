@@ -6,15 +6,30 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
     private let sessionManager = CameraSessionManager()
 
+    @IBOutlet weak var capturePhotoButton: UIButton!
+
+    @IBOutlet weak var previewView: PreviewView!
+
+    @IBOutlet private weak var cameraUnavailableLabel: UILabel!
+
+    @IBOutlet private weak var photoButton: UIButton!
+
+    // MARK: Scanning barcodes
+
+    @IBOutlet weak var barcodeButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Disable UI. The UI is enabled if and only if the session starts running.
         photoButton.isEnabled = false
         barcodeButton.isEnabled = false
+        capturePhotoButton.isHidden = true
+        cameraUnavailableLabel.isHidden = true
 
         sessionManager.previewView = previewView
         sessionManager.viewControllerDelegate = self
+        sessionManager.setup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -28,18 +43,16 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         super.viewWillDisappear(animated)
     }
 
-    @IBOutlet weak var previewView: PreviewView!
-
-    @IBOutlet private weak var cameraUnavailableLabel: UILabel!
-
-    @IBOutlet private weak var photoButton: UIButton!
-
-    // MARK: Scanning barcodes
-
-    @IBOutlet weak var barcodeButton: UIButton!
-
-
     @IBAction func capturePhoto(_ sender: UIButton) {
+        sessionManager.capturePhoto()
+    }
+
+    @IBAction func switchToPhoto(_ sender: UIButton) {
+        sessionManager.set(captureMode: .photo)
+    }
+
+    @IBAction func switchToBarcode(_ sender: UIButton) {
+        sessionManager.set(captureMode: .barcode)
     }
 }
 
@@ -106,8 +119,18 @@ extension CameraViewController: CameraViewControllerDelegate {
         }
     }
 
-    func onEnableSwitchTo(captureModel: CameraSessionManager.CameraCaptureMode) {
+    func onSwitchTo(captureMode: CameraSessionManager.CameraCaptureMode) {
+        photoButton.isEnabled = false
+        barcodeButton.isEnabled = false
+        capturePhotoButton.isHidden = true
 
+        switch captureMode {
+        case .photo:
+            barcodeButton.isEnabled = true
+            capturePhotoButton.isHidden = false
+        case .barcode:
+            photoButton.isEnabled = true
+        }
     }
 
     func onCameraInput(isAvailable: Bool) {
@@ -121,5 +144,23 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDidFinishCapturePhoto() {
+    }
+
+    func onDetect(barcode: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let wSelf = self else {
+                return
+            }
+
+            let alertMsg = "Barcode detected!"
+            let message = NSLocalizedString("Barcode: \(barcode)", comment: alertMsg)
+            let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
+
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
+                                                    style: .cancel,
+                                                    handler: nil))
+
+            wSelf.present(alertController, animated: true, completion: nil)
+        }
     }
 }
