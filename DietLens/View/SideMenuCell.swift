@@ -27,18 +27,16 @@ class SideMenuCell: UITableViewCell {
     func setupSideMenuCell(buttonName name: String, iconImage image: UIImage) {
         icon.image = image
         icon.image?.withRenderingMode(.alwaysTemplate)
-        
+
         buttonName.text = name
     }
-    
-    func cellSelected()
-    {
+
+    func cellSelected() {
         buttonName.textColor = #colorLiteral(red: 0.938290596, green: 0.4011681676, blue: 0.3992137313, alpha: 1)
         icon.tintColor = UIColor.red
     }
-    
-    func cellUnselected()
-    {
+
+    func cellUnselected() {
         icon.tintColor = #colorLiteral(red: 0.4035005569, green: 0.4078930914, blue: 0.4076195359, alpha: 1)
         buttonName.textColor = #colorLiteral(red: 0.4035005569, green: 0.4078930914, blue: 0.4076195359, alpha: 1)
     }

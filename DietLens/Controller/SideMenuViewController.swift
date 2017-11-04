@@ -9,18 +9,14 @@
 import UIKit
 import PBRevealViewController
 
-class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PBRevealViewControllerDelegate {
 
-class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PBRevealViewControllerDelegate
-{
-    
-    
     @IBOutlet weak var sideMenuTable: UITableView!
-    
-    let labels:[String] = ["Report", "Steps Taken", "Notifications", "Settings", "About Us", "Logout"]
-    let iconNames:[String] = ["Report", "Steps", "Notification", "Settings", "About", "Logout"]
-    let storyboardIDs:[String] = ["DietLens","StepsPage","NotificationsPage","SettingsPage","AboutPage","MainViewController"]
-    
+
+    let labels: [String] = ["Report", "Steps Taken", "Notifications", "Settings", "About Us", "Logout"]
+    let iconNames: [String] = ["Report", "Steps", "Notification", "Settings", "About", "Logout"]
+    let storyboardIDs: [String] = ["DietLens", "StepsPage", "NotificationsPage", "SettingsPage", "AboutPage", "MainViewController"]
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -50,8 +46,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "menuButtonCell") as? SideMenuCell {
             cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!)
-            if(indexPath.row == DataService.instance.screenUserIsIn)
-            {
+            if(indexPath.row == DataService.instance.screenUserIsIn) {
                 cell.cellSelected()
             }
             return cell
@@ -66,35 +61,28 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         DataService.instance.screenUserIsIn = indexPath.row
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var controller: UIViewController?
-        
-        if labels[indexPath.row] == "Logout"
-        {
+
+        if labels[indexPath.row] == "Logout" {
             controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-            revealViewController()?.setMainViewController(controller!, animated:true)
+            revealViewController()?.setMainViewController(controller!, animated: true)
             DataService.instance.screenUserIsIn = 0
-        }
-        else
-        {
+        } else {
             controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
             let nc = UINavigationController(rootViewController: controller!)
-            revealViewController()?.pushMainViewController(nc, animated:true)
+            revealViewController()?.pushMainViewController(nc, animated: true)
         }
     }
 
-    func revealController(_ revealController: PBRevealViewController, willShowLeft viewController:UIViewController)
-    {
+    func revealController(_ revealController: PBRevealViewController, willShowLeft viewController: UIViewController) {
         print ("user was in \(labels[DataService.instance.screenUserIsIn]) and side menu was selected!")
-        
-        for i in 0..<labels.count
-        {
-            if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: i, section: 0)) as? SideMenuCell
-            {
+
+        for i in 0..<labels.count {
+            if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: i, section: 0)) as? SideMenuCell {
                 cell.cellUnselected()
             }
         }
-        
-        if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: DataService.instance.screenUserIsIn, section: 0)) as? SideMenuCell
-        {
+
+        if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: DataService.instance.screenUserIsIn, section: 0)) as? SideMenuCell {
             cell.cellSelected()
         }
     }

@@ -10,15 +10,13 @@ import Foundation
 
 class DataService {
     static var instance = DataService()
-    var screenUserIsIn:Int = 0
-    
-    private init()
-    {
+    var screenUserIsIn: Int = 0
+
+    private init() {
 
     }
 
-    func test()
-    {
+    func test() {
         print("me")
     }
 }
