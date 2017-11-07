@@ -16,6 +16,10 @@
 		5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
 		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
 		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
+		58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */; };
+		58199C8B1FB1D696003F6104 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8A1FB1D696003F6104 /* FoodDiaryCell.swift */; };
+		58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
+		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
 		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
@@ -74,6 +78,10 @@
 		5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
 		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellDelegate.swift; sourceTree = "<group>"; };
+		58199C8A1FB1D696003F6104 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
+		58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHeaderCell.swift; sourceTree = "<group>"; };
+		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
 		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +172,14 @@
 			path = Pages;
 			sourceTree = "<group>";
 		};
+		58199C871FB1D63A003F6104 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +252,7 @@
 			children = (
 				58F2DF261F9F437100FF3A95 /* NewsFeed.swift */,
 				58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
+				5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -252,6 +269,8 @@
 				581809AF1FA868E000373763 /* ProfileImageView.swift */,
 				581809B11FA877D700373763 /* SideMenuCell.swift */,
 				5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */,
+				58199C8A1FB1D696003F6104 /* FoodDiaryCell.swift */,
+				58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,6 +278,7 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				58199C871FB1D63A003F6104 /* Delegate */,
 				BF794BB01FA46D7100D30550 /* Camera */,
 				580443611FB0176700D59DFF /* Pages */,
 			);
@@ -647,11 +667,13 @@
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				580443651FB0187C00D59DFF /* NotificationViewController.swift in Sources */,
+				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
 				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
 				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
+				58199C8B1FB1D696003F6104 /* FoodDiaryCell.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,
@@ -661,8 +683,10 @@
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
+				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
 				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
