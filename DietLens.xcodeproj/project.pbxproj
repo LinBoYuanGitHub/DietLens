@@ -16,6 +16,7 @@
 		5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
 		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
 		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
+		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
 		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
@@ -73,6 +74,7 @@
 		5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
 		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				580443641FB0187C00D59DFF /* NotificationViewController.swift */,
 				580443661FB0189E00D59DFF /* SettingViewController.swift */,
 				580443681FB0233900D59DFF /* AboutViewController.swift */,
+				585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
 				"${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
@@ -486,6 +490,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
@@ -658,6 +663,7 @@
 				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

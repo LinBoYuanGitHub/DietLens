@@ -13,6 +13,7 @@ target 'DietLens' do
   pod 'Socket.IO-Client-Swift'
   pod 'SwiftLint'
   pod 'PBRevealViewController/Swift'
+  pod "Floaty", "~> 4.0.0"
 
   target 'DietLensTests' do
     inherit! :search_paths

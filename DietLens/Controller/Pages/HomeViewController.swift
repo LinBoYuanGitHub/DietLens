@@ -8,6 +8,7 @@
 
 import UIKit
 import PBRevealViewController
+import Floaty
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -41,7 +42,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32), NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
+            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
+        //let floaty = Floaty()
+        //floaty.addItem(icon: #imageLiteral(resourceName: "AddFood"))
+        //self.view.addSubview(floaty)
         sideMenuButton.target = self.revealViewController()
         sideMenuButton.action = #selector(PBRevealViewController.revealLeftView)
         revealViewController()?.leftViewBlurEffectStyle = .light
