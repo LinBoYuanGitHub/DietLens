@@ -37,8 +37,8 @@
 		BF7893FF1FA4516200DA1667 /* CameraScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */; };
 		BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894001FA4518200DA1667 /* CameraViewController.swift */; };
 		BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */; };
-		BF7894061FA451B500DA1667 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894051FA451B500DA1667 /* PreviewView.swift */; };
 		BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */; };
+		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
 		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,8 +100,8 @@
 		BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraScreen.storyboard; sourceTree = "<group>"; };
 		BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
-		BF7894051FA451B500DA1667 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreviewView.swift; path = "../../../Downloads/AVCam-iOSUsingAVFoundationtoCaptureImagesandMovies 2/Swift/AVCam/PreviewView.swift"; sourceTree = "<group>"; };
 		BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerProcessor.swift; sourceTree = "<group>"; };
+		BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
 		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		58FCCFEC1F9D886900E4F421 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BF7894051FA451B500DA1667 /* PreviewView.swift */,
+				BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */,
 				58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
 				58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,
 				58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */,
@@ -608,6 +608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
+				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
@@ -624,7 +625,6 @@
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
-				BF7894061FA451B500DA1667 /* PreviewView.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
