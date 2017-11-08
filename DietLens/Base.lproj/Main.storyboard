@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -174,7 +174,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="60.5" y="87" width="255.5" height="60"/>
+                                <rect key="frame" x="60" y="87" width="255.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -285,7 +285,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="td5-MC-OyM">
                                 <rect key="frame" x="0.0" y="20" width="250" height="90"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laksa" translatesAutoresizingMaskIntoConstraints="NO" id="ShY-ca-RHn" customClass="ProfileImageView" customModule="DietLens" customModuleProvider="target">
+                                    <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laksa" translatesAutoresizingMaskIntoConstraints="NO" id="ShY-ca-RHn" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="5" y="10" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="BXs-rF-NON"/>
@@ -368,6 +368,7 @@
                                 <state key="normal" title="returnBack" image="cross"/>
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="hOM-6c-ZpG" eventType="touchUpInside" id="Soz-tv-QIu"/>
+                                    <action selector="closeButtonPressed:" destination="fTy-cd-LxN" eventType="touchUpInside" id="rDA-9N-igB"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7 November" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rz7-lS-GuF">
@@ -384,33 +385,35 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="calendar"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="3mI-Tp-4kk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="3mI-Tp-4kk">
                                 <rect key="frame" x="15" y="70.5" width="345" height="576.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="bQs-gl-SZu" customClass="FoodDiaryHeaderCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="345" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bQs-gl-SZu" id="0P2-TY-CBt">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zW-Qq-NCf">
+                                                    <rect key="frame" x="292" y="5" width="41" height="30"/>
+                                                    <state key="normal" title="+ Add">
+                                                        <color key="titleColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breakfast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4RX-x6-yyv">
-                                                    <rect key="frame" x="10" y="9" width="73" height="21"/>
+                                                    <rect key="frame" x="12" y="9.5" width="73" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.40350055689999997" green="0.40789309140000002" blue="0.4076195359" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zW-Qq-NCf">
-                                                    <rect key="frame" x="294" y="5" width="41" height="30"/>
-                                                    <state key="normal" title="+ Add"/>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="4RX-x6-yyv" firstAttribute="centerY" secondItem="0P2-TY-CBt" secondAttribute="centerY" id="1t9-Hr-plh"/>
-                                                <constraint firstAttribute="trailing" secondItem="3zW-Qq-NCf" secondAttribute="trailing" constant="10" id="ENf-M1-CRE"/>
+                                                <constraint firstAttribute="trailing" secondItem="3zW-Qq-NCf" secondAttribute="trailing" constant="12" id="ENf-M1-CRE"/>
                                                 <constraint firstItem="3zW-Qq-NCf" firstAttribute="centerY" secondItem="0P2-TY-CBt" secondAttribute="centerY" id="Sj7-lo-4wh"/>
-                                                <constraint firstItem="4RX-x6-yyv" firstAttribute="leading" secondItem="0P2-TY-CBt" secondAttribute="leading" constant="10" id="tmL-41-kCw"/>
+                                                <constraint firstItem="4RX-x6-yyv" firstAttribute="leading" secondItem="0P2-TY-CBt" secondAttribute="leading" constant="12" id="tmL-41-kCw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -421,23 +424,17 @@
                                         <rect key="frame" x="0.0" y="41" width="345" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mtE-pT-6Sd" id="Q3O-vM-UFQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Katong Laksa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyc-JM-9QG">
-                                                    <rect key="frame" x="110" y="19.5" width="104" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300g" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLH-QE-qD0">
                                                     <rect key="frame" x="110" y="49.5" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laksa" translatesAutoresizingMaskIntoConstraints="NO" id="0Po-nr-av0" customClass="ProfileImageView" customModule="DietLens" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="10" width="80" height="80"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="laksa" translatesAutoresizingMaskIntoConstraints="NO" id="0Po-nr-av0" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
+                                                    <rect key="frame" x="10" y="9.5" width="80" height="80.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="DdC-I9-Fgy"/>
                                                         <constraint firstAttribute="width" constant="80" id="Tfx-Y7-6Ra"/>
@@ -454,11 +451,19 @@
                                                     <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Katong Laksa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyc-JM-9QG">
+                                                    <rect key="frame" x="110" y="19.5" width="104" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="0Po-nr-av0" firstAttribute="centerY" secondItem="Q3O-vM-UFQ" secondAttribute="centerY" id="3aN-5I-Pbp"/>
                                                 <constraint firstItem="8AP-RF-kLT" firstAttribute="leading" secondItem="PLH-QE-qD0" secondAttribute="trailing" constant="22" id="DDh-tS-3iv"/>
+                                                <constraint firstAttribute="bottom" secondItem="0Po-nr-av0" secondAttribute="bottom" constant="10" id="GFl-Z8-0t4"/>
                                                 <constraint firstItem="0Po-nr-av0" firstAttribute="leading" secondItem="Q3O-vM-UFQ" secondAttribute="leading" constant="10" id="Mmo-v3-5rL"/>
+                                                <constraint firstItem="0Po-nr-av0" firstAttribute="top" secondItem="Q3O-vM-UFQ" secondAttribute="top" constant="10" id="PSS-d0-X6o"/>
                                                 <constraint firstItem="qyc-JM-9QG" firstAttribute="leading" secondItem="0Po-nr-av0" secondAttribute="trailing" constant="20" id="VC8-oU-sVD"/>
                                                 <constraint firstItem="8AP-RF-kLT" firstAttribute="centerY" secondItem="PLH-QE-qD0" secondAttribute="centerY" id="XM7-ai-ec8"/>
                                                 <constraint firstItem="PLH-QE-qD0" firstAttribute="centerY" secondItem="Q3O-vM-UFQ" secondAttribute="centerY" constant="10" id="Znl-j4-eYY"/>
@@ -466,11 +471,17 @@
                                                 <constraint firstItem="PLH-QE-qD0" firstAttribute="leading" secondItem="qyc-JM-9QG" secondAttribute="leading" id="oRG-FZ-AxR"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="calories" destination="8AP-RF-kLT" id="4d4-wH-rzM"/>
+                                            <outlet property="foodImage" destination="0Po-nr-av0" id="XNW-BN-OAq"/>
+                                            <outlet property="foodName" destination="qyc-JM-9QG" id="aJj-Zo-n6r"/>
+                                            <outlet property="servingSize" destination="PLH-QE-qD0" id="VMn-qC-lOz"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="G0E-8F-Bpa" firstAttribute="trailing" secondItem="3mI-Tp-4kk" secondAttribute="trailing" constant="15" id="A3U-7T-8wM"/>
                             <constraint firstItem="G0E-8F-Bpa" firstAttribute="trailing" secondItem="cwy-xG-jIU" secondAttribute="trailing" constant="16" id="DOn-G5-656"/>
@@ -485,6 +496,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G0E-8F-Bpa"/>
                     </view>
+                    <connections>
+                        <outlet property="foodDiaryTable" destination="3mI-Tp-4kk" id="Lan-xw-uI2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YNG-tR-ytq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

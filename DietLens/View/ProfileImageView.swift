@@ -1,5 +1,5 @@
 //
-//  ProfileImageView.swift
+//  RoundedImage.swift
 //  DietLens
 //
 //  Created by next on 31/10/17.
@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class ProfileImageView: UIImageView {
+class RoundedImage: UIImageView {
 
     /*
     // Only override draw() if you perform custom drawing.

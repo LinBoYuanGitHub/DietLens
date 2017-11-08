@@ -17,7 +17,6 @@
 		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
 		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
 		58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */; };
-		58199C8B1FB1D696003F6104 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8A1FB1D696003F6104 /* FoodDiaryCell.swift */; };
 		58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
 		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
 		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
@@ -28,6 +27,7 @@
 		5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */; };
 		5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
 		5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
+		587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */; };
 		58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
 		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
 		58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
@@ -79,7 +79,6 @@
 		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellDelegate.swift; sourceTree = "<group>"; };
-		58199C8A1FB1D696003F6104 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
 		58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHeaderCell.swift; sourceTree = "<group>"; };
 		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
 		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +95,7 @@
 		5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
 		5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
 		58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
 		58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -260,6 +260,7 @@
 		58FCCFEC1F9D886900E4F421 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */,
 				BF7894051FA451B500DA1667 /* PreviewView.swift */,
 				58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
 				58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,
@@ -269,7 +270,6 @@
 				581809AF1FA868E000373763 /* ProfileImageView.swift */,
 				581809B11FA877D700373763 /* SideMenuCell.swift */,
 				5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */,
-				58199C8A1FB1D696003F6104 /* FoodDiaryCell.swift */,
 				58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */,
 			);
 			path = View;
@@ -501,7 +501,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
@@ -510,7 +510,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Floaty.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
@@ -655,6 +655,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */,
 				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
@@ -673,7 +674,6 @@
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
 				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
-				58199C8B1FB1D696003F6104 /* FoodDiaryCell.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,

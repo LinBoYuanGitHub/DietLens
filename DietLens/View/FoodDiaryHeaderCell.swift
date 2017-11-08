@@ -11,6 +11,7 @@ import UIKit
 class FoodDiaryHeaderCell: UITableViewCell {
     weak var addFoodDelegate: DiaryHeaderCellDelegate?
     @IBOutlet weak var titleLabel: UILabel!
+    var meal: Meal = .breakfast
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,8 +22,21 @@ class FoodDiaryHeaderCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func buttonPressed(_ sender: UIButton)
-    {
-        addFoodDelegate?.didPressAddButton(1)
+
+    func setupHeaderCell(whichMeal: Meal) {
+        switch whichMeal {
+        case .breakfast:
+            titleLabel.text = "Breakfast"
+        case .lunch:
+            titleLabel.text = "Lunch"
+        case .dinner:
+            titleLabel.text = "Dinner"
+        default:
+            titleLabel.text = "None"
+        }
+    }
+
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        addFoodDelegate?.didPressAddButton(meal.rawValue)
     }
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2017 NExT++. All rights reserved.
 //
 
-protocol DiaryHeaderCellDelegate : class
-{
+protocol DiaryHeaderCellDelegate: class {
     func didPressAddButton(_ tag: Int)
 }

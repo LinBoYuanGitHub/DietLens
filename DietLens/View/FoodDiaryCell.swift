@@ -9,10 +9,25 @@
 import UIKit
 
 class FoodDiaryCell: UITableViewCell {
+    @IBOutlet weak var servingSize: UILabel!
+    @IBOutlet weak var foodName: UILabel!
+    @IBOutlet weak var calories: UILabel!
+
+    @IBOutlet weak var foodImage: RoundedImage!
+
+    var food: FoodInfo = FoodInfo()
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+
+    func setupCell(foodInfo: FoodInfo) {
+        food = foodInfo
+
+        foodName.text = food.foodName
+        foodImage.image = food.foodImage
+        servingSize.text = food.servingSize
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

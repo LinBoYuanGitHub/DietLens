@@ -6,15 +6,23 @@
 //  Copyright © 2017 NExT++. All rights reserved.
 //
 
-public enum Meal: Int
-{
-    case Breakfast
-    case Lunch
-    case Dinner
+import Foundation
+import UIKit
+
+public enum Meal: Int {
+    case breakfast
+    case lunch
+    case dinner
 }
 
-struct DiaryDailyFood
-{
-    var mealOfDay: Meal = .Breakfast
-    
+struct FoodInfo {
+    var foodName: String = ""
+    var calories: Double = 0
+    var foodImage: UIImage?
+    var servingSize: String = ""
+}
+
+struct DiaryDailyFood {
+    var mealOfDay: Meal = .breakfast
+    var foodConsumed = [FoodInfo]()
 }

@@ -8,7 +8,6 @@
 
 import UIKit
 import PBRevealViewController
-import Floaty
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
