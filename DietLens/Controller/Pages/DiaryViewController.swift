@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import FSCalendar
 
-class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
 
     @IBOutlet weak var foodDiaryTable: UITableView!
+    @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var closeCalButton: UIButton!
+    @IBOutlet weak var diaryCalendar: DiaryDatePicker!
     var mealsConsumed = [DiaryDailyFood]()
     var indexLookup = [Int]()
     var mealIndexLookup = [Int]()
@@ -18,6 +22,11 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var currentMealIndex: Int = -1
     var currentFoodItemIndex: Int = 0
     var totalRows: Int = 0
+    fileprivate let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        return formatter
+    }()
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return totalRows
     }
@@ -85,6 +94,38 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func bringInCalendar(_ sender: Any) {
+        calendarYConstraint.constant = 20
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+
+        UIView.animate(withDuration: 0.3) {
+            self.closeCalButton.alpha = 0.7
+            self.diaryCalendar.alpha = 1
+        }
+    }
+    @IBAction func dismissCalendar(_ sender: Any) {
+        calendarYConstraint.constant = -360
+
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+            self.closeCalButton.alpha = 0
+            self.diaryCalendar.alpha = 0
+        }
+    }
+
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print("calendar did select date \(self.formatter.string(from: date))")
+        let later = DispatchTime.now() + 0.3
+        DispatchQueue.main.asyncAfter(deadline: later) {
+            self.dismissCalendar(date)
+        }
+
+        if monthPosition == .previous || monthPosition == .next {
+            calendar.setCurrentPage(date, animated: true)
+        }
     }
 
     func testData() {

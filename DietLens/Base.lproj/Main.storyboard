@@ -174,7 +174,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="60" y="87" width="255.5" height="60"/>
+                                <rect key="frame" x="98.5" y="87" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -351,7 +351,7 @@
             </objects>
             <point key="canvasLocation" x="1736" y="-696.7016491754124"/>
         </scene>
-        <!--Diary View Controller-->
+        <!--Data Source-->
         <scene sceneID="9Hd-bl-PYV">
             <objects>
                 <viewController id="fTy-cd-LxN" customClass="DiaryViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
@@ -383,7 +383,10 @@
                                     <constraint firstAttribute="width" constant="25" id="AXy-6V-mwg"/>
                                     <constraint firstAttribute="height" constant="25" id="VL1-rn-1Lz"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="calendar"/>
+                                <state key="normal" title="openCal" image="calendar"/>
+                                <connections>
+                                    <action selector="bringInCalendar:" destination="fTy-cd-LxN" eventType="touchUpInside" id="mlW-GH-ETg"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="3mI-Tp-4kk">
                                 <rect key="frame" x="15" y="70.5" width="345" height="576.5"/>
@@ -480,23 +483,56 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qJ-B4-oxl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.22119398522587908" green="0.2213233304094476" blue="0.22924654907975461" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissCalendar:" destination="fTy-cd-LxN" eventType="touchUpInside" id="rMe-Qw-Bul"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JtV-vh-SCW" customClass="DiaryDatePicker" customModule="DietLens" customModuleProvider="target">
+                                <rect key="frame" x="5" y="-309" width="365" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Tuh-rJ-fsm"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="fTy-cd-LxN" id="6xM-Z1-veq"/>
+                                    <outlet property="delegate" destination="fTy-cd-LxN" id="GgG-h1-yjq"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="4qJ-B4-oxl" firstAttribute="top" secondItem="G0E-8F-Bpa" secondAttribute="top" constant="-20" id="4uJ-aD-pf8"/>
+                            <constraint firstItem="G0E-8F-Bpa" firstAttribute="bottom" secondItem="4qJ-B4-oxl" secondAttribute="bottom" id="619-fq-sUE"/>
+                            <constraint firstItem="JtV-vh-SCW" firstAttribute="centerX" secondItem="Quy-Os-25d" secondAttribute="centerX" id="9dg-8F-eGA"/>
                             <constraint firstItem="G0E-8F-Bpa" firstAttribute="trailing" secondItem="3mI-Tp-4kk" secondAttribute="trailing" constant="15" id="A3U-7T-8wM"/>
+                            <constraint firstItem="4qJ-B4-oxl" firstAttribute="trailing" secondItem="G0E-8F-Bpa" secondAttribute="trailing" id="Ayd-Zf-Orf"/>
                             <constraint firstItem="G0E-8F-Bpa" firstAttribute="trailing" secondItem="cwy-xG-jIU" secondAttribute="trailing" constant="16" id="DOn-G5-656"/>
                             <constraint firstItem="rz7-lS-GuF" firstAttribute="centerX" secondItem="G0E-8F-Bpa" secondAttribute="centerX" id="GiE-jx-aqx"/>
                             <constraint firstItem="3mI-Tp-4kk" firstAttribute="top" secondItem="rz7-lS-GuF" secondAttribute="bottom" constant="20" id="HGi-TK-DKj"/>
                             <constraint firstItem="rz7-lS-GuF" firstAttribute="top" secondItem="wyX-aS-zcl" secondAttribute="top" id="Php-ge-oLM"/>
                             <constraint firstItem="wyX-aS-zcl" firstAttribute="top" secondItem="G0E-8F-Bpa" secondAttribute="top" constant="8" id="RKt-aK-HpD"/>
                             <constraint firstItem="wyX-aS-zcl" firstAttribute="leading" secondItem="G0E-8F-Bpa" secondAttribute="leading" constant="16" id="VuG-Lr-CwB"/>
+                            <constraint firstItem="JtV-vh-SCW" firstAttribute="top" secondItem="cwy-xG-jIU" secondAttribute="bottom" constant="-360" id="bqZ-gl-rQR"/>
                             <constraint firstItem="3mI-Tp-4kk" firstAttribute="leading" secondItem="G0E-8F-Bpa" secondAttribute="leading" constant="15" id="fVc-zW-A5O"/>
+                            <constraint firstItem="4qJ-B4-oxl" firstAttribute="leading" secondItem="G0E-8F-Bpa" secondAttribute="leading" id="nP0-uc-Uw4"/>
                             <constraint firstItem="G0E-8F-Bpa" firstAttribute="bottom" secondItem="3mI-Tp-4kk" secondAttribute="bottom" constant="20" id="nsG-jE-7Pd"/>
+                            <constraint firstItem="JtV-vh-SCW" firstAttribute="leading" secondItem="G0E-8F-Bpa" secondAttribute="leading" constant="5" id="tvT-Ye-Xek"/>
                             <constraint firstItem="cwy-xG-jIU" firstAttribute="top" secondItem="G0E-8F-Bpa" secondAttribute="top" constant="6" id="vDK-8z-rPC"/>
+                            <constraint firstAttribute="trailing" secondItem="JtV-vh-SCW" secondAttribute="trailing" constant="5" id="yL3-x1-jnz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="G0E-8F-Bpa"/>
                     </view>
                     <connections>
+                        <outlet property="calendarYConstraint" destination="bqZ-gl-rQR" id="WHb-QN-Vhr"/>
+                        <outlet property="closeCalButton" destination="4qJ-B4-oxl" id="Z93-ST-gVF"/>
+                        <outlet property="diaryCalendar" destination="JtV-vh-SCW" id="e8e-tj-fU5"/>
                         <outlet property="foodDiaryTable" destination="3mI-Tp-4kk" id="Lan-xw-uI2"/>
                     </connections>
                 </viewController>
@@ -1124,136 +1160,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="re3-fg-2O2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1598" y="293"/>
-        </scene>
-        <!--Camera View Controller-->
-        <scene sceneID="S6J-pu-BBu">
-            <objects>
-                <viewController id="pY1-3q-tUu" userLabel="Camera View Controller" customClass="CameraViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="M2w-FO-bJv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zm1-yV-gKB" userLabel="Preview" customClass="PreviewView" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8i-9E-Bc3" userLabel="Photo">
-                                        <rect key="frame" x="147.5" y="542" width="80" height="36"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Capture">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="capturePhoto:" destination="pY1-3q-tUu" eventType="touchUpInside" id="giO-uu-Jex"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <gestureRecognizers/>
-                            </view>
-                            <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00l-LL-M64" userLabel="Camera Unavailable">
-                                <rect key="frame" x="83.5" y="319" width="208" height="29"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGe-o0-0eu" userLabel="Record">
-                                <rect key="frame" x="47.5" y="617" width="80" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Gallery">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAV-aR-i5u" userLabel="Photo">
-                                <rect key="frame" x="147.5" y="617" width="80" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="GT3-vZ-wZ6"/>
-                                    <constraint firstAttribute="height" constant="30" id="hHj-mB-e6e"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Photo">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="capturePhoto:" destination="pY1-3q-tUu" eventType="touchUpInside" id="wDT-VO-z0S"/>
-                                    <action selector="switchToPhoto:" destination="pY1-3q-tUu" eventType="touchUpInside" id="QAO-Bn-885"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0i-pX-NFU" userLabel="Camera">
-                                <rect key="frame" x="247.5" y="617" width="80" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Barcode">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="switchToBarcode:" destination="pY1-3q-tUu" eventType="touchUpInside" id="vjo-Zq-7xh"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="leading" secondItem="WGe-o0-0eu" secondAttribute="trailing" constant="20" id="26K-j9-zKy"/>
-                            <constraint firstItem="Z8i-9E-Bc3" firstAttribute="centerX" secondItem="cAV-aR-i5u" secondAttribute="centerX" id="3TM-wj-BIY"/>
-                            <constraint firstItem="xnA-Pc-XAc" firstAttribute="bottom" secondItem="cAV-aR-i5u" secondAttribute="bottom" constant="20" id="8N9-lS-X9r"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j0i-pX-NFU" secondAttribute="trailing" constant="20" symbolic="YES" id="8bE-nG-rz4"/>
-                            <constraint firstItem="Z8i-9E-Bc3" firstAttribute="leading" secondItem="cAV-aR-i5u" secondAttribute="leading" id="FWa-Rq-sBe"/>
-                            <constraint firstItem="zm1-yV-gKB" firstAttribute="leading" secondItem="xnA-Pc-XAc" secondAttribute="leading" id="Fk8-fi-FoO"/>
-                            <constraint firstItem="WGe-o0-0eu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="M2w-FO-bJv" secondAttribute="leading" constant="20" symbolic="YES" id="Gol-Ul-Qt3"/>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="height" secondItem="WGe-o0-0eu" secondAttribute="height" id="HEh-c6-cZV"/>
-                            <constraint firstItem="00l-LL-M64" firstAttribute="centerX" secondItem="xnA-Pc-XAc" secondAttribute="centerX" id="Hru-CS-cBr"/>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="width" secondItem="WGe-o0-0eu" secondAttribute="width" id="Ief-5Q-NYb"/>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="top" secondItem="WGe-o0-0eu" secondAttribute="top" id="Iq9-Rz-ehw"/>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="width" secondItem="j0i-pX-NFU" secondAttribute="width" id="LBs-E6-qib"/>
-                            <constraint firstItem="00l-LL-M64" firstAttribute="centerY" secondItem="M2w-FO-bJv" secondAttribute="centerY" id="LxB-cg-lPz"/>
-                            <constraint firstItem="zm1-yV-gKB" firstAttribute="trailing" secondItem="xnA-Pc-XAc" secondAttribute="trailing" id="VkI-dh-Qve"/>
-                            <constraint firstItem="zm1-yV-gKB" firstAttribute="bottom" secondItem="M2w-FO-bJv" secondAttribute="bottom" id="e9n-Q3-I7t"/>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="top" secondItem="Z8i-9E-Bc3" secondAttribute="bottom" constant="39" id="hHa-yj-Xmm"/>
-                            <constraint firstItem="j0i-pX-NFU" firstAttribute="leading" secondItem="WGe-o0-0eu" secondAttribute="trailing" constant="120" id="jX0-C7-Cdg"/>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="top" secondItem="j0i-pX-NFU" secondAttribute="top" id="kkR-cx-MYZ"/>
-                            <constraint firstItem="zm1-yV-gKB" firstAttribute="centerY" secondItem="M2w-FO-bJv" secondAttribute="centerY" id="lpv-7F-e6V"/>
-                            <constraint firstItem="xnA-Pc-XAc" firstAttribute="centerX" secondItem="cAV-aR-i5u" secondAttribute="centerX" id="tO7-qW-yIX"/>
-                            <constraint firstItem="Z8i-9E-Bc3" firstAttribute="trailing" secondItem="cAV-aR-i5u" secondAttribute="trailing" id="xRt-nQ-5dY"/>
-                            <constraint firstItem="cAV-aR-i5u" firstAttribute="height" secondItem="j0i-pX-NFU" secondAttribute="height" id="z2M-Mv-INu"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="xnA-Pc-XAc"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <outlet property="barcodeButton" destination="j0i-pX-NFU" id="X3B-e1-ASd"/>
-                        <outlet property="cameraUnavailableLabel" destination="00l-LL-M64" id="ogo-NB-GGd"/>
-                        <outlet property="capturePhotoButton" destination="Z8i-9E-Bc3" id="1qV-JZ-hyv"/>
-                        <outlet property="photoButton" destination="cAV-aR-i5u" id="Tj4-C8-2XV"/>
-                        <outlet property="previewView" destination="zm1-yV-gKB" id="psg-cF-AUV"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O4s-3S-0Xj" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3447" y="319"/>
         </scene>
     </scenes>
     <resources>
