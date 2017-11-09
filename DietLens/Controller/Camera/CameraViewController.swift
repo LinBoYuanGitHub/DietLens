@@ -54,6 +54,10 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     @IBAction func switchToBarcode(_ sender: UIButton) {
         sessionManager.set(captureMode: .barcode)
     }
+
+    @IBAction func dismissCamera(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension CameraViewController: CameraViewControllerDelegate {

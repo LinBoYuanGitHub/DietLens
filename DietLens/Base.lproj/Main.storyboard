@@ -737,9 +737,7 @@
                                 </constraints>
                                 <state key="normal" image="AddFood"/>
                                 <connections>
-                                    <segue destination="pY1-3q-tUu" kind="popoverPresentation" popoverAnchorView="lKc-MD-aDy" id="N1s-GI-DiP">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="presentCamera:" destination="xZk-St-05l" eventType="touchUpInside" id="4eD-2x-M5g"/>
                                 </connections>
                             </button>
                         </subviews>

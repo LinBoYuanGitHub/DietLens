@@ -67,6 +67,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 0)
     }
 
+    @IBAction func presentCamera(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "CameraScreen", bundle: nil)
+        guard let cameraViewController = storyboard.instantiateInitialViewController() as? CameraViewController
+            else { return }
+        present(cameraViewController, animated: true, completion: nil)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
