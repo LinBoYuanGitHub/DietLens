@@ -15,6 +15,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
     @IBOutlet weak var closeCalButton: UIButton!
     @IBOutlet weak var diaryCalendar: DiaryDatePicker!
+    @IBOutlet weak var dateLabel: UILabel!
     var mealsConsumed = [DiaryDailyFood]()
     var indexLookup = [Int]()
     var mealIndexLookup = [Int]()
@@ -24,7 +25,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var totalRows: Int = 0
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
+        //dateFormatter.locale = Locale(identifier: "en_GB")
+        formatter.setLocalizedDateFormatFromTemplate("MMMMd")
         return formatter
     }()
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,6 +55,9 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let date = Date()
+        diaryCalendar.setCurrentPage(date, animated: true)
+        dateLabel.text = formatter.string(from: date)
         foodDiaryTable.dataSource = self
         foodDiaryTable.delegate = self
         foodDiaryTable.estimatedRowHeight = 90
@@ -117,10 +122,11 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print("calendar did select date \(self.formatter.string(from: date))")
+        //print("calendar did select date \(self.formatter.string(from: date))")
         let later = DispatchTime.now() + 0.3
         DispatchQueue.main.asyncAfter(deadline: later) {
             self.dismissCalendar(date)
+            self.dateLabel.text = self.formatter.string(from: date)
         }
 
         if monthPosition == .previous || monthPosition == .next {
