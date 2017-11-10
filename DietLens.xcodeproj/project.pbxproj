@@ -258,8 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				58F2DF261F9F437100FF3A95 /* NewsFeed.swift */,
-				58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
 				5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */,
+				58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

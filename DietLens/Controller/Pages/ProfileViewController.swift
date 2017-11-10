@@ -13,10 +13,10 @@ class ProfileViewController: UIViewController, PBRevealViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.navigationItem.backBarButtonItem = nil
-        //self.navigationItem.backBarButtonItem = nil
-        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController, PBRevealViewControllerDelegate {
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController!.isNavigationBarHidden = false
     }
 
     func revealControllerTapGestureShouldBegin(_ revealController: PBRevealViewController) -> Bool {

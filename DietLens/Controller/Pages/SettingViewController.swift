@@ -10,8 +10,9 @@ import UIKit
 import PBRevealViewController
 
 class SettingViewController: UIViewController {
-
+    @IBOutlet weak var navigationBarItem: UINavigationItem!
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
+    @IBAction func unwindToSettingPage(segue: UIStoryboardSegue) {}
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +25,8 @@ class SettingViewController: UIViewController {
         navigationBar.isTranslucent = false
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
+        navigationBarItem.backBarButtonItem = nil
+
         // Do any additional setup after loading the view.
     }
 
