@@ -16,9 +16,14 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
 
         UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
+            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.4509400725, green: 0.4510070682, blue: 0.4509189129, alpha: 1)]
         sideMenuButton.target = self.revealViewController()
         sideMenuButton.action = #selector(PBRevealViewController.revealLeftView)
+        let navigationBar = UINavigationBar.appearance()
+        navigationBar.barTintColor = #colorLiteral(red: 0.9724672437, green: 0.9726032615, blue: 0.9724243283, alpha: 1)
+        navigationBar.isTranslucent = false
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
         // Do any additional setup after loading the view.
     }
 

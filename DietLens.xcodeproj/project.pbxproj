@@ -28,6 +28,7 @@
 		5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
 		5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
 		587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */; };
+		5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */; };
 		58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */; };
 		58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
 		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
@@ -98,6 +99,7 @@
 		5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
 		5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
+		5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDatePicker.swift; sourceTree = "<group>"; };
 		58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				580443661FB0189E00D59DFF /* SettingViewController.swift */,
 				580443681FB0233900D59DFF /* AboutViewController.swift */,
 				585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
+				5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,
 				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
 				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 			);
