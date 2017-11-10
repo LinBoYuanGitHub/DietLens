@@ -2,21 +2,25 @@ import UIKit
 import AVFoundation
 import Photos
 
-class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     private let sessionManager = CameraSessionManager()
 
     @IBOutlet weak var capturePhotoButton: UIButton!
 
-    @IBOutlet weak var previewView: PreviewView!
+    @IBOutlet weak var previewContainer: UIView!
 
     @IBOutlet private weak var cameraUnavailableLabel: UILabel!
 
     @IBOutlet private weak var photoButton: UIButton!
 
+    private let previewView = PreviewView()
+
     // MARK: Scanning barcodes
 
     @IBOutlet weak var barcodeButton: UIButton!
+
+    private let imagePicker = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,16 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         sessionManager.previewView = previewView
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
+
+        let previewLayer = previewView.videoPreviewLayer
+        previewLayer.frame.size = previewContainer.frame.size
+        previewLayer.videoGravity = .resizeAspectFill
+        previewContainer.layer.addSublayer(previewLayer)
+
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = false
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +67,10 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
     @IBAction func switchToBarcode(_ sender: UIButton) {
         sessionManager.set(captureMode: .barcode)
+    }
+
+    @IBAction func switchToGallery(_ sender: UIButton) {
+        present(imagePicker, animated: false, completion: nil)
     }
 
     @IBAction func dismissCamera(_ sender: UIButton) {
@@ -147,7 +165,41 @@ extension CameraViewController: CameraViewControllerDelegate {
         }
     }
 
-    func onDidFinishCapturePhoto() {
+    func onDidFinishCapturePhoto(image: UIImage) {
+        let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)
+        print("Cropped image")
+    }
+
+    func cropCameraImage(_ original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
+
+        var image = UIImage()
+
+        let previewImageLayerBounds = previewLayer.bounds
+
+        let originalWidth = original.size.width
+        let originalHeight = original.size.height
+
+        let A = previewImageLayerBounds.origin
+        let B = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.origin.y)
+        let D = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.size.height)
+
+        let a = previewLayer.captureDevicePointConverted(fromLayerPoint: A)
+        let b = previewLayer.captureDevicePointConverted(fromLayerPoint: B)
+        let d = previewLayer.captureDevicePointConverted(fromLayerPoint: D)
+
+        let posX = floor(b.x * originalHeight)
+        let posY = floor(b.y * originalWidth)
+
+        let width: CGFloat = d.x * originalHeight - b.x * originalHeight
+        let height: CGFloat = a.y * originalWidth - b.y * originalWidth
+
+        let cropRect = CGRect(x: posX, y: posY, width: width, height: height)
+
+        if let imageRef = original.cgImage?.cropping(to: cropRect) {
+            image = UIImage(cgImage: imageRef, scale: original.scale, orientation: original.imageOrientation)
+        }
+
+        return image
     }
 
     func onDetect(barcode: String) {
@@ -166,5 +218,16 @@ extension CameraViewController: CameraViewControllerDelegate {
 
             wSelf.present(alertController, animated: true, completion: nil)
         }
+    }
+}
+
+extension CameraViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            print("Cannot get image from gallery")
+            return
+        }
+        print("got image")
+        imagePicker.dismiss(animated: true, completion: nil)
     }
 }

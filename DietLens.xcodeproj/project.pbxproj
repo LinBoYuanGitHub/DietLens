@@ -125,7 +125,6 @@
 		BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraScreen.storyboard; sourceTree = "<group>"; };
 		BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
-		BF7894051FA451B500DA1667 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreviewView.swift; path = DietLens/View/PreviewView.swift; sourceTree = SOURCE_ROOT; };
 		BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerProcessor.swift; sourceTree = "<group>"; };
 		BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,7 +267,6 @@
 			isa = PBXGroup;
 			children = (
 				587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */,
-				BF7894051FA451B500DA1667 /* PreviewView.swift */,
 				BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */,
 				58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
 				58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,

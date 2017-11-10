@@ -1,9 +1,10 @@
 import AVFoundation
+import UIKit
 import Photos
 
 protocol PhotoCaptureDelegate: class {
     func onWillCapturePhoto()
-    func onDidCapturePhoto()
+    func onDidCapturePhoto(image: UIImage)
     func onCaptureError()
 }
 
@@ -59,7 +60,7 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings, error: Error?) {
         if let error = error {
             print("Error capturing photo: \(error)")
-            delegate.onDidCapturePhoto()
+            delegate.onCaptureError()
             return
         }
 
@@ -69,35 +70,12 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate {
             return
         }
 
-        PHPhotoLibrary.requestAuthorization { [weak self] status in
-            guard let wSelf = self else {
-                return
-            }
-
-            guard status == .authorized else {
-                wSelf.delegate.onCaptureError()
-                return
-            }
-
-            PHPhotoLibrary.shared().performChanges({
-                let options = PHAssetResourceCreationOptions()
-                let creationRequest = PHAssetCreationRequest.forAsset()
-                if #available(iOS 11.0, *) {
-                    options.uniformTypeIdentifier = wSelf.requestedPhotoSettings.processedFileType.map { $0.rawValue }
-                }
-                creationRequest.addResource(with: .photo, data: photoData, options: options)
-
-                }, completionHandler: { _, error in
-
-                    guard error == nil else {
-                        print("Error occurered while saving photo to photo library: \(error.debugDescription)")
-                        wSelf.delegate.onCaptureError()
-                        return
-                    }
-
-                    wSelf.delegate.onDidCapturePhoto()
-                }
-            )
+        guard let image = UIImage(data: photoData) else {
+            print("Cannot convert data to UIImage")
+            delegate.onCaptureError()
+            return
         }
+
+        delegate.onDidCapturePhoto(image: image)
     }
 }

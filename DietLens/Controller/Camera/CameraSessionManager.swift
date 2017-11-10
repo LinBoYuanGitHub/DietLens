@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import AVFoundation
 
 protocol CameraViewControllerDelegate: class {
@@ -14,7 +15,7 @@ protocol CameraViewControllerDelegate: class {
     func onSwitchTo(captureMode: CameraSessionManager.CameraCaptureMode)
     func onCameraInput(isAvailable: Bool)
     func onWillCapturePhoto()
-    func onDidFinishCapturePhoto()
+    func onDidFinishCapturePhoto(image: UIImage)
     func onDetect(barcode: String)
 }
 
@@ -331,12 +332,12 @@ extension CameraSessionManager: PhotoCaptureDelegate {
         }
     }
 
-    func onDidCapturePhoto() {
+    func onDidCapturePhoto(image: UIImage) {
         DispatchQueue.main.async { [weak self] in
             guard let wSelf = self else {
                 return
             }
-            wSelf.viewControllerDelegate.onDidFinishCapturePhoto()
+            wSelf.viewControllerDelegate.onDidFinishCapturePhoto(image: image)
         }
     }
 
