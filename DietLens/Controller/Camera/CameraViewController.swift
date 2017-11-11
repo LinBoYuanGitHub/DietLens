@@ -44,6 +44,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = false
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        imagePicker.navigationBar.isTranslucent = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -218,6 +219,7 @@ extension CameraViewController: CameraViewControllerDelegate {
 
             wSelf.present(alertController, animated: true, completion: nil)
         }
+        sessionManager.set(captureMode: .photo)
     }
 }
 
