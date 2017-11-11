@@ -16,6 +16,9 @@
 		5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
 		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
 		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
+		5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856591FB6DB15004BEBB3 /* ArticleViewController.swift */; };
+		5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */; };
+		581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */; };
 		58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */; };
 		58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
 		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
@@ -35,6 +38,7 @@
 		58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
 		58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */; };
 		58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */; };
+		58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0F3E71FB6D4F1004C1B81 /* Blur.swift */; };
 		58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E71FA0915500C542D9 /* NewsArticleCell.swift */; };
 		58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E91FA0993B00C542D9 /* NewsArticle.swift */; };
 		58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
@@ -80,6 +84,9 @@
 		5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
 		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		581856591FB6DB15004BEBB3 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableCell.swift; sourceTree = "<group>"; };
+		581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPaddingTextView.swift; sourceTree = "<group>"; };
 		58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellDelegate.swift; sourceTree = "<group>"; };
 		58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHeaderCell.swift; sourceTree = "<group>"; };
 		582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -106,6 +113,7 @@
 		58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideMenuViewController.swift; sourceTree = "<group>"; };
+		58D0F3E71FB6D4F1004C1B81 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		58E425E71FA0915500C542D9 /* NewsArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleCell.swift; sourceTree = "<group>"; };
 		58E425E91FA0993B00C542D9 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
 		58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -174,8 +182,18 @@
 				580443681FB0233900D59DFF /* AboutViewController.swift */,
 				585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
 				5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
+				581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
 			);
 			path = Pages;
+			sourceTree = "<group>";
+		};
+		5818565D1FB6DB97004BEBB3 /* ArticlePageViews */ = {
+			isa = PBXGroup;
+			children = (
+				5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */,
+				581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */,
+			);
+			path = ArticlePageViews;
 			sourceTree = "<group>";
 		};
 		58199C871FB1D63A003F6104 /* Delegate */ = {
@@ -245,6 +263,14 @@
 			path = DietLensUITests;
 			sourceTree = "<group>";
 		};
+		58D0F3E61FB6D4E3004C1B81 /* Blur */ = {
+			isa = PBXGroup;
+			children = (
+				58D0F3E71FB6D4F1004C1B81 /* Blur.swift */,
+			);
+			path = Blur;
+			sourceTree = "<group>";
+		};
 		58F2DF281F9F437F00FF3A95 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +292,7 @@
 		58FCCFEC1F9D886900E4F421 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5818565D1FB6DB97004BEBB3 /* ArticlePageViews */,
 				587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */,
 				BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */,
 				58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
@@ -295,6 +322,7 @@
 		58FCCFF01F9D8A4F00E4F421 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				58D0F3E61FB6D4E3004C1B81 /* Blur */,
 				582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */,
 				58FCCFF11F9D8A5900E4F421 /* Fonts */,
 				58AA521C1FA2D1AA0072779C /* Constants.swift */,
@@ -511,6 +539,8 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -520,6 +550,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -669,6 +701,7 @@
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
 				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
+				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
 				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
@@ -687,12 +720,15 @@
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,
+				5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */,
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
+				581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
+				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
 				5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,

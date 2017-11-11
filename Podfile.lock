@@ -1,7 +1,9 @@
 PODS:
   - Alamofire (4.5.1)
   - FSCalendar (2.7.9)
+  - ParallaxHeader (2.0.0)
   - PBRevealViewController/Swift (1.2.8)
+  - SnapKit (4.0.0)
   - Socket.IO-Client-Swift (12.1.2):
     - Starscream (~> 2.1.1)
   - Starscream (2.1.1)
@@ -11,7 +13,9 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - FSCalendar
+  - ParallaxHeader (~> 2.0.0)
   - PBRevealViewController/Swift
+  - SnapKit (~> 4.0)
   - Socket.IO-Client-Swift
   - SwiftLint
   - SwiftyJSON
@@ -19,12 +23,14 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
+  ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
   PBRevealViewController: b1471380464f30b63d73e9b04e9abf9cb7b67093
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Socket.IO-Client-Swift: ba3cb1c4bf0a6ca90080406a2c22685c25ad1f60
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 1c9550e76fbb10a365694cf09c739e2e384effcc
+PODFILE CHECKSUM: 01c1b917a3924a9777cb08f53bf90626ed60a5c6
 
 COCOAPODS: 1.3.1
