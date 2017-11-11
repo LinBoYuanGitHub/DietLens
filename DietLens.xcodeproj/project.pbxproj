@@ -23,6 +23,7 @@
 		58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
 		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
 		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
+		587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
 		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
@@ -94,6 +95,7 @@
 		582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-Bridging-Header.h"; sourceTree = "<group>"; };
 		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
 		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleArticleViewController.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
 				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
 				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
+				587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
 				5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,
+				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
 				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
 				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 			);
