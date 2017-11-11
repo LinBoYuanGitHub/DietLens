@@ -69,9 +69,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func presentCamera(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "CameraScreen", bundle: nil)
-        guard let cameraViewController = storyboard.instantiateInitialViewController() as? CameraViewController
+        guard let vc = storyboard.instantiateInitialViewController()
             else { return }
-        present(cameraViewController, animated: true, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

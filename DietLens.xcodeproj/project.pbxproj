@@ -50,6 +50,8 @@
 		BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894001FA4518200DA1667 /* CameraViewController.swift */; };
 		BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */; };
 		BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */; };
+		BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */; };
+		BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */; };
 		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
 		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 /* End PBXBuildFile section */
@@ -126,6 +128,8 @@
 		BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerProcessor.swift; sourceTree = "<group>"; };
+		BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
+		BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
 		BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				580443681FB0233900D59DFF /* AboutViewController.swift */,
 				585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
 				5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
+				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
+				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -514,6 +520,7 @@
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -523,6 +530,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -685,6 +693,8 @@
 				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
 				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
+				BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
+				BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,

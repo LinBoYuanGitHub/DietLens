@@ -1,6 +1,7 @@
 import UIKit
 import AVFoundation
 import Photos
+import XLPagerTabStrip
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
@@ -57,7 +58,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     private func addBarScannerLine() {
         let previewContainerFrame = previewContainer.frame
         barScannerLine.frame = CGRect(x: 0, y: 0, width: previewContainerFrame.width, height: 2)
-        barScannerLine.backgroundColor = UIColor.blue
+        barScannerLine.backgroundColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
         previewContainer.addSubview(barScannerLine)
         UIView.animate(withDuration: 2.0, delay: 0, options: [.repeat, .autoreverse], animations: {
             self.barScannerLine.frame = CGRect(x: 0, y: previewContainerFrame.height - 2, width: previewContainerFrame.width, height: 2)
@@ -82,10 +83,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBAction func switchToGallery(_ sender: UIButton) {
         present(imagePicker, animated: false, completion: nil)
-    }
-
-    @IBAction func dismissCamera(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -257,5 +254,11 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         }
         print("got image")
         imagePicker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CameraViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "BY IMAGE")
     }
 }
