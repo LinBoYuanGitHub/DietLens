@@ -25,12 +25,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Disable UI. The UI is enabled if and only if the session starts running.
-        photoButton.isEnabled = false
-        barcodeButton.isEnabled = false
-        capturePhotoButton.isHidden = true
-        cameraUnavailableLabel.isHidden = true
-
         sessionManager.previewView = previewView
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
@@ -78,6 +72,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
 }
+
+// MARK: CameraViewControllerDelegate methods
 
 extension CameraViewController: CameraViewControllerDelegate {
     func onConfigureSession(withResult result: CameraSessionManager.SessionSetupResult) {
@@ -143,17 +139,27 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onSwitchTo(captureMode: CameraSessionManager.CameraCaptureMode) {
-        photoButton.isEnabled = false
-        barcodeButton.isEnabled = false
-        capturePhotoButton.isHidden = true
-
+        var activeButton: UIButton
         switch captureMode {
         case .photo:
-            barcodeButton.isEnabled = true
+            activeButton = photoButton
             capturePhotoButton.isHidden = false
         case .barcode:
-            photoButton.isEnabled = true
+            activeButton = barcodeButton
+            capturePhotoButton.isHidden = true
         }
+
+        let allButtons = [photoButton, barcodeButton]
+        let inactiveButtons = allButtons.filter { $0 != activeButton }
+
+        for button in inactiveButtons {
+            button?.isEnabled = true
+            button?.backgroundColor = .clear
+        }
+
+        activeButton.isEnabled = false
+        activeButton.backgroundColor = UIColor(red: 1.00, green: 0.31, blue: 0.31, alpha: 0.7)
+        activeButton.layer.cornerRadius = 5
     }
 
     func onCameraInput(isAvailable: Bool) {
@@ -222,6 +228,8 @@ extension CameraViewController: CameraViewControllerDelegate {
         sessionManager.set(captureMode: .photo)
     }
 }
+
+// MARK: UIImagePickerControllerDelegate methods
 
 extension CameraViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
