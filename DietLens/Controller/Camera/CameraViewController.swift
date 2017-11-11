@@ -39,7 +39,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.setup()
 
         let previewLayer = previewView.videoPreviewLayer
-        previewLayer.frame.size = previewContainer.frame.size
         previewLayer.videoGravity = .resizeAspectFill
         previewContainer.layer.addSublayer(previewLayer)
 
@@ -48,6 +47,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         imagePicker.allowsEditing = false
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         imagePicker.navigationBar.isTranslucent = false
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        previewView.videoPreviewLayer.frame.size = previewContainer.frame.size
     }
 
     override func viewWillAppear(_ animated: Bool) {
