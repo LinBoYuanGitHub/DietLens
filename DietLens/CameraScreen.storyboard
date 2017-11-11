@@ -27,13 +27,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zf0-db-esM" userLabel="Camera Unavailable">
-                                <rect key="frame" x="103" y="354" width="208" height="29"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRT-dK-6dM" userLabel="Record">
                                 <rect key="frame" x="67" y="676" width="80" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -139,9 +132,22 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z2p-uY-GfY">
                                 <rect key="frame" x="0.0" y="100" width="414" height="414"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zf0-db-esM" userLabel="Camera Unavailable">
+                                        <rect key="frame" x="0.0" y="192" width="414" height="29"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Z2p-uY-GfY" secondAttribute="height" multiplier="1:1" id="7W4-wI-fIU"/>
+                                    <constraint firstItem="zf0-db-esM" firstAttribute="centerY" secondItem="Z2p-uY-GfY" secondAttribute="centerY" id="9GT-cg-5S1"/>
+                                    <constraint firstItem="zf0-db-esM" firstAttribute="leading" secondItem="Z2p-uY-GfY" secondAttribute="leading" id="BGV-Mk-ffn"/>
+                                    <constraint firstAttribute="trailing" secondItem="zf0-db-esM" secondAttribute="trailing" id="M0N-jq-F2G"/>
+                                    <constraint firstItem="zf0-db-esM" firstAttribute="centerX" secondItem="Z2p-uY-GfY" secondAttribute="centerX" id="TKA-TL-Kuc"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -151,9 +157,7 @@
                             <constraint firstItem="4yF-rr-9du" firstAttribute="leading" secondItem="BYo-0H-I4v" secondAttribute="trailing" id="5DD-q8-Km4"/>
                             <constraint firstItem="Z2p-uY-GfY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="6Vm-pY-94W"/>
                             <constraint firstItem="uCj-6P-mHF" firstAttribute="bottom" secondItem="nyU-fN-aJh" secondAttribute="bottom" constant="-30" id="6rm-42-nEK"/>
-                            <constraint firstItem="zf0-db-esM" firstAttribute="centerX" secondItem="Z2p-uY-GfY" secondAttribute="centerX" id="9xL-xm-FJp"/>
                             <constraint firstItem="uCj-6P-mHF" firstAttribute="height" secondItem="eRT-dK-6dM" secondAttribute="height" id="AEV-ew-H4g"/>
-                            <constraint firstItem="zf0-db-esM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="B6r-4f-AVR"/>
                             <constraint firstAttribute="trailing" secondItem="Z2p-uY-GfY" secondAttribute="trailing" id="C5V-PG-pmP"/>
                             <constraint firstItem="4yF-rr-9du" firstAttribute="width" secondItem="BYo-0H-I4v" secondAttribute="width" id="FN5-i4-l0E"/>
                             <constraint firstItem="diM-8N-scT" firstAttribute="centerX" secondItem="nyU-fN-aJh" secondAttribute="centerX" id="J3h-0D-b4q"/>

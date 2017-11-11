@@ -113,6 +113,7 @@ class CameraSessionManager {
         default:
             // The user has previously denied access.
             setupResult = .notAuthorized
+            viewControllerDelegate.onCameraInput(isAvailable: false)
         }
     }
 
@@ -137,6 +138,7 @@ class CameraSessionManager {
             print("Could not create video device input")
             setupResult = .configurationFailed
             session.commitConfiguration()
+            viewControllerDelegate.onCameraInput(isAvailable: false)
             return
         }
 
@@ -281,6 +283,10 @@ extension CameraSessionManager {
 extension CameraSessionManager {
     func capturePhoto() {
         guard captureMode == .photo else {
+            return
+        }
+
+        guard setupResult == .success else {
             return
         }
 

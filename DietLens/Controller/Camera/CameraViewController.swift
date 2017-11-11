@@ -168,7 +168,7 @@ extension CameraViewController: CameraViewControllerDelegate {
                 return
             }
 
-            wSelf.cameraUnavailableLabel.isHidden = !isAvailable
+            wSelf.cameraUnavailableLabel.isHidden = isAvailable
         }
     }
 
