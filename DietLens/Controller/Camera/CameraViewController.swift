@@ -4,8 +4,6 @@ import Photos
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
-    private let sessionManager = CameraSessionManager()
-
     @IBOutlet weak var capturePhotoButton: UIButton!
 
     @IBOutlet weak var previewContainer: UIView!
@@ -14,11 +12,15 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet private weak var photoButton: UIButton!
 
-    private let previewView = PreviewView()
-
     // MARK: Scanning barcodes
 
     @IBOutlet weak var barcodeButton: UIButton!
+
+    private let sessionManager = CameraSessionManager()
+
+    private let previewView = PreviewView()
+
+    private let barScannerLine = UIView()
 
     private let imagePicker = UIImagePickerController()
 
@@ -50,6 +52,20 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         // Order matters here
         sessionManager.onViewWillDisappear()
         super.viewWillDisappear(animated)
+    }
+
+    private func addBarScannerLine() {
+        let previewContainerFrame = previewContainer.frame
+        barScannerLine.frame = CGRect(x: 0, y: 0, width: previewContainerFrame.width, height: 2)
+        barScannerLine.backgroundColor = UIColor.blue
+        previewContainer.addSubview(barScannerLine)
+        UIView.animate(withDuration: 2.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+            self.barScannerLine.frame = CGRect(x: 0, y: previewContainerFrame.height - 2, width: previewContainerFrame.width, height: 2)
+        }, completion: nil)
+    }
+
+    private func removeBarScannerLine() {
+        barScannerLine.removeFromSuperview()
     }
 
     @IBAction func capturePhoto(_ sender: UIButton) {
@@ -144,9 +160,11 @@ extension CameraViewController: CameraViewControllerDelegate {
         case .photo:
             activeButton = photoButton
             capturePhotoButton.isHidden = false
+            removeBarScannerLine()
         case .barcode:
             activeButton = barcodeButton
             capturePhotoButton.isHidden = true
+            addBarScannerLine()
         }
 
         let allButtons = [photoButton, barcodeButton]
