@@ -17,6 +17,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var barcodeButton: UIButton!
 
+    @IBOutlet weak var reviewImagePalette: UIView!
+
+    @IBOutlet weak var chosenImageView: UIImageView!
+
     private let sessionManager = CameraSessionManager()
 
     private let previewView = PreviewView()
@@ -27,6 +31,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        hideReview()
 
         sessionManager.previewView = previewView
         sessionManager.viewControllerDelegate = self
@@ -83,6 +89,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBAction func switchToGallery(_ sender: UIButton) {
         present(imagePicker, animated: false, completion: nil)
+    }
+
+    @IBAction func approveImage(_ sender: UIButton) {
+        hideReview()
+    }
+
+    @IBAction func rejectImage(_ sender: UIButton) {
+        hideReview()
     }
 }
 
@@ -188,8 +202,8 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDidFinishCapturePhoto(image: UIImage) {
-        let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)
-        print("Cropped image")
+        let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
+        showReview(image: croppedImage)
     }
 
     func cropCameraImage(_ original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
@@ -252,13 +266,30 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             print("Cannot get image from gallery")
             return
         }
-        print("got image")
+        showReview(image: image)
         imagePicker.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: IndicatorInfoProvider methods
 extension CameraViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "BY IMAGE")
     }
+}
+
+// MARK: review image flow
+extension CameraViewController {
+    private func showReview(image: UIImage) {
+        chosenImageView.image = image
+        chosenImageView.contentMode = .scaleAspectFit
+        chosenImageView.isHidden = false
+        reviewImagePalette.isHidden = false
+    }
+
+    private func hideReview() {
+        chosenImageView.isHidden = true
+        reviewImagePalette.isHidden = true
+    }
+
 }
