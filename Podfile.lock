@@ -9,6 +9,7 @@ PODS:
   - Starscream (2.1.1)
   - SwiftLint (0.23.1)
   - SwiftyJSON (3.1.4)
+  - XLPagerTabStrip (8.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Socket.IO-Client-Swift
   - SwiftLint
   - SwiftyJSON
+  - XLPagerTabStrip (~> 8.0)
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -30,7 +32,12 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
+<<<<<<< HEAD
 PODFILE CHECKSUM: 01c1b917a3924a9777cb08f53bf90626ed60a5c6
+=======
+PODFILE CHECKSUM: 50b3bed97b76046ae05df4640d9672514f27153c
+>>>>>>> fc925a0eb885f45fbc1aed2010f494288f264c0f
 
 COCOAPODS: 1.3.1

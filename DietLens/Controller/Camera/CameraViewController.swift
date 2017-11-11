@@ -1,10 +1,9 @@
 import UIKit
 import AVFoundation
 import Photos
+import XLPagerTabStrip
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
-
-    private let sessionManager = CameraSessionManager()
 
     @IBOutlet weak var capturePhotoButton: UIButton!
 
@@ -14,16 +13,26 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet private weak var photoButton: UIButton!
 
-    private let previewView = PreviewView()
-
     // MARK: Scanning barcodes
 
     @IBOutlet weak var barcodeButton: UIButton!
+
+    @IBOutlet weak var reviewImagePalette: UIView!
+
+    @IBOutlet weak var chosenImageView: UIImageView!
+
+    private let sessionManager = CameraSessionManager()
+
+    private let previewView = PreviewView()
+
+    private let barScannerLine = UIView()
 
     private let imagePicker = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        hideReview()
 
         sessionManager.previewView = previewView
         sessionManager.viewControllerDelegate = self
@@ -52,6 +61,20 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         super.viewWillDisappear(animated)
     }
 
+    private func addBarScannerLine() {
+        let previewContainerFrame = previewContainer.frame
+        barScannerLine.frame = CGRect(x: 0, y: 0, width: previewContainerFrame.width, height: 2)
+        barScannerLine.backgroundColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
+        previewContainer.addSubview(barScannerLine)
+        UIView.animate(withDuration: 2.0, delay: 0, options: [.repeat, .autoreverse], animations: {
+            self.barScannerLine.frame = CGRect(x: 0, y: previewContainerFrame.height - 2, width: previewContainerFrame.width, height: 2)
+        }, completion: nil)
+    }
+
+    private func removeBarScannerLine() {
+        barScannerLine.removeFromSuperview()
+    }
+
     @IBAction func capturePhoto(_ sender: UIButton) {
         sessionManager.capturePhoto()
     }
@@ -68,8 +91,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         present(imagePicker, animated: false, completion: nil)
     }
 
-    @IBAction func dismissCamera(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func approveImage(_ sender: UIButton) {
+        hideReview()
+    }
+
+    @IBAction func rejectImage(_ sender: UIButton) {
+        hideReview()
     }
 }
 
@@ -144,9 +171,11 @@ extension CameraViewController: CameraViewControllerDelegate {
         case .photo:
             activeButton = photoButton
             capturePhotoButton.isHidden = false
+            removeBarScannerLine()
         case .barcode:
             activeButton = barcodeButton
             capturePhotoButton.isHidden = true
+            addBarScannerLine()
         }
 
         let allButtons = [photoButton, barcodeButton]
@@ -168,13 +197,13 @@ extension CameraViewController: CameraViewControllerDelegate {
                 return
             }
 
-            wSelf.cameraUnavailableLabel.isHidden = !isAvailable
+            wSelf.cameraUnavailableLabel.isHidden = isAvailable
         }
     }
 
     func onDidFinishCapturePhoto(image: UIImage) {
-        let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)
-        print("Cropped image")
+        let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
+        showReview(image: croppedImage)
     }
 
     func cropCameraImage(_ original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
@@ -237,7 +266,30 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             print("Cannot get image from gallery")
             return
         }
-        print("got image")
+        showReview(image: image)
         imagePicker.dismiss(animated: true, completion: nil)
     }
+}
+
+// MARK: IndicatorInfoProvider methods
+extension CameraViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "BY IMAGE")
+    }
+}
+
+// MARK: review image flow
+extension CameraViewController {
+    private func showReview(image: UIImage) {
+        chosenImageView.image = image
+        chosenImageView.contentMode = .scaleAspectFit
+        chosenImageView.isHidden = false
+        reviewImagePalette.isHidden = false
+    }
+
+    private func hideReview() {
+        chosenImageView.isHidden = true
+        reviewImagePalette.isHidden = true
+    }
+
 }
