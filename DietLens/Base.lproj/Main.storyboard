@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13528" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13526"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -969,11 +969,12 @@
                     </view>
                     <connections>
                         <outlet property="articleTable" destination="xlP-bx-uEh" id="aC6-bJ-OpE"/>
+                        <segue destination="q2f-f7-UZG" kind="presentation" identifier="presentArticlePage" id="8Rw-F9-HXm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ypI-iI-0EJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3248.8000000000002" y="292.80359820089956"/>
+            <point key="canvasLocation" x="3249" y="293"/>
         </scene>
         <!--Single Article View Controller-->
         <scene sceneID="aRP-64-quw">
@@ -987,7 +988,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="900" id="VqS-x0-TIw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="900" id="VqS-x0-TIw" customClass="SinglePageArticleBodyCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="375" height="900"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VqS-x0-TIw" id="DSJ-zr-bVs">
@@ -997,7 +998,7 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91C-Km-9eI">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="899.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut hendrerit nisl. Aenean commodo suscipit ultrices. Phasellus ante mauris, dictum vel purus quis, molestie luctus lacus. Fusce leo nisi, gravida eget interdum quis, rutrum eget ante. Praesent quis massa ac nunc porttitor fermentum vel eu elit. Praesent eu nisi at eros imperdiet ultricies. Nunc vitae urna a ex dapibus venenatis ut id lacus. Proin fermentum quam eu ex rutrum, sed interdum orci sollicitudin. Morbi vulputate, elit vel porta cursus, dolor metus gravida ante, a congue leo tellus nec nisl. Proin convallis imperdiet velit, ac tincidunt diam blandit ac. Quisque molestie mauris a ligula suscipit finibus. Nulla facilisi. Morbi pellentesque tincidunt massa sit amet ullamcorper. Praesent mollis lectus at ex elementum, quis consequat ligula dictum.
+                                                    <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut hendrerit nisl. Aenean commodo suscipit ultrices. Phasellus ante mauris, dictum vel purus quis, molestie luctus lacus. Fusce leo nisi, gravida eget interdum quis, rutrum eget ante. Praesent quis massa ac nunc porttitor fermentum vel eu elit. Praesent eu nisi at eros imperdiet ultricies. Nunc vitae urna a ex dapibus venenatis ut id lacus. Proin fermentum quam eu ex rutrum, sed interdum orci sollicitudin. Morbi vulputate, elit vel porta cursus, dolor metus gravida ante, a congue leo tellus nec nisl. Proin convallis imperdiet velit, ac tincidunt diam blandit ac. Quisque molestie mauris a ligula suscipit finibus. Nulla facilisi. Morbi pellentesque tincidunt massa sit amet ullamcorper. Praesent mollis lectus at ex elementum, quis consequat ligula dictum.
 
 Morbi cursus massa vel ex pellentesque, in malesuada quam bibendum. Integer placerat est a ex malesuada malesuada. Maecenas in dui et massa maximus placerat. Cras in risus rutrum, ultrices odio ut, accumsan eros. Aliquam porttitor nulla a ante lacinia, at lobortis dui elementum. Sed ultrices, ante a ullamcorper sodales, augue nisl sollicitudin arcu, ut mollis magna enim sed augue. Phasellus tellus dolor, finibus sed venenatis vel, convallis vitae nisl. Curabitur sit amet nisl eu nisl ornare tincidunt. Nunc egestas viverra sapien, vitae maximus ipsum sagittis sagittis. Mauris pharetra, risus a pulvinar tempor, leo nisl sollicitudin leo, tristique tincidunt quam arcu eget mauris. Nam feugiat dui ut urna finibus cursus. Quisque congue, dolor vel pretium commodo, risus odio ornare augue, eu commodo tellus turpis in ex. Aliquam at odio gravida, lobortis quam nec, mollis elit.
 
@@ -1005,7 +1006,7 @@ Maecenas ornare, risus quis vestibulum facilisis, sapien mauris gravida enim, at
 
 Integer vel metus egestas, efficitur mi nec, lobortis ante. Sed varius massa congue purus finibus porttitor. Fusce non nulla imperdiet, iaculis tortor accumsan, rhoncus felis. Donec efficitur magna lorem, ac suscipit tellus tincidunt id. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim placerat nunc at faucibus. Curabitur non urna dapibus, ornare orci et, cursus dolor.
 
-Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas at lectus sapien. Sed sit amet leo vel sem commodo cursus. Donec ultricies ante vitae magna sollicitudin accumsan. Maecenas augue est, luctus auctor mauris id, mollis sodales ipsum. Nulla facilisi.</mutableString>
+Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas at lectus sapien. Sed sit amet leo vel sem commodo cursus. Donec ultricies ante vitae magna sollicitudin accumsan. Maecenas augue est, luctus auctor mauris id, mollis sodales ipsum. Nulla facilisi.</string>
                                                     <color key="textColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1018,6 +1019,9 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                                 <constraint firstAttribute="bottom" secondItem="91C-Km-9eI" secondAttribute="bottom" id="zrw-7n-kkp"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textView" destination="91C-Km-9eI" id="vvS-ZG-YOR"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

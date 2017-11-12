@@ -46,7 +46,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "menuButtonCell") as? SideMenuCell {
             cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!)
-            if(indexPath.row == DataService.instance.screenUserIsIn) {
+            if indexPath.row == DataService.instance.screenUserIsIn {
                 cell.cellSelected()
             }
             return cell
