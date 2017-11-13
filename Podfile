@@ -18,6 +18,7 @@ target 'DietLens' do
   pod 'ParallaxHeader', '~> 2.0.0'
   pod 'SnapKit', '~> 4.0'
   pod 'XLPagerTabStrip', '~> 8.0'
+  pod 'AlamofireImage', '~> 3.3'
 
   target 'DietLensTests' do
     inherit! :search_paths
