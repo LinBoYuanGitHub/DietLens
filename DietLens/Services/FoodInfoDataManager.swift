@@ -9,15 +9,15 @@
 import Foundation
 import SwiftyJSON
 
-class FoodInfoDataManager{
+class FoodInfoDataManager {
     static var instance = FoodInfoDataManager()
-    private init(){}
-    public var foodInfoList = [FoodInfo]()
-    
-    func assembleFoodInfos(jsonArr:[JSON]){
-        for item in jsonArr{
+    private init() {}
+    public var foodInfoList = [FoodInfomation]()
+
+    func assembleFoodInfos(jsonArr: [JSON]) {
+        for item in jsonArr {
             var foodInfo = assembleFoodInfo(jsonObject: item)
-            if(foodInfo.food_name == "Non-food"){
+            if(foodInfo.foodName == "Non-food") {
                 foodInfo.calorie = 0.0
                 foodInfo.carbohydrate = "0.0"
                 foodInfo.protein = "0.0"
@@ -26,11 +26,11 @@ class FoodInfoDataManager{
             foodInfoList.append(foodInfo)
         }
     }
-    
-    func assembleFoodInfo(jsonObject:JSON) -> FoodInfo{
-        var foodInfo = FoodInfo()
-        foodInfo.food_id = jsonObject["food_id"].stringValue
-        foodInfo.food_name = jsonObject["food_name"].stringValue
+
+    func assembleFoodInfo(jsonObject: JSON) -> FoodInfomation {
+        var foodInfo = FoodInfomation()
+        foodInfo.foodId = jsonObject["food_id"].stringValue
+        foodInfo.foodName = jsonObject["food_name"].stringValue
         foodInfo.calorie = Float(jsonObject["calorie"].stringValue)!
         foodInfo.carbohydrate = jsonObject["carbohydrate"].stringValue
         foodInfo.protein = jsonObject["protein"].stringValue

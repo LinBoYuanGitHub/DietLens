@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct TextSearchSuggestionEntity{
-    public var id:Int = 0
-    public var name:String = ""
-    
-    init(id:Int,name:String){
+struct TextSearchSuggestionEntity {
+    public var id: Int = 0
+    public var name: String = ""
+
+    init(id: Int, name: String) {
         self.id = id
         self.name = name
     }

@@ -8,22 +8,22 @@
 
 import Foundation
 
-struct Article{
+struct Article {
     public var id: Int = 0
     public var timestamp: String = ""
     public var source: String = ""
-    public var article_title: String = ""
-    public var article_URL: String = ""
-    public var article_content: String = ""
-    public var article_image_URL: String = ""
-    
-    init(){
-        
+    public var articleTitle: String = ""
+    public var articleURL: String = ""
+    public var articleContent: String = ""
+    public var articleImageURL: String = ""
+
+    init() {
+
     }
-    
-    init(id:Int,title: String, content: String) {
+
+    init(id: Int, title: String, content: String) {
         self.id = id
-        self.article_title = title
-        self.article_content = content
+        self.articleTitle = title
+        self.articleContent = content
     }
 }

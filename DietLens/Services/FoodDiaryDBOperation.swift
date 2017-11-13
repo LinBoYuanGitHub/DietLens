@@ -9,59 +9,58 @@
 import Foundation
 import RealmSwift
 
-class FoodDiaryDBOperation{
+class FoodDiaryDBOperation {
+
     static var instance = FoodDiaryDBOperation()
+    //swiftlint:disable force_try
     let realm = try! Realm()
-    
+
     /// save foodDiary into realm
     ///
     /// - Parameter foodDiary: the whole foodDiary Object
-    func SaveFoodDiary(foodDiary:FoodDiary){
+    func saveFoodDiary(foodDiary: FoodDiary) {
         try! realm.write {
             realm.add(foodDiary)
         }
     }
-    
+
     /// delete target foodDiary by Id
     ///
     ///  - Parameter foodDiaryId: foodDiaryId
-    func deleteFoodDiary(foodDiaryId:Int){
+    func deleteFoodDiary(foodDiaryId: Int) {
         try! realm.write {
             let deleteTarget = realm.objects(FoodDiary.self).filter("id=\(foodDiaryId)")
             realm.delete(deleteTarget[0])
         }
     }
-    
+
     /// get all the foodDiary
     ///
     /// - Returns: array of all the foodDiary
-    func getAllFoodDiary() -> [FoodDiary]?{
+    func getAllFoodDiary() -> [FoodDiary]? {
         var results = [FoodDiary]()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self)
-            for foodDiary in foodDiarys{
+            for foodDiary in foodDiarys {
                 results.append(foodDiary)
             }
         }
-        return results;
+        return results
     }
-    
+
     /// get foodDiary by month&year time
     ///
     /// - Parameter year: foodDiary record year
     /// - Parameter month: foodDiary record month
     /// - Returns: array of foodDiary
-    func getFoodDiaryByMonth(year:String,month:String) -> [FoodDiary]?{
+    func getFoodDiaryByMonth(year: String, month: String) -> [FoodDiary]? {
         var results = [FoodDiary]()
         try! realm.write {
-            let foodDiarys = realm.objects(FoodDiary.self).filter("%@ IN mealTime",month+year)
-            for foodDiary in foodDiarys{
+            let foodDiarys = realm.objects(FoodDiary.self).filter("%@ IN mealTime", month+year)
+            for foodDiary in foodDiarys {
                 results.append(foodDiary)
             }
         }
-        return results;
+        return results
     }
 }
-
-
-

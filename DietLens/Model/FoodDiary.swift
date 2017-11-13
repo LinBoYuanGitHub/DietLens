@@ -9,10 +9,10 @@
 import Foundation
 import RealmSwift
 
-class FoodDiary: Object{
+class FoodDiary: Object {
     @objc dynamic var id = 0
     @objc dynamic var foodName = ""
-    @objc dynamic var rank = 1;
+    @objc dynamic var rank = 1
     @objc dynamic var userId = ""
     @objc dynamic var foodId = ""
     @objc dynamic var imageId = ""
@@ -21,7 +21,7 @@ class FoodDiary: Object{
     @objc dynamic var mealType = ""
     @objc dynamic var recordType = ""
     @objc dynamic var portionSize = 1.0
-    @objc dynamic var calorie = 1.0;
+    @objc dynamic var calorie = 1.0
     @objc dynamic var carbohydrate = ""
     @objc dynamic var protein = ""
     @objc dynamic var fat = ""

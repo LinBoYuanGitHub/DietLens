@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct FoodInfo{
-    public var food_id:String = ""
-    public var rank:Int = 0
-    public var food_name:String = ""
-    public var carbohydrate:String = ""
-    public var protein:String = ""
-    public var fat:String = ""
-    public var calorie:Float = 0.0
-    
-    init(){
-        
+struct FoodInfomation {
+    public var foodId: String = ""
+    public var rank: Int = 0
+    public var foodName: String = ""
+    public var carbohydrate: String = ""
+    public var protein: String = ""
+    public var fat: String = ""
+    public var calorie: Float = 0.0
+
+    init() {
+
     }
-    
+
 }

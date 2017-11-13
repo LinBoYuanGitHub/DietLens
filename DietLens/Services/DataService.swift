@@ -13,7 +13,7 @@ class DataService {
     var screenUserIsIn: Int = 0
 
     private init() {
-        
+
     }
 
     func test() {

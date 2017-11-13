@@ -7,12 +7,12 @@
 //
 
 import Foundation
-class FoodDiaryDataManager{
+class FoodDiaryDataManager {
     var foodDiaryDBOperation = FoodDiaryDBOperation.instance
-    func saveFoodDiary(ratio:Float,foodInfo:FoodInfo,mealTime:String,mealType:String,recordType:String,imageId:String,picpath:String,foodCategory:String){
-        let foodDiary:FoodDiary = FoodDiary()
-        foodDiary.foodId = foodInfo.food_id
-        foodDiary.foodName = foodInfo.food_name
+    func saveFoodDiary(ratio: Float, foodInfo: FoodInfomation, mealTime: String, mealType: String, recordType: String, imageId: String, picpath: String, foodCategory: String) {
+        let foodDiary: FoodDiary = FoodDiary()
+        foodDiary.foodId = foodInfo.foodId
+        foodDiary.foodName = foodInfo.foodName
         foodDiary.userId = "" //TODO get global user ID
         foodDiary.calorie = Double(foodInfo.calorie * ratio)
         foodDiary.carbohydrate = String(Float(foodInfo.carbohydrate)! * ratio)
@@ -23,11 +23,11 @@ class FoodDiaryDataManager{
         foodDiary.mealType = mealType
         foodDiary.recordType = recordType
         foodDiary.imageId = imageId
-        foodDiaryDBOperation.SaveFoodDiary(foodDiary: foodDiary)
+        foodDiaryDBOperation.saveFoodDiary(foodDiary: foodDiary)
     }
-    
-    init(){
-        
+
+    init() {
+
     }
-    
+
 }
