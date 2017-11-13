@@ -11,8 +11,10 @@ import UIKit
 class NewsArticleTableCell: UITableViewCell {
 
     @IBOutlet weak var articleImage: RoundedImage!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var articleDescription: UILabel!
+//    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: NoPaddingTextView!
+//    @IBOutlet weak var articleDescription: UILabel!
+    @IBOutlet weak var articleDesciption: NoPaddingTextView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,9 +26,9 @@ class NewsArticleTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setupCell(image: UIImage, title: String, description: String) {
-        self.articleImage.image = image
-        self.title.text = title
-        self.articleDescription.text = description
+    func setupCell(imageURL: String, title: String, description: String) {
+        articleImage.imageFromServerURL(urlString: imageURL)
+        titleLabel.text = title
+        articleDesciption.text = description
     }
 }

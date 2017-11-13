@@ -11,6 +11,7 @@ import UIKit
 class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var articleTable: UITableView!
+    public let articleDatamanager = ArticleDataManager.instance
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,10 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         articleTable.estimatedRowHeight = 90
         articleTable.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
+         APIService.instance.getArticleList(completion: { (articleList) in
+            self.articleDatamanager.articleList = articleList!
+            self.articleTable?.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,11 +32,11 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var image: UIImage
         if let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell") as? NewsArticleTableCell {
-
-            return cell
-        }
-
+            cell.setupCell(imageURL: articleDatamanager.articleList[indexPath.row].articleImageURL, title: articleDatamanager.articleList[indexPath.row].articleTitle, description: articleDatamanager.articleList[indexPath.row].articleContent)
+                return cell
+            }
         return UITableViewCell()
     }
 
@@ -41,7 +46,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return articleDatamanager.articleList.count
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
