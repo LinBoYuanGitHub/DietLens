@@ -22,7 +22,12 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         article.dataSource = self
         article.delegate = self
         setupParallaxHeader()
+        article.parallaxHeader.progress = 0
         // Do any additional setup after loading the view.
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,16 +66,21 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         let backButton = UIButton()
         backButton.setImage(#imageLiteral(resourceName: "Back Arrow"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        backButton.imageView?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         imageView.addSubview(backButton)
 
         backButton.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
             make.centerY.equalToSuperview()
         }
         article.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             //update alpha of blur view on top of image view
+            //backButton.snp.updateConstraints({ (make) in
+                //make.centerY.equalTo(self.view.snp.top).offset(30)
+            //})
+
             parallaxHeader.view.blurView.alpha = 1 - parallaxHeader.progress
-            backButton.imageView?.alpha = parallaxHeader.progress
+            //backButton.imageView?.alpha = parallaxHeader.progress
         }
 
         let originalLabel = UILabel()
@@ -92,7 +102,7 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         imageView.addSubview(originalLabel)
         //add constraints using SnapKit library
         vibrantLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 45, bottom: 5, right: 5))
         }
 
         originalLabel.snp.makeConstraints { make in
@@ -101,6 +111,8 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
             make.right.equalToSuperview().offset(5)
         }
 
+        imageView.bringSubview(toFront: backButton)
+        imageView.isUserInteractionEnabled = true
     }
 
     /*
@@ -117,6 +129,7 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
 //        if btnsendtag.tag == 1 {
 //            //do anything here
 //        }
+        print("click click")
         self.dismiss(animated: true, completion: nil)
     }
 }
