@@ -19,7 +19,7 @@
 		3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */; };
 		3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */; };
 		3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56971FB2FEFF002DCE15 /* Article.swift */; };
-		3FFB569A1FB334C0002DCE15 /* FoodInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56991FB334C0002DCE15 /* FoodInfo.swift */; };
+		3FFB569A1FB334C0002DCE15 /* FoodInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56991FB334C0002DCE15 /* FoodInformation.swift */; };
 		3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569B1FB6ABCE002DCE15 /* APIService.swift */; };
 		3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */; };
 		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
@@ -119,7 +119,7 @@
 		3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataManager.swift; sourceTree = "<group>"; };
 		3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoDataManager.swift; sourceTree = "<group>"; };
 		3FFB56971FB2FEFF002DCE15 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
-		3FFB56991FB334C0002DCE15 /* FoodInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfo.swift; sourceTree = "<group>"; };
+		3FFB56991FB334C0002DCE15 /* FoodInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInformation.swift; sourceTree = "<group>"; };
 		3FFB569B1FB6ABCE002DCE15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchSuggestionEntity.swift; sourceTree = "<group>"; };
 		5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePageArticleBodyCell.swift; sourceTree = "<group>"; };
@@ -350,7 +350,7 @@
 				58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
 				3FFB56841FADAF90002DCE15 /* FoodDiary.swift */,
 				3FFB56971FB2FEFF002DCE15 /* Article.swift */,
-				3FFB56991FB334C0002DCE15 /* FoodInfo.swift */,
+				3FFB56991FB334C0002DCE15 /* FoodInformation.swift */,
 				3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */,
 			);
 			path = Model;
@@ -813,7 +813,7 @@
 				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
 				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
-				3FFB569A1FB334C0002DCE15 /* FoodInfo.swift in Sources */,
+				3FFB569A1FB334C0002DCE15 /* FoodInformation.swift in Sources */,
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
