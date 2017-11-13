@@ -10,6 +10,8 @@ import Foundation
 
 class DataService {
     static var instance = DataService()
+    var screenUserIsIn: Int = 0
+
     private init() {
         
     }

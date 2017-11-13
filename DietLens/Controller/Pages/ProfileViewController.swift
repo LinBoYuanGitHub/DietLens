@@ -1,20 +1,22 @@
 //
-//  MainViewController.swift
+//  ProfileViewController.swift
 //  DietLens
 //
-//  Created by next on 23/10/17.
+//  Created by next on 10/11/17.
 //  Copyright © 2017 NExT++. All rights reserved.
 //
 
 import UIKit
+import PBRevealViewController
 
-class MainViewController: UIViewController {
-    
-    @IBAction func unwindToMainPage(segue:UIStoryboardSegue) {}
+class ProfileViewController: UIViewController, PBRevealViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,7 +24,13 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func backButtonPressed(_ sender: Any) {
+        self.navigationController!.isNavigationBarHidden = false
+    }
 
+    func revealControllerTapGestureShouldBegin(_ revealController: PBRevealViewController) -> Bool {
+        return false
+    }
     /*
     // MARK: - Navigation
 

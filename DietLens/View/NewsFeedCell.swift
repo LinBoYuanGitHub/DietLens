@@ -15,6 +15,7 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         super.awakeFromNib()
         newsArticleRow.dataSource = self
         newsArticleRow.delegate = self
+
         // Initialization code
     }
 
@@ -34,6 +35,5 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
             return NewsArticleCell()
         }
     }
-
 
 }

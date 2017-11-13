@@ -23,8 +23,22 @@
 		3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569B1FB6ABCE002DCE15 /* APIService.swift */; };
 		3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */; };
 		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
+		5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */; };
+		580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443621FB017DD00D59DFF /* StepsViewController.swift */; };
+		580443651FB0187C00D59DFF /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443641FB0187C00D59DFF /* NotificationViewController.swift */; };
+		580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443661FB0189E00D59DFF /* SettingViewController.swift */; };
+		580443691FB0233900D59DFF /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443681FB0233900D59DFF /* AboutViewController.swift */; };
+		5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
 		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
 		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
+		5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856591FB6DB15004BEBB3 /* ArticleViewController.swift */; };
+		5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */; };
+		581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */; };
+		58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */; };
+		58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
+		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
+		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
+		587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
 		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
@@ -32,11 +46,15 @@
 		5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */; };
 		5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
 		5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
+		587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */; };
+		5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */; };
+		58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */; };
 		58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
 		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
 		58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
 		58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */; };
 		58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */; };
+		58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0F3E71FB6D4F1004C1B81 /* Blur.swift */; };
 		58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E71FA0915500C542D9 /* NewsArticleCell.swift */; };
 		58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E91FA0993B00C542D9 /* NewsArticle.swift */; };
 		58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
@@ -47,6 +65,14 @@
 		58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
 		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
 		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
+		BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */; };
+		BF7893FF1FA4516200DA1667 /* CameraScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */; };
+		BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894001FA4518200DA1667 /* CameraViewController.swift */; };
+		BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */; };
+		BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */; };
+		BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */; };
+		BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */; };
+		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
 		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,8 +122,23 @@
 		3FFB56991FB334C0002DCE15 /* FoodInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfo.swift; sourceTree = "<group>"; };
 		3FFB569B1FB6ABCE002DCE15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchSuggestionEntity.swift; sourceTree = "<group>"; };
+		5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePageArticleBodyCell.swift; sourceTree = "<group>"; };
+		580443621FB017DD00D59DFF /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		580443641FB0187C00D59DFF /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		580443661FB0189E00D59DFF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		580443681FB0233900D59DFF /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
 		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		581856591FB6DB15004BEBB3 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableCell.swift; sourceTree = "<group>"; };
+		581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPaddingTextView.swift; sourceTree = "<group>"; };
+		58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellDelegate.swift; sourceTree = "<group>"; };
+		58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHeaderCell.swift; sourceTree = "<group>"; };
+		582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-Bridging-Header.h"; sourceTree = "<group>"; };
+		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
+		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleArticleViewController.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,11 +152,15 @@
 		5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
 		5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
+		5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDatePicker.swift; sourceTree = "<group>"; };
 		58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
 		58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideMenuViewController.swift; sourceTree = "<group>"; };
+		58D0F3E71FB6D4F1004C1B81 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		58E425E71FA0915500C542D9 /* NewsArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleCell.swift; sourceTree = "<group>"; };
 		58E425E91FA0993B00C542D9 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
 		58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -131,6 +176,14 @@
 		934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.release.xcconfig"; sourceTree = "<group>"; };
 		B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionManager.swift; sourceTree = "<group>"; };
+		BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraScreen.storyboard; sourceTree = "<group>"; };
+		BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
+		BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerProcessor.swift; sourceTree = "<group>"; };
+		BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
+		BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
+		BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
 		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +219,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		580443611FB0176700D59DFF /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
+				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
+				58AA52181FA1BA420072779C /* DiaryViewController.swift */,
+				58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */,
+				58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */,
+				580443621FB017DD00D59DFF /* StepsViewController.swift */,
+				580443641FB0187C00D59DFF /* NotificationViewController.swift */,
+				580443661FB0189E00D59DFF /* SettingViewController.swift */,
+				580443681FB0233900D59DFF /* AboutViewController.swift */,
+				585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
+				5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
+				581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
+				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
+				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
+				587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		5818565D1FB6DB97004BEBB3 /* ArticlePageViews */ = {
+			isa = PBXGroup;
+			children = (
+				5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */,
+				581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */,
+				5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */,
+			);
+			path = ArticlePageViews;
+			sourceTree = "<group>";
+		};
+		58199C871FB1D63A003F6104 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +298,7 @@
 				5877CF961F9D82BF0022B51E /* Info.plist */,
 				5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */,
 				3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */,
+				BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */,
 			);
 			path = DietLens;
 			sourceTree = "<group>";
@@ -227,6 +321,14 @@
 			path = DietLensUITests;
 			sourceTree = "<group>";
 		};
+		58D0F3E61FB6D4E3004C1B81 /* Blur */ = {
+			isa = PBXGroup;
+			children = (
+				58D0F3E71FB6D4F1004C1B81 /* Blur.swift */,
+			);
+			path = Blur;
+			sourceTree = "<group>";
+		};
 		58F2DF281F9F437F00FF3A95 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				58F2DF261F9F437100FF3A95 /* NewsFeed.swift */,
+				5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */,
 				58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
 				3FFB56841FADAF90002DCE15 /* FoodDiary.swift */,
 				3FFB56971FB2FEFF002DCE15 /* Article.swift */,
@@ -256,6 +359,9 @@
 		58FCCFEC1F9D886900E4F421 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5818565D1FB6DB97004BEBB3 /* ArticlePageViews */,
+				587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */,
+				BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */,
 				58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
 				58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,
 				58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */,
@@ -263,6 +369,9 @@
 				58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */,
 				581809AF1FA868E000373763 /* ProfileImageView.swift */,
 				581809B11FA877D700373763 /* SideMenuCell.swift */,
+				5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */,
+				58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */,
+				58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -270,11 +379,9 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
-				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
-				58AA52181FA1BA420072779C /* DiaryViewController.swift */,
-				58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */,
-				58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */,
+				58199C871FB1D63A003F6104 /* Delegate */,
+				BF794BB01FA46D7100D30550 /* Camera */,
+				580443611FB0176700D59DFF /* Pages */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,6 +389,8 @@
 		58FCCFF01F9D8A4F00E4F421 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				58D0F3E61FB6D4E3004C1B81 /* Blur */,
+				582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */,
 				58FCCFF11F9D8A5900E4F421 /* Fonts */,
 				58AA521C1FA2D1AA0072779C /* Constants.swift */,
 			);
@@ -294,6 +403,17 @@
 				58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BF794BB01FA46D7100D30550 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				BF7894001FA4518200DA1667 /* CameraViewController.swift */,
+				BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */,
+				BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */,
+				BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		C8B155BF22F4DE7D186C083D /* Pods */ = {
@@ -438,6 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */,
+				BF7893FF1FA4516200DA1667 /* CameraScreen.storyboard in Resources */,
 				5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */,
 				5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */,
 				58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */,
@@ -488,9 +609,14 @@
 				"${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -498,9 +624,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -584,7 +715,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n swiftlint\nelse\n echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -641,10 +772,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */,
 				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
 				3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */,
+				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
+				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
+				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
+				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
+				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
 				3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */,
@@ -652,13 +789,25 @@
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */,
+				580443651FB0187C00D59DFF /* NotificationViewController.swift in Sources */,
+				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
+				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
+				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
+				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
+				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
+				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
 				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
+				BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
+				BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
+				5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,
+				5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */,
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
 				3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */,
 				3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
+				581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
@@ -667,7 +816,14 @@
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
 				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
 				3FFB569A1FB334C0002DCE15 /* FoodInfo.swift in Sources */,
+				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
+				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
+				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,
+				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
+				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
+				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +1001,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DietLens/Supporting Files/FSCalendar-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -866,6 +1023,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DietLens/Supporting Files/FSCalendar-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
