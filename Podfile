@@ -13,6 +13,7 @@ target 'DietLens' do
   pod 'Socket.IO-Client-Swift'
   pod 'SwiftLint'
   pod 'PBRevealViewController/Swift'
+  pod 'RealmSwift'
 
   target 'DietLensTests' do
     inherit! :search_paths
