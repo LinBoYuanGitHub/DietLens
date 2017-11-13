@@ -14,6 +14,10 @@ target 'DietLens' do
   pod 'SwiftLint'
   pod 'PBRevealViewController/Swift'
   pod 'RealmSwift'
+  pod 'FSCalendar'
+  pod 'ParallaxHeader', '~> 2.0.0'
+  pod 'SnapKit', '~> 4.0'
+  pod 'XLPagerTabStrip', '~> 8.0'
 
   target 'DietLensTests' do
     inherit! :search_paths
