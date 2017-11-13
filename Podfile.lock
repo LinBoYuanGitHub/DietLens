@@ -1,6 +1,11 @@
 PODS:
   - Alamofire (4.5.1)
   - PBRevealViewController/Swift (1.2.7)
+  - Realm (3.0.1):
+    - Realm/Headers (= 3.0.1)
+  - Realm/Headers (3.0.1)
+  - RealmSwift (3.0.1):
+    - Realm (= 3.0.1)
   - Socket.IO-Client-Swift (12.1.2):
     - Starscream (~> 2.1.1)
   - Starscream (2.1.1)
@@ -10,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - PBRevealViewController/Swift
+  - RealmSwift
   - Socket.IO-Client-Swift
   - SwiftLint
   - SwiftyJSON
@@ -17,11 +23,13 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   PBRevealViewController: 3190feb1459915c1846f93663594ef6d8913387f
+  Realm: ba6144c74f835f7497791f6599d63a7755377b83
+  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
   Socket.IO-Client-Swift: ba3cb1c4bf0a6ca90080406a2c22685c25ad1f60
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 2622fcfbd169413a03759ea83fac19f4a06af07f
+PODFILE CHECKSUM: 321d9573a634ca5cd9ea60937ddf035fe0e064d5
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.3.1
