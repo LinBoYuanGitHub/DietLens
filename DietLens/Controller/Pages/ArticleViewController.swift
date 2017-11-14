@@ -54,9 +54,8 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var article: Article = articleDatamanager.articleList[(articleTable.indexPathForSelectedRow?.row)!]
-
         if let dest = segue.destination as? SingleArticleViewController {
-            dest.newsArticle = NewsArticle(title: article.articleTitle, image: #imageLiteral(resourceName: "runner"), articleID: "DAVIDNIELD", articleBody: article.articleContent)
+            dest.articleData = article
         }
     }
     /*

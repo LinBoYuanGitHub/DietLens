@@ -63,4 +63,21 @@ class FoodDiaryDBOperation {
         }
         return results
     }
+
+    func getFoodDiaryByDate(date: String) -> [FoodDiary]? {
+        var results = [FoodDiary]()
+        try! realm.write {
+//            let foodDiarys = realm.objects(FoodDiary.self).filter("mealTime='\(date)'")
+//            for foodDiary in foodDiarys {
+//                results.append(foodDiary)
+//            }
+            let foodDiarys = realm.objects(FoodDiary.self)
+            for foodDiary in foodDiarys {
+                if(foodDiary.mealTime == date) {
+                  results.append(foodDiary)
+                }
+            }
+        }
+        return results
+    }
 }

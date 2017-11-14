@@ -62,10 +62,14 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         foodDiaryTable.delegate = self
         foodDiaryTable.estimatedRowHeight = 90
         foodDiaryTable.rowHeight = UITableViewAutomaticDimension
-        testData()
+//        testData()
+//        testOnSaveData()
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        // Do any additional setup after loading the view.
+    }
 
+    func calculateTableViewParams() {
         let numOfMeals = mealsConsumed.count
         var foodAte: Int = 0
 
@@ -90,7 +94,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         currentFoodItemIndex = 0
         headerIndex = 0
         totalRows = total
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,16 +125,46 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+
         //print("calendar did select date \(self.formatter.string(from: date))")
         let later = DispatchTime.now() + 0.3
+        let diaryFormatter = DateFormatter()
+        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
         DispatchQueue.main.asyncAfter(deadline: later) {
             self.dismissCalendar(date)
             self.dateLabel.text = self.formatter.string(from: date)
         }
-
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
         }
+        //display today`s foodDiary from local realm
+        let foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))
+//        let foodDiaryList = FoodDiaryDBOperation.instance.getAllFoodDiary()
+        for foodDiary in foodDiaryList! {
+            var entity: DiaryDailyFood = DiaryDailyFood()
+            var foodInfo: FoodInfo = FoodInfo()
+            foodInfo.calories = foodDiary.calorie
+            foodInfo.foodName = foodDiary.foodName
+            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
+            foodInfo.servingSize = "unknown"
+            entity.foodConsumed.append(foodInfo)
+            entity.mealOfDay = .breakfast
+            mealsConsumed.append(entity)
+        }
+        calculateTableViewParams()
+        foodDiaryTable.reloadData()
+    }
+
+    func testOnSaveData() {
+        let foodDiary = FoodDiary()
+        foodDiary.mealTime = "14 Nov 2017"
+        foodDiary.calorie = 210.5
+        foodDiary.foodName = "testFood"
+        foodDiary.foodId = "9999"
+        foodDiary.carbohydrate = "0.0"
+        foodDiary.protein = "0.0"
+        foodDiary.fat = "0.0"
+        FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: foodDiary)
     }
 
     func testData() {

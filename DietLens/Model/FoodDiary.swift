@@ -21,7 +21,7 @@ class FoodDiary: Object {
     @objc dynamic var mealType = ""
     @objc dynamic var recordType = ""
     @objc dynamic var portionSize = 1.0
-    @objc dynamic var calorie = 1.0
+    @objc dynamic var calorie = 0.0
     @objc dynamic var carbohydrate = ""
     @objc dynamic var protein = ""
     @objc dynamic var fat = ""
