@@ -208,6 +208,10 @@ extension CameraViewController: CameraViewControllerDelegate {
     func onDidFinishCapturePhoto(image: UIImage) {
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
         showReview(image: croppedImage)
+        let imgData = UIImagePNGRepresentation(croppedImage)!
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
+            // upload result and callback
+        }
     }
 
     func cropCameraImage(_ original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
@@ -238,26 +242,43 @@ extension CameraViewController: CameraViewControllerDelegate {
         if let imageRef = original.cgImage?.cropping(to: cropRect) {
             image = UIImage(cgImage: imageRef, scale: original.scale, orientation: original.imageOrientation)
         }
-
         return image
     }
 
     func onDetect(barcode: String) {
-        DispatchQueue.main.async { [weak self] in
-            guard let wSelf = self else {
-                return
+        APIService.instance.getBarcodeScanResult(barcode: barcode) { (foodInfomation) in
+            if foodInfomation == nil {
+                DispatchQueue.main.async { [weak self] in
+                    guard let wSelf = self else {
+                        return
+                    }
+                    let alertMsg = "Result not found!"
+                    let message = NSLocalizedString("barocode result not found in database", comment: alertMsg)
+                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
+                                                            style: .cancel,
+                                                            handler: nil))
+                    wSelf.present(alertController, animated: true, completion: nil)
+                }
             }
-
-            let alertMsg = "Barcode detected!"
-            let message = NSLocalizedString("Barcode: \(barcode)", comment: alertMsg)
-            let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-                                                    style: .cancel,
-                                                    handler: nil))
-
-            wSelf.present(alertController, animated: true, completion: nil)
+            //TODO prepare seague to save foodDiary view
+            print(foodInfomation)
         }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let wSelf = self else {
+//                return
+//            }
+//
+//            let alertMsg = "Barcode detected!"
+//            let message = NSLocalizedString("Barcode: \(barcode)", comment: alertMsg)
+//            let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
+//
+//            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
+//                                                    style: .cancel,
+//                                                    handler: nil))
+//
+//            wSelf.present(alertController, animated: true, completion: nil)
+//        }
         sessionManager.set(captureMode: .photo)
     }
 }
@@ -271,6 +292,10 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             return
         }
         showReview(image: image)
+        let imgData = UIImagePNGRepresentation(image)!
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
+            // upload result and callback
+        }
         imagePicker.dismiss(animated: true, completion: nil)
     }
 }

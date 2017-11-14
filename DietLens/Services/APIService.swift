@@ -161,10 +161,13 @@ class APIService {
     }
 
     public func getBarcodeScanResult(barcode: String, completion: @escaping (FoodInfomation?) -> Void) {
+        let params = ["barcode": barcode]
         Alamofire.request(
             URL(string: ServerConfig.barcodeSearchURL)!,
             method: .post,
-            parameters: ["barcode": barcode])
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -172,17 +175,18 @@ class APIService {
                     completion(nil)
                     return
                 }
-                guard let scanResult = response.result.value as? JSON else {
+                guard let scanResult = response.result.value else {
                     print("Get searchResult failed due to : Server Data Type Error")
                     completion(nil)
                     return
                 }
-                let barcodeScanResult = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: scanResult)
+                let jsonObject = JSON(scanResult)
+                let barcodeScanResult = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
                 completion(barcodeScanResult)
         }
     }
 
-    public func uploadRecognitionImage(imgData: Data, userId: String) {
+    public func uploadRecognitionImage(imgData: Data, userId: String, completion: @escaping ([FoodInfomation]?) -> Void) {
         let parameters = ["user_id": userId]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
@@ -197,10 +201,14 @@ class APIService {
                     print("Upload Progress: \(progress.fractionCompleted)")
                 })
                 upload.responseJSON { response in
-                    print(response.result.value)
+                    let resultArray = JSON(response)["result_list"]
+                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonArr: resultArray)
+                    completion(resultList)
+//                    print(response.result.value)
                 }
             case .failure(let encodingError):
                 print(encodingError)
+                completion(nil)
             }
         }
     }
@@ -242,11 +250,12 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let result = response.result.value as? JSON else {
+                guard let result = response.result.value else {
                     print("Save food diary failed due to : Server Data Type Error")
                     completion(false)
                     return
                 }
+                let jsonObject = JSON(result)
                 completion(true)
         }
     }
