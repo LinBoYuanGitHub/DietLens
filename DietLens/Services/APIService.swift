@@ -187,6 +187,7 @@ class APIService {
     }
 
     public func uploadRecognitionImage(imgData: Data, userId: String, completion: @escaping ([FoodInfomation]?) -> Void) {
+        let img = UIImage(data: imgData)
         let parameters = ["user_id": userId]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
@@ -198,10 +199,12 @@ class APIService {
             switch result {
             case .success(let upload, _, _):
                 upload.uploadProgress(closure: { (progress) in
+                    #if DEBUG
                     print("Upload Progress: \(progress.fractionCompleted)")
+                    #endif
                 })
                 upload.responseJSON { response in
-                    let resultArray = JSON(response)["result_list"]
+                    let resultArray = JSON(response.value)["result_list"]
                     let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonArr: resultArray)
                     completion(resultList)
 //                    print(response.result.value)

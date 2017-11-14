@@ -18,8 +18,8 @@ class FoodInfoDataManager {
          for i in 0..<jsonArr.count {
             var jsonObject = jsonArr[i]
             var foodInfo = FoodInfomation()
-            foodInfo.foodId = jsonObject["id"].stringValue
-            foodInfo.foodName = jsonObject["name"].stringValue
+            foodInfo.foodId = jsonObject["food_id"].stringValue
+            foodInfo.foodName = jsonObject["food_name"].stringValue
             if(foodInfo.foodName == "Non-food") {
                 foodInfo.calorie = 0.0
                 foodInfo.carbohydrate = "0.0"

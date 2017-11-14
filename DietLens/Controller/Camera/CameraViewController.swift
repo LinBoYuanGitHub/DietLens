@@ -29,6 +29,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     private let imagePicker = UIImagePickerController()
 
+    private var foodResults: [FoodInfomation]?
+
+    private var activityIndicator = UIActivityIndicatorView()
+
+    @IBOutlet weak var loadingScreen: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,6 +53,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         imagePicker.allowsEditing = false
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         imagePicker.navigationBar.isTranslucent = false
+        loadingScreen.alpha = 0
     }
 
     override func viewDidLayoutSubviews() {
@@ -97,6 +104,21 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBAction func approveImage(_ sender: UIButton) {
         hideReview()
+
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+            self.loadingScreen.alpha = 1
+        }, completion: nil)
+
+        let imgData = UIImagePNGRepresentation(chosenImageView.image!)!
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
+            // upload result and callback
+
+            self.performSegue(withIdentifier: "test", sender: self)
+            self.loadingScreen.alpha = 0
+            self.foodResults = results
+            print(results!)
+
+        }
     }
 
     @IBAction func rejectImage(_ sender: UIButton) {
@@ -208,10 +230,6 @@ extension CameraViewController: CameraViewControllerDelegate {
     func onDidFinishCapturePhoto(image: UIImage) {
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
         showReview(image: croppedImage)
-        let imgData = UIImagePNGRepresentation(croppedImage)!
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
-            // upload result and callback
-        }
     }
 
     func cropCameraImage(_ original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
@@ -292,11 +310,11 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             return
         }
         showReview(image: image)
-        let imgData = UIImagePNGRepresentation(image)!
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
-            // upload result and callback
-        }
-        imagePicker.dismiss(animated: true, completion: nil)
+//        let imgData = UIImagePNGRepresentation(image)!
+//        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
+//            // upload result and callback
+//        }
+//        imagePicker.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -309,6 +327,7 @@ extension CameraViewController: IndicatorInfoProvider {
 
 // MARK: review image flow
 extension CameraViewController {
+
     private func showReview(image: UIImage) {
         chosenImageView.image = image
         chosenImageView.contentMode = .scaleAspectFit
@@ -319,6 +338,13 @@ extension CameraViewController {
     private func hideReview() {
         chosenImageView.isHidden = true
         reviewImagePalette.isHidden = true
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? RecognitionResultsViewController {
+            dest.results = foodResults
+            dest.userFoodImage = chosenImageView.image!
+        }
     }
 
 }
