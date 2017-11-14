@@ -76,7 +76,7 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
 
         backButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(view.snp.top).offset(38)
         }
         article.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             //update alpha of blur view on top of image view
