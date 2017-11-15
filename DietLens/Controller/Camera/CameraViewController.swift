@@ -278,9 +278,11 @@ extension CameraViewController: CameraViewControllerDelegate {
                                                             handler: nil))
                     wSelf.present(alertController, animated: true, completion: nil)
                 }
+            } else{
+                self.performSegue(withIdentifier: "test", sender: self)
+                //TODO pass info to view
             }
-            //TODO prepare seague to save foodDiary view
-            print(foodInfomation)
+            
         }
 //        DispatchQueue.main.async { [weak self] in
 //            guard let wSelf = self else {
