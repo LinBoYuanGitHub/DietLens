@@ -11,25 +11,23 @@ import UIKit
 class RecognitionResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var foodImage: UIImageView!
-    @IBOutlet weak var foodNameField: UITextInput!
-    @IBOutlet weak var buttonB: UIButton!
-    @IBOutlet weak var buttonL: UIButton!
-    @IBOutlet weak var buttonD: UIButton!
     @IBOutlet weak var foodSelectionView: UIView!
     @IBOutlet weak var optionListTable: UITableView!
+    @IBOutlet weak var mealOfDay: UISegmentedControl!
+    @IBOutlet weak var foodName: UITextField!
 
+    @IBOutlet weak var selectDishView: UIView!
+    @IBOutlet weak var foodNameOptionTable: UITableView!
+    @IBOutlet weak var dateTime: UIDatePicker!
     var userFoodImage: UIImage?
     var whichMeal: Meal = .breakfast
     var results: [FoodInfomation]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        optionListTable.dataSource = self
-        optionListTable.delegate = self
-        buttonB.addTarget(self, action: #selector(mealButtonPressed), for: .touchUpInside)
-        buttonL.addTarget(self, action: #selector(mealButtonPressed), for: .touchUpInside)
-        buttonD.addTarget(self, action: #selector(mealButtonPressed), for: .touchUpInside)
-        foodSelectionView.alpha = 1
+        foodNameOptionTable.dataSource = self
+        foodNameOptionTable.delegate = self
+        selectDishView.alpha = 1
         if userFoodImage != nil {
             foodImage.image = userFoodImage
         } else {
@@ -52,7 +50,22 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
             results!.append(f1)
         }
         foodImage.contentMode = .scaleAspectFill
+
+        foodName.text = "Laksa"
         // Do any additional setup after loading the view.
+    }
+
+    @IBAction func mealChanged(_ sender: Any) {
+        switch mealOfDay.selectedSegmentIndex {
+        case 0:
+            whichMeal = .breakfast
+        case 1:
+            whichMeal = .lunch
+        case 2:
+            whichMeal = .dinner
+        default:
+            break
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,16 +76,17 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "foodNameCell")
-        cell?.textLabel?.text = "\(indexPath.row+1). \(results![indexPath.row].foodName)"
-        return cell!
+        let cell = UITableViewCell() //tableView.dequeueReusableCell(withIdentifier: "foodNameCell")
+        cell.textLabel?.text = "\(indexPath.row+1). \(results![indexPath.row].foodName)"
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-            self.foodSelectionView.alpha = 0
+            self.selectDishView.alpha = 0
         }, completion: nil)
+        foodName.text = results![indexPath.row].foodName
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,7 +95,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        print("Ate \(foodNameField.text) for \(whichMeal)")
+        print("Ate \(foodName.text ?? "none") for \(whichMeal) on \(dateTime.date)")
         dismiss(animated: true, completion: nil)
     }
 
@@ -101,13 +115,13 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
     @IBAction func optionNotInList(_ sender: Any) {
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-            self.foodSelectionView.alpha = 0
+            self.selectDishView.alpha = 0
         }, completion: nil)
     }
 
     @IBAction func changeButtonPressed(_ sender: Any) {
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-            self.foodSelectionView.alpha = 1
+            self.selectDishView.alpha = 1
         }, completion: nil)
     }
 

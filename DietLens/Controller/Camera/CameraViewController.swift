@@ -113,9 +113,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
             // upload result and callback
 
-            self.performSegue(withIdentifier: "test", sender: self)
             self.loadingScreen.alpha = 0
             self.foodResults = results
+            self.performSegue(withIdentifier: "test", sender: self)
+
             print(results!)
 
         }
