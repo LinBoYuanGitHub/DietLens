@@ -18,17 +18,40 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var foodSelectionView: UIView!
     @IBOutlet weak var optionListTable: UITableView!
 
-    var userFoodImage = UIImage()
+    var userFoodImage: UIImage?
     var whichMeal: Meal = .breakfast
     var results: [FoodInfomation]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        optionListTable.dataSource = self
+        optionListTable.delegate = self
         buttonB.addTarget(self, action: #selector(mealButtonPressed), for: .touchUpInside)
         buttonL.addTarget(self, action: #selector(mealButtonPressed), for: .touchUpInside)
         buttonD.addTarget(self, action: #selector(mealButtonPressed), for: .touchUpInside)
         foodSelectionView.alpha = 1
-        foodImage.image = userFoodImage
+        if userFoodImage != nil {
+            foodImage.image = userFoodImage
+        } else {
+            foodImage.image = #imageLiteral(resourceName: "laksa")
+        }
+        if results == nil {
+            results = [FoodInfomation]()
+            var f1 = FoodInfomation()
+            f1.foodName = "laksa"
+            results!.append(f1)
+            f1.foodName = "mee goreng"
+            results!.append(f1)
+            f1.foodName = "laksa goreng"
+            results!.append(f1)
+            f1.foodName = "nasi goreng"
+            results!.append(f1)
+            f1.foodName = "beehoon goreng"
+            results!.append(f1)
+            f1.foodName = "kway tiao goreng"
+            results!.append(f1)
+        }
+        foodImage.contentMode = .scaleAspectFill
         // Do any additional setup after loading the view.
     }
 
@@ -41,8 +64,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "foodNameCell")
-        cell?.textLabel?.text = "\(indexPath.row). \(results![indexPath.row].foodName)"
-        cell?.textLabel?.text = ""
+        cell?.textLabel?.text = "\(indexPath.row+1). \(results![indexPath.row].foodName)"
         return cell!
     }
 
@@ -59,7 +81,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        print("Ate \(foodNameField) for \(whichMeal)")
+        print("Ate \(foodNameField.text) for \(whichMeal)")
         dismiss(animated: true, completion: nil)
     }
 
@@ -78,7 +100,9 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         }
     }
     @IBAction func optionNotInList(_ sender: Any) {
-
+        UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
+            self.foodSelectionView.alpha = 0
+        }, completion: nil)
     }
 
     @IBAction func changeButtonPressed(_ sender: Any) {
