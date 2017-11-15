@@ -17,6 +17,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var diaryCalendar: DiaryDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
     var mealsConsumed = [DiaryDailyFood]()
+    var foodDiaryList = [FoodDiary]()
     var indexLookup = [Int]()
     var mealIndexLookup = [Int]()
     var headerIndex: Int = 0
@@ -42,6 +43,20 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "foodItem") as? FoodDiaryCell {
+                var documentsUrl: URL {
+                    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                }
+                let fileName = mealsConsumed[mealIndexLookup[indexPath.item]].foodConsumed[indexLookup[indexPath.item]].imageURL
+                let filePath = documentsUrl.appendingPathComponent(fileName!).path
+               if FileManager.default.fileExists(atPath: filePath) {
+                    do {
+                        cell.foodImage.image = UIImage(contentsOfFile: filePath)
+                    } catch {
+                        print("Error loading image : \(error)")
+                    }
+//                    cell.foodImage.af_setImage(withURL: imageURL, placeholderImage: #imageLiteral(resourceName: "laksa"), filter: nil,
+//                                               imageTransition: .crossDissolve(0.5))
+                }
                 cell.setupCell(foodInfo: mealsConsumed[mealIndexLookup[indexPath.item]].foodConsumed[indexLookup[indexPath.item]])
                 return cell
             }
@@ -67,9 +82,15 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         // Do any additional setup after loading the view.
+        loadDiaryData(date: Date())
     }
 
     func calculateTableViewParams() {
+        indexLookup.removeAll()
+        mealIndexLookup.removeAll()
+        currentFoodItemIndex = 0
+        headerIndex = 0
+        currentMealIndex = -1
         let numOfMeals = mealsConsumed.count
         var foodAte: Int = 0
 
@@ -128,8 +149,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         //print("calendar did select date \(self.formatter.string(from: date))")
         let later = DispatchTime.now() + 0.3
-        let diaryFormatter = DateFormatter()
-        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
         DispatchQueue.main.asyncAfter(deadline: later) {
             self.dismissCalendar(date)
             self.dateLabel.text = self.formatter.string(from: date)
@@ -138,19 +157,38 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             calendar.setCurrentPage(date, animated: true)
         }
         //display today`s foodDiary from local realm
-        let foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))
+        loadDiaryData(date: date)
+    }
+
+    func loadDiaryData(date: Date) {
+        let diaryFormatter = DateFormatter()
+        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
+        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))!
         mealsConsumed.removeAll()
-        for foodDiary in foodDiaryList! {
-            var entity: DiaryDailyFood = DiaryDailyFood()
+        var breakfastEntity: DiaryDailyFood = DiaryDailyFood()
+        var lunchEntity: DiaryDailyFood = DiaryDailyFood()
+        var dinnerEntity: DiaryDailyFood = DiaryDailyFood()
+        breakfastEntity.mealOfDay = .breakfast
+        lunchEntity.mealOfDay = .lunch
+        dinnerEntity.mealOfDay = .dinner
+        for foodDiary in foodDiaryList {
             var foodInfo: FoodInfo = FoodInfo()
             foodInfo.calories = foodDiary.calorie
             foodInfo.foodName = foodDiary.foodName
-            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
+            foodInfo.imageURL = foodDiary.imagePath
+//            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
             foodInfo.servingSize = "unknown"
-            entity.foodConsumed.append(foodInfo)
-            entity.mealOfDay = .breakfast
-            mealsConsumed.append(entity)
+            if foodDiary.mealType == "breakfast" {
+                 breakfastEntity.foodConsumed.append(foodInfo)
+            } else if foodDiary.mealType == "lunch" {
+                lunchEntity.foodConsumed.append(foodInfo)
+            } else {
+                dinnerEntity.foodConsumed.append(foodInfo)
+            }
         }
+        mealsConsumed.append(breakfastEntity)
+        mealsConsumed.append(lunchEntity)
+        mealsConsumed.append(dinnerEntity)
         calculateTableViewParams()
         foodDiaryTable.reloadData()
     }
@@ -170,13 +208,13 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func testData() {
         var f1: FoodInfo = FoodInfo()
         f1.calories = 213.1
-        f1.foodImage = #imageLiteral(resourceName: "laksa")
+//        f1.foodImage = #imageLiteral(resourceName: "laksa")
         f1.foodName = "Singapore Laksa"
         f1.servingSize = "1 medium bowl"
 
         var f2: FoodInfo = FoodInfo()
         f2.calories = 210.1
-        f2.foodImage = #imageLiteral(resourceName: "bg")
+//        f2.foodImage = #imageLiteral(resourceName: "bg")
         f2.foodName = "Another food that is not food"
         f2.servingSize = "1 circle"
 

@@ -18,6 +18,7 @@ class ArticleDataManager {
     }
 
     func assembleArticles(jsonArr: JSON) -> [Article] {
+        articleList.removeAll()
         for i in 0..<jsonArr.count {
             var article = Article()
             article.id = jsonArr[i]["id"].intValue

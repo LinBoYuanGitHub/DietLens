@@ -15,6 +15,7 @@ class FoodInfoDataManager {
     public var foodInfoList = [FoodInfomation]()
 
     func assembleFoodInfos(jsonArr: JSON) -> [FoodInfomation] {
+         foodInfoList.removeAll()
          for i in 0..<jsonArr.count {
             var jsonObject = jsonArr[i]
             var foodInfo = FoodInfomation()

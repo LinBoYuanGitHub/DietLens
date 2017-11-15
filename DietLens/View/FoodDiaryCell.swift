@@ -26,7 +26,7 @@ class FoodDiaryCell: UITableViewCell {
         food = foodInfo
 
         foodName.text = food.foodName
-        foodImage.image = food.foodImage
+//        foodImage.image = food.foodImage
         servingSize.text = food.servingSize
     }
 
