@@ -113,9 +113,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
             // upload result and callback
 
-            self.performSegue(withIdentifier: "test", sender: self)
             self.loadingScreen.alpha = 0
             self.foodResults = results
+            self.performSegue(withIdentifier: "test", sender: self)
             print(results!)
 
         }
@@ -278,11 +278,11 @@ extension CameraViewController: CameraViewControllerDelegate {
                                                             handler: nil))
                     wSelf.present(alertController, animated: true, completion: nil)
                 }
-            } else{
+            } else {
                 self.performSegue(withIdentifier: "test", sender: self)
                 //TODO pass info to view
             }
-            
+
         }
 //        DispatchQueue.main.async { [weak self] in
 //            guard let wSelf = self else {

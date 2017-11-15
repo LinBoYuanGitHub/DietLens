@@ -139,7 +139,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         //display today`s foodDiary from local realm
         let foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))
-//        let foodDiaryList = FoodDiaryDBOperation.instance.getAllFoodDiary()
+        mealsConsumed.removeAll()
         for foodDiary in foodDiaryList! {
             var entity: DiaryDailyFood = DiaryDailyFood()
             var foodInfo: FoodInfo = FoodInfo()
