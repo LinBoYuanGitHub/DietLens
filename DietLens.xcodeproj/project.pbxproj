@@ -68,7 +68,7 @@
 		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
 		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
 		BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */; };
-		BF7893FF1FA4516200DA1667 /* CameraScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */; };
+		BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */; };
 		BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894001FA4518200DA1667 /* CameraViewController.swift */; };
 		BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */; };
 		BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */; };
@@ -181,7 +181,7 @@
 		B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionManager.swift; sourceTree = "<group>"; };
-		BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CameraScreen.storyboard; sourceTree = "<group>"; };
+		BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddFoodScreen.storyboard; sourceTree = "<group>"; };
 		BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerProcessor.swift; sourceTree = "<group>"; };
@@ -239,7 +239,6 @@
 				5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
 				581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
 				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
-				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
 				587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
 				3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */,
 			);
@@ -303,7 +302,7 @@
 				5877CF961F9D82BF0022B51E /* Info.plist */,
 				5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */,
 				3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */,
-				BF7893FE1FA4516200DA1667 /* CameraScreen.storyboard */,
+				BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */,
 			);
 			path = DietLens;
 			sourceTree = "<group>";
@@ -384,6 +383,7 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BF6EF2F21FC31C0300420B2B /* TextInput */,
 				58199C871FB1D63A003F6104 /* Delegate */,
 				BF794BB01FA46D7100D30550 /* Camera */,
 				580443611FB0176700D59DFF /* Pages */,
@@ -408,6 +408,14 @@
 				58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BF6EF2F21FC31C0300420B2B /* TextInput */ = {
+			isa = PBXGroup;
+			children = (
+				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
+			);
+			path = TextInput;
 			sourceTree = "<group>";
 		};
 		BF794BB01FA46D7100D30550 /* Camera */ = {
@@ -564,7 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */,
-				BF7893FF1FA4516200DA1667 /* CameraScreen.storyboard in Resources */,
+				BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */,
 				5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */,
 				5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */,
 				58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */,

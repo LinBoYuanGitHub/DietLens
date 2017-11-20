@@ -81,7 +81,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func presentCamera(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "CameraScreen", bundle: nil)
+        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
         guard let vc = storyboard.instantiateInitialViewController()
             else { return }
         present(vc, animated: true, completion: nil)
