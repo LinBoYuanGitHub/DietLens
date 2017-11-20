@@ -127,9 +127,11 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: foodDiary)
         //TODO jump to diaryViewController at another storyboard
 //        dismiss(animated: true, completion: nil)
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "calendarViewController")
-        present(vc, animated: true, completion: nil)
+
+        let parent = presentingViewController
+        dismiss(animated: false, completion: {
+            parent!.dismiss(animated: true, completion: nil)
+        })
     }
 
     func saveImage(imgData: Data, filename: String) {
