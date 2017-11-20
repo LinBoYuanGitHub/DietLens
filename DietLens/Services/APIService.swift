@@ -187,7 +187,6 @@ class APIService {
     }
 
     public func uploadRecognitionImage(imgData: Data, userId: String, completion: @escaping ([FoodInfomation]?) -> Void) {
-        let img = UIImage(data: imgData)
         let parameters = ["user_id": userId]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")

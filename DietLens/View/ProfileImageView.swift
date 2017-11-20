@@ -26,7 +26,7 @@ class RoundedImage: UIImageView {
 
     public func imageFromServerURL(urlString: String) {
         let url = URL(string: urlString)
-        self.image = nil
+        self.image = #imageLiteral(resourceName: "loading_img")
 
         // check cached image
         if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {

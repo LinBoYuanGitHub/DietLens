@@ -35,6 +35,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var loadingScreen: UIView!
 
+    private var recordType: String = "recogniton"
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -109,12 +111,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             self.loadingScreen.alpha = 1
         }, completion: nil)
 
-        let imgData = UIImagePNGRepresentation(chosenImageView.image!)!
+        let imgData = UIImageJPEGRepresentation(chosenImageView.image!, 0.2)!
         APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
             // upload result and callback
-
             self.loadingScreen.alpha = 0
             self.foodResults = results
+            self.recordType = "recognition"
             self.performSegue(withIdentifier: "test", sender: self)
             print(results!)
 
@@ -279,8 +281,10 @@ extension CameraViewController: CameraViewControllerDelegate {
                     wSelf.present(alertController, animated: true, completion: nil)
                 }
             } else {
+                self.loadingScreen.alpha = 0
+                self.foodResults = [foodInfomation!]
+                self.recordType = "barcode"
                 self.performSegue(withIdentifier: "test", sender: self)
-                //TODO pass info to view
             }
 
         }
@@ -345,7 +349,11 @@ extension CameraViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? RecognitionResultsViewController {
             dest.results = foodResults
-            dest.userFoodImage = chosenImageView.image!
+            if recordType == "recognition" {
+                dest.userFoodImage = chosenImageView.image!
+            } else if recordType == "barcode" {
+                dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
+            }
         }
     }
 

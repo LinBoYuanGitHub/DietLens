@@ -28,6 +28,7 @@ class FoodDiaryCell: UITableViewCell {
         foodName.text = food.foodName
 //        foodImage.image = food.foodImage
         servingSize.text = food.servingSize
+        calories.text = String(foodInfo.calories)+" Kcal"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

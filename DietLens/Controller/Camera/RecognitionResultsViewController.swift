@@ -23,33 +23,40 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     var whichMeal: Meal = .breakfast
     var results: [FoodInfomation]?
     var foodDiary = FoodDiary()
+    var recordType: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         foodNameOptionTable.dataSource = self
         foodNameOptionTable.delegate = self
-        selectDishView.alpha = 1
         if userFoodImage != nil {
             foodImage.image = userFoodImage
         } else {
             foodImage.image = #imageLiteral(resourceName: "laksa")
         }
-        if results == nil || results?.count == 0 {
-            results = [FoodInfomation]()
-            var f1 = FoodInfomation()
-            f1.foodName = "laksa"
-            results!.append(f1)
-            f1.foodName = "mee goreng"
-            results!.append(f1)
-            f1.foodName = "laksa goreng"
-            results!.append(f1)
-            f1.foodName = "nasi goreng"
-            results!.append(f1)
-            f1.foodName = "beehoon goreng"
-            results!.append(f1)
-            f1.foodName = "kway tiao goreng"
-            results!.append(f1)
-        } else {
+        if recordType == "recognition"{
+            selectDishView.alpha = 1
+            if results == nil || results?.count == 0 {
+                results = [FoodInfomation]()
+                var f1 = FoodInfomation()
+                f1.foodName = "laksa"
+                results!.append(f1)
+                f1.foodName = "mee goreng"
+                results!.append(f1)
+                f1.foodName = "laksa goreng"
+                results!.append(f1)
+                f1.foodName = "nasi goreng"
+                results!.append(f1)
+                f1.foodName = "beehoon goreng"
+                results!.append(f1)
+                f1.foodName = "kway tiao goreng"
+                results!.append(f1)
+            } else {
+                setFoodInfoIntoDiary(foodInfo: results![0])
+            }
+        } else if recordType == "barcode"{
+            selectDishView.alpha = 0
+            foodName.text = results![0].foodName
             setFoodInfoIntoDiary(foodInfo: results![0])
         }
         foodImage.contentMode = .scaleAspectFill
@@ -60,10 +67,13 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         switch mealOfDay.selectedSegmentIndex {
         case 0:
             whichMeal = .breakfast
+             foodDiary.mealType = "breakfast"
         case 1:
             whichMeal = .lunch
+             foodDiary.mealType = "lunch"
         case 2:
             whichMeal = .dinner
+             foodDiary.mealType = "dinner"
         default:
             break
         }
@@ -115,7 +125,11 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         foodDiary.mealTime = diaryFormatter.string(from: dateTime.date)
         saveImage(imgData: UIImagePNGRepresentation(foodImage.image!)!, filename: String(Date().timeIntervalSince1970 * 1000)+".png")
         FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: foodDiary)
-        dismiss(animated: true, completion: nil)
+        //TODO jump to diaryViewController at another storyboard
+//        dismiss(animated: true, completion: nil)
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "calendarViewController")
+        present(vc, animated: true, completion: nil)
     }
 
     func saveImage(imgData: Data, filename: String) {
@@ -135,13 +149,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         let btnsendtag: UIButton = sender
         if btnsendtag.tag == 0 {
             whichMeal = .breakfast
-            foodDiary.mealType = "breakfast"
         } else if btnsendtag.tag == 1 {
             whichMeal = .lunch
-            foodDiary.mealType = "lunch"
         } else {
             whichMeal = .dinner
-            foodDiary.mealType = "dinner"
         }
     }
     @IBAction func optionNotInList(_ sender: Any) {

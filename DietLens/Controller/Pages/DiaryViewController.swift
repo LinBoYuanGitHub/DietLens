@@ -16,6 +16,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var closeCalButton: UIButton!
     @IBOutlet weak var diaryCalendar: DiaryDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
+
     var mealsConsumed = [DiaryDailyFood]()
     var foodDiaryList = [FoodDiary]()
     var indexLookup = [Int]()
@@ -49,10 +50,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let fileName = mealsConsumed[mealIndexLookup[indexPath.item]].foodConsumed[indexLookup[indexPath.item]].imageURL
                 let filePath = documentsUrl.appendingPathComponent(fileName!).path
                if FileManager.default.fileExists(atPath: filePath) {
-                    do {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
                         cell.foodImage.image = UIImage(contentsOfFile: filePath)
-                    } catch {
-                        print("Error loading image : \(error)")
                     }
 //                    cell.foodImage.af_setImage(withURL: imageURL, placeholderImage: #imageLiteral(resourceName: "laksa"), filter: nil,
 //                                               imageTransition: .crossDissolve(0.5))
@@ -152,12 +151,12 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         DispatchQueue.main.asyncAfter(deadline: later) {
             self.dismissCalendar(date)
             self.dateLabel.text = self.formatter.string(from: date)
+            self.loadDiaryData(date: date)
         }
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
         }
         //display today`s foodDiary from local realm
-        loadDiaryData(date: date)
     }
 
     func loadDiaryData(date: Date) {
