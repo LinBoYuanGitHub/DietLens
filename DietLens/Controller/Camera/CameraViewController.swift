@@ -273,7 +273,7 @@ extension CameraViewController: CameraViewControllerDelegate {
                         return
                     }
                     let alertMsg = "Result not found!"
-                    let message = NSLocalizedString("barocode result not found in database", comment: alertMsg)
+                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
                     let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
                                                             style: .cancel,
