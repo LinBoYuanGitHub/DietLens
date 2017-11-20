@@ -957,8 +957,8 @@
         <!--Text Input View Controller-->
         <scene sceneID="Wal-Dc-u1g">
             <objects>
-                <viewController id="xEF-Sa-l1r" customClass="TextInputViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="psF-GO-MkU">
+                <viewController storyboardIdentifier="textInputVC" id="xEF-Sa-l1r" customClass="TextInputViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="textInputVC" id="psF-GO-MkU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -973,16 +973,35 @@
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 </variation>
+                                <connections>
+                                    <action selector="textFieldChanged:" destination="xEF-Sa-l1r" eventType="editingChanged" id="aZx-hq-g80"/>
+                                    <action selector="textFieldTouched:" destination="xEF-Sa-l1r" eventType="touchDown" id="jgh-V2-Gjo"/>
+                                </connections>
                             </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WH3-Nd-PTi">
+                                <rect key="frame" x="35" y="70" width="305" height="0.0"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="d3t-NY-fja"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.9370916485786438" green="0.93694382905960083" blue="0.95754462480545044" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="WH3-Nd-PTi" firstAttribute="leading" secondItem="KCL-uq-Rnr" secondAttribute="leading" id="6Cj-yh-rTF"/>
                             <constraint firstItem="KCL-uq-Rnr" firstAttribute="top" secondItem="nGo-c8-EwY" secondAttribute="top" constant="15" id="8Gm-Y1-ZvT"/>
                             <constraint firstItem="nGo-c8-EwY" firstAttribute="trailing" secondItem="KCL-uq-Rnr" secondAttribute="trailing" constant="35" id="DTv-qI-O1X"/>
+                            <constraint firstItem="WH3-Nd-PTi" firstAttribute="trailing" secondItem="KCL-uq-Rnr" secondAttribute="trailing" id="fCi-8j-WaA"/>
                             <constraint firstItem="KCL-uq-Rnr" firstAttribute="leading" secondItem="nGo-c8-EwY" secondAttribute="leading" constant="35" id="gIQ-YZ-zcH"/>
+                            <constraint firstItem="KCL-uq-Rnr" firstAttribute="bottom" secondItem="WH3-Nd-PTi" secondAttribute="top" constant="-5" id="jtX-cB-FEQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nGo-c8-EwY"/>
                     </view>
+                    <connections>
+                        <outlet property="suggestionHeightConstraint" destination="d3t-NY-fja" id="7Iz-F8-kM4"/>
+                        <outlet property="suggestionTableView" destination="WH3-Nd-PTi" id="d1j-6d-5un"/>
+                        <outlet property="textField" destination="KCL-uq-Rnr" id="ERd-dy-ebU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQo-rX-2DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
