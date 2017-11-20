@@ -44,6 +44,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "foodItem") as? FoodDiaryCell {
+                cell.foodImage.image = #imageLiteral(resourceName: "loading_img")
                 var documentsUrl: URL {
                     return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                 }
