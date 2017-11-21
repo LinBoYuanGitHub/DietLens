@@ -11,10 +11,12 @@ import XLPagerTabStrip
 
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        guard let cameraViewController = storyboard?.instantiateViewController(withIdentifier: "cameraVC") as? CameraViewController
+        guard let cameraViewController = storyboard?.instantiateViewController(withIdentifier: "cameraVC")
+            as? CameraViewController, let textInputViewController =
+            storyboard?.instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController
             else { return [] }
 
-        return [cameraViewController, TextInputViewController()]
+        return [cameraViewController, textInputViewController]
     }
 
     override func viewDidLoad() {
@@ -37,6 +39,10 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         }
 
         super.viewDidLoad()
+
+        containerView.bounces = false
+        containerView.alwaysBounceHorizontal = false
+        containerView.scrollsToTop = false
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
