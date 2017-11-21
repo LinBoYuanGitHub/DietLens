@@ -39,6 +39,10 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         }
 
         super.viewDidLoad()
+
+        containerView.bounces = false
+        containerView.alwaysBounceHorizontal = false
+        containerView.scrollsToTop = false
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
