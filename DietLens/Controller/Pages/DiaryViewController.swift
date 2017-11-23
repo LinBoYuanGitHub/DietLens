@@ -9,7 +9,7 @@
 import UIKit
 import FSCalendar
 
-class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
+class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 
     @IBOutlet weak var foodDiaryTable: UITableView!
     @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
@@ -25,12 +25,17 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var currentMealIndex: Int = -1
     var currentFoodItemIndex: Int = 0
     var totalRows: Int = 0
+
+    var datesWithEvent = [Date]()
+
+    fileprivate let gregorian = Calendar(identifier: .gregorian)
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_GB")
         formatter.setLocalizedDateFormatFromTemplate("MMMMd")
         return formatter
     }()
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return totalRows
     }
@@ -67,10 +72,26 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     }
 
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        print("Checking for date: \(date)")
+        for dateWithEvent in datesWithEvent {
+            if Calendar.current.isDate(date, inSameDayAs: dateWithEvent) {
+                return 1
+            }
+        }
+
+//        if self.datesWithEvent.contains(date) {
+//            return 1
+//        }
+        return 0
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let date = Date()
         diaryCalendar.setCurrentPage(date, animated: true)
+        diaryCalendar.dataSource = self
+        diaryCalendar.delegate = self
         dateLabel.text = formatter.string(from: date)
         foodDiaryTable.dataSource = self
         foodDiaryTable.delegate = self
@@ -81,7 +102,12 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         // Do any additional setup after loading the view.
+        
         loadDiaryData(date: Date())
+        // Adding random date as events
+        for i in 0..<4 {
+            datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
+        }
     }
 
     func calculateTableViewParams() {
