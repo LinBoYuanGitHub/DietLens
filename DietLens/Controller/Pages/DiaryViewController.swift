@@ -8,6 +8,7 @@
 
 import UIKit
 import FSCalendar
+import PBRevealViewController
 
 class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 
@@ -16,6 +17,9 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var closeCalButton: UIButton!
     @IBOutlet weak var diaryCalendar: DiaryDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var emptyDiaryHelperText: UILabel!
+    @IBOutlet weak var emptyDiaryIcon: UIImageView!
+    @IBOutlet weak var closeButton: UIButton!
 
     var mealsConsumed = [DiaryDailyFood]()
     var foodDiaryList = [FoodDiary]()
@@ -54,7 +58,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
                 let fileName = mealsConsumed[mealIndexLookup[indexPath.item]].foodConsumed[indexLookup[indexPath.item]].imageURL
                 let filePath = documentsUrl.appendingPathComponent(fileName!).path
-               if FileManager.default.fileExists(atPath: filePath) {
+                if FileManager.default.fileExists(atPath: filePath) {
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
                         cell.foodImage.image = UIImage(contentsOfFile: filePath)
                     }
@@ -79,10 +83,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 return 1
             }
         }
-
-//        if self.datesWithEvent.contains(date) {
-//            return 1
-//        }
         return 0
     }
 
@@ -97,13 +97,19 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         foodDiaryTable.delegate = self
         foodDiaryTable.estimatedRowHeight = 90
         foodDiaryTable.rowHeight = UITableViewAutomaticDimension
-//        testData()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        closeButton.target(forAction: #selector(PBRevealViewController.revealLeftView), withSender: nil)
+        closeButton.actions(forTarget: PBRevealViewController.revealLeftView, forControlEvent: .touchUpInside)
+        //closeButton.target = self.revealViewController()
+        //closeButton.action = #selector(PBRevealViewController.revealLeftView)
+
 //        testOnSaveData()
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         // Do any additional setup after loading the view.
-        
+
         loadDiaryData(date: Date())
+//        testData()
         // Adding random date as events
         for i in 0..<4 {
             datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
@@ -147,7 +153,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+       self.revealViewController()?.revealLeftView()// PBRevealViewController.revealLeftView()
     }
     @IBAction func bringInCalendar(_ sender: Any) {
         calendarYConstraint.constant = 20
@@ -210,6 +217,13 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } else {
                 dinnerEntity.foodConsumed.append(foodInfo)
             }
+        }
+        if foodDiaryList.count == 0 {
+            emptyDiaryHelperText.alpha = 0
+            emptyDiaryIcon.alpha = 0
+        } else {
+            emptyDiaryHelperText.alpha = 1
+            emptyDiaryIcon.alpha = 1
         }
         mealsConsumed.append(breakfastEntity)
         mealsConsumed.append(lunchEntity)
