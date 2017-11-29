@@ -13,9 +13,12 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var sideMenuTable: UITableView!
 
-    let labels: [String] = ["Home", "Food Diary", "Steps Taken", "Notifications", "Settings", "About Us", "Logout"]
-    let iconNames: [String] = ["checkmark", "Report", "Steps", "Notification", "Settings", "About", "Logout"]
-    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "StepsPage", "NotificationsPage", "SettingsPage", "AboutPage", "MainViewController"]
+    //let labels: [String] = ["Home", "Food Diary", "Steps Taken", "Notifications", "Settings", "About Us", "Logout"]
+    //let iconNames: [String] = ["checkmark", "Report", "Steps", "Notification", "Settings", "About", "Logout"]
+    //let storyboardIDs: [String] = ["DietLens", "calendarViewController", "StepsPage", "NotificationsPage", "SettingsPage", "AboutPage", "MainViewController"]
+    let labels: [String] = ["Home", "Food Diary"]
+    let iconNames: [String] = ["checkmark", "Report"]
+    let storyboardIDs: [String] = ["DietLens", "calendarViewController"]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -85,6 +88,9 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: DataService.instance.screenUserIsIn, section: 0)) as? SideMenuCell {
             cell.cellSelected()
         }
+    }
+    @IBAction func profileButtonPressed(_ sender: Any) {
+        print("Go to profile page")
     }
     /*
     // MARK: - Navigation

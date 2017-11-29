@@ -49,6 +49,9 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if indexLookup[indexPath.item] == -1 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "header") as? FoodDiaryHeaderCell {
                 cell.setupHeaderCell(whichMeal: mealsConsumed[mealIndexLookup[indexPath.item]].mealOfDay)
+                let headerSelect = UIView()
+                headerSelect.backgroundColor = UIColor.clear
+                cell.selectedBackgroundView = headerSelect
                 return cell
             }
         } else {
