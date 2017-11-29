@@ -129,7 +129,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("\(String(dateString[..<3]))|\(String(dateString[4...]))")
         if let allFoodInMonth = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(dateString[4...]), month: String(dateString[..<3])) {
             for var food in allFoodInMonth {
-                print(food.foodName)
+                print(food.mealTime)
             }
         }
 
@@ -204,6 +204,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.dismissCalendar(date)
             self.dateLabel.text = self.formatter.string(from: date)
             self.loadDiaryData(date: date)
+            self.loadDaysRecordedFromDiary(date: date)
         }
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
