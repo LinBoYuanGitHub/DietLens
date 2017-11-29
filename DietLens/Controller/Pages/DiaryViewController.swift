@@ -114,9 +114,25 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         loadDiaryData(date: Date())
 //        testData()
         // Adding random date as events
+
+        loadDaysRecordedFromDiary(date: Date())
         for i in 0..<4 {
             datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
         }
+    }
+
+    func loadDaysRecordedFromDiary(date: Date) {
+        let diaryDateFormatter = DateFormatter()
+        diaryDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMM")
+        let dateString: String = diaryDateFormatter.string(from: date)
+        //print(dateString[...4])
+        print("\(String(dateString[..<3]))|\(String(dateString[4...]))")
+        if let allFoodInMonth = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(dateString[4...]), month: String(dateString[..<3])) {
+            for var food in allFoodInMonth {
+                print(food.foodName)
+            }
+        }
+
     }
 
     func calculateTableViewParams() {
@@ -273,4 +289,24 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mealsConsumed.append(m1)
     }
 
+}
+
+extension String {
+    subscript(value: PartialRangeUpTo<Int>) -> Substring {
+        get {
+            return self[..<index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+
+    subscript(value: PartialRangeThrough<Int>) -> Substring {
+        get {
+            return self[...index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+
+    subscript(value: PartialRangeFrom<Int>) -> Substring {
+        get {
+            return self[index(startIndex, offsetBy: value.lowerBound)...]
+        }
+    }
 }
