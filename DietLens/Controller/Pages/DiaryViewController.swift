@@ -8,14 +8,18 @@
 
 import UIKit
 import FSCalendar
+import PBRevealViewController
 
-class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource {
+class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
 
     @IBOutlet weak var foodDiaryTable: UITableView!
     @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
     @IBOutlet weak var closeCalButton: UIButton!
     @IBOutlet weak var diaryCalendar: DiaryDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var emptyDiaryHelperText: UILabel!
+    @IBOutlet weak var emptyDiaryIcon: UIImageView!
+    @IBOutlet weak var closeButton: UIButton!
 
     var mealsConsumed = [DiaryDailyFood]()
     var foodDiaryList = [FoodDiary]()
@@ -33,6 +37,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         formatter.setLocalizedDateFormatFromTemplate("MMMMd")
         return formatter
     }()
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return totalRows
     }
@@ -41,6 +46,9 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if indexLookup[indexPath.item] == -1 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "header") as? FoodDiaryHeaderCell {
                 cell.setupHeaderCell(whichMeal: mealsConsumed[mealIndexLookup[indexPath.item]].mealOfDay)
+                let headerSelect = UIView()
+                headerSelect.backgroundColor = UIColor.clear
+                cell.selectedBackgroundView = headerSelect
                 return cell
             }
         } else {
@@ -75,21 +83,60 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
     }
 
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        print("Checking for date: \(date)")
+        for dateWithEvent in datesWithEvent {
+            if Calendar.current.isDate(date, inSameDayAs: dateWithEvent) {
+                return 1
+            }
+        }
+        return 0
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let date = Date()
         diaryCalendar.setCurrentPage(date, animated: true)
+        diaryCalendar.dataSource = self
+        diaryCalendar.delegate = self
         dateLabel.text = formatter.string(from: date)
         foodDiaryTable.dataSource = self
         foodDiaryTable.delegate = self
         foodDiaryTable.estimatedRowHeight = 90
         foodDiaryTable.rowHeight = UITableViewAutomaticDimension
-//        testData()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        closeButton.target(forAction: #selector(PBRevealViewController.revealLeftView), withSender: nil)
+        closeButton.actions(forTarget: PBRevealViewController.revealLeftView, forControlEvent: .touchUpInside)
+        //closeButton.target = self.revealViewController()
+        //closeButton.action = #selector(PBRevealViewController.revealLeftView)
+
 //        testOnSaveData()
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         // Do any additional setup after loading the view.
+
         loadDiaryData(date: Date())
+//        testData()
+        // Adding random date as events
+
+        loadDaysRecordedFromDiary(date: Date())
+        for i in 0..<4 {
+            datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
+        }
+    }
+
+    func loadDaysRecordedFromDiary(date: Date) {
+        let diaryDateFormatter = DateFormatter()
+        diaryDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMM")
+        let dateString: String = diaryDateFormatter.string(from: date)
+        //print(dateString[...4])
+        print("\(String(dateString[..<3]))|\(String(dateString[4...]))")
+        if let allFoodInMonth = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(dateString[4...]), month: String(dateString[..<3])) {
+            for var food in allFoodInMonth {
+                print(food.mealTime)
+            }
+        }
+
     }
 
     func calculateTableViewParams() {
@@ -129,7 +176,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+       self.revealViewController()?.revealLeftView()// PBRevealViewController.revealLeftView()
     }
     @IBAction func bringInCalendar(_ sender: Any) {
         calendarYConstraint.constant = 20
@@ -160,6 +208,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.dismissCalendar(date)
             self.dateLabel.text = self.formatter.string(from: date)
             self.loadDiaryData(date: date)
+            self.loadDaysRecordedFromDiary(date: date)
         }
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
@@ -192,6 +241,13 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } else {
                 dinnerEntity.foodConsumed.append(foodInfo)
             }
+        }
+        if foodDiaryList.count == 0 {
+            emptyDiaryHelperText.alpha = 0
+            emptyDiaryIcon.alpha = 0
+        } else {
+            emptyDiaryHelperText.alpha = 1
+            emptyDiaryIcon.alpha = 1
         }
         mealsConsumed.append(breakfastEntity)
         mealsConsumed.append(lunchEntity)
@@ -238,4 +294,24 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mealsConsumed.append(m1)
     }
 
+}
+
+extension String {
+    subscript(value: PartialRangeUpTo<Int>) -> Substring {
+        get {
+            return self[..<index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+
+    subscript(value: PartialRangeThrough<Int>) -> Substring {
+        get {
+            return self[...index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+
+    subscript(value: PartialRangeFrom<Int>) -> Substring {
+        get {
+            return self[index(startIndex, offsetBy: value.lowerBound)...]
+        }
+    }
 }

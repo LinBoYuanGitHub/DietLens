@@ -32,12 +32,14 @@ class SideMenuCell: UITableViewCell {
     }
 
     func cellSelected() {
-        buttonName.textColor = #colorLiteral(red: 0.938290596, green: 0.4011681676, blue: 0.3992137313, alpha: 1)
-        icon.tintColor = UIColor.red
+        //buttonName.textColor = #colorLiteral(red: 0.938290596, green: 0.4011681676, blue: 0.3992137313, alpha: 1)
+        //icon.tintColor = UIColor.red
+        backgroundColor = #colorLiteral(red: 0.9310602546, green: 0.9312162399, blue: 0.9310397506, alpha: 1)
     }
 
     func cellUnselected() {
-        icon.tintColor = #colorLiteral(red: 0.4035005569, green: 0.4078930914, blue: 0.4076195359, alpha: 1)
-        buttonName.textColor = #colorLiteral(red: 0.4035005569, green: 0.4078930914, blue: 0.4076195359, alpha: 1)
+        //icon.tintColor = #colorLiteral(red: 0.4035005569, green: 0.4078930914, blue: 0.4076195359, alpha: 1)
+        //buttonName.textColor = #colorLiteral(red: 0.4035005569, green: 0.4078930914, blue: 0.4076195359, alpha: 1)
+        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     }
 }

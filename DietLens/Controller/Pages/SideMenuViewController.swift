@@ -86,6 +86,9 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
             cell.cellSelected()
         }
     }
+    @IBAction func profileButtonPressed(_ sender: Any) {
+        print("Go to profile page")
+    }
     /*
     // MARK: - Navigation
 
