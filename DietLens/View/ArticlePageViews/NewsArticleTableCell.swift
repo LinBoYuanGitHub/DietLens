@@ -27,7 +27,13 @@ class NewsArticleTableCell: UITableViewCell {
     }
 
     func setupCell(imageURL: String, title: String, description: String) {
-        articleImage.imageFromServerURL(urlString: imageURL)
+        let imageView = UIImageView()
+        self.articleImage.image = #imageLiteral(resourceName: "loading_img") //set placeholder
+        imageView.af_setImage(withURL: URL(string: imageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,
+                              imageTransition: .crossDissolve(0.5), completion: { _ in
+                                self.articleImage.image = imageView.image
+        })
+        //      articleImage.imageFromServerURL(urlString: imageURL)
         titleLabel.text = title
         articleDesciption.text = description
     }

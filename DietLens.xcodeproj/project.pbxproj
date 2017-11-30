@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
 		3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */; };
+		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
+		3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
 		3FFB568A1FB02F7C002DCE15 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56881FB02F79002DCE15 /* RealmSwift.framework */; };
@@ -114,6 +116,8 @@
 /* Begin PBXFileReference section */
 		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHistoryViewController.swift; sourceTree = "<group>"; };
+		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewController.swift; sourceTree = "<group>"; };
 		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
 		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
 		3FFB56881FB02F79002DCE15 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
 				587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
 				3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */,
+				3F1B628D1FC66D56006A38FE /* WebViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
+				3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */,
 			);
 			path = TextInput;
 			sourceTree = "<group>";
@@ -813,6 +819,7 @@
 				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
+				3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
 				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
 				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
@@ -828,6 +835,7 @@
 				581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
+				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,

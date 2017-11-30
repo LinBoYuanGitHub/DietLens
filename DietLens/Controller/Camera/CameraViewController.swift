@@ -88,6 +88,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         barScannerLine.removeFromSuperview()
     }
 
+    @IBAction func dismissCamera(_ sender: UIButton) {
+        if reviewImagePalette.isHidden {
+            super.dismiss(animated: true)
+        } else {
+            hideReview()
+        }
+    }
+
     @IBAction func capturePhoto(_ sender: UIButton) {
         sessionManager.capturePhoto()
     }
@@ -105,12 +113,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     @IBAction func approveImage(_ sender: UIButton) {
-        hideReview()
-
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.loadingScreen.alpha = 1
         }, completion: nil)
-
         let imgData = UIImageJPEGRepresentation(chosenImageView.image!, 0.2)!
         APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
             // upload result and callback
@@ -118,7 +123,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             self.foodResults = results
             self.recordType = "recognition"
             self.performSegue(withIdentifier: "test", sender: self)
-            print(results!)
+            self.hideReview()
 
         }
     }
@@ -349,6 +354,7 @@ extension CameraViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? RecognitionResultsViewController {
             dest.results = foodResults
+            dest.dateTime = Date()
             if recordType == "recognition" {
                 dest.userFoodImage = chosenImageView.image!
             } else if recordType == "barcode" {

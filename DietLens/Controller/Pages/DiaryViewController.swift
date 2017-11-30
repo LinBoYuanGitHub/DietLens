@@ -25,6 +25,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var currentMealIndex: Int = -1
     var currentFoodItemIndex: Int = 0
     var totalRows: Int = 0
+    //tableview cell cache
+    let imageCache = NSCache<NSString, AnyObject>()
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_GB")
@@ -34,7 +36,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return totalRows
     }
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("indexPath row:\(indexPath.row), item:\(indexPath.item)")
         if indexLookup[indexPath.item] == -1 {
@@ -48,16 +49,22 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 var documentsUrl: URL {
                     return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                 }
-                let fileName = mealsConsumed[mealIndexLookup[indexPath.item]].foodConsumed[indexLookup[indexPath.item]].imageURL
-                let filePath = documentsUrl.appendingPathComponent(fileName!).path
-               if FileManager.default.fileExists(atPath: filePath) {
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-                        cell.foodImage.image = UIImage(contentsOfFile: filePath)
+                let fileName: String = self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]].imageURL!
+                let filePath = documentsUrl.appendingPathComponent(fileName).path
+                if FileManager.default.fileExists(atPath: filePath) {
+                    DispatchQueue.main.async {
+                        if let cachedImage = self.imageCache.object(forKey: fileName as NSString) as? UIImage {
+                            cell.foodImage.image = cachedImage
+                            return
+                        } else {
+                            cell.foodImage.image = UIImage(contentsOfFile: filePath)
+                            self.imageCache.setObject(UIImage(contentsOfFile: (filePath as NSString) as String)!, forKey: fileName as NSString)
+                        }
                     }
-//                    cell.foodImage.af_setImage(withURL: imageURL, placeholderImage: #imageLiteral(resourceName: "laksa"), filter: nil,
-//                                               imageTransition: .crossDissolve(0.5))
                 }
-                cell.setupCell(foodInfo: mealsConsumed[mealIndexLookup[indexPath.item]].foodConsumed[indexLookup[indexPath.item]])
+                DispatchQueue.main.async {
+                    cell.setupCell(foodInfo: self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]])
+                }
                 return cell
             }
         }

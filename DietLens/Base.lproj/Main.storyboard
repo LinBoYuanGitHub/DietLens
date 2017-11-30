@@ -572,7 +572,7 @@
             <objects>
                 <viewController storyboardIdentifier="DietLens" title="DietLens" id="xZk-St-05l" customClass="HomeViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rdz-ba-FZ3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="732"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="240" estimatedRowHeight="230" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hye-DC-9gR">
@@ -1138,7 +1138,38 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XK-8B-IVs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4804" y="1195"/>
+            <point key="canvasLocation" x="4679" y="1146"/>
+        </scene>
+        <!--webpage-->
+        <scene sceneID="09I-Px-y3H">
+            <objects>
+                <viewController storyboardIdentifier="BrowserPage" id="kwp-St-aWJ" customClass="WebViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oDP-IH-CjI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="leU-Z7-f5b">
+                                <rect key="frame" x="0.0" y="62" width="375" height="605"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="YXd-My-0Jy"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="webpage" id="38p-yG-jWm">
+                        <barButtonItem key="leftBarButtonItem" title="sideMenu" image="SideMenu" id="jFL-xZ-CrJ">
+                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="sideMenuButton" destination="jFL-xZ-CrJ" id="qkn-H4-PE5"/>
+                        <outlet property="webViewContainer" destination="leU-Z7-f5b" id="2v9-eH-7RJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gff-bQ-QLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4677.6000000000004" y="1867.9160419790107"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="2Dq-IK-wwe">
@@ -1374,7 +1405,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                     <tabBarItem key="tabBarItem" title="Item 1" id="qZU-GZ-rvT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Wv8-Uc-cFc">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.97252601385116577" green="0.97326189279556274" blue="0.97263997793197632" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -1583,7 +1614,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
     <resources>
         <image name=" " width="16" height="16"/>
         <image name="AddFood" width="83" height="83"/>
-        <image name="Back Arrow" width="20" height="32"/>
+        <image name="Back Arrow" width="10" height="17"/>
         <image name="Facebook" width="50" height="50"/>
         <image name="Profile" width="130" height="130"/>
         <image name="SideMenu" width="18" height="14"/>

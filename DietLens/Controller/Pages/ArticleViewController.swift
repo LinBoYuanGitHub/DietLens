@@ -20,7 +20,23 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         articleTable.estimatedRowHeight = 90
         articleTable.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
-         APIService.instance.getArticleList(completion: { (articleList) in
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        let alertController = UIAlertController(title: nil, message: "Loading...\n\n", preferredStyle: UIAlertControllerStyle.alert)
+        let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
+        spinnerIndicator.color = UIColor.black
+        spinnerIndicator.startAnimating()
+        alertController.view.addSubview(spinnerIndicator)
+        self.present(alertController, animated: false, completion: nil)
+        APIService.instance.getArticleList(completion: { (articleList) in
+            alertController.dismiss(animated: true, completion: nil)
+            if articleList == nil {
+                //TODO show empty view
+                return
+            }
             self.articleDatamanager.articleList = articleList!
             self.articleTable?.reloadData()
         })
@@ -53,7 +69,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var article: Article = articleDatamanager.articleList[(articleTable.indexPathForSelectedRow?.row)!]
+        let article: Article = articleDatamanager.articleList[(articleTable.indexPathForSelectedRow?.row)!]
         if let dest = segue.destination as? SingleArticleViewController {
             dest.articleData = article
         }

@@ -20,7 +20,9 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.userLoginURL)!,
             method: .post,
-            parameters: ["email": userEmail, "pwd": password])
+            parameters: ["email": userEmail, "pwd": password],
+            encoding: JSONEncoding.default,
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -46,7 +48,9 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.thirdPartyLoginURL)!,
             method: .post,
-            parameters: ["id": appUserId, "nickname": nickName, "platform": platform])
+            parameters: ["id": appUserId, "nickname": nickName, "platform": platform],
+            encoding: JSONEncoding.default,
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -72,7 +76,9 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.thirdPartyLoginURL)!,
             method: .post,
-            parameters: ["nickname": nickName, "email": email, "password": password])
+            parameters: ["nickname": nickName, "email": email, "password": password],
+            encoding: JSONEncoding.default,
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -116,7 +122,9 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.foodSearchListURL)!,
             method: .post,
-            parameters: ["text": keywords])
+            parameters: ["text": keywords],
+            encoding: JSONEncoding.default,
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -124,15 +132,17 @@ class APIService {
                     completion(nil)
                     return
                 }
-                guard let searchResults = response.result.value as? [JSON] else {
+
+                guard let searchResults = response.result.value else {
                     print("Get searchResult failed due to : Server Data Type Error")
                     completion(nil)
                     return
                 }
+                let jsonArr = JSON(searchResults)
                 var foodSearchList = [TextSearchSuggestionEntity]()
-                for item in searchResults {
-                    foodSearchList.append(
-                        TextSearchSuggestionEntity(id: item["id"].intValue, name: item["name"].stringValue))
+                for i in 0..<jsonArr.count {
+                    let entity = TextSearchSuggestionEntity(id: (jsonArr[i].dictionaryValue["id"]?.intValue)!, name: (jsonArr[i].dictionaryValue["name"]?.stringValue)!)
+                    foodSearchList.append(entity)
                 }
                 completion(foodSearchList)
         }
@@ -142,7 +152,9 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.foodSearchDetailURL)!,
             method: .post,
-            parameters: ["id": foodId])
+            parameters: ["id": foodId],
+            encoding: JSONEncoding.default,
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -244,7 +256,9 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.saveFoodDiaryURL)!,
             method: .post,
-            parameters: params)
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
