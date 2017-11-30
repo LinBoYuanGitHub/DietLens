@@ -13,9 +13,12 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var sideMenuTable: UITableView!
 
-    let labels: [String] = ["Report", "Steps Taken", "Notifications", "Browser", "Settings", "About Us", "Logout"]
-    let iconNames: [String] = ["Report", "Steps", "Notification", "browser", "Settings", "About", "Logout"]
-    let storyboardIDs: [String] = ["DietLens", "StepsPage", "NotificationsPage", "BrowserPage", "SettingsPage", "AboutPage", "MainViewController"]
+//    let labels: [String] = ["Report", "Steps Taken", "Notifications", "Browser", "Settings", "About Us", "Logout"]
+//    let iconNames: [String] = ["Report", "Steps", "Notification", "browser", "Settings", "About", "Logout"]
+//    let storyboardIDs: [String] = ["DietLens", "StepsPage", "NotificationsPage", "BrowserPage", "SettingsPage", "AboutPage", "MainViewController"]
+    let labels: [String] = ["Home", "Food Diary"]
+    let iconNames: [String] = ["checkmark", "Report"]
+    let storyboardIDs: [String] = ["DietLens", "calendarViewController"]
 
     override func awakeFromNib() {
         super.awakeFromNib()

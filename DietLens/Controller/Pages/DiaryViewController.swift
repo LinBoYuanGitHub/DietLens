@@ -29,8 +29,12 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var currentMealIndex: Int = -1
     var currentFoodItemIndex: Int = 0
     var totalRows: Int = 0
-    //tableview cell cache
+     //tableview cell cache
     let imageCache = NSCache<NSString, AnyObject>()
+
+    var datesWithEvent = [Date]()
+
+    fileprivate let gregorian = Calendar(identifier: .gregorian)
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_GB")

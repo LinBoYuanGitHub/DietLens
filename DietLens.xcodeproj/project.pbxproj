@@ -1,1205 +1,1205 @@
 // !$*UTF8*$!
 {
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 48;
-	objects = {
+    archiveVersion = 1;
+    classes = {
+    };
+    objectVersion = 48;
+    objects = {
 
 /* Begin PBXBuildFile section */
-		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
-		3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */; };
-		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
-		3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */; };
-		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
-		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
-		3FFB568A1FB02F7C002DCE15 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56881FB02F79002DCE15 /* RealmSwift.framework */; };
-		3FFB568B1FB02F7C002DCE15 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56881FB02F79002DCE15 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3FFB568C1FB02F7C002DCE15 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56891FB02F7B002DCE15 /* Realm.framework */; };
-		3FFB568D1FB02F7C002DCE15 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56891FB02F7B002DCE15 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */; };
-		3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */; };
-		3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */; };
-		3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */; };
-		3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56971FB2FEFF002DCE15 /* Article.swift */; };
-		3FFB569A1FB334C0002DCE15 /* FoodInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56991FB334C0002DCE15 /* FoodInformation.swift */; };
-		3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569B1FB6ABCE002DCE15 /* APIService.swift */; };
-		3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */; };
-		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
-		5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */; };
-		580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443621FB017DD00D59DFF /* StepsViewController.swift */; };
-		580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443661FB0189E00D59DFF /* SettingViewController.swift */; };
-		580443691FB0233900D59DFF /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443681FB0233900D59DFF /* AboutViewController.swift */; };
-		5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
-		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
-		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
-		5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856591FB6DB15004BEBB3 /* ArticleViewController.swift */; };
-		5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */; };
-		581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */; };
-		58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */; };
-		58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
-		58410CAE1FCE8C5400CF4958 /* SingleNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */; };
-		5841A5071FCE5939006201C5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841A5061FCE5939006201C5 /* Notification.swift */; };
-		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
-		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
-		587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */; };
-		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
-		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
-		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
-		5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF911F9D82BF0022B51E /* Assets.xcassets */; };
-		5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */; };
-		5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
-		5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
-		587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */; };
-		588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */; };
-		5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */; };
-		58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */; };
-		58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
-		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
-		58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
-		58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */; };
-		58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */; };
-		58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0F3E71FB6D4F1004C1B81 /* Blur.swift */; };
-		58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */; };
-		58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */; };
-		58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E71FA0915500C542D9 /* NewsArticleCell.swift */; };
-		58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E91FA0993B00C542D9 /* NewsArticle.swift */; };
-		58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
-		58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */; };
-		58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */; };
-		58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF261F9F437100FF3A95 /* NewsFeed.swift */; };
-		58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF291F9F439100FF3A95 /* DataService.swift */; };
-		58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
-		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
-		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
-		BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */; };
-		BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */; };
-		BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894001FA4518200DA1667 /* CameraViewController.swift */; };
-		BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */; };
-		BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */; };
-		BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */; };
-		BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */; };
-		BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */; };
-		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
-		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
+        046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
+        3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */; };
+        3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
+        3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */; };
+        3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
+        3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
+        3FFB568A1FB02F7C002DCE15 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56881FB02F79002DCE15 /* RealmSwift.framework */; };
+        3FFB568B1FB02F7C002DCE15 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56881FB02F79002DCE15 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+        3FFB568C1FB02F7C002DCE15 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56891FB02F7B002DCE15 /* Realm.framework */; };
+        3FFB568D1FB02F7C002DCE15 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56891FB02F7B002DCE15 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+        3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */; };
+        3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */; };
+        3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */; };
+        3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */; };
+        3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56971FB2FEFF002DCE15 /* Article.swift */; };
+        3FFB569A1FB334C0002DCE15 /* FoodInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56991FB334C0002DCE15 /* FoodInformation.swift */; };
+        3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569B1FB6ABCE002DCE15 /* APIService.swift */; };
+        3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */; };
+        4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
+        5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */; };
+        580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443621FB017DD00D59DFF /* StepsViewController.swift */; };
+        580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443661FB0189E00D59DFF /* SettingViewController.swift */; };
+        580443691FB0233900D59DFF /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443681FB0233900D59DFF /* AboutViewController.swift */; };
+        5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
+        581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
+        581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
+        5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856591FB6DB15004BEBB3 /* ArticleViewController.swift */; };
+        5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */; };
+        581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */; };
+        58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */; };
+        58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
+        58410CAE1FCE8C5400CF4958 /* SingleNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */; };
+        5841A5071FCE5939006201C5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841A5061FCE5939006201C5 /* Notification.swift */; };
+        5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
+        585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
+        587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */; };
+        5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
+        5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
+        5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
+        5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF911F9D82BF0022B51E /* Assets.xcassets */; };
+        5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */; };
+        5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
+        5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
+        587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */; };
+        588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */; };
+        5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */; };
+        58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */; };
+        58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
+        58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
+        58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
+        58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */; };
+        58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */; };
+        58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0F3E71FB6D4F1004C1B81 /* Blur.swift */; };
+        58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */; };
+        58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */; };
+        58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E71FA0915500C542D9 /* NewsArticleCell.swift */; };
+        58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E425E91FA0993B00C542D9 /* NewsArticle.swift */; };
+        58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
+        58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */; };
+        58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */; };
+        58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF261F9F437100FF3A95 /* NewsFeed.swift */; };
+        58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF291F9F439100FF3A95 /* DataService.swift */; };
+        58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
+        58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
+        58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
+        BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */; };
+        BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */; };
+        BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894001FA4518200DA1667 /* CameraViewController.swift */; };
+        BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */; };
+        BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */; };
+        BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */; };
+        BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */; };
+        BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */; };
+        BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
+        E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5877CF9C1F9D82BF0022B51E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5877CF7C1F9D82BF0022B51E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5877CF831F9D82BF0022B51E;
-			remoteInfo = DietLens;
-		};
-		5877CFA71F9D82BF0022B51E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5877CF7C1F9D82BF0022B51E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5877CF831F9D82BF0022B51E;
-			remoteInfo = DietLens;
-		};
+        5877CF9C1F9D82BF0022B51E /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = 5877CF7C1F9D82BF0022B51E /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = 5877CF831F9D82BF0022B51E;
+            remoteInfo = DietLens;
+        };
+        5877CFA71F9D82BF0022B51E /* PBXContainerItemProxy */ = {
+            isa = PBXContainerItemProxy;
+            containerPortal = 5877CF7C1F9D82BF0022B51E /* Project object */;
+            proxyType = 1;
+            remoteGlobalIDString = 5877CF831F9D82BF0022B51E;
+            remoteInfo = DietLens;
+        };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3FFB568D1FB02F7C002DCE15 /* Realm.framework in Embed Frameworks */,
-				3FFB568B1FB02F7C002DCE15 /* RealmSwift.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+        3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */ = {
+            isa = PBXCopyFilesBuildPhase;
+            buildActionMask = 2147483647;
+            dstPath = "";
+            dstSubfolderSpec = 10;
+            files = (
+                3FFB568D1FB02F7C002DCE15 /* Realm.framework in Embed Frameworks */,
+                3FFB568B1FB02F7C002DCE15 /* RealmSwift.framework in Embed Frameworks */,
+            );
+            name = "Embed Frameworks";
+            runOnlyForDeploymentPostprocessing = 0;
+        };
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHistoryViewController.swift; sourceTree = "<group>"; };
-		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewController.swift; sourceTree = "<group>"; };
-		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
-		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
-		3FFB56881FB02F79002DCE15 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
-		3FFB56891FB02F7B002DCE15 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveFoodDiaryStoryboard.storyboard; sourceTree = "<group>"; };
-		3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDataManager.swift; sourceTree = "<group>"; };
-		3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataManager.swift; sourceTree = "<group>"; };
-		3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoDataManager.swift; sourceTree = "<group>"; };
-		3FFB56971FB2FEFF002DCE15 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
-		3FFB56991FB334C0002DCE15 /* FoodInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInformation.swift; sourceTree = "<group>"; };
-		3FFB569B1FB6ABCE002DCE15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchSuggestionEntity.swift; sourceTree = "<group>"; };
-		5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePageArticleBodyCell.swift; sourceTree = "<group>"; };
-		580443621FB017DD00D59DFF /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
-		580443661FB0189E00D59DFF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		580443681FB0233900D59DFF /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
-		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
-		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
-		581856591FB6DB15004BEBB3 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
-		5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableCell.swift; sourceTree = "<group>"; };
-		581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPaddingTextView.swift; sourceTree = "<group>"; };
-		58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellDelegate.swift; sourceTree = "<group>"; };
-		58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHeaderCell.swift; sourceTree = "<group>"; };
-		582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-Bridging-Header.h"; sourceTree = "<group>"; };
-		58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleNotificationViewController.swift; sourceTree = "<group>"; };
-		5841A5061FCE5939006201C5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
-		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
-		587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleArticleViewController.swift; sourceTree = "<group>"; };
-		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DietLens.xcdatamodel; sourceTree = "<group>"; };
-		5877CF911F9D82BF0022B51E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5877CF941F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5877CF961F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensTests.swift; sourceTree = "<group>"; };
-		5877CFA11F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
-		5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
-		588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultsViewController.swift; sourceTree = "<group>"; };
-		5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDatePicker.swift; sourceTree = "<group>"; };
-		58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
-		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
-		58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
-		58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideMenuViewController.swift; sourceTree = "<group>"; };
-		58D0F3E71FB6D4F1004C1B81 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
-		58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
-		58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableCell.swift; sourceTree = "<group>"; };
-		58E425E71FA0915500C542D9 /* NewsArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleCell.swift; sourceTree = "<group>"; };
-		58E425E91FA0993B00C542D9 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
-		58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBorderClearButton.swift; sourceTree = "<group>"; };
-		58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		58F2DF261F9F437100FF3A95 /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
-		58F2DF291F9F439100FF3A95 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
-		58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
-		7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.release.xcconfig"; sourceTree = "<group>"; };
-		9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.release.xcconfig"; sourceTree = "<group>"; };
-		B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
-		BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionManager.swift; sourceTree = "<group>"; };
-		BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddFoodScreen.storyboard; sourceTree = "<group>"; };
-		BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
-		BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableUITextField.swift; sourceTree = "<group>"; };
-		BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerProcessor.swift; sourceTree = "<group>"; };
-		BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
-		BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
-		BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
-		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
-		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
+        3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+        3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHistoryViewController.swift; sourceTree = "<group>"; };
+        3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+        3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewController.swift; sourceTree = "<group>"; };
+        3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
+        3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
+        3FFB56881FB02F79002DCE15 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+        3FFB56891FB02F7B002DCE15 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+        3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveFoodDiaryStoryboard.storyboard; sourceTree = "<group>"; };
+        3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDataManager.swift; sourceTree = "<group>"; };
+        3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataManager.swift; sourceTree = "<group>"; };
+        3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoDataManager.swift; sourceTree = "<group>"; };
+        3FFB56971FB2FEFF002DCE15 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+        3FFB56991FB334C0002DCE15 /* FoodInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInformation.swift; sourceTree = "<group>"; };
+        3FFB569B1FB6ABCE002DCE15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+        3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchSuggestionEntity.swift; sourceTree = "<group>"; };
+        5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePageArticleBodyCell.swift; sourceTree = "<group>"; };
+        580443621FB017DD00D59DFF /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+        580443661FB0189E00D59DFF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+        580443681FB0233900D59DFF /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+        5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
+        581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+        581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+        581856591FB6DB15004BEBB3 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+        5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableCell.swift; sourceTree = "<group>"; };
+        581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPaddingTextView.swift; sourceTree = "<group>"; };
+        58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellDelegate.swift; sourceTree = "<group>"; };
+        58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHeaderCell.swift; sourceTree = "<group>"; };
+        582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-Bridging-Header.h"; sourceTree = "<group>"; };
+        58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleNotificationViewController.swift; sourceTree = "<group>"; };
+        5841A5061FCE5939006201C5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+        5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
+        585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+        587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleArticleViewController.swift; sourceTree = "<group>"; };
+        5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
+        5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+        5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+        5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DietLens.xcdatamodel; sourceTree = "<group>"; };
+        5877CF911F9D82BF0022B51E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+        5877CF941F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+        5877CF961F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+        5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+        5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensTests.swift; sourceTree = "<group>"; };
+        5877CFA11F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+        5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+        5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
+        5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+        587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
+        588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultsViewController.swift; sourceTree = "<group>"; };
+        5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+        58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDatePicker.swift; sourceTree = "<group>"; };
+        58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
+        58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
+        58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+        58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+        58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSlideMenuViewController.swift; sourceTree = "<group>"; };
+        58D0F3E71FB6D4F1004C1B81 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+        58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+        58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableCell.swift; sourceTree = "<group>"; };
+        58E425E71FA0915500C542D9 /* NewsArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleCell.swift; sourceTree = "<group>"; };
+        58E425E91FA0993B00C542D9 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
+        58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+        58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBorderClearButton.swift; sourceTree = "<group>"; };
+        58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+        58F2DF261F9F437100FF3A95 /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
+        58F2DF291F9F439100FF3A95 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+        58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
+        58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+        58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
+        7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.release.xcconfig"; sourceTree = "<group>"; };
+        9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.debug.xcconfig"; sourceTree = "<group>"; };
+        934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.release.xcconfig"; sourceTree = "<group>"; };
+        B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+        B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
+        BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionManager.swift; sourceTree = "<group>"; };
+        BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddFoodScreen.storyboard; sourceTree = "<group>"; };
+        BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+        BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
+        BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableUITextField.swift; sourceTree = "<group>"; };
+        BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerProcessor.swift; sourceTree = "<group>"; };
+        BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
+        BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
+        BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+        C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+        C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
+        EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5877CF811F9D82BF0022B51E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3FFB568C1FB02F7C002DCE15 /* Realm.framework in Frameworks */,
-				3FFB568A1FB02F7C002DCE15 /* RealmSwift.framework in Frameworks */,
-				4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5877CF981F9D82BF0022B51E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5877CFA31F9D82BF0022B51E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+        5877CF811F9D82BF0022B51E /* Frameworks */ = {
+            isa = PBXFrameworksBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                3FFB568C1FB02F7C002DCE15 /* Realm.framework in Frameworks */,
+                3FFB568A1FB02F7C002DCE15 /* RealmSwift.framework in Frameworks */,
+                4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        5877CF981F9D82BF0022B51E /* Frameworks */ = {
+            isa = PBXFrameworksBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        5877CFA31F9D82BF0022B51E /* Frameworks */ = {
+            isa = PBXFrameworksBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		580443611FB0176700D59DFF /* Pages */ = {
-			isa = PBXGroup;
-			children = (
-				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
-				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
-				58AA52181FA1BA420072779C /* DiaryViewController.swift */,
-				58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */,
-				58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */,
-				580443621FB017DD00D59DFF /* StepsViewController.swift */,
-				580443661FB0189E00D59DFF /* SettingViewController.swift */,
-				580443681FB0233900D59DFF /* AboutViewController.swift */,
-				585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
-				5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
-				581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
-				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
-				587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
-				3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */,
-				3F1B628D1FC66D56006A38FE /* WebViewController.swift */,
-				58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */,
-				58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */,
-			);
-			path = Pages;
-			sourceTree = "<group>";
-		};
-		5818565D1FB6DB97004BEBB3 /* ArticlePageViews */ = {
-			isa = PBXGroup;
-			children = (
-				5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */,
-				581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */,
-				5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */,
-			);
-			path = ArticlePageViews;
-			sourceTree = "<group>";
-		};
-		58199C871FB1D63A003F6104 /* Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */,
-			);
-			path = Delegate;
-			sourceTree = "<group>";
-		};
-		5877CF7B1F9D82BF0022B51E = {
-			isa = PBXGroup;
-			children = (
-				3FFB56891FB02F7B002DCE15 /* Realm.framework */,
-				3FFB56881FB02F79002DCE15 /* RealmSwift.framework */,
-				5877CF861F9D82BF0022B51E /* DietLens */,
-				5877CF9E1F9D82BF0022B51E /* DietLensTests */,
-				5877CFA91F9D82BF0022B51E /* DietLensUITests */,
-				5877CF851F9D82BF0022B51E /* Products */,
-				C8B155BF22F4DE7D186C083D /* Pods */,
-				D17C6477152A12102B087091 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		5877CF851F9D82BF0022B51E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5877CF841F9D82BF0022B51E /* DietLens.app */,
-				5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */,
-				5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5877CF861F9D82BF0022B51E /* DietLens */ = {
-			isa = PBXGroup;
-			children = (
-				58F2DF281F9F437F00FF3A95 /* Services */,
-				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
-				58FCCFED1F9D886E00E4F421 /* Controller */,
-				58FCCFEC1F9D886900E4F421 /* View */,
-				58FCCFEB1F9D886400E4F421 /* Model */,
-				5877CF871F9D82BF0022B51E /* AppDelegate.swift */,
-				5877CF8B1F9D82BF0022B51E /* Main.storyboard */,
-				5877CF911F9D82BF0022B51E /* Assets.xcassets */,
-				5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */,
-				5877CF961F9D82BF0022B51E /* Info.plist */,
-				5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */,
-				3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */,
-				BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */,
-			);
-			path = DietLens;
-			sourceTree = "<group>";
-		};
-		5877CF9E1F9D82BF0022B51E /* DietLensTests */ = {
-			isa = PBXGroup;
-			children = (
-				5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */,
-				5877CFA11F9D82BF0022B51E /* Info.plist */,
-			);
-			path = DietLensTests;
-			sourceTree = "<group>";
-		};
-		5877CFA91F9D82BF0022B51E /* DietLensUITests */ = {
-			isa = PBXGroup;
-			children = (
-				5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */,
-				5877CFAC1F9D82BF0022B51E /* Info.plist */,
-			);
-			path = DietLensUITests;
-			sourceTree = "<group>";
-		};
-		58D0F3E61FB6D4E3004C1B81 /* Blur */ = {
-			isa = PBXGroup;
-			children = (
-				58D0F3E71FB6D4F1004C1B81 /* Blur.swift */,
-			);
-			path = Blur;
-			sourceTree = "<group>";
-		};
-		58D575ED1FCE5A8A0046EA25 /* NotificationPageViews */ = {
-			isa = PBXGroup;
-			children = (
-				58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */,
-			);
-			path = NotificationPageViews;
-			sourceTree = "<group>";
-		};
-		58F2DF281F9F437F00FF3A95 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				58F2DF291F9F439100FF3A95 /* DataService.swift */,
-				3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */,
-				3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */,
-				3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */,
-				3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */,
-				3FFB569B1FB6ABCE002DCE15 /* APIService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		58FCCFEB1F9D886400E4F421 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				58F2DF261F9F437100FF3A95 /* NewsFeed.swift */,
-				5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */,
-				58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
-				3FFB56841FADAF90002DCE15 /* FoodDiary.swift */,
-				3FFB56971FB2FEFF002DCE15 /* Article.swift */,
-				3FFB56991FB334C0002DCE15 /* FoodInformation.swift */,
-				3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */,
-				5841A5061FCE5939006201C5 /* Notification.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		58FCCFEC1F9D886900E4F421 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				58D575ED1FCE5A8A0046EA25 /* NotificationPageViews */,
-				5818565D1FB6DB97004BEBB3 /* ArticlePageViews */,
-				587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */,
-				BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */,
-				58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
-				58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,
-				58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */,
-				58E425E71FA0915500C542D9 /* NewsArticleCell.swift */,
-				58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */,
-				581809AF1FA868E000373763 /* ProfileImageView.swift */,
-				581809B11FA877D700373763 /* SideMenuCell.swift */,
-				5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */,
-				58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */,
-				58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */,
-				BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		58FCCFED1F9D886E00E4F421 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				BF6EF2F21FC31C0300420B2B /* TextInput */,
-				58199C871FB1D63A003F6104 /* Delegate */,
-				BF794BB01FA46D7100D30550 /* Camera */,
-				580443611FB0176700D59DFF /* Pages */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		58FCCFF01F9D8A4F00E4F421 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				58D0F3E61FB6D4E3004C1B81 /* Blur */,
-				582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */,
-				58FCCFF11F9D8A5900E4F421 /* Fonts */,
-				58AA521C1FA2D1AA0072779C /* Constants.swift */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		58FCCFF11F9D8A5900E4F421 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		BF6EF2F21FC31C0300420B2B /* TextInput */ = {
-			isa = PBXGroup;
-			children = (
-				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
-				3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */,
-			);
-			path = TextInput;
-			sourceTree = "<group>";
-		};
-		BF794BB01FA46D7100D30550 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				BF7894001FA4518200DA1667 /* CameraViewController.swift */,
-				BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */,
-				BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */,
-				BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */,
-				588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
-		C8B155BF22F4DE7D186C083D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */,
-				934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */,
-				EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */,
-				7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */,
-				9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */,
-				B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		D17C6477152A12102B087091 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */,
-				B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */,
-				C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
+        580443611FB0176700D59DFF /* Pages */ = {
+            isa = PBXGroup;
+            children = (
+                58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
+                58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
+                58AA52181FA1BA420072779C /* DiaryViewController.swift */,
+                58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */,
+                58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */,
+                580443621FB017DD00D59DFF /* StepsViewController.swift */,
+                580443661FB0189E00D59DFF /* SettingViewController.swift */,
+                580443681FB0233900D59DFF /* AboutViewController.swift */,
+                585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
+                5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
+                581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
+                BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
+                587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
+                3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */,
+                3F1B628D1FC66D56006A38FE /* WebViewController.swift */,
+                58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */,
+                58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */,
+            );
+            path = Pages;
+            sourceTree = "<group>";
+        };
+        5818565D1FB6DB97004BEBB3 /* ArticlePageViews */ = {
+            isa = PBXGroup;
+            children = (
+                5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */,
+                581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */,
+                5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */,
+            );
+            path = ArticlePageViews;
+            sourceTree = "<group>";
+        };
+        58199C871FB1D63A003F6104 /* Delegate */ = {
+            isa = PBXGroup;
+            children = (
+                58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */,
+            );
+            path = Delegate;
+            sourceTree = "<group>";
+        };
+        5877CF7B1F9D82BF0022B51E = {
+            isa = PBXGroup;
+            children = (
+                3FFB56891FB02F7B002DCE15 /* Realm.framework */,
+                3FFB56881FB02F79002DCE15 /* RealmSwift.framework */,
+                5877CF861F9D82BF0022B51E /* DietLens */,
+                5877CF9E1F9D82BF0022B51E /* DietLensTests */,
+                5877CFA91F9D82BF0022B51E /* DietLensUITests */,
+                5877CF851F9D82BF0022B51E /* Products */,
+                C8B155BF22F4DE7D186C083D /* Pods */,
+                D17C6477152A12102B087091 /* Frameworks */,
+            );
+            sourceTree = "<group>";
+        };
+        5877CF851F9D82BF0022B51E /* Products */ = {
+            isa = PBXGroup;
+            children = (
+                5877CF841F9D82BF0022B51E /* DietLens.app */,
+                5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */,
+                5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */,
+            );
+            name = Products;
+            sourceTree = "<group>";
+        };
+        5877CF861F9D82BF0022B51E /* DietLens */ = {
+            isa = PBXGroup;
+            children = (
+                58F2DF281F9F437F00FF3A95 /* Services */,
+                58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
+                58FCCFED1F9D886E00E4F421 /* Controller */,
+                58FCCFEC1F9D886900E4F421 /* View */,
+                58FCCFEB1F9D886400E4F421 /* Model */,
+                5877CF871F9D82BF0022B51E /* AppDelegate.swift */,
+                5877CF8B1F9D82BF0022B51E /* Main.storyboard */,
+                5877CF911F9D82BF0022B51E /* Assets.xcassets */,
+                5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */,
+                5877CF961F9D82BF0022B51E /* Info.plist */,
+                5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */,
+                3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */,
+                BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */,
+            );
+            path = DietLens;
+            sourceTree = "<group>";
+        };
+        5877CF9E1F9D82BF0022B51E /* DietLensTests */ = {
+            isa = PBXGroup;
+            children = (
+                5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */,
+                5877CFA11F9D82BF0022B51E /* Info.plist */,
+            );
+            path = DietLensTests;
+            sourceTree = "<group>";
+        };
+        5877CFA91F9D82BF0022B51E /* DietLensUITests */ = {
+            isa = PBXGroup;
+            children = (
+                5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */,
+                5877CFAC1F9D82BF0022B51E /* Info.plist */,
+            );
+            path = DietLensUITests;
+            sourceTree = "<group>";
+        };
+        58D0F3E61FB6D4E3004C1B81 /* Blur */ = {
+            isa = PBXGroup;
+            children = (
+                58D0F3E71FB6D4F1004C1B81 /* Blur.swift */,
+            );
+            path = Blur;
+            sourceTree = "<group>";
+        };
+        58D575ED1FCE5A8A0046EA25 /* NotificationPageViews */ = {
+            isa = PBXGroup;
+            children = (
+                58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */,
+            );
+            path = NotificationPageViews;
+            sourceTree = "<group>";
+        };
+        58F2DF281F9F437F00FF3A95 /* Services */ = {
+            isa = PBXGroup;
+            children = (
+                58F2DF291F9F439100FF3A95 /* DataService.swift */,
+                3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */,
+                3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */,
+                3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */,
+                3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */,
+                3FFB569B1FB6ABCE002DCE15 /* APIService.swift */,
+            );
+            path = Services;
+            sourceTree = "<group>";
+        };
+        58FCCFEB1F9D886400E4F421 /* Model */ = {
+            isa = PBXGroup;
+            children = (
+                58F2DF261F9F437100FF3A95 /* NewsFeed.swift */,
+                5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */,
+                58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
+                3FFB56841FADAF90002DCE15 /* FoodDiary.swift */,
+                3FFB56971FB2FEFF002DCE15 /* Article.swift */,
+                3FFB56991FB334C0002DCE15 /* FoodInformation.swift */,
+                3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */,
+                5841A5061FCE5939006201C5 /* Notification.swift */,
+            );
+            path = Model;
+            sourceTree = "<group>";
+        };
+        58FCCFEC1F9D886900E4F421 /* View */ = {
+            isa = PBXGroup;
+            children = (
+                58D575ED1FCE5A8A0046EA25 /* NotificationPageViews */,
+                5818565D1FB6DB97004BEBB3 /* ArticlePageViews */,
+                587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */,
+                BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */,
+                58F2DF201F9F21AA00FF3A95 /* GradientView.swift */,
+                58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,
+                58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */,
+                58E425E71FA0915500C542D9 /* NewsArticleCell.swift */,
+                58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */,
+                581809AF1FA868E000373763 /* ProfileImageView.swift */,
+                581809B11FA877D700373763 /* SideMenuCell.swift */,
+                5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */,
+                58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */,
+                58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */,
+                BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */,
+            );
+            path = View;
+            sourceTree = "<group>";
+        };
+        58FCCFED1F9D886E00E4F421 /* Controller */ = {
+            isa = PBXGroup;
+            children = (
+                BF6EF2F21FC31C0300420B2B /* TextInput */,
+                58199C871FB1D63A003F6104 /* Delegate */,
+                BF794BB01FA46D7100D30550 /* Camera */,
+                580443611FB0176700D59DFF /* Pages */,
+            );
+            path = Controller;
+            sourceTree = "<group>";
+        };
+        58FCCFF01F9D8A4F00E4F421 /* Supporting Files */ = {
+            isa = PBXGroup;
+            children = (
+                58D0F3E61FB6D4E3004C1B81 /* Blur */,
+                582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */,
+                58FCCFF11F9D8A5900E4F421 /* Fonts */,
+                58AA521C1FA2D1AA0072779C /* Constants.swift */,
+            );
+            path = "Supporting Files";
+            sourceTree = "<group>";
+        };
+        58FCCFF11F9D8A5900E4F421 /* Fonts */ = {
+            isa = PBXGroup;
+            children = (
+                58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */,
+            );
+            path = Fonts;
+            sourceTree = "<group>";
+        };
+        BF6EF2F21FC31C0300420B2B /* TextInput */ = {
+            isa = PBXGroup;
+            children = (
+                BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
+                3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */,
+            );
+            path = TextInput;
+            sourceTree = "<group>";
+        };
+        BF794BB01FA46D7100D30550 /* Camera */ = {
+            isa = PBXGroup;
+            children = (
+                BF7894001FA4518200DA1667 /* CameraViewController.swift */,
+                BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */,
+                BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */,
+                BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */,
+                588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */,
+            );
+            path = Camera;
+            sourceTree = "<group>";
+        };
+        C8B155BF22F4DE7D186C083D /* Pods */ = {
+            isa = PBXGroup;
+            children = (
+                C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */,
+                934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */,
+                EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */,
+                7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */,
+                9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */,
+                B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */,
+            );
+            name = Pods;
+            sourceTree = "<group>";
+        };
+        D17C6477152A12102B087091 /* Frameworks */ = {
+            isa = PBXGroup;
+            children = (
+                3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */,
+                B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */,
+                C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */,
+            );
+            name = Frameworks;
+            sourceTree = "<group>";
+        };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5877CF831F9D82BF0022B51E /* DietLens */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5877CFAF1F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLens" */;
-			buildPhases = (
-				5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */,
-				5877CF801F9D82BF0022B51E /* Sources */,
-				5877CF811F9D82BF0022B51E /* Frameworks */,
-				5877CF821F9D82BF0022B51E /* Resources */,
-				297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
-				D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */,
-				BF8441171FA435B200D5018F /* ShellScript */,
-				3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = DietLens;
-			productName = DietLens;
-			productReference = 5877CF841F9D82BF0022B51E /* DietLens.app */;
-			productType = "com.apple.product-type.application";
-		};
-		5877CF9A1F9D82BF0022B51E /* DietLensTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5877CFB21F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensTests" */;
-			buildPhases = (
-				A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */,
-				5877CF971F9D82BF0022B51E /* Sources */,
-				5877CF981F9D82BF0022B51E /* Frameworks */,
-				5877CF991F9D82BF0022B51E /* Resources */,
-				7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */,
-				9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5877CF9D1F9D82BF0022B51E /* PBXTargetDependency */,
-			);
-			name = DietLensTests;
-			productName = DietLensTests;
-			productReference = 5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5877CFA51F9D82BF0022B51E /* DietLensUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5877CFB51F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensUITests" */;
-			buildPhases = (
-				D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */,
-				5877CFA21F9D82BF0022B51E /* Sources */,
-				5877CFA31F9D82BF0022B51E /* Frameworks */,
-				5877CFA41F9D82BF0022B51E /* Resources */,
-				0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */,
-				F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5877CFA81F9D82BF0022B51E /* PBXTargetDependency */,
-			);
-			name = DietLensUITests;
-			productName = DietLensUITests;
-			productReference = 5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
+        5877CF831F9D82BF0022B51E /* DietLens */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = 5877CFAF1F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLens" */;
+            buildPhases = (
+                5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */,
+                5877CF801F9D82BF0022B51E /* Sources */,
+                5877CF811F9D82BF0022B51E /* Frameworks */,
+                5877CF821F9D82BF0022B51E /* Resources */,
+                297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
+                D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */,
+                BF8441171FA435B200D5018F /* ShellScript */,
+                3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */,
+            );
+            buildRules = (
+            );
+            dependencies = (
+            );
+            name = DietLens;
+            productName = DietLens;
+            productReference = 5877CF841F9D82BF0022B51E /* DietLens.app */;
+            productType = "com.apple.product-type.application";
+        };
+        5877CF9A1F9D82BF0022B51E /* DietLensTests */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = 5877CFB21F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensTests" */;
+            buildPhases = (
+                A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */,
+                5877CF971F9D82BF0022B51E /* Sources */,
+                5877CF981F9D82BF0022B51E /* Frameworks */,
+                5877CF991F9D82BF0022B51E /* Resources */,
+                7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */,
+                9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */,
+            );
+            buildRules = (
+            );
+            dependencies = (
+                5877CF9D1F9D82BF0022B51E /* PBXTargetDependency */,
+            );
+            name = DietLensTests;
+            productName = DietLensTests;
+            productReference = 5877CF9B1F9D82BF0022B51E /* DietLensTests.xctest */;
+            productType = "com.apple.product-type.bundle.unit-test";
+        };
+        5877CFA51F9D82BF0022B51E /* DietLensUITests */ = {
+            isa = PBXNativeTarget;
+            buildConfigurationList = 5877CFB51F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensUITests" */;
+            buildPhases = (
+                D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */,
+                5877CFA21F9D82BF0022B51E /* Sources */,
+                5877CFA31F9D82BF0022B51E /* Frameworks */,
+                5877CFA41F9D82BF0022B51E /* Resources */,
+                0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */,
+                F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */,
+            );
+            buildRules = (
+            );
+            dependencies = (
+                5877CFA81F9D82BF0022B51E /* PBXTargetDependency */,
+            );
+            name = DietLensUITests;
+            productName = DietLensUITests;
+            productReference = 5877CFA61F9D82BF0022B51E /* DietLensUITests.xctest */;
+            productType = "com.apple.product-type.bundle.ui-testing";
+        };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5877CF7C1F9D82BF0022B51E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "NExT++";
-				TargetAttributes = {
-					5877CF831F9D82BF0022B51E = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-					};
-					5877CF9A1F9D82BF0022B51E = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 5877CF831F9D82BF0022B51E;
-					};
-					5877CFA51F9D82BF0022B51E = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 5877CF831F9D82BF0022B51E;
-					};
-				};
-			};
-			buildConfigurationList = 5877CF7F1F9D82BF0022B51E /* Build configuration list for PBXProject "DietLens" */;
-			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = en;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-				Base,
-			);
-			mainGroup = 5877CF7B1F9D82BF0022B51E;
-			productRefGroup = 5877CF851F9D82BF0022B51E /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				5877CF831F9D82BF0022B51E /* DietLens */,
-				5877CF9A1F9D82BF0022B51E /* DietLensTests */,
-				5877CFA51F9D82BF0022B51E /* DietLensUITests */,
-			);
-		};
+        5877CF7C1F9D82BF0022B51E /* Project object */ = {
+            isa = PBXProject;
+            attributes = {
+                LastSwiftUpdateCheck = 0900;
+                LastUpgradeCheck = 0900;
+                ORGANIZATIONNAME = "NExT++";
+                TargetAttributes = {
+                    5877CF831F9D82BF0022B51E = {
+                        CreatedOnToolsVersion = 9.0;
+                        ProvisioningStyle = Automatic;
+                    };
+                    5877CF9A1F9D82BF0022B51E = {
+                        CreatedOnToolsVersion = 9.0;
+                        ProvisioningStyle = Automatic;
+                        TestTargetID = 5877CF831F9D82BF0022B51E;
+                    };
+                    5877CFA51F9D82BF0022B51E = {
+                        CreatedOnToolsVersion = 9.0;
+                        ProvisioningStyle = Automatic;
+                        TestTargetID = 5877CF831F9D82BF0022B51E;
+                    };
+                };
+            };
+            buildConfigurationList = 5877CF7F1F9D82BF0022B51E /* Build configuration list for PBXProject "DietLens" */;
+            compatibilityVersion = "Xcode 8.0";
+            developmentRegion = en;
+            hasScannedForEncodings = 0;
+            knownRegions = (
+                en,
+                Base,
+            );
+            mainGroup = 5877CF7B1F9D82BF0022B51E;
+            productRefGroup = 5877CF851F9D82BF0022B51E /* Products */;
+            projectDirPath = "";
+            projectRoot = "";
+            targets = (
+                5877CF831F9D82BF0022B51E /* DietLens */,
+                5877CF9A1F9D82BF0022B51E /* DietLensTests */,
+                5877CFA51F9D82BF0022B51E /* DietLensUITests */,
+            );
+        };
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5877CF821F9D82BF0022B51E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */,
-				BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */,
-				5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */,
-				5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */,
-				58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */,
-				5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5877CF991F9D82BF0022B51E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5877CFA41F9D82BF0022B51E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+        5877CF821F9D82BF0022B51E /* Resources */ = {
+            isa = PBXResourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */,
+                BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */,
+                5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */,
+                5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */,
+                58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */,
+                5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        5877CF991F9D82BF0022B51E /* Resources */ = {
+            isa = PBXResourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        5877CFA41F9D82BF0022B51E /* Resources */ = {
+            isa = PBXResourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
-				"${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DietLens-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DietLensTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BF8441171FA435B200D5018F /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"";
-		};
-		D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DietLensUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
+        0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+            );
+            name = "[CP] Embed Pods Frameworks";
+            outputPaths = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-frameworks.sh\"\n";
+            showEnvVarsInLog = 0;
+        };
+        297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+                "${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh",
+                "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+                "${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+                "${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+                "${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
+                "${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
+                "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+                "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+                "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+                "${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+                "${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+                "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+                "${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+            );
+            name = "[CP] Embed Pods Frameworks";
+            outputPaths = (
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+                "${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh\"\n";
+            showEnvVarsInLog = 0;
+        };
+        5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+                "${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+                "${PODS_ROOT}/Manifest.lock",
+            );
+            name = "[CP] Check Pods Manifest.lock";
+            outputPaths = (
+                "$(DERIVED_FILE_DIR)/Pods-DietLens-checkManifestLockResult.txt",
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+            showEnvVarsInLog = 0;
+        };
+        7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+            );
+            name = "[CP] Embed Pods Frameworks";
+            outputPaths = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-frameworks.sh\"\n";
+            showEnvVarsInLog = 0;
+        };
+        9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+            );
+            name = "[CP] Copy Pods Resources";
+            outputPaths = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-resources.sh\"\n";
+            showEnvVarsInLog = 0;
+        };
+        A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+                "${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+                "${PODS_ROOT}/Manifest.lock",
+            );
+            name = "[CP] Check Pods Manifest.lock";
+            outputPaths = (
+                "$(DERIVED_FILE_DIR)/Pods-DietLensTests-checkManifestLockResult.txt",
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+            showEnvVarsInLog = 0;
+        };
+        BF8441171FA435B200D5018F /* ShellScript */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+            );
+            outputPaths = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+        };
+        D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+            );
+            name = "[CP] Copy Pods Resources";
+            outputPaths = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh\"\n";
+            showEnvVarsInLog = 0;
+        };
+        D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+                "${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+                "${PODS_ROOT}/Manifest.lock",
+            );
+            name = "[CP] Check Pods Manifest.lock";
+            outputPaths = (
+                "$(DERIVED_FILE_DIR)/Pods-DietLensUITests-checkManifestLockResult.txt",
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+            showEnvVarsInLog = 0;
+        };
+        F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */ = {
+            isa = PBXShellScriptBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+            );
+            inputPaths = (
+            );
+            name = "[CP] Copy Pods Resources";
+            outputPaths = (
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+            shellPath = /bin/sh;
+            shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-resources.sh\"\n";
+            showEnvVarsInLog = 0;
+        };
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5877CF801F9D82BF0022B51E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */,
-				587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */,
-				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
-				3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */,
-				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
-				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
-				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
-				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
-				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
-				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
-				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
-				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
-				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
-				3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */,
-				581809B21FA877D700373763 /* SideMenuCell.swift in Sources */,
-				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
-				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
-				3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */,
-				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
-				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
-				588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */,
-				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
-				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
-				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
-				3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */,
-				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
-				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
-				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
-				58410CAE1FCE8C5400CF4958 /* SingleNotificationViewController.swift in Sources */,
-				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
-				BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
-				BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,
-				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
-				5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,
-				5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */,
-				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
-				3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */,
-				3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
-				581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
-				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
-				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
-				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
-				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
-				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
-				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
-				58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */,
-				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
-				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
-				3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */,
-				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
-				3FFB569A1FB334C0002DCE15 /* FoodInformation.swift in Sources */,
-				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
-				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
-				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
-				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
-				5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,
-				5841A5071FCE5939006201C5 /* Notification.swift in Sources */,
-				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
-				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
-				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5877CF971F9D82BF0022B51E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5877CFA21F9D82BF0022B51E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+        5877CF801F9D82BF0022B51E /* Sources */ = {
+            isa = PBXSourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */,
+                587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */,
+                58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
+                3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */,
+                BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
+                BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
+                581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
+                580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
+                58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
+                5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
+                BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
+                58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
+                58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
+                3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */,
+                581809B21FA877D700373763 /* SideMenuCell.swift in Sources */,
+                5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
+                58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
+                3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */,
+                58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
+                580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
+                588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */,
+                580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
+                58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
+                5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
+                3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */,
+                BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
+                58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
+                58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
+                58410CAE1FCE8C5400CF4958 /* SingleNotificationViewController.swift in Sources */,
+                58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
+                BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
+                BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,
+                58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
+                5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,
+                5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */,
+                58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
+                3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */,
+                3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
+                581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
+                58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
+                58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
+                3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
+                58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
+                BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
+                3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
+                58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */,
+                58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
+                3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
+                3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */,
+                3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
+                3FFB569A1FB334C0002DCE15 /* FoodInformation.swift in Sources */,
+                5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
+                5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
+                BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
+                58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+                5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,
+                5841A5071FCE5939006201C5 /* Notification.swift in Sources */,
+                587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
+                58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
+                585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        5877CF971F9D82BF0022B51E /* Sources */ = {
+            isa = PBXSourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
+        5877CFA21F9D82BF0022B51E /* Sources */ = {
+            isa = PBXSourcesBuildPhase;
+            buildActionMask = 2147483647;
+            files = (
+                5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */,
+            );
+            runOnlyForDeploymentPostprocessing = 0;
+        };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5877CF9D1F9D82BF0022B51E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5877CF831F9D82BF0022B51E /* DietLens */;
-			targetProxy = 5877CF9C1F9D82BF0022B51E /* PBXContainerItemProxy */;
-		};
-		5877CFA81F9D82BF0022B51E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5877CF831F9D82BF0022B51E /* DietLens */;
-			targetProxy = 5877CFA71F9D82BF0022B51E /* PBXContainerItemProxy */;
-		};
+        5877CF9D1F9D82BF0022B51E /* PBXTargetDependency */ = {
+            isa = PBXTargetDependency;
+            target = 5877CF831F9D82BF0022B51E /* DietLens */;
+            targetProxy = 5877CF9C1F9D82BF0022B51E /* PBXContainerItemProxy */;
+        };
+        5877CFA81F9D82BF0022B51E /* PBXTargetDependency */ = {
+            isa = PBXTargetDependency;
+            target = 5877CF831F9D82BF0022B51E /* DietLens */;
+            targetProxy = 5877CFA71F9D82BF0022B51E /* PBXContainerItemProxy */;
+        };
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5877CF8B1F9D82BF0022B51E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5877CF8C1F9D82BF0022B51E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5877CF941F9D82BF0022B51E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
+        5877CF8B1F9D82BF0022B51E /* Main.storyboard */ = {
+            isa = PBXVariantGroup;
+            children = (
+                5877CF8C1F9D82BF0022B51E /* Base */,
+            );
+            name = Main.storyboard;
+            sourceTree = "<group>";
+        };
+        5877CF931F9D82BF0022B51E /* LaunchScreen.storyboard */ = {
+            isa = PBXVariantGroup;
+            children = (
+                5877CF941F9D82BF0022B51E /* Base */,
+            );
+            name = LaunchScreen.storyboard;
+            sourceTree = "<group>";
+        };
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5877CFAD1F9D82BF0022B51E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		5877CFAE1F9D82BF0022B51E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		5877CFB01F9D82BF0022B51E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BCQF4SHM2R;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = DietLens/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "DietLens/Supporting Files/FSCalendar-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		5877CFB11F9D82BF0022B51E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BCQF4SHM2R;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = DietLens/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "DietLens/Supporting Files/FSCalendar-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		5877CFB31F9D82BF0022B51E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DietLensTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietLens.app/DietLens";
-			};
-			name = Debug;
-		};
-		5877CFB41F9D82BF0022B51E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DietLensTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietLens.app/DietLens";
-			};
-			name = Release;
-		};
-		5877CFB61F9D82BF0022B51E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DietLensUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DietLens;
-			};
-			name = Debug;
-		};
-		5877CFB71F9D82BF0022B51E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DietLensUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = DietLens;
-			};
-			name = Release;
-		};
+        5877CFAD1F9D82BF0022B51E /* Debug */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                ALWAYS_SEARCH_USER_PATHS = NO;
+                CLANG_ANALYZER_NONNULL = YES;
+                CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+                CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+                CLANG_CXX_LIBRARY = "libc++";
+                CLANG_ENABLE_MODULES = YES;
+                CLANG_ENABLE_OBJC_ARC = YES;
+                CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+                CLANG_WARN_BOOL_CONVERSION = YES;
+                CLANG_WARN_COMMA = YES;
+                CLANG_WARN_CONSTANT_CONVERSION = YES;
+                CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+                CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+                CLANG_WARN_EMPTY_BODY = YES;
+                CLANG_WARN_ENUM_CONVERSION = YES;
+                CLANG_WARN_INFINITE_RECURSION = YES;
+                CLANG_WARN_INT_CONVERSION = YES;
+                CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+                CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+                CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+                CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+                CLANG_WARN_STRICT_PROTOTYPES = YES;
+                CLANG_WARN_SUSPICIOUS_MOVE = YES;
+                CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+                CLANG_WARN_UNREACHABLE_CODE = YES;
+                CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+                CODE_SIGN_IDENTITY = "iPhone Developer";
+                COPY_PHASE_STRIP = NO;
+                DEBUG_INFORMATION_FORMAT = dwarf;
+                ENABLE_STRICT_OBJC_MSGSEND = YES;
+                ENABLE_TESTABILITY = YES;
+                GCC_C_LANGUAGE_STANDARD = gnu11;
+                GCC_DYNAMIC_NO_PIC = NO;
+                GCC_NO_COMMON_BLOCKS = YES;
+                GCC_OPTIMIZATION_LEVEL = 0;
+                GCC_PREPROCESSOR_DEFINITIONS = (
+                    "DEBUG=1",
+                    "$(inherited)",
+                );
+                GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+                GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+                GCC_WARN_UNDECLARED_SELECTOR = YES;
+                GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+                GCC_WARN_UNUSED_FUNCTION = YES;
+                GCC_WARN_UNUSED_VARIABLE = YES;
+                IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+                MTL_ENABLE_DEBUG_INFO = YES;
+                ONLY_ACTIVE_ARCH = YES;
+                SDKROOT = iphoneos;
+                SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+                SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+            };
+            name = Debug;
+        };
+        5877CFAE1F9D82BF0022B51E /* Release */ = {
+            isa = XCBuildConfiguration;
+            buildSettings = {
+                ALWAYS_SEARCH_USER_PATHS = NO;
+                CLANG_ANALYZER_NONNULL = YES;
+                CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+                CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+                CLANG_CXX_LIBRARY = "libc++";
+                CLANG_ENABLE_MODULES = YES;
+                CLANG_ENABLE_OBJC_ARC = YES;
+                CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+                CLANG_WARN_BOOL_CONVERSION = YES;
+                CLANG_WARN_COMMA = YES;
+                CLANG_WARN_CONSTANT_CONVERSION = YES;
+                CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+                CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+                CLANG_WARN_EMPTY_BODY = YES;
+                CLANG_WARN_ENUM_CONVERSION = YES;
+                CLANG_WARN_INFINITE_RECURSION = YES;
+                CLANG_WARN_INT_CONVERSION = YES;
+                CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+                CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+                CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+                CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+                CLANG_WARN_STRICT_PROTOTYPES = YES;
+                CLANG_WARN_SUSPICIOUS_MOVE = YES;
+                CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+                CLANG_WARN_UNREACHABLE_CODE = YES;
+                CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+                CODE_SIGN_IDENTITY = "iPhone Developer";
+                COPY_PHASE_STRIP = NO;
+                DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+                ENABLE_NS_ASSERTIONS = NO;
+                ENABLE_STRICT_OBJC_MSGSEND = YES;
+                GCC_C_LANGUAGE_STANDARD = gnu11;
+                GCC_NO_COMMON_BLOCKS = YES;
+                GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+                GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+                GCC_WARN_UNDECLARED_SELECTOR = YES;
+                GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+                GCC_WARN_UNUSED_FUNCTION = YES;
+                GCC_WARN_UNUSED_VARIABLE = YES;
+                IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+                MTL_ENABLE_DEBUG_INFO = NO;
+                SDKROOT = iphoneos;
+                SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+                VALIDATE_PRODUCT = YES;
+            };
+            name = Release;
+        };
+        5877CFB01F9D82BF0022B51E /* Debug */ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */;
+            buildSettings = {
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+                CODE_SIGN_STYLE = Automatic;
+                DEVELOPMENT_TEAM = BCQF4SHM2R;
+                FRAMEWORK_SEARCH_PATHS = (
+                    "$(inherited)",
+                    "$(PROJECT_DIR)",
+                );
+                INFOPLIST_FILE = DietLens/Info.plist;
+                IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                PROVISIONING_PROFILE_SPECIFIER = "";
+                SWIFT_OBJC_BRIDGING_HEADER = "DietLens/Supporting Files/FSCalendar-Bridging-Header.h";
+                SWIFT_VERSION = 4.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+            };
+            name = Debug;
+        };
+        5877CFB11F9D82BF0022B51E /* Release */ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = 934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */;
+            buildSettings = {
+                ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+                "CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+                CODE_SIGN_STYLE = Automatic;
+                DEVELOPMENT_TEAM = BCQF4SHM2R;
+                FRAMEWORK_SEARCH_PATHS = (
+                    "$(inherited)",
+                    "$(PROJECT_DIR)",
+                );
+                INFOPLIST_FILE = DietLens/Info.plist;
+                IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLens;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                PROVISIONING_PROFILE_SPECIFIER = "";
+                SWIFT_OBJC_BRIDGING_HEADER = "DietLens/Supporting Files/FSCalendar-Bridging-Header.h";
+                SWIFT_VERSION = 4.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+            };
+            name = Release;
+        };
+        5877CFB31F9D82BF0022B51E /* Debug */ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */;
+            buildSettings = {
+                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                CODE_SIGN_STYLE = Automatic;
+                INFOPLIST_FILE = DietLensTests/Info.plist;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 4.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietLens.app/DietLens";
+            };
+            name = Debug;
+        };
+        5877CFB41F9D82BF0022B51E /* Release */ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = 7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */;
+            buildSettings = {
+                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+                BUNDLE_LOADER = "$(TEST_HOST)";
+                CODE_SIGN_STYLE = Automatic;
+                INFOPLIST_FILE = DietLensTests/Info.plist;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensTests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 4.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietLens.app/DietLens";
+            };
+            name = Release;
+        };
+        5877CFB61F9D82BF0022B51E /* Debug */ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = 9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */;
+            buildSettings = {
+                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+                CODE_SIGN_STYLE = Automatic;
+                INFOPLIST_FILE = DietLensUITests/Info.plist;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensUITests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 4.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_TARGET_NAME = DietLens;
+            };
+            name = Debug;
+        };
+        5877CFB71F9D82BF0022B51E /* Release */ = {
+            isa = XCBuildConfiguration;
+            baseConfigurationReference = B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */;
+            buildSettings = {
+                ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+                CODE_SIGN_STYLE = Automatic;
+                INFOPLIST_FILE = DietLensUITests/Info.plist;
+                LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+                PRODUCT_BUNDLE_IDENTIFIER = com.next.wellness.DietLensUITests;
+                PRODUCT_NAME = "$(TARGET_NAME)";
+                SWIFT_VERSION = 4.0;
+                TARGETED_DEVICE_FAMILY = "1,2";
+                TEST_TARGET_NAME = DietLens;
+            };
+            name = Release;
+        };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5877CF7F1F9D82BF0022B51E /* Build configuration list for PBXProject "DietLens" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5877CFAD1F9D82BF0022B51E /* Debug */,
-				5877CFAE1F9D82BF0022B51E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5877CFAF1F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLens" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5877CFB01F9D82BF0022B51E /* Debug */,
-				5877CFB11F9D82BF0022B51E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5877CFB21F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5877CFB31F9D82BF0022B51E /* Debug */,
-				5877CFB41F9D82BF0022B51E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5877CFB51F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5877CFB61F9D82BF0022B51E /* Debug */,
-				5877CFB71F9D82BF0022B51E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
+        5877CF7F1F9D82BF0022B51E /* Build configuration list for PBXProject "DietLens" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                5877CFAD1F9D82BF0022B51E /* Debug */,
+                5877CFAE1F9D82BF0022B51E /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        5877CFAF1F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLens" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                5877CFB01F9D82BF0022B51E /* Debug */,
+                5877CFB11F9D82BF0022B51E /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        5877CFB21F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensTests" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                5877CFB31F9D82BF0022B51E /* Debug */,
+                5877CFB41F9D82BF0022B51E /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
+        5877CFB51F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensUITests" */ = {
+            isa = XCConfigurationList;
+            buildConfigurations = (
+                5877CFB61F9D82BF0022B51E /* Debug */,
+                5877CFB71F9D82BF0022B51E /* Release */,
+            );
+            defaultConfigurationIsVisible = 0;
+            defaultConfigurationName = Release;
+        };
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */,
-			);
-			currentVersion = 5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */;
-			path = DietLens.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
+        5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */ = {
+            isa = XCVersionGroup;
+            children = (
+                5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */,
+            );
+            currentVersion = 5877CF8F1F9D82BF0022B51E /* DietLens.xcdatamodel */;
+            path = DietLens.xcdatamodeld;
+            sourceTree = "<group>";
+            versionGroupType = wrapper.xcdatamodel;
+        };
 /* End XCVersionGroup section */
-	};
-	rootObject = 5877CF7C1F9D82BF0022B51E /* Project object */;
+    };
+    rootObject = 5877CF7C1F9D82BF0022B51E /* Project object */;
 }
