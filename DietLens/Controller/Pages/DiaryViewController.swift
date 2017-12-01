@@ -192,6 +192,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         UIView.animate(withDuration: 0.3) {
             self.closeCalButton.alpha = 0.7
             self.diaryCalendar.alpha = 1
+            self.emptyDiaryIcon.alpha = 0.3
+            self.emptyDiaryHelperText.alpha = 0.3
         }
     }
     @IBAction func dismissCalendar(_ sender: Any) {
@@ -201,6 +203,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.view.layoutIfNeeded()
             self.closeCalButton.alpha = 0
             self.diaryCalendar.alpha = 0
+            self.emptyDiaryIcon.alpha = 1
+            self.emptyDiaryHelperText.alpha = 1
         }
     }
 
@@ -247,11 +251,11 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         if foodDiaryList.count == 0 {
-            emptyDiaryHelperText.alpha = 0
-            emptyDiaryIcon.alpha = 0
-        } else {
             emptyDiaryHelperText.alpha = 1
             emptyDiaryIcon.alpha = 1
+        } else {
+            emptyDiaryHelperText.alpha = 0
+            emptyDiaryIcon.alpha = 0
         }
         mealsConsumed.append(breakfastEntity)
         mealsConsumed.append(lunchEntity)

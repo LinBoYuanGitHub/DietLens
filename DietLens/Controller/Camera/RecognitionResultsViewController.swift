@@ -13,7 +13,6 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var foodSelectionView: UIView!
     @IBOutlet weak var optionListTable: UITableView!
-    @IBOutlet weak var mealOfDay: UISegmentedControl!
     @IBOutlet weak var caloriePercentage: UILabel!
     @IBOutlet weak var foodName: UITextField!
 

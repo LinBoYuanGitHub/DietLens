@@ -20,10 +20,6 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         articleTable.estimatedRowHeight = 90
         articleTable.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
-
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
         let alertController = UIAlertController(title: nil, message: "Loading...\n\n", preferredStyle: UIAlertControllerStyle.alert)
         let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
@@ -40,6 +36,11 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.articleDatamanager.articleList = articleList!
             self.articleTable?.reloadData()
         })
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+
     }
 
     override func didReceiveMemoryWarning() {
