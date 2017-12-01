@@ -11,12 +11,17 @@ import UIKit
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var notificationTable: UITableView!
+
+    @IBOutlet weak var emptyViewIcon: UIImageView!
+    @IBOutlet weak var emptyViewLabel: UILabel!
+
     var listOfNotifications = [NotificationModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
         notificationTable.delegate = self
         notificationTable.dataSource = self
         sampleData()
+        checkEmpty()
         // Do any additional setup after loading the view.
     }
 
@@ -53,6 +58,16 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     @IBAction func clearNotificationPressed(_ sender: Any) {
         print("clear notifications!")
+    }
+
+    func checkEmpty() {
+        if listOfNotifications.count == 0 {
+            emptyViewIcon.alpha = 1
+            emptyViewLabel.alpha = 1
+        } else {
+            emptyViewIcon.alpha = 0
+            emptyViewLabel.alpha = 0
+        }
     }
 
     func sampleData() {

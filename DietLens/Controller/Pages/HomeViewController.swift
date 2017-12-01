@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var proteinProgressBar: HomeProgressView!
     @IBOutlet weak var carbohydrateProgressBar: HomeProgressView!
 
+    @IBOutlet weak var headerView: UIView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -59,6 +60,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         UIView.animate(withDuration: 1.8, delay: 1.2, options: .curveLinear, animations: { self.fatsProgressBar.setProgress(0.9, animated: true) }, completion: nil)
         UIView.animate(withDuration: 1.6, delay: 1.2, options: .curveLinear, animations: { self.proteinProgressBar.setProgress(0.7, animated: true) }, completion: nil)
         UIView.animate(withDuration: 1.7, delay: 1.2, options: .curveLinear, animations: { self.carbohydrateProgressBar.setProgress(0.8, animated: true) }, completion: nil)
+        newsFeedTable.tableHeaderView = headerView
     }
 
     override func viewDidAppear(_ animated: Bool) {
