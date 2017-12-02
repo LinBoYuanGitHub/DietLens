@@ -61,6 +61,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         UIView.animate(withDuration: 1.7, delay: 1.2, options: .curveLinear, animations: { self.carbohydrateProgressBar.setProgress(0.8, animated: true) }, completion: nil)
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +18,40 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="rX2-aj-FbI">
+                                <rect key="frame" x="50" y="244.5" width="275" height="228"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rX2-aj-FbI" secondAttribute="height" multiplier="339:282" id="3Iu-lB-wWh"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashDietLensFont" translatesAutoresizingMaskIntoConstraints="NO" id="fmx-rG-1i0">
+                                <rect key="frame" x="80" y="118.5" width="215" height="60.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fmx-rG-1i0" secondAttribute="height" multiplier="32:9" id="wwl-k0-2Uj"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashCopyright" translatesAutoresizingMaskIntoConstraints="NO" id="Ogu-aO-Djj">
+                                <rect key="frame" x="120" y="539" width="135" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ogu-aO-Djj" secondAttribute="height" multiplier="215:89" id="eq7-J5-vIU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rX2-aj-FbI" firstAttribute="top" secondItem="fmx-rG-1i0" secondAttribute="bottom" constant="65.5" id="1XQ-G3-9A0"/>
+                            <constraint firstItem="Ogu-aO-Djj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="120" id="BZz-0G-WYl"/>
+                            <constraint firstItem="Ogu-aO-Djj" firstAttribute="top" secondItem="rX2-aj-FbI" secondAttribute="bottom" constant="66.5" id="CFQ-DD-fkF"/>
+                            <constraint firstItem="Ogu-aO-Djj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KrY-R2-4Yf"/>
+                            <constraint firstItem="fmx-rG-1i0" firstAttribute="centerX" secondItem="rX2-aj-FbI" secondAttribute="centerX" id="MlC-cZ-3Zv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rX2-aj-FbI" secondAttribute="trailing" constant="50" id="fSX-Qv-lc4"/>
+                            <constraint firstItem="fmx-rG-1i0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="r0l-5o-T4P"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ogu-aO-Djj" secondAttribute="trailing" constant="120" id="t0U-hd-Xtt"/>
+                            <constraint firstItem="rX2-aj-FbI" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="25" id="uYw-nv-Eoi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fmx-rG-1i0" secondAttribute="trailing" constant="80" id="wP1-Px-vhU"/>
+                            <constraint firstItem="rX2-aj-FbI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="xSe-aU-9IA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -26,4 +60,9 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SplashCopyright" width="163" height="36"/>
+        <image name="SplashDietLensFont" width="214" height="59"/>
+        <image name="splash" width="244" height="212"/>
+    </resources>
 </document>

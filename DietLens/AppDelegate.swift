@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController)
 //        self.window?.rootViewController = slideMenuController
 //        self.window?.makeKeyAndVisible()
+        //UIApplication.shared.statusBarView?.backgroundColor = UIColor.clear
         return true
     }
 
