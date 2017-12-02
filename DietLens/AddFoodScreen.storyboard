@@ -666,6 +666,8 @@
                         <outlet property="foodImage" destination="aZb-Q8-bF0" id="36e-Oc-sjg"/>
                         <outlet property="foodName" destination="PEi-Ez-2Qa" id="Od9-JD-EIK"/>
                         <outlet property="foodNameOptionTable" destination="1Om-Yc-TbQ" id="FiC-gw-pba"/>
+                        <outlet property="ingredientStack" destination="qZW-cN-Sob" id="REI-fg-6g7"/>
+                        <outlet property="portionStack" destination="Pwh-eu-TCh" id="6fc-sC-CtE"/>
                         <outlet property="selectDishView" destination="v8t-lR-uHp" id="oUd-TY-Niq"/>
                     </connections>
                 </viewController>
@@ -1128,7 +1130,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Akh-0Q-ozU"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="4DE-L4-shl"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="search_icon"/>
@@ -1137,7 +1139,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=compact-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
@@ -1147,13 +1149,6 @@
                                     <action selector="textFieldTouched:" destination="xEF-Sa-l1r" eventType="touchDown" id="jgh-V2-Gjo"/>
                                 </connections>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WH3-Nd-PTi">
-                                <rect key="frame" x="20" y="100" width="335" height="0.0"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="d3t-NY-fja"/>
-                                </constraints>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD HISTORY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xm-42-mjM">
                                 <rect key="frame" x="20" y="120" width="128" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -1194,25 +1189,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="X9Q-zp-lO0" firstAttribute="trailing" secondItem="KCL-uq-Rnr" secondAttribute="trailing" id="3hF-2p-zr9"/>
-                            <constraint firstItem="WH3-Nd-PTi" firstAttribute="leading" secondItem="KCL-uq-Rnr" secondAttribute="leading" id="6Cj-yh-rTF"/>
                             <constraint firstItem="KCL-uq-Rnr" firstAttribute="top" secondItem="nGo-c8-EwY" secondAttribute="top" constant="30" id="8Gm-Y1-ZvT"/>
                             <constraint firstItem="nGo-c8-EwY" firstAttribute="trailing" secondItem="KCL-uq-Rnr" secondAttribute="trailing" constant="20" id="DTv-qI-O1X"/>
                             <constraint firstItem="nGo-c8-EwY" firstAttribute="bottom" secondItem="X9Q-zp-lO0" secondAttribute="bottom" id="EZw-4T-woD"/>
                             <constraint firstItem="4Xm-42-mjM" firstAttribute="leading" secondItem="KCL-uq-Rnr" secondAttribute="leading" id="Me8-vc-Gj9"/>
                             <constraint firstItem="4Xm-42-mjM" firstAttribute="top" secondItem="KCL-uq-Rnr" secondAttribute="bottom" constant="25" id="bdg-L9-vLS"/>
-                            <constraint firstItem="WH3-Nd-PTi" firstAttribute="trailing" secondItem="KCL-uq-Rnr" secondAttribute="trailing" id="fCi-8j-WaA"/>
                             <constraint firstItem="KCL-uq-Rnr" firstAttribute="leading" secondItem="nGo-c8-EwY" secondAttribute="leading" constant="20" id="gIQ-YZ-zcH"/>
                             <constraint firstItem="X9Q-zp-lO0" firstAttribute="leading" secondItem="KCL-uq-Rnr" secondAttribute="leading" id="gcZ-pw-cQL"/>
                             <constraint firstItem="X9Q-zp-lO0" firstAttribute="centerX" secondItem="KCL-uq-Rnr" secondAttribute="centerX" id="jrN-jn-Crs"/>
-                            <constraint firstItem="KCL-uq-Rnr" firstAttribute="bottom" secondItem="WH3-Nd-PTi" secondAttribute="top" constant="-5" id="jtX-cB-FEQ"/>
                             <constraint firstItem="X9Q-zp-lO0" firstAttribute="top" secondItem="4Xm-42-mjM" secondAttribute="bottom" constant="15" id="tEn-xP-Fgq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nGo-c8-EwY"/>
                     </view>
                     <connections>
                         <outlet property="addHistoryTable" destination="X9Q-zp-lO0" id="kty-8K-CwZ"/>
-                        <outlet property="suggestionHeightConstraint" destination="d3t-NY-fja" id="7Iz-F8-kM4"/>
-                        <outlet property="suggestionTableView" destination="WH3-Nd-PTi" id="d1j-6d-5un"/>
                         <outlet property="textField" destination="KCL-uq-Rnr" id="ERd-dy-ebU"/>
                         <segue destination="2Qm-pN-qyc" kind="show" identifier="searchFood" id="XcK-zc-uIx"/>
                     </connections>
@@ -1235,7 +1225,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="oUk-ou-Pus"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="Back Arrow"/>

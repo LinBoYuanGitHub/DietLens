@@ -22,6 +22,8 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var TFfoodPercentage: UITextField!
     @IBOutlet weak var TFmealType: UITextField!
 
+    @IBOutlet weak var portionStack: UIStackView!
+    @IBOutlet weak var ingredientStack: UIStackView!
     var itemPicker: UIPickerView!
     var pickerStatus: String = "" //pickPortion, pickMeal
     var percentagePickerData = ["25%", "50%", "75%", "100%", "150%", "200%", "300%", "400%"]
@@ -164,6 +166,8 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         setFoodInfoIntoDiary(foodInfo: results![indexPath.row])
         //set click action on foodName,mealType,eaten percentage
         recordType = "recognition"
+        portionStack.isHidden = false
+        ingredientStack.isHidden = true
         foodName.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
         TFmealType.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
         TFfoodPercentage.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
@@ -236,8 +240,11 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     @IBAction func optionNotInList(_ sender: Any) {
         UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
             self.selectDishView.alpha = 0
+            self.foodName.text = ""
         }, completion: nil)
         recordType = "customized"
+        portionStack.isHidden = true
+        ingredientStack.isHidden = false
     }
 
     @IBAction func changeButtonPressed(_ sender: Any) {

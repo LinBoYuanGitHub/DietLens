@@ -14,7 +14,7 @@ class MainSlideMenuViewController: PBRevealViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.leftViewRevealWidth = 250.0
-        self.leftViewBlurEffectStyle = .none
+        self.leftViewBlurEffectStyle = .dark
     }
 
     override func didReceiveMemoryWarning() {
