@@ -162,12 +162,13 @@ class APIService {
                 completion(nil)
                     return
                 }
-                guard let detail = response.result.value as? JSON else {
+                guard let detail = response.result.value else {
                     print("Get food detail failed due to : Server Data Type Error")
                     completion(nil)
                     return
                 }
-                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: detail)
+                let jsonObj = JSON(detail)
+                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObj)
                 completion(foodInfo)
         }
     }

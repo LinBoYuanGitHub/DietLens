@@ -271,7 +271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-656.52173913043487" y="-630.16304347826087"/>
+            <point key="canvasLocation" x="214" y="-631"/>
         </scene>
         <!--Recognition Results View Controller-->
         <scene sceneID="Vgt-d1-9Hz">
@@ -519,6 +519,44 @@
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Qa-T4-Jod" id="rGO-3N-eMP">
                                                             <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pDc-Ne-dpW">
+                                                                    <rect key="frame" x="0.0" y="10" width="335" height="43.5"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WAd-ht-H4g">
+                                                                            <rect key="frame" x="0.0" y="12" width="20" height="20"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="20" id="FOE-el-pZN"/>
+                                                                                <constraint firstAttribute="height" constant="20" id="SxT-hQ-WLp"/>
+                                                                            </constraints>
+                                                                            <state key="normal" image="Unselected"/>
+                                                                        </button>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lh6-1y-fmp">
+                                                                            <rect key="frame" x="20" y="11.5" width="310" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray_dot" translatesAutoresizingMaskIntoConstraints="NO" id="1dg-0G-VsZ">
+                                                                            <rect key="frame" x="330" y="19.5" width="5" height="5"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="5" id="3qj-Zr-4uP"/>
+                                                                                <constraint firstAttribute="width" constant="5" id="67M-Ur-k8l"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="1dg-0G-VsZ" secondAttribute="trailing" id="Llr-Oq-18N"/>
+                                                                        <constraint firstItem="WAd-ht-H4g" firstAttribute="leading" secondItem="pDc-Ne-dpW" secondAttribute="leading" id="Tbp-2e-AXO"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="pDc-Ne-dpW" firstAttribute="width" secondItem="rGO-3N-eMP" secondAttribute="width" id="4g7-in-hfw"/>
+                                                                <constraint firstItem="pDc-Ne-dpW" firstAttribute="top" secondItem="rGO-3N-eMP" secondAttribute="top" constant="10" id="Q3C-gh-xdS"/>
+                                                                <constraint firstItem="pDc-Ne-dpW" firstAttribute="height" secondItem="rGO-3N-eMP" secondAttribute="height" id="Xps-6g-yel"/>
+                                                                <constraint firstItem="pDc-Ne-dpW" firstAttribute="centerX" secondItem="rGO-3N-eMP" secondAttribute="centerX" id="vmA-sy-AHF"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -667,13 +705,14 @@
                         <outlet property="foodName" destination="PEi-Ez-2Qa" id="Od9-JD-EIK"/>
                         <outlet property="foodNameOptionTable" destination="1Om-Yc-TbQ" id="FiC-gw-pba"/>
                         <outlet property="ingredientStack" destination="qZW-cN-Sob" id="REI-fg-6g7"/>
+                        <outlet property="ingredientTable" destination="MsO-R0-jmU" id="QoK-Wx-2Hk"/>
                         <outlet property="portionStack" destination="Pwh-eu-TCh" id="6fc-sC-CtE"/>
                         <outlet property="selectDishView" destination="v8t-lR-uHp" id="oUd-TY-Niq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hUf-Hu-Jua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="213.59999999999999" y="-631.0344827586207"/>
+            <point key="canvasLocation" x="1121" y="-631"/>
         </scene>
         <!--Add Food View Controller-->
         <scene sceneID="fco-qt-tUB">
@@ -736,7 +775,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oxc-XU-u1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-658.39999999999998" y="-1318.2908545727137"/>
+            <point key="canvasLocation" x="-658" y="-631"/>
         </scene>
         <!--Recognition Results View Controller-->
         <scene sceneID="Wgk-V1-s0U">
@@ -999,7 +1038,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L8D-kw-rUw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="81" y="82"/>
+            <point key="canvasLocation" x="1122" y="-1318"/>
         </scene>
         <!--Food Diary History View Controller-->
         <scene sceneID="Tr0-kv-dx0">
@@ -1113,7 +1152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J96-7q-a5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025" y="-607"/>
+            <point key="canvasLocation" x="1946" y="-1318"/>
         </scene>
         <!--Text Input View Controller-->
         <scene sceneID="Wal-Dc-u1g">
@@ -1209,7 +1248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQo-rX-2DC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1039.2" y="103.89805097451276"/>
+            <point key="canvasLocation" x="-657" y="163"/>
         </scene>
         <!--Text Search View Controller-->
         <scene sceneID="2O3-Wp-ouM">
@@ -1280,11 +1319,12 @@
                     <connections>
                         <outlet property="TFSearch" destination="nct-UC-OMV" id="5Fu-f4-HJ5"/>
                         <outlet property="suggestionTableView" destination="dSN-Pe-zuN" id="4wX-FA-fUF"/>
+                        <segue destination="6Wa-xI-B06" kind="showDetail" identifier="showTextDetail" id="sLK-wE-Cs6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7L-sE-zTm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1848.8" y="103.89805097451276"/>
+            <point key="canvasLocation" x="214" y="162"/>
         </scene>
     </scenes>
     <resources>
@@ -1292,6 +1332,7 @@
         <image name="Unselected" width="15" height="15"/>
         <image name="capture" width="99" height="99"/>
         <image name="cross" width="20" height="20"/>
+        <image name="gray_dot" width="6" height="6"/>
         <image name="imageView:33n-zZ-8yu:image" width="6" height="6">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
@@ -1349,5 +1390,8 @@ A
         <image name="red_tick" width="66" height="66"/>
         <image name="search_icon" width="17" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="sLK-wE-Cs6"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

@@ -18,6 +18,7 @@ class TextSearchViewController: UIViewController {
     private var suggestionCellIdentifier = "suggestionFoodTableViewCell"
 
     private var lastSearchTime = Date()
+    var foodResults = [FoodInfomation]()
 
     override func viewDidLoad() {
         let button = UIButton(type: .custom)
@@ -67,6 +68,17 @@ extension TextSearchViewController: UITextFieldDelegate {
 
 extension TextSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //perform search
+        APIService.instance.getFoodSearchDetailResult(foodId: suggestions[indexPath.row].id) { (foodInformation) in
+
+            if foodInformation == nil {
+                //TODO show error message
+                return
+            }
+            self.foodResults.removeAll()
+            self.foodResults.append(foodInformation!)
+            self.performSegue(withIdentifier: "showTextDetail", sender: self)
+        }
 
     }
 
@@ -75,7 +87,7 @@ extension TextSearchViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 50
+        return 50
     }
 
 }
@@ -97,5 +109,17 @@ extension TextSearchViewController: UITableViewDataSource {
         cell.imageView?.image = #imageLiteral(resourceName: "search_icon")
         cell.textLabel?.text = suggestions[indexPath.row].name
         return cell
+    }
+}
+
+extension TextSearchViewController {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? RecognitionResultsViewController {
+            dest.recordType = "text"
+            dest.results = foodResults
+            dest.dateTime = Date()
+            dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
+        }
     }
 }

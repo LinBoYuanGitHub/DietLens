@@ -24,6 +24,8 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     @IBOutlet weak var portionStack: UIStackView!
     @IBOutlet weak var ingredientStack: UIStackView!
+
+    @IBOutlet weak var ingredientTable: UITableView!
     var itemPicker: UIPickerView!
     var pickerStatus: String = "" //pickPortion, pickMeal
     var percentagePickerData = ["25%", "50%", "75%", "100%", "150%", "200%", "300%", "400%"]
@@ -51,9 +53,16 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         }
         foodImage.contentMode = .scaleAspectFill
         // Do any additional setup after loading the view.
-         setUpPickerView()
-        self.TFfoodPercentage.inputView = itemPicker
-        self.TFmealType.inputView = itemPicker
+        setUpInputView()
+        setUpPickerView()
+        TFmealType.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
+        TFmealType.inputView = itemPicker
+        TFfoodPercentage.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
+        TFfoodPercentage.inputView = itemPicker
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+
     }
 
     func setUpPickerView() {
@@ -61,6 +70,44 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         itemPicker.dataSource = self
         itemPicker.delegate = self
     }
+
+    func setUpInputView() {
+        if recordType == "recognition"{
+            selectDishView.alpha = 1
+            if results == nil || results?.count == 0 {
+                results = [FoodInfomation]()
+                var f1 = FoodInfomation()
+                f1.foodName = "laksa"
+                results!.append(f1)
+                f1.foodName = "mee goreng"
+                results!.append(f1)
+                f1.foodName = "laksa goreng"
+                results!.append(f1)
+                f1.foodName = "nasi goreng"
+                results!.append(f1)
+                f1.foodName = "beehoon goreng"
+                results!.append(f1)
+                f1.foodName = "kway tiao goreng"
+                results!.append(f1)
+            } else {
+                setFoodInfoIntoDiary(foodInfo: results![0])
+                foodCalorie.text = String(results![0].calorie) + " kcal"
+            }
+        } else if recordType == "barcode"{
+            selectDishView.alpha = 0
+            ingredientStack.isHidden = true
+            foodName.text = results![0].foodName
+            foodCalorie.text = String(results![0].calorie) + " kcal"
+            setFoodInfoIntoDiary(foodInfo: results![0])
+        } else if recordType == "text" {
+            selectDishView.alpha = 0
+            ingredientStack.isHidden = true
+            foodName.text = results![0].foodName
+            foodCalorie.text = String(results![0].calorie) + " kcal"
+            setFoodInfoIntoDiary(foodInfo: results![0])
+        }
+    }
+
     // The number of columns of data
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -91,36 +138,6 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
             TFfoodPercentage.text = percentagePickerData[row]
         } else if pickerStatus == "pickMeal"{
             TFmealType.text = mealPickerData[row]
-        }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        if recordType == "recognition"{
-            selectDishView.alpha = 1
-            if results == nil || results?.count == 0 {
-                results = [FoodInfomation]()
-                var f1 = FoodInfomation()
-                f1.foodName = "laksa"
-                results!.append(f1)
-                f1.foodName = "mee goreng"
-                results!.append(f1)
-                f1.foodName = "laksa goreng"
-                results!.append(f1)
-                f1.foodName = "nasi goreng"
-                results!.append(f1)
-                f1.foodName = "beehoon goreng"
-                results!.append(f1)
-                f1.foodName = "kway tiao goreng"
-                results!.append(f1)
-            } else {
-                setFoodInfoIntoDiary(foodInfo: results![0])
-                foodCalorie.text = String(results![0].calorie) + " kcal"
-            }
-        } else if recordType == "barcode"{
-            selectDishView.alpha = 0
-            foodName.text = results![0].foodName
-            foodCalorie.text = String(results![0].calorie) + " kcal"
-            setFoodInfoIntoDiary(foodInfo: results![0])
         }
     }
 

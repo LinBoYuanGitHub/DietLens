@@ -355,6 +355,7 @@ extension CameraViewController {
         if let dest = segue.destination as? RecognitionResultsViewController {
             dest.results = foodResults
             dest.dateTime = Date()
+            dest.recordType = self.recordType
             if recordType == "recognition" {
                 dest.userFoodImage = chosenImageView.image!
             } else if recordType == "barcode" {
