@@ -224,12 +224,17 @@ extension CameraSessionManager {
 
                 if isSessionRunning && wSelf.captureMode == .photo {
                     DispatchQueue.main.async {
-                        wSelf.viewControllerDelegate.onSwitchTo(captureMode: .photo)
+                        if wSelf.viewControllerDelegate != nil {
+                            wSelf.viewControllerDelegate.onSwitchTo(captureMode: .photo)
+                        }
+
                     }
                 }
                 if isSessionRunning && wSelf.captureMode == .barcode {
                     DispatchQueue.main.async {
-                        wSelf.viewControllerDelegate.onSwitchTo(captureMode: .barcode)
+                        if wSelf.viewControllerDelegate != nil {
+                            wSelf.viewControllerDelegate.onSwitchTo(captureMode: .barcode)
+                        }
                     }
                 }
             }

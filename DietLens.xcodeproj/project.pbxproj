@@ -10,6 +10,7 @@
 		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
 		3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */; };
 		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
+		3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */; };
 		3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
@@ -120,6 +121,7 @@
 		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHistoryViewController.swift; sourceTree = "<group>"; };
 		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageMapper.swift; sourceTree = "<group>"; };
 		3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewController.swift; sourceTree = "<group>"; };
 		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
 		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
@@ -235,6 +237,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F6CF8221FD5197A00D7556E /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Adapter;
+			sourceTree = "<group>";
+		};
 		580443611FB0176700D59DFF /* Pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +417,7 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3F6CF8221FD5197A00D7556E /* Adapter */,
 				BF6EF2F21FC31C0300420B2B /* TextInput */,
 				58199C871FB1D63A003F6104 /* Delegate */,
 				BF794BB01FA46D7100D30550 /* Camera */,
@@ -440,6 +450,7 @@
 			children = (
 				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
 				3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */,
+				3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */,
 			);
 			path = TextInput;
 			sourceTree = "<group>";
@@ -832,6 +843,7 @@
 				3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */,
 				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
+				3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */,
 				588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */,
 				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,

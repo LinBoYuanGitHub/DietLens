@@ -37,6 +37,31 @@ class TextSearchViewController: UIViewController {
         suggestionTableView.dataSource = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        //regist notification
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+    }
+
+    //adjust tableview height to just above the keyboard
+    @objc func keyboardWasShown (notification: NSNotification) {
+        let info: NSDictionary = notification.userInfo! as NSDictionary
+        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
+        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        var contentInsets: UIEdgeInsets
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+        } else {
+            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+        }
+        suggestionTableView.contentInset = contentInsets
+        suggestionTableView.scrollIndicatorInsets = suggestionTableView.contentInset
+    }
+
+    @objc func keyboardWillBeHidden () {
+        suggestionTableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+
     @IBAction func textFieldChanged(_ sender: UITextField) {
         //load suggestion from net, set time
         if Double(Date().timeIntervalSince(lastSearchTime)) > 0.75 {
@@ -119,7 +144,7 @@ extension TextSearchViewController {
             dest.recordType = "text"
             dest.results = foodResults
             dest.dateTime = Date()
-            dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
+            dest.userFoodImage = SampleImageMapper.instance.getFoodSampleImage(foodCategory: foodResults[0].category)
         }
     }
 }

@@ -21,7 +21,7 @@ class FoodInfoDataManager {
             var foodInfo = FoodInfomation()
             foodInfo.foodId = jsonObject["food_id"].stringValue
             foodInfo.foodName = jsonObject["food_name"].stringValue
-            if(foodInfo.foodName == "Non-food") {
+            if foodInfo.foodName == "Non-food" {
                 foodInfo.calorie = 0.0
                 foodInfo.carbohydrate = "0.0"
                 foodInfo.protein = "0.0"
@@ -46,6 +46,7 @@ class FoodInfoDataManager {
         foodInfo.carbohydrate = jsonObject["carbohydrate"].stringValue
         foodInfo.protein = jsonObject["protein"].stringValue
         foodInfo.fat = jsonObject["fat"].stringValue
+        foodInfo.category = jsonObject["category"].stringValue
         return foodInfo
     }
 }

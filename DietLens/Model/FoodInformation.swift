@@ -16,6 +16,7 @@ struct FoodInfomation {
     public var protein: String = ""
     public var fat: String = ""
     public var calorie: Float = 0.0
+    public var category: String = ""
 
     init() {
 

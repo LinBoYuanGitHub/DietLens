@@ -57,10 +57,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.proteinProgressBar.progress = 0.01
         self.carbohydrateProgressBar.progress = 0.01
         // Do any additional setup after loading the view.
-        UIView.animate(withDuration: 1.8, delay: 1.2, options: .curveLinear, animations: { self.fatsProgressBar.setProgress(0.9, animated: true) }, completion: nil)
-        UIView.animate(withDuration: 1.6, delay: 1.2, options: .curveLinear, animations: { self.proteinProgressBar.setProgress(0.7, animated: true) }, completion: nil)
-        UIView.animate(withDuration: 1.7, delay: 1.2, options: .curveLinear, animations: { self.carbohydrateProgressBar.setProgress(0.8, animated: true) }, completion: nil)
         newsFeedTable.tableHeaderView = headerView
+
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -68,7 +66,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        getDailyAccumulateCPF()
+    }
 
+    func getDailyAccumulateCPF() {
+        var foodDiaryList = [FoodDiary]()
+        let diaryFormatter = DateFormatter()
+        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
+        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: Date()) )!
+        var dailyCarb: Float = 0
+        var dailyProtein: Float = 0
+        var dailyFat: Float = 0
+        for foodDiary in foodDiaryList {
+            dailyCarb += (foodDiary.carbohydrate as NSString).floatValue //standard 300
+            dailyProtein += (foodDiary.protein as NSString).floatValue //standard 100
+            dailyFat += (foodDiary.fat as NSString).floatValue //standard 100
+        }
+        UIView.animate(withDuration: 1.8, delay: 1.2, options: .curveEaseIn, animations: { self.fatsProgressBar.setProgress(dailyFat/100, animated: true) }, completion: nil)
+        UIView.animate(withDuration: 1.6, delay: 1.2, options: .curveEaseIn, animations: { self.proteinProgressBar.setProgress(dailyProtein/100, animated: true) }, completion: nil)
+        UIView.animate(withDuration: 1.7, delay: 1.2, options: .curveEaseIn, animations: { self.carbohydrateProgressBar.setProgress(dailyCarb/300, animated: true) }, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
