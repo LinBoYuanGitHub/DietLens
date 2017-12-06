@@ -571,10 +571,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8t-lR-uHp" userLabel="FoodSelect">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgX-Vy-n5R">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5q-OY-lVb">
+                                        <rect key="frame" x="-0.5" y="0.0" width="375" height="667"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WaV-xN-yng">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5Z-kq-Xhw">
                                         <rect key="frame" x="38" y="80" width="300" height="507"/>
                                         <subviews>
@@ -666,15 +671,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="b5q-OY-lVb" firstAttribute="height" secondItem="v8t-lR-uHp" secondAttribute="height" id="CNZ-mR-Q0N"/>
+                                    <constraint firstItem="b5q-OY-lVb" firstAttribute="top" secondItem="v8t-lR-uHp" secondAttribute="top" id="GHC-ke-FvN"/>
                                     <constraint firstItem="o5Z-kq-Xhw" firstAttribute="centerX" secondItem="v8t-lR-uHp" secondAttribute="centerX" id="Gnp-U7-rPw"/>
                                     <constraint firstItem="o5Z-kq-Xhw" firstAttribute="top" secondItem="v8t-lR-uHp" secondAttribute="top" constant="80" id="HKk-xo-Kfw"/>
-                                    <constraint firstItem="xgX-Vy-n5R" firstAttribute="top" secondItem="v8t-lR-uHp" secondAttribute="top" id="Kk0-Bb-gA5"/>
-                                    <constraint firstItem="xgX-Vy-n5R" firstAttribute="height" secondItem="v8t-lR-uHp" secondAttribute="height" id="LIH-Ws-l9a"/>
-                                    <constraint firstItem="xgX-Vy-n5R" firstAttribute="width" secondItem="v8t-lR-uHp" secondAttribute="width" id="Qvw-73-cXY"/>
+                                    <constraint firstItem="b5q-OY-lVb" firstAttribute="width" secondItem="v8t-lR-uHp" secondAttribute="width" id="HPx-r5-LlM"/>
                                     <constraint firstAttribute="bottom" secondItem="o5Z-kq-Xhw" secondAttribute="bottom" constant="80" id="V4t-KU-GMt"/>
-                                    <constraint firstAttribute="bottom" secondItem="xgX-Vy-n5R" secondAttribute="bottom" id="kNT-sL-FRa"/>
-                                    <constraint firstAttribute="trailing" secondItem="xgX-Vy-n5R" secondAttribute="trailing" id="p0u-oG-eOA"/>
-                                    <constraint firstItem="xgX-Vy-n5R" firstAttribute="leading" secondItem="v8t-lR-uHp" secondAttribute="leading" id="t4Q-ZK-UHx"/>
+                                    <constraint firstItem="b5q-OY-lVb" firstAttribute="centerX" secondItem="v8t-lR-uHp" secondAttribute="centerX" id="aJJ-7Q-RVa"/>
                                 </constraints>
                             </view>
                         </subviews>

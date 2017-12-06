@@ -98,12 +98,14 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
             ingredientStack.isHidden = true
             foodName.text = results![0].foodName
             foodCalorie.text = String(results![0].calorie) + " kcal"
+            caloriePercentage.text = "\(Int(results![0].calorie/20))% of your daily calorie intake"
             setFoodInfoIntoDiary(foodInfo: results![0])
         } else if recordType == "text" {
             selectDishView.alpha = 0
             ingredientStack.isHidden = true
             foodName.text = results![0].foodName
             foodCalorie.text = String(results![0].calorie) + " kcal"
+            caloriePercentage.text = "\(Int(results![0].calorie/20))% of your daily calorie intake"
             setFoodInfoIntoDiary(foodInfo: results![0])
         }
     }
@@ -126,8 +128,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerStatus == "pickPortion"{
+//            foodDiary.portionSize = Double(percentagePickerData[row].replacingOccurrences(of: "%", with: ""))!
             return percentagePickerData[row]
         } else if pickerStatus == "pickMeal"{
+            foodDiary.mealType = mealPickerData[row]
             return mealPickerData[row]
         }
         return ""
@@ -180,6 +184,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 //        foodName.isUserInteractionEnabled = false
         foodName.text = results![indexPath.row].foodName
         foodCalorie.text = String(results![indexPath.row].calorie) + " kcal"
+        caloriePercentage.text = "\(Int(results![indexPath.row].calorie/20))% of your daily calorie intake"
         setFoodInfoIntoDiary(foodInfo: results![indexPath.row])
         //set click action on foodName,mealType,eaten percentage
         recordType = "recognition"
@@ -262,6 +267,9 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         recordType = "customized"
         portionStack.isHidden = true
         ingredientStack.isHidden = false
+        //change the reminder
+        foodCalorie.text = "Oops"
+        caloriePercentage.text = "looks like you have eaten something special"
     }
 
     @IBAction func changeButtonPressed(_ sender: Any) {

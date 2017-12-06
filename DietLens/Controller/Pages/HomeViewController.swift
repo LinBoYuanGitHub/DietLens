@@ -19,6 +19,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     public let articleDatamanager = ArticleDataManager.instance
     var whichArticleIndex = 0
 
+    @IBOutlet weak var fatLabel: UILabel!
+    @IBOutlet weak var proteinLabel: UILabel!
+    @IBOutlet weak var carboLabel: UILabel!
+
     @IBOutlet weak var headerView: UIView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -85,9 +89,35 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             dailyProtein += (foodDiary.protein as NSString).floatValue //standard 100
             dailyFat += (foodDiary.fat as NSString).floatValue //standard 100
         }
-        UIView.animate(withDuration: 1.8, delay: 1.2, options: .curveEaseIn, animations: { self.fatsProgressBar.setProgress(dailyFat/100, animated: true) }, completion: nil)
-        UIView.animate(withDuration: 1.6, delay: 1.2, options: .curveEaseIn, animations: { self.proteinProgressBar.setProgress(dailyProtein/100, animated: true) }, completion: nil)
-        UIView.animate(withDuration: 1.7, delay: 1.2, options: .curveEaseIn, animations: { self.carbohydrateProgressBar.setProgress(dailyCarb/300, animated: true) }, completion: nil)
+        UIView.animate(withDuration: 1.8, delay: 1.2, options: .curveEaseIn, animations: {
+            if dailyFat > 100 {
+                self.fatsProgressBar.setProgress(1, animated: true)
+                self.fatLabel.textColor = UIColor.red
+            } else {
+                 self.fatsProgressBar.setProgress(dailyFat/100, animated: true)
+            }
+            self.fatLabel.text = "\(Int(dailyFat))g of 100g"
+        }, completion: nil)
+
+        UIView.animate(withDuration: 1.6, delay: 1.2, options: .curveEaseIn, animations: {
+            if dailyProtein > 100 {
+                self.proteinProgressBar.setProgress(1, animated: true)
+                self.proteinLabel.textColor = UIColor.red
+            } else {
+                 self.proteinProgressBar.setProgress(dailyProtein/100, animated: true)
+            }
+            self.proteinLabel.text = "\(Int(dailyProtein))g of 100g"
+        }, completion: nil)
+
+        UIView.animate(withDuration: 1.7, delay: 1.2, options: .curveEaseIn, animations: {
+        if dailyCarb > 300 {
+            self.carbohydrateProgressBar.setProgress(1, animated: true)
+            self.carboLabel.textColor = UIColor.red
+        } else {
+            self.carbohydrateProgressBar.setProgress(dailyCarb/300, animated: true)
+        }
+        self.carboLabel.text = "\(Int(dailyCarb))g of 300g"
+        }, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -16,9 +16,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: Scanning barcodes
 
     @IBOutlet weak var barcodeButton: UIButton!
-
     @IBOutlet weak var reviewImagePalette: UIView!
-
     @IBOutlet weak var chosenImageView: UIImageView!
 
     private let sessionManager = CameraSessionManager()
