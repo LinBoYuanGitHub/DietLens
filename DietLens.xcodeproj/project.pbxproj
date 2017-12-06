@@ -54,6 +54,7 @@
 		587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */; };
 		588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */; };
 		5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */; };
+		589424B01FD7B1B1009AEA4C /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589424AF1FD7B1B1009AEA4C /* SplashScreenViewController.swift */; };
 		58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */; };
 		58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
 		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
@@ -169,6 +170,7 @@
 		587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
 		588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultsViewController.swift; sourceTree = "<group>"; };
 		5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		589424AF1FD7B1B1009AEA4C /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDatePicker.swift; sourceTree = "<group>"; };
 		58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				3F1B628D1FC66D56006A38FE /* WebViewController.swift */,
 				58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */,
 				58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */,
+				589424AF1FD7B1B1009AEA4C /* SplashScreenViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -841,6 +844,7 @@
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */,
+				589424B01FD7B1B1009AEA4C /* SplashScreenViewController.swift in Sources */,
 				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
 				3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */,

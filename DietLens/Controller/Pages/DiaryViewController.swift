@@ -325,6 +325,10 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         return nil
     }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        return #colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)
+    }
 
 }
 
