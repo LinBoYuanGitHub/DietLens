@@ -212,8 +212,14 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         UIView.animate(withDuration: 0.3) {
             self.closeCalButton.alpha = 0.7
             self.diaryCalendar.alpha = 1
-            self.emptyDiaryIcon.alpha = 0.3
-            self.emptyDiaryHelperText.alpha = 0.3
+            if self.foodDiaryList.count == 0 {
+                self.emptyDiaryIcon.alpha = 0.3
+                self.emptyDiaryHelperText.alpha = 0.3
+            } else {
+                self.emptyDiaryIcon.alpha = 0
+                self.emptyDiaryHelperText.alpha = 0
+            }
+
         }
     }
     @IBAction func dismissCalendar(_ sender: Any) {
@@ -223,9 +229,12 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.view.layoutIfNeeded()
             self.closeCalButton.alpha = 0
             self.diaryCalendar.alpha = 0
-            if(self.foodDiaryList.count == 0) {
+            if self.foodDiaryList.count == 0 {
                 self.emptyDiaryIcon.alpha = 1
                 self.emptyDiaryHelperText.alpha = 1
+            } else {
+                self.emptyDiaryIcon.alpha = 0
+                self.emptyDiaryHelperText.alpha = 0
             }
         }
     }
