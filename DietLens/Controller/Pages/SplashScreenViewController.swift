@@ -17,7 +17,7 @@ class SplashScreenViewController: UIViewController {
         APIService.instance.getArticleList { (articleList) in
             if articleList != nil {
                 self.articleDatamanager.articleList = articleList!
-                self.performSegue(withIdentifier: "toMainPage", sender: nil)
+                self.performSegue(withIdentifier: "toMainPage", sender: self)
             }
         }
 

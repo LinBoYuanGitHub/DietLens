@@ -32,6 +32,7 @@
 		580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443661FB0189E00D59DFF /* SettingViewController.swift */; };
 		580443691FB0233900D59DFF /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443681FB0233900D59DFF /* AboutViewController.swift */; };
 		5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
+		5804F4D51FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804F4D41FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift */; };
 		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
 		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
 		5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856591FB6DB15004BEBB3 /* ArticleViewController.swift */; };
@@ -141,6 +142,7 @@
 		580443661FB0189E00D59DFF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		580443681FB0233900D59DFF /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
+		5804F4D41FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCollectionCellDelegate.swift; sourceTree = "<group>"; };
 		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		581856591FB6DB15004BEBB3 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */,
+				5804F4D41FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				5804F4D51FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift in Sources */,
 				5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,
 				5841A5071FCE5939006201C5 /* Notification.swift in Sources */,
 				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,

@@ -177,7 +177,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="60" y="87" width="255.5" height="60"/>
+                                <rect key="frame" x="60.5" y="87" width="255.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -1008,6 +1008,7 @@ Click add to record food~</string>
                         <outlet property="newsFeedTable" destination="Hye-DC-9gR" id="QSh-Ai-khZ"/>
                         <outlet property="proteinProgressBar" destination="GKI-ny-vXC" id="aej-sS-yno"/>
                         <outlet property="sideMenuButton" destination="Ehb-RR-J6W" id="Tkh-x5-npH"/>
+                        <segue destination="q2f-f7-UZG" kind="presentation" identifier="presentArticlePage" id="NAD-8N-HRw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEa-8m-P7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2278,5 +2279,6 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gFb-lA-J3h"/>
+        <segue reference="NAD-8N-HRw"/>
     </inferredMetricsTieBreakers>
 </document>

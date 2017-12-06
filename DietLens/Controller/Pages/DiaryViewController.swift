@@ -126,6 +126,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        for i in 0..<4 {
 //            datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
 //        }
+
+        diaryCalendar.appearance.headerTitleColor = #colorLiteral(red: 0.2319577109, green: 0.2320933503, blue: 0.2404021281, alpha: 1)
     }
 
     func loadDaysRecordedFromDiary(date: Date) {
@@ -325,9 +327,9 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         return nil
     }
-    
+
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
-        return #colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)
+        return [#colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)]
     }
 
 }
