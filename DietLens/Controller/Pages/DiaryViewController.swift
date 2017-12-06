@@ -31,6 +31,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var totalRows: Int = 0
      //tableview cell cache
     let imageCache = NSCache<NSString, AnyObject>()
+    var selectedFoodDiary: FoodDiary?
+    var selectedImage: UIImage?
 
     var datesWithEvent = [Date]()
 
@@ -85,6 +87,24 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //to foodDiary detail page
+        if indexLookup[indexPath.item] == -1 {
+            //to add food&date
+            return
+        }
+        selectedFoodDiary = foodDiaryList[indexLookup[indexPath.item]]
+        selectedImage = (tableView.cellForRow(at: indexPath) as? FoodDiaryCell)?.foodImage.image
+        performSegue(withIdentifier: "toDetailDiaryPage", sender: self)
+    }
+
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? FoodDiaryHistoryViewController {
+            dest.foodDiary = selectedFoodDiary!
+            dest.diaryImage = selectedImage
+        }
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
@@ -203,8 +223,10 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.view.layoutIfNeeded()
             self.closeCalButton.alpha = 0
             self.diaryCalendar.alpha = 0
-            self.emptyDiaryIcon.alpha = 1
-            self.emptyDiaryHelperText.alpha = 1
+            if(self.foodDiaryList.count == 0) {
+                self.emptyDiaryIcon.alpha = 1
+                self.emptyDiaryHelperText.alpha = 1
+            }
         }
     }
 

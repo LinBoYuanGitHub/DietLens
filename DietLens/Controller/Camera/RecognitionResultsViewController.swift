@@ -126,8 +126,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerStatus == "pickPortion"{
+//            foodDiary.portionSize = Double(percentagePickerData[row].replacingOccurrences(of: "%", with: ""))!
             return percentagePickerData[row]
         } else if pickerStatus == "pickMeal"{
+            foodDiary.mealType = mealPickerData[row]
             return mealPickerData[row]
         }
         return ""
