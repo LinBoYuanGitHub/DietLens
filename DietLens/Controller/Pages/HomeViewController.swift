@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var fatsProgressBar: HomeProgressView!
     @IBOutlet weak var proteinProgressBar: HomeProgressView!
     @IBOutlet weak var carbohydrateProgressBar: HomeProgressView!
+    public let articleDatamanager = ArticleDataManager.instance
 
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
@@ -29,6 +30,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedRow") as? NewsFeedCell {
+                cell.setupNewsArticleRow(articles: articleDatamanager.articleList)
                 cell.selectionStyle = .none
                 return cell
             }

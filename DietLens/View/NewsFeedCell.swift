@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var newsArticleRow: UICollectionView!
 
+    var listOfArticles = [Article]()
     override func awakeFromNib() {
         super.awakeFromNib()
         newsArticleRow.dataSource = self
@@ -30,10 +32,18 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsArticleCell {
+            cell.newsTitle.text = listOfArticles[indexPath.row].articleTitle
+            cell.newsImage.image = #imageLiteral(resourceName: "loading_img")
+            cell.newsImage.af_setImage(withURL: URL(string: listOfArticles[indexPath.row].articleImageURL)!)
+
             return cell
         } else {
             return NewsArticleCell()
         }
+    }
+
+    func setupNewsArticleRow(articles: [Article]) {
+        listOfArticles = articles
     }
 
 }

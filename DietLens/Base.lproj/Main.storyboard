@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pgj-0E-wfv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ole-YA-gKG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-546.39999999999998" y="-54.422788605697157"/>
+            <point key="canvasLocation" x="-970" y="-441"/>
         </scene>
         <!--SideMenu-->
         <scene sceneID="qHJ-gG-5TX">
@@ -1243,8 +1243,8 @@ Click add to record food~</string>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a really long text to test multi-line labels and useful to see if the label field can contain that many text" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPt-iD-XO9">
                                                                         <rect key="frame" x="20" y="133" width="239" height="61"/>
-                                                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="13"/>
-                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                                                        <color key="textColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -2583,6 +2583,57 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
             </objects>
             <point key="canvasLocation" x="3957.5999999999999" y="-372.86356821589209"/>
         </scene>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="pgM-U6-dEN">
+            <objects>
+                <viewController id="Ole-YA-gKG" customClass="SplashScreenViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nrT-3c-0bO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="ls2-W5-mXf">
+                                <rect key="frame" x="50" y="244.5" width="275" height="228"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ls2-W5-mXf" secondAttribute="height" multiplier="339:282" id="vl9-XM-1u8"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashDietLensFont" translatesAutoresizingMaskIntoConstraints="NO" id="Zoc-ab-enb">
+                                <rect key="frame" x="80" y="118.5" width="215" height="60.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Zoc-ab-enb" secondAttribute="height" multiplier="32:9" id="NLi-aR-eHY"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashCopyright" translatesAutoresizingMaskIntoConstraints="NO" id="Aia-yC-6PN">
+                                <rect key="frame" x="120" y="539" width="135" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Aia-yC-6PN" secondAttribute="height" multiplier="215:89" id="Jzx-tI-6Hw"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="7Cu-GJ-Ozw" firstAttribute="trailing" secondItem="Aia-yC-6PN" secondAttribute="trailing" constant="120" id="02m-d9-qMZ"/>
+                            <constraint firstItem="Aia-yC-6PN" firstAttribute="leading" secondItem="7Cu-GJ-Ozw" secondAttribute="leading" constant="120" id="3jl-rg-A0K"/>
+                            <constraint firstItem="ls2-W5-mXf" firstAttribute="centerY" secondItem="nrT-3c-0bO" secondAttribute="centerY" constant="25" id="BVb-mv-PaT"/>
+                            <constraint firstItem="Aia-yC-6PN" firstAttribute="top" secondItem="ls2-W5-mXf" secondAttribute="bottom" constant="66.5" id="BZX-xl-O81"/>
+                            <constraint firstItem="ls2-W5-mXf" firstAttribute="top" secondItem="Zoc-ab-enb" secondAttribute="bottom" constant="65.5" id="E5G-Py-YEM"/>
+                            <constraint firstItem="Aia-yC-6PN" firstAttribute="centerX" secondItem="nrT-3c-0bO" secondAttribute="centerX" id="H49-M5-4qt"/>
+                            <constraint firstItem="7Cu-GJ-Ozw" firstAttribute="trailing" secondItem="ls2-W5-mXf" secondAttribute="trailing" constant="50" id="PNO-6V-Qi4"/>
+                            <constraint firstItem="Zoc-ab-enb" firstAttribute="leading" secondItem="7Cu-GJ-Ozw" secondAttribute="leading" constant="80" id="S5f-93-E5A"/>
+                            <constraint firstItem="7Cu-GJ-Ozw" firstAttribute="trailing" secondItem="Zoc-ab-enb" secondAttribute="trailing" constant="80" id="T0O-00-rDi"/>
+                            <constraint firstItem="ls2-W5-mXf" firstAttribute="leading" secondItem="7Cu-GJ-Ozw" secondAttribute="leading" constant="50" id="e0q-ch-Ay1"/>
+                            <constraint firstItem="Zoc-ab-enb" firstAttribute="centerX" secondItem="ls2-W5-mXf" secondAttribute="centerX" id="z2h-gh-tc3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7Cu-GJ-Ozw"/>
+                    </view>
+                    <connections>
+                        <segue destination="Pgj-0E-wfv" kind="showDetail" identifier="toMainPage" action="showViewController:sender:" id="gFb-lA-J3h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xeO-12-eMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-537" y="351"/>
+        </scene>
     </scenes>
     <resources>
         <image name=" " width="16" height="16"/>
@@ -2656,7 +2707,11 @@ A
         <image name="kid" width="167" height="68"/>
         <image name="laksa" width="355" height="270"/>
         <image name="loading_img" width="510" height="406"/>
+        <image name="splash" width="244" height="212"/>
         <image name="twitter" width="50" height="50"/>
         <image name="wechat" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="gFb-lA-J3h"/>
+    </inferredMetricsTieBreakers>
 </document>
