@@ -108,7 +108,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        print("Checking for date: \(date)")
         for dateWithEvent in datesWithEvent {
             if Calendar.current.isDate(date, inSameDayAs: dateWithEvent) {
                 return 1
@@ -144,21 +143,24 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Adding random date as events
 
         loadDaysRecordedFromDiary(date: Date())
-        for i in 0..<4 {
-            datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
-        }
+//        for i in 0..<4 {
+//            datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
+//        }
     }
 
     func loadDaysRecordedFromDiary(date: Date) {
         let diaryDateFormatter = DateFormatter()
         diaryDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMM")
         let dateString: String = diaryDateFormatter.string(from: date)
-        //print(dateString[...4])
-        print("\(String(dateString[..<3]))|\(String(dateString[4...]))")
         if let allFoodInMonth = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(dateString[4...]), month: String(dateString[..<3])) {
+            var uniqueDates = Set<Date>()
+            let dateFormatterDB = DateFormatter()
+            dateFormatterDB.dateFormat = "dd MMM y"
             for var food in allFoodInMonth {
-                print(food.mealTime)
+                //print(food.mealTime)
+                uniqueDates.insert(dateFormatterDB.date(from: food.mealTime) ?? Date())
             }
+            datesWithEvent = uniqueDates.sorted()
         }
 
     }
@@ -331,6 +333,28 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
         m1.mealOfDay = .dinner
         mealsConsumed.append(m1)
+    }
+
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
+        return #colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)
+    }
+
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        if Calendar.current.isDate(Date(), inSameDayAs: date) {
+            return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        }
+        return nil
+    }
+
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        return #colorLiteral(red: 0.2319577109, green: 0.2320933503, blue: 0.2404021281, alpha: 1)
+    }
+
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, borderDefaultColorFor date: Date) -> UIColor? {
+        if Calendar.current.isDate(Date(), inSameDayAs: date) {
+            return #colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)
+        }
+        return nil
     }
 
 }
