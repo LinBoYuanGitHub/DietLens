@@ -9,7 +9,7 @@
 import UIKit
 import PBRevealViewController
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ArticleCollectionCellDelegate {
 
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
     @IBOutlet weak var newsFeedTable: UITableView!
@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var proteinProgressBar: HomeProgressView!
     @IBOutlet weak var carbohydrateProgressBar: HomeProgressView!
     public let articleDatamanager = ArticleDataManager.instance
+    var whichArticleIndex = 0
 
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
@@ -30,7 +31,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedRow") as? NewsFeedCell {
-                cell.setupNewsArticleRow(articles: articleDatamanager.articleList)
+                cell.setupNewsArticleRow(articles: articleDatamanager.articleList, whichVCisDelegate: self)
                 cell.selectionStyle = .none
                 return cell
             }
@@ -145,4 +146,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
 
+    func didPressArticle(_ indexOfArticleList: Int) {
+        whichArticleIndex = indexOfArticleList
+        performSegue(withIdentifier: "presentArticlePage", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let article: Article = articleDatamanager.articleList[whichArticleIndex]
+        if let dest = segue.destination as? SingleArticleViewController {
+            dest.articleData = article
+        }
+    }
 }

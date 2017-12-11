@@ -11,6 +11,7 @@ import AlamofireImage
 
 class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var newsArticleRow: UICollectionView!
+    weak var pressArticleDelegate: ArticleCollectionCellDelegate?
 
     var listOfArticles = [Article]()
     override func awakeFromNib() {
@@ -42,8 +43,14 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         }
     }
 
-    func setupNewsArticleRow(articles: [Article]) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selecting \(indexPath.item)")
+        pressArticleDelegate!.didPressArticle(indexPath.item)
+    }
+
+    func setupNewsArticleRow(articles: [Article], whichVCisDelegate: ArticleCollectionCellDelegate?) {
         listOfArticles = articles
+        pressArticleDelegate = whichVCisDelegate
     }
 
 }

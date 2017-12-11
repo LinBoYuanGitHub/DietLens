@@ -1404,6 +1404,7 @@ Click add to record food~</string>
                         <outlet property="proteinLabel" destination="SCO-tq-eAD" id="kFA-Yb-qOs"/>
                         <outlet property="proteinProgressBar" destination="GKI-ny-vXC" id="aej-sS-yno"/>
                         <outlet property="sideMenuButton" destination="Ehb-RR-J6W" id="Tkh-x5-npH"/>
+                        <segue destination="q2f-f7-UZG" kind="presentation" identifier="presentArticlePage" id="NAD-8N-HRw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEa-8m-P7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2730,5 +2731,6 @@ A
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gFb-lA-J3h"/>
+        <segue reference="NAD-8N-HRw"/>
     </inferredMetricsTieBreakers>
 </document>
