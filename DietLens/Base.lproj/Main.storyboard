@@ -177,7 +177,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="60" y="87" width="255.5" height="60"/>
+                                <rect key="frame" x="60.5" y="87" width="255.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -718,7 +718,7 @@ Click add to record food~</string>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kUm-Jq-bUm">
-                                <rect key="frame" x="20" y="294" width="335" height="463"/>
+                                <rect key="frame" x="20" y="294" width="335" height="507"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kjY-HZ-agy" userLabel="Stack View dishname">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="91"/>
@@ -958,6 +958,16 @@ Click add to record food~</string>
                                             </tableView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asd-po-Lze" userLabel="DeleteBtn">
+                                        <rect key="frame" x="0.0" y="473" width="335" height="34"/>
+                                        <color key="backgroundColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Delete">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteButtonPressed:" destination="HqO-ZY-5Xp" eventType="touchUpInside" id="YBc-jH-V5V"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="kjY-HZ-agy" firstAttribute="top" secondItem="kUm-Jq-bUm" secondAttribute="top" id="EFb-qZ-vjD"/>
@@ -985,6 +995,11 @@ Click add to record food~</string>
                         <outlet property="TFportion" destination="0Dm-4a-mOJ" id="Eoe-xQ-Meb"/>
                         <outlet property="diaryFoodCarlorieLabel" destination="ozJ-h6-Loa" id="mTE-kT-cOZ"/>
                         <outlet property="diaryFoodImage" destination="Tjx-y8-93J" id="y0x-fn-vpu"/>
+                        <outlet property="ingredientStack" destination="LKV-L5-nay" id="Klq-dB-TCa"/>
+                        <outlet property="ingredientTable" destination="M4N-sM-y4K" id="WnZ-FO-FNC"/>
+                        <outlet property="nutritionStack" destination="Hgd-Eg-fXa" id="38H-2v-5Nd"/>
+                        <outlet property="nutritionTable" destination="52O-cx-ZnZ" id="wVw-3b-K42"/>
+                        <outlet property="portionStack" destination="A6f-If-DGe" id="E2e-YC-ErT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nru-iJ-F3u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2644,9 +2659,9 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
         <image name="Profile" width="130" height="130"/>
         <image name="Settings" width="24" height="24"/>
         <image name="SideMenu" width="18" height="14"/>
-        <image name="Unselected" width="15" height="15"/>
         <image name="SplashCopyright" width="163" height="36"/>
         <image name="SplashDietLensFont" width="214" height="59"/>
+        <image name="Unselected" width="15" height="15"/>
         <image name="calendar" width="40" height="40"/>
         <image name="checkmark" width="32" height="32"/>
         <image name="cross" width="20" height="20"/>

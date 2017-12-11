@@ -17,14 +17,22 @@ class FoodDiaryHistoryViewController: UIViewController {
     @IBOutlet weak var TFfoodName: UITextField!
 
     @IBOutlet weak var diaryFoodCarlorieLabel: UILabel!
-    var foodDiary = FoodDiary()
+    var selectedFoodInfo = FoodInfo()
     var diaryImage: UIImage?
 
+    @IBOutlet weak var ingredientStack: UIStackView!
+    @IBOutlet weak var nutritionStack: UIStackView!
+    @IBOutlet weak var portionStack: UIStackView!
+
+    @IBOutlet weak var ingredientTable: UITableView!
+    @IBOutlet weak var nutritionTable: UITableView!
+
     override func viewDidLoad() {
-        TFfoodName.text = foodDiary.foodName
-        TFportion.text = "\(foodDiary.portionSize*100)%"
-        TFmealType.text = foodDiary.mealType
-        diaryFoodCarlorieLabel.text = "\(foodDiary.calorie) kcal"
+        TFfoodName.text = selectedFoodInfo.foodName
+        TFportion.text = "100%"
+        TFmealType.text = ""
+        diaryFoodCarlorieLabel.text = "\(selectedFoodInfo.calories) kcal"
+
         TFfoodName.isUserInteractionEnabled = false
         TFportion.isUserInteractionEnabled = false
         TFmealType.isUserInteractionEnabled = false
@@ -32,6 +40,11 @@ class FoodDiaryHistoryViewController: UIViewController {
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+//        FoodDiaryDBOperation.instance.deleteFoodDiary(id: foodDiary.id)
         dismiss(animated: true, completion: nil)
     }
 }

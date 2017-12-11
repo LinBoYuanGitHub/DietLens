@@ -80,4 +80,11 @@ class FoodDiaryDBOperation {
         }
         return results
     }
+
+    func deleteFoodDiary(id: Int) {
+        try! realm.write {
+            let deleteObj = realm.objects(FoodDiary.self).filter("id = \(id)")
+            realm.delete(deleteObj)
+        }
+    }
 }

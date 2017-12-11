@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecognitionResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class RecognitionResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, AddIngredientDelegate {
 
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var foodSelectionView: UIView!
@@ -26,6 +26,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var ingredientStack: UIStackView!
 
     @IBOutlet weak var ingredientTable: UITableView!
+    var ingredientAdapter: PlainTextTableAdapter<UITableViewCell>!
     var itemPicker: UIPickerView!
     var pickerStatus: String = "" //pickPortion, pickMeal
     var percentagePickerData = ["25%", "50%", "75%", "100%", "150%", "200%", "300%", "400%"]
@@ -59,6 +60,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         TFmealType.inputView = itemPicker
         TFfoodPercentage.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
         TFfoodPercentage.inputView = itemPicker
+        //set up tableview adapter
+        ingredientAdapter = PlainTextTableAdapter()
+        ingredientTable.dataSource = ingredientAdapter
+        ingredientTable.delegate = ingredientAdapter
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -237,8 +242,11 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         let diaryFormatter = DateFormatter()
         diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
         foodDiary.mealTime = diaryFormatter.string(from: dateTime!)
+        foodDiary.recordType = recordType!
         saveImage(imgData: UIImagePNGRepresentation(foodImage.image!)!, filename: String(Date().timeIntervalSince1970 * 1000)+".png")
-        FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: foodDiary)
+        DispatchQueue.main.async {
+            FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: self.foodDiary)
+        }
         //TODO jump to diaryViewController at another storyboard
         let parent = presentingViewController
         dismiss(animated: false, completion: {
@@ -278,6 +286,9 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         }, completion: nil)
     }
 
+    @IBAction func onPlusBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "toAddIngredient", sender: self)
+    }
     /**
      * Called when 'return' key pressed. return NO to ignore.
      */
@@ -303,6 +314,20 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         } else {
             return false
         }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? IngredientSearchController {
+            dest.addIngredientDelegate = self
+        }
+    }
+
+    func onAddIngredient(_ ingredientStr: String) {
+        if !ingredientStr.isEmpty {
+            ingredientAdapter.textList.append(ingredientStr)
+            ingredientTable.reloadData()
+        }
+
     }
 
     /*

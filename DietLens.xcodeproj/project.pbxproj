@@ -9,15 +9,18 @@
 /* Begin PBXBuildFile section */
 		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
 		3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */; };
+		3F1794351FDD70DA0047F9C1 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1794331FDD70D70047F9C1 /* RealmSwift.framework */; };
+		3F1794361FDD70DA0047F9C1 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1794341FDD70DA0047F9C1 /* Realm.framework */; };
+		3F1794381FDD711D0047F9C1 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1794341FDD70DA0047F9C1 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3F17943A1FDD711D0047F9C1 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F1794331FDD70D70047F9C1 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
 		3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */; };
+		3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */; };
+		3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */; };
+		3F6CF82A1FD8FABC00D7556E /* PlainTextTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */; };
 		3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
-		3FFB568A1FB02F7C002DCE15 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56881FB02F79002DCE15 /* RealmSwift.framework */; };
-		3FFB568B1FB02F7C002DCE15 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56881FB02F79002DCE15 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3FFB568C1FB02F7C002DCE15 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56891FB02F7B002DCE15 /* Realm.framework */; };
-		3FFB568D1FB02F7C002DCE15 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3FFB56891FB02F7B002DCE15 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */; };
 		3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */; };
 		3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */; };
@@ -110,8 +113,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3FFB568D1FB02F7C002DCE15 /* Realm.framework in Embed Frameworks */,
-				3FFB568B1FB02F7C002DCE15 /* RealmSwift.framework in Embed Frameworks */,
+				3F17943A1FDD711D0047F9C1 /* RealmSwift.framework in Embed Frameworks */,
+				3F1794381FDD711D0047F9C1 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,13 +124,16 @@
 /* Begin PBXFileReference section */
 		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F117DED1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHistoryViewController.swift; sourceTree = "<group>"; };
+		3F1794331FDD70D70047F9C1 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../Downloads/realm-swift-3.0.2/ios/swift-4.0.2/RealmSwift.framework"; sourceTree = "<group>"; };
+		3F1794341FDD70DA0047F9C1 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageMapper.swift; sourceTree = "<group>"; };
+		3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientSearchController.swift; sourceTree = "<group>"; };
+		3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientDelegate.swift; sourceTree = "<group>"; };
+		3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextTableAdapter.swift; sourceTree = "<group>"; };
 		3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewController.swift; sourceTree = "<group>"; };
 		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
 		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
-		3FFB56881FB02F79002DCE15 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
-		3FFB56891FB02F7B002DCE15 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveFoodDiaryStoryboard.storyboard; sourceTree = "<group>"; };
 		3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDataManager.swift; sourceTree = "<group>"; };
 		3FFB56931FB2F833002DCE15 /* ArticleDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDataManager.swift; sourceTree = "<group>"; };
@@ -214,8 +220,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FFB568C1FB02F7C002DCE15 /* Realm.framework in Frameworks */,
-				3FFB568A1FB02F7C002DCE15 /* RealmSwift.framework in Frameworks */,
+				3F1794361FDD70DA0047F9C1 /* Realm.framework in Frameworks */,
+				3F1794351FDD70DA0047F9C1 /* RealmSwift.framework in Frameworks */,
 				4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +248,7 @@
 		3F6CF8221FD5197A00D7556E /* Adapter */ = {
 			isa = PBXGroup;
 			children = (
+				3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */,
 			);
 			path = Adapter;
 			sourceTree = "<group>";
@@ -285,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */,
+				3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -292,8 +300,6 @@
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
-				3FFB56891FB02F7B002DCE15 /* Realm.framework */,
-				3FFB56881FB02F79002DCE15 /* RealmSwift.framework */,
 				5877CF861F9D82BF0022B51E /* DietLens */,
 				5877CF9E1F9D82BF0022B51E /* DietLensTests */,
 				5877CFA91F9D82BF0022B51E /* DietLensUITests */,
@@ -316,6 +322,8 @@
 		5877CF861F9D82BF0022B51E /* DietLens */ = {
 			isa = PBXGroup;
 			children = (
+				3F1794341FDD70DA0047F9C1 /* Realm.framework */,
+				3F1794331FDD70D70047F9C1 /* RealmSwift.framework */,
 				58F2DF281F9F437F00FF3A95 /* Services */,
 				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
 				58FCCFED1F9D886E00E4F421 /* Controller */,
@@ -454,6 +462,7 @@
 				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
 				3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */,
 				3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */,
+				3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */,
 			);
 			path = TextInput;
 			sourceTree = "<group>";
@@ -505,9 +514,9 @@
 				5877CF811F9D82BF0022B51E /* Frameworks */,
 				5877CF821F9D82BF0022B51E /* Resources */,
 				297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
-				D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */,
-				BF8441171FA435B200D5018F /* ShellScript */,
 				3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */,
+				D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */,
+				BF8441171FA435B200D5018F /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -758,18 +767,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BF8441171FA435B200D5018F /* ShellScript */ = {
+		BF8441171FA435B200D5018F /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\necho \"Target architectures: $ARCHS\"\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\nFRAMEWORK_TMP_PATH=\"$FRAMEWORK_EXECUTABLE_PATH-tmp\"\n\n# remove simulator's archs if location is not simulator's directory\ncase \"${TARGET_BUILD_DIR}\" in\n*\"iphonesimulator\")\necho \"No need to remove archs\"\n;;\n*)\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"i386\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"i386\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"i386 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"x86_64\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"x86_64\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"x86_64 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\n;;\nesac\n\necho \"Completed for executable $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\ndone";
 		};
 		D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -829,10 +839,12 @@
 				58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */,
 				587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */,
 				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
+				3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */,
 				3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */,
 				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
+				3F6CF82A1FD8FABC00D7556E /* PlainTextTableAdapter.swift in Sources */,
 				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
 				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
@@ -851,6 +863,7 @@
 				588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */,
 				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
+				3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
 				3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
@@ -1060,6 +1073,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/DietLens",
 				);
 				INFOPLIST_FILE = DietLens/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1078,12 +1092,14 @@
 			baseConfigurationReference = 934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BCQF4SHM2R;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/DietLens",
 				);
 				INFOPLIST_FILE = DietLens/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

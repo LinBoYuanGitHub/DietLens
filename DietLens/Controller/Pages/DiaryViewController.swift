@@ -31,7 +31,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var totalRows: Int = 0
      //tableview cell cache
     let imageCache = NSCache<NSString, AnyObject>()
-    var selectedFoodDiary: FoodDiary?
+    var selectedFoodInfo = FoodInfo()
     var selectedImage: UIImage?
 
     var datesWithEvent = [Date]()
@@ -95,14 +95,15 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             //to add food&date
             return
         }
-        selectedFoodDiary = foodDiaryList[indexLookup[indexPath.item]]
+        selectedFoodInfo =  self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]]
+        selectedFoodInfo.calories =  Double(round(10*selectedFoodInfo.calories)/10)
         selectedImage = (tableView.cellForRow(at: indexPath) as? FoodDiaryCell)?.foodImage.image
         performSegue(withIdentifier: "toDetailDiaryPage", sender: self)
     }
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? FoodDiaryHistoryViewController {
-            dest.foodDiary = selectedFoodDiary!
+            dest.selectedFoodInfo = selectedFoodInfo
             dest.diaryImage = selectedImage
         }
     }
@@ -270,14 +271,14 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         dinnerEntity.mealOfDay = .dinner
         for foodDiary in foodDiaryList {
             var foodInfo: FoodInfo = FoodInfo()
-            foodInfo.calories = foodDiary.calorie
+            foodInfo.calories = Double(round(10*foodDiary.calorie)/10)
             foodInfo.foodName = foodDiary.foodName
             foodInfo.imageURL = foodDiary.imagePath
 //            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
             foodInfo.servingSize = "unknown"
-            if foodDiary.mealType == "breakfast" {
+            if foodDiary.mealType == "Breakfast" {
                  breakfastEntity.foodConsumed.append(foodInfo)
-            } else if foodDiary.mealType == "lunch" {
+            } else if foodDiary.mealType == "Lunch" {
                 lunchEntity.foodConsumed.append(foodInfo)
             } else {
                 dinnerEntity.foodConsumed.append(foodInfo)
