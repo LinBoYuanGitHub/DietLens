@@ -10,6 +10,9 @@ import Foundation
 import XLPagerTabStrip
 
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
+    var addFoodDate = Date()
+    var mealType: Meal = .dinner
+
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         guard let cameraViewController = storyboard?.instantiateViewController(withIdentifier: "cameraVC")
             as? CameraViewController, let textInputViewController =
@@ -43,6 +46,11 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
         containerView.scrollsToTop = false
+        NotificationCenter.addObserver(self, forKeyPath: #selector(onNotifyToDismiss()), options: .peru, context: nil)
+    }
+    
+    func onNotifyToDismiss() {
+        self.sentNotificationLabel.text = "Notification sent!"
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {

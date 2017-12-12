@@ -316,6 +316,7 @@ extension CameraViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             print("Cannot get image from gallery")
+            imagePicker.dismiss(animated: true, completion: nil)
             return
         }
         showReview(image: image)
@@ -323,7 +324,7 @@ extension CameraViewController: UIImagePickerControllerDelegate {
 //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
 //            // upload result and callback
 //        }
-//        imagePicker.dismiss(animated: true, completion: nil)
+        imagePicker.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -350,9 +351,11 @@ extension CameraViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let parentVC = self.parent as! AddFoodViewController
         if let dest = segue.destination as? RecognitionResultsViewController {
             dest.results = foodResults
-            dest.dateTime = Date()
+            dest.dateTime = parentVC.addFoodDate
+            dest.whichMeal = parentVC.mealType
             dest.recordType = self.recordType
             if recordType == "recognition" {
                 dest.userFoodImage = chosenImageView.image!

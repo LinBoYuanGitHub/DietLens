@@ -35,6 +35,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var selectedImage: UIImage?
 
     var datesWithEvent = [Date]()
+    var addFoodDate: Date = Date()
 
     fileprivate let gregorian = Calendar(identifier: .gregorian)
     fileprivate let formatter: DateFormatter = {
@@ -55,8 +56,16 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let headerSelect = UIView()
                 headerSelect.backgroundColor = UIColor.clear
                 cell.selectedBackgroundView = headerSelect
+                cell.callBackBlock { (mealType) in
+                    let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+                    let vc = storyboard.instantiateViewController(withIdentifier: "addFoodVC") as! AddFoodViewController
+                    vc.addFoodDate = self.addFoodDate
+                    vc.mealType = mealType
+                    self.present(vc, animated: true, completion: nil)
+                }
                 return cell
             }
+
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "foodItem") as? FoodDiaryCell {
                 cell.foodImage.image = #imageLiteral(resourceName: "loading_img")
@@ -93,6 +102,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //to foodDiary detail page
         if indexLookup[indexPath.item] == -1 {
             //to add food&date
+
             return
         }
         selectedFoodInfo =  self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]]
@@ -250,6 +260,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let later = DispatchTime.now() + 0.3
         DispatchQueue.main.asyncAfter(deadline: later) {
             self.dismissCalendar(date)
+            self.addFoodDate = date
             self.dateLabel.text = self.formatter.string(from: date)
             self.loadDiaryData(date: date)
             self.loadDaysRecordedFromDiary(date: date)
@@ -276,6 +287,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             foodInfo.calories = Double(round(10*foodDiary.calorie)/10)
             foodInfo.foodName = foodDiary.foodName
             foodInfo.imageURL = foodDiary.imagePath
+            foodInfo.mealType = foodDiary.mealType
 //            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
             foodInfo.servingSize = "unknown"
             if foodDiary.mealType == "Breakfast" {
@@ -298,44 +310,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mealsConsumed.append(dinnerEntity)
         calculateTableViewParams()
         foodDiaryTable.reloadData()
-    }
-
-    func testOnSaveData() {
-        let foodDiary = FoodDiary()
-        foodDiary.mealTime = "14 Nov 2017"
-        foodDiary.calorie = 210.5
-        foodDiary.foodName = "testFood"
-        foodDiary.foodId = "9999"
-        foodDiary.carbohydrate = "0.0"
-        foodDiary.protein = "0.0"
-        foodDiary.fat = "0.0"
-        FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: foodDiary)
-    }
-
-    func testData() {
-        var f1: FoodInfo = FoodInfo()
-        f1.calories = 213.1
-//        f1.foodImage = #imageLiteral(resourceName: "laksa")
-        f1.foodName = "Singapore Laksa"
-        f1.servingSize = "1 medium bowl"
-
-        var f2: FoodInfo = FoodInfo()
-        f2.calories = 210.1
-//        f2.foodImage = #imageLiteral(resourceName: "bg")
-        f2.foodName = "Another food that is not food"
-        f2.servingSize = "1 circle"
-
-        var m1: DiaryDailyFood = DiaryDailyFood()
-        m1.mealOfDay = .breakfast
-        mealsConsumed.append(m1)
-
-        m1.mealOfDay = .lunch
-        m1.foodConsumed.append(f1)
-        m1.foodConsumed.append(f2)
-        mealsConsumed.append(m1)
-
-        m1.mealOfDay = .dinner
-        mealsConsumed.append(m1)
     }
 
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {

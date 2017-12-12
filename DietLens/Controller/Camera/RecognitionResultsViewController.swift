@@ -56,14 +56,25 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         // Do any additional setup after loading the view.
         setUpInputView()
         setUpPickerView()
+        let pickerToolBar = setUpPickerToolBar()
         TFmealType.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
         TFmealType.inputView = itemPicker
+        TFmealType.inputAccessoryView = pickerToolBar
         TFfoodPercentage.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
         TFfoodPercentage.inputView = itemPicker
+        TFfoodPercentage.inputAccessoryView = pickerToolBar
         //set up tableview adapter
         ingredientAdapter = PlainTextTableAdapter()
         ingredientTable.dataSource = ingredientAdapter
         ingredientTable.delegate = ingredientAdapter
+        switch whichMeal {
+        case .breakfast:
+            TFmealType.text = "Breakfast"
+        case .lunch:
+            TFmealType.text = "Lunch"
+        case .dinner:
+            TFmealType.text = "Dinner"
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +85,28 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         itemPicker = UIPickerView()
         itemPicker.dataSource = self
         itemPicker.delegate = self
+        itemPicker.showsSelectionIndicator = true
+        itemPicker.accessibilityViewIsModal = true
+    }
+
+    func setUpPickerToolBar() -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        toolBar.sizeToFit()
+
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: "donePicker")
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+
+        toolBar.setItems([spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        return toolBar
+    }
+
+    @objc func donePicker() {
+        TFmealType.resignFirstResponder()
+        TFfoodPercentage.resignFirstResponder()
     }
 
     func setUpInputView() {

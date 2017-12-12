@@ -16,6 +16,35 @@ class APIService {
 
     }
 
+    public func getUUIDRequest(completion: @escaping (_ isSuccess: Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.getUUidURL)!,
+            method: .get,
+            parameters: nil,
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("request UUID Failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let value = response.result.value else {
+                    print("Login Failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObj = JSON(value)
+                //TODO restore userID
+                let userId = jsonObj["user_id"].stringValue
+                //                let rooms = rows.flatMap({ (roomDict) -> RemoteRoom? in
+                //                    return RemoteRoom(jsonData: roomDict)
+                //                })
+                completion(true)
+        }
+    }
+
     public func loginRequest(userEmail: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.userLoginURL)!,

@@ -20,12 +20,14 @@ public enum Meal: Int {
 struct FoodInfo {
     var foodName: String = ""
     var calories: Double = 0
+    var mealType: String = ""
     var imageURL: String?
     var servingSize: String = ""
 
     init() {
         self.foodName = ""
         self.calories = 0
+        self.mealType = ""
         self.imageURL = ""
         self.servingSize = ""
     }
@@ -34,6 +36,7 @@ struct FoodInfo {
         self.foodName = food.foodName
         self.calories = food.calorie
         self.servingSize = String(food.portionSize)
+        self.mealType = food.mealType
         downloadImage(foodImageURL: food.imagePath)
 //        downloadImage(foodImageURL: "https://httpbin.org/image/png")
     }

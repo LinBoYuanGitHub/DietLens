@@ -30,7 +30,7 @@ class FoodDiaryHistoryViewController: UIViewController {
     override func viewDidLoad() {
         TFfoodName.text = selectedFoodInfo.foodName
         TFportion.text = "100%"
-        TFmealType.text = ""
+        TFmealType.text = selectedFoodInfo.mealType
         diaryFoodCarlorieLabel.text = "\(selectedFoodInfo.calories) kcal"
 
         TFfoodName.isUserInteractionEnabled = false

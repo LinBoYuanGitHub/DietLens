@@ -28,7 +28,11 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         // Configure the view for the selected state
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        if listOfArticles.count >= 3 {
+            return 3
+        } else {
+            return 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

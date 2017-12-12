@@ -778,7 +778,7 @@
         <!--Add Food View Controller-->
         <scene sceneID="fco-qt-tUB">
             <objects>
-                <viewController id="kTU-F7-eOW" customClass="AddFoodViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addFoodVC" id="kTU-F7-eOW" customClass="AddFoodViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bwf-F9-hnT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1451,7 +1451,7 @@ A
         <image name="search_icon" width="17" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sLK-wE-Cs6"/>
+        <segue reference="E5A-Z7-Aui"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

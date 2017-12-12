@@ -65,7 +65,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.carbohydrateProgressBar.progress = 0.01
         // Do any additional setup after loading the view.
         newsFeedTable.tableHeaderView = headerView
-
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

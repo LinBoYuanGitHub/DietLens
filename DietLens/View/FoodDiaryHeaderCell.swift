@@ -9,12 +9,19 @@
 import UIKit
 
 class FoodDiaryHeaderCell: UITableViewCell {
-    weak var addFoodDelegate: DiaryHeaderCellDelegate?
+
+    typealias SwiftBlock = (_ meal: Meal) -> Void
+    var callBack: SwiftBlock?
     @IBOutlet weak var titleLabel: UILabel!
     var meal: Meal = .breakfast
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+
+    func callBackBlock(block: @escaping SwiftBlock) {
+        callBack = block
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,6 +31,7 @@ class FoodDiaryHeaderCell: UITableViewCell {
     }
 
     func setupHeaderCell(whichMeal: Meal) {
+        meal = whichMeal
         switch whichMeal {
         case .breakfast:
             titleLabel.text = "Breakfast"
@@ -37,6 +45,8 @@ class FoodDiaryHeaderCell: UITableViewCell {
     }
 
     @IBAction func buttonPressed(_ sender: UIButton) {
-        addFoodDelegate?.didPressAddButton(meal.rawValue)
+        if callBack != nil {
+            callBack!(meal)
+        }
     }
 }
