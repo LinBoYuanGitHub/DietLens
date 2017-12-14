@@ -21,12 +21,29 @@ class SplashScreenViewController: UIViewController {
             }
         }
 
-//        let waitAbit = DispatchTime.now() + 0.4
-//        DispatchQueue.main.asyncAfter(deadline: waitAbit) {
-//            self.performSegue(withIdentifier: "toMainPage", sender: nil)
-//        }
+        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
+
+            guard authorized else {
+
+                let baseMessage = "HealthKit Authorization Failed"
+
+                if let error = error {
+                    print("\(baseMessage). Reason: \(error.localizedDescription)")
+                } else {
+                    print(baseMessage)
+                }
+
+                return
+            }
+
+            print("HealthKit Successfully Authorized.")
+        }
 
         // Do any additional setup after loading the view.
+    }
+
+    func getProfile() {
+
     }
 
     override func didReceiveMemoryWarning() {

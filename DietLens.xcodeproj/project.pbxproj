@@ -47,6 +47,8 @@
 		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
 		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
 		586C99BE1FDF819400B86C9C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 586C99BD1FDF819300B86C9C /* RealmSwift.framework */; };
+		587067AC1FE252B000660262 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587067AB1FE252B000660262 /* HealthKit.framework */; };
+		587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587067AD1FE2534300660262 /* HealthKitSetupAssistant.swift */; };
 		587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
@@ -161,6 +163,9 @@
 		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
 		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		586C99BD1FDF819300B86C9C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		587067AA1FE252B000660262 /* DietLens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DietLens.entitlements; sourceTree = "<group>"; };
+		587067AB1FE252B000660262 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		587067AD1FE2534300660262 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
 		587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleArticleViewController.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1794361FDD70DA0047F9C1 /* Realm.framework in Frameworks */,
+				587067AC1FE252B000660262 /* HealthKit.framework in Frameworks */,
 				4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */,
 				586C99BE1FDF819400B86C9C /* RealmSwift.framework in Frameworks */,
 			);
@@ -325,6 +331,7 @@
 		5877CF861F9D82BF0022B51E /* DietLens */ = {
 			isa = PBXGroup;
 			children = (
+				587067AA1FE252B000660262 /* DietLens.entitlements */,
 				3F1794341FDD70DA0047F9C1 /* Realm.framework */,
 				58F2DF281F9F437F00FF3A95 /* Services */,
 				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
@@ -448,6 +455,7 @@
 				58FCCFF11F9D8A5900E4F421 /* Fonts */,
 				58AA521C1FA2D1AA0072779C /* Constants.swift */,
 				3F17943C1FDF84EC0047F9C1 /* NotificationName.swift */,
+				587067AD1FE2534300660262 /* HealthKitSetupAssistant.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -499,6 +507,7 @@
 		D17C6477152A12102B087091 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				587067AB1FE252B000660262 /* HealthKit.framework */,
 				3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */,
 				B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */,
 				C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */,
@@ -588,6 +597,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
+							com.apple.HealthKit = {
 								enabled = 1;
 							};
 						};
@@ -890,6 +900,7 @@
 				3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */,
 				3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
 				581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
+				587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
