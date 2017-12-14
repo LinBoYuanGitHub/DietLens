@@ -35,6 +35,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     private var recordType: String = "recogniton"
 
+    @IBOutlet weak var focusViewImg: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +47,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
         let previewLayer = previewView.videoPreviewLayer
         previewLayer.videoGravity = .resizeAspectFill
+
         previewContainer.layer.addSublayer(previewLayer)
+        //previewContainer.bringSubview(toFront: focusViewImg)
 
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
@@ -59,6 +62,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewView.videoPreviewLayer.frame.size = previewContainer.frame.size
+        previewContainer.bringSubview(toFront: focusViewImg)
     }
 
     override func viewWillAppear(_ animated: Bool) {
