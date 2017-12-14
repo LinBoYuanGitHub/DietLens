@@ -1929,7 +1929,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
             </objects>
             <point key="canvasLocation" x="4070" y="1868"/>
         </scene>
-        <!--webpage-->
+        <!--Webpage-->
         <scene sceneID="09I-Px-y3H">
             <objects>
                 <viewController storyboardIdentifier="BrowserPage" id="kwp-St-aWJ" customClass="WebViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
@@ -1937,28 +1937,39 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="leU-Z7-f5b">
-                                <rect key="frame" x="0.0" y="62" width="375" height="605"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leU-Z7-f5b">
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="leU-Z7-f5b" firstAttribute="top" secondItem="YXd-My-0Jy" secondAttribute="top" id="4aK-TV-TM1"/>
+                            <constraint firstItem="leU-Z7-f5b" firstAttribute="leading" secondItem="YXd-My-0Jy" secondAttribute="leading" id="Pij-zU-bhP"/>
+                            <constraint firstItem="leU-Z7-f5b" firstAttribute="trailing" secondItem="YXd-My-0Jy" secondAttribute="trailing" id="mwp-RQ-xa3"/>
+                            <constraint firstItem="YXd-My-0Jy" firstAttribute="bottom" secondItem="leU-Z7-f5b" secondAttribute="bottom" id="ogD-Tv-oez"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="YXd-My-0Jy"/>
                     </view>
-                    <navigationItem key="navigationItem" title="webpage" id="38p-yG-jWm">
-                        <barButtonItem key="leftBarButtonItem" title="sideMenu" image="SideMenu" id="jFL-xZ-CrJ">
-                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Webpage" id="Fil-px-i0d">
+                        <barButtonItem key="leftBarButtonItem" title="sideMenu" image="SideMenu" id="l2N-VT-cNS">
+                            <color key="tintColor" red="0.60995256900000006" green="0.61038547750000005" blue="0.6212365031" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Clear Data" id="Zzh-Ri-A8d">
+                            <color key="tintColor" red="0.60995256900000006" green="0.61038547750000005" blue="0.6212365031" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="sideMenuButton" destination="jFL-xZ-CrJ" id="qkn-H4-PE5"/>
+                        <outlet property="leftBarButton" destination="l2N-VT-cNS" id="vcq-ZY-AFx"/>
+                        <outlet property="rightBarButton" destination="Zzh-Ri-A8d" id="hTr-bm-O6A"/>
                         <outlet property="webViewContainer" destination="leU-Z7-f5b" id="2v9-eH-7RJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gff-bQ-QLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5023" y="1868"/>
+            <point key="canvasLocation" x="5021.6000000000004" y="1867.9160419790107"/>
         </scene>
         <!--Main Slide Menu View Controller-->
         <scene sceneID="Fmk-2s-VrE">
