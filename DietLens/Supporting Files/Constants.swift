@@ -16,6 +16,7 @@ struct ServerConfig {
     static let userRegisterURL = baseURL + "/register/"
     static let articleURL = baseURL + "/article/"
     static let imageUploadURL = baseURL + "/process/"
+//    static let imageUploadURL = "http://137.132.179.21:8002/process/"
     static let saveFoodDiaryURL = baseURL + "/photolist/"
     static let foodSearchListURL = baseURL + "/text/"
     static let foodSearchDetailURL = baseURL + "/textinfo/"

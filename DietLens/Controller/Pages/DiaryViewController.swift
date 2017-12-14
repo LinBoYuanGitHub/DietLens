@@ -37,6 +37,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var datesWithEvent = [Date]()
     var addFoodDate: Date = Date()
 
+    var isAddNewDiary = false
+
     fileprivate let gregorian = Calendar(identifier: .gregorian)
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -62,6 +64,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     vc.addFoodDate = self.addFoodDate
                     vc.mealType = mealType
                     self.present(vc, animated: true, completion: nil)
+                    self.isAddNewDiary = true //set the addnewdiary flag
                 }
                 return cell
             }
@@ -102,13 +105,13 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //to foodDiary detail page
         if indexLookup[indexPath.item] == -1 {
             //to add food&date
-
             return
         }
         selectedFoodInfo =  self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]]
         selectedFoodInfo.calories =  Double(round(10*selectedFoodInfo.calories)/10)
         selectedImage = (tableView.cellForRow(at: indexPath) as? FoodDiaryCell)?.foodImage.image
         performSegue(withIdentifier: "toDetailDiaryPage", sender: self)
+        isAddNewDiary = true
     }
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -148,17 +151,16 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         // Do any additional setup after loading the view.
-
-        loadDiaryData(date: Date())
-//        testData()
-        // Adding random date as events
-
-        loadDaysRecordedFromDiary(date: Date())
 //        for i in 0..<4 {
 //            datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
 //        }
-
         diaryCalendar.appearance.headerTitleColor = #colorLiteral(red: 0.2319577109, green: 0.2320933503, blue: 0.2404021281, alpha: 1)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        loadDiaryData(date: addFoodDate)
+        loadDaysRecordedFromDiary(date: addFoodDate)
+        diaryCalendar.reloadData()
     }
 
     func loadDaysRecordedFromDiary(date: Date) {
@@ -309,7 +311,17 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mealsConsumed.append(lunchEntity)
         mealsConsumed.append(dinnerEntity)
         calculateTableViewParams()
-        foodDiaryTable.reloadData()
+        if isAddNewDiary {
+            let range = NSRange(location: 0, length: 1)
+            let sections = NSIndexSet(indexesIn: range)
+            foodDiaryTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
+            isAddNewDiary = false
+        } else {
+            UIView.transition(with: foodDiaryTable,
+                              duration: 0.35,
+                              options: .transitionCurlUp,
+                              animations: { self.foodDiaryTable.reloadData() })
+        }
     }
 
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {

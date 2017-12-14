@@ -39,8 +39,11 @@ class TextSearchViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         //regist notification
+        NotificationCenter.default.removeObserver(self, name: .addDiaryDismiss, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
+
     }
 
     //adjust tableview height to just above the keyboard
@@ -79,6 +82,11 @@ class TextSearchViewController: UIViewController {
 
     @objc func backToPreviousView() {
         dismiss(animated: true, completion: nil)
+    }
+
+    @objc func onNotifyToDismiss() {
+        dismiss(animated: false, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
 }

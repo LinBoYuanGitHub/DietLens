@@ -42,15 +42,14 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         }
 
         super.viewDidLoad()
-
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
         containerView.scrollsToTop = false
-        NotificationCenter.addObserver(self, forKeyPath: #selector(onNotifyToDismiss()), options: .peru, context: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
     }
-    
-    func onNotifyToDismiss() {
-        self.sentNotificationLabel.text = "Notification sent!"
+
+    @objc func onNotifyToDismiss() {
+        dismiss(animated: false, completion: nil)
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {

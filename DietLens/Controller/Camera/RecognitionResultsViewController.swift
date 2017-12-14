@@ -276,15 +276,23 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
         foodDiary.mealTime = diaryFormatter.string(from: dateTime!)
         foodDiary.recordType = recordType!
+        foodDiary.mealType = TFmealType.text!
         saveImage(imgData: UIImagePNGRepresentation(foodImage.image!)!, filename: String(Date().timeIntervalSince1970 * 1000)+".png")
         DispatchQueue.main.async {
             FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: self.foodDiary)
         }
-        //TODO jump to diaryViewController at another storyboard
-        let parent = presentingViewController
-        dismiss(animated: false, completion: {
-            parent!.dismiss(animated: true, completion: nil)
-        })
+        // jump to diaryViewController at another storyboard
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "mainSlideMenuVC") as! MainSlideMenuViewController
+//        vc.addFoodDate = self.dateTime!
+//        self.present(vc, animated: true, completion: nil)
+//        let parent = presentingViewController
+//        dismiss(animated: false, completion: {
+//                parent!.dismiss(animated: true, completion: nil)
+//        })
+        dismiss(animated: false) {
+            NotificationCenter.default.post(name: .addDiaryDismiss, object: nil)
+        }
     }
 
     func saveImage(imgData: Data, filename: String) {
