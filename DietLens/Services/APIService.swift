@@ -36,11 +36,16 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(value)
-                //TODO restore userID
                 let userId = jsonObj["user_id"].stringValue
-                //                let rooms = rows.flatMap({ (roomDict) -> RemoteRoom? in
-                //                    return RemoteRoom(jsonData: roomDict)
-                //                })
+                let preferences = UserDefaults.standard
+                let key = "userId"
+                preferences.setValue(userId, forKey: key)
+                let didSave = preferences.synchronize()
+                if !didSave {
+                    print("Couldn`t save,fatal exception happened")
+                } else {
+                    print("userId:\(userId)")
+                }
                 completion(true)
         }
     }
@@ -59,17 +64,12 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let value = response.result.value as? JSON else {
-                    print("Login Failed due to : Server Data Type Error")
+                let jsonObj = JSON(response.result.value)
+                if jsonObj["message"] == "Success"{
+                    completion(true)
+                } else {
                     completion(false)
-                    return
                 }
-                let userId = value["id"].stringValue
-                let nickname = value["nickname"].stringValue
-//                let rooms = rows.flatMap({ (roomDict) -> RemoteRoom? in
-//                    return RemoteRoom(jsonData: roomDict)
-//                })
-                completion(true)
         }
     }
 
@@ -101,11 +101,11 @@ class APIService {
         }
     }
 
-    public func register(nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
+    public func register(uuid: String, nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.thirdPartyLoginURL)!,
+            URL(string: ServerConfig.registry)!,
             method: .post,
-            parameters: ["nickname": nickName, "email": email, "password": password],
+            parameters: ["uuid": uuid, "nickname": nickName, "email": email, "password": password],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -115,13 +115,13 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let value = response.result.value as? JSON else {
-                    print("Register failed due to : Server Data Type Error")
-                    completion(false)
-                    return
+                let jsonObj = JSON(response.result.value)
+                if jsonObj["message"] == "Success"{
+                     completion(true)
+                } else {
+                     completion(false)
                 }
-                let userId = value["id"].stringValue
-                completion(true)
+
         }
     }
 

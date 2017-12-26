@@ -217,8 +217,9 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     @IBAction func closeButtonPressed(_ sender: Any) {
-        //self.dismiss(animated: true, completion: nil)
-       self.revealViewController()?.revealLeftView()// PBRevealViewController.revealLeftView()
+        self.dismiss(animated: true, completion: nil)
+//       self.revealViewController()?.revealLeftView()
+        //PBRevealViewController.revealLeftView()
     }
     @IBAction func bringInCalendar(_ sender: Any) {
         calendarYConstraint.constant = 20

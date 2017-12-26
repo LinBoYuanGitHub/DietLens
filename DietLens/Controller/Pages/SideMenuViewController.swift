@@ -16,9 +16,9 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
 //    let labels: [String] = ["Report", "Steps Taken", "Notifications", "Browser", "Settings", "About Us", "Logout"]
 //    let iconNames: [String] = ["Report", "Steps", "Notification", "browser", "Settings", "About", "Logout"]
 //    let storyboardIDs: [String] = ["DietLens", "StepsPage", "NotificationsPage", "BrowserPage", "SettingsPage", "AboutPage", "MainViewController"]
-    let labels: [String] = ["Home", "Food Diary", "Browser"]
-    let iconNames: [String] = ["checkmark", "Report", "browser"]
-    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "BrowserPage"]
+    let labels: [String] = ["Home", "Food Diary", "Report", "Articles", "Steps Counter", "Browser"]
+    let iconNames: [String] = ["checkmark", "Report", "ReportIcon", "ArticleIcon", "Steps", "browser"]
+    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC", "BrowserPage"]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,10 +69,15 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
             controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
             revealViewController()?.setMainViewController(controller!, animated: true)
             DataService.instance.screenUserIsIn = 0
+        } else if labels[indexPath.row] == "Home"{
+            controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
+                let nc = UINavigationController(rootViewController: controller!)
+                revealViewController()?.pushMainViewController(nc, animated: true)
         } else {
             controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
-            let nc = UINavigationController(rootViewController: controller!)
-            revealViewController()?.pushMainViewController(nc, animated: true)
+//            let nc = UINavigationController(rootViewController: controller!)
+//            revealViewController()?.pushMainViewController(nc, animated: true)
+            present(controller!, animated: true, completion: nil)
         }
     }
 
@@ -91,6 +96,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     }
     @IBAction func profileButtonPressed(_ sender: Any) {
         print("Go to profile page")
+        performSegue(withIdentifier: "menuToLogin", sender: nil)
     }
     /*
     // MARK: - Navigation

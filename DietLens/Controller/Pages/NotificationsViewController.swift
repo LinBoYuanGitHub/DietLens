@@ -22,7 +22,17 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         notificationTable.dataSource = self
         sampleData()
         checkEmpty()
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: .didReceiveNotification, object: nil)
         // Do any additional setup after loading the view.
+    }
+
+    @objc func refresh(_ notification: NSNotification) {
+        if let message = notification.userInfo?["message"] as? String {
+            listOfNotifications.insert(NotificationModel.init(id: "A2", body: message, title: "Reminder", read: false, hidden: false, dateReceived: Date()), at: 0)
+            let range = NSRange(location: 0, length: 1)
+            let sections = NSIndexSet(indexesIn: range)
+            notificationTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,13 +50,14 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        for var notification in listOfNotifications {
-            if notification.hidden == false {
-                count += 1
-            }
-        }
-        return count
+//        var count = 0
+//        for var notification in listOfNotifications {
+//            if notification.hidden == false {
+//                count += 1
+//            }
+//        }
+//        return count
+        return listOfNotifications.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

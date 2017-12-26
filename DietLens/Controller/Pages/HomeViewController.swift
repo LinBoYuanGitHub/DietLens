@@ -151,8 +151,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let article: Article = articleDatamanager.articleList[whichArticleIndex]
         if let dest = segue.destination as? SingleArticleViewController {
+             let article: Article = articleDatamanager.articleList[whichArticleIndex]
             dest.articleData = article
         }
     }

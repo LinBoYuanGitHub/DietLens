@@ -10,7 +10,25 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    @IBOutlet weak var TFEmail: UITextField!
+     @IBOutlet weak var TFPassword: UITextField!
+
     @IBAction func unwindToMainPage(segue: UIStoryboardSegue) {}
+
+    @IBAction func onLoginBtnClicked(_ sender: Any) {
+        if (TFEmail.text?.isEmpty)! {
+            return
+        } else if (TFPassword.text?.isEmpty)! {
+            return
+        }
+        APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!) { (isSuccess) in
+            if isSuccess {
+                self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+            } else {
+                print("Login failed")
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,5 +49,13 @@ class MainViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 }

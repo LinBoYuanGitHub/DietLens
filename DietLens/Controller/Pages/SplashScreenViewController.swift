@@ -17,28 +17,22 @@ class SplashScreenViewController: UIViewController {
         APIService.instance.getArticleList { (articleList) in
             if articleList != nil {
                 self.articleDatamanager.articleList = articleList!
+            }
+        }
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        var userId = preferences.object(forKey: key)
+        if userId == nil {
+            APIService.instance.getUUIDRequest { (_) in
+                DispatchQueue.main.async {
+                     self.performSegue(withIdentifier: "toMainPage", sender: self)
+                }
+            }
+        } else {
+            DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "toMainPage", sender: self)
             }
         }
-
-        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
-
-            guard authorized else {
-
-                let baseMessage = "HealthKit Authorization Failed"
-
-                if let error = error {
-                    print("\(baseMessage). Reason: \(error.localizedDescription)")
-                } else {
-                    print(baseMessage)
-                }
-
-                return
-            }
-
-            print("HealthKit Successfully Authorized.")
-        }
-
         // Do any additional setup after loading the view.
     }
 
@@ -56,7 +50,7 @@ class SplashScreenViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? HomeViewController {
-            dest.articleDatamanager.articleList = self.articleDatamanager.articleList
+
         }
     }
 
