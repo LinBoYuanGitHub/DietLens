@@ -33,9 +33,18 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
+
         self.revealViewController()!.delegate = self
         self.revealViewController()!.toggleAnimationType = .crossDissolve
+        self.revealViewController()!.leftViewShadowOpacity = 0
         // Do any additional setup after loading the view.
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        for subview in sideMenuTable.subviews where subview is UIVisualEffectView {
+            subview.alpha = 0
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,9 +59,9 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "menuButtonCell") as? SideMenuCell {
             cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!)
-            if indexPath.row == DataService.instance.screenUserIsIn {
-                cell.cellSelected()
-            }
+            //if indexPath.row == DataService.instance.screenUserIsIn {
+               // cell.cellSelected()
+            //}
             return cell
         }
         return UITableViewCell()
@@ -62,9 +71,11 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         print ("item \(labels[indexPath.row]) was selected!")
         tableView.deselectRow(at: indexPath, animated: true)
         self.revealViewController()!.revealLeftView()
-        DataService.instance.screenUserIsIn = indexPath.row
+        DataService.instance.screenUserIsIn = 0
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var controller: UIViewController?
+
+        // deselect food diary
 
         if labels[indexPath.row] == "Logout" {
             controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
