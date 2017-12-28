@@ -31,7 +31,7 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         if listOfArticles.count >= 3 {
             return 3
         } else {
-            return 0
+            return listOfArticles.count
         }
     }
 
@@ -39,8 +39,9 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsArticleCell {
             cell.newsTitle.text = listOfArticles[indexPath.row].articleTitle
             cell.newsImage.image = #imageLiteral(resourceName: "loading_img")
-            cell.newsImage.af_setImage(withURL: URL(string: listOfArticles[indexPath.row].articleImageURL)!)
-
+            if listOfArticles[indexPath.row].articleImageURL != ""{
+                cell.newsImage.af_setImage(withURL: URL(string: listOfArticles[indexPath.row].articleImageURL)!)
+            }
             return cell
         } else {
             return NewsArticleCell()

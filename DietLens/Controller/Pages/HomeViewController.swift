@@ -107,16 +107,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             self.proteinLabel.text = "\(Int(dailyProtein))g of 100g"
         }, completion: nil)
-
-        UIView.animate(withDuration: 1.7, delay: 1.2, options: .curveEaseIn, animations: {
-        if dailyCarb > 300 {
-            self.carbohydrateProgressBar.setProgress(1, animated: true)
-            self.carboLabel.textColor = UIColor.red
-        } else {
-            self.carbohydrateProgressBar.setProgress(dailyCarb/300, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+            UIView.animate(withDuration: 1, delay: 1, options: .curveEaseIn, animations: {
+                if dailyCarb > 300 {
+                    self.carbohydrateProgressBar.setProgress(1, animated: true)
+                    self.carboLabel.textColor = UIColor.red
+                } else {
+                    self.carbohydrateProgressBar.setProgress(dailyCarb/300, animated: true)
+                }
+                self.carboLabel.text = "\(Int(dailyCarb))g of 300g"
+            }, completion: nil)
         }
-        self.carboLabel.text = "\(Int(dailyCarb))g of 300g"
-        }, completion: nil)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

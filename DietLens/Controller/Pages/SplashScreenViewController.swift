@@ -43,7 +43,7 @@ class SplashScreenViewController: UIViewController {
         healthStore = HKHealthStore()
 
         // Query to get the user's latest weight, if it exists.
-        let stepsCompletion: ((Double, Error?) -> Void) = {
+        let stepsCompletion: (([Double], Error?) -> Void) = {
 
             (totalStepsForDay, error) -> Void in
 

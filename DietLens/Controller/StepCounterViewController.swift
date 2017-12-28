@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import HealthKit
 class StepCounterViewController: UIViewController {
 
     @IBOutlet weak var standardLabel: UILabel!
 
     @IBOutlet weak var stepCounterTable: UITableView!
+
+    var stepsList = [StepEntity]()
 
     override func viewDidLoad() {
         stepCounterTable.delegate = self
@@ -36,10 +39,28 @@ class StepCounterViewController: UIViewController {
                 }
                 return
             }
-
-            print("HealthKit Successfully Authorized.")
+            self.requestStepData()
         }
 
+    }
+
+    func getMaxValue() -> Double {
+        var max: Double = 0.0
+        for stepEntity in stepsList {
+            if stepEntity.stepValue > max {
+                max = stepEntity.stepValue
+            }
+        }
+        return max
+    }
+
+    func requestStepData() {
+        HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: Date()) { (steps, _) in
+            self.stepsList = steps
+            DispatchQueue.main.async {
+                 self.stepCounterTable.reloadData()
+            }
+        }
     }
 
 }
@@ -47,11 +68,21 @@ class StepCounterViewController: UIViewController {
 extension StepCounterViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return stepsList.count
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        //
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "stepCounterCell") as? StepCounterCell {
+            cell.setupCell(stepEntity: stepsList[indexPath.row], maxValue: self.getMaxValue())
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 
 }

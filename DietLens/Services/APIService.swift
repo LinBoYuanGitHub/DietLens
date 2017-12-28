@@ -19,7 +19,7 @@ class APIService {
     public func getUUIDRequest(completion: @escaping (_ isSuccess: Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.getUUidURL)!,
-            method: .get,
+            method: .post,
             parameters: nil,
             encoding: JSONEncoding.default,
             headers: [:])
@@ -223,8 +223,12 @@ class APIService {
                     return
                 }
                 let jsonObject = JSON(scanResult)
-                let barcodeScanResult = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
-                completion(barcodeScanResult)
+                if jsonObject == nil {
+                    completion(nil)
+                } else {
+                    let barcodeScanResult = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
+                    completion(barcodeScanResult)
+                }
         }
     }
 

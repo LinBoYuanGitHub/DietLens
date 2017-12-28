@@ -56,8 +56,12 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
 
         let imageView = UIImageView()
         //imageView.image = image
-        imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil,
-                              imageTransition: .crossDissolve(0.5))
+        if articleData?.articleImageURL != ""{
+            imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil,
+                                  imageTransition: .crossDissolve(0.5))
+        } else {
+            imageView.image = #imageLiteral(resourceName: "runner")
+        }
         imageView.contentMode = .scaleAspectFill
         parallaxHeaderView = imageView
 

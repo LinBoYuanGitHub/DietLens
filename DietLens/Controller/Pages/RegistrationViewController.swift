@@ -17,7 +17,10 @@ class RegistrationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        TFNickName.delegate = self
+        TFRePassword.delegate = self
+        TFEmail.delegate = self
+        TFPassword.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -34,15 +37,19 @@ class RegistrationViewController: UIViewController {
     @IBAction func signUpButtonPressed(_ sender: Any) {
         if (TFNickName.text?.isEmpty)! {
             print("please fill in nick name")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in nick")
             return
         } else if (TFEmail.text?.isEmpty)! {
             print("please fill in email")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in email")
             return
         } else if (TFPassword.text?.isEmpty)! {
-            print("please fill in password")
+             print("please fill in password")
+             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in password")
             return
         } else if TFRePassword.text != TFPassword.text {
-            print("confirm password again please")
+            print("please confirm password again")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
             return
         } else {
             APIService.instance.register(uuid: "String", nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
@@ -52,6 +59,7 @@ class RegistrationViewController: UIViewController {
                     self.present(vc, animated: true, completion: nil)
                 } else {
                     print("register failed")
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "register failed")
                 }
             })
         }

@@ -28,7 +28,9 @@ class HealthKitSetupAssistant {
               let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
               let height = HKObjectType.quantityType(forIdentifier: .height),
               let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
-              let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else {
+              let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
+              let steps = HKObjectType.quantityType(forIdentifier: .stepCount) else {
+
                 completion(false, HealthkitSetupError.dataTypeNotAvailable)
                 return
         }
@@ -79,7 +81,6 @@ extension HKHealthStore {
         }
 
         let query = HKStatisticsQuery(quantityType: HKQuantityType.quantityType(forIdentifier: .stepCount)!, quantitySamplePredicate: predicate, options: HKStatisticsOptions.cumulativeSum, completionHandler: completionHandler)
-
         self.execute(query)
     }
 
@@ -107,17 +108,17 @@ extension HKHealthStore {
         self.execute(query)
     }
 
-    func getStepsForWeekGivenDate(anyDayOfTheWeek date: Date, completion completionHandler: ((Double, Error?) -> Void)?) {
+    func getStepsForWeekGivenDate(anyDayOfTheWeek date: Date, completion completionHandler: (([Double], Error?) -> Void)?) {
         let calendar = Calendar.current
 
         var comp = calendar.dateComponents([.weekOfYear, .yearForWeekOfYear], from: date)
-        comp.weekday = 3 // Monday, 1 is Sunday, 0 is Sat
+        comp.weekday = 2 // Monday, 1 is Sunday, 0 is Sat
         let startDate = calendar.startOfDay(for: calendar.date(from: comp)!)
         let endOfWeekDate = calendar.date(byAdding: .day, value: 6, to: startDate)!
 
         let today = calendar.date(byAdding: Calendar.Component.day, value: 1, to: Date())!
         var endDate: Date
-        if(endOfWeekDate > today) {
+        if endOfWeekDate > today {
             endDate = calendar.date(byAdding: Calendar.Component.day, value: 1, to: Date())!
         } else {
             endDate = calendar.date(byAdding: Calendar.Component.day, value: 1, to: endOfWeekDate)!
@@ -125,20 +126,75 @@ extension HKHealthStore {
 
         let predicate: NSPredicate = HKQuery.predicateForSamples(withStart: startDate, end: endDate, options: HKQueryOptions.strictStartDate)
 
-        let completionHandler: (HKStatisticsQuery, HKStatistics?, Error?) -> Void = {
-            (_, result, error) -> Void in
-
-            let sum: HKQuantity? = result!.sumQuantity()
-
+        let completionHandler: (HKSampleQuery, [HKSample]?, Error?) -> Void = {
+            (_, results, error) -> Void in
+            var steps = [Double]()
+            if results!.count > 0 {
+                for result in results as! [HKQuantitySample] {
+                    steps.append(result.quantity.doubleValue(for: HKUnit.count()))
+                }
+            }
             if completionHandler != nil {
-                let value: Double = (sum != nil) ? sum!.doubleValue(for: HKUnit.count()) : 0
-
-                completionHandler!(value, error)
+                completionHandler!(steps, error)
             }
         }
+        let query = HKSampleQuery(sampleType: HKQuantityType.quantityType(forIdentifier: .stepCount)!, predicate: predicate, limit: 0, sortDescriptors: nil, resultsHandler: completionHandler)
+        self.execute(query)
+    }
 
-        let query = HKStatisticsQuery(quantityType: HKQuantityType.quantityType(forIdentifier: .stepCount)!, quantitySamplePredicate: predicate, options: HKStatisticsOptions.cumulativeSum, completionHandler: completionHandler)
+    func getWeeklyStepsCountList(anyDayOfTheWeek date: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
+        let calendar = Calendar.current
+        var interval = DateComponents()
+        interval.day = 1
+        var anchorComponents = calendar.dateComponents([.day, .month, .year, .weekday], from: Date())
+//        let offset = (7 + anchorComponents.weekday! - 2) % 7
+//        anchorComponents.day! -= offset
+        anchorComponents.hour = 8
+        guard let anchorDate = calendar.date(from: anchorComponents) else {
+            fatalError("*** unable to create a valid date from the given components ***")
+        }
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
+            fatalError("*** Unable to create a step count type ***")
+        }
+        // Create the query
+        let query = HKStatisticsCollectionQuery(quantityType: quantityType,
+                                                quantitySamplePredicate: nil,
+                                                options: .cumulativeSum,
+                                                anchorDate: anchorDate,
+                                                intervalComponents: interval)
+        // Set the results handler
+        query.initialResultsHandler = {
+            query, results, error in
 
+            guard let statsCollection = results else {
+                // Perform proper error handling here
+                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
+                if completionHandler != nil {
+                    completionHandler!([], error)
+                }
+            }
+            let endDate = Date()
+            guard let startDate = calendar.date(byAdding: .day, value: -7, to: endDate)
+                else {
+                    fatalError("*** Unable to calculate the start date ***")
+                    if completionHandler != nil {
+                        completionHandler!([], error)
+                    }
+            }
+            var stepList = [StepEntity]()
+            // Plot the weekly step counts over the past 3 months
+            statsCollection.enumerateStatistics(from: startDate, to: endDate) { [unowned self] statistics, _ in
+
+                if let quantity = statistics.sumQuantity() {
+                    let date = statistics.startDate
+                    let value = quantity.doubleValue(for: HKUnit.count())
+                    let stepEntity = StepEntity(date: date, stepValue: value)
+                    // Call a custom method to plot each data point.
+                    stepList.append(stepEntity)
+                }
+            }
+            completionHandler!(stepList, error)
+        }
         self.execute(query)
     }
 

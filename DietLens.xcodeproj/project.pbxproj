@@ -24,6 +24,9 @@
 		3F6CF82A1FD8FABC00D7556E /* PlainTextTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */; };
 		3F8A69E61FE267E8005B83B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A69E51FE267E7005B83B0 /* GoogleService-Info.plist */; };
 		3F9BFE5C1FF0D4E40011845B /* StepCounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE5B1FF0D4E40011845B /* StepCounterViewController.swift */; };
+		3F9BFE981FF34CF20011845B /* StepEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE971FF34CF20011845B /* StepEntity.swift */; };
+		3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE991FF36D8A0011845B /* StepCounterCell.swift */; };
+		3F9BFE9C1FF3957C0011845B /* AlertMessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */; };
 		3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
@@ -147,6 +150,9 @@
 		3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextTableAdapter.swift; sourceTree = "<group>"; };
 		3F8A69E51FE267E7005B83B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F9BFE5B1FF0D4E40011845B /* StepCounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StepCounterViewController.swift; path = DietLens/Controller/StepCounterViewController.swift; sourceTree = SOURCE_ROOT; };
+		3F9BFE971FF34CF20011845B /* StepEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepEntity.swift; sourceTree = "<group>"; };
+		3F9BFE991FF36D8A0011845B /* StepCounterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCounterCell.swift; sourceTree = "<group>"; };
+		3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageHelper.swift; sourceTree = "<group>"; };
 		3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewController.swift; sourceTree = "<group>"; };
 		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
 		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
@@ -426,6 +432,7 @@
 				3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */,
 				5841A5061FCE5939006201C5 /* Notification.swift */,
 				3F43DACB1FEB661800A3685A /* ReportEntity.swift */,
+				3F9BFE971FF34CF20011845B /* StepEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -451,6 +458,8 @@
 				3F43DAC71FE79BC400A3685A /* GraphView.swift */,
 				3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */,
 				3F43DACD1FEBB04600A3685A /* CardView.swift */,
+				3F9BFE991FF36D8A0011845B /* StepCounterCell.swift */,
+				3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -914,6 +923,7 @@
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
 				3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */,
 				588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */,
+				3F9BFE9C1FF3957C0011845B /* AlertMessageHelper.swift in Sources */,
 				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
 				3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */,
@@ -935,11 +945,13 @@
 				3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
 				581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
 				587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */,
+				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
+				3F9BFE981FF34CF20011845B /* StepEntity.swift in Sources */,
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
 				58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */,
 				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,

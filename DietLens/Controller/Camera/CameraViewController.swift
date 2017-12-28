@@ -122,11 +122,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
             // upload result and callback
             self.loadingScreen.alpha = 0
-            self.foodResults = results
-            self.recordType = "recognition"
-            self.performSegue(withIdentifier: "test", sender: self)
+            if results == nil || results?.count == 0 {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+            } else {
+                self.foodResults = results
+                self.recordType = "recognition"
+                self.performSegue(withIdentifier: "test", sender: self)
+            }
             self.hideReview()
-
         }
     }
 

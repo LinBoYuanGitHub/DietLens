@@ -1773,9 +1773,8 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uG-A9-UbY">
-                                <rect key="frame" x="16" y="20" width="20" height="25"/>
+                                <rect key="frame" x="16" y="20" width="50" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="H5M-cN-qmD"/>
                                     <constraint firstAttribute="height" constant="25" id="fre-wN-zKR"/>
                                 </constraints>
                                 <color key="tintColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1794,18 +1793,68 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                 <color key="textColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MC8-5B-dcd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MC8-5B-dcd">
                                 <rect key="frame" x="16" y="167" width="343" height="500"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCounterCell" id="JCE-gR-3gk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCounterCell" id="JCE-gR-3gk" customClass="StepCounterCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JCE-gR-3gk" id="2km-vC-Zse">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ena-wT-blD" userLabel="DisplayView">
+                                                    <rect key="frame" x="-0.5" y="0.0" width="343" height="40"/>
+                                                    <subviews>
+                                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qNv-aY-nbR">
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="41"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <color key="progressTintColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </progressView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bye-QD-OAV">
+                                                            <rect key="frame" x="-0.5" y="10" width="42" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="qNv-aY-nbR" firstAttribute="centerY" secondItem="ena-wT-blD" secondAttribute="centerY" id="0o3-5H-lzD"/>
+                                                        <constraint firstAttribute="height" constant="40" id="GbO-ga-15p"/>
+                                                        <constraint firstItem="qNv-aY-nbR" firstAttribute="width" secondItem="ena-wT-blD" secondAttribute="width" id="LiI-Is-QiN"/>
+                                                        <constraint firstItem="bye-QD-OAV" firstAttribute="leading" secondItem="ena-wT-blD" secondAttribute="leading" id="TV0-Vf-Gun"/>
+                                                        <constraint firstItem="qNv-aY-nbR" firstAttribute="height" secondItem="ena-wT-blD" secondAttribute="height" id="f5Q-1s-OyU"/>
+                                                        <constraint firstItem="qNv-aY-nbR" firstAttribute="centerX" secondItem="ena-wT-blD" secondAttribute="centerX" id="nfV-Vg-vRg"/>
+                                                        <constraint firstItem="bye-QD-OAV" firstAttribute="centerY" secondItem="ena-wT-blD" secondAttribute="centerY" id="w4s-Wv-Jnk"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1du-Hp-dzf" userLabel="BlankView">
+                                                    <rect key="frame" x="-0.5" y="40" width="343" height="20"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="vd3-5T-OL5"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1du-Hp-dzf" firstAttribute="top" secondItem="ena-wT-blD" secondAttribute="bottom" id="9mc-If-z2d"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="ena-wT-blD" firstAttribute="top" secondItem="JCE-gR-3gk" secondAttribute="top" id="9rk-wC-qcb"/>
+                                            <constraint firstItem="1du-Hp-dzf" firstAttribute="width" secondItem="JCE-gR-3gk" secondAttribute="width" id="Dbi-Nn-wGr"/>
+                                            <constraint firstItem="ena-wT-blD" firstAttribute="width" secondItem="JCE-gR-3gk" secondAttribute="width" id="VrQ-rR-W5c"/>
+                                            <constraint firstItem="ena-wT-blD" firstAttribute="centerX" secondItem="JCE-gR-3gk" secondAttribute="centerX" id="fFA-gC-gMX"/>
+                                            <constraint firstItem="1du-Hp-dzf" firstAttribute="centerX" secondItem="JCE-gR-3gk" secondAttribute="centerX" id="meB-J6-yHf"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="cellProgressView" destination="qNv-aY-nbR" id="jqx-on-FW4"/>
+                                            <outlet property="cellText" destination="bye-QD-OAV" id="0ZK-ag-KIN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -2315,7 +2364,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="signUpButtonPressed:" destination="hOM-6c-ZpG" eventType="touchUpInside" id="d3H-ei-665"/>
+                                    <action selector="signUpButtonPressed:" destination="hOM-6c-ZpG" eventType="touchUpInside" id="WuG-sp-SUZ"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="M1t-Zg-juw">
@@ -2340,7 +2389,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="signInButtonPressed:" destination="hOM-6c-ZpG" eventType="touchUpInside" id="CI6-Fw-h1y"/>
+                                            <action selector="signInButtonPressed:" destination="hOM-6c-ZpG" eventType="touchUpInside" id="dbC-M4-J0X"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2370,7 +2419,6 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                         <outlet property="TFNickName" destination="i2A-od-LDc" id="o71-Pq-coa"/>
                         <outlet property="TFPassword" destination="lXr-mC-mUd" id="9PA-hj-Wy9"/>
                         <outlet property="TFRePassword" destination="cXW-dO-cWj" id="A6M-qi-nZB"/>
-                        <outlet property="signUpPressed" destination="EyN-mF-vfw" id="vqt-bK-zKR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHs-Ov-OZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
