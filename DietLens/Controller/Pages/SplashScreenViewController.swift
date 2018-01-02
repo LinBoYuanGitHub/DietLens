@@ -17,26 +17,42 @@ class SplashScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.object(forKey: key)
+        if userId == nil {
+            APIService.instance.getUUIDRequest { (userId) in
+                let preferences = UserDefaults.standard
+                let key = "userId"
+                preferences.setValue(userId, forKey: key)
+                let didSave = preferences.synchronize()
+                if !didSave {
+                    print("Couldn`t save,fatal exception happened")
+                } else {
+                    print("userId:\(userId)")
+                }
+                self.getArticleListToMainPage()
+            }
+        } else {
+           getArticleListToMainPage()
+        }
+        // Do any additional setup after loading the view.
+    }
+
+    func getArticleListToMainPage() {
         APIService.instance.getArticleList { (articleList) in
             if articleList != nil {
                 self.articleDatamanager.articleList = articleList!
-            }
-        }
-        let preferences = UserDefaults.standard
-        let key = "userId"
-        var userId = preferences.object(forKey: key)
-        if userId == nil {
-            APIService.instance.getUUIDRequest { (_) in
                 DispatchQueue.main.async {
-                     self.performSegue(withIdentifier: "toMainPage", sender: self)
+                    self.performSegue(withIdentifier: "toMainPage", sender: self)
+                }
+            } else {
+                //TODO: handle article list nil
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "toMainPage", sender: self)
                 }
             }
-        } else {
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "toMainPage", sender: self)
-            }
         }
-        // Do any additional setup after loading the view.
     }
 
     func loadSteps() {

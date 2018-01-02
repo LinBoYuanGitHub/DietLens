@@ -35,6 +35,37 @@ class SettingViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+
+    @IBAction func logout(_ sender: Any) {
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        if userId == nil {
+            //no userId cannot Logout
+            return
+        }
+        //request new userId
+        APIService.instance.getUUIDRequest { (userID) in
+            preferences.setValue(userID, forKey: key)
+            let didSave = preferences.synchronize()
+            if !didSave {
+                print("Couldn`t save,fatal exception happened")
+            } else {
+                DispatchQueue.main.async {
+                    self.clearPersonalData()
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+                    self.present(controller, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+
+    func clearPersonalData() {
+        let preferences = UserDefaults.standard
+        let nicknameKey = "nickname"
+        preferences.setValue(nil, forKey: nicknameKey)
+    }
     /*
     // MARK: - Navigation
 

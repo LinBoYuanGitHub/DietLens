@@ -12,6 +12,8 @@ import PBRevealViewController
 class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PBRevealViewControllerDelegate {
 
     @IBOutlet weak var sideMenuTable: UITableView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var clickToEditLabel: UILabel!
 
 //    let labels: [String] = ["Home", "Food Diary", "Report", "Articles", "Steps Counter", "Browser"]
 //    let iconNames: [String] = ["checkmark", "Report", "ReportIcon", "ArticleIcon", "Steps", "browser"]
@@ -36,6 +38,14 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         self.revealViewController()!.delegate = self
         self.revealViewController()!.toggleAnimationType = .crossDissolve
         // Do any additional setup after loading the view.
+        //set nickname
+        let preferences = UserDefaults.standard
+        let nicknameKey = "nickname"
+        let nickname =  preferences.string(forKey: nicknameKey)
+        if nickname != nil {
+            clickToEditLabel.isHidden = true
+            userNameLabel.text = nickname
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,7 +107,15 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     }
     @IBAction func profileButtonPressed(_ sender: Any) {
         print("Go to profile page")
-        performSegue(withIdentifier: "menuToLogin", sender: nil)
+        let preferences = UserDefaults.standard
+        let nicknameKey = "nickname"
+        let nickname =  preferences.string(forKey: nicknameKey)
+        if nickname == nil {
+             performSegue(withIdentifier: "menuToLogin", sender: nil)
+        } else {
+            //TODO to edit profile
+        }
+
     }
     /*
     // MARK: - Navigation

@@ -257,6 +257,12 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
 
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let currentDate = calendar.currentPage
+        loadDaysRecordedFromDiary(date: currentDate)
+        diaryCalendar.reloadData()
+    }
+
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
 
         //print("calendar did select date \(self.formatter.string(from: date))")

@@ -52,7 +52,10 @@ class RegistrationViewController: UIViewController {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
             return
         } else {
-            APIService.instance.register(uuid: "String", nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
+            let preferences = UserDefaults.standard
+            let key = "userId"
+            let userId = preferences.string(forKey: key)
+            APIService.instance.register(uuid: userId!, nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
                 if isSucceed {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "mainSlideMenuVC") as! MainSlideMenuViewController

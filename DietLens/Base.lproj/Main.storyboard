@@ -177,7 +177,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="98" y="87" width="180" height="60"/>
+                                <rect key="frame" x="97.5" y="87" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -436,7 +436,9 @@
                     <navigationItem key="navigationItem" title="Diary" id="q1V-rG-kgf"/>
                     <size key="freeformSize" width="250" height="667"/>
                     <connections>
+                        <outlet property="clickToEditLabel" destination="C3L-dU-4e1" id="zvR-pJ-Ls4"/>
                         <outlet property="sideMenuTable" destination="bFN-da-djy" id="sgs-cS-1Kr"/>
+                        <outlet property="userNameLabel" destination="C1f-1h-rBO" id="B2o-QK-QNp"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="menuToLogin" id="skB-Wa-j6S"/>
                     </connections>
                 </viewController>
@@ -1402,9 +1404,6 @@ Click add to record food~</string>
                     <navigationItem key="navigationItem" title="DietLens" id="xKh-FD-m6R">
                         <barButtonItem key="leftBarButtonItem" title="sideMenu" image="SideMenu" id="Ehb-RR-J6W">
                             <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                            <connections>
-                                <action selector="openSideMenu:" destination="xZk-St-05l" id="yXZ-Hu-2Hg"/>
-                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="foodDiary" image="Notification" id="bjg-aR-xjs">
                             <color key="tintColor" red="0.40350055689999997" green="0.40789309140000002" blue="0.4076195359" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1468,11 +1467,11 @@ Click add to record food~</string>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="322" id="KDW-BW-GQ8" customClass="NewsArticleTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="343" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDW-BW-GQ8" id="fmm-2w-8di">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDW-BW-GQ8" id="fmm-2w-8di">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="322"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kid" translatesAutoresizingMaskIntoConstraints="NO" id="Wdd-4O-WgZ" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="kid" translatesAutoresizingMaskIntoConstraints="NO" id="Wdd-4O-WgZ" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="25" width="343" height="180"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="180" id="hNK-ak-PB9"/>
@@ -1483,7 +1482,7 @@ Click add to record food~</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu," selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pd9-0G-lto" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu," selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pd9-0G-lto" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="213" width="313" height="32"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -1496,11 +1495,14 @@ Click add to record food~</string>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-Xs-lcO" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-Xs-lcO" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="245" width="313" height="77"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                     </accessibility>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="dtV-aN-QLy"/>
+                                                    </constraints>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimemt ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
@@ -2105,6 +2107,9 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                                 <state key="normal" title="Sign Out">
                                                     <color key="titleColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="logout:" destination="lri-UG-LWD" eventType="touchUpInside" id="rRe-op-mc3"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sra-3L-lnL">
                                                 <rect key="frame" x="0.0" y="47" width="343" height="1"/>
@@ -3006,7 +3011,7 @@ A
         <image name="wechat" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gFb-lA-J3h"/>
-        <segue reference="NAD-8N-HRw"/>
+        <segue reference="Rjr-kT-kMW"/>
+        <segue reference="8Rw-F9-HXm"/>
     </inferredMetricsTieBreakers>
 </document>

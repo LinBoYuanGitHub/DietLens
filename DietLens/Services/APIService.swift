@@ -16,7 +16,7 @@ class APIService {
 
     }
 
-    public func getUUIDRequest(completion: @escaping (_ isSuccess: Bool) -> Void) {
+    public func getUUIDRequest(completion: @escaping (_ userId: String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.getUUidURL)!,
             method: .post,
@@ -27,26 +27,22 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("request UUID Failed due to : \(String(describing: response.result.error))")
-                    completion(false)
+                    completion("")
                     return
                 }
                 guard let value = response.result.value else {
                     print("Login Failed due to : Server Data Type Error")
-                    completion(false)
+                    completion("")
                     return
                 }
                 let jsonObj = JSON(value)
-                let userId = jsonObj["user_id"].stringValue
-                let preferences = UserDefaults.standard
-                let key = "userId"
-                preferences.setValue(userId, forKey: key)
-                let didSave = preferences.synchronize()
-                if !didSave {
-                    print("Couldn`t save,fatal exception happened")
+                if jsonObj["status"] == "HTTP_200_OK"{
+                     let userId = jsonObj["data"]["id"].stringValue
+                    completion(userId)
                 } else {
-                    print("userId:\(userId)")
+                    completion("")
                 }
-                completion(true)
+
         }
     }
 
@@ -54,7 +50,7 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.userLoginURL)!,
             method: .post,
-            parameters: ["email": userEmail, "pwd": password],
+            parameters: ["email": userEmail, "password": password],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -65,7 +61,13 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(response.result.value)
-                if jsonObj["message"] == "Success"{
+                if jsonObj["status"] == "HTTP_200_OK"{
+                    //save uuid & nickname, TODO change to save user object
+                    let preferences = UserDefaults.standard
+                    let key = "userId"
+                    let nicknameKey = "nickname"
+                    preferences.setValue(jsonObj["data"]["uuid"].stringValue, forKey: key)
+                    preferences.setValue(jsonObj["data"]["nickname"].stringValue, forKey: nicknameKey)
                     completion(true)
                 } else {
                     completion(false)
@@ -116,7 +118,7 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(response.result.value)
-                if jsonObj["message"] == "Success"{
+                if jsonObj["status"] == "HTTP_200_OK"{
                      completion(true)
                 } else {
                      completion(false)
@@ -258,6 +260,34 @@ class APIService {
                 print(encodingError)
                 completion(nil)
             }
+        }
+    }
+
+    public func saveDeviceToken(httpMethod: HTTPMethod, uuid: String, fcmToken: String, status: String, completion: @escaping (Bool?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.userURL+"/\(uuid)/device")!,
+            method: httpMethod,
+            parameters: ["token": fcmToken, "status": status, "device_type": "ios"],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("save device token failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("save device token failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObject = JSON(scanResult)
+                if jsonObject == nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
         }
     }
 

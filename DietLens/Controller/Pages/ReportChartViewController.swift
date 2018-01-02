@@ -20,6 +20,9 @@ class ReportChartViewController: UIViewController {
     var proteinList = [Float]()
     var fatList = [Float]()
 
+    var graphDataDict: [String: Double] = [:]
+    var graphDataSortedKeys = [String]()
+
     override func viewDidLoad() {
         reportTableView.delegate = self
         reportTableView.dataSource  = self
@@ -59,8 +62,10 @@ class ReportChartViewController: UIViewController {
         let diaryDateFormatter = DateFormatter()
         diaryDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMM")
         let dateString: String = diaryDateFormatter.string(from: Date())
-        let year = String(dateString[4...])
-        let month = String(dateString[..<3])
+//        let year = String(dateString[4...])
+//        let month = String(dateString[..<3])
+        let year = "2017"
+        let month = "Dec"
         let foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(year), month: String(month))
         setUpData(foodDiaryList: foodDiaryList!)
     }
@@ -80,7 +85,11 @@ class ReportChartViewController: UIViewController {
         var fatSum: Float = 0
 
         for foodDiary in foodDiaryList {
-
+            if graphDataDict[foodDiary.mealTime] == nil {
+                graphDataDict[foodDiary.mealTime] = foodDiary.calorie
+            } else {
+                graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + foodDiary.calorie
+            }
             calorieList.append(Float(foodDiary.calorie))
             carbohydrateList.append(Float(foodDiary.carbohydrate)!)
             proteinList.append(Float(foodDiary.protein)!)
@@ -94,7 +103,7 @@ class ReportChartViewController: UIViewController {
         carbohydrateAverage = Int(carbohydrateSum/Float(carbohydrateList.count))
         proteinAverage = Int(proteinSum/Float(proteinList.count))
         fatAverage = Int(fatSum/Float(fatList.count))
-
+        graphDataSortedKeys = Array(graphDataDict.keys).sorted(by: <)
         reportList.append(ReportEntity(name: "Average Calories(kcal):", value: String(calorieAverage), standard: "2600"))
         reportList.append(ReportEntity(name: "Average Carbs(g):", value: String(carbohydrateAverage), standard: "300"))
         reportList.append(ReportEntity(name: "Average Protein(g):", value: String(proteinAverage), standard: "100"))
@@ -131,19 +140,22 @@ extension ReportChartViewController: ScrollableGraphViewDataSource {
 
     func value(forPlot plot: Plot, atIndex pointIndex: Int) -> Double {
         // Return the data for each plot.
-        switch(plot.identifier) {
+        switch plot.identifier {
         case "line":
-            return Double(calorieList[pointIndex])
+//            return Array(graphDataDict.values)[pointIndex]
+            return graphDataDict[graphDataSortedKeys[pointIndex]]!
         default:
             return 0
         }
     }
 
     func label(atIndex pointIndex: Int) -> String {
-        return "FEB \(pointIndex)"
+//        let result = String(Array(graphDataDict.keys)[pointIndex].prefix(7))
+        let result = graphDataSortedKeys[pointIndex].prefix(7)
+        return String(result)
     }
 
     func numberOfPoints() -> Int {
-        return calorieList.count
+        return graphDataDict.count
     }
 }

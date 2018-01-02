@@ -119,7 +119,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             self.loadingScreen.alpha = 1
         }, completion: nil)
         let imgData = UIImageJPEGRepresentation(chosenImageView.image!, 0.2)!
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!) {(results) in
             // upload result and callback
             self.loadingScreen.alpha = 0
             if results == nil || results?.count == 0 {
@@ -209,10 +212,12 @@ extension CameraViewController: CameraViewControllerDelegate {
         case .photo:
             activeButton = photoButton
             capturePhotoButton.isHidden = false
+            focusViewImg.isHidden = false
             removeBarScannerLine()
         case .barcode:
             activeButton = barcodeButton
             capturePhotoButton.isHidden = true
+            focusViewImg.isHidden = true
             addBarScannerLine()
         }
 

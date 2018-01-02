@@ -56,7 +56,7 @@ class FoodDiaryDBOperation {
     func getFoodDiaryByMonth(year: String, month: String) -> [FoodDiary]? {
         var results = [FoodDiary]()
         try! realm.write {
-            let foodDiarys = realm.objects(FoodDiary.self).filter("mealTime CONTAINS '\(month+" "+year)'")
+            let foodDiarys = realm.objects(FoodDiary.self).filter("mealTime CONTAINS '\(month+" "+year)'").sorted(byKeyPath: "mealTime", ascending: false)
             for foodDiary in foodDiarys {
                 results.append(foodDiary)
             }
