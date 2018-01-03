@@ -122,7 +122,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!) {(results) in
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
             // upload result and callback
             self.loadingScreen.alpha = 0
             if results == nil || results?.count == 0 {

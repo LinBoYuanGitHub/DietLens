@@ -13,6 +13,7 @@ import ScrollableGraphView
 class ReportChartViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var reportTableView: UITableView!
+    @IBOutlet weak var lineLabel: UILabel!
 
     var reportList = [ReportEntity]()
     var calorieList = [Float]()
@@ -23,15 +24,20 @@ class ReportChartViewController: UIViewController {
     var graphDataDict: [String: Double] = [:]
     var graphDataSortedKeys = [String]()
 
+    var foodDiaryList = [FoodDiary]()
+
+    var graphView: ScrollableGraphView!
+
     override func viewDidLoad() {
         reportTableView.delegate = self
         reportTableView.dataSource  = self
+        reportTableView.bounces = false
         loadReportData()
         initGraphView()
     }
 
     func initGraphView() {
-        let graphView = ScrollableGraphView(frame: containerView.frame, dataSource: self)
+        graphView = ScrollableGraphView(frame: containerView.frame, dataSource: self)
         let linePlot = LinePlot(identifier: "line") // Identifier should be unique for each plot.
         linePlot.lineStyle = .smooth
         linePlot.lineColor = .white
@@ -66,11 +72,11 @@ class ReportChartViewController: UIViewController {
 //        let month = String(dateString[..<3])
         let year = "2017"
         let month = "Dec"
-        let foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(year), month: String(month))
-        setUpData(foodDiaryList: foodDiaryList!)
+        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(year), month: String(month))!
+        setUpData(type: "calorie")
     }
 
-    func setUpData(foodDiaryList: [FoodDiary]) {
+    func setUpData(type: String) {
         if foodDiaryList.count == 0 {
             return
         }
@@ -83,12 +89,36 @@ class ReportChartViewController: UIViewController {
         var carbohydrateSum: Float = 0
         var proteinSum: Float = 0
         var fatSum: Float = 0
-
+        graphDataDict.removeAll()
+        reportList.removeAll()
         for foodDiary in foodDiaryList {
-            if graphDataDict[foodDiary.mealTime] == nil {
-                graphDataDict[foodDiary.mealTime] = foodDiary.calorie
-            } else {
-                graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + foodDiary.calorie
+            switch type {
+            case "calorie":
+                    if graphDataDict[foodDiary.mealTime] == nil {
+                        graphDataDict[foodDiary.mealTime] = foodDiary.calorie
+                    } else {
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + foodDiary.calorie
+                    }
+            case "carbo":
+                    if graphDataDict[foodDiary.mealTime] == nil {
+                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.carbohydrate)
+                    } else {
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.carbohydrate)!
+                    }
+            case "protein":
+                    if graphDataDict[foodDiary.mealTime] == nil {
+                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.protein)
+                    } else {
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.protein)!
+                    }
+            case "fat":
+                    if graphDataDict[foodDiary.mealTime] == nil {
+                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.fat)
+                    } else {
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.fat)!
+                    }
+            default:
+                break
             }
             calorieList.append(Float(foodDiary.calorie))
             carbohydrateList.append(Float(foodDiary.carbohydrate)!)
@@ -99,10 +129,10 @@ class ReportChartViewController: UIViewController {
             proteinSum += Float(foodDiary.protein)!
             fatSum += Float(foodDiary.fat)!
         }
-        calorieAverage = Int(calorieSum/Float(calorieList.count))
-        carbohydrateAverage = Int(carbohydrateSum/Float(carbohydrateList.count))
-        proteinAverage = Int(proteinSum/Float(proteinList.count))
-        fatAverage = Int(fatSum/Float(fatList.count))
+        calorieAverage = Int(calorieSum/Float(graphDataDict.count))
+        carbohydrateAverage = Int(carbohydrateSum/Float(graphDataDict.count))
+        proteinAverage = Int(proteinSum/Float(graphDataDict.count))
+        fatAverage = Int(fatSum/Float(graphDataDict.count))
         graphDataSortedKeys = Array(graphDataDict.keys).sorted(by: <)
         reportList.append(ReportEntity(name: "Average Calories(kcal):", value: String(calorieAverage), standard: "2600"))
         reportList.append(ReportEntity(name: "Average Carbs(g):", value: String(carbohydrateAverage), standard: "300"))
@@ -132,6 +162,31 @@ extension ReportChartViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             return UITableViewCell()
         }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)
+        switch reportList[indexPath.row].name {
+        case "Average Calories(kcal):":
+            setUpData(type: "calorie")
+            graphView.reload()
+            lineLabel.text = "calorie"
+        case "Average Carbs(g):":
+            setUpData(type: "carbo")
+            graphView.reload()
+            lineLabel.text = "Carbohydrate"
+        case "Average Protein(g):":
+            setUpData(type: "protein")
+            graphView.reload()
+            lineLabel.text = "protein"
+        case "Average Fat(g):":
+            setUpData(type: "fat")
+            graphView.reload()
+             lineLabel.text = "fat"
+        default:
+            break
+        }
+
     }
 
 }
