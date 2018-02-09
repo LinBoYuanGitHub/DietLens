@@ -57,12 +57,17 @@ class RegistrationViewController: UIViewController {
             let userId = preferences.string(forKey: key)
             APIService.instance.register(uuid: userId!, nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
                 if isSucceed {
+                    // save for basic authentication
+                    let preferences = UserDefaults.standard
+                    let pwdKey = "password"
+                    preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
+                    //to main page
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "mainSlideMenuVC") as! MainSlideMenuViewController
                     self.present(vc, animated: true, completion: nil)
                 } else {
                     print("register failed")
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "register failed")
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
                 }
             })
         }

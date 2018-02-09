@@ -16,11 +16,11 @@ class APIService {
 
     }
 
-    public func getUUIDRequest(completion: @escaping (_ userId: String) -> Void) {
+    public func getUUIDRequest(userId: String, completion: @escaping (_ userId: String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.getUUidURL)!,
             method: .post,
-            parameters: nil,
+            parameters: ["id": userId],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -36,7 +36,7 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(value)
-                if jsonObj["status"] == "HTTP_200_OK"{
+                if jsonObj["status"].stringValue == "HTTP_200_OK"{
                      let userId = jsonObj["data"]["id"].stringValue
                     completion(userId)
                 } else {
@@ -56,18 +56,20 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("Login Failed due to : \(String(describing: response.result.error))")
+                    print("Login Failed due to :")
                     completion(false)
                     return
                 }
                 let jsonObj = JSON(response.result.value)
-                if jsonObj["status"] == "HTTP_200_OK"{
+                if jsonObj["message"] == "Login success"{
                     //save uuid & nickname, TODO change to save user object
                     let preferences = UserDefaults.standard
-                    let key = "userId"
                     let nicknameKey = "nickname"
-                    preferences.setValue(jsonObj["data"]["uuid"].stringValue, forKey: key)
-                    preferences.setValue(jsonObj["data"]["nickname"].stringValue, forKey: nicknameKey)
+                    let userNameKey = "username"
+                    let userIdKey = "userId"
+                    preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: userIdKey)
+                    preferences.setValue(jsonObj["data"]["email"].stringValue, forKey: userNameKey)
+                    preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: nicknameKey)
                     completion(true)
                 } else {
                     completion(false)
@@ -107,19 +109,25 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.registry)!,
             method: .post,
-            parameters: ["uuid": uuid, "nickname": nickName, "email": email, "password": password],
+            parameters: ["id": uuid, "name": nickName, "email": email, "password": password],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("Register Failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 let jsonObj = JSON(response.result.value)
-                if jsonObj["status"] == "HTTP_200_OK"{
-                     completion(true)
+                if jsonObj["message"] == "Register success"{
+                    let preferences = UserDefaults.standard
+                    let nicknameKey = "nickname"
+                    let userNameKey = "username"
+                    let userIdKey = "userId"
+                    preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: userIdKey)
+                    preferences.setValue(jsonObj["data"]["email"].stringValue, forKey: userNameKey)
+                    preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: nicknameKey)
+                    completion(true)
                 } else {
                      completion(false)
                 }
@@ -149,6 +157,28 @@ class APIService {
         }
     }
 
+    public func getEventList(completion: @escaping ([Article]?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.eventURL)!,
+            method: .get)
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get articles failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let articles = response.result.value else {
+                    print("Get articles failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonArr = JSON(articles)
+                let articleList: [Article] = ArticleDataManager.instance.assembleEvents(jsonArr: jsonArr)
+                completion(articleList)
+        }
+    }
+
     public func getFoodSearchResult(keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.foodSearchListURL)!,
@@ -169,7 +199,37 @@ class APIService {
                     completion(nil)
                     return
                 }
-                let jsonArr = JSON(searchResults)
+                let jsonArr = JSON(searchResults)["data"]
+                var foodSearchList = [TextSearchSuggestionEntity]()
+                for i in 0..<jsonArr.count {
+                    let entity = TextSearchSuggestionEntity(id: (jsonArr[i].dictionaryValue["id"]?.intValue)!, name: (jsonArr[i].dictionaryValue["name"]?.stringValue)!)
+                    foodSearchList.append(entity)
+                }
+                completion(foodSearchList)
+        }
+    }
+
+    public func getIngredientSearchResult(keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.ingredientSearchURL)!,
+            method: .post,
+            parameters: ["text": keywords],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get ingredient search result failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+
+                guard let searchResults = response.result.value else {
+                    print("Get  ingredient searchResult failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonArr = JSON(searchResults)["data"]
                 var foodSearchList = [TextSearchSuggestionEntity]()
                 for i in 0..<jsonArr.count {
                     let entity = TextSearchSuggestionEntity(id: (jsonArr[i].dictionaryValue["id"]?.intValue)!, name: (jsonArr[i].dictionaryValue["name"]?.stringValue)!)
@@ -180,9 +240,10 @@ class APIService {
     }
 
     public func getFoodSearchDetailResult(foodId: Int, completion: @escaping (FoodInfomation?) -> Void) {
+        let url = ServerConfig.foodSearchListURL+"?id="+String(foodId)
         Alamofire.request(
-            URL(string: ServerConfig.foodSearchDetailURL)!,
-            method: .post,
+            URL(string: url)!,
+            method: .get,
             parameters: ["id": foodId],
             encoding: JSONEncoding.default,
             headers: [:])
@@ -198,18 +259,42 @@ class APIService {
                     completion(nil)
                     return
                 }
-                let jsonObj = JSON(detail)
+                let jsonObj = JSON(detail)["data"]
                 let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObj)
                 completion(foodInfo)
         }
     }
 
-    public func getBarcodeScanResult(barcode: String, completion: @escaping (FoodInfomation?) -> Void) {
-        let params = ["barcode": barcode]
+    public func getIngredientSearchDetailResult(foodId: Int, completion: @escaping (Ingredient?) -> Void) {
+        let url = ServerConfig.ingredientSearchURL+"?id="+String(foodId)
         Alamofire.request(
-            URL(string: ServerConfig.barcodeSearchURL)!,
-            method: .post,
-            parameters: params,
+            URL(string: url)!,
+            method: .get,
+            parameters: ["id": foodId],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get food detail failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let detail = response.result.value else {
+                    print("Get food detail failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonObj = JSON(detail)["data"]
+                let ingredient = FoodInfoDataManager.instance.assembleIngredientInfo(jsonObject: jsonObj)
+                completion(ingredient)
+        }
+    }
+
+    public func getBarcodeScanResult(barcode: String, completion: @escaping (FoodInfomation?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.barcodeSearchURL+"?id="+barcode)!,
+            method: .get,
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -224,17 +309,17 @@ class APIService {
                     completion(nil)
                     return
                 }
-                let jsonObject = JSON(scanResult)
+                let jsonObject = JSON(scanResult)["data"]
                 if jsonObject == nil {
                     completion(nil)
                 } else {
-                    let barcodeScanResult = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
+                    let barcodeScanResult = FoodInfoDataManager.instance.assembleBarcodeFoodInfo(jsonObject: jsonObject)
                     completion(barcodeScanResult)
                 }
         }
     }
 
-    public func uploadRecognitionImage(imgData: Data, userId: String, completion: @escaping ([FoodInfomation]?) -> Void) {
+    public func uploadRecognitionImage(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping ([FoodInfomation]?) -> Void) {
         let parameters = ["user_id": userId]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
@@ -251,8 +336,8 @@ class APIService {
                     #endif
                 })
                 upload.responseJSON { response in
-                    let resultArray = JSON(response.value)["result_list"]
-                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonArr: resultArray)
+                    let resultObj = JSON(response.value)
+                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
                     completion(resultList)
 //                    print(response.result.value)
                 }
@@ -263,10 +348,10 @@ class APIService {
         }
     }
 
-    public func saveDeviceToken(httpMethod: HTTPMethod, uuid: String, fcmToken: String, status: String, completion: @escaping (Bool?) -> Void) {
+    public func saveDeviceToken(uuid: String, fcmToken: String, status: String, completion: @escaping (Bool) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.userURL+"/\(uuid)/device")!,
-            method: httpMethod,
+            URL(string: ServerConfig.userURL+"/\(uuid)/device/")!,
+            method: .put,
             parameters: ["token": fcmToken, "status": status, "device_type": "ios"],
             encoding: JSONEncoding.default,
             headers: [:])
@@ -291,6 +376,190 @@ class APIService {
         }
     }
 
+    public func sendFeedBack(userId: String, content: String, completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.feedBackURL+"?user_id="+userId)!,
+            method: .post,
+            parameters: ["text": content],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("save device token failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("save device token failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObject = JSON(scanResult)["message"]
+                if jsonObject == nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+        }
+    }
+
+    public func getProfile(userId: String, completion: @escaping (UserProfile?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.userURL + "/" + userId + "/profile/")!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getBasicAuthenticationHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get profile failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("get profile failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonObject = JSON(scanResult)["data"]
+                let userProfile = ProfileDataManager.instance.assembleUserProfile(jsonObj: jsonObject)
+                if jsonObject == nil {
+                    completion(nil)
+                } else {
+                    completion(userProfile)
+                }
+        }
+    }
+
+    public func updateProfile(userId: String, name: String, gender: Int, height: Double, weight: Double, completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.userURL + "/" + userId + "/profile/")!,
+            method: .put,
+            parameters: ["name": name, "gender": gender, "height": height, "weight": weight],
+            encoding: JSONEncoding.default,
+            headers: getBasicAuthenticationHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("update profile failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("update profile failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObject = JSON(scanResult)["message"]
+                if jsonObject == nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+        }
+    }
+
+    public func getNotificationList(userId: String, completion: @escaping ([NotificationModel]?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.NotificationURL + "/list/?user_id=" + userId)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get notifcation failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("get notifcation failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonArr = JSON(scanResult)["data"]
+                let notications = NotificationDataManager.instance.assembleUserNotification(jsonArr: jsonArr)
+                if jsonArr == nil {
+                    completion(nil)
+                } else {
+                    completion(notications)
+                }
+        }
+    }
+
+    public func didReceiveNotifcation(notificationId: String, completion: @escaping (Bool?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.NotificationURL + "/" + notificationId + "/")!,
+            method: .put,
+            parameters: ["status": "read"],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get notifcation failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("get notifcation failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObj = JSON(scanResult)
+                if jsonObj == nil {
+                    completion(false)
+                } else {
+                    completion(true)
+                }
+        }
+    }
+
+    public func deleteAllNotification(userId: String, completion: @escaping (Bool?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.NotificationURL + "/all/"+"?user_id=" + userId)!,
+            method: .delete,
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.response?.statusCode == 204 else {
+                    print("get notifcation failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("get notifcation failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
+
+    public func deleteNotification(notificationId: String, completion: @escaping (Bool?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.NotificationURL + "/"+notificationId+"/")!,
+            method: .delete,
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.response?.statusCode == 204 else {
+                    print("get notifcation failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("get notifcation failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
+
     //swiftlint:disable function_parameter_count
     /// save FoodDiary API
     ///
@@ -304,21 +573,10 @@ class APIService {
     ///   - category: food category
     ///   - ratio: portion ratio
     ///   - completion: for passing callback
-    public func saveFoodDiary(foodDiary: FoodDiary, imageUrl: String, fileName: String, mealTime: String, mealType: String, recordType: String, category: String, ratio: Float, completion: @escaping (Bool) -> Void) {
-        var params: Dictionary = ["rank": foodDiary.rank, "user_id": "", "image_url": imageUrl, "file_name": fileName, "mealtime": mealTime, "mealType": mealType, "search_type": recordType, "portion_size": ratio, "calorie": foodDiary.calorie, "carbohydrate": foodDiary.carbohydrate, "protein": foodDiary.protein, "fat": foodDiary.fat] as [String: Any]
-        if recordType == "Image"{
-            params["food_id"] = foodDiary.id
-        } else if recordType == "Text"{
-            params["textfood_id"] = foodDiary.id
-            params["category"] = category
-        } else if recordType == "Barcode"{
-            params["barcodefood_id"] = foodDiary.id
-            params["category"] = "BarcodeItems"
-        } else {
-            params["customizefood"] = foodDiary.foodName
-        }
+    public func saveFoodDiary(userId: String, foodDiary: FoodDiary, mealTime: String, mealType: String, nutrientJson: String, ingredientJson: String, recordType: String, category: String, rank: Int, completion: @escaping (Bool) -> Void) {
+        var params: Dictionary = ["food_name": foodDiary.foodName, "portion_size": foodDiary.portionSize, "meal_type": mealType, "nutrient": nutrientJson, "ingredient": ingredientJson, "search_type": recordType, "rank": String(rank)] as [String: Any]
         Alamofire.request(
-            URL(string: ServerConfig.saveFoodDiaryURL)!,
+            URL(string: ServerConfig.saveFoodDiaryURL+"?user_id="+userId)!,
             method: .post,
             parameters: params,
             encoding: JSONEncoding.default,
@@ -338,6 +596,81 @@ class APIService {
                 let jsonObject = JSON(result)
                 completion(true)
         }
+    }
+
+    public func uploadStepData(userId: String, params: Dictionary<String, Any>, completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.saveStepDiaryURL+"?user_id="+userId)!,
+            method: .put,
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("Save exercise data failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObject = JSON(result)
+                completion(true)
+        }
+    }
+
+    //healthCenter
+    func uploadHealthCenterData(userId: String, title: String, content: String, unit: String, amount: String, datetime: String, completion: @escaping (Bool) -> Void) {
+        let params = ["title": title, "content": content, "unit": unit, "amount": amount, "datetime": datetime]
+        Alamofire.request(
+            URL(string: ServerConfig.saveHealthCenterDataURL+"?user_id="+userId)!,
+            method: .post,
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("Save exercise data failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObject = JSON(result)
+                completion(true)
+        }
+    }
+
+    //cancel task
+    func cancelRequest(requestURL: String) {
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
+            sessionDataTask.forEach {
+                if ($0.originalRequest?.url?.absoluteString == requestURL) {
+                    $0.cancel()
+                }
+            }
+            uploadData.forEach { $0.cancel() }
+            downloadData.forEach { $0.cancel() }
+        }
+    }
+    //basic authentication header
+    func getBasicAuthenticationHeader() -> Dictionary<String, String> {
+        let preferences = UserDefaults.standard
+        let userNameKey = "username"
+        let pwdKey = "password"
+        let userName = preferences.string(forKey: userNameKey)
+        let password = preferences.string(forKey: pwdKey)
+        let credentialData = "\(userName):\(password)".data(using: String.Encoding.utf8)!
+        let base64Credentials = credentialData.base64EncodedString(options: [])
+        let headers = ["Authorization": "Basic \(base64Credentials)"]
+        return headers
     }
 
 }

@@ -15,6 +15,7 @@ class ReportChartViewController: UIViewController {
     @IBOutlet weak var reportTableView: UITableView!
     @IBOutlet weak var lineLabel: UILabel!
 
+    @IBOutlet weak var emptyView: UILabel!
     var reportList = [ReportEntity]()
     var calorieList = [Float]()
     var carbohydrateList = [Float]()
@@ -52,7 +53,6 @@ class ReportChartViewController: UIViewController {
 
         graphView.addPlot(plot: linePlot)
         graphView.addReferenceLines(referenceLines: referenceLines)
-        graphView.topMargin = 5
         graphView.bottomMargin = 5
         graphView.backgroundFillColor = UIColor.clear
         graphView.backgroundColor = UIColor.clear
@@ -61,6 +61,7 @@ class ReportChartViewController: UIViewController {
         graphView.shouldAnimateOnStartup = true
         graphView.center = CGPoint(x: containerView.frame.size.width/2, y: containerView.frame.size.height/2)
         graphView.showsHorizontalScrollIndicator = false
+        graphView.fs_height = 180
         containerView.addSubview(graphView)
     }
 
@@ -68,18 +69,27 @@ class ReportChartViewController: UIViewController {
         let diaryDateFormatter = DateFormatter()
         diaryDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMM")
         let dateString: String = diaryDateFormatter.string(from: Date())
-//        let year = String(dateString[4...])
-//        let month = String(dateString[..<3])
-        let year = "2017"
-        let month = "Dec"
+        let year = String(dateString[4...])
+        let month = String(dateString[..<3])
+//        let year = "2017"
+//        let month = "Dec"
         foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(year), month: String(month))!
         setUpData(type: "calorie")
     }
 
     func setUpData(type: String) {
+        graphDataDict.removeAll()
+        reportList.removeAll()
         if foodDiaryList.count == 0 {
+            emptyView.isHidden = false
+            reportList.append(ReportEntity(name: "Average Calories(kcal):", value: "0", standard: "2600"))
+            reportList.append(ReportEntity(name: "Average Carbs(g):", value: "0", standard: "300"))
+            reportList.append(ReportEntity(name: "Average Protein(g):", value: "0", standard: "100"))
+            reportList.append(ReportEntity(name: "Average Fat(g):", value: "0", standard: "100"))
+            reportTableView.reloadData()
             return
         }
+        emptyView.isHidden = true
         var calorieAverage: Int = 0
         var carbohydrateAverage: Int = 0
         var proteinAverage: Int = 0
@@ -89,8 +99,6 @@ class ReportChartViewController: UIViewController {
         var carbohydrateSum: Float = 0
         var proteinSum: Float = 0
         var fatSum: Float = 0
-        graphDataDict.removeAll()
-        reportList.removeAll()
         for foodDiary in foodDiaryList {
             switch type {
             case "calorie":

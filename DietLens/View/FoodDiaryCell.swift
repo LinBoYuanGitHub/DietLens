@@ -24,11 +24,11 @@ class FoodDiaryCell: UITableViewCell {
 
     func setupCell(foodInfo: FoodInfo) {
         food = foodInfo
-
         foodName.text = food.foodName
 //        foodImage.image = food.foodImage
         servingSize.text = food.servingSize
-        calories.text = String(foodInfo.calories)+" Kcal"
+        servingSize.isHidden = true
+        calories.text = String(round(10*foodInfo.calories*foodInfo.portionSize)/1000)+" Kcal"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

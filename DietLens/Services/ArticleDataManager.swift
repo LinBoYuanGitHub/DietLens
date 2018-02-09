@@ -11,6 +11,7 @@ import SwiftyJSON
 class ArticleDataManager {
     static var instance = ArticleDataManager()
     public var articleList = [Article]()
+    public var eventList = [Article]()
     var page: Int = 0
 
     private init() {
@@ -21,13 +22,26 @@ class ArticleDataManager {
         articleList.removeAll()
         for i in 0..<jsonArr.count {
             var article = Article()
-            article.id = jsonArr[i]["id"].intValue
-            article.articleTitle = jsonArr[i]["article_title"].stringValue
-            article.articleContent = jsonArr[i]["article_content"].stringValue
-            article.articleImageURL = jsonArr[i]["article_image_URL"].stringValue
+            article.articleId = jsonArr[i]["id"].stringValue
+            article.articleTitle = jsonArr[i]["title"].stringValue
+            article.articleContent = jsonArr[i]["content"].stringValue
+            article.articleImageURL = jsonArr[i]["image"].stringValue
             articleList.append(article)
         }
         return articleList
+    }
+
+    func assembleEvents(jsonArr: JSON) -> [Article] {
+        eventList.removeAll()
+        for i in 0..<jsonArr.count {
+            var article = Article()
+            article.articleId = jsonArr[i]["id"].stringValue
+            article.articleTitle = jsonArr[i]["title"].stringValue
+            article.articleContent = jsonArr[i]["content"].stringValue
+            article.articleImageURL = jsonArr[i]["image"].stringValue
+            eventList.append(article)
+        }
+        return eventList
     }
 
 }

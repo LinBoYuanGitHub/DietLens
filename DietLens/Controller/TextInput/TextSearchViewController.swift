@@ -19,6 +19,8 @@ class TextSearchViewController: UIViewController {
 
     private var lastSearchTime = Date()
     var foodResults = [FoodInfomation]()
+    var isSearching = false
+    var selectedImage: UIImage?
 
     override func viewDidLoad() {
         let button = UIButton(type: .custom)
@@ -35,6 +37,8 @@ class TextSearchViewController: UIViewController {
         //set up suggestionTableView
         suggestionTableView.delegate = self
         suggestionTableView.dataSource = self
+        loadSearchHistory()
+        TFSearch.becomeFirstResponder()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,16 +71,25 @@ class TextSearchViewController: UIViewController {
 
     @IBAction func textFieldChanged(_ sender: UITextField) {
         //load suggestion from net, set time
-        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.75 {
+        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
             lastSearchTime = Date()
-            APIService.instance.getFoodSearchResult(keywords: TFSearch.text!) { (foodSearchList) in
-                if foodSearchList == nil {
-                    self.suggestions =  [TextSearchSuggestionEntity]()
-                } else {
-                    self.suggestions = foodSearchList!
-                }
-                self.suggestionTableView.reloadData()
+            performTextSearch()
+        }
+    }
+
+    func performTextSearch() {
+        if isSearching {
+            APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchListURL)
+        }
+        isSearching = true
+        APIService.instance.getFoodSearchResult(keywords: TFSearch.text!) { (foodSearchList) in
+            self.isSearching = false
+            if foodSearchList == nil {
+                self.suggestions =  [TextSearchSuggestionEntity]()
+            } else {
+                self.suggestions = foodSearchList!
             }
+            self.suggestionTableView.reloadData()
         }
     }
 
@@ -87,6 +100,17 @@ class TextSearchViewController: UIViewController {
     @objc func onNotifyToDismiss() {
         dismiss(animated: false, completion: nil)
         self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    func loadSearchHistory() {
+        let preference = UserDefaults.standard
+        var result: Any = preference.array(forKey: SharedPreferenceKey.textSearchHistoryKey)
+        if result == nil {
+            suggestions = result as! [TextSearchSuggestionEntity]
+        } else {
+            suggestions = []
+        }
+        suggestionTableView.reloadData()
     }
 
 }
@@ -101,9 +125,10 @@ extension TextSearchViewController: UITextFieldDelegate {
 
 extension TextSearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //save search Item
+//        saveTextSearchHistory(entity: suggestions[indexPath.row])
         //perform search
         APIService.instance.getFoodSearchDetailResult(foodId: suggestions[indexPath.row].id) { (foodInformation) in
-
             if foodInformation == nil {
                 //TODO show error message
                 return
@@ -112,7 +137,19 @@ extension TextSearchViewController: UITableViewDelegate {
             self.foodResults.append(foodInformation!)
             self.performSegue(withIdentifier: "showTextDetail", sender: self)
         }
+    }
 
+    func saveTextSearchHistory(entity: TextSearchSuggestionEntity) {
+        let preference = UserDefaults.standard
+        var historyArray: [TextSearchSuggestionEntity] = preference.array(forKey: SharedPreferenceKey.textSearchHistoryKey) as! [TextSearchSuggestionEntity]
+        //insert data into search history list
+        if historyArray.count > 1 {//history array max size 2
+            historyArray.remove(at: 0)
+        }
+        historyArray.append(entity)
+        //sync data after record
+        preference.setValue(historyArray, forKey: SharedPreferenceKey.textSearchHistoryKey)
+        preference.synchronize()
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

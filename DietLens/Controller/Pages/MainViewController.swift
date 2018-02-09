@@ -25,12 +25,20 @@ class MainViewController: UIViewController {
         }
         APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!) { (isSuccess) in
             if isSuccess {
+                // save for basic authentication
+                let preferences = UserDefaults.standard
+                let pwdKey = "password"
+                preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
                 self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
             } else {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
                 print("Login failed")
             }
         }
+    }
+
+    @IBAction func onBackPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {

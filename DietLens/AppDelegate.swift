@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import UserNotifications
 import Firebase
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         registerForPushNotifications()
+        realmSetting(application)
 
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
@@ -45,6 +47,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.makeKeyAndVisible()
         //UIApplication.shared.statusBarView?.backgroundColor = UIColor.clear
         return true
+    }
+
+    func realmSetting(_ application: UIApplication) {
+        let config = Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 2,
+
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+
+                if oldSchemaVersion <= 1 {
+                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
+                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)
+                    }
+                }
+        })
+        Realm.Configuration.defaultConfiguration = config
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -200,9 +221,23 @@ extension AppDelegate: MessagingDelegate {
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
-
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        if userId == nil {
+            //record fcmToken
+            let tokenKey = "fcmToken"
+            preferences.set(fcmToken, forKey: tokenKey)
+        } else {
+            //send token to server
+            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken, status: "1", completion: { (flag) in
+                if flag {
+                    print("send device token succeed")
+                }
+            })
+        }
     }
     // [END refresh_token]
     // [START ios_10_data_message]

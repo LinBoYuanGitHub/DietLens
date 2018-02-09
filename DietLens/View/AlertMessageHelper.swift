@@ -21,4 +21,17 @@ class AlertMessageHelper {
         }))
         targetController.present(alert, animated: true, completion: nil)
     }
+
+    class func showOkCancelDialog(targetController: UIViewController, title: String, message: String, postiveText: String, negativeText: String, callback: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(postiveText, comment: "Default action"), style: .`default`, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+            callback(true)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString(negativeText, comment: "Default action"), style: .cancel, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+            callback(false)
+        }))
+        targetController.present(alert, animated: true, completion: nil)
+    }
 }

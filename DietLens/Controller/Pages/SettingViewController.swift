@@ -36,29 +36,41 @@ class SettingViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func showAboutPage(_ sender: Any) {
+        performSegue(withIdentifier: "toAboutPage", sender: nil)
+    }
+
+    @IBAction func showFeedBackPage(_ sender: Any) {
+        performSegue(withIdentifier: "toFeedBackPage", sender: nil)
+    }
     @IBAction func logout(_ sender: Any) {
-        let preferences = UserDefaults.standard
-        let key = "userId"
-        let userId = preferences.string(forKey: key)
-        if userId == nil {
-            //no userId cannot Logout
-            return
-        }
-        //request new userId
-        APIService.instance.getUUIDRequest { (userID) in
-            preferences.setValue(userID, forKey: key)
-            let didSave = preferences.synchronize()
-            if !didSave {
-                print("Couldn`t save,fatal exception happened")
-            } else {
-                DispatchQueue.main.async {
-                    self.clearPersonalData()
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-                    self.present(controller, animated: true, completion: nil)
+        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Confirm to logout?", postiveText: "Confirm", negativeText: "Cancel") { (result) in
+            if (result) {
+                let preferences = UserDefaults.standard
+                let key = "userId"
+                let userId = preferences.string(forKey: key)
+                if userId == nil {
+                    //no userId cannot Logout
+                    return
+                }
+                //request new userId
+                APIService.instance.getUUIDRequest(userId: userId!) { (userID) in
+                    preferences.setValue(userID, forKey: key)
+                    let didSave = preferences.synchronize()
+                    if !didSave {
+                        print("Couldn`t save,fatal exception happened")
+                    } else {
+                        DispatchQueue.main.async {
+                            self.clearPersonalData()
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+                            self.present(controller, animated: true, completion: nil)
+                        }
+                    }
                 }
             }
         }
+
     }
 
     func clearPersonalData() {

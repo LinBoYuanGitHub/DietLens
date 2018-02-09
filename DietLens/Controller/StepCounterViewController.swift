@@ -8,30 +8,43 @@
 
 import UIKit
 import HealthKit
+import SwiftyJSON
 class StepCounterViewController: UIViewController {
 
     @IBOutlet weak var standardLabel: UILabel!
 
     @IBOutlet weak var stepCounterTable: UITableView!
 
+    @IBOutlet weak var emptyView: UITextView!
+
     var stepsList = [StepEntity]()
 
     override func viewDidLoad() {
         stepCounterTable.delegate = self
         stepCounterTable.dataSource = self
+        emptyView.delegate = self
+        emptyView.isHidden = true
+        requestAuthFromHealthKit()
+        //set observer refresh the stepList when come back from healthCenter or other app
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+    }
+
+    @objc func willEnterForeground() {
         requestAuthFromHealthKit()
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
         dismiss(animated: true, completion: nil)
     }
+
     func requestAuthFromHealthKit() {
         HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
 
             guard authorized else {
 
                 let baseMessage = "HealthKit Authorization Failed"
-
+                self.emptyView.isHidden = false
                 if let error = error {
                     print("\(baseMessage). Reason: \(error.localizedDescription)")
                 } else {
@@ -58,7 +71,36 @@ class StepCounterViewController: UIViewController {
         HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: Date()) { (steps, _) in
             self.stepsList = steps
             DispatchQueue.main.async {
-                 self.stepCounterTable.reloadData()
+                if self.stepsList.count == 0 {
+                    self.emptyView.isHidden = false
+                } else {
+                    self.emptyView.isHidden = true
+                }
+                self.stepCounterTable.reloadData()
+                self.uploadStepData()
+            }
+        }
+    }
+
+    func uploadStepData() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
+        var stepArray = [[String: Any]]()
+        for i in 0..<stepsList.count {
+            var step: [String: Any] = [:]
+            let dateStr = dateFormatter.string(from: stepsList[i].date!)
+            let dataArr = dateStr.split(separator: "/")
+            step["exercise_datetime"] = String(dataArr[2]) + "-" + String(dataArr[1]) + "-" + String(dataArr[0])
+            step["exercise_amount"] = String(stepsList[i].stepValue)
+            stepArray.append(step)
+        }
+        let params = ["steps": stepArray]
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        APIService.instance.uploadStepData(userId: userId!, params: params) { (isSuccess) in
+            if !isSuccess {
+                print("upload step data failed")
             }
         }
     }
@@ -83,6 +125,15 @@ extension StepCounterViewController: UITableViewDelegate, UITableViewDataSource 
         } else {
             return UITableViewCell()
         }
+    }
+
+}
+
+extension StepCounterViewController: UITextViewDelegate {
+
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        UIApplication.shared.open(URL(string: "x-apple-health://")!)
+        return false
     }
 
 }

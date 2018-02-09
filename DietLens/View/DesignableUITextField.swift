@@ -5,11 +5,24 @@ import UIKit
 @IBDesignable
 class DesignableUITextField: UITextField {
 
+     var addedTouchArea = CGFloat(0)
+
     // Provides left padding for images
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         var textRect = super.leftViewRect(forBounds: bounds)
         textRect.origin.x += imagePadding
         return textRect
+    }
+
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+
+        let newBound = CGRect(
+            x: self.bounds.origin.x - 20,
+            y: self.bounds.origin.y - 20,
+            width: self.bounds.width + 2 * 20,
+            height: self.bounds.width + 2 * 20
+        )
+        return newBound.contains(point)
     }
 
     @IBInspectable var leftImage: UIImage? {

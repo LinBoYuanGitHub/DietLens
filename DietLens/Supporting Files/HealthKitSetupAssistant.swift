@@ -22,35 +22,21 @@ class HealthKitSetupAssistant {
             return
         }
 
-        guard let dateOfBirth = HKObjectType.characteristicType(forIdentifier: .dateOfBirth),
-              let bloodType = HKObjectType.characteristicType(forIdentifier: .bloodType),
-              let biologicalSex = HKObjectType.characteristicType(forIdentifier: .biologicalSex),
-              let bodyMassIndex = HKObjectType.quantityType(forIdentifier: .bodyMassIndex),
-              let height = HKObjectType.quantityType(forIdentifier: .height),
-              let bodyMass = HKObjectType.quantityType(forIdentifier: .bodyMass),
-              let activeEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
-              let steps = HKObjectType.quantityType(forIdentifier: .stepCount) else {
+        guard let steps = HKObjectType.quantityType(forIdentifier: .stepCount) else {
 
                 completion(false, HealthkitSetupError.dataTypeNotAvailable)
                 return
         }
 
-        let healthKitTypesToWrite: Set<HKSampleType> = [bodyMassIndex,
-                                                        activeEnergy,
-                                                        steps,
-                                                        HKObjectType.workoutType()]
+//        let healthKitTypesToWrite: Set<HKSampleType> = [bodyMassIndex,
+//                                                        activeEnergy,
+//                                                        steps,
+//                                                        HKObjectType.workoutType()]
 
-        let healthKitTypesToRead: Set<HKObjectType> = [dateOfBirth,
-                                                       bloodType,
-                                                       biologicalSex,
-                                                       bodyMassIndex,
-                                                       height,
-                                                       bodyMass,
-                                                       steps,
-                                                       HKObjectType.workoutType()]
+        let healthKitTypesToWrite: Set<HKSampleType> = []
+        let healthKitTypesToRead: Set<HKObjectType> = [steps]
 
-        HKHealthStore().requestAuthorization(toShare: healthKitTypesToWrite,
-                                             read: healthKitTypesToRead) { (success, error) in
+        HKHealthStore().requestAuthorization(toShare: healthKitTypesToWrite, read: healthKitTypesToRead) { (success, error) in
                                                 completion(success, error)
         }
     }

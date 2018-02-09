@@ -14,13 +14,20 @@ class TextInputViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var addHistoryTable: UITableView!
+
+    var historyDiaryList = [FoodDiary]()
+    var selectedFoodDiary = FoodDiary()
+    var foodResults = [FoodInfomation]()
+    var selectedImageView: UIImage?
+    var targetPortion: Double?
+
     // Should reload table when this is changed
 
 //    private var addFoodHistoryList = [FoodInfomation]()
 //
 //    private let suggestions = ["Laksa", "Chili Crab", "Chicken Rice", "Oyster Omelette"]
 //    private let suggestionCellIdentifier = "suggestionFoodTableViewCell"
-//    private var filteredSuggestion: [String] {
+    //    private var filteredSuggesvarnvarString] {
 //        guard let searchText = textField.text else {
 //            return []
 //        }
@@ -31,39 +38,44 @@ class TextInputViewController: UIViewController {
 //        return suggestions.filter { $0.lowercased().contains(searchText) }
 //    }
 
-    @IBAction func textFieldTouched(_ sender: UITextField) {
-        performSegue(withIdentifier: "searchFood", sender: self)
-    }
+//    @IBAction func textFieldTouched(_ sender: UITextField) {
+//        performSegue(withIdentifier: "searchFood", sender: self)
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addHistoryTable.delegate = self
         addHistoryTable.dataSource = self
         textField.delegate = self
+        loadHistoryItem()
+    }
+
+    func loadHistoryItem() {
+        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
+        addHistoryTable.reloadData()
     }
 
 }
 
 extension TextInputViewController: UITableViewDataSource {
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count: Int = 3
-        return count
+        return historyDiaryList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            //fill in tableview
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "addFoodHistoryCellIdentifier") else {
-                return UITableViewCell()
-            }
-            cell.imageView?.image = #imageLiteral(resourceName: "food_sample_image")
-            cell.textLabel?.text = "Rice"
-            cell.detailTextLabel?.text = "456 kcal"
-            return cell
+        //fill in tableview
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "addFoodHistoryCellIdentifier") as? HistoryFoodDiaryCell else {
+            return UITableViewCell()
+        }
+        cell.setUpCell(imagePath: historyDiaryList[indexPath.row].imagePath, foodNameString: historyDiaryList[indexPath.row].foodName, foodCal: String(round(historyDiaryList[indexPath.row].calorie*historyDiaryList[indexPath.row].portionSize/100.0)))
+        return cell
     }
+
 }
 
 extension TextInputViewController: UITextFieldDelegate {
@@ -74,18 +86,35 @@ extension TextInputViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        performSegue(withIdentifier: "searchFood", sender: self)
         return false
     }
+
 }
 
 extension TextInputViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedFoodDiary = historyDiaryList[indexPath.row]
         // Row selected, so set textField to relevant value, hide tableView
         // endEditing can trigger some other action according to requirements
-        if tableView == self.addHistoryTable {
-           //do something on item click
-        }
+        self.foodResults.removeAll()
+        var targetFoodInfo = FoodInfomation()
+        targetPortion = selectedFoodDiary.portionSize
+        targetFoodInfo.foodId = selectedFoodDiary.foodId
+        targetFoodInfo.foodName = selectedFoodDiary.foodName
+        targetFoodInfo.category = selectedFoodDiary.category
+        targetFoodInfo.sampleImagePath = selectedFoodDiary.imagePath
+        targetFoodInfo.rank = selectedFoodDiary.rank
+        //calculation for individual nutrition
+        targetFoodInfo.carbohydrate = String(round(10*Double(selectedFoodDiary.carbohydrate)!)/10)
+        targetFoodInfo.protein = String(round(10*Double(selectedFoodDiary.protein)!)/10)
+        targetFoodInfo.fat = String(round(10*Double(selectedFoodDiary.fat)!)/10)
+        targetFoodInfo.calorie = Float(round(10*Double(selectedFoodDiary.calorie))/10)
+        foodResults.append(targetFoodInfo)
+        selectedImageView = (tableView.cellForRow(at: indexPath) as! HistoryFoodDiaryCell).foodDiaryImage.image
+        //perform segue
+        performSegue(withIdentifier: "historyToResult", sender: self)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -103,5 +132,19 @@ extension TextInputViewController: UITableViewDelegate {
 extension TextInputViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "BY TEXT")
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? RecognitionResultsViewController {
+            dest.recordType = selectedFoodDiary.recordType
+            for ingredient in selectedFoodDiary.ingredientList {
+                dest.foodDiary.ingredientList.append(ingredient)
+            }
+            dest.foodDiary.portionSize = targetPortion!
+            dest.results = foodResults
+            dest.recordType = "text"
+            dest.dateTime = Date()
+            dest.userFoodImage = selectedImageView
+        }
     }
 }

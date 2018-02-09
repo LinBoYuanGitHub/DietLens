@@ -13,6 +13,5 @@ struct NotificationModel {
     public var body: String = ""
     public var title: String = ""
     public var read: Bool = false
-    public var hidden: Bool = false
     public var dateReceived = Date()
 }

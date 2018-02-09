@@ -57,8 +57,7 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         let imageView = UIImageView()
         //imageView.image = image
         if articleData?.articleImageURL != ""{
-            imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil,
-                                  imageTransition: .crossDissolve(0.5))
+            imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: nil)
         } else {
             imageView.image = #imageLiteral(resourceName: "runner")
         }
@@ -72,15 +71,15 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         article.parallaxHeader.minimumHeight = 80
         article.parallaxHeader.mode = .centerFill
 
-        let backButton = UIButton()
+        let backButton = ExpandedUIButton()
         backButton.setImage(#imageLiteral(resourceName: "Back Arrow"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         backButton.imageView?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         imageView.addSubview(backButton)
 
         backButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.centerY.equalTo(view.snp.top).offset(38)
+            make.left.equalToSuperview().offset(20)
+            make.centerY.equalTo(view.snp.top).offset(48)
         }
         article.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             //update alpha of blur view on top of image view

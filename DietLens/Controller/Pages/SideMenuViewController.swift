@@ -19,9 +19,9 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
 //    let iconNames: [String] = ["checkmark", "Report", "ReportIcon", "ArticleIcon", "Steps", "browser"]
 //    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC", "BrowserPage"]
 
-    let labels: [String] = ["Home", "Food Diary", "Report", "Articles", "Steps Counter"]
-    let iconNames: [String] = ["home", "Report", "ReportIcon", "ArticleIcon", "Steps"]
-    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC"]
+    let labels: [String] = ["Home", "Food Diary", "Report", "Articles", "Steps Counter", "Health Center"]
+    let iconNames: [String] = ["home", "Report", "ReportIcon", "ArticleIcon", "Steps", "healthCenterIcon"]
+    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC", "HealthCenterVC"]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -122,9 +122,9 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         let nicknameKey = "nickname"
         let nickname =  preferences.string(forKey: nicknameKey)
         if nickname == nil {
-             performSegue(withIdentifier: "menuToLogin", sender: nil)
+             performSegue(withIdentifier: "menuToLogin", sender: self)
         } else {
-            //TODO to edit profile
+            performSegue(withIdentifier: "MenutoProfile", sender: self)
         }
 
     }

@@ -11,45 +11,70 @@ import HealthKit
 
 class SplashScreenViewController: UIViewController {
 
-    let articleDatamanager = ArticleDataManager.instance
-
     var healthStore: HKHealthStore?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let preferences = UserDefaults.standard
         let key = "userId"
-        let userId = preferences.object(forKey: key)
+        var userId = preferences.string(forKey: key)
         if userId == nil {
-            APIService.instance.getUUIDRequest { (userId) in
-                let preferences = UserDefaults.standard
-                let key = "userId"
-                preferences.setValue(userId, forKey: key)
-                let didSave = preferences.synchronize()
-                if !didSave {
-                    print("Couldn`t save,fatal exception happened")
-                } else {
-                    print("userId:\(userId)")
-                }
-                self.getArticleListToMainPage()
+            userId = ""
+        }
+        APIService.instance.getUUIDRequest(userId: userId!) { (userId) in
+            let preferences = UserDefaults.standard
+            let key = "userId"
+            preferences.setValue(userId, forKey: key)
+            let didSave = preferences.synchronize()
+            if !didSave {
+                print("Couldn`t save,fatal exception happened")
+            } else {
+                print("userId:\(userId)")
             }
-        } else {
-           getArticleListToMainPage()
+            //send notification to server
+            let tokenKey = "fcmToken"
+            let token = preferences.string(forKey: tokenKey)
+            if token != nil {
+                //send token to server
+                APIService.instance.saveDeviceToken(uuid: userId, fcmToken: token!, status: "1", completion: { (flag) in
+                    if flag {
+                        preferences.setValue(nil, forKey: tokenKey)
+                        print("send device token succeed")
+                    }
+                })
+            }
+            self.getArticleListToMainPage()
         }
         // Do any additional setup after loading the view.
     }
 
     func getArticleListToMainPage() {
+        let preferences = UserDefaults.standard
+        let nicknameKey = "nickname"
+        let firstTimeKey = "notfirsttime"
+        let nickName = preferences.string(forKey: nicknameKey)
+        let isNotFirstTime = preferences.bool(forKey: firstTimeKey)
         APIService.instance.getArticleList { (articleList) in
             if articleList != nil {
-                self.articleDatamanager.articleList = articleList!
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "toMainPage", sender: self)
+                APIService.instance.getEventList { (_) in
+                    DispatchQueue.main.async {
+                        if (isNotFirstTime == false || nickName == nil) {
+                            self.performSegue(withIdentifier: "toLoginPage", sender: self)
+                            preferences.set(true, forKey: firstTimeKey)
+                        } else {
+                            self.performSegue(withIdentifier: "toMainPage", sender: self)
+                        }
+                    }
                 }
             } else {
                 //TODO: handle article list nil
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "toMainPage", sender: self)
+                  if (isNotFirstTime == false || nickName == nil) {
+                        self.performSegue(withIdentifier: "toLoginPage", sender: self)
+                        preferences.set(true, forKey: firstTimeKey)
+                    } else {
+                        self.performSegue(withIdentifier: "toMainPage", sender: self)
+                    }
                 }
             }
         }

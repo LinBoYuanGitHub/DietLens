@@ -10,6 +10,7 @@ import Foundation
 
 struct Article {
     public var id: Int = 0
+    public var articleId: String = ""
     public var timestamp: String = ""
     public var source: String = ""
     public var articleTitle: String = ""

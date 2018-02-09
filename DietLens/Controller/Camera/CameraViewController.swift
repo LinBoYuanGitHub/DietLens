@@ -36,6 +36,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     private var recordType: String = "recogniton"
 
     @IBOutlet weak var focusViewImg: UIImageView!
+
+    let locationManager = CLLocationManager()
+    var latitude = 0.0
+    var longitude = 0.0
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,6 +62,36 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         imagePicker.navigationBar.isTranslucent = false
         loadingScreen.alpha = 0
+        //setup location manager
+        if CLLocationManager.locationServicesEnabled() {
+            enableLocationServices()
+        } else {
+            print("Location services are not enabled")
+        }
+    }
+
+    func enableLocationServices() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        case .restricted, .denied:
+            break
+            // Disable location features or quit
+//            disableMyLocationBasedFeatures()
+
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        case .authorizedAlways:
+            break
+            // Enable any of your app's location features
+//            enableMyAlwaysFeatures()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -99,10 +134,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     @IBAction func capturePhoto(_ sender: UIButton) {
+        capturePhotoButton.isEnabled = false
         sessionManager.capturePhoto()
     }
 
     @IBAction func switchToPhoto(_ sender: UIButton) {
+        capturePhotoButton.isEnabled = true
         sessionManager.set(captureMode: .photo)
     }
 
@@ -122,8 +159,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(results) in
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude) {(results) in
             // upload result and callback
+            self.capturePhotoButton.isEnabled = true
             self.loadingScreen.alpha = 0
             if results == nil || results?.count == 0 {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
@@ -377,4 +415,18 @@ extension CameraViewController {
         }
     }
 
+}
+
+extension CameraViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.latitude = (locations.last?.coordinate.latitude)!
+        self.longitude = (locations.last?.coordinate.longitude)!
+        print("latitude:\(locations.last?.coordinate.latitude)")
+        print("longitude\(locations.last?.coordinate.longitude)")
+        locationManager.stopUpdatingLocation()
+    }
 }

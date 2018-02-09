@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 import AlamofireImage
+import RealmSwift
 
 public enum Meal: Int {
     case breakfast
@@ -18,11 +19,18 @@ public enum Meal: Int {
 }
 
 struct FoodInfo {
+    var id: Int = 0
     var foodName: String = ""
     var calories: Double = 0
+    var carbohydrate: String = ""
+    var protein: String = ""
+    var fat: String = ""
     var mealType: String = ""
     var imageURL: String?
     var servingSize: String = ""
+    var portionSize: Double = 100
+    var recordType: String = ""
+    var ingredientList = List<IngredientDiary>()
 
     init() {
         self.foodName = ""

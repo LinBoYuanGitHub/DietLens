@@ -293,10 +293,17 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         dinnerEntity.mealOfDay = .dinner
         for foodDiary in foodDiaryList {
             var foodInfo: FoodInfo = FoodInfo()
+            foodInfo.id = foodDiary.id
             foodInfo.calories = Double(round(10*foodDiary.calorie)/10)
+            foodInfo.carbohydrate = foodDiary.carbohydrate
+            foodInfo.protein = foodDiary.protein
+            foodInfo.fat = foodDiary.fat
             foodInfo.foodName = foodDiary.foodName
             foodInfo.imageURL = foodDiary.imagePath
             foodInfo.mealType = foodDiary.mealType
+            foodInfo.recordType = foodDiary.recordType
+            foodInfo.portionSize = foodDiary.portionSize
+            foodInfo.ingredientList = foodDiary.ingredientList
 //            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
             foodInfo.servingSize = "unknown"
             if foodDiary.mealType == "Breakfast" {

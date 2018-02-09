@@ -20,10 +20,25 @@ class FoodDiary: Object {
     @objc dynamic var mealTime = ""
     @objc dynamic var mealType = ""
     @objc dynamic var recordType = ""
-    @objc dynamic var portionSize = 1.0
+    @objc dynamic var portionSize: Double = 100.0
     @objc dynamic var calorie = 0.0
-    @objc dynamic var carbohydrate = ""
-    @objc dynamic var protein = ""
-    @objc dynamic var fat = ""
+    @objc dynamic var carbohydrate = "0.0"
+    @objc dynamic var protein = "0.0"
+    @objc dynamic var fat = "0.0"
     @objc dynamic var category = ""
+    let ingredientList = List<IngredientDiary>() // used only when user choose customized food
+}
+
+class IngredientDiary: Object {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var ingredientId: Int = 0
+    @objc dynamic var ingredientName: String = ""
+    @objc dynamic var calorie = 0.0
+    @objc dynamic var carbs = 0.0
+    @objc dynamic var protein = 0.0
+    @objc dynamic var fat = 0.0
+    @objc dynamic var sugars_total = 0.0
+    @objc dynamic var quantity: Double = 0
+    @objc dynamic var unit = ""
+    @objc dynamic var weight = 0.0
 }

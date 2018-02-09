@@ -17,6 +17,7 @@ struct FoodInfomation {
     public var fat: String = ""
     public var calorie: Float = 0.0
     public var category: String = ""
+    public var sampleImagePath: String = ""
 
     init() {
 

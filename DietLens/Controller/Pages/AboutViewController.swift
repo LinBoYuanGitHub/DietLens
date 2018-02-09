@@ -7,19 +7,19 @@
 //
 
 import UIKit
-import PBRevealViewController
 
 class AboutViewController: UIViewController {
 
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
+
+    @IBOutlet weak var appImageIcon: UIImageView!
+    @IBOutlet weak var versionLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
-        sideMenuButton.target = self.revealViewController()
-        sideMenuButton.action = #selector(PBRevealViewController.revealLeftView)
-        // Do any additional setup after loading the view.
+        let nsObject: AnyObject? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as AnyObject
+        let version = nsObject as! String
+        versionLabel.text = "Dietlens  V " + version
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +27,9 @@ class AboutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func onBackPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

@@ -18,7 +18,6 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         super.awakeFromNib()
         newsArticleRow.dataSource = self
         newsArticleRow.delegate = self
-
         // Initialization code
     }
 
@@ -40,7 +39,10 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
             cell.newsTitle.text = listOfArticles[indexPath.row].articleTitle
             cell.newsImage.image = #imageLiteral(resourceName: "loading_img")
             if listOfArticles[indexPath.row].articleImageURL != ""{
-                cell.newsImage.af_setImage(withURL: URL(string: listOfArticles[indexPath.row].articleImageURL)!)
+                let imageView = UIImageView()
+                imageView.af_setImage(withURL: URL(string: listOfArticles[indexPath.row].articleImageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
+                    cell.newsImage.image = imageView.image
+                })
             }
             return cell
         } else {

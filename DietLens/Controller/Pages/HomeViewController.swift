@@ -16,7 +16,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var fatsProgressBar: HomeProgressView!
     @IBOutlet weak var proteinProgressBar: HomeProgressView!
     @IBOutlet weak var carbohydrateProgressBar: HomeProgressView!
-    public let articleDatamanager = ArticleDataManager.instance
     var whichArticleIndex = 0
 
     @IBOutlet weak var fatLabel: UILabel!
@@ -25,20 +24,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var headerView: UIView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return ArticleDataManager.instance.eventList.count+1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedRow") as? NewsFeedCell {
-                cell.setupNewsArticleRow(articles: articleDatamanager.articleList, whichVCisDelegate: self)
+                cell.setupNewsArticleRow(articles: ArticleDataManager.instance.articleList, whichVCisDelegate: self)
                 cell.selectionStyle = .none
                 return cell
             }
-        } else if indexPath.row == 1 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "otherFeedRow") //as? UITableViewCell
-            {
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "otherFeedRow") as? EventCell {
                 cell.selectionStyle = .none
+                cell.setuUpCell(imagePath: ArticleDataManager.instance.eventList[indexPath.row-1].articleImageURL)
+                if indexPath.row != 1 {
+                    cell.hideTitle()
+                }
                 return cell
             }
         }
@@ -58,8 +60,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         sideMenuButton.target = self.revealViewController()
         sideMenuButton.action = #selector(PBRevealViewController.revealLeftView)
         revealViewController()?.leftViewBlurEffectStyle = .light
-        newsFeedTable.estimatedRowHeight = 240
-        newsFeedTable.rowHeight = UITableViewAutomaticDimension
+//        newsFeedTable.estimatedRowHeight = 240
+//        newsFeedTable.rowHeight = UITableViewAutomaticDimension
         self.fatsProgressBar.progress = 0.01
         self.proteinProgressBar.progress = 0.01
         self.carbohydrateProgressBar.progress = 0.01
@@ -73,6 +75,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getDailyAccumulateCPF()
+        newsFeedTable.reloadData()
     }
 
     func getDailyAccumulateCPF() {
@@ -126,7 +129,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if indexPath.row == 1 {
             return CGFloat(320)
         } else {
-            return UITableViewAutomaticDimension
+            return CGFloat(300)
         }
     }
 
@@ -153,7 +156,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? SingleArticleViewController {
-             let article: Article = articleDatamanager.articleList[whichArticleIndex]
+             let article: Article = ArticleDataManager.instance.articleList[whichArticleIndex]
             dest.articleData = article
         }
     }
