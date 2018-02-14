@@ -16,6 +16,7 @@ public enum Meal: Int {
     case breakfast
     case lunch
     case dinner
+    case snack
 }
 
 struct FoodInfo {

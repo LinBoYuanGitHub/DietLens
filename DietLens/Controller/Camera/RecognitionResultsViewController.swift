@@ -31,7 +31,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     var mealitemPicker: UIPickerView!
     var percentageitemPicker: UIPickerView!
     var percentagePickerData = ["25%", "50%", "75%", "100%", "150%", "200%", "300%", "400%"]
-    var mealPickerData = ["Breakfast", "Lunch", "Dinner"]
+    var mealPickerData = ["Breakfast", "Lunch", "Dinner", "Snack"]
 
     var dateTime: Date? //previous controller should always pass dateTime
 
@@ -99,6 +99,8 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
             TFmealType.text = "Lunch"
         case .dinner:
             TFmealType.text = "Dinner"
+        case .snack:
+            TFmealType.text = "Snack"
         }
         //regist header here
         let nib = UINib(nibName: "IngredientHeader", bundle: nil)
@@ -125,15 +127,18 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     func setMealType() {
         let hour: Int = Calendar.current.component(.hour, from: Date())
-        if (hour > 5 && hour < 11) {
+        if (hour < 9 && hour > 6) {
             self.whichMeal = .breakfast
             mealitemPicker.selectRow(0, inComponent: 0, animated: false)
-        } else if (hour > 11 && hour < 16) {
+        } else if (hour < 14 && hour > 11) {
             self.whichMeal = .lunch
             mealitemPicker.selectRow(1, inComponent: 0, animated: false)
-        } else {
+        } else if (hour < 20 && hour > 17) {
             self.whichMeal = .dinner
             mealitemPicker.selectRow(2, inComponent: 0, animated: false)
+        } else {
+            self.whichMeal = .snack
+            mealitemPicker.selectRow(3, inComponent: 0, animated: false)
         }
     }
 

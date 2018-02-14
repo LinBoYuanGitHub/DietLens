@@ -50,6 +50,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return totalRows
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("indexPath row:\(indexPath.row), item:\(indexPath.item)")
         if indexLookup[indexPath.item] == -1 {
@@ -288,9 +289,11 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         var breakfastEntity: DiaryDailyFood = DiaryDailyFood()
         var lunchEntity: DiaryDailyFood = DiaryDailyFood()
         var dinnerEntity: DiaryDailyFood = DiaryDailyFood()
+        var snackEntity: DiaryDailyFood = DiaryDailyFood()
         breakfastEntity.mealOfDay = .breakfast
         lunchEntity.mealOfDay = .lunch
         dinnerEntity.mealOfDay = .dinner
+        snackEntity.mealOfDay = .snack
         for foodDiary in foodDiaryList {
             var foodInfo: FoodInfo = FoodInfo()
             foodInfo.id = foodDiary.id
@@ -310,8 +313,10 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                  breakfastEntity.foodConsumed.append(foodInfo)
             } else if foodDiary.mealType == "Lunch" {
                 lunchEntity.foodConsumed.append(foodInfo)
-            } else {
+            } else if foodDiary.mealType == "Dinner" {
                 dinnerEntity.foodConsumed.append(foodInfo)
+            } else {
+                snackEntity.foodConsumed.append(foodInfo)
             }
         }
         if foodDiaryList.count == 0 {
@@ -324,6 +329,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mealsConsumed.append(breakfastEntity)
         mealsConsumed.append(lunchEntity)
         mealsConsumed.append(dinnerEntity)
+        mealsConsumed.append(snackEntity)
         calculateTableViewParams()
         if isAddNewDiary {
             let range = NSRange(location: 0, length: 1)
