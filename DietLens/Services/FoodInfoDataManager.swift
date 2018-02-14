@@ -52,6 +52,18 @@ class FoodInfoDataManager {
         return foodInfo
     }
 
+    func assembleTextFoodInfo(jsonObject: JSON) -> FoodInfomation {
+        var foodInfo = FoodInfomation()
+        foodInfo.foodId = jsonObject["id"].stringValue
+        foodInfo.foodName = jsonObject["display_name"].stringValue
+        foodInfo.calorie = Float(jsonObject["energy"].stringValue)!
+        foodInfo.carbohydrate = jsonObject["carbohydrate"].stringValue
+        foodInfo.protein = jsonObject["protein"].stringValue
+        foodInfo.fat = jsonObject["total_fat"].stringValue
+        foodInfo.category = jsonObject["subcat"].stringValue
+        return foodInfo
+    }
+
     func assembleBarcodeFoodInfo(jsonObject: JSON) -> FoodInfomation {
         var foodInfo = FoodInfomation()
         foodInfo.foodId = jsonObject["id"].stringValue

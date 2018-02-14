@@ -260,7 +260,7 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(detail)["data"]
-                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObj)
+                let foodInfo = FoodInfoDataManager.instance.assembleTextFoodInfo(jsonObject: jsonObj)
                 completion(foodInfo)
         }
     }
