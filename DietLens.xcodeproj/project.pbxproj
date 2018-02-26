@@ -76,6 +76,9 @@
 		5841A5071FCE5939006201C5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841A5061FCE5939006201C5 /* Notification.swift */; };
 		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
 		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
+		586124A02043E29A00E727B2 /* ForgetPasswordEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5861249F2043E29A00E727B2 /* ForgetPasswordEmailViewController.swift */; };
+		586124A22043E2EA00E727B2 /* ForgetPasswordMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */; };
+		586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */; };
 		586C99BE1FDF819400B86C9C /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 586C99BD1FDF819300B86C9C /* RealmSwift.framework */; };
 		587067AC1FE252B000660262 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587067AB1FE252B000660262 /* HealthKit.framework */; };
 		587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587067AD1FE2534300660262 /* HealthKitSetupAssistant.swift */; };
@@ -222,6 +225,9 @@
 		5841A5061FCE5939006201C5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
 		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		5861249F2043E29A00E727B2 /* ForgetPasswordEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordEmailViewController.swift; sourceTree = "<group>"; };
+		586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordMainViewController.swift; sourceTree = "<group>"; };
+		586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordVerifyViewController.swift; sourceTree = "<group>"; };
 		586C99BD1FDF819300B86C9C /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		587067AA1FE252B000660262 /* DietLens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DietLens.entitlements; sourceTree = "<group>"; };
 		587067AB1FE252B000660262 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -372,6 +378,16 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
+		5861249E2043E27700E727B2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5861249F2043E29A00E727B2 /* ForgetPasswordEmailViewController.swift */,
+				586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */,
+				586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +506,7 @@
 		58FCCFEC1F9D886900E4F421 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5861249E2043E27700E727B2 /* Login */,
 				58D575ED1FCE5A8A0046EA25 /* NotificationPageViews */,
 				5818565D1FB6DB97004BEBB3 /* ArticlePageViews */,
 				587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */,
@@ -973,6 +990,7 @@
 				3F17943D1FDF84EC0047F9C1 /* NotificationName.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
 				3FD0861B200C73E60052D54B /* ExpandedUIButton.swift in Sources */,
+				586124A02043E29A00E727B2 /* ForgetPasswordEmailViewController.swift in Sources */,
 				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
@@ -1022,9 +1040,11 @@
 				3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
+				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
+				586124A22043E2EA00E727B2 /* ForgetPasswordMainViewController.swift in Sources */,
 				3F9BFE981FF34CF20011845B /* StepEntity.swift in Sources */,
 				3FD08625200EEC6B0052D54B /* HealthRecord.swift in Sources */,
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
