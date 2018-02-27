@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ForgetPasswordEmailViewController: UIViewController {
+class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     var emailFromLogin: String = ""
     @IBOutlet weak var emailAddr: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        emailAddr.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -27,6 +27,13 @@ class ForgetPasswordEmailViewController: UIViewController {
 
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailAddr {
+            cfmEmailPressed(self)
+        }
+        return true
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,9 +45,19 @@ class ForgetPasswordEmailViewController: UIViewController {
     @IBAction func cfmEmailPressed(_ sender: Any) {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
             // TODO:Call backend server
-
+            APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess, verificationNeeded) in
+                if isSuccess {
+                    if verificationNeeded {
+                        self.performSegue(withIdentifier: "GoToForgetVerify", sender: nil)
+                    } else {
+                        self.performSegue(withIdentifier: "GoToForgetPwMain", sender: nil)
+                    }
+                } else {
+                    self.alertWithTitle(title: "Error", message: "No such email found!", viewController: self, toFocus: self.emailAddr)
+                }
+            }
             // With 2FA
-            self.performSegue(withIdentifier: "GoToForgetVerify", sender: nil)
+            //self.performSegue(withIdentifier: "GoToForgetVerify", sender: nil)
             // Without 2FA
             //self.performSegue(withIdentifier: "GoToForgetPwMain", sender: nil)
         } else {

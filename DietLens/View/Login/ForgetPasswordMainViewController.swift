@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForgetPasswordMainViewController: UIViewController {
+class ForgetPasswordMainViewController: UIViewController, UITextFieldDelegate {
     var emailToDisplay: String = ""
     @IBOutlet weak var emailAddrField: UITextField!
     @IBOutlet weak var pwdField: UITextField!
@@ -17,6 +17,8 @@ class ForgetPasswordMainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         emailAddrField.text = emailToDisplay
+        pwdField.delegate = self
+        cfmPwdField.delegate = self
         pwdField.becomeFirstResponder()
     }
 
@@ -31,27 +33,44 @@ class ForgetPasswordMainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == pwdField {
+            textField.resignFirstResponder()
+            cfmPwdField.becomeFirstResponder()
+        }
+        if textField == cfmPwdField {
+            chngPwPressed(self)
+        }
+        return true
+    }
+
     @IBAction func chngPwPressed(_ sender: Any) {
         // Jump to main page
         if let pwd = pwdField.text, !pwd.isEmpty {
             if let cfmPwd = cfmPwdField.text, !cfmPwd.isEmpty {
                 if pwd == cfmPwd {
                     // TODO:Update backend server with new password
-                    
-                    
-                    // Login again
-                    APIService.instance.loginRequest(userEmail: emailToDisplay, password: cfmPwd) { (isSuccess) in
-                        if isSuccess {
-                            // save for basic authentication
-                            let preferences = UserDefaults.standard
-                            let pwdKey = "password"
-                            preferences.setValue(cfmPwd, forKey: pwdKey)
-                            self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
-                        } else {
-                            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
-                            print("Login failed")
+                    APIService.instance.resetChangePwRequest(userEmail: emailToDisplay, password: pwd, completion: { (succeeded) in
+                        if succeeded {
+                            let alert = UIAlertController(title: "Successfully change password", message: "Signing you in now..", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .`default`, handler: { _ in
+                                APIService.instance.loginRequest(userEmail: self.emailToDisplay, password: cfmPwd) { (isSuccess) in
+                                    if isSuccess {
+                                        // save for basic authentication
+                                        let preferences = UserDefaults.standard
+                                        let pwdKey = "password"
+                                        preferences.setValue(cfmPwd, forKey: pwdKey)
+                                        self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                                    } else {
+                                        AlertMessageHelper.showMessage(targetController: self, title: "Error", message: "Change pw request failed")
+                                    }
+                                }
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                            AlertMessageHelper.showMessage(targetController: self, title: "Successfully change password", message: "Signing you in now..")
                         }
-                    }
+                    })
+
                 } else {
                     alertWithTitle(title: "Error", message: "Both password fields do not match", viewController: self, toFocus: cfmPwdField)
                 }

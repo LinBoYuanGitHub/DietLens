@@ -26,13 +26,17 @@ struct ServerConfig {
     //testing environment
 
 //    static let baseURL = "http://dl.dietlens.com:8000/dl/v1"
-    static let baseURL = "http://47.74.189.175:8001/dl/v1"
-//    static let baseURL = "http://172.29.32.226:8000/dl/v1"
+//    static let baseURL = "http://47.74.189.175:8001/dl/v1"
+    static let baseURL = "http://172.29.32.226:8001/dl/v1"
     static let userURL = baseURL + "/users"
     static let userLoginURL = baseURL + "/login/"
     static let getUUidURL = baseURL + "/anonymous/"
     static let registry = baseURL + "/register/"
     static let thirdPartyLoginURL = baseURL + "/3rdlogin"
+
+    static let acctForgetPwSendEmailURL = baseURL + "/accounts/check/"
+    static let acctForgetPwEmailVerifURL = baseURL + "/accounts/verification/"
+    static let acctForgetPwResetURL = baseURL + "/accounts/set-password/"
 
     static let articleURL = baseURL + "/article"
     static let eventURL = baseURL + "/event/"

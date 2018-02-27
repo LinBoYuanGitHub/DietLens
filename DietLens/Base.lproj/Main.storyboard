@@ -50,7 +50,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="19"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Rj-1z-Jct">
                                                 <rect key="frame" x="0.0" y="21" width="315" height="1"/>
@@ -3541,7 +3541,7 @@ specific  recommendation</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="19"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="email"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GlG-zd-6qM">
                                                 <rect key="frame" x="0.0" y="21" width="315" height="1"/>
@@ -3559,7 +3559,7 @@ specific  recommendation</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="19"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="email"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHL-HL-yba">
                                                 <rect key="frame" x="0.0" y="21" width="315" height="1"/>
@@ -3634,6 +3634,7 @@ specific  recommendation</string>
                         <outlet property="cfmPwdField" destination="7od-Yo-gx9" id="OQD-Kb-s8L"/>
                         <outlet property="emailAddrField" destination="Cr8-Hh-ghU" id="l3w-CU-SPt"/>
                         <outlet property="pwdField" destination="K8J-Mt-QVe" id="5z2-Q2-qPV"/>
+                        <segue destination="Pgj-0E-wfv" kind="show" identifier="loginToMainPage" id="xOW-iC-wx0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fxg-1w-DDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3677,7 +3678,7 @@ specific  recommendation</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="315" height="19"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="email"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="postal-code"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pM-QS-6ZD">
                                                 <rect key="frame" x="0.0" y="21" width="315" height="1"/>
@@ -3847,8 +3848,8 @@ A
         <image name="weightIcon" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="L1g-pL-wT5"/>
-        <segue reference="Rjr-kT-kMW"/>
+        <segue reference="lNl-KA-hAD"/>
+        <segue reference="xOW-iC-wx0"/>
         <segue reference="NAD-8N-HRw"/>
         <segue reference="8og-k8-hEH"/>
     </inferredMetricsTieBreakers>
