@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -502,7 +503,7 @@
                                 <rect key="frame" x="15" y="90.666666666666686" width="384" height="625.33333333333326"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="bQs-gl-SZu" customClass="FoodDiaryHeaderCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="bQs-gl-SZu" customClass="FoodDiaryHeaderCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="384" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bQs-gl-SZu" id="0P2-TY-CBt">
@@ -536,7 +537,7 @@
                                             <outlet property="titleLabel" destination="4RX-x6-yyv" id="2m2-cb-xVQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodItem" rowHeight="100" id="mtE-pT-6Sd" customClass="FoodDiaryCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodItem" rowHeight="100" id="mtE-pT-6Sd" customClass="FoodDiaryCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="41" width="384" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mtE-pT-6Sd" id="Q3O-vM-UFQ">
@@ -725,13 +726,13 @@ Click add to record food~</string>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYT-3h-LKE" userLabel="ImageInfoView">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tjx-y8-93J">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                                 </imageView>
                                                 <view alpha="0.20000000000000001" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBr-xW-Gz0" userLabel="CoverView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6jE-pj-2LE">
@@ -768,13 +769,13 @@ Click add to record food~</string>
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kUm-Jq-bUm">
-                                            <rect key="frame" x="16" y="200" width="343" height="293"/>
+                                            <rect key="frame" x="16" y="200" width="382" height="293"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kjY-HZ-agy" userLabel="Stack View dishname">
-                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="91"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dish Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIh-JD-cOs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="EbG-Fj-ug6"/>
                                                             </constraints>
@@ -783,10 +784,10 @@ Click add to record food~</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VdL-JQ-87c">
-                                                            <rect key="frame" x="0.0" y="45" width="343" height="30"/>
+                                                            <rect key="frame" x="0.0" y="45" width="382" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dish name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bnp-zW-poH">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="377" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="nGr-j2-Phe"/>
                                                                     </constraints>
@@ -795,7 +796,7 @@ Click add to record food~</string>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:cwH-LN-qPh:image" translatesAutoresizingMaskIntoConstraints="NO" id="cwH-LN-qPh">
-                                                                    <rect key="frame" x="338" y="12.666666666666686" width="5" height="5"/>
+                                                                    <rect key="frame" x="377" y="12.666666666666686" width="5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="5" id="gl4-Eh-gki"/>
                                                                         <constraint firstAttribute="width" constant="5" id="qex-3n-Qpv"/>
@@ -807,7 +808,7 @@ Click add to record food~</string>
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xey-Jd-pCf" userLabel="grayLine">
-                                                            <rect key="frame" x="0.0" y="90" width="343" height="1"/>
+                                                            <rect key="frame" x="0.0" y="90" width="382" height="1"/>
                                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="lNG-bm-1dq"/>
@@ -819,10 +820,10 @@ Click add to record food~</string>
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="TvS-U4-PIw" userLabel="Stack View mealtype">
-                                                    <rect key="frame" x="0.0" y="101" width="343" height="91"/>
+                                                    <rect key="frame" x="0.0" y="101" width="382" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" text="This is my" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaS-6D-d0T">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="ZHb-SR-cH2"/>
                                                             </constraints>
@@ -831,10 +832,10 @@ Click add to record food~</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="g2O-Hq-FB5">
-                                                            <rect key="frame" x="0.0" y="45" width="343" height="30"/>
+                                                            <rect key="frame" x="0.0" y="45" width="382" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Breakfast" placeholder="MealType" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MBG-6z-Hoi">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="377" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="R2y-Rk-qRW"/>
                                                                     </constraints>
@@ -843,7 +844,7 @@ Click add to record food~</string>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:cwH-LN-qPh:image" translatesAutoresizingMaskIntoConstraints="NO" id="FGA-JU-Njq">
-                                                                    <rect key="frame" x="338" y="12.666666666666686" width="5" height="5"/>
+                                                                    <rect key="frame" x="377" y="12.666666666666686" width="5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="5" id="xog-bn-E8p"/>
                                                                         <constraint firstAttribute="height" constant="5" id="zka-sL-BjX"/>
@@ -855,7 +856,7 @@ Click add to record food~</string>
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZG-dU-Zga" userLabel="grayLine">
-                                                            <rect key="frame" x="0.0" y="90" width="343" height="1"/>
+                                                            <rect key="frame" x="0.0" y="90" width="382" height="1"/>
                                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="Hd3-F4-lbu"/>
@@ -867,10 +868,10 @@ Click add to record food~</string>
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="A6f-If-DGe" userLabel="Stack View portion">
-                                                    <rect key="frame" x="0.0" y="202" width="343" height="91"/>
+                                                    <rect key="frame" x="0.0" y="202" width="382" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I finished" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50J-BU-XQN">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Tu4-zd-N15"/>
                                                             </constraints>
@@ -879,10 +880,10 @@ Click add to record food~</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Od1-4Q-ZUC">
-                                                            <rect key="frame" x="0.0" y="45" width="343" height="30"/>
+                                                            <rect key="frame" x="0.0" y="45" width="382" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100%" placeholder="percentage" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dm-4a-mOJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="377" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="P98-bx-bCX"/>
                                                                     </constraints>
@@ -891,7 +892,7 @@ Click add to record food~</string>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:cwH-LN-qPh:image" translatesAutoresizingMaskIntoConstraints="NO" id="1uZ-ib-yhB">
-                                                                    <rect key="frame" x="338" y="12.666666666666686" width="5" height="5"/>
+                                                                    <rect key="frame" x="377" y="12.666666666666686" width="5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="5" id="gQ6-Gu-WUA"/>
                                                                         <constraint firstAttribute="width" constant="5" id="q7U-TH-h2Y"/>
@@ -903,7 +904,7 @@ Click add to record food~</string>
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Il9-Nz-p9U" userLabel="grayLine">
-                                                            <rect key="frame" x="0.0" y="90" width="343" height="1"/>
+                                                            <rect key="frame" x="0.0" y="90" width="382" height="1"/>
                                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="39I-Ay-oPh"/>
@@ -931,7 +932,7 @@ Click add to record food~</string>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asd-po-Lze" userLabel="DeleteBtn">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
                                             <color key="backgroundColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="yTo-cD-2Qo"/>
@@ -946,7 +947,7 @@ Click add to record food~</string>
                                     </subviews>
                                 </stackView>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="nutritionItemCell" id="Zvx-rl-obI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="nutritionItemCell" id="Zvx-rl-obI">
                                         <rect key="frame" x="0.0" y="521" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zvx-rl-obI" id="E2t-a9-z8W">
@@ -1423,18 +1424,18 @@ Click add to record food~</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="330" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="xlP-bx-uEh">
-                                <rect key="frame" x="16" y="59" width="382" height="677"/>
+                                <rect key="frame" x="0.0" y="59" width="414" height="677"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="322" id="KDW-BW-GQ8" customClass="NewsArticleTableCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="382" height="322"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="322" id="KDW-BW-GQ8" customClass="NewsArticleTableCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="414" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDW-BW-GQ8" id="fmm-2w-8di">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="322"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="322"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="kid" translatesAutoresizingMaskIntoConstraints="NO" id="Wdd-4O-WgZ" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="25" width="382" height="180"/>
+                                                    <rect key="frame" x="16" y="25" width="382" height="180"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="180" id="hNK-ak-PB9"/>
                                                     </constraints>
@@ -1445,7 +1446,7 @@ Click add to record food~</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu," selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pd9-0G-lto" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="213" width="352" height="32"/>
+                                                    <rect key="frame" x="15" y="213" width="384" height="32"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                     </accessibility>
@@ -1458,7 +1459,7 @@ Click add to record food~</string>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-Xs-lcO" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="245" width="352" height="77"/>
+                                                    <rect key="frame" x="15" y="245" width="384" height="77"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                     </accessibility>
@@ -1475,11 +1476,12 @@ Click add to record food~</string>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="1JQ-Xs-lcO" secondAttribute="bottom" id="K8a-az-dnZ"/>
                                                 <constraint firstItem="Pd9-0G-lto" firstAttribute="leading" secondItem="fmm-2w-8di" secondAttribute="leadingMargin" id="PYW-nk-7If"/>
+                                                <constraint firstItem="Wdd-4O-WgZ" firstAttribute="centerX" secondItem="fmm-2w-8di" secondAttribute="centerX" id="TQf-cf-de6"/>
                                                 <constraint firstItem="1JQ-Xs-lcO" firstAttribute="leading" secondItem="fmm-2w-8di" secondAttribute="leadingMargin" id="Tqf-m1-dV6"/>
                                                 <constraint firstItem="1JQ-Xs-lcO" firstAttribute="trailing" secondItem="fmm-2w-8di" secondAttribute="trailingMargin" id="aIv-nR-1Wu"/>
-                                                <constraint firstAttribute="trailing" secondItem="Wdd-4O-WgZ" secondAttribute="trailing" id="g8s-KJ-F65"/>
+                                                <constraint firstAttribute="trailing" secondItem="Wdd-4O-WgZ" secondAttribute="trailing" constant="16" id="g8s-KJ-F65"/>
                                                 <constraint firstItem="1JQ-Xs-lcO" firstAttribute="top" secondItem="Pd9-0G-lto" secondAttribute="bottom" id="iCO-aI-2vY"/>
-                                                <constraint firstItem="Wdd-4O-WgZ" firstAttribute="leading" secondItem="fmm-2w-8di" secondAttribute="leading" id="iRj-QE-Qci"/>
+                                                <constraint firstItem="Wdd-4O-WgZ" firstAttribute="leading" secondItem="fmm-2w-8di" secondAttribute="leading" constant="16" id="iRj-QE-Qci"/>
                                                 <constraint firstItem="Pd9-0G-lto" firstAttribute="top" secondItem="Wdd-4O-WgZ" secondAttribute="bottom" constant="8" id="ky6-4v-BcT"/>
                                                 <constraint firstItem="Pd9-0G-lto" firstAttribute="trailing" secondItem="fmm-2w-8di" secondAttribute="trailingMargin" id="m2v-bH-nf9"/>
                                                 <constraint firstItem="Wdd-4O-WgZ" firstAttribute="top" secondItem="fmm-2w-8di" secondAttribute="top" constant="25" id="paP-ya-z2s"/>
@@ -1500,10 +1502,10 @@ Click add to record food~</string>
                             <constraint firstItem="aky-m1-I7S" firstAttribute="top" secondItem="eGc-5Q-BmS" secondAttribute="top" constant="6" id="8kq-o9-Bnq"/>
                             <constraint firstItem="xlP-bx-uEh" firstAttribute="top" secondItem="aky-m1-I7S" secondAttribute="bottom" constant="8" id="8ss-Se-Btg"/>
                             <constraint firstItem="SBc-W0-Vdn" firstAttribute="centerX" secondItem="ZPY-6d-M7g" secondAttribute="centerX" id="Sw7-rz-pfc"/>
-                            <constraint firstItem="eGc-5Q-BmS" firstAttribute="trailing" secondItem="xlP-bx-uEh" secondAttribute="trailing" constant="16" id="ZTo-RC-w8D"/>
+                            <constraint firstItem="eGc-5Q-BmS" firstAttribute="trailing" secondItem="xlP-bx-uEh" secondAttribute="trailing" id="ZTo-RC-w8D"/>
                             <constraint firstItem="aky-m1-I7S" firstAttribute="leading" secondItem="eGc-5Q-BmS" secondAttribute="leading" constant="16" id="ha4-om-7ys"/>
                             <constraint firstItem="SBc-W0-Vdn" firstAttribute="centerY" secondItem="aky-m1-I7S" secondAttribute="centerY" id="mhw-nH-zdq"/>
-                            <constraint firstItem="xlP-bx-uEh" firstAttribute="leading" secondItem="eGc-5Q-BmS" secondAttribute="leading" constant="16" id="ryL-7K-XQl"/>
+                            <constraint firstItem="xlP-bx-uEh" firstAttribute="leading" secondItem="eGc-5Q-BmS" secondAttribute="leading" id="ryL-7K-XQl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eGc-5Q-BmS"/>
                     </view>
@@ -1528,7 +1530,7 @@ Click add to record food~</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="900" id="VqS-x0-TIw" customClass="SinglePageArticleBodyCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="900" id="VqS-x0-TIw" customClass="SinglePageArticleBodyCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="414" height="900"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VqS-x0-TIw" id="DSJ-zr-bVs">
@@ -1641,7 +1643,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                 <rect key="frame" x="0.0" y="290" width="414" height="426"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="reportCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reportCell" id="mLF-uE-idS" customClass="ReportTableCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="reportCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reportCell" id="mLF-uE-idS" customClass="ReportTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mLF-uE-idS" id="8WJ-Wy-gPd">
@@ -1790,7 +1792,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCounterCell" id="JCE-gR-3gk" customClass="StepCounterCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCounterCell" id="JCE-gR-3gk" customClass="StepCounterCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JCE-gR-3gk" id="2km-vC-Zse">
@@ -1798,10 +1800,10 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ena-wT-blD" userLabel="DisplayView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
                                                     <subviews>
                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qNv-aY-nbR">
-                                                            <rect key="frame" x="74.666666666666657" y="0.0" width="307.33333333333337" height="41"/>
+                                                            <rect key="frame" x="74.666666666666657" y="0.0" width="268.33333333333337" height="41"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <color key="progressTintColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1836,7 +1838,7 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1du-Hp-dzf" userLabel="BlankView">
-                                                    <rect key="frame" x="0.0" y="40" width="382" height="20"/>
+                                                    <rect key="frame" x="0.0" y="40" width="343" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="vd3-5T-OL5"/>
@@ -2609,7 +2611,7 @@ Developed by a dedicated team at NExT++ lab, Dietlens aims to your best AI assis
                                 <rect key="frame" x="16" y="106" width="382" height="610"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthCenterToolCell" id="hxS-zd-oj3" customClass="HealthToolCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthCenterToolCell" id="hxS-zd-oj3" customClass="HealthToolCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="382" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hxS-zd-oj3" id="33G-SQ-Ih2">
@@ -2633,13 +2635,13 @@ Developed by a dedicated team at NExT++ lab, Dietlens aims to your best AI assis
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WEIGHT RECORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlZ-oJ-TVS" userLabel="recordName">
-                                                            <rect key="frame" x="82.999999999999986" y="20" width="157.66666666666663" height="21"/>
+                                                            <rect key="frame" x="82.999999999999986" y="14" width="157.66666666666663" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LastRecord 56KG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNY-4Z-fHG" userLabel="lastRecord">
-                                                            <rect key="frame" x="82.999999999999986" y="46" width="134.66666666666663" height="21"/>
+                                                            <rect key="frame" x="82.999999999999986" y="35" width="134.66666666666663" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.62116312979999999" green="0.63280040029999995" blue="0.63613027330000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2658,13 +2660,13 @@ Developed by a dedicated team at NExT++ lab, Dietlens aims to your best AI assis
                                                         <constraint firstItem="WBx-tc-RFF" firstAttribute="centerY" secondItem="UR0-7J-EAB" secondAttribute="centerY" id="A56-JZ-wzL"/>
                                                         <constraint firstItem="nNY-4Z-fHG" firstAttribute="leading" secondItem="ZmU-2X-t6A" secondAttribute="trailing" constant="20" id="LTX-jM-hv0"/>
                                                         <constraint firstAttribute="trailing" secondItem="WBx-tc-RFF" secondAttribute="trailing" constant="25" id="LsW-PO-DOI"/>
-                                                        <constraint firstItem="nNY-4Z-fHG" firstAttribute="top" secondItem="VlZ-oJ-TVS" secondAttribute="bottom" constant="5" id="NFS-0w-cCK"/>
+                                                        <constraint firstItem="nNY-4Z-fHG" firstAttribute="top" secondItem="l4f-bQ-hXh" secondAttribute="centerY" id="NFS-0w-cCK"/>
                                                         <constraint firstItem="ZmU-2X-t6A" firstAttribute="centerY" secondItem="UR0-7J-EAB" secondAttribute="centerY" id="S78-B6-9Km"/>
                                                         <constraint firstAttribute="height" constant="70" id="TYs-qI-eI8"/>
                                                         <constraint firstItem="ZmU-2X-t6A" firstAttribute="leading" secondItem="l4f-bQ-hXh" secondAttribute="trailing" constant="15" id="at5-3Y-nxS"/>
                                                         <constraint firstItem="l4f-bQ-hXh" firstAttribute="leading" secondItem="UR0-7J-EAB" secondAttribute="leading" constant="16" id="bJi-bx-Gat"/>
                                                         <constraint firstItem="l4f-bQ-hXh" firstAttribute="centerY" secondItem="UR0-7J-EAB" secondAttribute="centerY" id="gzc-HN-5VK"/>
-                                                        <constraint firstItem="VlZ-oJ-TVS" firstAttribute="top" secondItem="l4f-bQ-hXh" secondAttribute="top" id="wFI-J4-jhF"/>
+                                                        <constraint firstItem="VlZ-oJ-TVS" firstAttribute="bottom" secondItem="l4f-bQ-hXh" secondAttribute="centerY" id="wFI-J4-jhF"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -2771,7 +2773,7 @@ Developed by a dedicated team at NExT++ lab, Dietlens aims to your best AI assis
                                 <rect key="frame" x="16" y="277" width="382" height="439"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="historyDeviceDataCell" id="irp-au-0dG" customClass="HealthDeviceDataCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="historyDeviceDataCell" id="irp-au-0dG" customClass="HealthDeviceDataCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="382" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="irp-au-0dG" id="sGc-e9-Zhk">
@@ -3149,7 +3151,7 @@ specific  recommendation</string>
                                 <rect key="frame" x="6" y="57" width="402" height="679"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="132" id="6HU-kW-PnL" customClass="NotificationTableCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="132" id="6HU-kW-PnL" customClass="NotificationTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="402" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6HU-kW-PnL" id="dY0-Dr-BLL">
@@ -3493,7 +3495,7 @@ A
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gFb-lA-J3h"/>
-        <segue reference="NAD-8N-HRw"/>
+        <segue reference="8Rw-F9-HXm"/>
         <segue reference="8og-k8-hEH"/>
     </inferredMetricsTieBreakers>
 </document>

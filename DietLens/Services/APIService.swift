@@ -409,7 +409,7 @@ class APIService {
             URL(string: ServerConfig.userURL + "/" + userId + "/profile/")!,
             method: .get,
             encoding: JSONEncoding.default,
-            headers: getBasicAuthenticationHeader())
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -438,7 +438,7 @@ class APIService {
             method: .put,
             parameters: ["name": name, "gender": gender, "height": height, "weight": weight],
             encoding: JSONEncoding.default,
-            headers: getBasicAuthenticationHeader())
+            headers: [:])
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {

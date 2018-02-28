@@ -43,14 +43,10 @@ class PlainTextTableAdapter<CellType: UITableViewCell>: NSObject, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            if isShowIngredient {
-                return "Ingredients (per serve)"
-            } else {
-                return "Nutrients (per serve)"
-            }
+        if section == 0 && isShowIngredient {
+            return StringConstants.UIString.IngredientHeaderText
         } else {
-            return "Nutrients (per serve)"
+            return StringConstants.UIString.NutritionHeaderText
         }
     }
 
@@ -66,26 +62,28 @@ class PlainTextTableAdapter<CellType: UITableViewCell>: NSObject, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            if isShowIngredient {
-                let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: "IngredientSectionHeader")
-                let header = cell as! IngredientSectionHeader
-                header.titleLabel.text = "Ingredient (per serve)"
-                if isShowPlusBtn {
-                    header.plusButton.isHidden = false
-                } else {
-                    header.plusButton.isHidden = true
-                }
-                return cell
-            } else {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "IngredientSectionHeader") as? IngredientSectionHeader, section == 0, isShowIngredient else {
                 return UITableViewHeaderFooterView()
-            }
-        } else {
-            return UITableViewHeaderFooterView()
         }
+
+        header.titleLabel.text = StringConstants.UIString.IngredientHeaderText
+        header.plusButton.isHidden = !isShowPlusBtn
+        return header
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let nutritionCell = tableView.dequeueReusableCell(withIdentifier: "nutritionItemCell") as? UITableViewCell else{
+//            guard let ingredientCell =  tableView.dequeueReusableCell(withIdentifier: "ingredientItemCell") as? IngredientItemCell, indexPath.section == 0,isShowIngredient else {
+//                nutritionCell.textLabel?.text = "\(nutritionTextList[indexPath.row])"
+//                return nutritionCell
+//            }
+//            ingredientCell.setUpCell(ingredientName: ingredientTextList[indexPath.row])
+//            ingredientCell.deleteBtn.tag = indexPath.row
+//            ingredientCell.deleteBtn.addTarget(self, action: #selector(deleteIngredient(_:)), for: .touchUpInside)
+//            return ingredientCell
+//        }
+//        nutritionCell.textLabel?.text = "\(nutritionTextList[indexPath.row])"
+//        return nutritionCell
         var cell = tableView.dequeueReusableCell(withIdentifier: "nutritionItemCell") //UITableViewCell()
         if indexPath.section == 0 {
             if isShowIngredient {
