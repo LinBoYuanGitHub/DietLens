@@ -46,6 +46,78 @@ class APIService {
         }
     }
 
+    public func resetPwRequest(userEmail: String, completion: @escaping (_ isSuccess: Bool, _ verificationNeeded: Bool) -> Void) {
+        Alamofire.request(URL(string: ServerConfig.acctForgetPwSendEmailURL)!,
+                          method: .post,
+                          parameters: ["email": userEmail],
+                          encoding: JSONEncoding.default,
+                          headers: [:])
+        .validate()
+            .responseJSON {(response) -> Void in
+            guard response.result.isSuccess else {
+                print ("Failed to request verification email")
+                completion (false, false)
+                return
+            }
+            let jsonObj = JSON(response.result.value)
+            if let data = jsonObj["data"].dictionaryObject {
+                if let needVerify = data["verification"] {
+                    completion (true, needVerify as! Bool)
+                    return
+                }
+            }
+            completion(true, false)
+        }
+    }
+
+    public func resetVerifyRequest(userEmail: String, verificationCode: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        Alamofire.request(URL(string: ServerConfig.acctForgetPwEmailVerifURL)!,
+                          method: .post,
+                          parameters: ["email": userEmail, "code": verificationCode],
+                          encoding: JSONEncoding.default,
+                          headers: [:])
+            .validate()
+            .responseJSON {(response) -> Void in
+                guard response.result.isSuccess else {
+                    print ("Failed to request verification email")
+                    completion (false)
+                    return
+                }
+                let jsonObj = JSON(response.result.value)
+                if jsonObj["message"] == "Verification success"{
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+        }
+    }
+
+    public func resetChangePwRequest(userEmail: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        Alamofire.request(URL(string: ServerConfig.acctForgetPwResetURL)!,
+                          method: .post,
+                          parameters: ["email": userEmail, "password": password],
+                          encoding: JSONEncoding.default,
+                          headers: [:])
+            .validate()
+            .responseJSON {(response) -> Void in
+                guard response.result.isSuccess else {
+                    print ("Failed to request verification email")
+                    completion (false)
+                    return
+                }
+                let jsonObj = JSON(response.result.value)
+                if let data = jsonObj["data"].dictionaryObject {
+                    if let success = data["email_sending_result"] {
+                        if jsonObj["data"]["email_sending_result"] == "success"{
+                            completion(true)
+                            return
+                        }
+                    }
+                }
+                completion(false)
+        }
+    }
+
     public func loginRequest(userEmail: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.userLoginURL)!,

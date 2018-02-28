@@ -53,15 +53,25 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+    @IBAction func forgetPwPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "GoToForgetPwEmail", sender: self)
+    }
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let emailTyped = TFEmail.text, !emailTyped.isEmpty {
+            if segue.identifier == "GoToForgetPwEmail"{
+                if let emailConfirm = segue.destination as? ForgetPasswordEmailViewController {
+                    emailConfirm.emailFromLogin = emailTyped
+                }
+            }
+        }
+
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }
 
