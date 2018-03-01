@@ -12,7 +12,10 @@ class ArticleDataManager {
     static var instance = ArticleDataManager()
     public var articleList = [Article]()
     public var eventList = [Article]()
-    var page: Int = 0
+    //pagering for article list
+    var articleCurrentPage: Int = 0
+    //pagering for event list
+    var eventCurrentPage: Int = 0
 
     private init() {
 

@@ -401,7 +401,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         var ingredientString = ""
         if foodDiary.ingredientList.count == 0 {
             ingredientString = "[]"
-        } else{
+        } else {
             ingredientString = "["
             for ingredient in  foodDiary.ingredientList {
                 let json: JSON = [

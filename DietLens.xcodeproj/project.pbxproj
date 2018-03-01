@@ -25,6 +25,7 @@
 		3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACD1FEBB04600A3685A /* CardView.swift */; };
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
+		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */; };
 		3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */; };
 		3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */; };
@@ -110,7 +111,6 @@
 		58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
 		58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */; };
 		58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */; };
-		58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF261F9F437100FF3A95 /* NewsFeed.swift */; };
 		58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF291F9F439100FF3A95 /* DataService.swift */; };
 		58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
 		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
@@ -176,6 +176,7 @@
 		3F43DACD1FEBB04600A3685A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageMapper.swift; sourceTree = "<group>"; };
 		3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientSearchController.swift; sourceTree = "<group>"; };
 		3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientDelegate.swift; sourceTree = "<group>"; };
@@ -268,7 +269,6 @@
 		58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBorderClearButton.swift; sourceTree = "<group>"; };
 		58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		58F2DF261F9F437100FF3A95 /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		58F2DF291F9F439100FF3A95 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -483,6 +483,7 @@
 				3FD08622200EEC160052D54B /* HealthCenterDBOperation.swift */,
 				3F14CC47201C79FF0032CC77 /* ProfileDataManager.swift */,
 				3F4906EC201E119900D1F388 /* NotificationDataManager.swift */,
+				3F575C322047F0D9009C096C /* DateUtil.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -490,7 +491,6 @@
 		58FCCFEB1F9D886400E4F421 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				58F2DF261F9F437100FF3A95 /* NewsFeed.swift */,
 				5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */,
 				58E425E91FA0993B00C542D9 /* NewsArticle.swift */,
 				3FFB56841FADAF90002DCE15 /* FoodDiary.swift */,
@@ -1019,6 +1019,7 @@
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
 				3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */,
 				3FD0861D200DACA50052D54B /* HealthCenterViewController.swift in Sources */,
+				3F575C332047F0D9009C096C /* DateUtil.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
 				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
 				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
@@ -1056,7 +1057,6 @@
 				3FD08625200EEC6B0052D54B /* HealthRecord.swift in Sources */,
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
 				58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */,
-				58F2DF271F9F437100FF3A95 /* NewsFeed.swift in Sources */,
 				3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */,
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
 				3F117DEE1FBD6A3D00E4A4A5 /* FoodDiaryHistoryViewController.swift in Sources */,
