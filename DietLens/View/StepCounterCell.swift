@@ -19,9 +19,7 @@ class StepCounterCell: UITableViewCell {
     }
 
     func setupCell(stepEntity: StepEntity, maxValue: Double) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.setLocalizedDateFormatFromTemplate("dd MMM")
-        stepDate.text = "\(dateFormatter.string(from: stepEntity.date!)):"
+        stepDate.text = "\( DateUtil.day3MDateToString(date: stepEntity.date!)):"
         stepValue.text = "\(String(format: "%.0f", stepEntity.stepValue))"
         //progress bar color & animation setting
         if stepEntity.stepValue > 6000 {

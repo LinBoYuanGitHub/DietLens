@@ -30,6 +30,8 @@ struct FoodInfo {
     var imageURL: String?
     var servingSize: String = ""
     var portionSize: Double = 100
+    var quantity: Double = 1.0
+    var unit: String = ""
     var recordType: String = ""
     var ingredientList = List<IngredientDiary>()
 

@@ -26,6 +26,8 @@ class FoodDiary: Object {
     @objc dynamic var protein = "0.0"
     @objc dynamic var fat = "0.0"
     @objc dynamic var category = ""
+    @objc dynamic var quantity = 0.0
+    @objc dynamic var unit = ""
     let ingredientList = List<IngredientDiary>() // used only when user choose customized food
 }
 
@@ -37,7 +39,7 @@ class IngredientDiary: Object {
     @objc dynamic var carbs = 0.0
     @objc dynamic var protein = 0.0
     @objc dynamic var fat = 0.0
-    @objc dynamic var sugars_total = 0.0
+    @objc dynamic var sugarsTotal = 0.0
     @objc dynamic var quantity: Double = 0
     @objc dynamic var unit = ""
     @objc dynamic var weight = 0.0

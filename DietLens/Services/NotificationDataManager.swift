@@ -21,7 +21,7 @@ class NotificationDataManager {
             notification.title = jsonobj["title"].stringValue
             notification.body = jsonobj["content"].stringValue
             let dateStr = jsonobj["created_time"].stringValue.split(separator: ".")[0]
-            let date = DateUtil.StandardStringToDate(dateStr: String(dateStr))
+            let date = DateUtil.standardStringToDate(dateStr: String(dateStr))
             notification.dateReceived = date
             if jsonobj["status"].stringValue == "read"{
                 notification.read = true

@@ -307,6 +307,8 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             foodInfo.recordType = foodDiary.recordType
             foodInfo.portionSize = foodDiary.portionSize
             foodInfo.ingredientList = foodDiary.ingredientList
+            foodInfo.unit = foodDiary.unit
+            foodInfo.quantity = foodDiary.quantity
 //            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
             foodInfo.servingSize = "unknown"
             if foodDiary.mealType == "Breakfast" {

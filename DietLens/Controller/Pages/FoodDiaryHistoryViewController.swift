@@ -14,12 +14,18 @@ class FoodDiaryHistoryViewController: UIViewController {
 
     @IBOutlet weak var recognitzeDataTable: UITableView!
     @IBOutlet weak var header: UIStackView!
-    @IBOutlet weak var TFportion: UITextField!
+//    @IBOutlet weak var TFportion: UITextField!
+
+    @IBOutlet weak var TFunit: UITextField!
+    @IBOutlet weak var TFquantity: UITextField!
     @IBOutlet weak var TFmealType: UITextField!
     @IBOutlet weak var TFfoodName: UITextField!
     @IBOutlet weak var caloriePercentage: UILabel!
-    @IBOutlet weak var portionStack: UIStackView!
+//    @IBOutlet weak var portionStack: UIStackView!
+    @IBOutlet weak var quantityStack: UIStackView!
+    @IBOutlet weak var unitStack: UIStackView!
 
+    @IBOutlet weak var mainStackView: UIStackView!
     var ingredientAdapter: PlainTextTableAdapter<UITableViewCell>!
     @IBOutlet weak var diaryFoodCarlorieLabel: UILabel!
     var selectedFoodInfo = FoodInfo()
@@ -27,15 +33,18 @@ class FoodDiaryHistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         TFfoodName.text = selectedFoodInfo.foodName
-        TFportion.text = String(selectedFoodInfo.portionSize)+"%"
+//        TFportion.text = String(selectedFoodInfo.portionSize)+"%"
         TFmealType.text = selectedFoodInfo.mealType
 
         TFfoodName.isUserInteractionEnabled = false
-        TFportion.isUserInteractionEnabled = false
+        TFquantity.isUserInteractionEnabled = false
+        TFunit.isUserInteractionEnabled = false
         TFmealType.isUserInteractionEnabled = false
+//        TFportion.isUserInteractionEnabled = false
         diaryFoodImage.contentMode = .scaleAspectFill
         diaryFoodImage.image = diaryImage
         recognitzeDataTable.tableHeaderView = header
+        recognitzeDataTable.tableHeaderView?.fs_height = 550
         ingredientAdapter = PlainTextTableAdapter()
         recognitzeDataTable.delegate = ingredientAdapter
         recognitzeDataTable.dataSource = ingredientAdapter
@@ -46,10 +55,14 @@ class FoodDiaryHistoryViewController: UIViewController {
         setFoodDataList()
         loadIngredients()
         if selectedFoodInfo.recordType == "customized"{
-            portionStack.isHidden = true
+//            portionStack.isHidden = true
+            quantityStack.isHidden = true
+            unitStack.isHidden = true
             recognitzeDataTable.tableHeaderView?.fs_height = (recognitzeDataTable.tableHeaderView?.fs_height)! - CGFloat(100)
         } else {
-            portionStack.isHidden = false
+//            portionStack.isHidden = false
+            quantityStack.isHidden = false
+            unitStack.isHidden = false
         }
     }
 
@@ -75,7 +88,9 @@ class FoodDiaryHistoryViewController: UIViewController {
         ingredientAdapter.nutritionTextList.append("Fats   \(String(total_fat))g")
         recognitzeDataTable.reloadData()
         //adjust calorie textlabel
-        TFportion.text = "\(round(selectedFoodInfo.portionSize))%"
+//        TFportion.text = "\(round(selectedFoodInfo.portionSize))%"
+        TFquantity.text = String(round(selectedFoodInfo.quantity))
+        TFunit.text = selectedFoodInfo.unit
         diaryFoodCarlorieLabel.text = "\(round(total_calories)) kcal"
         caloriePercentage.text = "\(round(total_calories/20))% of your daily calorie intake"
     }

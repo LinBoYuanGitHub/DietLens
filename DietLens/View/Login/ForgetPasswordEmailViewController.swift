@@ -45,6 +45,7 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cfmEmailPressed(_ sender: Any) {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
             // TODO:Call backend server
+            AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess, verificationNeeded) in
                 if isSuccess {
                     if verificationNeeded {
@@ -53,7 +54,11 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
                         self.performSegue(withIdentifier: "GoToForgetPwMain", sender: nil)
                     }
                 } else {
-                    self.alertWithTitle(title: "Error", message: "No such email found!", viewController: self, toFocus: self.emailAddr)
+                    DispatchQueue.main.async {
+                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                        self.alertWithTitle(title: "Error", message: "No such email found!", viewController: self, toFocus: self.emailAddr)
+                    }
+
                 }
             }
             // With 2FA

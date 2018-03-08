@@ -80,9 +80,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     func getDailyAccumulateCPF() {
         var foodDiaryList = [FoodDiary]()
-        let diaryFormatter = DateFormatter()
-        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
-        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: Date()) )!
+        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: DateUtil.formatGMTDateToString(date: Date()))!
         var dailyCarb: Float = 0
         var dailyProtein: Float = 0
         var dailyFat: Float = 0

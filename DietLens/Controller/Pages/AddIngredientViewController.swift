@@ -59,14 +59,14 @@ class AddIngredientViewController: UIViewController {
         ingredientDiary.carbs = Double(ingredient.carbs)!*rate
         ingredientDiary.protein = Double(ingredient.protein)!*rate
         ingredientDiary.fat = Double(ingredient.fat)!*rate
-        ingredientDiary.sugars_total = Double(ingredient.sugars_total)!*rate
+        ingredientDiary.sugarsTotal = Double(ingredient.sugars_total)!*rate
         //round decimal
         ingredientDiary.calorie = round(10*ingredientDiary.calorie)/10
         ingredientDiary.carbs = round(10*ingredientDiary.carbs)/10
         ingredientDiary.protein = round(10*ingredientDiary.protein)/10
         ingredientDiary.fat = round(10*ingredientDiary.fat)/10
         //set value for nutritions
-        nutrtitions = ["calories  "+String(ingredientDiary.calorie)+"g", "carbs  "+String(ingredientDiary.carbs)+"g", "protein  "+String(ingredientDiary.protein)+"g", "fat  "+String(ingredientDiary.fat)+"g", "sugarTotal  "+String(ingredientDiary.sugars_total)+"g"]
+        nutrtitions = ["calories  "+String(ingredientDiary.calorie)+"g", "carbs  "+String(ingredientDiary.carbs)+"g", "protein  "+String(ingredientDiary.protein)+"g", "fat  "+String(ingredientDiary.fat)+"g", "sugarTotal  "+String(ingredientDiary.sugarsTotal)+"g"]
         nutritionTable.reloadData()
     }
 

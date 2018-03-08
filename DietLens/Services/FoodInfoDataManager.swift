@@ -34,6 +34,15 @@ class FoodInfoDataManager {
                 foodInfo.fat = jsonObject["fat"].stringValue
                 foodInfo.sampleImagePath = jsonObject["food_sample_url"].stringValue
             }
+            for json in jsonObject["portion"].arrayValue {
+                var portion = Portion()
+                portion.sizeValue = json["size_value"].intValue
+                portion.rank = json["rank"].intValue
+                portion.sizeUnit = json["size_unit"].stringValue
+                portion.weightUnit = json["weight_unit"].stringValue
+                portion.weightValue = json["weight_value"].doubleValue
+                foodInfo.portionList.append(portion)
+            }
             foodInfo.rank = i+1
             foodInfoList.append(foodInfo)
         }
@@ -49,6 +58,15 @@ class FoodInfoDataManager {
         foodInfo.protein = jsonObject["protein"].stringValue
         foodInfo.fat = jsonObject["total_fat"].stringValue
         foodInfo.category = jsonObject["subcat"].stringValue
+        for json in jsonObject["portion"].arrayValue {
+            var portion = Portion()
+            portion.sizeValue = json["size_value"].intValue
+            portion.rank = json["rank"].intValue
+            portion.sizeUnit = json["size_unit"].stringValue
+            portion.weightUnit = json["weight_unit"].stringValue
+            portion.weightValue = json["weight_value"].doubleValue
+            foodInfo.portionList.append(portion)
+        }
         return foodInfo
     }
 
@@ -61,6 +79,15 @@ class FoodInfoDataManager {
         foodInfo.protein = jsonObject["protein"].stringValue
         foodInfo.fat = jsonObject["total_fat"].stringValue
         foodInfo.category = jsonObject["subcat"].stringValue
+        for json in jsonObject["portion"].arrayValue {
+            var portion = Portion()
+            portion.sizeValue = json["size_value"].intValue
+            portion.rank = json["rank"].intValue
+            portion.sizeUnit = json["size_unit"].stringValue
+            portion.weightUnit = json["weight_unit"].stringValue
+            portion.weightValue = json["weight_value"].doubleValue
+            foodInfo.portionList.append(portion)
+        }
         return foodInfo
     }
 
@@ -73,6 +100,15 @@ class FoodInfoDataManager {
         foodInfo.protein = jsonObject["protein"].stringValue
         foodInfo.fat = jsonObject["total_fat"].stringValue
         foodInfo.category = "barcode"
+        for json in jsonObject["portion"].arrayValue {
+            var portion = Portion()
+            portion.sizeValue = json["size_value"].intValue
+            portion.rank = json["rank"].intValue
+            portion.sizeUnit = json["size_unit"].stringValue
+            portion.weightUnit = json["weight_unit"].stringValue
+            portion.weightValue = json["weight_value"].doubleValue
+            foodInfo.portionList.append(portion)
+        }
         return foodInfo
     }
 

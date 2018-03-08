@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 class AlertMessageHelper {
 
+    static var alertController: UIAlertController?
+
     class func showMessage(targetController: UIViewController, title: String, message: String) {
         showMessage(targetController: targetController, title: title, message: message, confirmText: "OK")
     }
@@ -33,5 +35,21 @@ class AlertMessageHelper {
             callback(false)
         }))
         targetController.present(alert, animated: true, completion: nil)
+    }
+
+    class func showLoadingDialog(targetController: UIViewController) {
+        alertController = UIAlertController(title: nil, message: "Loading...\n\n", preferredStyle: UIAlertControllerStyle.alert)
+        let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
+        spinnerIndicator.color = UIColor.black
+        spinnerIndicator.startAnimating()
+        alertController?.view.addSubview(spinnerIndicator)
+        targetController.present(alertController!, animated: false, completion: nil)
+    }
+
+    class func dismissLoadingDialog(targetController: UIViewController) {
+        if alertController != nil {
+            alertController?.dismiss(animated: false, completion: nil)
+        }
     }
 }

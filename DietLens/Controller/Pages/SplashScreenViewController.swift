@@ -51,16 +51,13 @@ class SplashScreenViewController: UIViewController {
     func getArticleListToMainPage() {
         let preferences = UserDefaults.standard
         let nicknameKey = "nickname"
-        let firstTimeKey = "notfirsttime"
         let nickName = preferences.string(forKey: nicknameKey)
-        let isNotFirstTime = preferences.bool(forKey: firstTimeKey)
         APIService.instance.getArticleList { (articleList) in
             if articleList != nil {
                 APIService.instance.getEventList { (_) in
                     DispatchQueue.main.async {
-                        if (isNotFirstTime == false || nickName == nil) {
+                        if (nickName == nil) {
                             self.performSegue(withIdentifier: "toLoginPage", sender: self)
-                            preferences.set(true, forKey: firstTimeKey)
                         } else {
                             self.performSegue(withIdentifier: "toMainPage", sender: self)
                         }
@@ -69,9 +66,8 @@ class SplashScreenViewController: UIViewController {
             } else {
                 //TODO: handle article list nil
                 DispatchQueue.main.async {
-                  if (isNotFirstTime == false || nickName == nil) {
+                  if (nickName == nil) {
                         self.performSegue(withIdentifier: "toLoginPage", sender: self)
-                        preferences.set(true, forKey: firstTimeKey)
                     } else {
                         self.performSegue(withIdentifier: "toMainPage", sender: self)
                     }

@@ -23,8 +23,8 @@ class ProfileDataManager {
         userProfile.occupation = jsonObj["occupation"].stringValue
         userProfile.nationality = jsonObj["nationality"].stringValue
         userProfile.marital_status = jsonObj["marital_status"].stringValue
-        userProfile.height = Double(jsonObj["height"].intValue)
-        userProfile.weight = Double(jsonObj["weight"].intValue)
+        userProfile.height = jsonObj["height"].doubleValue
+        userProfile.weight = jsonObj["weight"].doubleValue
         return userProfile
     }
 }

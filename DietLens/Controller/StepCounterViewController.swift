@@ -83,14 +83,13 @@ class StepCounterViewController: UIViewController {
     }
 
     func uploadStepData() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd")
         var stepArray = [[String: Any]]()
         for i in 0..<stepsList.count {
             var step: [String: Any] = [:]
-            let dateStr = dateFormatter.string(from: stepsList[i].date!)
-            let dataArr = dateStr.split(separator: "/")
-            step["exercise_datetime"] = String(dataArr[2]) + "-" + String(dataArr[1]) + "-" + String(dataArr[0])
+            let dateStr = DateUtil.normalDateToString(date: stepsList[i].date!)
+//            let dataArr = dateStr.split(separator: "/")
+//            step["exercise_datetime"] = String(dataArr[2]) + "-" + String(dataArr[1]) + "-" + String(dataArr[0])
+            step["exercise_datetime"] = dateStr
             step["exercise_amount"] = String(stepsList[i].stepValue)
             stepArray.append(step)
         }

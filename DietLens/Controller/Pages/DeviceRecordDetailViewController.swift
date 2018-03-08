@@ -51,9 +51,7 @@ class DeviceRecordDetailViewController: UIViewController {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        let dateFormatter = DateFormatter()
-        dateFormatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
-        let date = dateFormatter.string(from: Date())
+        let date = DateUtil.templateDateToString(date: Date())
         let dateStr = date.split(separator: ",")[0]
         let timeStr = date.split(separator: ",")[1]
         let dateStrArr = dateStr.split(separator: "/")
@@ -100,9 +98,7 @@ extension DeviceRecordDetailViewController: UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "historyDeviceDataCell") as? HealthDeviceDataCell {
-            let dateformatter = DateFormatter()
-            dateformatter.dateFormat = "dd MMM"
-            let dateStr = dateformatter.string(from: historyList[indexPath.row].date)
+            let dateStr = DateUtil.day3MDateToString(date: historyList[indexPath.row].date)
             cell.setupCell(value: String(historyList[indexPath.row].value), unit: historyList[indexPath.row].unit, dateStr: dateStr)
             return cell
         } else {

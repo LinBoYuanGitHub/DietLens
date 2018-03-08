@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class RecognitionResultsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -25,8 +26,14 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     //Header-User Input Item part
     @IBOutlet weak var foodName: UITextField!
-    @IBOutlet weak var portionStack: UIStackView!
-    @IBOutlet weak var TFfoodPercentage: UITextField!
+    @IBOutlet weak var quantityStack: UIStackView!
+    @IBOutlet weak var unitStack: UIStackView!
+
+    @IBOutlet weak var TFquantity: UITextField!
+    @IBOutlet weak var TFunit: UITextField!
+
+//    @IBOutlet weak var portionStack: UIStackView!
+//    @IBOutlet weak var TFfoodPercentage: UITextField!
     @IBOutlet weak var TFmealType: UITextField!
     @IBOutlet weak var recognizeDataTable: UITableView!
     @IBOutlet weak var footer: UIView!
@@ -36,8 +43,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     //picker & ArrayOfData for Picker
     var mealitemPicker: UIPickerView!
-    var percentageitemPicker: UIPickerView!
-    var percentagePickerData = ["25%", "50%", "75%", "100%", "150%", "200%", "300%", "400%"]
+    var unitPicker: UIPickerView!
+    var unitPickerData: [String] = []
+//    var percentageitemPicker: UIPickerView!
+//    var percentagePickerData = ["25%", "50%", "75%", "100%", "150%", "200%", "300%", "400%"]
     var mealPickerData = ["Breakfast", "Lunch", "Dinner", "Snack"]
 
     var dateTime: Date? //previous controller should always pass dateTime
@@ -59,7 +68,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         foodNameOptionTable.dataSource = self
         foodNameOptionTable.delegate = self
         foodName.delegate = self
-        TFfoodPercentage.delegate = self
+//        TFfoodPercentage.delegate = self
+        TFquantity.keyboardType = UIKeyboardType.decimalPad
+        TFquantity.delegate = self
+        TFunit.delegate = self
         TFmealType.delegate = self
         //set up image
         foodImage.contentMode = .scaleAspectFill
@@ -71,13 +83,15 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         //set up tableview adapter
         setUpIngredientTableAdapter()
         //set picker view
-        setUpInputView()
         setUpPickerView()
+        setUpUnitList(pos: 0)
+        setUpInputView()
         //set taleview
         setFoodDataList()
         recognizeDataTable.dataSource = ingredientAdapter
         recognizeDataTable.delegate = ingredientAdapter
         recognizeDataTable.tableHeaderView = header
+        recognizeDataTable.tableHeaderView?.fs_height = 550
         recognizeDataTable.tableFooterView = footer
         setMealType()
         //regist header here
@@ -111,7 +125,15 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     @objc func onAddIngredient(_ notification: NSNotification) {
         if let diaryIngredient = notification.userInfo?["ingredientdiary"] as? IngredientDiary {
-            foodDiary.ingredientList.append(diaryIngredient)
+            //TODO fix realm add code problem
+            let realm = try! Realm()
+            do {
+                try realm.write({
+                  foodDiary.ingredientList.append(diaryIngredient)
+                })
+            } catch let error {
+                print(error)
+            }
             //reload table to show added ingredient
             ingredientAdapter.ingredientTextList.append(diaryIngredient.ingredientName + "  " + String(diaryIngredient.quantity*diaryIngredient.weight) + StringConstants.UIString.diaryIngredientUnit)
             //acccumulate nutrtion
@@ -147,42 +169,57 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     func setFoodDataList() {
+        let unitPosition = unitPicker.selectedRow(inComponent: 0)
+        let ratio: Double = Double(TFquantity.text!)!*results![foodDiary.rank-1].portionList[unitPosition].weightValue
         ingredientAdapter.nutritionTextList.removeAll()
-        let total_calories = round(10*Double(foodDiary.calorie)*foodDiary.portionSize)/1000
-        let total_carbohydrate = round(10*Double(foodDiary.carbohydrate)!*foodDiary.portionSize)/1000
-        let total_protein = round(10*Double(foodDiary.protein)!*foodDiary.portionSize)/1000
-        let total_fat = round(10*Double(foodDiary.fat)!*foodDiary.portionSize)/1000
+        let total_calories = round(10*Double(foodDiary.calorie)*ratio)/1000
+        let total_carbohydrate = round(10*Double(foodDiary.carbohydrate)!*ratio)/1000
+        let total_protein = round(10*Double(foodDiary.protein)!*ratio)/1000
+        let total_fat = round(10*Double(foodDiary.fat)!*ratio)/1000
         ingredientAdapter.nutritionTextList.append("Calories   \(String(total_calories))kcal")
         ingredientAdapter.nutritionTextList.append("Carbs   \(String(total_carbohydrate))g")
         ingredientAdapter.nutritionTextList.append("Protein   \(String(total_protein))g")
         ingredientAdapter.nutritionTextList.append("Fats   \(String(total_fat))g")
         //adjust calorie textlabel
-        TFfoodPercentage.text = "\(round(foodDiary.portionSize))%"
+//        TFfoodPercentage.text = "\(round(foodDiary.portionSize))%"
         foodCalorie.text = "\(round(total_calories)) kcal"
         caloriePercentage.text = "\(round(total_calories/20))% of your daily calorie intake"
     }
 
+    func setUpUnitList(pos: Int) {
+        unitPickerData.removeAll()
+        for portion in results![pos].portionList {
+            unitPickerData.append(portion.sizeUnit)
+        }
+        unitPicker.selectRow(0, inComponent: 0, animated: false)
+        TFunit.text = unitPickerData[0]
+        //recalculate nutrition data
+        setFoodDataList()
+    }
+
     func setUpPickerView() {
         mealitemPicker = UIPickerView()
-        percentageitemPicker = UIPickerView()
+        unitPicker = UIPickerView()
         mealitemPicker.dataSource = self
         mealitemPicker.delegate = self
         mealitemPicker.showsSelectionIndicator = true
         mealitemPicker.accessibilityViewIsModal = true
-        percentageitemPicker.dataSource = self
-        percentageitemPicker.delegate = self
-        percentageitemPicker.showsSelectionIndicator = true
-        percentageitemPicker.accessibilityViewIsModal = true
-        percentageitemPicker.selectRow(3, inComponent: 0, animated: false)
+        unitPicker.dataSource = self
+        unitPicker.delegate = self
+        unitPicker.showsSelectionIndicator = true
+        unitPicker.accessibilityViewIsModal = true
         //set up picker tool bar
         let pickerToolBar = setUpPickerToolBar()
-        TFmealType.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
+//        TFmealType.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
         TFmealType.inputView = mealitemPicker
         TFmealType.inputAccessoryView = pickerToolBar
-        TFfoodPercentage.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
-        TFfoodPercentage.inputView = percentageitemPicker
-        TFfoodPercentage.inputAccessoryView = pickerToolBar
-        TFfoodPercentage.text = percentagePickerData[3]
+//        TFunit.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
+        TFunit.inputView = unitPicker
+        TFunit.inputAccessoryView = pickerToolBar
+//        TFfoodPercentage.addTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
+//        TFfoodPercentage.inputView = percentageitemPicker
+//        TFfoodPercentage.inputAccessoryView = pickerToolBar
+//        TFfoodPercentage.text = percentagePickerData[3]
     }
 
     func setUpPickerToolBar() -> UIToolbar {
@@ -202,50 +239,45 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     @objc func donePicker() {
         DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-            self.foodDiary.portionSize = Double(self.percentagePickerData[self.percentageitemPicker.selectedRow(inComponent: 0)].replacingOccurrences(of: "%", with: ""))!
+            self.foodDiary.unit = self.unitPickerData[self.unitPicker.selectedRow(inComponent: 0)]
+//            self.foodDiary.portionSize = Double(self.percentagePickerData[self.percentageitemPicker.selectedRow(inComponent: 0)].replacingOccurrences(of: "%", with: ""))!
             self.setFoodDataList()
             self.recognizeDataTable.reloadData()
         }
         TFmealType.resignFirstResponder()
-        TFfoodPercentage.resignFirstResponder()
+        TFquantity.resignFirstResponder()
+        TFunit.resignFirstResponder()
+//        TFfoodPercentage.resignFirstResponder()
     }
 
     func setUpInputView() {
         if recordType == "recognition"{
             selectDishView.alpha = 1
-            if results == nil || results?.count == 0 {
-                results = [FoodInfomation]()
-                var f1 = FoodInfomation()
-                f1.foodName = "laksa"
-                results!.append(f1)
-                f1.foodName = "mee goreng"
-                results!.append(f1)
-                f1.foodName = "laksa goreng"
-                results!.append(f1)
-                f1.foodName = "nasi goreng"
-                results!.append(f1)
-                f1.foodName = "beehoon goreng"
-                results!.append(f1)
-                f1.foodName = "kway tiao goreng"
-                results!.append(f1)
-            } else {
-                setFoodInfoIntoDiary(foodInfo: results![0])
-                foodCalorie.text = String(results![0].calorie) + " kcal"
-            }
-        } else if recordType == "barcode"{
+            foodName.text = results![0].foodName
+            setFoodInfoIntoDiary(foodInfo: results![0])
+            setFoodDataList()
+//            if results == nil || results?.count == 0 {
+//                results = [FoodInfomation]()
+//                var f1 = FoodInfomation()
+//                f1.foodName = "laksa"
+//                results!.append(f1)
+//                f1.foodName = "mee goreng"
+//                results!.append(f1)
+//                f1.foodName = "laksa goreng"
+//                results!.append(f1)
+//                f1.foodName = "nasi goreng"
+//                results!.append(f1)
+//                f1.foodName = "beehoon goreng"
+//                results!.append(f1)
+//                f1.foodName = "kway tiao goreng"
+//                results!.append(f1)
+//            } else {
+
+//            }
+        } else if (recordType == "barcode"||recordType == "text") {
             selectDishView.alpha = 0
             //hide ingredientinput
             foodName.text = results![0].foodName
-            foodCalorie.text = String(results![0].calorie) + " kcal"
-            caloriePercentage.text = "\(Int(results![0].calorie/20))% of your daily calorie intake"
-            setFoodInfoIntoDiary(foodInfo: results![0])
-            setFoodDataList()
-        } else if recordType == "text" {
-            selectDishView.alpha = 0
-            //show ingredientinput
-            foodName.text = results![0].foodName
-            foodCalorie.text = String(results![0].calorie) + " kcal"
-            caloriePercentage.text = "\(Int(results![0].calorie/20))% of your daily calorie intake"
             setFoodInfoIntoDiary(foodInfo: results![0])
             setFoodDataList()
         } else if recordType == "customized" {
@@ -257,6 +289,20 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
             }
             recognizeDataTable.reloadData()
         }
+        //register tap gesture recognition
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        header.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+        keyboardWillHide()
+    }
+
+    func keyboardWillHide() {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += (100)
+        }
     }
 
     // The number of columns of data
@@ -266,8 +312,8 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     // The number of rows of data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == percentageitemPicker {
-            return percentagePickerData.count
+        if pickerView == unitPicker {
+            return unitPickerData.count
         } else if pickerView == mealitemPicker {
             return mealPickerData.count
         }
@@ -276,8 +322,8 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == percentageitemPicker {
-            return percentagePickerData[row]
+        if pickerView == unitPicker {
+            return unitPickerData[row]
         } else if pickerView == mealitemPicker {
             foodDiary.mealType = mealPickerData[row]
             return mealPickerData[row]
@@ -286,8 +332,8 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-         if pickerView == percentageitemPicker {
-            TFfoodPercentage.text = percentagePickerData[row]
+         if pickerView == unitPicker {
+            TFunit.text = unitPickerData[row]
         } else if pickerView == mealitemPicker {
             TFmealType.text = mealPickerData[row]
         }
@@ -316,6 +362,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         foodCalorie.text = String(results![indexPath.row].calorie) + " kcal"
         caloriePercentage.text = "\(Int(results![indexPath.row].calorie/20))% of your daily calorie intake"
         setFoodInfoIntoDiary(foodInfo: results![indexPath.row])
+        setUpUnitList(pos: indexPath.row)
         //set click action on foodName,mealType,eaten percentage
         recordType = "recognition"
         foodDiary.rank = indexPath.row + 1//set selection rank
@@ -372,32 +419,49 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     @IBAction func doneButtonPressed(_ sender: Any) {
         if recordType == "customized" && ingredientAdapter.ingredientTextList.count == 0 {
-            AlertMessageHelper.showMessage(targetController: self, title: "Note", message: "you haven`t add any ingredients yet!")
+            AlertMessageHelper.showMessage(targetController: self, title: "Note", message: "you haven't add any ingredients yet!")
             return
         }
-        let diaryFormatter = DateFormatter()
-        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
         self.foodDiary.foodName = self.foodName.text!
-        self.foodDiary.mealTime = diaryFormatter.string(from: self.dateTime!)
+        self.foodDiary.mealTime = DateUtil.formatGMTDateToString(date: self.dateTime!)
         self.foodDiary.recordType = self.recordType!
         self.foodDiary.mealType = self.TFmealType.text!
-        self.saveImage(imgData: UIImageJPEGRepresentation(self.foodImage.image!, 1)!, filename: String(Date().timeIntervalSince1970 * 1000)+".png")
-        DispatchQueue.main.async {
-//            FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: self.foodDiary)
-        }
-        self.dismiss(animated: false) {
-            NotificationCenter.default.post(name: .addDiaryDismiss, object: nil)
-        }
+        self.foodDiary.quantity = Double(self.TFquantity.text!)!
+        self.foodDiary.unit = self.TFunit.text!
         //upload to server
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        var nutrientJson: JSON = [
+        let nutrientJson: JSON = assembleNutrtionString()
+        let ingredientString = assembleIngredientString()
+        //TODO show loading progress bar for saving image
+        APIService.instance.saveFoodDiary(userId: userId!, foodDiary: foodDiary, mealTime: foodDiary.mealTime, mealType: foodDiary.mealType, nutrientJson: nutrientJson.rawString()!, ingredientJson: ingredientString, recordType: foodDiary.recordType, category: foodDiary.category, rank: foodDiary.rank, quantity: foodDiary.quantity, unit: foodDiary.unit) { (flag) in
+            if flag {
+                self.saveImage(imgData: UIImageJPEGRepresentation(self.foodImage.image!, 1)!, filename: String(Date().timeIntervalSince1970 * 1000)+".png")
+                DispatchQueue.main.async {
+                    FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: self.foodDiary)
+                    self.dismiss(animated: false) {
+                        NotificationCenter.default.post(name: .addDiaryDismiss, object: nil)
+                    }
+                }
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "food Diary save failed")
+            }
+        }
+        print("Ate \(foodName.text ?? "none") for \(whichMeal) on \(dateTime)")
+    }
+
+    func assembleNutrtionString() -> JSON {
+        let nutrientJson: JSON = [
             "calorie": foodDiary.calorie,
             "carbs": foodDiary.carbohydrate,
             "protein": foodDiary.protein,
             "fat": foodDiary.fat
         ]
+        return nutrientJson
+    }
+
+    func assembleIngredientString() -> String {
         var ingredientString = ""
         if foodDiary.ingredientList.count == 0 {
             ingredientString = "[]"
@@ -421,35 +485,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
             ingredientString = ingredientString.substring(to: ingredientString.index(before: ingredientString.endIndex))
             ingredientString += "]"
         }
-        APIService.instance.saveFoodDiary(userId: userId!, foodDiary: foodDiary, mealTime: foodDiary.mealTime, mealType: foodDiary.mealType, nutrientJson: nutrientJson.rawString()!, ingredientJson: ingredientString, recordType: foodDiary.recordType, category: foodDiary.category, rank: foodDiary.rank) { (flag) in
-            if (flag) {
-                let diaryFormatter = DateFormatter()
-                diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
-                self.foodDiary.foodName = self.foodName.text!
-                self.foodDiary.mealTime = diaryFormatter.string(from: self.dateTime!)
-                self.foodDiary.recordType = self.recordType!
-                self.foodDiary.mealType = self.TFmealType.text!
-                self.saveImage(imgData: UIImageJPEGRepresentation(self.foodImage.image!, 1)!, filename: String(Date().timeIntervalSince1970 * 1000)+".png")
-                DispatchQueue.main.async {
-                    FoodDiaryDBOperation.instance.saveFoodDiary(foodDiary: self.foodDiary)
-                }
-                self.dismiss(animated: false) {
-                    NotificationCenter.default.post(name: .addDiaryDismiss, object: nil)
-                }
-            } else {
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: "food Diary save failed")
-            }
-        }
-        print("Ate \(foodName.text ?? "none") for \(whichMeal) on \(dateTime)")
-        // jump to diaryViewController at another storyboard
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "mainSlideMenuVC") as! MainSlideMenuViewController
-//        vc.addFoodDate = self.dateTime!
-//        self.present(vc, animated: true, completion: nil)
-//        let parent = presentingViewController
-//        dismiss(animated: false, completion: {
-//                parent!.dismiss(animated: true, completion: nil)
-//        })
+        return ingredientString
     }
 
     func saveImage(imgData: Data, filename: String) {
@@ -483,9 +519,12 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         foodCalorie.text = ""
         caloriePercentage.text = ""
         ingredientAdapter.isShowIngredient = true
+        recognizeDataTable.tableHeaderView?.fs_height = 480
         UIView.animate(withDuration: 0.3) {
             self.recognizeDataTable.tableHeaderView?.fs_height = (self.recognizeDataTable.tableHeaderView?.fs_height)! - CGFloat(100)
-            self.portionStack.isHidden = true
+//            self.portionStack.isHidden = true
+            self.quantityStack.isHidden = true
+            self.unitStack.isHidden = true
             self.recognizeDataTable.reloadData()
         }
     }
@@ -515,10 +554,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == TFfoodPercentage || textField == TFmealType {
+//         if textField == TFfoodPercentage || textField == TFmealType
+        if textField == TFmealType || textField == TFunit || textField == TFquantity {
             return true
         } else if recordType == "customized" && textField == foodName {
-            foodName.text = ""
             foodName.removeTarget(self, action: #selector(self.buttonClicked(_:)), for: .touchDown)
             return true
         } else {
@@ -526,14 +565,11 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == TFquantity {
+            setFoodDataList()
+            recognizeDataTable.reloadData()
+        }
     }
-    */
 
 }

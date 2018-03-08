@@ -18,9 +18,18 @@ struct FoodInfomation {
     public var calorie: Float = 0.0
     public var category: String = ""
     public var sampleImagePath: String = ""
+    public var portionList: [Portion] = []
 
     init() {
 
     }
 
+}
+
+struct Portion {
+    public var sizeUnit = ""
+    public var sizeValue = 1
+    public var weightValue = 0.0
+    public var weightUnit = ""
+    public var rank = 0
 }

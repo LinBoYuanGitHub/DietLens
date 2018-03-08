@@ -105,16 +105,16 @@ class APIService {
                     completion (false)
                     return
                 }
-                let jsonObj = JSON(response.result.value)
-                if let data = jsonObj["data"].dictionaryObject {
-                    if let success = data["email_sending_result"] {
-                        if jsonObj["data"]["email_sending_result"] == "success"{
-                            completion(true)
-                            return
-                        }
-                    }
-                }
-                completion(false)
+//                let jsonObj = JSON(response.result.value)
+//                if let data = jsonObj["data"].dictionaryObject {
+//                    if let success = data["email_sending_result"] {
+//                        if jsonObj["data"]["email_sending_result"] == "success"{
+//                            completion(true)
+//                            return
+//                        }
+//                    }
+//                }
+                completion(true)
         }
     }
 
@@ -645,8 +645,8 @@ class APIService {
     ///   - category: food category
     ///   - ratio: portion ratio
     ///   - completion: for passing callback
-    public func saveFoodDiary(userId: String, foodDiary: FoodDiary, mealTime: String, mealType: String, nutrientJson: String, ingredientJson: String, recordType: String, category: String, rank: Int, completion: @escaping (Bool) -> Void) {
-        var params: Dictionary = ["food_name": foodDiary.foodName, "portion_size": foodDiary.portionSize, "meal_type": mealType, "nutrient": nutrientJson, "ingredient": ingredientJson, "search_type": recordType, "rank": String(rank)] as [String: Any]
+    public func saveFoodDiary(userId: String, foodDiary: FoodDiary, mealTime: String, mealType: String, nutrientJson: String, ingredientJson: String, recordType: String, category: String, rank: Int, quantity: Double, unit: String, completion: @escaping (Bool) -> Void) {
+        var params: Dictionary = ["food_name": foodDiary.foodName, "portion_size": foodDiary.portionSize, "meal_type": mealType, "nutrient": nutrientJson, "ingredient": ingredientJson, "search_type": recordType, "rank": String(rank), "quantity": quantity, "unit": unit] as [String: Any]
         Alamofire.request(
             URL(string: ServerConfig.saveFoodDiaryURL+"?user_id="+userId)!,
             method: .post,

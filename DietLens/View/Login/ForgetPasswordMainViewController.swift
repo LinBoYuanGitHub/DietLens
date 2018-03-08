@@ -50,7 +50,9 @@ class ForgetPasswordMainViewController: UIViewController, UITextFieldDelegate {
             if let cfmPwd = cfmPwdField.text, !cfmPwd.isEmpty {
                 if pwd == cfmPwd {
                     // TODO:Update backend server with new password
+                    AlertMessageHelper.showLoadingDialog(targetController: self)
                     APIService.instance.resetChangePwRequest(userEmail: emailToDisplay, password: pwd, completion: { (succeeded) in
+                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
                         if succeeded {
                             let alert = UIAlertController(title: "Successfully change password", message: "Signing you in now..", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .`default`, handler: { _ in

@@ -49,8 +49,10 @@ class ProfileViewController: UIViewController {
             //set userProfile
             self.TFName.text = userProfile?.name
             if userProfile != nil {
-                self.TFWeight.text = "\(userProfile!.weight)"
-                self.TFHeight.text = "\(userProfile!.height)"
+                self.TFWeight.text = String(format: "%.1f", userProfile!.weight)
+                self.TFHeight.text = String(format: "%.1f", userProfile!.height)
+//                self.TFWeight.text = "\(userProfile!.weight)"
+//                self.TFHeight.text = "\(userProfile!.height)"
             }
             if userProfile?.gender == 0 {
                 self.TFGender.text = self.genderList[1]
@@ -89,6 +91,8 @@ class ProfileViewController: UIViewController {
 
     @objc func donePicker() {
         if TFGender.isFirstResponder {
+            //set selectValue
+            TFGender.text = genderList[genderPickerView.selectedRow(inComponent: 0)]
             TFHeight.becomeFirstResponder()
         } else if TFHeight.isFirstResponder {
             TFWeight.becomeFirstResponder()

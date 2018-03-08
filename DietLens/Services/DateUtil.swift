@@ -7,21 +7,62 @@
 //
 
 import Foundation
-class DateUtil{
-    
-    public static func StandardStringToDate(dateStr:String) -> Date{
+class DateUtil {
+
+    public static func standardStringToDate(dateStr: String) -> Date {
         let RFC3339DateFormatter = DateFormatter()
         RFC3339DateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
         let resultDate = RFC3339DateFormatter.date(from: String(dateStr))
         return resultDate!
     }
-    
-    public static func StandardDateToString(date:Date) -> String{
+
+    public static func standardDateToString(date: Date) -> String {
         let RFC3339DateFormatter = DateFormatter()
-        RFC3339DateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
+        RFC3339DateFormatter.dateFormat = "yyyy-MM-dd"
         let resultStr = RFC3339DateFormatter.string(from: date)
         return resultStr
     }
-    
-    
+
+    public static func normalStringToDate(dateStr: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let resultDate = dateFormatter.date(from: String(dateStr))
+        return resultDate!
+    }
+
+    public static func normalDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+    public static func templateStringToDate(dateStr: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let resultDate = dateFormatter.date(from: String(dateStr))
+        return resultDate!
+    }
+
+    public static func templateDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+    public static func day3MDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+    public static func formatGMTDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
 }
