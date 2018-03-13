@@ -15,6 +15,8 @@ class PlainTextTableAdapter<CellType: UITableViewCell>: NSObject, UITableViewDat
     public var isShowIngredient = false
     public var isShowPlusBtn = true
 
+    public var totalWeight: Double = 0
+
     public var callBack: ((Int) -> Void)?
 
     override init() {
@@ -46,7 +48,7 @@ class PlainTextTableAdapter<CellType: UITableViewCell>: NSObject, UITableViewDat
         if section == 0 && isShowIngredient {
             return StringConstants.UIString.IngredientHeaderText
         } else {
-            return StringConstants.UIString.NutritionHeaderText
+            return StringConstants.UIString.NutritionHeaderText + "(\(totalWeight)"+StringConstants.UIString.diaryIngredientUnit+")"
         }
     }
 

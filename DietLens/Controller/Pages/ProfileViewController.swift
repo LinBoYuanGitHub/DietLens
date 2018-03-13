@@ -39,8 +39,6 @@ class ProfileViewController: UIViewController {
         TFGender.inputAccessoryView = genderPickerToolBar
         TFHeight.inputAccessoryView = heightPickerToolBar
         TFWeight.inputAccessoryView = weightPickerToolBar
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
         //load profie
         let preferences = UserDefaults.standard
         let key = "userId"
@@ -101,11 +99,6 @@ class ProfileViewController: UIViewController {
             keyboardWillHide()
         }
 
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-        keyboardWillHide()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -198,4 +191,17 @@ extension ProfileViewController: UITextFieldDelegate {
         return true
     }
 
+}
+
+extension ProfileViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+        keyboardWillHide()
+    }
 }

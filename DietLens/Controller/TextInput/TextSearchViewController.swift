@@ -22,6 +22,10 @@ class TextSearchViewController: UIViewController {
     var isSearching = false
     var selectedImage: UIImage?
 
+    var addFoodDate: Date?
+    var mealType: Meal = .snack
+    var isSetMealByTimeRequired: Bool = true
+
     override func viewDidLoad() {
         let button = UIButton(type: .custom)
         button.setImage(#imageLiteral(resourceName: "Back Arrow"), for: .normal)
@@ -185,11 +189,15 @@ extension TextSearchViewController: UITableViewDataSource {
 extension TextSearchViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let parentVC = self.parent as! AddFoodViewController
         if let dest = segue.destination as? RecognitionResultsViewController {
             dest.recordType = "text"
             dest.results = foodResults
-            dest.dateTime = Date()
+            dest.whichMeal = mealType
+            dest.dateTime = addFoodDate
+            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
             dest.userFoodImage = SampleImageMapper.instance.getFoodSampleImage(foodCategory: foodResults[0].category)
+
         }
     }
 }

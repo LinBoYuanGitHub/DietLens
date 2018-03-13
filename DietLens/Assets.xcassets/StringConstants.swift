@@ -11,8 +11,9 @@ import Foundation
 struct StringConstants {
     struct UIString {
         static let IngredientHeaderText = "Ingredients (per serve)"
-        static let NutritionHeaderText = "Nutrients (per serve)"
+        static let NutritionHeaderText = "Nutrients "
         static let diaryIngredientUnit = "g"
+        static let calorieUnit = "kcal"
     }
     struct MealString {
         static let breakfast = "Breakfast"

@@ -12,6 +12,7 @@ import XLPagerTabStrip
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
     var addFoodDate = Date()
     var mealType: Meal = .dinner
+    var isSetMealByTimeRequired = true
 
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         guard let cameraViewController = storyboard?.instantiateViewController(withIdentifier: "cameraVC")

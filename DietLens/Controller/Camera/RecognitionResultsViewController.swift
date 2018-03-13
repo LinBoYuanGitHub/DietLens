@@ -44,7 +44,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     //picker & ArrayOfData for Picker
     var mealitemPicker: UIPickerView!
     var unitPicker: UIPickerView!
-    var unitPickerData: [String] = []
+    var unitPickerData: [String] = ["portion"]
 //    var percentageitemPicker: UIPickerView!
 //    var percentagePickerData = ["25%", "50%", "75%", "100%", "150%", "200%", "300%", "400%"]
     var mealPickerData = ["Breakfast", "Lunch", "Dinner", "Snack"]
@@ -53,12 +53,14 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     var userFoodImage: UIImage?
     var whichMeal: Meal = .breakfast
+    var isSetMealByTimeRequired = true
     var results: [FoodInfomation]?
     var foodDiary = FoodDiary()
     var recordType: String?
 
     // use the flag to mark whether app should dismiss when user close selection dialog
     var shouldDismissFromSelection: Bool = true
+    var imageId = 0
 
 //    var ingredientDeleteHandler: ((Int) -> Void)?
 
@@ -129,18 +131,18 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
             let realm = try! Realm()
             do {
                 try realm.write({
-                  foodDiary.ingredientList.append(diaryIngredient)
+                    foodDiary.ingredientList.append(diaryIngredient)
+                    //acccumulate nutrtion
+                    foodDiary.calorie += diaryIngredient.calorie
+                    foodDiary.carbohydrate = String(Double(foodDiary.carbohydrate)!+diaryIngredient.carbs)
+                    foodDiary.protein = String(Double(foodDiary.protein)!+diaryIngredient.protein)
+                    foodDiary.fat = String(Double(foodDiary.fat)!+diaryIngredient.fat)
                 })
             } catch let error {
                 print(error)
             }
             //reload table to show added ingredient
             ingredientAdapter.ingredientTextList.append(diaryIngredient.ingredientName + "  " + String(diaryIngredient.quantity*diaryIngredient.weight) + StringConstants.UIString.diaryIngredientUnit)
-            //acccumulate nutrtion
-            foodDiary.calorie += diaryIngredient.calorie
-            foodDiary.carbohydrate = String(Double(foodDiary.carbohydrate)!+diaryIngredient.carbs)
-            foodDiary.protein = String(Double(foodDiary.protein)!+diaryIngredient.protein)
-            foodDiary.fat = String(Double(foodDiary.fat)!+diaryIngredient.fat)
             //reload the data
             setFoodDataList()
             recognizeDataTable.reloadData()
@@ -148,24 +150,42 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     func setMealType() {
-        let hour: Int = Calendar.current.component(.hour, from: Date())
-        if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
-            self.whichMeal = .breakfast
-            TFmealType.text = StringConstants.MealString.breakfast
-            mealitemPicker.selectRow(0, inComponent: 0, animated: false)
-        } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
-            self.whichMeal = .lunch
-             TFmealType.text =  StringConstants.MealString.lunch
-            mealitemPicker.selectRow(1, inComponent: 0, animated: false)
-        } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
-            self.whichMeal = .dinner
-            TFmealType.text = StringConstants.MealString.dinner
-            mealitemPicker.selectRow(2, inComponent: 0, animated: false)
+        if isSetMealByTimeRequired {
+            let hour: Int = Calendar.current.component(.hour, from: Date())
+            if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
+                self.whichMeal = .breakfast
+                TFmealType.text = StringConstants.MealString.breakfast
+                mealitemPicker.selectRow(0, inComponent: 0, animated: false)
+            } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
+                self.whichMeal = .lunch
+                TFmealType.text =  StringConstants.MealString.lunch
+                mealitemPicker.selectRow(1, inComponent: 0, animated: false)
+            } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
+                self.whichMeal = .dinner
+                TFmealType.text = StringConstants.MealString.dinner
+                mealitemPicker.selectRow(2, inComponent: 0, animated: false)
+            } else {
+                self.whichMeal = .snack
+                TFmealType.text = StringConstants.MealString.snack
+                mealitemPicker.selectRow(3, inComponent: 0, animated: false)
+            }
         } else {
-            self.whichMeal = .snack
-            TFmealType.text = StringConstants.MealString.snack
-            mealitemPicker.selectRow(3, inComponent: 0, animated: false)
+            switch whichMeal {
+            case Meal.breakfast:
+                TFmealType.text = StringConstants.MealString.breakfast
+                mealitemPicker.selectRow(0, inComponent: 0, animated: false)
+            case Meal.lunch:
+                TFmealType.text = StringConstants.MealString.lunch
+                mealitemPicker.selectRow(1, inComponent: 0, animated: false)
+            case Meal.dinner:
+                TFmealType.text = StringConstants.MealString.dinner
+                mealitemPicker.selectRow(2, inComponent: 0, animated: false)
+            case Meal.snack:
+                TFmealType.text = StringConstants.MealString.snack
+                mealitemPicker.selectRow(3, inComponent: 0, animated: false)
+            }
         }
+
     }
 
     func setFoodDataList() {
@@ -176,13 +196,17 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         let total_carbohydrate = round(10*Double(foodDiary.carbohydrate)!*ratio)/1000
         let total_protein = round(10*Double(foodDiary.protein)!*ratio)/1000
         let total_fat = round(10*Double(foodDiary.fat)!*ratio)/1000
-        ingredientAdapter.nutritionTextList.append("Calories   \(String(total_calories))kcal")
-        ingredientAdapter.nutritionTextList.append("Carbs   \(String(total_carbohydrate))g")
-        ingredientAdapter.nutritionTextList.append("Protein   \(String(total_protein))g")
-        ingredientAdapter.nutritionTextList.append("Fats   \(String(total_fat))g")
+        ingredientAdapter.nutritionTextList.append(NutrtionData.calorieText + "   \(String(total_calories))"+StringConstants.UIString.calorieUnit)
+        ingredientAdapter.nutritionTextList.append(NutrtionData.carbohydrateText + "   \(String(total_carbohydrate))"+StringConstants.UIString.diaryIngredientUnit)
+        ingredientAdapter.nutritionTextList.append(NutrtionData.proteinText + "   \(String(total_protein))"+StringConstants.UIString.diaryIngredientUnit)
+        ingredientAdapter.nutritionTextList.append(NutrtionData.fatText + "   \(String(total_fat))"+StringConstants.UIString.diaryIngredientUnit)
         //adjust calorie textlabel
+        ingredientAdapter.totalWeight = 0.0
+        for ingredient in foodDiary.ingredientList {
+            ingredientAdapter.totalWeight += ingredient.weight
+        }
 //        TFfoodPercentage.text = "\(round(foodDiary.portionSize))%"
-        foodCalorie.text = "\(round(total_calories)) kcal"
+        foodCalorie.text = "\(round(total_calories)) "+StringConstants.UIString.calorieUnit
         caloriePercentage.text = "\(round(total_calories/20))% of your daily calorie intake"
     }
 
@@ -418,10 +442,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        if recordType == "customized" && ingredientAdapter.ingredientTextList.count == 0 {
-            AlertMessageHelper.showMessage(targetController: self, title: "Note", message: "you haven't add any ingredients yet!")
-            return
-        }
+//        if recordType == "customized" && ingredientAdapter.ingredientTextList.count == 0 {
+//            AlertMessageHelper.showMessage(targetController: self, title: "Note", message: "you haven't add any ingredients yet!")
+//            return
+//        }
         self.foodDiary.foodName = self.foodName.text!
         self.foodDiary.mealTime = DateUtil.formatGMTDateToString(date: self.dateTime!)
         self.foodDiary.recordType = self.recordType!
@@ -435,7 +459,7 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
         let nutrientJson: JSON = assembleNutrtionString()
         let ingredientString = assembleIngredientString()
         //TODO show loading progress bar for saving image
-        APIService.instance.saveFoodDiary(userId: userId!, foodDiary: foodDiary, mealTime: foodDiary.mealTime, mealType: foodDiary.mealType, nutrientJson: nutrientJson.rawString()!, ingredientJson: ingredientString, recordType: foodDiary.recordType, category: foodDiary.category, rank: foodDiary.rank, quantity: foodDiary.quantity, unit: foodDiary.unit) { (flag) in
+        APIService.instance.saveFoodDiary(userId: userId!, foodDiary: foodDiary, mealTime: foodDiary.mealTime, mealType: foodDiary.mealType, nutrientJson: nutrientJson.rawString()!, ingredientJson: ingredientString, recordType: foodDiary.recordType, category: foodDiary.category, rank: foodDiary.rank, quantity: foodDiary.quantity, unit: foodDiary.unit, imageId: imageId) { (flag) in
             if flag {
                 self.saveImage(imgData: UIImageJPEGRepresentation(self.foodImage.image!, 1)!, filename: String(Date().timeIntervalSince1970 * 1000)+".png")
                 DispatchQueue.main.async {
@@ -453,10 +477,10 @@ class RecognitionResultsViewController: UIViewController, UITableViewDataSource,
 
     func assembleNutrtionString() -> JSON {
         let nutrientJson: JSON = [
-            "calorie": foodDiary.calorie,
-            "carbs": foodDiary.carbohydrate,
-            "protein": foodDiary.protein,
-            "fat": foodDiary.fat
+            NutrtionData.calorieText: foodDiary.calorie,
+            NutrtionData.carbohydrateText: foodDiary.carbohydrate,
+            NutrtionData.proteinText: foodDiary.protein,
+            NutrtionData.fatText: foodDiary.fat
         ]
         return nutrientJson
     }

@@ -63,6 +63,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "addFoodVC") as! AddFoodViewController
                     vc.addFoodDate = self.addFoodDate
+                    vc.isSetMealByTimeRequired = false
                     vc.mealType = mealType
                     self.present(vc, animated: true, completion: nil)
                     self.isAddNewDiary = true //set the addnewdiary flag

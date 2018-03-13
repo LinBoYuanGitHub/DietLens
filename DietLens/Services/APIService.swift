@@ -391,7 +391,7 @@ class APIService {
         }
     }
 
-    public func uploadRecognitionImage(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping ([FoodInfomation]?) -> Void) {
+    public func uploadRecognitionImage(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping (Int, [FoodInfomation]?) -> Void) {
         let parameters = ["user_id": userId]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
@@ -410,12 +410,13 @@ class APIService {
                 upload.responseJSON { response in
                     let resultObj = JSON(response.value)
                     let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
-                    completion(resultList)
+                    let imageId = resultObj["data"]["id"].intValue
+                    completion(imageId, resultList)
 //                    print(response.result.value)
                 }
             case .failure(let encodingError):
                 print(encodingError)
-                completion(nil)
+                completion(0, nil)
             }
         }
     }
@@ -645,8 +646,8 @@ class APIService {
     ///   - category: food category
     ///   - ratio: portion ratio
     ///   - completion: for passing callback
-    public func saveFoodDiary(userId: String, foodDiary: FoodDiary, mealTime: String, mealType: String, nutrientJson: String, ingredientJson: String, recordType: String, category: String, rank: Int, quantity: Double, unit: String, completion: @escaping (Bool) -> Void) {
-        var params: Dictionary = ["food_name": foodDiary.foodName, "portion_size": foodDiary.portionSize, "meal_type": mealType, "nutrient": nutrientJson, "ingredient": ingredientJson, "search_type": recordType, "rank": String(rank), "quantity": quantity, "unit": unit] as [String: Any]
+    public func saveFoodDiary(userId: String, foodDiary: FoodDiary, mealTime: String, mealType: String, nutrientJson: String, ingredientJson: String, recordType: String, category: String, rank: Int, quantity: Double, unit: String, imageId: Int, completion: @escaping (Bool) -> Void) {
+        let params: Dictionary = ["food_name": foodDiary.foodName, "portion_size": foodDiary.portionSize, "image_id": imageId, "meal_type": mealType, "nutrient": nutrientJson, "ingredient": ingredientJson, "search_type": recordType, "rank": String(rank), "quantity": quantity, "unit": unit] as [String: Any]
         Alamofire.request(
             URL(string: ServerConfig.saveFoodDiaryURL+"?user_id="+userId)!,
             method: .post,

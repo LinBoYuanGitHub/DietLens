@@ -40,6 +40,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     let locationManager = CLLocationManager()
     var latitude = 0.0
     var longitude = 0.0
+    var imageId: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,12 +156,21 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.loadingScreen.alpha = 1
         }, completion: nil)
-        let imgData = UIImageJPEGRepresentation(chosenImageView.image!, 0.2)!
+        //resize&compress image process
+        let size = CGSize(width: 500, height: 500)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
+        chosenImageView.image!.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let imgData = UIImageJPEGRepresentation(newImage!, 0.6)!
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude) {(results) in
+        //upload image to server
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude) {(imageId, results) in
             // upload result and callback
+            self.imageId = imageId
             self.capturePhotoButton.isEnabled = true
             self.loadingScreen.alpha = 0
             if results == nil || results?.count == 0 {
@@ -404,7 +414,9 @@ extension CameraViewController {
         let parentVC = self.parent as! AddFoodViewController
         if let dest = segue.destination as? RecognitionResultsViewController {
             dest.results = foodResults
+            dest.imageId = imageId
             dest.dateTime = parentVC.addFoodDate
+            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
             dest.whichMeal = parentVC.mealType
             dest.recordType = self.recordType
             if recordType == "recognition" {

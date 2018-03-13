@@ -53,7 +53,7 @@ class DateUtil {
 
     public static func day3MDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "dd MMM"
         let resultStr = dateFormatter.string(from: date)
         return resultStr
     }

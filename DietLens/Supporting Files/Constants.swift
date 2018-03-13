@@ -55,3 +55,11 @@ struct ServerConfig {
 struct SharedPreferenceKey {
     static let textSearchHistoryKey = "textSearchKey"
 }
+
+struct NutrtionData {
+    static let calorieText = "Calorie"
+    static let carbohydrateText = "Carbohydrate"
+    static let proteinText = "Protein"
+    static let fatText = "Fat"
+    static let sugarText = "Sugar"
+}

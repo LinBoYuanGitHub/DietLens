@@ -28,6 +28,7 @@ class FoodDiary: Object {
     @objc dynamic var category = ""
     @objc dynamic var quantity = 0.0
     @objc dynamic var unit = ""
+    var portion: Portion = Portion()
     let ingredientList = List<IngredientDiary>() // used only when user choose customized food
 }
 
