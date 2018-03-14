@@ -15,20 +15,16 @@ class FoodDiaryCell: UITableViewCell {
 
     @IBOutlet weak var foodImage: RoundedImage!
 
-    var food: FoodInfo = FoodInfo()
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func setupCell(foodInfo: FoodInfo) {
-        food = foodInfo
-        foodName.text = food.foodName
+    func setupCell(foodDiary: FoodDiary) {
+        foodName.text = foodDiary.foodName
 //        foodImage.image = food.foodImage
-        servingSize.text = food.servingSize
-        servingSize.isHidden = true
-        calories.text = String(round(10*foodInfo.calories*foodInfo.portionSize)/1000)+" Kcal"
+        servingSize.text = foodDiary.unit
+        calories.text = String(round(10*foodDiary.calorie*foodDiary.portionSize)/1000)+" "+StringConstants.UIString.calorieUnit
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

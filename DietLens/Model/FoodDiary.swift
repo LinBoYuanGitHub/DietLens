@@ -28,7 +28,8 @@ class FoodDiary: Object {
     @objc dynamic var category = ""
     @objc dynamic var quantity = 0.0
     @objc dynamic var unit = ""
-    var portion: Portion = Portion()
+    var portion = RecordPortion()
+    let portionList = List<Portion>()
     let ingredientList = List<IngredientDiary>() // used only when user choose customized food
 }
 
@@ -44,4 +45,19 @@ class IngredientDiary: Object {
     @objc dynamic var quantity: Double = 0
     @objc dynamic var unit = ""
     @objc dynamic var weight = 0.0
+}
+
+class RecordPortion: Object {
+    @objc dynamic var quantity = 1.0
+    @objc dynamic var weightValue = 0.0
+    @objc dynamic var weightUnit = ""
+    @objc dynamic var rank = 0
+}
+
+class Portion: Object{
+    @objc dynamic var sizeUnit = ""
+    @objc dynamic var sizeValue = 1
+    @objc dynamic var weightValue = 0.0
+    @objc dynamic var weightUnit = ""
+    @objc dynamic var rank = 0
 }

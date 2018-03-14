@@ -10,7 +10,7 @@ import UIKit
 import FSCalendar
 import PBRevealViewController
 
-class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+class DiaryViewController: UIViewController {
 
     @IBOutlet weak var foodDiaryTable: UITableView!
     @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
@@ -20,25 +20,21 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var emptyDiaryHelperText: UILabel!
     @IBOutlet weak var emptyDiaryIcon: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
+    
+    //reference of DataManager
+    let foodDiaryDataManager = FoodDiaryDataManager.instance
 
-    var mealsConsumed = [DiaryDailyFood]()
-    var foodDiaryList = [FoodDiary]()
-    var indexLookup = [Int]()
-    var mealIndexLookup = [Int]()
-    var headerIndex: Int = 0
-    var currentMealIndex: Int = -1
-    var currentFoodItemIndex: Int = 0
-    var totalRows: Int = 0
      //tableview cell cache
     let imageCache = NSCache<NSString, AnyObject>()
-    var selectedFoodInfo = FoodInfo()
+    var selectedFoodDiary: FoodDiary?
     var selectedImage: UIImage?
 
+    //calendar date attribute
     var datesWithEvent = [Date]()
     var addFoodDate: Date = Date()
-
     var isAddNewDiary = false
 
+    //setting up calendar
     fileprivate let gregorian = Calendar(identifier: .gregorian)
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -47,89 +43,11 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return formatter
     }()
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return totalRows
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("indexPath row:\(indexPath.row), item:\(indexPath.item)")
-        if indexLookup[indexPath.item] == -1 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "header") as? FoodDiaryHeaderCell {
-                cell.setupHeaderCell(whichMeal: mealsConsumed[mealIndexLookup[indexPath.item]].mealOfDay)
-                let headerSelect = UIView()
-                headerSelect.backgroundColor = UIColor.clear
-                cell.selectedBackgroundView = headerSelect
-                cell.callBackBlock { (mealType) in
-                    let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "addFoodVC") as! AddFoodViewController
-                    vc.addFoodDate = self.addFoodDate
-                    vc.isSetMealByTimeRequired = false
-                    vc.mealType = mealType
-                    self.present(vc, animated: true, completion: nil)
-                    self.isAddNewDiary = true //set the addnewdiary flag
-                }
-                return cell
-            }
-
-        } else {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "foodItem") as? FoodDiaryCell {
-                cell.foodImage.image = #imageLiteral(resourceName: "loading_img")
-                var documentsUrl: URL {
-                    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                }
-                let fileName: String = self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]].imageURL!
-                let filePath = documentsUrl.appendingPathComponent(fileName).path
-                if FileManager.default.fileExists(atPath: filePath) {
-                    DispatchQueue.main.async {
-                        if let cachedImage = self.imageCache.object(forKey: fileName as NSString) as? UIImage {
-                            cell.foodImage.image = cachedImage
-                            return
-                        } else {
-                            cell.foodImage.image = UIImage(contentsOfFile: filePath)
-                            self.imageCache.setObject(UIImage(contentsOfFile: (filePath as NSString) as String)!, forKey: fileName as NSString)
-                        }
-                    }
-                }
-                DispatchQueue.main.async {
-                    cell.setupCell(foodInfo: self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]])
-                }
-                return cell
-            }
-        }
-        return UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //to foodDiary detail page
-        if indexLookup[indexPath.item] == -1 {
-            //to add food&date
-            return
-        }
-        selectedFoodInfo =  self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]]
-        selectedFoodInfo.calories =  Double(round(10*selectedFoodInfo.calories)/10)
-        selectedImage = (tableView.cellForRow(at: indexPath) as? FoodDiaryCell)?.foodImage.image
-        performSegue(withIdentifier: "toDetailDiaryPage", sender: self)
-        isAddNewDiary = true
-    }
-
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? FoodDiaryHistoryViewController {
-            dest.selectedFoodInfo = selectedFoodInfo
+            dest.selectedFoodDiary = selectedFoodDiary!
             dest.diaryImage = selectedImage
         }
-    }
-
-    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        for dateWithEvent in datesWithEvent {
-            if Calendar.current.isDate(date, inSameDayAs: dateWithEvent) {
-                return 1
-            }
-        }
-        return 0
     }
 
     override func viewDidLoad() {
@@ -146,10 +64,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         closeButton.target(forAction: #selector(PBRevealViewController.revealLeftView), withSender: nil)
         closeButton.actions(forTarget: PBRevealViewController.revealLeftView, forControlEvent: .touchUpInside)
-        //closeButton.target = self.revealViewController()
-        //closeButton.action = #selector(PBRevealViewController.revealLeftView)
-
-//        testOnSaveData()
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         // Do any additional setup after loading the view.
@@ -157,12 +71,46 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //            datesWithEvent.append(gregorian.date(byAdding: .day, value: ((i+1)*3)%8, to: Date())!)
 //        }
         diaryCalendar.appearance.headerTitleColor = #colorLiteral(red: 0.2319577109, green: 0.2320933503, blue: 0.2404021281, alpha: 1)
+        registTableHeader()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         loadDiaryData(date: addFoodDate)
         loadDaysRecordedFromDiary(date: addFoodDate)
         diaryCalendar.reloadData()
+    }
+
+    func registTableHeader() {
+        let nib = UINib(nibName: "diaryHeader", bundle: nil)
+        foodDiaryTable.register(nib, forHeaderFooterViewReuseIdentifier: "DiarySectionHeader")
+    }
+
+    @objc func onAddFoodFromDiary(_ sender: UIButton) {
+        var mealType = Meal.snack
+        switch sender.tag {
+        case 0:
+            //breakfast
+            mealType = Meal.breakfast
+        case 1:
+            //lunch
+            mealType = Meal.lunch
+        case 2:
+            //dinner
+            mealType = Meal.dinner
+        case 3:
+            //snack
+            mealType = Meal.snack
+        default:
+            break
+        }
+        //jump to addFoodDiaryView
+        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "addFoodVC") as! AddFoodViewController
+        vc.addFoodDate = self.addFoodDate
+        vc.isSetMealByTimeRequired = false
+        vc.mealType = mealType
+        self.present(vc, animated: true, completion: nil)
+        self.isAddNewDiary = true //set the addnewdiary flag
     }
 
     func loadDaysRecordedFromDiary(date: Date) {
@@ -180,38 +128,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             datesWithEvent = uniqueDates.sorted()
         }
 
-    }
-
-    func calculateTableViewParams() {
-        indexLookup.removeAll()
-        mealIndexLookup.removeAll()
-        currentFoodItemIndex = 0
-        headerIndex = 0
-        currentMealIndex = -1
-        let numOfMeals = mealsConsumed.count
-        var foodAte: Int = 0
-
-        for meal in mealsConsumed {
-            foodAte += meal.foodConsumed.count
-        }
-
-        let total = numOfMeals + foodAte
-        for i in 0..<total {
-            if i == headerIndex {
-                indexLookup.append(-1)
-                currentMealIndex += 1
-                headerIndex += mealsConsumed[currentMealIndex].foodConsumed.count + 1
-                currentFoodItemIndex = 0
-            } else {
-                indexLookup.append(currentFoodItemIndex)
-                currentFoodItemIndex += 1
-            }
-            mealIndexLookup.append(currentMealIndex)
-        }
-        currentMealIndex = -1
-        currentFoodItemIndex = 0
-        headerIndex = 0
-        totalRows = total
     }
 
     override func didReceiveMemoryWarning() {
@@ -232,7 +148,7 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         UIView.animate(withDuration: 0.3) {
             self.closeCalButton.alpha = 0.7
             self.diaryCalendar.alpha = 1
-            if self.foodDiaryList.count == 0 {
+            if foodDiaryDataManager.foodDiaryList.count == 0 {
                 self.emptyDiaryIcon.alpha = 0.3
                 self.emptyDiaryHelperText.alpha = 0.3
             } else {
@@ -244,12 +160,11 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     @IBAction func dismissCalendar(_ sender: Any) {
         calendarYConstraint.constant = -360
-
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
             self.closeCalButton.alpha = 0
             self.diaryCalendar.alpha = 0
-            if self.foodDiaryList.count == 0 {
+            if foodDiaryDataManager.foodDiaryList.count == 0 {
                 self.emptyDiaryIcon.alpha = 1
                 self.emptyDiaryHelperText.alpha = 1
             } else {
@@ -259,10 +174,184 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
 
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        let currentDate = calendar.currentPage
-        loadDaysRecordedFromDiary(date: currentDate)
-        diaryCalendar.reloadData()
+    func loadDiaryData(date: Date) {
+        let diaryFormatter = DateFormatter()
+        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
+        foodDiaryDataManager.foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))!
+        foodDiaryDataManager.mealEntity.removeAll()
+        var breakfastEntity: DiaryDailyFood = DiaryDailyFood()
+        var lunchEntity: DiaryDailyFood = DiaryDailyFood()
+        var dinnerEntity: DiaryDailyFood = DiaryDailyFood()
+        var snackEntity: DiaryDailyFood = DiaryDailyFood()
+        breakfastEntity.mealOfDay = .breakfast
+        lunchEntity.mealOfDay = .lunch
+        dinnerEntity.mealOfDay = .dinner
+        snackEntity.mealOfDay = .snack
+        for foodDiary in foodDiaryDataManager.foodDiaryList {
+//            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
+            if foodDiary.mealType == "Breakfast" {
+                 breakfastEntity.foodConsumed.append(foodDiary)
+            } else if foodDiary.mealType == "Lunch" {
+                lunchEntity.foodConsumed.append(foodDiary)
+            } else if foodDiary.mealType == "Dinner" {
+                dinnerEntity.foodConsumed.append(foodDiary)
+            } else {
+                snackEntity.foodConsumed.append(foodDiary)
+            }
+        }
+        if foodDiaryDataManager.foodDiaryList.count == 0 {
+            emptyDiaryHelperText.alpha = 1
+            emptyDiaryIcon.alpha = 1
+        } else {
+            emptyDiaryHelperText.alpha = 0
+            emptyDiaryIcon.alpha = 0
+        }
+        foodDiaryDataManager.mealEntity.append(breakfastEntity)
+        foodDiaryDataManager.mealEntity.append(lunchEntity)
+        foodDiaryDataManager.mealEntity.append(dinnerEntity)
+        foodDiaryDataManager.mealEntity.append(snackEntity)
+//        calculateTableViewParams()
+        if isAddNewDiary {
+//            let range = NSRange(location: 0, length: 1)
+//            let sections = NSIndexSet(indexesIn: range)
+//            foodDiaryTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
+            foodDiaryTable.reloadData()
+            isAddNewDiary = false
+        } else {
+            UIView.transition(with: foodDiaryTable,
+                              duration: 0.35,
+                              options: .transitionCurlUp,
+                              animations: { self.foodDiaryTable.reloadData() })
+        }
+    }
+
+}
+
+extension String {
+    subscript(value: PartialRangeUpTo<Int>) -> Substring {
+        get {
+            return self[..<index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+
+    subscript(value: PartialRangeThrough<Int>) -> Substring {
+        get {
+            return self[...index(startIndex, offsetBy: value.upperBound)]
+        }
+    }
+
+    subscript(value: PartialRangeFrom<Int>) -> Substring {
+        get {
+            return self[index(startIndex, offsetBy: value.lowerBound)...]
+        }
+    }
+}
+
+extension DiaryViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return foodDiaryDataManager.mealEntity[section].foodConsumed.count
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return foodDiaryDataManager.mealEntity.count
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DiarySectionHeader") as? DiarySectionHeader else {
+            return UITableViewHeaderFooterView()
+        }
+        let meal = foodDiaryDataManager.mealEntity[section].mealOfDay
+        switch meal {
+        case .breakfast:
+            header.diaryLabel.text = StringConstants.MealString.breakfast
+            header.addLabel.tag = 0
+        case .lunch:
+            header.diaryLabel.text = StringConstants.MealString.lunch
+            header.addLabel.tag = 1
+        case .dinner:
+            header.diaryLabel.text = StringConstants.MealString.dinner
+            header.addLabel.tag = 2
+        case .snack:
+            header.diaryLabel.text = StringConstants.MealString.snack
+            header.addLabel.tag = 3
+        }
+        header.addLabel.addTarget(self, action: #selector(onAddFoodFromDiary(_:)), for: .touchUpInside)
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("indexPath row:\(indexPath.row), item:\(indexPath.item)")
+//        if indexLookup[indexPath.item] == -1 {
+//            if let cell = tableView.dequeueReusableCell(withIdentifier: "header") as? FoodDiaryHeaderCell {
+//                cell.setupHeaderCell(whichMeal: mealsConsumed[mealIndexLookup[indexPath.item]].mealOfDay)
+//                let headerSelect = UIView()
+//                headerSelect.backgroundColor = UIColor.clear
+//                cell.selectedBackgroundView = headerSelect
+//                cell.callBackBlock { (mealType) in
+//                    let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+//                    let vc = storyboard.instantiateViewController(withIdentifier: "addFoodVC") as! AddFoodViewController
+//                    vc.addFoodDate = self.addFoodDate
+//                    vc.isSetMealByTimeRequired = false
+//                    vc.mealType = mealType
+//                    self.present(vc, animated: true, completion: nil)
+//                    self.isAddNewDiary = true //set the addnewdiary flag
+//                }
+//                return cell
+//            }
+//        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "foodItem") as? FoodDiaryCell {
+                cell.foodImage.image = #imageLiteral(resourceName: "loading_img")
+                var documentsUrl: URL {
+                    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                }
+                let fileName: String = foodDiaryDataManager.mealEntity[indexPath.section].foodConsumed[indexPath.row].imagePath
+//                 self.mealsConsumed[self.mealIndexLookup[indexPath.item]].foodConsumed[self.indexLookup[indexPath.item]].imageURL!
+                let filePath = documentsUrl.appendingPathComponent(fileName).path
+                if FileManager.default.fileExists(atPath: filePath) {
+                    DispatchQueue.main.async {
+                        if let cachedImage = self.imageCache.object(forKey: fileName as NSString) as? UIImage {
+                            cell.foodImage.image = cachedImage
+                            return
+                        } else {
+                            cell.foodImage.image = UIImage(contentsOfFile: filePath)
+                            self.imageCache.setObject(UIImage(contentsOfFile: (filePath as NSString) as String)!, forKey: fileName as NSString)
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    cell.setupCell(foodDiary: foodDiaryDataManager.mealEntity[indexPath.section].foodConsumed[indexPath.row])
+                }
+                return cell
+            }
+        return UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //to foodDiary detail page
+        selectedFoodDiary = foodDiaryDataManager.mealEntity[indexPath.section].foodConsumed[indexPath.row]
+        selectedImage = (tableView.cellForRow(at: indexPath) as? FoodDiaryCell)?.foodImage.image
+        performSegue(withIdentifier: "toDetailDiaryPage", sender: self)
+        isAddNewDiary = true
+    }
+}
+
+extension DiaryViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        for dateWithEvent in datesWithEvent {
+            if Calendar.current.isDate(date, inSameDayAs: dateWithEvent) {
+                return 1
+            }
+        }
+        return 0
     }
 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -280,71 +369,6 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
             calendar.setCurrentPage(date, animated: true)
         }
         //display today`s foodDiary from local realm
-    }
-
-    func loadDiaryData(date: Date) {
-        let diaryFormatter = DateFormatter()
-        diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
-        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))!
-        mealsConsumed.removeAll()
-        var breakfastEntity: DiaryDailyFood = DiaryDailyFood()
-        var lunchEntity: DiaryDailyFood = DiaryDailyFood()
-        var dinnerEntity: DiaryDailyFood = DiaryDailyFood()
-        var snackEntity: DiaryDailyFood = DiaryDailyFood()
-        breakfastEntity.mealOfDay = .breakfast
-        lunchEntity.mealOfDay = .lunch
-        dinnerEntity.mealOfDay = .dinner
-        snackEntity.mealOfDay = .snack
-        for foodDiary in foodDiaryList {
-            var foodInfo: FoodInfo = FoodInfo()
-            foodInfo.id = foodDiary.id
-            foodInfo.calories = Double(round(10*foodDiary.calorie)/10)
-            foodInfo.carbohydrate = foodDiary.carbohydrate
-            foodInfo.protein = foodDiary.protein
-            foodInfo.fat = foodDiary.fat
-            foodInfo.foodName = foodDiary.foodName
-            foodInfo.imageURL = foodDiary.imagePath
-            foodInfo.mealType = foodDiary.mealType
-            foodInfo.recordType = foodDiary.recordType
-            foodInfo.portionSize = foodDiary.portionSize
-            foodInfo.ingredientList = foodDiary.ingredientList
-            foodInfo.unit = foodDiary.unit
-            foodInfo.quantity = foodDiary.quantity
-//            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
-            foodInfo.servingSize = "unknown"
-            if foodDiary.mealType == "Breakfast" {
-                 breakfastEntity.foodConsumed.append(foodInfo)
-            } else if foodDiary.mealType == "Lunch" {
-                lunchEntity.foodConsumed.append(foodInfo)
-            } else if foodDiary.mealType == "Dinner" {
-                dinnerEntity.foodConsumed.append(foodInfo)
-            } else {
-                snackEntity.foodConsumed.append(foodInfo)
-            }
-        }
-        if foodDiaryList.count == 0 {
-            emptyDiaryHelperText.alpha = 1
-            emptyDiaryIcon.alpha = 1
-        } else {
-            emptyDiaryHelperText.alpha = 0
-            emptyDiaryIcon.alpha = 0
-        }
-        mealsConsumed.append(breakfastEntity)
-        mealsConsumed.append(lunchEntity)
-        mealsConsumed.append(dinnerEntity)
-        mealsConsumed.append(snackEntity)
-        calculateTableViewParams()
-        if isAddNewDiary {
-            let range = NSRange(location: 0, length: 1)
-            let sections = NSIndexSet(indexesIn: range)
-            foodDiaryTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
-            isAddNewDiary = false
-        } else {
-            UIView.transition(with: foodDiaryTable,
-                              duration: 0.35,
-                              options: .transitionCurlUp,
-                              animations: { self.foodDiaryTable.reloadData() })
-        }
     }
 
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
@@ -373,24 +397,41 @@ class DiaryViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return [#colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)]
     }
 
-}
-
-extension String {
-    subscript(value: PartialRangeUpTo<Int>) -> Substring {
-        get {
-            return self[..<index(startIndex, offsetBy: value.upperBound)]
-        }
-    }
-
-    subscript(value: PartialRangeThrough<Int>) -> Substring {
-        get {
-            return self[...index(startIndex, offsetBy: value.upperBound)]
-        }
-    }
-
-    subscript(value: PartialRangeFrom<Int>) -> Substring {
-        get {
-            return self[index(startIndex, offsetBy: value.lowerBound)...]
-        }
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let currentDate = calendar.currentPage
+        loadDaysRecordedFromDiary(date: currentDate)
+        diaryCalendar.reloadData()
     }
 }
+
+//    func calculateTableViewParams() {
+//        indexLookup.removeAll()
+//        mealIndexLookup.removeAll()
+//        currentFoodItemIndex = 0
+//        headerIndex = 0
+//        currentMealIndex = -1
+//        let numOfMeals = mealsConsumed.count
+//        var foodAte: Int = 0
+//
+//        for meal in mealsConsumed {
+//            foodAte += meal.foodConsumed.count
+//        }
+//
+//        let total = numOfMeals + foodAte
+//        for i in 0..<total {
+//            if i == headerIndex {
+//                indexLookup.append(-1)
+//                currentMealIndex += 1
+//                headerIndex += mealsConsumed[currentMealIndex].foodConsumed.count + 1
+//                currentFoodItemIndex = 0
+//            } else {
+//                indexLookup.append(currentFoodItemIndex)
+//                currentFoodItemIndex += 1
+//            }
+//            mealIndexLookup.append(currentMealIndex)
+//        }
+//        currentMealIndex = -1
+//        currentFoodItemIndex = 0
+//        headerIndex = 0
+//        totalRows = total
+//    }

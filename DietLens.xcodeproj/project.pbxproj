@@ -51,6 +51,8 @@
 		3FD08627200F21460052D54B /* HealthDeviceDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */; };
 		3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08628200F38500052D54B /* FeedBackViewController.swift */; };
 		3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */; };
+		3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC34512057D0F80060099A /* DiarySectionHeader.swift */; };
+		3FEC34542057D1380060099A /* diaryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC34532057D1380060099A /* diaryHeader.xib */; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
 		3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */; };
@@ -202,6 +204,8 @@
 		3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDeviceDataCell.swift; sourceTree = "<group>"; };
 		3FD08628200F38500052D54B /* FeedBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackViewController.swift; sourceTree = "<group>"; };
 		3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientItemCell.swift; sourceTree = "<group>"; };
+		3FEC34512057D0F80060099A /* DiarySectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarySectionHeader.swift; sourceTree = "<group>"; };
+		3FEC34532057D1380060099A /* diaryHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = diaryHeader.xib; sourceTree = "<group>"; };
 		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
 		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
 		3FFB568F1FB2F3B2002DCE15 /* SaveFoodDiaryStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SaveFoodDiaryStoryboard.storyboard; sourceTree = "<group>"; };
@@ -329,6 +333,17 @@
 				3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */,
 			);
 			path = Adapter;
+			sourceTree = "<group>";
+		};
+		3FEC34502057BF110060099A /* TableHeader */ = {
+			isa = PBXGroup;
+			children = (
+				3F9BFE9D20009C300011845B /* IngredientSectionHeader.swift */,
+				3F9BFE9F2000A0120011845B /* IngredientHeader.xib */,
+				3FEC34512057D0F80060099A /* DiarySectionHeader.swift */,
+				3FEC34532057D1380060099A /* diaryHeader.xib */,
+			);
+			path = TableHeader;
 			sourceTree = "<group>";
 		};
 		580443611FB0176700D59DFF /* Pages */ = {
@@ -531,8 +546,7 @@
 				3F43DACD1FEBB04600A3685A /* CardView.swift */,
 				3F9BFE991FF36D8A0011845B /* StepCounterCell.swift */,
 				3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */,
-				3F9BFE9D20009C300011845B /* IngredientSectionHeader.swift */,
-				3F9BFE9F2000A0120011845B /* IngredientHeader.xib */,
+				3FEC34502057BF110060099A /* TableHeader */,
 				3FD0861A200C73E60052D54B /* ExpandedUIButton.swift */,
 				3FD0861E200DE1B20052D54B /* HealthToolCell.swift */,
 				3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */,
@@ -754,6 +768,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FEC34542057D1380060099A /* diaryHeader.xib in Resources */,
 				3FFB56901FB2F3B3002DCE15 /* SaveFoodDiaryStoryboard.storyboard in Resources */,
 				BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */,
 				5877CF951F9D82BF0022B51E /* LaunchScreen.storyboard in Resources */,
@@ -1028,6 +1043,7 @@
 				3F43DAC61FE7963700A3685A /* ReportChartViewController.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				3F14CC44201854D40032CC77 /* HistoryFoodDiaryCell.swift in Sources */,
+				3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */,
 				3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */,
 				BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
 				BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,

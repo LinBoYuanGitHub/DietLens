@@ -67,7 +67,6 @@ class PlainTextTableAdapter<CellType: UITableViewCell>: NSObject, UITableViewDat
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "IngredientSectionHeader") as? IngredientSectionHeader, section == 0, isShowIngredient else {
                 return UITableViewHeaderFooterView()
         }
-
         header.titleLabel.text = StringConstants.UIString.IngredientHeaderText
         header.plusButton.isHidden = !isShowPlusBtn
         return header

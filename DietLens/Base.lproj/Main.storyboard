@@ -600,12 +600,12 @@
                                     <action selector="bringInCalendar:" destination="fTy-cd-LxN" eventType="touchUpInside" id="mlW-GH-ETg"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="3mI-Tp-4kk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3mI-Tp-4kk">
                                 <rect key="frame" x="15" y="90.5" width="345" height="556.5"/>
-                                <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="bQs-gl-SZu" customClass="FoodDiaryHeaderCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="345" height="40"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="345" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bQs-gl-SZu" id="0P2-TY-CBt">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="40"/>
@@ -639,7 +639,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodItem" rowHeight="100" id="mtE-pT-6Sd" customClass="FoodDiaryCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="41" width="345" height="100"/>
+                                        <rect key="frame" x="0.0" y="95.5" width="345" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mtE-pT-6Sd" id="Q3O-vM-UFQ">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="100"/>

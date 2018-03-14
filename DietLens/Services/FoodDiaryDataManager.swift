@@ -8,7 +8,13 @@
 
 import Foundation
 class FoodDiaryDataManager {
-    var foodDiaryDBOperation = FoodDiaryDBOperation.instance
+
+    static var instance = FoodDiaryDataManager()
+
+    public var mealEntity = [DiaryDailyFood]()
+    public var foodDiaryList = [FoodDiary]()
+
+    private var foodDiaryDBOperation = FoodDiaryDBOperation.instance
     func saveFoodDiary(ratio: Float, foodInfo: FoodInfomation, mealTime: String, mealType: String, recordType: String, imageId: String, picpath: String, foodCategory: String) {
         let foodDiary: FoodDiary = FoodDiary()
         foodDiary.foodId = foodInfo.foodId

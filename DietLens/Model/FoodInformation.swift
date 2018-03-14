@@ -26,10 +26,11 @@ struct FoodInfomation {
 
 }
 
-struct Portion {
-    public var sizeUnit = ""
-    public var sizeValue = 1
-    public var weightValue = 0.0
-    public var weightUnit = ""
-    public var rank = 0
-}
+//struct Portion {
+//    public var sizeUnit = ""
+//    public var sizeValue = 1
+//    public var weightValue = 0.0
+//    public var weightUnit = ""
+//    public var rank = 0
+//}
+

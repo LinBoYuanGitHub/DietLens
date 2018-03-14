@@ -28,13 +28,13 @@ class FoodDiaryHistoryViewController: UIViewController {
     @IBOutlet weak var mainStackView: UIStackView!
     var ingredientAdapter: PlainTextTableAdapter<UITableViewCell>!
     @IBOutlet weak var diaryFoodCarlorieLabel: UILabel!
-    var selectedFoodInfo = FoodInfo()
+    var selectedFoodDiary = FoodDiary()
     var diaryImage: UIImage?
 
     override func viewDidLoad() {
-        TFfoodName.text = selectedFoodInfo.foodName
+        TFfoodName.text = selectedFoodDiary.foodName
 //        TFportion.text = String(selectedFoodInfo.portionSize)+"%"
-        TFmealType.text = selectedFoodInfo.mealType
+        TFmealType.text = selectedFoodDiary.mealType
 
         TFfoodName.isUserInteractionEnabled = false
         TFquantity.isUserInteractionEnabled = false
@@ -54,7 +54,7 @@ class FoodDiaryHistoryViewController: UIViewController {
         ingredientAdapter.isShowPlusBtn = false
         setFoodDataList()
         loadIngredients()
-        if selectedFoodInfo.recordType == "customized"{
+        if selectedFoodDiary.recordType == "customized"{
 //            portionStack.isHidden = true
             quantityStack.isHidden = true
             unitStack.isHidden = true
@@ -67,9 +67,9 @@ class FoodDiaryHistoryViewController: UIViewController {
     }
 
     func loadIngredients() {
-        if selectedFoodInfo.ingredientList.count != 0 {
+        if selectedFoodDiary.ingredientList.count != 0 {
             ingredientAdapter.isShowIngredient = true
-            for ingredient in selectedFoodInfo.ingredientList {
+            for ingredient in selectedFoodDiary.ingredientList {
                 ingredientAdapter.ingredientTextList.append(ingredient.ingredientName + "  " + String(ingredient.quantity*ingredient.weight) + "g")
             }
             recognitzeDataTable.reloadData()
@@ -78,10 +78,10 @@ class FoodDiaryHistoryViewController: UIViewController {
 
     func setFoodDataList() {
         ingredientAdapter.nutritionTextList.removeAll()
-        let total_calories = round(10*Double(selectedFoodInfo.calories)*selectedFoodInfo.portionSize)/1000
-        let total_carbohydrate = round(10*Double(selectedFoodInfo.carbohydrate)!*selectedFoodInfo.portionSize)/1000
-        let total_protein = round(10*Double(selectedFoodInfo.protein)!*selectedFoodInfo.portionSize)/1000
-        let total_fat = round(10*Double(selectedFoodInfo.fat)!*selectedFoodInfo.portionSize)/1000
+        let total_calories = round(10*Double(selectedFoodDiary.calorie))/10
+        let total_carbohydrate = round(10*Double(selectedFoodDiary.carbohydrate)!)/10
+        let total_protein = round(10*Double(selectedFoodDiary.protein)!)/10
+        let total_fat = round(10*Double(selectedFoodDiary.fat)!)/10
         ingredientAdapter.nutritionTextList.append("Calories   \(String(total_calories))kcal")
         ingredientAdapter.nutritionTextList.append("Carbs   \(String(total_carbohydrate))g")
         ingredientAdapter.nutritionTextList.append("Protein   \(String(total_protein))g")
@@ -89,8 +89,8 @@ class FoodDiaryHistoryViewController: UIViewController {
         recognitzeDataTable.reloadData()
         //adjust calorie textlabel
 //        TFportion.text = "\(round(selectedFoodInfo.portionSize))%"
-        TFquantity.text = String(round(selectedFoodInfo.quantity))
-        TFunit.text = selectedFoodInfo.unit
+        TFquantity.text = String(round(selectedFoodDiary.quantity))
+        TFunit.text = selectedFoodDiary.unit
         diaryFoodCarlorieLabel.text = "\(round(total_calories)) kcal"
         caloriePercentage.text = "\(round(total_calories/20))% of your daily calorie intake"
     }
@@ -101,9 +101,9 @@ class FoodDiaryHistoryViewController: UIViewController {
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
 //        FoodDiaryDBOperation.instance.deleteFoodDiary(id: foodDiary.id)
-        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Do you want to delete \(selectedFoodInfo.foodName)?", postiveText: "yes", negativeText: "no") { (flag) in
+        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Do you want to delete \(selectedFoodDiary.foodName)?", postiveText: "yes", negativeText: "no") { (flag) in
             if flag {
-                FoodDiaryDBOperation.instance.deleteFoodDiary(id: self.selectedFoodInfo.id)
+                FoodDiaryDBOperation.instance.deleteFoodDiary(id: self.selectedFoodDiary.id)
             }
             self.dismiss(animated: true, completion: nil)
         }
