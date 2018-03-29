@@ -36,7 +36,12 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsArticleCell {
-            cell.newsTitle.text = listOfArticles[indexPath.row].articleTitle
+            //add hyphenation text
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.hyphenationFactor = 1.0
+            let attributedString = NSMutableAttributedString(string: listOfArticles[indexPath.row].articleTitle, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
+            cell.newsTitle.attributedText = attributedString
+//            cell.newsTitle.text = listOfArticles[indexPath.row].articleTitle
             cell.newsImage.image = #imageLiteral(resourceName: "loading_img")
             if listOfArticles[indexPath.row].articleImageURL != ""{
                 let imageView = UIImageView()

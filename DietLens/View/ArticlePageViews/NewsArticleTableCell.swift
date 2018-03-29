@@ -14,7 +14,12 @@ class NewsArticleTableCell: UITableViewCell {
 //    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleLabel: NoPaddingTextView!
 //    @IBOutlet weak var articleDescription: UILabel!
-    @IBOutlet weak var articleDesciption: NoPaddingTextView!
+
+    @IBOutlet weak var articleSourceLabel: UILabel!
+
+    @IBOutlet weak var articleDataLabel: UILabel!
+
+//    @IBOutlet weak var articleDesciption: NoPaddingTextView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,7 +31,7 @@ class NewsArticleTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setupCell(imageURL: String, title: String, description: String) {
+    func setupCell(imageURL: String, title: String, source: String, dateStr: String) {
         let imageView = UIImageView()
         //self.articleImage.image = #imageLiteral(resourceName: "loading_img") //set placeholder
         if imageURL != "" {
@@ -39,6 +44,8 @@ class NewsArticleTableCell: UITableViewCell {
         }
         //      articleImage.imageFromServerURL(urlString: imageURL)
         titleLabel.text = title
-        articleDesciption.text = description
+        articleSourceLabel.text = source
+        articleDataLabel.text = dateStr
+//        articleDesciption.text = description
     }
 }

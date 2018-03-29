@@ -22,6 +22,8 @@ target 'DietLens' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'ScrollableGraphView'
+  pod 'HFSwipeView'
+  pod 'LGSideMenuController'
 
   target 'DietLensTests' do
     inherit! :search_paths

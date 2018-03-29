@@ -191,6 +191,13 @@
                                                     <constraint firstAttribute="height" constant="50" id="EWF-R1-vUf"/>
                                                 </constraints>
                                             </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx8-Up-GlH">
+                                                <rect key="frame" x="103.5" y="53.5" width="42" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait while we fetch the recognition results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmj-ld-UBF">
                                                 <rect key="frame" x="10" y="72.5" width="230" height="35.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -276,6 +283,7 @@
                         <outlet property="photoButton" destination="uCj-6P-mHF" id="Ha8-ua-hxy"/>
                         <outlet property="previewContainer" destination="Z2p-uY-GfY" id="Q2m-mi-hge"/>
                         <outlet property="reviewImagePalette" destination="liy-ML-Fb6" id="mjW-cb-slF"/>
+                        <outlet property="uploadPercentageLabel" destination="lx8-Up-GlH" id="wo4-yF-LeU"/>
                         <segue destination="6Wa-xI-B06" kind="show" identifier="test" id="E5A-Z7-Aui"/>
                     </connections>
                 </viewController>
@@ -286,7 +294,7 @@
         <!--Recognition Results View Controller-->
         <scene sceneID="Vgt-d1-9Hz">
             <objects>
-                <viewController id="6Wa-xI-B06" customClass="RecognitionResultsViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="recognizeVC" id="6Wa-xI-B06" customClass="RecognitionResultsViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K38-Ju-hto" customClass="Recognition">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -304,7 +312,7 @@
                                                 <action selector="backButtonPressed:" destination="6Wa-xI-B06" id="J4S-8R-10P"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Xs5-wE-f0X">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="Xs5-wE-f0X">
                                             <color key="tintColor" red="1" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="doneButtonPressed:" destination="6Wa-xI-B06" id="jnT-XS-GVU"/>
@@ -800,6 +808,7 @@
                         <outlet property="quantityStack" destination="u5J-iQ-H9G" id="8gv-sX-Hes"/>
                         <outlet property="recognizeDataTable" destination="gcc-6h-Mp0" id="YX9-8g-Kj8"/>
                         <outlet property="selectDishView" destination="v8t-lR-uHp" id="oUd-TY-Niq"/>
+                        <outlet property="topRightBtn" destination="Xs5-wE-f0X" id="fwv-g4-Qnn"/>
                         <outlet property="unitStack" destination="x25-KS-1Sa" id="L9j-si-7s2"/>
                         <segue destination="8y7-Jv-vEk" kind="show" identifier="toAddIngredient" id="zf1-8P-MfB"/>
                     </connections>
@@ -1993,7 +2002,7 @@ A
         <image name="search_icon" width="17" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sLK-wE-Cs6"/>
+        <segue reference="E5A-Z7-Aui"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

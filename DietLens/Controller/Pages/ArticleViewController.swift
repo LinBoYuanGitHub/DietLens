@@ -35,7 +35,6 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         APIService.instance.getArticleList(completion: { (articleList) in
             alertController.dismiss(animated: true, completion: nil)
             if articleList == nil {
-                //TODO show empty view
                 return
             }
             self.articleDatamanager.articleList = articleList!
@@ -50,7 +49,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell") as? NewsArticleTableCell {
-            cell.setupCell(imageURL: articleDatamanager.articleList[indexPath.row].articleImageURL, title: articleDatamanager.articleList[indexPath.row].articleTitle, description: articleDatamanager.articleList[indexPath.row].articleContent)
+            cell.setupCell(imageURL: articleDatamanager.articleList[indexPath.row].articleImageURL, title: articleDatamanager.articleList[indexPath.row].articleTitle, source: articleDatamanager.articleList[indexPath.row].source, dateStr: "March 27, 2018")
                 return cell
             }
         return UITableViewCell()
@@ -59,6 +58,10 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "presentArticlePage", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

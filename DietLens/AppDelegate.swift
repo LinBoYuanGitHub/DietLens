@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 3,
+            schemaVersion: 4,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -70,6 +70,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject?["unit"] = "portion"
                     }
                 }
+                if oldSchemaVersion <= 3 {
+                    migration.enumerateObjects(ofType: FoodDiary.className()) { oldObject, newObject in
+//                        let foodInfoList = newObject?.dynamicList("foodInfoList")
+                        let foodInfoList =  newObject?["foodInfoList"] as! List<MigrationObject>
+                        let foodInfo = migration.create(FoodInfomation.className(), value: FoodInfomation())
+//                        let foodInfo = MigrationObject()
+                        foodInfo["foodId"] = oldObject?["foodId"]
+                        foodInfo["foodName"] = oldObject?["foodName"]
+                        foodInfo["carbohydrate"] = oldObject?["carbohydrate"]
+                        foodInfo["protein"] = oldObject?["protein"]
+                        foodInfo["fat"] = oldObject?["fat"]
+                        foodInfo["calorie"] = oldObject?["calorie"]
+                        foodInfo["category"] = oldObject?["category"]
+                        foodInfo["sampleImagePath"] = oldObject?["imagePath"]
+                        foodInfoList.append(foodInfo)
+                        //portion part
+                        let portionList = foodInfo["portionList"] as! List<MigrationObject>
+                        let portion = migration.create(Portion.className(), value: Portion())
+                        portion["weightValue"] = 100
+                        portion["sizeUnit"] = oldObject?["unit"]
+                        portionList.append(portion)
+                        //question part
+                        newObject?["quantity"] = 1
+                        newObject?["selectedFoodInfoPos"] = 0
+                        newObject?["selectedPortionPos"] = 0
+                    }
+                }
+
         })
         Realm.Configuration.defaultConfiguration = config
     }

@@ -25,7 +25,10 @@ class ReportChartViewController: UIViewController {
     var graphDataDict: [String: Double] = [:]
     var graphDataSortedKeys = [String]()
 
-    var foodDiaryList = [FoodDiary]()
+    var foodDiaryList = [FoodDiaryModel]()
+
+    //counting report entity
+    var reportCountingList = [ReportCountingEntity]()
 
     var graphView: ScrollableGraphView!
 
@@ -74,7 +77,41 @@ class ReportChartViewController: UIViewController {
 //        let year = "2017"
 //        let month = "Dec"
         foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(year), month: String(month))!
+        //calculate meal counting part, count times & average
+        for _ in 0..<4 {
+            reportCountingList.append(ReportCountingEntity())
+        }
+        for foodDiary in foodDiaryList {
+            switch foodDiary.mealType {
+            case StringConstants.MealString.breakfast:
+                reportCountingList[0].name = StringConstants.MealString.breakfast
+                accumulateReportCountingList(index: 0, foodDiary: foodDiary)
+            case StringConstants.MealString.lunch:
+                reportCountingList[1].name = StringConstants.MealString.lunch
+                accumulateReportCountingList(index: 1, foodDiary: foodDiary)
+            case StringConstants.MealString.dinner:
+                reportCountingList[2].name = StringConstants.MealString.dinner
+                accumulateReportCountingList(index: 2, foodDiary: foodDiary)
+            case StringConstants.MealString.snack:
+                reportCountingList[3].name = StringConstants.MealString.snack
+                accumulateReportCountingList(index: 3, foodDiary: foodDiary)
+            default:
+                break
+            }
+        }
         setUpData(type: "calorie")
+    }
+
+    /**
+     * sum up the total nutrition information
+     *  calculate the accumulate meal times
+     */
+    func accumulateReportCountingList(index: Int, foodDiary: FoodDiaryModel) {
+        reportCountingList[index].countsNum += 1
+        reportCountingList[index].sumCalorie += Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie)
+        reportCountingList[index].sumCarbo +=  Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate)!
+        reportCountingList[index].sumProtein +=  Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein)!
+        reportCountingList[index].sumFat +=  Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat)!
     }
 
     func setUpData(type: String) {
@@ -103,39 +140,39 @@ class ReportChartViewController: UIViewController {
             switch type {
             case "calorie":
                     if graphDataDict[foodDiary.mealTime] == nil {
-                        graphDataDict[foodDiary.mealTime] = foodDiary.calorie
+                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie)
                     } else {
-                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + foodDiary.calorie
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie)
                     }
             case "carbo":
                     if graphDataDict[foodDiary.mealTime] == nil {
-                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.carbohydrate)
+                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate)
                     } else {
-                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.carbohydrate)!
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate)!
                     }
             case "protein":
                     if graphDataDict[foodDiary.mealTime] == nil {
-                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.protein)
+                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein)
                     } else {
-                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.protein)!
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein)!
                     }
             case "fat":
                     if graphDataDict[foodDiary.mealTime] == nil {
-                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.fat)
+                        graphDataDict[foodDiary.mealTime] = Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat)
                     } else {
-                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.fat)!
+                        graphDataDict[foodDiary.mealTime] = graphDataDict[foodDiary.mealTime]! + Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat)!
                     }
             default:
                 break
             }
-            calorieList.append(Float(foodDiary.calorie))
-            carbohydrateList.append(Float(foodDiary.carbohydrate)!)
-            proteinList.append(Float(foodDiary.protein)!)
-            fatList.append(Float(foodDiary.fat)!)
-            calorieSum += Float(foodDiary.calorie)
-            carbohydrateSum += Float(foodDiary.carbohydrate)!
-            proteinSum += Float(foodDiary.protein)!
-            fatSum += Float(foodDiary.fat)!
+            calorieList.append(Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie))
+            carbohydrateList.append(Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate)!)
+            proteinList.append(Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein)!)
+            fatList.append(Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat)!)
+            calorieSum += Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie)
+            carbohydrateSum += Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate)!
+            proteinSum += Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein)!
+            fatSum += Float(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat)!
         }
         calorieAverage = Int(calorieSum/Float(graphDataDict.count))
         carbohydrateAverage = Int(carbohydrateSum/Float(graphDataDict.count))

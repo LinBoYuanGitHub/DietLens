@@ -16,7 +16,7 @@ struct UserProfile {
     var age: Int = 0
     var occupation: String = ""
     var nationality: String = ""
-    var marital_status: String = ""
+    var maritalStatus: String = ""
     var height: Double = 0.0
     var weight: Double = 0.0
 }

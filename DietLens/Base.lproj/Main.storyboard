@@ -24,6 +24,7 @@
         </array>
         <array key="PingFang.ttc">
             <string>PingFangSC-Light</string>
+            <string>PingFangSC-Medium</string>
             <string>PingFangSC-Regular</string>
             <string>PingFangSC-Semibold</string>
         </array>
@@ -277,7 +278,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="98" y="87" width="180" height="60"/>
+                                <rect key="frame" x="60.5" y="87" width="255.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -1161,10 +1162,10 @@ Click add to record food~</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJH-wh-XA8">
                                                     <rect key="frame" x="0.0" y="16" width="335" height="22.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="TODAY'S INTAKE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQ8-3N-pqR">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Today's intake" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQ8-3N-pqR">
                                                             <rect key="frame" x="0.0" y="0.0" width="279.5" height="22.5"/>
-                                                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
-                                                            <color key="textColor" red="0.21903544664382935" green="0.22377052903175354" blue="0.22816714644432068" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
+                                                            <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DETAIL" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbZ-Bc-f1n">
@@ -1350,13 +1351,13 @@ Click add to record food~</string>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LATEST ARTICLES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlQ-R1-bXL">
-                                                    <rect key="frame" x="19" y="11" width="145" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest articles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlQ-R1-bXL">
+                                                    <rect key="frame" x="19" y="11" width="170" height="22"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="145" id="TUj-8l-s6I"/>
+                                                        <constraint firstAttribute="width" constant="170" id="TUj-8l-s6I"/>
                                                         <constraint firstAttribute="height" constant="22" id="p9d-ro-cDi"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
                                                     <color key="textColor" red="0.21853182723534562" green="0.2236884728886312" blue="0.22597555051813467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1409,12 +1410,12 @@ Click add to record food~</string>
                                                     </cells>
                                                 </collectionView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JD-gp-kWL">
-                                                    <rect key="frame" x="299" y="8" width="57" height="28"/>
+                                                    <rect key="frame" x="309" y="8" width="47" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="jYM-vq-gEr"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="19"/>
-                                                    <state key="normal" title="MORE">
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                    <state key="normal" title="More &gt;">
                                                         <color key="titleColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
@@ -1449,18 +1450,18 @@ Click add to record food~</string>
                                                         <constraint firstAttribute="height" constant="270" id="iNr-3w-DCK"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LATEST EVENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTS-kI-oym">
-                                                    <rect key="frame" x="19" y="6" width="151" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest healthy events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTS-kI-oym">
+                                                    <rect key="frame" x="19" y="6" width="184" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="151" id="20h-Dp-aCB"/>
+                                                        <constraint firstAttribute="width" constant="184" id="20h-Dp-aCB"/>
                                                         <constraint firstAttribute="height" constant="21" id="D7x-BY-HpF"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
                                                     <color key="textColor" red="0.2185318272" green="0.22368847289999999" blue="0.22597555050000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ij0-Q7-zcs">
-                                                    <rect key="frame" x="308" y="6.5" width="48" height="21"/>
+                                                    <rect key="frame" x="308" y="6" width="48" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="QnC-02-UpV"/>
                                                         <constraint firstAttribute="width" constant="48" id="WhY-k8-znW"/>
@@ -1469,14 +1470,26 @@ Click add to record food~</string>
                                                     <color key="textColor" red="0.49509740889999998" green="0.50678010939999996" blue="0.51196162560000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLb-ua-Cvm">
+                                                    <rect key="frame" x="308" y="2" width="47" height="28"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="aOT-ws-Ldu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                    <state key="normal" title="More &gt;">
+                                                        <color key="titleColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ij0-Q7-zcs" secondAttribute="trailing" constant="4" id="RXs-rq-W6L"/>
                                                 <constraint firstItem="ij0-Q7-zcs" firstAttribute="centerY" secondItem="KTS-kI-oym" secondAttribute="centerY" id="SLS-Jy-ca3"/>
                                                 <constraint firstItem="e8m-ry-uMx" firstAttribute="trailing" secondItem="ij0-Q7-zcs" secondAttribute="trailing" id="iU5-jP-vdJ"/>
                                                 <constraint firstItem="e8m-ry-uMx" firstAttribute="leading" secondItem="KTS-kI-oym" secondAttribute="leading" id="jKk-gN-H2l"/>
+                                                <constraint firstItem="BLb-ua-Cvm" firstAttribute="leading" secondItem="ij0-Q7-zcs" secondAttribute="leading" id="maQ-8T-2hJ"/>
                                                 <constraint firstItem="KTS-kI-oym" firstAttribute="top" secondItem="p5X-21-CCp" secondAttribute="topMargin" constant="-5" id="sRc-CL-uUx"/>
                                                 <constraint firstItem="KTS-kI-oym" firstAttribute="leading" secondItem="p5X-21-CCp" secondAttribute="leadingMargin" constant="4" id="wXU-bq-PYe"/>
+                                                <constraint firstItem="BLb-ua-Cvm" firstAttribute="centerY" secondItem="ij0-Q7-zcs" secondAttribute="centerY" id="xuk-fz-QBf"/>
                                                 <constraint firstItem="e8m-ry-uMx" firstAttribute="top" secondItem="KTS-kI-oym" secondAttribute="bottom" constant="8" id="ybA-b5-wZ7"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1537,7 +1550,7 @@ Click add to record food~</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEa-8m-P7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2412" y="415"/>
+            <point key="canvasLocation" x="2412" y="414.69265367316348"/>
         </scene>
         <!--Article View Controller-->
         <scene sceneID="sOa-17-wXj">
@@ -1576,14 +1589,14 @@ Click add to record food~</string>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="322" id="KDW-BW-GQ8" customClass="NewsArticleTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="375" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDW-BW-GQ8" id="fmm-2w-8di">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDW-BW-GQ8" id="fmm-2w-8di">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="322"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="kid" translatesAutoresizingMaskIntoConstraints="NO" id="Wdd-4O-WgZ" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="25" width="343" height="180"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kid" translatesAutoresizingMaskIntoConstraints="NO" id="Wdd-4O-WgZ" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="25" width="343" height="200"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="180" id="hNK-ak-PB9"/>
+                                                        <constraint firstAttribute="height" constant="200" id="hNK-ak-PB9"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1591,51 +1604,60 @@ Click add to record food~</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu," selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pd9-0G-lto" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="213" width="345" height="32"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="articleTitleBackground" translatesAutoresizingMaskIntoConstraints="NO" id="ZcW-AR-c9n" customClass="RoundedImage" customModule="DietLens" customModuleProvider="target">
+                                                    <rect key="frame" x="14.5" y="185.5" width="345" height="39.5"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu," selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pd9-0G-lto" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="185" width="345" height="39.5"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" notEnabled="YES"/>
                                                     </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="55" id="PZa-px-YRL"/>
-                                                        <constraint firstAttribute="height" constant="32" id="Wm6-bW-Zsz"/>
-                                                    </constraints>
-                                                    <color key="textColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JQ-Xs-lcO" customClass="NoPaddingTextView" customModule="DietLens" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="245" width="345" height="77"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                    </accessibility>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="dtV-aN-QLy"/>
-                                                    </constraints>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimemt ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <color key="textColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By Author" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toK-ZZ-A15" userLabel="Source Label">
+                                                    <rect key="frame" x="16" y="233" width="56" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March 21, 2018" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9a-YK-gQO" userLabel="Date Label">
+                                                    <rect key="frame" x="272.5" y="233" width="86.5" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="1JQ-Xs-lcO" secondAttribute="bottom" id="K8a-az-dnZ"/>
+                                                <constraint firstItem="toK-ZZ-A15" firstAttribute="top" secondItem="Wdd-4O-WgZ" secondAttribute="bottom" constant="8" id="C7t-Tf-4cX"/>
+                                                <constraint firstItem="ZcW-AR-c9n" firstAttribute="height" secondItem="Pd9-0G-lto" secondAttribute="height" id="DFH-4F-uk8"/>
+                                                <constraint firstItem="s9a-YK-gQO" firstAttribute="trailing" secondItem="Wdd-4O-WgZ" secondAttribute="trailing" id="DlK-m4-ZVy"/>
                                                 <constraint firstItem="Pd9-0G-lto" firstAttribute="leading" secondItem="fmm-2w-8di" secondAttribute="leadingMargin" id="PYW-nk-7If"/>
                                                 <constraint firstItem="Wdd-4O-WgZ" firstAttribute="centerX" secondItem="fmm-2w-8di" secondAttribute="centerX" id="TQf-cf-de6"/>
-                                                <constraint firstItem="1JQ-Xs-lcO" firstAttribute="leading" secondItem="fmm-2w-8di" secondAttribute="leadingMargin" id="Tqf-m1-dV6"/>
-                                                <constraint firstItem="1JQ-Xs-lcO" firstAttribute="trailing" secondItem="fmm-2w-8di" secondAttribute="trailingMargin" id="aIv-nR-1Wu"/>
+                                                <constraint firstItem="ZcW-AR-c9n" firstAttribute="centerX" secondItem="Pd9-0G-lto" secondAttribute="centerX" id="V6o-vh-5sn"/>
+                                                <constraint firstItem="toK-ZZ-A15" firstAttribute="leading" secondItem="Wdd-4O-WgZ" secondAttribute="leading" id="VhP-cO-cvb"/>
+                                                <constraint firstItem="s9a-YK-gQO" firstAttribute="top" secondItem="Wdd-4O-WgZ" secondAttribute="bottom" constant="8" id="b8m-5G-OFX"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wdd-4O-WgZ" secondAttribute="trailing" constant="16" id="g8s-KJ-F65"/>
-                                                <constraint firstItem="1JQ-Xs-lcO" firstAttribute="top" secondItem="Pd9-0G-lto" secondAttribute="bottom" id="iCO-aI-2vY"/>
                                                 <constraint firstItem="Wdd-4O-WgZ" firstAttribute="leading" secondItem="fmm-2w-8di" secondAttribute="leading" constant="16" id="iRj-QE-Qci"/>
-                                                <constraint firstItem="Pd9-0G-lto" firstAttribute="top" secondItem="Wdd-4O-WgZ" secondAttribute="bottom" constant="8" id="ky6-4v-BcT"/>
+                                                <constraint firstItem="ZcW-AR-c9n" firstAttribute="centerY" secondItem="Pd9-0G-lto" secondAttribute="centerY" id="iv7-N8-qeb"/>
                                                 <constraint firstItem="Pd9-0G-lto" firstAttribute="trailing" secondItem="fmm-2w-8di" secondAttribute="trailingMargin" id="m2v-bH-nf9"/>
+                                                <constraint firstItem="ZcW-AR-c9n" firstAttribute="width" secondItem="Pd9-0G-lto" secondAttribute="width" id="nvK-ep-kC6"/>
                                                 <constraint firstItem="Wdd-4O-WgZ" firstAttribute="top" secondItem="fmm-2w-8di" secondAttribute="top" constant="25" id="paP-ya-z2s"/>
+                                                <constraint firstItem="Pd9-0G-lto" firstAttribute="bottom" secondItem="Wdd-4O-WgZ" secondAttribute="bottom" id="sMT-C7-GGd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="articleDesciption" destination="1JQ-Xs-lcO" id="fhZ-jK-xDu"/>
+                                            <outlet property="articleDataLabel" destination="s9a-YK-gQO" id="8mT-xN-2zc"/>
                                             <outlet property="articleImage" destination="Wdd-4O-WgZ" id="ej4-hm-i7a"/>
+                                            <outlet property="articleSourceLabel" destination="toK-ZZ-A15" id="vbx-mU-R2T"/>
                                             <outlet property="titleLabel" destination="Pd9-0G-lto" id="uHa-vj-pWf"/>
                                         </connections>
                                     </tableViewCell>
@@ -1662,7 +1684,7 @@ Click add to record food~</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ypI-iI-0EJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3249" y="293"/>
+            <point key="canvasLocation" x="3248.8000000000002" y="292.80359820089956"/>
         </scene>
         <!--Single Article View Controller-->
         <scene sceneID="aRP-64-quw">
@@ -1672,43 +1694,31 @@ Click add to record food~</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="cQm-3Y-lym">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="cQm-3Y-lym">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="900" id="VqS-x0-TIw" customClass="SinglePageArticleBodyCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="375" height="900"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="663" id="VqS-x0-TIw" customClass="SinglePageArticleBodyCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="375" height="663"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VqS-x0-TIw" id="DSJ-zr-bVs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="899.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="662.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91C-Km-9eI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="899.5"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJx-6A-2Ui" userLabel="WebKt Container">
+                                                    <rect key="frame" x="10" y="10" width="355" height="642.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut hendrerit nisl. Aenean commodo suscipit ultrices. Phasellus ante mauris, dictum vel purus quis, molestie luctus lacus. Fusce leo nisi, gravida eget interdum quis, rutrum eget ante. Praesent quis massa ac nunc porttitor fermentum vel eu elit. Praesent eu nisi at eros imperdiet ultricies. Nunc vitae urna a ex dapibus venenatis ut id lacus. Proin fermentum quam eu ex rutrum, sed interdum orci sollicitudin. Morbi vulputate, elit vel porta cursus, dolor metus gravida ante, a congue leo tellus nec nisl. Proin convallis imperdiet velit, ac tincidunt diam blandit ac. Quisque molestie mauris a ligula suscipit finibus. Nulla facilisi. Morbi pellentesque tincidunt massa sit amet ullamcorper. Praesent mollis lectus at ex elementum, quis consequat ligula dictum.
-
-Morbi cursus massa vel ex pellentesque, in malesuada quam bibendum. Integer placerat est a ex malesuada malesuada. Maecenas in dui et massa maximus placerat. Cras in risus rutrum, ultrices odio ut, accumsan eros. Aliquam porttitor nulla a ante lacinia, at lobortis dui elementum. Sed ultrices, ante a ullamcorper sodales, augue nisl sollicitudin arcu, ut mollis magna enim sed augue. Phasellus tellus dolor, finibus sed venenatis vel, convallis vitae nisl. Curabitur sit amet nisl eu nisl ornare tincidunt. Nunc egestas viverra sapien, vitae maximus ipsum sagittis sagittis. Mauris pharetra, risus a pulvinar tempor, leo nisl sollicitudin leo, tristique tincidunt quam arcu eget mauris. Nam feugiat dui ut urna finibus cursus. Quisque congue, dolor vel pretium commodo, risus odio ornare augue, eu commodo tellus turpis in ex. Aliquam at odio gravida, lobortis quam nec, mollis elit.
-
-Maecenas ornare, risus quis vestibulum facilisis, sapien mauris gravida enim, at varius sapien ex id odio. In hac habitasse platea dictumst. Cras mollis vehicula purus, sit amet rutrum ipsum volutpat ac. Suspendisse libero massa, dignissim sit amet faucibus vel, vulputate sed lacus. Sed eget dolor arcu. In ultrices sodales ipsum dictum fermentum. Sed nec urna quis sem suscipit accumsan id ut ex. Quisque dui tortor, faucibus vitae arcu non, tincidunt aliquet nunc. Nunc sit amet feugiat ipsum.
-
-Integer vel metus egestas, efficitur mi nec, lobortis ante. Sed varius massa congue purus finibus porttitor. Fusce non nulla imperdiet, iaculis tortor accumsan, rhoncus felis. Donec efficitur magna lorem, ac suscipit tellus tincidunt id. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dignissim placerat nunc at faucibus. Curabitur non urna dapibus, ornare orci et, cursus dolor.
-
-Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas at lectus sapien. Sed sit amet leo vel sem commodo cursus. Donec ultricies ante vitae magna sollicitudin accumsan. Maecenas augue est, luctus auctor mauris id, mollis sodales ipsum. Nulla facilisi.</string>
-                                                    <color key="textColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="91C-Km-9eI" secondAttribute="trailing" id="K4a-1K-YNO"/>
-                                                <constraint firstItem="91C-Km-9eI" firstAttribute="leading" secondItem="DSJ-zr-bVs" secondAttribute="leading" id="dvg-D0-cXy"/>
-                                                <constraint firstItem="91C-Km-9eI" firstAttribute="top" secondItem="DSJ-zr-bVs" secondAttribute="top" id="kKh-Ae-aGI"/>
-                                                <constraint firstAttribute="bottom" secondItem="91C-Km-9eI" secondAttribute="bottom" id="zrw-7n-kkp"/>
+                                                <constraint firstItem="bJx-6A-2Ui" firstAttribute="leading" secondItem="DSJ-zr-bVs" secondAttribute="leading" constant="10" id="CpZ-Lk-LmM"/>
+                                                <constraint firstItem="bJx-6A-2Ui" firstAttribute="top" secondItem="DSJ-zr-bVs" secondAttribute="top" constant="10" id="SxG-5T-Zug"/>
+                                                <constraint firstAttribute="bottom" secondItem="bJx-6A-2Ui" secondAttribute="bottom" constant="10" id="ccr-vL-7zj"/>
+                                                <constraint firstAttribute="trailing" secondItem="bJx-6A-2Ui" secondAttribute="trailing" constant="10" id="sK4-k9-7mo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="textView" destination="91C-Km-9eI" id="vvS-ZG-YOR"/>
+                                            <outlet property="webViewContainer" destination="bJx-6A-2Ui" id="1x5-wL-4Nr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1716,10 +1726,10 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                         </subviews>
                         <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="5WM-9R-ZIc" firstAttribute="bottom" secondItem="cQm-3Y-lym" secondAttribute="bottom" id="4Gs-qY-aZk"/>
-                            <constraint firstItem="5WM-9R-ZIc" firstAttribute="trailing" secondItem="cQm-3Y-lym" secondAttribute="trailing" id="JfA-Cf-yfx"/>
-                            <constraint firstItem="cQm-3Y-lym" firstAttribute="leading" secondItem="5WM-9R-ZIc" secondAttribute="leading" id="WFC-XK-bpU"/>
-                            <constraint firstItem="cQm-3Y-lym" firstAttribute="top" secondItem="MsX-gV-1n1" secondAttribute="top" id="nj4-9g-x0b"/>
+                            <constraint firstItem="cQm-3Y-lym" firstAttribute="leading" secondItem="5WM-9R-ZIc" secondAttribute="leading" id="4qg-54-q8n"/>
+                            <constraint firstAttribute="top" secondItem="cQm-3Y-lym" secondAttribute="top" id="Qc5-ja-pth"/>
+                            <constraint firstItem="5WM-9R-ZIc" firstAttribute="trailing" secondItem="cQm-3Y-lym" secondAttribute="trailing" id="YOz-PP-cUg"/>
+                            <constraint firstItem="5WM-9R-ZIc" firstAttribute="bottom" secondItem="cQm-3Y-lym" secondAttribute="bottom" id="oJN-5O-byV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5WM-9R-ZIc"/>
                     </view>
@@ -1730,6 +1740,55 @@ Aliquam eu elit auctor magna commodo accumsan. Sed at rhoncus mauris. Maecenas a
                 <placeholder placeholderIdentifier="IBFirstResponder" id="16y-Qa-F3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3956" y="292.80359820089956"/>
+        </scene>
+        <!--Report Statistic Controller-->
+        <scene sceneID="Zhq-cw-h6u">
+            <objects>
+                <viewController id="KHh-yf-Qfn" customClass="ReportStatisticController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nGv-Hj-9a9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ey-d8-Iwe">
+                                <rect key="frame" x="159" y="20" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eli-kM-wNF" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
+                                <rect key="frame" x="16" y="20" width="33" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="Back Arrow">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBackPressed:" destination="SRP-3w-m30" eventType="touchUpInside" id="vhk-Sv-HKh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Average nutrition" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPa-Bj-Xod">
+                                <rect key="frame" x="16" y="50" width="117" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recent 3days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBR-1C-S1j">
+                                <rect key="frame" x="242" y="50" width="117" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="nHc-Sn-Odm"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BbS-Rk-IyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2840.8000000000002" y="1172.5637181409297"/>
         </scene>
         <!--Steps-->
         <scene sceneID="U2p-dw-36v">
@@ -3820,6 +3879,7 @@ specific  recommendation</string>
         <image name="SideMenu" width="18" height="14"/>
         <image name="SplashCopyright" width="163" height="36"/>
         <image name="SplashDietLensFont" width="214" height="59"/>
+        <image name="articleTitleBackground" width="343" height="26"/>
         <image name="calendar" width="40" height="40"/>
         <image name="checkmark" width="32" height="32"/>
         <image name="cross" width="20" height="20"/>
@@ -4005,7 +4065,7 @@ A
     <inferredMetricsTieBreakers>
         <segue reference="lNl-KA-hAD"/>
         <segue reference="xOW-iC-wx0"/>
-        <segue reference="NAD-8N-HRw"/>
+        <segue reference="8Rw-F9-HXm"/>
         <segue reference="8og-k8-hEH"/>
     </inferredMetricsTieBreakers>
 </document>

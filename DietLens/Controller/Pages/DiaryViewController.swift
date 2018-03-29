@@ -20,13 +20,13 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var emptyDiaryHelperText: UILabel!
     @IBOutlet weak var emptyDiaryIcon: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
-    
+
     //reference of DataManager
     let foodDiaryDataManager = FoodDiaryDataManager.instance
 
      //tableview cell cache
     let imageCache = NSCache<NSString, AnyObject>()
-    var selectedFoodDiary: FoodDiary?
+    var selectedFoodDiary: FoodDiaryModel?
     var selectedImage: UIImage?
 
     //calendar date attribute
@@ -44,10 +44,19 @@ class DiaryViewController: UIViewController {
     }()
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? FoodDiaryHistoryViewController {
-            dest.selectedFoodDiary = selectedFoodDiary!
-            dest.diaryImage = selectedImage
+//        if let dest = segue.destination as? FoodDiaryHistoryViewController {
+//            dest.selectedFoodDiary = selectedFoodDiary!
+//            dest.diaryImage = selectedImage
+//        }
+        if let dest = segue.destination as? RecognitionResultsViewController {
+            dest.foodDiary = selectedFoodDiary!
+            dest.imageId = Int(selectedFoodDiary!.imageId)!
+            dest.isSetMealByTimeRequired = false
+            dest.foodDiary.recordType = selectedFoodDiary!.recordType
+            dest.dateTime = DateUtil.templateStringToDate(dateStr: (selectedFoodDiary?.mealTime)!)
+            dest.isNewDiary = false
         }
+
     }
 
     override func viewDidLoad() {
@@ -148,7 +157,7 @@ class DiaryViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.closeCalButton.alpha = 0.7
             self.diaryCalendar.alpha = 1
-            if foodDiaryDataManager.foodDiaryList.count == 0 {
+            if self.foodDiaryDataManager.foodDiaryList.count == 0 {
                 self.emptyDiaryIcon.alpha = 0.3
                 self.emptyDiaryHelperText.alpha = 0.3
             } else {
@@ -164,7 +173,7 @@ class DiaryViewController: UIViewController {
             self.view.layoutIfNeeded()
             self.closeCalButton.alpha = 0
             self.diaryCalendar.alpha = 0
-            if foodDiaryDataManager.foodDiaryList.count == 0 {
+            if self.foodDiaryDataManager.foodDiaryList.count == 0 {
                 self.emptyDiaryIcon.alpha = 1
                 self.emptyDiaryHelperText.alpha = 1
             } else {
@@ -319,7 +328,7 @@ extension DiaryViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
                 DispatchQueue.main.async {
-                    cell.setupCell(foodDiary: foodDiaryDataManager.mealEntity[indexPath.section].foodConsumed[indexPath.row])
+                    cell.setupCell(foodDiary: self.foodDiaryDataManager.mealEntity[indexPath.section].foodConsumed[indexPath.row])
                 }
                 return cell
             }
@@ -338,7 +347,29 @@ extension DiaryViewController: UITableViewDelegate, UITableViewDataSource {
         //to foodDiary detail page
         selectedFoodDiary = foodDiaryDataManager.mealEntity[indexPath.section].foodConsumed[indexPath.row]
         selectedImage = (tableView.cellForRow(at: indexPath) as? FoodDiaryCell)?.foodImage.image
-        performSegue(withIdentifier: "toDetailDiaryPage", sender: self)
+//        performSegue(withIdentifier: "toDetailDiaryPage", sender: self)
+        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+        let vc =  storyboard.instantiateViewController(withIdentifier: "recognizeVC") as! RecognitionResultsViewController
+        vc.isNewDiary = false
+        vc.dateTime = addFoodDate
+        vc.isSetMealByTimeRequired = false
+        switch(selectedFoodDiary?.mealType) {
+        case StringConstants.MealString.breakfast?:
+            vc.whichMeal = .breakfast
+        case StringConstants.MealString.lunch?:
+            vc.whichMeal = .lunch
+        case StringConstants.MealString.dinner?:
+            vc.whichMeal = .dinner
+        case StringConstants.MealString.snack?:
+            vc.whichMeal = .snack
+        default:
+            vc.isSetMealByTimeRequired = true
+        }
+        vc.foodDiary = selectedFoodDiary!
+        vc.userFoodImage = selectedImage
+        vc.foodDiary.recordType = (selectedFoodDiary?.recordType)!
+        self.present(vc, animated: true, completion: nil)
+        //refresh label
         isAddNewDiary = true
     }
 }

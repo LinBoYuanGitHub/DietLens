@@ -20,11 +20,13 @@ class FoodDiaryCell: UITableViewCell {
         // Initialization code
     }
 
-    func setupCell(foodDiary: FoodDiary) {
-        foodName.text = foodDiary.foodName
+    func setupCell(foodDiary: FoodDiaryModel) {
+        foodName.text = foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].foodName
 //        foodImage.image = food.foodImage
-        servingSize.text = foodDiary.unit
-        calories.text = String(round(10*foodDiary.calorie*foodDiary.portionSize)/1000)+" "+StringConstants.UIString.calorieUnit
+        servingSize.text = foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightUnit
+        let ratio = foodDiary.quantity * foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightValue/100
+        let calorieValue = Double(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie)*ratio
+        calories.text = String(format: "%.1f", calorieValue) + " " + StringConstants.UIString.calorieUnit
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

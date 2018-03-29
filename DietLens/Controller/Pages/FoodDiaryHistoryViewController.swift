@@ -28,11 +28,11 @@ class FoodDiaryHistoryViewController: UIViewController {
     @IBOutlet weak var mainStackView: UIStackView!
     var ingredientAdapter: PlainTextTableAdapter<UITableViewCell>!
     @IBOutlet weak var diaryFoodCarlorieLabel: UILabel!
-    var selectedFoodDiary = FoodDiary()
+    var selectedFoodDiary = FoodDiaryModel()
     var diaryImage: UIImage?
 
     override func viewDidLoad() {
-        TFfoodName.text = selectedFoodDiary.foodName
+        TFfoodName.text = selectedFoodDiary.foodInfoList[selectedFoodDiary.selectedFoodInfoPos].foodName
 //        TFportion.text = String(selectedFoodInfo.portionSize)+"%"
         TFmealType.text = selectedFoodDiary.mealType
 
@@ -78,10 +78,10 @@ class FoodDiaryHistoryViewController: UIViewController {
 
     func setFoodDataList() {
         ingredientAdapter.nutritionTextList.removeAll()
-        let total_calories = round(10*Double(selectedFoodDiary.calorie))/10
-        let total_carbohydrate = round(10*Double(selectedFoodDiary.carbohydrate)!)/10
-        let total_protein = round(10*Double(selectedFoodDiary.protein)!)/10
-        let total_fat = round(10*Double(selectedFoodDiary.fat)!)/10
+        let total_calories = round(10*Double(selectedFoodDiary.foodInfoList[selectedFoodDiary.selectedFoodInfoPos].calorie))/10
+        let total_carbohydrate = round(10*Double(selectedFoodDiary.foodInfoList[selectedFoodDiary.selectedFoodInfoPos].carbohydrate)!)/10
+        let total_protein = round(10*Double(selectedFoodDiary.foodInfoList[selectedFoodDiary.selectedFoodInfoPos].protein)!)/10
+        let total_fat = round(10*Double(selectedFoodDiary.foodInfoList[selectedFoodDiary.selectedFoodInfoPos].fat)!)/10
         ingredientAdapter.nutritionTextList.append("Calories   \(String(total_calories))kcal")
         ingredientAdapter.nutritionTextList.append("Carbs   \(String(total_carbohydrate))g")
         ingredientAdapter.nutritionTextList.append("Protein   \(String(total_protein))g")
@@ -90,7 +90,7 @@ class FoodDiaryHistoryViewController: UIViewController {
         //adjust calorie textlabel
 //        TFportion.text = "\(round(selectedFoodInfo.portionSize))%"
         TFquantity.text = String(round(selectedFoodDiary.quantity))
-        TFunit.text = selectedFoodDiary.unit
+        TFunit.text = selectedFoodDiary.foodInfoList[selectedFoodDiary.selectedFoodInfoPos].portionList[selectedFoodDiary.selectedPortionPos].weightUnit
         diaryFoodCarlorieLabel.text = "\(round(total_calories)) kcal"
         caloriePercentage.text = "\(round(total_calories/20))% of your daily calorie intake"
     }
@@ -101,7 +101,7 @@ class FoodDiaryHistoryViewController: UIViewController {
 
     @IBAction func deleteButtonPressed(_ sender: Any) {
 //        FoodDiaryDBOperation.instance.deleteFoodDiary(id: foodDiary.id)
-        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Do you want to delete \(selectedFoodDiary.foodName)?", postiveText: "yes", negativeText: "no") { (flag) in
+        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Do you want to delete \(selectedFoodDiary.foodInfoList[selectedFoodDiary.selectedFoodInfoPos].foodName)?", postiveText: "yes", negativeText: "no") { (flag) in
             if flag {
                 FoodDiaryDBOperation.instance.deleteFoodDiary(id: self.selectedFoodDiary.id)
             }

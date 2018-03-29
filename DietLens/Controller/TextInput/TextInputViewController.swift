@@ -15,8 +15,8 @@ class TextInputViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var addHistoryTable: UITableView!
 
-    var historyDiaryList = [FoodDiary]()
-    var selectedFoodDiary = FoodDiary()
+    var historyDiaryList = [FoodDiaryModel]()
+    var selectedFoodDiary = FoodDiaryModel()
     var foodResults = [FoodInfomation]()
     var selectedImageView: UIImage?
     var targetPortion: Double?
@@ -73,7 +73,8 @@ extension TextInputViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "addFoodHistoryCellIdentifier") as? HistoryFoodDiaryCell else {
             return UITableViewCell()
         }
-        cell.setUpCell(imagePath: historyDiaryList[indexPath.row].imagePath, foodNameString: historyDiaryList[indexPath.row].foodName, foodCal: String(round(historyDiaryList[indexPath.row].calorie*historyDiaryList[indexPath.row].portionSize/100.0)))
+        let foodDiary  = historyDiaryList[indexPath.row]
+        cell.setUpCell(imagePath: foodDiary.imagePath, foodNameString: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].foodName, foodCal: String(round(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie)))
         return cell
     }
 
@@ -98,27 +99,7 @@ extension TextInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedFoodDiary = historyDiaryList[indexPath.row]
         // Row selected, so set textField to relevant value, hide tableView
-        // endEditing can trigger some other action according to requirements
-        self.foodResults.removeAll()
-        var targetFoodInfo = FoodInfomation()
-        targetPortion = selectedFoodDiary.portionSize
-        targetFoodInfo.foodId = selectedFoodDiary.foodId
-        targetFoodInfo.foodName = selectedFoodDiary.foodName
-        targetFoodInfo.category = selectedFoodDiary.category
-        targetFoodInfo.sampleImagePath = selectedFoodDiary.imagePath
-        targetFoodInfo.rank = selectedFoodDiary.rank
-        targetFoodInfo.category = selectedFoodDiary.category
-        var portion = Portion()
-        portion.sizeUnit = selectedFoodDiary.unit
-        //FIXME harcode weightValue,need to fix latter
-        portion.weightValue = 100
-        targetFoodInfo.portionList.append(portion)
         //calculation for individual nutrition
-        targetFoodInfo.carbohydrate = String(round(10*Double(selectedFoodDiary.carbohydrate)!)/10)
-        targetFoodInfo.protein = String(round(10*Double(selectedFoodDiary.protein)!)/10)
-        targetFoodInfo.fat = String(round(10*Double(selectedFoodDiary.fat)!)/10)
-        targetFoodInfo.calorie = Float(round(10*Double(selectedFoodDiary.calorie))/10)
-        foodResults.append(targetFoodInfo)
         selectedImageView = (tableView.cellForRow(at: indexPath) as! HistoryFoodDiaryCell).foodDiaryImage.image
         //perform segue
         performSegue(withIdentifier: "historyToResult", sender: self)
@@ -143,13 +124,12 @@ extension TextInputViewController: IndicatorInfoProvider {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? RecognitionResultsViewController {
-            dest.recordType = selectedFoodDiary.recordType
+            dest.foodDiary.recordType = selectedFoodDiary.recordType
             for ingredient in selectedFoodDiary.ingredientList {
                 dest.foodDiary.ingredientList.append(ingredient)
             }
-            dest.foodDiary.portionSize = targetPortion!
-            dest.results = foodResults
-            dest.recordType = "text"
+            dest.foodDiary = selectedFoodDiary
+            dest.foodDiary.recordType = RecordType.RecordByText
             dest.userFoodImage = selectedImageView
             guard let parentVC = self.parent as? AddFoodViewController else {
                 dest.dateTime = Date()

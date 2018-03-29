@@ -10,12 +10,12 @@ import Foundation
 
 struct Ingredient {
     var ingredientId: Int = 0
-    var long_desc: String = ""
-    var energy_kcal = ""
+    var longDesc: String = ""
+    var energyKcal = ""
     var carbs = ""
     var protein: String = ""
     var fat = ""
-    var sugars_total = ""
+    var sugarsTotal = ""
     var ingredientUnit = [IngredientUnit]()
 }
 

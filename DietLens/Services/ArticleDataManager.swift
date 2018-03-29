@@ -29,6 +29,7 @@ class ArticleDataManager {
             article.articleTitle = jsonArr[i]["title"].stringValue
             article.articleContent = jsonArr[i]["content"].stringValue
             article.articleImageURL = jsonArr[i]["image"].stringValue
+            article.source = jsonArr[i]["source"].stringValue
             articleList.append(article)
         }
         return articleList

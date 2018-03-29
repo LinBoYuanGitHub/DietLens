@@ -14,6 +14,8 @@ struct StringConstants {
         static let NutritionHeaderText = "Nutrients "
         static let diaryIngredientUnit = "g"
         static let calorieUnit = "kcal"
+        static let updateBtnText = "Update"
+        static let addBtnText = "Done"
     }
     struct MealString {
         static let breakfast = "Breakfast"
@@ -21,4 +23,5 @@ struct StringConstants {
         static let dinner = "Dinner"
         static let snack = "Snack"
     }
+
 }

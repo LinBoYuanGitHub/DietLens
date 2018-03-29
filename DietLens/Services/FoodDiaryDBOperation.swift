@@ -18,12 +18,21 @@ class FoodDiaryDBOperation {
     /// save foodDiary into realm
     ///
     /// - Parameter foodDiary: the whole foodDiary Object
-    func saveFoodDiary(foodDiary: FoodDiary) {
-        //autoincrease
-        let nextId = getMaxIngredientId()+1
-        foodDiary.id = nextId
+    func saveFoodDiary(foodDiaryModel: FoodDiaryModel) {
+//        //autoincrease
+//        let nextId = getMaxIngredientId()+1
+//        foodDiary.id = nextId
         try! realm.write {
+            let foodDiary = foodDiaryModel.convertToStorage()
             realm.add(foodDiary)
+        }
+    }
+
+    func updateFoodDiary(foodDiaryModel: FoodDiaryModel) {
+        try! realm.write {
+            //convert model to storage
+            let replacedObj = foodDiaryModel.convertToStorage()
+            realm.add(replacedObj, update: true)
         }
     }
 
@@ -52,29 +61,36 @@ class FoodDiaryDBOperation {
     /// get all the foodDiary
     ///
     /// - Returns: array of all the foodDiary
-    func getAllFoodDiary() -> [FoodDiary]? {
-        var results = [FoodDiary]()
+    func getAllFoodDiary() -> [FoodDiaryModel]? {
+        var results = [FoodDiaryModel]()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self)
             for foodDiary in foodDiarys {
-                results.append(foodDiary)
+                var foodDiaryModel = FoodDiaryModel()
+                foodDiaryModel.convertToObject(foodDiary: foodDiary)
+                results.append(foodDiaryModel)
             }
         }
         return results
     }
 
     //show in history food
-    func getRecentAddedFoodDiary(limit: Int) -> [FoodDiary] {
-        var results = [FoodDiary]()
+    func getRecentAddedFoodDiary(limit: Int) -> [FoodDiaryModel] {
+        var results = [FoodDiaryModel]()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self).filter("recordType='text'").sorted(byKeyPath: "id", ascending: false)
             if foodDiarys.count > limit {
                 for i in 0..<limit {
-                    results.append(foodDiarys[i])
+                    let foodDiary = foodDiarys[i]
+                    var foodDiaryModel = FoodDiaryModel()
+                    foodDiaryModel.convertToObject(foodDiary: foodDiary)
+                    results.append(foodDiaryModel)
                 }
             } else {
                 for foodDiary in foodDiarys {
-                    results.append(foodDiary)
+                    var foodDiaryModel = FoodDiaryModel()
+                    foodDiaryModel.convertToObject(foodDiary: foodDiary)
+                    results.append(foodDiaryModel)
                 }
             }
         }
@@ -86,29 +102,27 @@ class FoodDiaryDBOperation {
     /// - Parameter year: foodDiary record year
     /// - Parameter month: foodDiary record month
     /// - Returns: array of foodDiary
-    func getFoodDiaryByMonth(year: String, month: String) -> [FoodDiary]? {
-        var results = [FoodDiary]()
+    func getFoodDiaryByMonth(year: String, month: String) -> [FoodDiaryModel]? {
+        var results = [FoodDiaryModel]()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self).filter("mealTime CONTAINS '\(month+" "+year)'").sorted(byKeyPath: "mealTime", ascending: false)
             for foodDiary in foodDiarys {
-                results.append(foodDiary)
+                var foodDiaryModel = FoodDiaryModel()
+                foodDiaryModel.convertToObject(foodDiary: foodDiary)
+                results.append(foodDiaryModel)
             }
         }
         return results
     }
 
-    func getFoodDiaryByDate(date: String) -> [FoodDiary]? {
-        var results = [FoodDiary]()
+    func getFoodDiaryByDate(date: String) -> [FoodDiaryModel]? {
+        var results = [FoodDiaryModel]()
         try! realm.write {
-//            let foodDiarys = realm.objects(FoodDiary.self).filter("mealTime='\(date)'")
-//            for foodDiary in foodDiarys {
-//                results.append(foodDiary)
-//            }
             let foodDiarys = realm.objects(FoodDiary.self)
-            for foodDiary in foodDiarys {
-                if(foodDiary.mealTime == date) {
-                  results.append(foodDiary)
-                }
+            for foodDiary in foodDiarys where foodDiary.mealTime == date {
+                var foodDiaryModel = FoodDiaryModel()
+                foodDiaryModel.convertToObject(foodDiary: foodDiary)
+                results.append(foodDiaryModel)
             }
         }
         return results
@@ -121,34 +135,12 @@ class FoodDiaryDBOperation {
         }
     }
 
-//    private func saveIngredient(ingredientDiary: IngredientDiary) {
-//        try! realm.write {
-//            realm.add(ingredientDiary)
-//        }
-//    }
-//
-//    private func getMaxIngredientId() -> Int {
-//        var maxId = 1
-//        try! realm.write {
-//            maxId = realm.objects(IngredientDiary.self).max(ofProperty: "id")!
-//        }
-//        return maxId
-//    }
-//
-//    func getIngredientById(id: Int) -> IngredientDiary {
-//        var ingredient = IngredientDiary()
-//        try! realm.write {
-//            let results = realm.objects(IngredientDiary.self).filter("id = \(id)")
-//            ingredient = results[0]
-//        }
-//        return ingredient
-//    }
-//
-//    func addIngredient(ingredientDiary: IngredientDiary) {
-//        var id = getMaxIngredientId()
-//        id += 1
-//        ingredientDiary.id = id
-//        saveIngredient(ingredientDiary: ingredientDiary)
-//    }
+    func getFoodDiaryById(id: Int) -> FoodDiary {
+        var records: Results<FoodDiary>!
+        try! realm.write {
+            records = realm.objects(FoodDiary.self).filter("id = \(id)")
+        }
+        return records[0]
+    }
 
 }

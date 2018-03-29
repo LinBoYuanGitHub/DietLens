@@ -25,7 +25,7 @@ class AddIngredientViewController: UIViewController {
 
     override func viewDidLoad() {
         self.hideKeyboardWhenTappedAround()
-        ingredientNameLabel.text = ingredient?.long_desc
+        ingredientNameLabel.text = ingredient?.longDesc
         quantityTextField.keyboardType = UIKeyboardType.decimalPad
         quantityTextField.delegate = self
         unitTextField.text = ingredient?.ingredientUnit[0].unit
@@ -38,7 +38,7 @@ class AddIngredientViewController: UIViewController {
         calculateNutrtions()
         //set up diary basic
         ingredientDiary.ingredientId = ingredient.ingredientId
-        ingredientDiary.ingredientName = ingredient.long_desc
+        ingredientDiary.ingredientName = ingredient.longDesc
     }
 
     func calculateNutrtions() {
@@ -47,11 +47,11 @@ class AddIngredientViewController: UIViewController {
         ingredientDiary.weight = Double(ingredient.ingredientUnit[unitIndex].weight)!
         ingredientDiary.quantity = Double(quantityTextField.text!)!
         ingredientDiary.unit = ingredient.ingredientUnit[unitIndex].unit
-        ingredientDiary.calorie = Double(ingredient.energy_kcal)!*rate
+        ingredientDiary.calorie = Double(ingredient.energyKcal)!*rate
         ingredientDiary.carbs = Double(ingredient.carbs)!*rate
         ingredientDiary.protein = Double(ingredient.protein)!*rate
         ingredientDiary.fat = Double(ingredient.fat)!*rate
-        ingredientDiary.sugarsTotal = Double(ingredient.sugars_total)!*rate
+        ingredientDiary.sugarsTotal = Double(ingredient.sugarsTotal)!*rate
         //round decimal
         ingredientDiary.calorie = round(10*ingredientDiary.calorie)/10
         ingredientDiary.carbs = round(10*ingredientDiary.carbs)/10
@@ -107,7 +107,9 @@ class AddIngredientViewController: UIViewController {
             parent!.dismiss(animated: true, completion: nil)
         })
         //send notification to add ingredient
-        let dataDict: [String: IngredientDiary] = ["ingredientdiary": ingredientDiary]
+        var diaryIngredientModel = IngredientDiaryModel()
+        diaryIngredientModel.convertToObject(ingredientDiary: ingredientDiary)
+        let dataDict: [String: IngredientDiaryModel] = ["ingredientdiary": diaryIngredientModel]
         NotificationCenter.default.post(name: .addIngredient, object: nil, userInfo: dataDict)
     }
 }

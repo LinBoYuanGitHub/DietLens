@@ -2,6 +2,7 @@ import UIKit
 import AVFoundation
 import Photos
 import XLPagerTabStrip
+import RealmSwift
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
@@ -27,13 +28,15 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     private let imagePicker = UIImagePickerController()
 
-    private var foodResults: [FoodInfomation]?
+    private var foodDiary = FoodDiaryModel()
 
     private var activityIndicator = UIActivityIndicatorView()
 
     @IBOutlet weak var loadingScreen: UIView!
 
-    private var recordType: String = "recogniton"
+    @IBOutlet weak var uploadPercentageLabel: UILabel!
+
+    private var recordType: String = RecordType.RecordByImage
 
     @IBOutlet weak var focusViewImg: UIImageView!
 
@@ -42,21 +45,21 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     var longitude = 0.0
     var imageId: Int = 0
 
+    var pinchGestureRecognizer = UIPinchGestureRecognizer()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         hideReview()
-
+        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(CameraViewController.pinchCameraView(_:)))
         sessionManager.previewView = previewView
+        sessionManager.previewView.addGestureRecognizer(pinchGestureRecognizer)
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
-
         let previewLayer = previewView.videoPreviewLayer
         previewLayer.videoGravity = .resizeAspectFill
 
         previewContainer.layer.addSublayer(previewLayer)
         //previewContainer.bringSubview(toFront: focusViewImg)
-
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = false
@@ -69,6 +72,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         } else {
             print("Location services are not enabled")
         }
+    }
+
+    @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
+        //TODO camera zoom in & out according to pinch
+        sessionManager.pinch(pinch: sender)
     }
 
     func enableLocationServices() {
@@ -168,7 +176,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         let key = "userId"
         let userId = preferences.string(forKey: key)
         //upload image to server
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude) {(imageId, results) in
+        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (imageId, results) in
             // upload result and callback
             self.imageId = imageId
             self.capturePhotoButton.isEnabled = true
@@ -176,11 +184,17 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             if results == nil || results?.count == 0 {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
             } else {
-                self.foodResults = results
-                self.recordType = "recognition"
+                self.foodDiary.foodInfoList.removeAll()
+                for result in results! {
+                    self.foodDiary.foodInfoList.append(result)
+                }
+                self.recordType = RecordType.RecordByImage
                 self.performSegue(withIdentifier: "test", sender: self)
             }
             self.hideReview()
+        }) { (progress) in
+            //TODO update progress dialog to show progress
+            self.uploadPercentageLabel.text = "\(progress)%"
         }
     }
 
@@ -329,8 +343,8 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDetect(barcode: String) {
-        APIService.instance.getBarcodeScanResult(barcode: barcode) { (foodInfomation) in
-            if foodInfomation == nil {
+        APIService.instance.getBarcodeScanResult(barcode: barcode) { (foodInformation) in
+            if foodInformation == nil {
                 DispatchQueue.main.async { [weak self] in
                     guard let wSelf = self else {
                         return
@@ -342,15 +356,44 @@ extension CameraViewController: CameraViewControllerDelegate {
                                                             style: .cancel,
                                                             handler: nil))
                     wSelf.present(alertController, animated: true, completion: nil)
-                }
+                    }
             } else {
                 self.loadingScreen.alpha = 0
-                self.foodResults = [foodInfomation!]
-                self.recordType = "barcode"
+                do {
+                    try Realm().write {
+                        self.foodDiary.foodInfoList.append(foodInformation!)
+                    }
+                } catch let error as NSError {
+                    //handel error
+                }
+                self.recordType = RecordType.RecordByBarcode
                 self.performSegue(withIdentifier: "test", sender: self)
             }
-
         }
+//        APIService.instance.getBarcodeScanResult(barcode: barcode){ (foodInformation?) in
+//            if foodInformation == nil {
+//                DispatchQueue.main.async { [weak self] in foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos]
+//                    guard let wSelf = self else {
+//                        returna
+//                    }
+//                    let alertMsg = "Result not found!"
+//                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
+//                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
+//                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
+//                                                            style: .cancel,
+//                                                            handler: nil))
+//                    wSelf.present(alertController, animated: true, completion: nil)
+//                }
+//            } else {
+//                self.loadingScreen.alpha = 0
+//                try Realm().write {
+//                    self.foodDiary.foodInfoList.append(foodInformation)
+//                }
+//                self.recordType = RecordType.RecordByBarcode
+//                self.performSegue(withIdentifier: "test", sender: self)
+//            }
+//
+//        }
 //        DispatchQueue.main.async { [weak self] in
 //            guard let wSelf = self else {
 //                return
@@ -413,15 +456,15 @@ extension CameraViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let parentVC = self.parent as! AddFoodViewController
         if let dest = segue.destination as? RecognitionResultsViewController {
-            dest.results = foodResults
+            dest.foodDiary = foodDiary
             dest.imageId = imageId
             dest.dateTime = parentVC.addFoodDate
             dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
             dest.whichMeal = parentVC.mealType
-            dest.recordType = self.recordType
-            if recordType == "recognition" {
+            dest.foodDiary.recordType = self.recordType
+            if recordType == RecordType.RecordByImage {
                 dest.userFoodImage = chosenImageView.image!
-            } else if recordType == "barcode" {
+            } else if recordType == RecordType.RecordByBarcode {
                 dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
             }
         }

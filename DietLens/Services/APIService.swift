@@ -209,7 +209,7 @@ class APIService {
 
     public func getArticleList(completion: @escaping ([Article]?) -> Void) {
             Alamofire.request(
-                URL(string: ServerConfig.articleURL)!,
+                URL(string: ServerConfig.articleURL+"/?type=1")!,
                 method: .get)
                 .validate()
                 .responseJSON { (response) -> Void in
@@ -231,7 +231,7 @@ class APIService {
 
     public func getEventList(completion: @escaping ([Article]?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.eventURL)!,
+            URL(string: ServerConfig.articleURL+"/?type=1")!,
             method: .get)
             .validate()
             .responseJSON { (response) -> Void in
@@ -311,7 +311,7 @@ class APIService {
         }
     }
 
-    public func getFoodSearchDetailResult(foodId: Int, completion: @escaping (FoodInfomation?) -> Void) {
+    public func getFoodSearchDetailResult(foodId: Int, completion: @escaping (FoodInfomationModel?) -> Void) {
         let url = ServerConfig.foodSearchListURL+"?id="+String(foodId)
         Alamofire.request(
             URL(string: url)!,
@@ -358,12 +358,12 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(detail)["data"]
-                let ingredient = FoodInfoDataManager.instance.assembleIngredientInfo(jsonObject: jsonObj)
-                completion(ingredient)
+                let Ingredient = FoodInfoDataManager.instance.assembleIngredientInfo(jsonObject: jsonObj)
+                completion(Ingredient)
         }
     }
 
-    public func getBarcodeScanResult(barcode: String, completion: @escaping (FoodInfomation?) -> Void) {
+    public func getBarcodeScanResult(barcode: String, completion: @escaping (FoodInfomationModel?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.barcodeSearchURL+"?id="+barcode)!,
             method: .get,
@@ -391,7 +391,7 @@ class APIService {
         }
     }
 
-    public func uploadRecognitionImage(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping (Int, [FoodInfomation]?) -> Void) {
+    public func uploadRecognitionImage(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping (Int, [FoodInfomationModel]?) -> Void, progressCompletion: @escaping (Int) -> Void) {
         let parameters = ["user_id": userId]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
@@ -405,6 +405,7 @@ class APIService {
                 upload.uploadProgress(closure: { (progress) in
                     #if DEBUG
                     print("Upload Progress: \(progress.fractionCompleted)")
+                    progressCompletion(Int(progress.fractionCompleted*100))
                     #endif
                 })
                 upload.responseJSON { response in
@@ -633,6 +634,32 @@ class APIService {
         }
     }
 
+    public func updateFoodDiary(foodDiary: FoodDiaryModel, completion: @escaping(Bool) -> Void) {
+
+        let params: Dictionary = ["food_name": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].foodName, "image_id": foodDiary.imageId, "meal_type": foodDiary.mealType, "nutrient": assembleNutrtionString(foodDiary: foodDiary), "ingredient": assembleIngredientString(foodDiary: foodDiary), "search_type": foodDiary.recordType, "rank": String(foodDiary.selectedFoodInfoPos+1), "quantity": foodDiary.quantity, "unit": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightUnit] as [String: Any]
+        Alamofire.request(
+            URL(string: ServerConfig.foodDiaryURL+String(foodDiary.id)+"/")!,
+            method: .put,
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("update food diary failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("update food diary failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+//                let jsonObject = JSON(result)
+                completion(true)
+        }
+    }
+
     //swiftlint:disable function_parameter_count
     /// save FoodDiary API
     ///
@@ -646,10 +673,10 @@ class APIService {
     ///   - category: food category
     ///   - ratio: portion ratio
     ///   - completion: for passing callback
-    public func saveFoodDiary(userId: String, foodDiary: FoodDiary, mealTime: String, mealType: String, nutrientJson: String, ingredientJson: String, recordType: String, category: String, rank: Int, quantity: Double, unit: String, imageId: Int, completion: @escaping (Bool) -> Void) {
-        let params: Dictionary = ["food_name": foodDiary.foodName, "portion_size": foodDiary.portionSize, "image_id": imageId, "meal_type": mealType, "nutrient": nutrientJson, "ingredient": ingredientJson, "search_type": recordType, "rank": String(rank), "quantity": quantity, "unit": unit] as [String: Any]
+    public func saveFoodDiary(userId: String, foodDiary: FoodDiaryModel, completion: @escaping (Bool, JSON) -> Void) {
+        let params: Dictionary = ["food_name": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].foodName, "image_id": foodDiary.imageId, "meal_type": foodDiary.mealType, "nutrient": assembleNutrtionString(foodDiary: foodDiary), "ingredient": assembleIngredientString(foodDiary: foodDiary), "search_type": foodDiary.recordType, "rank": String(foodDiary.selectedFoodInfoPos+1), "quantity": foodDiary.quantity, "unit": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightUnit] as [String: Any]
         Alamofire.request(
-            URL(string: ServerConfig.saveFoodDiaryURL+"?user_id="+userId)!,
+            URL(string: ServerConfig.foodDiaryURL+"?user_id="+userId)!,
             method: .post,
             parameters: params,
             encoding: JSONEncoding.default,
@@ -658,17 +685,54 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save food diary failed due to : \(String(describing: response.result.error))")
-                    completion(false)
+                    completion(false, nil)
                     return
                 }
                 guard let result = response.result.value else {
                     print("Save food diary failed due to : Server Data Type Error")
-                    completion(false)
+                    completion(false, nil)
                     return
                 }
                 let jsonObject = JSON(result)
-                completion(true)
+                completion(true, jsonObject)
         }
+    }
+
+    func assembleNutrtionString(foodDiary: FoodDiaryModel) -> String {
+        let nutrientJson: JSON = [
+            NutrtionData.calorieText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie,
+            NutrtionData.carbohydrateText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate,
+            NutrtionData.proteinText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein,
+            NutrtionData.fatText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat
+        ]
+        return nutrientJson.rawString()!
+    }
+
+    func assembleIngredientString(foodDiary: FoodDiaryModel) -> String {
+        var ingredientString = ""
+        if foodDiary.ingredientList.count == 0 {
+            ingredientString = "[]"
+        } else {
+            ingredientString = "["
+            for ingredient in  foodDiary.ingredientList {
+                let json: JSON = [
+                    "id": ingredient.id,
+                    "ingredientId": ingredient.ingredientId,
+                    "ingredientName": ingredient.ingredientName,
+                    "calorie": ingredient.calorie,
+                    "carbs": ingredient.carbs,
+                    "protein": ingredient.protein,
+                    "fat": ingredient.fat,
+                    "quantity": ingredient.quantity,
+                    "unit": ingredient.unit,
+                    "weight": ingredient.weight
+                ]
+                ingredientString += json.rawString()! + ","
+            }
+            ingredientString = ingredientString.substring(to: ingredientString.index(before: ingredientString.endIndex))
+            ingredientString += "]"
+        }
+        return ingredientString
     }
 
     public func uploadStepData(userId: String, params: Dictionary<String, Any>, completion: @escaping (Bool) -> Void) {

@@ -18,6 +18,8 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
 
     var articleData: Article?
 
+    let headerDarkAlpha = 0.6
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +45,6 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
             cell.setupCell(type: .body, data: articleData?.articleContent)
             return cell
         }
-
         return UITableViewCell()
     }
 
@@ -51,12 +52,25 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         return 1
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.fs_height
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let tableView = scrollView as? UITableView {
+            for cell in tableView.visibleCells {
+                guard let cell = cell as? SinglePageArticleBodyCell else { continue }
+                cell.webView?.setNeedsLayout()
+            }
+        }
+    }
+
     func setupParallaxHeader() {
         //let image = newsArticle.newsImage
 
         let imageView = UIImageView()
         //imageView.image = image
-        if articleData?.articleImageURL != ""{
+        if articleData?.articleImageURL != "" {
             imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: nil)
         } else {
             imageView.image = #imageLiteral(resourceName: "runner")
@@ -64,60 +78,60 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         imageView.contentMode = .scaleAspectFill
         parallaxHeaderView = imageView
 
-        imageView.blurView.setup(style: UIBlurEffectStyle.dark, alpha: 1).enable()
-
+        imageView.blurView.setup(style: UIBlurEffectStyle.dark, alpha: CGFloat(headerDarkAlpha)).enable()
         article.parallaxHeader.view = imageView
         article.parallaxHeader.height = 400
-        article.parallaxHeader.minimumHeight = 80
+        article.parallaxHeader.minimumHeight = 65
         article.parallaxHeader.mode = .centerFill
 
         let backButton = ExpandedUIButton()
         backButton.setImage(#imageLiteral(resourceName: "Back Arrow"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
-        backButton.imageView?.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        backButton.imageView?.tintColor = UIColor.white
         imageView.addSubview(backButton)
 
         backButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
-            make.centerY.equalTo(view.snp.top).offset(48)
+            make.centerY.equalTo(view.snp.top).offset(39)
         }
         article.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             //update alpha of blur view on top of image view
             //backButton.snp.updateConstraints({ (make) in
                 //make.centerY.equalTo(self.view.snp.top).offset(30)
             //})
-
-            parallaxHeader.view.blurView.alpha = 1 - parallaxHeader.progress
+            parallaxHeader.view.blurView.alpha = CGFloat(self.headerDarkAlpha) - parallaxHeader.progress
             //backButton.imageView?.alpha = parallaxHeader.progress
         }
-
-        let originalLabel = UILabel()
-        originalLabel.text = articleData?.articleTitle
-        originalLabel.numberOfLines = 0
-        originalLabel.font = UIFont.systemFont(ofSize: 35.0)
-        originalLabel.sizeToFit()
-        originalLabel.textAlignment = .left
-        originalLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        let originalLabel = UILabel()
+//        originalLabel.text = articleData?.articleTitle
+//        originalLabel.numberOfLines = 1
+//        originalLabel.font = UIFont.systemFont(ofSize: 35.0)
+//        originalLabel.sizeToFit()
+//        originalLabel.textAlignment = .left
+//        originalLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         // Label for vibrant text
         let vibrantLabel = UILabel()
         vibrantLabel.text = articleData?.articleTitle
-        vibrantLabel.numberOfLines = 0
+        vibrantLabel.numberOfLines = 1
         vibrantLabel.font = UIFont.systemFont(ofSize: 17.0)
         vibrantLabel.sizeToFit()
         vibrantLabel.textAlignment = .left
         vibrantLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         imageView.blurView.blurContentView?.addSubview(vibrantLabel)
-        imageView.addSubview(originalLabel)
+        vibrantLabel.snp.makeConstraints { make in
+           make.centerY.equalTo(view.snp.top).offset(39)
+        }
+//        imageView.addSubview(originalLabel)
         //add constraints using SnapKit library
         vibrantLabel.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 45, bottom: 5, right: 5))
         }
 
-        originalLabel.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.left.equalToSuperview().offset(5)
-            make.right.equalToSuperview().offset(5)
-        }
+//        originalLabel.snp.makeConstraints { make in
+//            make.bottom.equalToSuperview()
+//            make.left.equalToSuperview().offset(5)
+//            make.right.equalToSuperview().offset(5)
+//        }
 
         imageView.bringSubview(toFront: backButton)
         imageView.isUserInteractionEnabled = true

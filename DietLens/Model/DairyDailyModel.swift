@@ -21,7 +21,7 @@ public enum Meal: Int {
 
 struct DiaryDailyFood {
     var mealOfDay: Meal = .breakfast
-    var foodConsumed = [FoodDiary]()
+    var foodConsumed = [FoodDiaryModel]()
 }
 
 //struct FoodInfo {

@@ -18,7 +18,7 @@ class TextSearchViewController: UIViewController {
     private var suggestionCellIdentifier = "suggestionFoodTableViewCell"
 
     private var lastSearchTime = Date()
-    var foodResults = [FoodInfomation]()
+    var foodDiary = FoodDiaryModel()
     var isSearching = false
     var selectedImage: UIImage?
 
@@ -108,7 +108,7 @@ class TextSearchViewController: UIViewController {
 
     func loadSearchHistory() {
         let preference = UserDefaults.standard
-        var result: Any = preference.array(forKey: SharedPreferenceKey.textSearchHistoryKey)
+        let result: Any = preference.array(forKey: SharedPreferenceKey.textSearchHistoryKey)
         if result == nil {
             suggestions = result as! [TextSearchSuggestionEntity]
         } else {
@@ -137,8 +137,8 @@ extension TextSearchViewController: UITableViewDelegate {
                 //TODO show error message
                 return
             }
-            self.foodResults.removeAll()
-            self.foodResults.append(foodInformation!)
+            self.foodDiary.foodInfoList.removeAll()
+            self.foodDiary.foodInfoList.append(foodInformation!)
             self.performSegue(withIdentifier: "showTextDetail", sender: self)
         }
     }
@@ -191,12 +191,12 @@ extension TextSearchViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        let parentVC = self.parent as! AddFoodViewController
         if let dest = segue.destination as? RecognitionResultsViewController {
-            dest.recordType = "text"
-            dest.results = foodResults
+            dest.foodDiary.recordType = "text"
+            dest.foodDiary = foodDiary
             dest.whichMeal = mealType
             dest.dateTime = addFoodDate
             dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-            dest.userFoodImage = SampleImageMapper.instance.getFoodSampleImage(foodCategory: foodResults[0].category)
+            dest.userFoodImage = SampleImageMapper.instance.getFoodSampleImage(foodCategory: foodDiary.foodInfoList[0].category)
 
         }
     }

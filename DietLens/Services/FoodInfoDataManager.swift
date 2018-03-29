@@ -12,14 +12,14 @@ import SwiftyJSON
 class FoodInfoDataManager {
     static var instance = FoodInfoDataManager()
     private init() {}
-    public var foodInfoList = [FoodInfomation]()
+    public var foodInfoList = [FoodInfomationModel]()
 
-    func assembleFoodInfos(jsonObj: JSON) -> [FoodInfomation] {
+    func assembleFoodInfos(jsonObj: JSON) -> [FoodInfomationModel] {
          foodInfoList.removeAll()
          var jsonArr = jsonObj["data"]["food_info"]
          for i in 0..<jsonArr.count {
             var jsonObject = jsonArr[i]
-            var foodInfo = FoodInfomation()
+            var foodInfo = FoodInfomationModel()
 //            foodInfo.foodId = jsonObject["food_id"].stringValue
             foodInfo.foodName = jsonObject["food_name"].stringValue
             if foodInfo.foodName == "Non-food" {
@@ -35,7 +35,7 @@ class FoodInfoDataManager {
                 foodInfo.sampleImagePath = jsonObject["food_sample_url"].stringValue
             }
             for json in jsonObject["portion"].arrayValue {
-                var portion = Portion()
+                var portion = PortionModel()
                 portion.sizeValue = json["size_value"].intValue
                 portion.rank = json["rank"].intValue
                 portion.sizeUnit = json["size_unit"].stringValue
@@ -49,8 +49,8 @@ class FoodInfoDataManager {
         return foodInfoList
     }
 
-    func assembleFoodInfo(jsonObject: JSON) -> FoodInfomation {
-        var foodInfo = FoodInfomation()
+    func assembleFoodInfo(jsonObject: JSON) -> FoodInfomationModel {
+        var foodInfo = FoodInfomationModel()
         foodInfo.foodId = jsonObject["id"].stringValue
         foodInfo.foodName = jsonObject["name"].stringValue
         foodInfo.calorie = Float(jsonObject["energy"].stringValue)!
@@ -59,7 +59,7 @@ class FoodInfoDataManager {
         foodInfo.fat = jsonObject["total_fat"].stringValue
         foodInfo.category = jsonObject["subcat"].stringValue
         for json in jsonObject["portion"].arrayValue {
-            var portion = Portion()
+            var portion = PortionModel()
             portion.sizeValue = json["size_value"].intValue
             portion.rank = json["rank"].intValue
             portion.sizeUnit = json["size_unit"].stringValue
@@ -70,8 +70,8 @@ class FoodInfoDataManager {
         return foodInfo
     }
 
-    func assembleTextFoodInfo(jsonObject: JSON) -> FoodInfomation {
-        var foodInfo = FoodInfomation()
+    func assembleTextFoodInfo(jsonObject: JSON) -> FoodInfomationModel {
+        var foodInfo = FoodInfomationModel()
         foodInfo.foodId = jsonObject["id"].stringValue
         foodInfo.foodName = jsonObject["display_name"].stringValue
         foodInfo.calorie = Float(jsonObject["energy"].stringValue)!
@@ -80,7 +80,7 @@ class FoodInfoDataManager {
         foodInfo.fat = jsonObject["total_fat"].stringValue
         foodInfo.category = jsonObject["subcat"].stringValue
         for json in jsonObject["portion"].arrayValue {
-            var portion = Portion()
+            var portion = PortionModel()
             portion.sizeValue = json["size_value"].intValue
             portion.rank = json["rank"].intValue
             portion.sizeUnit = json["size_unit"].stringValue
@@ -91,8 +91,8 @@ class FoodInfoDataManager {
         return foodInfo
     }
 
-    func assembleBarcodeFoodInfo(jsonObject: JSON) -> FoodInfomation {
-        var foodInfo = FoodInfomation()
+    func assembleBarcodeFoodInfo(jsonObject: JSON) -> FoodInfomationModel {
+        var foodInfo = FoodInfomationModel()
         foodInfo.foodId = jsonObject["id"].stringValue
         foodInfo.foodName = jsonObject["name"].stringValue
         foodInfo.calorie = Float(jsonObject["calories"].stringValue)!
@@ -101,7 +101,7 @@ class FoodInfoDataManager {
         foodInfo.fat = jsonObject["total_fat"].stringValue
         foodInfo.category = "barcode"
         for json in jsonObject["portion"].arrayValue {
-            var portion = Portion()
+            var portion = PortionModel()
             portion.sizeValue = json["size_value"].intValue
             portion.rank = json["rank"].intValue
             portion.sizeUnit = json["size_unit"].stringValue
@@ -115,16 +115,16 @@ class FoodInfoDataManager {
     func assembleIngredientInfo(jsonObject: JSON) -> Ingredient {
         var ingredient = Ingredient()
         ingredient.ingredientId = jsonObject["ID"].intValue
-        ingredient.long_desc = jsonObject["Name"].stringValue
+        ingredient.longDesc = jsonObject["Name"].stringValue
         if jsonObject["Carbohydrate"].stringValue == "null" {
             ingredient.carbs = "0.0"
         } else {
             ingredient.carbs = jsonObject["Carbohydrate"].stringValue
         }
         if jsonObject["Energy"].stringValue == "null" {
-            ingredient.energy_kcal = "0.0"
+            ingredient.energyKcal = "0.0"
         } else {
-            ingredient.energy_kcal = jsonObject["Energy"].stringValue
+            ingredient.energyKcal = jsonObject["Energy"].stringValue
         }
         if jsonObject["Protein"].stringValue == "null" {
             ingredient.protein = "0.0"
@@ -133,9 +133,9 @@ class FoodInfoDataManager {
         }
         ingredient.fat = String(jsonObject["Total_fat"].doubleValue)
         if jsonObject["Sugar"].stringValue == "null" {
-            ingredient.sugars_total = "0.0"
+            ingredient.sugarsTotal = "0.0"
         } else {
-            ingredient.sugars_total = jsonObject["Sugar"].stringValue
+            ingredient.sugarsTotal = jsonObject["Sugar"].stringValue
         }
         for i in 0..<jsonObject["unit_list"].count {
             var unit = IngredientUnit()

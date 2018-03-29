@@ -155,12 +155,11 @@ class CameraSessionManager {
             let videoInput = try? AVCaptureDeviceInput(device: device) else {
                 return false
         }
-
         // Set autofocus
         if device.isFocusModeSupported(.continuousAutoFocus),
             (try? device.lockForConfiguration()) != nil {
                 device.focusMode = .continuousAutoFocus
-                device.unlockForConfiguration()
+            device.unlockForConfiguration()
         }
 
         guard session.canAddInput(videoInput) else {
@@ -170,6 +169,40 @@ class CameraSessionManager {
         session.addInput(videoInput)
         self.videoInput = videoInput
         return true
+    }
+
+    func pinch(pinch: UIPinchGestureRecognizer) {
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
+            let videoInput = try? AVCaptureDeviceInput(device: device) else {
+                return
+        }
+        var vZoomFactor = pinch.scale
+        var error: NSError!
+        let maxZoomFactor = device.activeFormat.videoMaxZoomFactor
+        let pinchOutVelocityDividerFactor: CGFloat = 35.0// bigger -> slower
+        let pinchInVelocityDividerFactor: CGFloat = 25.0
+        do {
+            try device.lockForConfiguration()
+            defer {device.unlockForConfiguration()}
+            var desiredZoomFactor: CGFloat = 1.0
+            //set different velocity for pinch-in & pinch-out
+            if pinch.velocity > 0 {
+                desiredZoomFactor = device.videoZoomFactor + atan2(pinch.velocity, pinchOutVelocityDividerFactor)
+            } else {
+                desiredZoomFactor = device.videoZoomFactor + atan2(pinch.velocity, pinchInVelocityDividerFactor)
+            }
+            //pinch velocity
+            device.videoZoomFactor = max(1.0, min(desiredZoomFactor, maxZoomFactor))
+//            if (vZoomFactor <= device.activeFormat.videoMaxZoomFactor) {
+//                device.videoZoomFactor += (vZoomFactor-1)
+//            } else {
+//                NSLog("Unable to set videoZoom: (max %f, asked %f)", device.activeFormat.videoMaxZoomFactor, vZoomFactor)
+//            }
+        } catch error as NSError {
+            NSLog("Unable to set videoZoom: %@", error.localizedDescription)
+        } catch _ {
+
+        }
     }
 }
 
