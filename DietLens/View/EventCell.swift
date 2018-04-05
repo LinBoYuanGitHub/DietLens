@@ -11,21 +11,29 @@ import UIKit
 class EventCell: UITableViewCell {
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var eventTitle: UILabel!
+    @IBOutlet weak var moreBtn: UIButton!
+    @IBOutlet weak var eventNewsTitle: UILabel!
+    @IBOutlet weak var sourceLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var healthyStack: UIStackView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     func hideTitle() {
-        eventTitle.isHidden = true
+        healthyStack.isHidden = true
     }
 
-    func setuUpCell(imagePath: String) {
-        if imagePath != "" && !imagePath.isEmpty {
+    func setuUpCell(article: Article) {
+        if article.articleImageURL != "" && !article.articleImageURL.isEmpty {
             let imageView = UIImageView()
-            imageView.af_setImage(withURL: URL(string: imagePath)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
+            imageView.af_setImage(withURL: URL(string: article.articleImageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
                 self.eventImageView.image = imageView.image
             })
+            eventNewsTitle.text = article.articleTitle
+//            SourceLabel.text = article.source
+            //TODO set the date text
         }
     }
 

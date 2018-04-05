@@ -7,21 +7,22 @@
 //
 
 import UIKit
-import PBRevealViewController
+//import PBRevealViewController
+import LGSideMenuController
 
-class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PBRevealViewControllerDelegate {
+class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var sideMenuTable: UITableView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var clickToEditLabel: UILabel!
 
 //    let labels: [String] = ["Home", "Food Diary", "Report", "Articles", "Steps Counter", "Browser"]
-//    let iconNames: [String] = ["checkmark", "Report", "ReportIcon", "ArticleIcon", "Steps", "browser"]
-//    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC", "BrowserPage"]
+//      let iconNames: [String] = ["home", "Report", "ReportIcon", "ArticleIcon", "Steps", "healthCenterIcon"]
+//      let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC", "HealthCenterVC"]
 
-    let labels: [String] = ["Home", "Food Diary", "Report", "Articles", "Steps Counter", "Health Center"]
-    let iconNames: [String] = ["home", "Report", "ReportIcon", "ArticleIcon", "Steps", "healthCenterIcon"]
-    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC", "HealthCenterVC"]
+    let labels: [String] = ["Home", "Food Diary", "Report", "Steps Counter"]
+    let iconNames: [String] = ["blackHomeIcon", "blackFoodDiaryIcon", "blackReportIcon", "blackStepCounterIcon"]
+    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "StepCounterVC"]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,12 +34,15 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.leftViewWidth = 100.0
+//        self.leftViewPresentationStyle = .scaleFromLittle
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
+        sideMenuTable.backgroundColor = UIColor.white
 
-        self.revealViewController()!.delegate = self
-        self.revealViewController()!.toggleAnimationType = .crossDissolve
-        self.revealViewController()!.leftViewShadowOpacity = 0
+//        self.revealViewController()!.delegate = self
+//        self.revealViewController()!.toggleAnimationType = .crossDissolve
+//        self.revealViewController()!.leftViewShadowOpacity = 0
         // Do any additional setup after loading the view.
         //set nickname
         let preferences = UserDefaults.standard
@@ -80,7 +84,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print ("item \(labels[indexPath.row]) was selected!")
         tableView.deselectRow(at: indexPath, animated: true)
-        self.revealViewController()!.revealLeftView()
+//        self.revealViewController()!.revealLeftView()
         DataService.instance.screenUserIsIn = 0
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var controller: UIViewController?
@@ -89,7 +93,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
 
         if labels[indexPath.row] == "Logout" {
             controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-            revealViewController()?.setMainViewController(controller!, animated: true)
+//            revealViewController()?.setMainViewController(controller!, animated: true)
             DataService.instance.screenUserIsIn = 0
         } else if labels[indexPath.row] == "Home"{
             controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
@@ -103,19 +107,19 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-    func revealController(_ revealController: PBRevealViewController, willShowLeft viewController: UIViewController) {
-        print ("user was in \(labels[DataService.instance.screenUserIsIn]) and side menu was selected!")
-
-        for i in 0..<labels.count {
-            if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: i, section: 0)) as? SideMenuCell {
-                cell.cellUnselected()
-            }
-        }
-
-        if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: DataService.instance.screenUserIsIn, section: 0)) as? SideMenuCell {
-            cell.cellSelected()
-        }
-    }
+//    func revealController(_ revealController: PBRevealViewController, willShowLeft viewController: UIViewController) {
+//        print ("user was in \(labels[DataService.instance.screenUserIsIn]) and side menu was selected!")
+//
+//        for i in 0..<labels.count {
+//            if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: i, section: 0)) as? SideMenuCell {
+//                cell.cellUnselected()
+//            }
+//        }
+//
+//        if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: DataService.instance.screenUserIsIn, section: 0)) as? SideMenuCell {
+//            cell.cellSelected()
+//        }
+//    }
     @IBAction func profileButtonPressed(_ sender: Any) {
         print("Go to profile page")
         let preferences = UserDefaults.standard

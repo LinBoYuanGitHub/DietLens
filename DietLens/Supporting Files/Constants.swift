@@ -26,8 +26,9 @@ struct ServerConfig {
     //testing environment
 
 //    static let baseURL = "http://dl.dietlens.com:8000/dl/v1"
-//    static let baseURL = "http://47.74.189.175:8001/dl/v1"
-    static let baseURL = "http://172.29.32.226:8001/dl/v1"
+    static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
+//    static let baseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
+//    static let baseURL = "http://172.29.32.226:8001/dl/v1"
     static let userURL = baseURL + "/users"
     static let userLoginURL = baseURL + "/login/"
     static let getUUidURL = baseURL + "/anonymous/"
@@ -38,8 +39,8 @@ struct ServerConfig {
     static let acctForgetPwEmailVerifURL = baseURL + "/accounts/verification/"
     static let acctForgetPwResetURL = baseURL + "/accounts/set-password/"
 
-    static let articleURL = baseURL + "/article"
-    static let eventURL = baseURL + "/event/"
+    static let articleURL = "http://47.88.223.32:8001/dl/v1" + "/article"
+    static let eventURL = "http://47.88.223.32:8001/dl/v1" + "/event/"
 //    static let imageUploadURL = baseURL + "/process"
     static let imageUploadURL = baseURL + "/image-search/"
     static let foodDiaryURL = baseURL + "/healthlog/diet/"
@@ -69,4 +70,9 @@ struct RecordType {
     static let RecordByBarcode = "barcode"
     static let RecordByText = "text"
     static let RecordByCustomized = "customized"
+}
+
+struct ArticleType {
+    static let ARTICLE = "article"
+    static let EVENT = "event"
 }

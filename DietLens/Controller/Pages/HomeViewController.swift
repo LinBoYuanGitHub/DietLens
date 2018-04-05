@@ -7,60 +7,44 @@
 //
 
 import UIKit
-import PBRevealViewController
+//import PBRevealViewController
 import RealmSwift
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ArticleCollectionCellDelegate {
+class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
+    @IBOutlet weak var homeTitleBar: UINavigationItem!
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
     @IBOutlet weak var newsFeedTable: UITableView!
     @IBOutlet weak var fatsProgressBar: HomeProgressView!
     @IBOutlet weak var proteinProgressBar: HomeProgressView!
     @IBOutlet weak var carbohydrateProgressBar: HomeProgressView!
+    //index to mark article/event
     var whichArticleIndex = 0
+    var whichEventIndex = 0
+    //article Type
+    var articleType = ArticleType.ARTICLE
 
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var carboLabel: UILabel!
 
     @IBOutlet weak var headerView: UIView!
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ArticleDataManager.instance.eventList.count+1
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedRow") as? NewsFeedCell {
-                cell.setupNewsArticleRow(articles: ArticleDataManager.instance.articleList, whichVCisDelegate: self)
-                cell.selectionStyle = .none
-                return cell
-            }
-        } else {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "otherFeedRow") as? EventCell {
-                cell.selectionStyle = .none
-                cell.setuUpCell(imagePath: ArticleDataManager.instance.eventList[indexPath.row-1].articleImageURL)
-                if indexPath.row != 1 {
-                    cell.hideTitle()
-                }
-                return cell
-            }
-        }
-
-        return UITableViewCell()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         newsFeedTable.dataSource = self
         newsFeedTable.delegate = self
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
-
-        sideMenuButton.target = self.revealViewController()
-        sideMenuButton.action = #selector(PBRevealViewController.revealLeftView)
-        revealViewController()?.leftViewBlurEffectStyle = .light
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        //change statusbarcolor
+//        self.navigationItem.leftBarButtonItem = sideMenuButton
+//        UINavigationBar.appearance().shadowImage = UIImage()
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//        UINavigationBar.appearance().titleTextAttributes = [
+//            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
+//        sideMenuButton.target = self.openLeftMenu()
+//        sideMenuButton.action = #selector(openLeftMenu)
+//        revealViewController()?.leftViewBlurEffectStyle = .light
 //        newsFeedTable.estimatedRowHeight = 240
 //        newsFeedTable.rowHeight = UITableViewAutomaticDimension
         self.fatsProgressBar.progress = 0.0
@@ -68,11 +52,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.carbohydrateProgressBar.progress = 0.0
         // Do any additional setup after loading the view.
         newsFeedTable.tableHeaderView = headerView
+        //set up tableview Height
+        newsFeedTable.tableHeaderView?.fs_height = 198
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getDailyAccumulateCPF()
@@ -125,20 +112,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return CGFloat(240)
-        } else if indexPath.row == 1 {
-            return CGFloat(320)
-        } else {
-            return CGFloat(300)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 0)
-    }
-
     @IBAction func presentCamera(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
         guard let vc = storyboard.instantiateInitialViewController()
@@ -152,14 +125,90 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func didPressArticle(_ indexOfArticleList: Int) {
+        articleType = ArticleType.ARTICLE
         whichArticleIndex = indexOfArticleList
         performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? SingleArticleViewController {
-            let article: Article = ArticleDataManager.instance.articleList[whichArticleIndex]
-            dest.articleData = article
+            if articleType == ArticleType.ARTICLE {
+                dest.articleData = ArticleDataManager.instance.articleList[whichArticleIndex]
+            } else {
+                dest.articleData = ArticleDataManager.instance.eventList[whichEventIndex]
+            }
+        }
+        if let dest = segue.destination as? ArticleViewController {
+            dest.articleType = self.articleType
         }
     }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return CGFloat(220)
+        } else if indexPath.row == 1 {
+            return CGFloat(310)
+        } else {
+            return CGFloat(275)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 0)
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ArticleDataManager.instance.eventList.count + 1
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 { //first collectionView disable interaction
+            return
+        }
+        //navigate to article page
+        articleType = ArticleType.EVENT
+        whichEventIndex = indexPath.row - 1
+        performSegue(withIdentifier: "presentArticlePage", sender: self)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "newsFeedRow") as? NewsFeedCell {
+                if cell.moreBtn != nil {
+                    cell.moreBtn.addTarget(self, action: #selector(performSegueToArticleList), for: .touchUpInside)
+                }
+                cell.setupNewsArticleRow(articles: ArticleDataManager.instance.articleList, whichVCisDelegate: self)
+                cell.selectionStyle = .none
+                return cell
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "otherFeedRow") as? EventCell {
+                cell.selectionStyle = .none
+                if cell.moreBtn != nil {
+                     cell.moreBtn.addTarget(self, action: #selector(performSegueToEventList), for: .touchUpInside)
+                }
+                cell.setuUpCell(article: ArticleDataManager.instance.eventList[indexPath.row-1])
+                if indexPath.row != 1 {
+                    cell.hideTitle()
+                }
+                return cell
+            }
+        }
+
+        return UITableViewCell()
+    }
+
+    @objc func performSegueToArticleList() {
+        articleType = ArticleType.ARTICLE
+        performSegue(withIdentifier: "showArticleList", sender: self)
+    }
+
+    @objc func performSegueToEventList() {
+        articleType = ArticleType.EVENT
+        performSegue(withIdentifier: "showArticleList", sender: self)
+    }
+
 }

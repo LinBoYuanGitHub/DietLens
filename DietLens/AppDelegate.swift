@@ -282,3 +282,9 @@ extension AppDelegate: MessagingDelegate {
     }
     // [END ios_10_data_message]
 }
+
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+}

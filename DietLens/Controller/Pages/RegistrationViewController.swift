@@ -63,13 +63,21 @@ class RegistrationViewController: UIViewController {
                     preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
                     //to main page
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "mainSlideMenuVC") as! MainSlideMenuViewController
+                    let vc = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
                     self.present(vc, animated: true, completion: nil)
+                    //to profile page
+//                    self.performSegue(withIdentifier: "toProfilePage", sender: nil)
                 } else {
                     print("register failed")
                     AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
                 }
             })
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? ProfileViewController {
+
         }
     }
 

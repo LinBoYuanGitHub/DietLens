@@ -14,9 +14,13 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var TFGender: UITextField!
     @IBOutlet weak var TFHeight: UITextField!
     @IBOutlet weak var TFWeight: UITextField!
+    @IBOutlet weak var TFAge: UITextField!
 
     var genderPickerView: UIPickerView!
+    var birthDayPickerView: UIDatePicker!
     var genderList = ["male", "female"]
+
+    var isRegister = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +34,22 @@ class ProfileViewController: UIViewController {
         TFWeight.delegate = self
         TFWeight.keyboardType = .decimalPad
         TFWeight.tag = 4
+        TFAge.keyboardType = .numberPad
+        TFAge.delegate = self
+        TFAge.tag = 5
         //set up gender picker
         setUpPickerView()
         let genderPickerToolBar = setUpPickerToolBar(textField: TFGender)
         let heightPickerToolBar = setUpPickerToolBar(textField: TFHeight)
         let weightPickerToolBar = setUpPickerToolBar(textField: TFWeight)
+        let agePickerToolBar =
+            setUpPickerToolBar(textField: TFAge)
         TFGender.inputView = genderPickerView
+        TFAge.inputView = birthDayPickerView
         TFGender.inputAccessoryView = genderPickerToolBar
         TFHeight.inputAccessoryView = heightPickerToolBar
         TFWeight.inputAccessoryView = weightPickerToolBar
+        TFAge.inputAccessoryView = agePickerToolBar
         //load profie
         let preferences = UserDefaults.standard
         let key = "userId"
@@ -49,6 +60,7 @@ class ProfileViewController: UIViewController {
             if userProfile != nil {
                 self.TFWeight.text = String(format: "%.1f", userProfile!.weight)
                 self.TFHeight.text = String(format: "%.1f", userProfile!.height)
+                self.TFAge.text = "\(userProfile!.age)"
 //                self.TFWeight.text = "\(userProfile!.weight)"
 //                self.TFHeight.text = "\(userProfile!.height)"
             }
@@ -70,6 +82,17 @@ class ProfileViewController: UIViewController {
         genderPickerView.delegate = self
         genderPickerView.showsSelectionIndicator = true
         genderPickerView.accessibilityViewIsModal = true
+        birthDayPickerView = UIDatePicker()
+        birthDayPickerView.datePickerMode = .date
+        birthDayPickerView.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+    }
+
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let componenets = Calendar.current.dateComponents([.year, .month, .day], from: sender.date)
+        if let day = componenets.day, let month = componenets.month, let year = componenets.year {
+            TFAge.text = "\(year)-\(month)-\(day)"
+//            print("\(day) \(month) \(year)")
+        }
     }
 
     func setUpPickerToolBar(textField: UITextField) -> UIToolbar {
@@ -95,7 +118,9 @@ class ProfileViewController: UIViewController {
         } else if TFHeight.isFirstResponder {
             TFWeight.becomeFirstResponder()
         } else if TFWeight.isFirstResponder {
-            TFWeight.resignFirstResponder()
+            TFAge.becomeFirstResponder()
+        } else {
+            TFAge.resignFirstResponder()
             keyboardWillHide()
         }
 
@@ -138,7 +163,7 @@ class ProfileViewController: UIViewController {
             //TODO alert fill incomplete warning
             return
         }
-        APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!) { (isSuccess) in
+        APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!, age: TFAge.text!) { (isSuccess) in
             if isSuccess {
                 self.dismiss(animated: true, completion: nil)
             } else {
@@ -177,6 +202,8 @@ extension ProfileViewController: UITextFieldDelegate {
             TFHeight.becomeFirstResponder()
         } else if textField == TFHeight {
             TFWeight.becomeFirstResponder()
+        } else if textField == TFAge {
+            TFAge.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
             keyboardWillHide()
@@ -185,7 +212,7 @@ extension ProfileViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if (textField == TFHeight || textField == TFWeight ) {
+        if (textField == TFHeight || textField == TFWeight || textField == TFAge ) {
             keyboardWillShow()
         }
         return true

@@ -20,6 +20,7 @@
 		3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C47620440F1500DFA459 /* ConfigVariable.swift */; };
 		3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */; };
 		3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436636206CC44B0089C63A /* ReportStatisticController.swift */; };
+		3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436638206F7ACF0089C63A /* NewsEventCell.swift */; };
 		3F43DAC61FE7963700A3685A /* ReportChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC51FE7963700A3685A /* ReportChartViewController.swift */; };
 		3F43DAC81FE79BC400A3685A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC71FE79BC400A3685A /* GraphView.swift */; };
 		3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */; };
@@ -176,6 +177,7 @@
 		3F25C47620440F1500DFA459 /* ConfigVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigVariable.swift; sourceTree = "<group>"; };
 		3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCountingEntity.swift; sourceTree = "<group>"; };
 		3F436636206CC44B0089C63A /* ReportStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatisticController.swift; sourceTree = "<group>"; };
+		3F436638206F7ACF0089C63A /* NewsEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEventCell.swift; sourceTree = "<group>"; };
 		3F43DAC51FE7963700A3685A /* ReportChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChartViewController.swift; sourceTree = "<group>"; };
 		3F43DAC71FE79BC400A3685A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */,
 				3F14CC43201854D40032CC77 /* HistoryFoodDiaryCell.swift */,
 				3F4906EE2020387D00D1F388 /* EventCell.swift */,
+				3F436638206F7ACF0089C63A /* NewsEventCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1081,6 +1084,7 @@
 				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,
 				3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
+				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,

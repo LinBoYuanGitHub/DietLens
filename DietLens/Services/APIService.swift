@@ -209,7 +209,7 @@ class APIService {
 
     public func getArticleList(completion: @escaping ([Article]?) -> Void) {
             Alamofire.request(
-                URL(string: ServerConfig.articleURL+"/?type=1")!,
+                URL(string: ServerConfig.articleURL+"/?type=0")!,
                 method: .get)
                 .validate()
                 .responseJSON { (response) -> Void in
@@ -236,12 +236,12 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("Get articles failed due to : \(String(describing: response.result.error))")
+                    print("Get events failed due to : \(String(describing: response.result.error))")
                     completion(nil)
                     return
                 }
                 guard let articles = response.result.value else {
-                    print("Get articles failed due to : Server Data Type Error")
+                    print("Get events failed due to : Server Data Type Error")
                     completion(nil)
                     return
                 }
@@ -506,11 +506,11 @@ class APIService {
         }
     }
 
-    public func updateProfile(userId: String, name: String, gender: Int, height: Double, weight: Double, completion: @escaping (Bool) -> Void) {
+    public func updateProfile(userId: String, name: String, gender: Int, height: Double, weight: Double, age: String, completion: @escaping (Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.userURL + "/" + userId + "/profile/")!,
             method: .put,
-            parameters: ["name": name, "gender": gender, "height": height, "weight": weight],
+            parameters: ["name": name, "gender": gender, "height": height, "weight": weight, "age": age],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()

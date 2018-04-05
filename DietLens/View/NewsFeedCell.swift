@@ -11,6 +11,7 @@ import AlamofireImage
 
 class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var newsArticleRow: UICollectionView!
+    @IBOutlet weak var moreBtn: UIButton!
     weak var pressArticleDelegate: ArticleCollectionCellDelegate?
 
     var listOfArticles = [Article]()

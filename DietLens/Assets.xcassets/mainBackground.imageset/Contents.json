@@ -2,25 +2,22 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "38E67050-C0EB-44BA-83FE-2BFE5913FBAB@1x.png",
+      "filename" : "9CF627CF-AAAB-4782-9C04-D980655C0B41@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "38E67050-C0EB-44BA-83FE-2BFE5913FBAB@2x.png",
+      "filename" : "9CF627CF-AAAB-4782-9C04-D980655C0B41@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "38E67050-C0EB-44BA-83FE-2BFE5913FBAB@3x.png",
+      "filename" : "9CF627CF-AAAB-4782-9C04-D980655C0B41@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }
