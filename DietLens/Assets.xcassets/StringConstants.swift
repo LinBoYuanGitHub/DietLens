@@ -23,5 +23,9 @@ struct StringConstants {
         static let dinner = "Dinner"
         static let snack = "Snack"
     }
+    struct navigatorTitle {
+        static let reportTitle = "Report"
+        static let dietlensTitle = "Dietlens"
+    }
 
 }

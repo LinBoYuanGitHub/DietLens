@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         portion["weightValue"] = 100
                         portion["sizeUnit"] = oldObject?["unit"]
                         portionList.append(portion)
-                        //question part
+                        //changing part
                         newObject?["quantity"] = 1
                         newObject?["selectedFoodInfoPos"] = 0
                         newObject?["selectedPortionPos"] = 0
@@ -185,7 +185,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             print("Notification settings: \(settings)")
             guard settings.authorizationStatus == .authorized else { return }
-            UIApplication.shared.registerForRemoteNotifications()
+            DispatchQueue.main.async {
+                  UIApplication.shared.registerForRemoteNotifications()
+            }
         }
     }
 
@@ -235,12 +237,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? NSDictionary {
                 if let message = alert["message"] as? String {
-                    //Do stuff
+                    //TODO notify foodDiary part to update
                     let messageDict: [String: String] = ["message": message]
                     NotificationCenter.default.post(name: .didReceiveNotification, object: nil, userInfo: messageDict)
                 }
             } else if let alert = aps["alert"] as? String {
-                //Do stuff
+                //TODO notify foodDiary part to update
                 let messageDict: [String: String] = ["message": alert]
                 NotificationCenter.default.post(name: .didReceiveNotification, object: nil, userInfo: messageDict)
             }

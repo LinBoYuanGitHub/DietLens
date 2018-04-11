@@ -27,19 +27,19 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .clear
         settings.style.buttonBarItemBackgroundColor = .clear
-        settings.style.selectedBarBackgroundColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
-        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 16)!
-        settings.style.selectedBarHeight = 5.0
+        settings.style.selectedBarBackgroundColor = .white
+        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 14)!
+        settings.style.selectedBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarItemTitleColor = .white
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
 
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .black
-            newCell?.label.textColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
+//            oldCell?.label.textColor = .white
+//            newCell?.label.textColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
         }
 
         super.viewDidLoad()

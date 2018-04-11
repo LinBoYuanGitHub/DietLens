@@ -12,52 +12,98 @@ import XLPagerTabStrip
 
 class TextInputViewController: UIViewController {
 
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var addHistoryTable: UITableView!
+    @IBOutlet weak var textSearchField: DesignableUITextField!
+    @IBOutlet weak var textSearchFilterView: UICollectionView!
+    @IBOutlet weak var textSearchTable: UITableView!
+    @IBOutlet weak var animationView: UIView!  //for the selected barItem underline effort
+    //tab item for filter the result
+    var filterItem = ["All", "Ingredient", "Side dish"]
+    //autoComplete & textSearchResult List
+    var autoCompleteTextList = [String]()
+    var searchResultList = [TextSearchSuggestionEntity]()
+//    var foodResults = [FoodInfomation]()
 
-    var historyDiaryList = [FoodDiaryModel]()
-    var selectedFoodDiary = FoodDiaryModel()
-    var foodResults = [FoodInfomation]()
     var selectedImageView: UIImage?
-    var targetPortion: Double?
     var addFoodDate: Date?
+    var selectedFoodDiary = FoodDiaryModel()
+    var currentInputStatus = TextInputStatus.autoComplete
 
-    // Should reload table when this is changed
-
-//    private var addFoodHistoryList = [FoodInfomation]()
-//
-//    private let suggestions = ["Laksa", "Chili Crab", "Chicken Rice", "Oyster Omelette"]
-//    private let suggestionCellIdentifier = "suggestionFoodTableViewCell"
-    //    private var filteredSuggesvarnvarString] {
-//        guard let searchText = textField.text else {
-//            return []
-//        }
-//        let processedSearchText = searchText.trimmingCharacters(in: .whitespaces).lowercased()
-//        guard processedSearchText.lengthOfBytes(using: .utf8) >= 2 else {
-//            return []
-//        }
-//        return suggestions.filter { $0.lowercased().contains(searchText) }
-//    }
-
-//    @IBAction func textFieldTouched(_ sender: UITextField) {
-//        performSegue(withIdentifier: "searchFood", sender: self)
-//    }
+    var isSearching = false
+    private var lastSearchTime = Date()
+    //enum for textSearch status
+    enum TextInputStatus {
+        case autoComplete
+        case textSearchResult
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addHistoryTable.delegate = self
-        addHistoryTable.dataSource = self
-        textField.delegate = self
-        loadHistoryItem()
+        textSearchField.delegate = self
+        textSearchTable.delegate = self
+        textSearchTable.dataSource = self
+        textSearchFilterView.delegate = self
+        textSearchFilterView.dataSource = self
+        loadRecentTextSearchResult()
     }
 
-    func loadHistoryItem() {
-        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
-        addHistoryTable.reloadData()
+    override func viewWillAppear(_ animated: Bool) {
+        //regist notification
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+
+    }
+
+    @objc func keyboardWasShown (notification: NSNotification) {
+        let info: NSDictionary = notification.userInfo! as NSDictionary
+        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
+        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        var contentInsets: UIEdgeInsets
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+        } else {
+            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+        }
+        textSearchTable.contentInset = contentInsets
+        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
+    }
+
+    @objc func keyboardWillBeHidden () {
+        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+
+    //GoodToHave: local storage to display recent search top2 item
+    func loadRecentTextSearchResult() {
+//        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
+        textSearchTable.reloadData()
+    }
+
+    @IBAction func textFieldChanged(_ sender: UITextField) {
+        //load suggestion from net, set time
+        currentInputStatus = .autoComplete
+        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
+            lastSearchTime = Date()
+            performTextSearch()
+        }
+    }
+
+    func performTextSearch() {
+        if isSearching {
+            APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchAutocompleteURL)
+        }
+        isSearching = true
+        let autoCompleteText = textSearchField.text
+        APIService.instance.autoCompleteText(keywords: autoCompleteText!) { (textResults) in
+            self.isSearching = false
+            if textResults != nil {
+                self.autoCompleteTextList = textResults!
+                self.textSearchTable.reloadData()
+            }
+        }
     }
 
 }
 
+//block to handle textSearchResult&autoComplete dataSource
 extension TextInputViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,19 +111,80 @@ extension TextInputViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyDiaryList.count
+        if currentInputStatus == .autoComplete {
+            return autoCompleteTextList.count
+        } else if currentInputStatus == .textSearchResult {
+            return searchResultList.count
+        }
+        return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //fill in tableview
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "addFoodHistoryCellIdentifier") as? HistoryFoodDiaryCell else {
-            return UITableViewCell()
+        if currentInputStatus == .autoComplete {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell") as? AutoCompleteCell else {
+                return UITableViewCell()
+            }
+            let searchText = autoCompleteTextList[indexPath.row]
+            cell.setUpCell(text: searchText)
+            //cell to adapt the autoComplete text
+            return cell
+        } else if currentInputStatus == .textSearchResult {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
+                return UITableViewCell()
+            }
+            let result  = searchResultList[indexPath.row]
+            //cell to adapt the searchResult
+            cell.setUpCell(textResultEntity: result)
+            return cell
         }
-        let foodDiary  = historyDiaryList[indexPath.row]
-        cell.setUpCell(imagePath: foodDiary.imagePath, foodNameString: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].foodName, foodCal: String(round(foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie)))
-        return cell
+        return UITableViewCell()
     }
 
+}
+
+//block to handle tableCell ui attribute for textSearchResult&autoComplete
+extension TextInputViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if currentInputStatus == .autoComplete {
+            //change the currentStatus,fill in textSearch content,
+            textSearchField.text = autoCompleteTextList[indexPath.row]
+            APIService.instance.getFoodSearchResult(keywords: autoCompleteTextList[indexPath.row], completion: { (textResultList) in
+                if textResultList == nil {
+                    //handle search failed error
+                    return
+                }
+                self.searchResultList = textResultList!
+                self.currentInputStatus = .textSearchResult
+                self.textSearchTable.reloadData()
+            })
+        } else if currentInputStatus == .textSearchResult {
+            //loading to get food text search detail
+            let textSearchEntity = searchResultList[indexPath.row]
+            APIService.instance.getFoodSearchDetailResult(foodId: textSearchEntity.id, completion: { (_) in
+                    //perform segue to foodDetailPage
+
+            })
+        }
+//        selectedFoodDiary = historyDiaryList[indexPath.row]
+        // Row selected, so set textField to relevant value, hide tableView
+        //calculation for individual nutrition
+//        selectedImageView = (tableView.cellForRow(at: indexPath) as! HistoryFoodDiaryCell).foodDiaryImage.image
+        //perform segue
+//        performSegue(withIdentifier: "historyToResult", sender: self)
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == self.textSearchTable {
+            return 60
+        }
+        return 0
+    }
 }
 
 extension TextInputViewController: UITextFieldDelegate {
@@ -87,34 +194,6 @@ extension TextInputViewController: UITextFieldDelegate {
         return true
     }
 
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        performSegue(withIdentifier: "searchFood", sender: self)
-        return false
-    }
-
-}
-
-extension TextInputViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedFoodDiary = historyDiaryList[indexPath.row]
-        // Row selected, so set textField to relevant value, hide tableView
-        //calculation for individual nutrition
-        selectedImageView = (tableView.cellForRow(at: indexPath) as! HistoryFoodDiaryCell).foodDiaryImage.image
-        //perform segue
-        performSegue(withIdentifier: "historyToResult", sender: self)
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.0
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView == self.addHistoryTable {
-            return 60
-        }
-        return 0
-    }
 }
 
 extension TextInputViewController: IndicatorInfoProvider {
@@ -149,4 +228,31 @@ extension TextInputViewController: IndicatorInfoProvider {
             dest.mealType = parentVC.mealType
         }
     }
+}
+
+extension TextInputViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //All,Ingredient,SideDish
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //UILabel with underLine
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "textSearchCollectionCell", for: indexPath) as? CollectionTextFilterCell {
+            cell.setUpCell(filterText: filterItem[indexPath.row])
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //switch collectonView underline, refresh list
+        let destX = collectionView.cellForItem(at: indexPath)?.center.x
+        UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.animationView.center.x = destX!
+        }) { (_) in
+
+        }
+    }
+
 }

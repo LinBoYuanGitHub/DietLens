@@ -38,7 +38,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     private var recordType: String = RecordType.RecordByImage
 
-    @IBOutlet weak var focusViewImg: UIImageView!
+//    @IBOutlet weak var focusViewImg: UIImageView!
 
     let locationManager = CLLocationManager()
     var latitude = 0.0
@@ -106,7 +106,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewView.videoPreviewLayer.frame.size = previewContainer.frame.size
-        previewContainer.bringSubview(toFront: focusViewImg)
+//        previewContainer.bringSubview(toFront: focusViewImg)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -193,7 +193,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             }
             self.hideReview()
         }) { (progress) in
-            //TODO update progress dialog to show progress
             self.uploadPercentageLabel.text = "\(progress)%"
         }
     }
@@ -274,12 +273,12 @@ extension CameraViewController: CameraViewControllerDelegate {
         case .photo:
             activeButton = photoButton
             capturePhotoButton.isHidden = false
-            focusViewImg.isHidden = false
+//            focusViewImg.isHidden = false
             removeBarScannerLine()
         case .barcode:
             activeButton = barcodeButton
             capturePhotoButton.isHidden = true
-            focusViewImg.isHidden = true
+//            focusViewImg.isHidden = true
             addBarScannerLine()
         }
 
@@ -290,10 +289,10 @@ extension CameraViewController: CameraViewControllerDelegate {
             button?.isEnabled = true
             button?.backgroundColor = .clear
         }
-
+//        activeButton.setTitleColor(UIColor(red: 242, green: 64, blue: 93, alpha: 1), for: .disabled)
         activeButton.isEnabled = false
-        activeButton.backgroundColor = UIColor(red: 1.00, green: 0.31, blue: 0.31, alpha: 0.7)
-        activeButton.layer.cornerRadius = 5
+//        activeButton.backgroundColor = UIColor(red: 1.00, green: 0.31, blue: 0.31, alpha: 0.7)
+//        activeButton.layer.cornerRadius = 5
     }
 
     func onCameraInput(isAvailable: Bool) {

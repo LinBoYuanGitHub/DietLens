@@ -53,7 +53,13 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         // Do any additional setup after loading the view.
         newsFeedTable.tableHeaderView = headerView
         //set up tableview Height
-        newsFeedTable.tableHeaderView?.fs_height = 198
+        newsFeedTable.tableHeaderView?.fs_height = CGFloat(Dimen.NewsFeedTableHeight)
+
+    }
+
+    @IBAction func onDetailClick(_ sender: Any) {
+        //segue to nutrition page
+        performSegue(withIdentifier: "toDailyNutrtionDetail", sender: nil)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -66,6 +72,13 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.reloadData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //setUp title
+        self.navigationController?.navigationBar.topItem?.title = StringConstants.navigatorTitle.dietlensTitle
+    }
+
+    // calculate Nutrition Data & put into homePage
     func getDailyAccumulateCPF() {
         var foodDiaryList = [FoodDiaryModel]()
         foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: DateUtil.formatGMTDateToString(date: Date()))!
@@ -74,7 +87,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         var dailyFat: Float = 0
 
         for foodDiary in foodDiaryList {
-            //quantity * weight/100
+            //quantity * weight divide 100g to get the multiply ratio
             let ratio = foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightValue * (foodDiary.quantity/100)
             dailyCarb += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate as NSString).floatValue * Float(ratio)//standard 300
             dailyProtein += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein as NSString).floatValue * Float(ratio) //standard 100
@@ -148,11 +161,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return CGFloat(220)
+            return CGFloat(Dimen.NewsArticleCollectionHeight)
         } else if indexPath.row == 1 {
-            return CGFloat(310)
+            return CGFloat(Dimen.EventsFirstRowHeight)
         } else {
-            return CGFloat(275)
+            return CGFloat(Dimen.EventsRowHeight)
         }
     }
 

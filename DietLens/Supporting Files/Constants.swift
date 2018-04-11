@@ -27,8 +27,8 @@ struct ServerConfig {
 
 //    static let baseURL = "http://dl.dietlens.com:8000/dl/v1"
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
-//    static let baseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
-//    static let baseURL = "http://172.29.32.226:8001/dl/v1"
+    static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
+    static let labDeskTopURL = "http://172.29.32.226:8001/dl/v1"
     static let userURL = baseURL + "/users"
     static let userLoginURL = baseURL + "/login/"
     static let getUUidURL = baseURL + "/anonymous/"
@@ -39,14 +39,15 @@ struct ServerConfig {
     static let acctForgetPwEmailVerifURL = baseURL + "/accounts/verification/"
     static let acctForgetPwResetURL = baseURL + "/accounts/set-password/"
 
-    static let articleURL = "http://47.88.223.32:8001/dl/v1" + "/article"
-    static let eventURL = "http://47.88.223.32:8001/dl/v1" + "/event/"
+    static let articleURL = testBaseURL + "/article"
+    static let eventURL = testBaseURL + "/event/"
 //    static let imageUploadURL = baseURL + "/process"
     static let imageUploadURL = baseURL + "/image-search/"
     static let foodDiaryURL = baseURL + "/healthlog/diet/"
     static let saveStepDiaryURL = baseURL + "/healthlog/steps/"
     static let saveHealthCenterDataURL = baseURL + "/healthlog/Medical/"
-    static let foodSearchListURL = baseURL + "/text-search/"
+    static let foodSearchListURL = labDeskTopURL + "/search/results/"
+    static let foodSearchAutocompleteURL = labDeskTopURL + "/search/autocomplete/"
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
     static let feedBackURL = baseURL + "/feedback/"
@@ -75,4 +76,11 @@ struct RecordType {
 struct ArticleType {
     static let ARTICLE = "article"
     static let EVENT = "event"
+}
+
+struct Dimen {
+    static let NewsFeedTableHeight = 198
+    static let NewsArticleCollectionHeight = 220
+    static let EventsFirstRowHeight = 310
+    static let EventsRowHeight = 275
 }

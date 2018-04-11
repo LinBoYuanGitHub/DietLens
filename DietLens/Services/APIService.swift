@@ -251,6 +251,36 @@ class APIService {
         }
     }
 
+    public func autoCompleteText(keywords: String, completion: @escaping ([String]?) -> Void ) {
+        Alamofire.request(
+            URL(string: ServerConfig.foodSearchAutocompleteURL)!,
+            method: .post,
+            parameters: ["text": keywords],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get autoComplete result failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+
+                guard let searchResults = response.result.value else {
+                    print("get autoComplete result failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonArr = JSON(searchResults)["data"]
+                var resultList = [String]()
+                for i in 0..<jsonArr.count {
+                    let result = jsonArr[i].dictionaryValue["name"]?.stringValue
+                    resultList.append(result!)
+                }
+                completion(resultList)
+        }
+    }
+
     public func getFoodSearchResult(keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.foodSearchListURL)!,
