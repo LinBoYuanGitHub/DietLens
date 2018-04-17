@@ -47,6 +47,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     var pinchGestureRecognizer = UIPinchGestureRecognizer()
 
+    //passing parameter
+    var displayList = [DisplayFoodCategory]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         hideReview()
@@ -91,7 +94,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             break
             // Disable location features or quit
 //            disableMyLocationBasedFeatures()
-
         case .authorizedWhenInUse:
             // Enable basic location features
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -165,7 +167,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             self.loadingScreen.alpha = 1
         }, completion: nil)
         //resize&compress image process
-        let size = CGSize(width: 500, height: 500)
+        let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         chosenImageView.image!.draw(in: rect)
@@ -176,25 +178,43 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         let key = "userId"
         let userId = preferences.string(forKey: key)
         //upload image to server
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (imageId, results) in
+        APIService.instance.uploadImageForMatrix(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (results) in
             // upload result and callback
-            self.imageId = imageId
             self.capturePhotoButton.isEnabled = true
             self.loadingScreen.alpha = 0
             if results == nil || results?.count == 0 {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
             } else {
-                self.foodDiary.foodInfoList.removeAll()
-                for result in results! {
-                    self.foodDiary.foodInfoList.append(result)
-                }
+                self.displayList.removeAll()
+                self.displayList = results!
                 self.recordType = RecordType.RecordByImage
-                self.performSegue(withIdentifier: "test", sender: self)
+                //                self.performSegue(withIdentifier: "test", sender: self)
+                self.performSegue(withIdentifier: "showResultPage", sender: self)
             }
             self.hideReview()
         }) { (progress) in
             self.uploadPercentageLabel.text = "\(progress)%"
         }
+//        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (imageId, results) in
+//            // upload result and callback
+//            self.imageId = imageId
+//            self.capturePhotoButton.isEnabled = true
+//            self.loadingScreen.alpha = 0
+//            if results == nil || results?.count == 0 {
+//                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+//            } else {
+//                self.foodDiary.foodInfoList.removeAll()
+//                for result in results! {
+//                    self.foodDiary.foodInfoList.append(result)
+//                }
+//                self.recordType = RecordType.RecordByImage
+////                self.performSegue(withIdentifier: "test", sender: self)
+//                self.performSegue(withIdentifier: "showResultPage", sender: self)
+//            }
+//            self.hideReview()
+//        }) { (progress) in
+//            self.uploadPercentageLabel.text = "\(progress)%"
+//        }
     }
 
     @IBAction func rejectImage(_ sender: UIButton) {
@@ -442,7 +462,7 @@ extension CameraViewController {
 
     private func showReview(image: UIImage) {
         chosenImageView.image = image
-        chosenImageView.contentMode = .scaleAspectFit
+        chosenImageView.contentMode = .scaleToFill
         chosenImageView.isHidden = false
         reviewImagePalette.isHidden = false
     }
@@ -454,17 +474,25 @@ extension CameraViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let parentVC = self.parent as! AddFoodViewController
-        if let dest = segue.destination as? RecognitionResultsViewController {
-            dest.foodDiary = foodDiary
-            dest.imageId = imageId
-            dest.dateTime = parentVC.addFoodDate
-            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
-            dest.whichMeal = parentVC.mealType
-            dest.foodDiary.recordType = self.recordType
+//        if let dest = segue.destination as? RecognitionResultsViewController {
+//            dest.foodDiary = foodDiary
+//            dest.imageId = imageId
+//            dest.dateTime = parentVC.addFoodDate
+//            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
+//            dest.whichMeal = parentVC.mealType
+//            dest.foodDiary.recordType = self.recordType
+//            if recordType == RecordType.RecordByImage {
+//                dest.userFoodImage = chosenImageView.image!
+//            } else if recordType == RecordType.RecordByBarcode {
+//                dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
+//            }
+//        }
+        if let dest  = segue.destination as? RecognitionResultViewController {
             if recordType == RecordType.RecordByImage {
-                dest.userFoodImage = chosenImageView.image!
+                dest.cameraImage = chosenImageView.image!
+                dest.foodCategoryList = displayList
             } else if recordType == RecordType.RecordByBarcode {
-                dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
+                dest.cameraImage = #imageLiteral(resourceName: "barcode_sample_icon")
             }
         }
     }

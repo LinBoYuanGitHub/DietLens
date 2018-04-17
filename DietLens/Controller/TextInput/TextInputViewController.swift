@@ -30,6 +30,9 @@ class TextInputViewController: UIViewController {
 
     var isSearching = false
     private var lastSearchTime = Date()
+    //passed parameter
+    var cameraImage: UIImage?
+
     //enum for textSearch status
     enum TextInputStatus {
         case autoComplete

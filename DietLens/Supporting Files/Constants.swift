@@ -52,6 +52,7 @@ struct ServerConfig {
     static let barcodeSearchURL = baseURL + "/barcode-search/"
     static let feedBackURL = baseURL + "/feedback/"
     static let NotificationURL = baseURL + "/notification"
+    static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 }
 
 struct SharedPreferenceKey {

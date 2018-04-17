@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class APIService {
     static var instance = APIService()
+
     private init() {
 
     }
@@ -37,7 +38,7 @@ class APIService {
                 }
                 let jsonObj = JSON(value)
                 if jsonObj["status"].stringValue == "HTTP_200_OK"{
-                     let userId = jsonObj["data"]["id"].stringValue
+                    let userId = jsonObj["data"]["id"].stringValue
                     completion(userId)
                 } else {
                     completion("")
@@ -418,6 +419,33 @@ class APIService {
                     let barcodeScanResult = FoodInfoDataManager.instance.assembleBarcodeFoodInfo(jsonObject: jsonObject)
                     completion(barcodeScanResult)
                 }
+        }
+    }
+
+    public func uploadImageForMatrix(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping ( [DisplayFoodCategory]?) -> Void, progressCompletion: @escaping (Int) -> Void) {
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
+        }, to: ServerConfig.uploadRecognitionURL) {
+            (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.uploadProgress(closure: { (progress) in
+                    #if DEBUG
+                        print("Upload Progress: \(progress.fractionCompleted)")
+                        progressCompletion(Int(progress.fractionCompleted*100))
+                    #endif
+                })
+                upload.responseJSON { response in
+                    let resultObj = JSON(response.value)
+                    let resultList = MockedUpFoodData.instance.assembleFoodInfoData(data: resultObj["data"])
+//                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
+//                    let imageId = resultObj["data"]["id"].intValue
+                    completion(resultList)
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+                completion(nil)
+            }
         }
     }
 

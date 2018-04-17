@@ -9,24 +9,21 @@
 import UIKit
 
 class FoodReportViewController: UIViewController {
-    
-    @IBOutlet weak var foodReportTextView:UITextView!
-    @IBOutlet weak var reportedImage:UIImageView!
-    var sourceImage:UIImage!
-    
+
+    @IBOutlet weak var foodReportTextView: UITextView!
+    @IBOutlet weak var reportedImage: UIImageView!
+    var sourceImage: UIImage!
+
     override func viewDidLoad() {
         reportedImage.image = sourceImage
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = StringConstants.navigatorTitle.reportTitle
     }
-    
-    func uploadReportImageToServer(){
-        
+
+    func uploadReportImageToServer() {
+
     }
-    
-    
-    
-    
+
 }
