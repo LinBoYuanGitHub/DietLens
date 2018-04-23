@@ -36,6 +36,10 @@ class RecognitionResultViewController: UIViewController {
         foodCategory.dataSource = self
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+
     func mockUpCategoryData() {
         foodCategoryList = MockedUpFoodData.instance.createMockedUpFoodData()
     }
@@ -45,25 +49,27 @@ class RecognitionResultViewController: UIViewController {
     }
 
     @IBAction func toTextSearchPage(_ sender: Any) {
-        performSegue(withIdentifier: "toTextSearchPage", sender: nil)
+//        performSegue(withIdentifier: "toTextSearchPage", sender: nil)
+        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
+            dest.addFoodDate = recordDate
+            dest.cameraImage = cameraImage
+            if let navigator = self.navigationController {
+                //clear controller to Bottom & add foodCalendar Controller
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+         self.navigationController?.popViewController(animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if let dest = segue.destination as? UINavigationController {//FoodInfoViewController
-//            dest.addedFood = selectedFoodInfo
-//            dest.addFoodDate = recordDate
-            let foodInfoVC =  dest.viewControllers.first as! FoodInfoViewController
-            foodInfoVC.userFoodImage = cameraImage
-        }
-        if let dest = segue.destination as? TextInputViewController {
-            //text search
-            dest.addFoodDate = recordDate
-            dest.cameraImage = cameraImage
+        let navVC = segue.destination as? UINavigationController
+        if let dest = navVC?.viewControllers.first as? FoodInfoViewController {
+            dest.userFoodImage = cameraImage
+            dest.isAccumulatedDiary = false
+            dest.foodId = selectedFoodInfo.id
         }
     }
 
@@ -84,6 +90,16 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //jump to selected foodItem add FoodPage
+        selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
+//        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+//            dest.userFoodImage = cameraImage
+//            dest.isAccumulatedDiary = false
+//            dest.foodId = selectedFoodInfo.id
+//            if let navigator = self.navigationController {
+//                navigator.pushViewController(dest, animated: true)
+//
+//            }
+//        }
         performSegue(withIdentifier: "toRecognizedFoodPage", sender: nil)
     }
 

@@ -75,6 +75,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //setUp title
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.navigatorTitle.dietlensTitle
     }
 
@@ -126,10 +127,12 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     }
 
     @IBAction func presentCamera(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
-        guard let vc = storyboard.instantiateInitialViewController()
-            else { return }
-        present(vc, animated: true, completion: nil)
+        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
+            if let navigator = self.navigationController {
+                //clear controller to Bottom & add foodCalendar Controller
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -138,9 +141,10 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     }
 
     func didPressArticle(_ indexOfArticleList: Int) {
-        articleType = ArticleType.ARTICLE
-        whichArticleIndex = indexOfArticleList
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+//        articleType = ArticleType.ARTICLE
+//        whichArticleIndex = indexOfArticleList
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

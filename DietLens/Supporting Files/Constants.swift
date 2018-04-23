@@ -28,7 +28,7 @@ struct ServerConfig {
 //    static let baseURL = "http://dl.dietlens.com:8000/dl/v1"
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
-    static let labDeskTopURL = "http://172.29.32.226:8001/dl/v1"
+    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
     static let userURL = baseURL + "/users"
     static let userLoginURL = baseURL + "/login/"
     static let getUUidURL = baseURL + "/anonymous/"
@@ -53,6 +53,13 @@ struct ServerConfig {
     static let feedBackURL = baseURL + "/feedback/"
     static let NotificationURL = baseURL + "/notification"
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
+    static let uploadImageKeyURL = "http://172.29.33.83:8003/webHook"
+    //foodDiary CRUD
+    static let foodDiaryOperationURL = labDeskTopURL + "/foodinfo/"
+    static let foodDiaryDietLogs = labDeskTopURL + "/dietlogs/"
+    static let foodDiaryDietItems = labDeskTopURL + "/delete-detail/"
+    static let foodDiaryCalendar = labDeskTopURL + "/dietlogs/calendar/"
+    static let dietaryGuideURL = labDeskTopURL + "/users/dietary-guide/"
 }
 
 struct SharedPreferenceKey {
@@ -72,6 +79,13 @@ struct RecordType {
     static let RecordByBarcode = "barcode"
     static let RecordByText = "text"
     static let RecordByCustomized = "customized"
+}
+
+struct RecognitionInteger {
+    static let recognition = "0"
+    static let text = "1"
+    static let gallery = "2"
+    static let barcode = "3"
 }
 
 struct ArticleType {

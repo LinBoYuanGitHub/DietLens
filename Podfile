@@ -25,6 +25,8 @@ target 'DietLens' do
   pod 'ScrollableGraphView'
   pod 'HFSwipeView'
   pod 'LGSideMenuController'
+  pod 'CryptoSwift'
+  pod 'QiniuUpload'
 
   target 'DietLensTests' do
     inherit! :search_paths

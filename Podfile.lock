@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.5.1)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
+  - CryptoSwift (0.8.0)
   - Firebase/Core (4.5.0):
     - FirebaseAnalytics (= 4.0.4)
     - FirebaseCore (= 4.0.10)
@@ -42,6 +43,7 @@ PODS:
   - PBRevealViewController/Swift (1.2.8)
   - Protobuf (3.4.0)
   - PureLayout (3.0.2)
+  - QiniuUpload (3.0.0)
   - Realm (3.0.1):
     - Realm/Headers (= 3.0.1)
   - Realm/Headers (3.0.1)
@@ -60,6 +62,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 3.3)
+  - CryptoSwift
   - Firebase/Core
   - Firebase/Messaging
   - FSCalendar
@@ -67,6 +70,7 @@ DEPENDENCIES:
   - LGSideMenuController
   - ParallaxHeader (~> 2.0.0)
   - PBRevealViewController/Swift
+  - QiniuUpload
   - RealmSwift
   - ScrollableGraphView
   - SnapKit (~> 4.0)
@@ -78,6 +82,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   Firebase: d83d287bdb6b1c78320561482706d1fcfc8ddfc1
   FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
   FirebaseCore: da5e8e372cb6046212739a4d81e42d32c22907cc
@@ -92,6 +97,7 @@ SPEC CHECKSUMS:
   PBRevealViewController: b1471380464f30b63d73e9b04e9abf9cb7b67093
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  QiniuUpload: b1b3dda4883b9bacf9e2efc9e28978cdd6a26c70
   Realm: ba6144c74f835f7497791f6599d63a7755377b83
   RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
   ScrollableGraphView: 072ea302f4ca27779692656a49d51fe537b2b1e7
@@ -103,6 +109,6 @@ SPEC CHECKSUMS:
   TinyLog: 1b19359cd3f32ab4972c595d002efc614e596529
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 554d94f1ee9aa5c21c0bb45426c74e096046c4e6
+PODFILE CHECKSUM: a236a83daeece6d1f40d503e19fb1d3b48d962a0
 
 COCOAPODS: 1.3.1

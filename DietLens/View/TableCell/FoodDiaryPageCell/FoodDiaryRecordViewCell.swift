@@ -1,0 +1,24 @@
+//
+//  FoodDiaryRecordViewCell.swift
+//  DietLens
+//
+//  Created by linby on 23/04/2018.
+//  Copyright © 2018 NExT++. All rights reserved.
+//
+
+import UIKit
+
+class FoodDiaryRecordViewCell: UITableViewCell {
+    @IBOutlet weak var foodImageView: UIImageView!
+    @IBOutlet weak var calorieView: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    func setUpCell(image: UIImage, calorieText: String) {
+        foodImageView.image = image
+        calorieView.text = calorieText
+    }
+
+}

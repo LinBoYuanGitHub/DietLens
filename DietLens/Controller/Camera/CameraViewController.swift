@@ -151,11 +151,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBAction func switchToPhoto(_ sender: UIButton) {
         capturePhotoButton.isEnabled = true
+        capturePhotoButton.tintColor = UIColor.red
         sessionManager.set(captureMode: .photo)
     }
 
     @IBAction func switchToBarcode(_ sender: UIButton) {
         sessionManager.set(captureMode: .barcode)
+        barcodeButton.tintColor = UIColor.red
     }
 
     @IBAction func switchToGallery(_ sender: UIButton) {
@@ -174,27 +176,61 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let imgData = UIImageJPEGRepresentation(newImage!, 0.6)!
-        let preferences = UserDefaults.standard
-        let key = "userId"
-        let userId = preferences.string(forKey: key)
+//        let preferences = UserDefaults.standard
+//        let key = "userId"
+//        let userId = preferences.string(forKey: key)
         //upload image to server
-        APIService.instance.uploadImageForMatrix(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (results) in
-            // upload result and callback
-            self.capturePhotoButton.isEnabled = true
-            self.loadingScreen.alpha = 0
-            if results == nil || results?.count == 0 {
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
-            } else {
-                self.displayList.removeAll()
-                self.displayList = results!
-                self.recordType = RecordType.RecordByImage
-                //                self.performSegue(withIdentifier: "test", sender: self)
-                self.performSegue(withIdentifier: "showResultPage", sender: self)
+        APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
+            if imageKey == nil {
+                //error happen during upload image to Qiniu
+                return
             }
-            self.hideReview()
+            self.uploadPercentageLabel.text = "retrieving recognition result..."
+            APIService.instance.postForRecognitionResult(imageKey: imageKey!, latitude: self.latitude, longitude: self.longitude, completion: { (resultList) in
+                    self.hideReview()
+                    self.capturePhotoButton.isEnabled = true
+                    self.loadingScreen.alpha = 0
+                    if resultList == nil || resultList?.count == 0 {
+                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+                    } else {
+                        self.displayList.removeAll()
+                        self.displayList = resultList!
+                        self.recordType = RecordType.RecordByImage
+                        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "recognitionVC") as? RecognitionResultViewController {
+                            if self.recordType == RecordType.RecordByImage {
+                                dest.cameraImage = self.chosenImageView.image!
+                                dest.foodCategoryList = self.displayList
+                            } else if self.recordType == RecordType.RecordByBarcode {
+                                dest.cameraImage = #imageLiteral(resourceName: "barcode_sample_icon")
+                            }
+                            if let navigator = self.navigationController {
+                                navigator.pushViewController(dest, animated: true)
+                            }
+                        }
+                    }
+                    self.hideReview()
+            })
+            //upload imageToken to server to get the food recognition results
         }) { (progress) in
             self.uploadPercentageLabel.text = "\(progress)%"
         }
+//        APIService.instance.uploadImageForMatrix(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (results) in
+//            // upload result and callback
+//            self.capturePhotoButton.isEnabled = true
+//            self.loadingScreen.alpha = 0
+//            if results == nil || results?.count == 0 {
+//                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+//            } else {
+//                self.displayList.removeAll()
+//                self.displayList = results!
+//                self.recordType = RecordType.RecordByImage
+//                //                self.performSegue(withIdentifier: "test", sender: self)
+//                self.performSegue(withIdentifier: "showResultPage", sender: self)
+//            }
+//            self.hideReview()
+//        }) { (progress) in
+//            self.uploadPercentageLabel.text = "\(progress)%"
+//        }
 //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (imageId, results) in
 //            // upload result and callback
 //            self.imageId = imageId

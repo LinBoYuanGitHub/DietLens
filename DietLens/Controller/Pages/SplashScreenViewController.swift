@@ -21,6 +21,7 @@ class SplashScreenViewController: UIViewController {
         if userId == nil {
             userId = ""
         }
+
         APIService.instance.getUUIDRequest(userId: userId!) { (userId) in
             let preferences = UserDefaults.standard
             let key = "userId"
@@ -45,7 +46,14 @@ class SplashScreenViewController: UIViewController {
             }
             self.getArticleListToMainPage()
         }
+        getPersonalGoal()
         // Do any additional setup after loading the view.
+    }
+
+    func getPersonalGoal() {
+        APIService.instance.getDietaryGuideInfo { (isSuccess) in
+            print(isSuccess)
+        }
     }
 
     func getArticleListToMainPage() {

@@ -18,11 +18,11 @@ class FoodItemListCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func setUpCell(foodName: String, quantity: Int, unit: String, calorie: Double) {
-        foodNameLable.text = foodName
-        quantityLable.text = String(quantity)
-        unitLabel.text = unit
-        calorieLabel.text = String(calorie)
+    func setUpCell(dietItem: DietItem) {
+        foodNameLable.text = dietItem.foodName
+        quantityLable.text = String(dietItem.quantity)
+        unitLabel.text = dietItem.portionInfo[dietItem.selectedPos].weightUnit
+        calorieLabel.text = String(dietItem.nutritionInfo.calorie)
     }
 
 }

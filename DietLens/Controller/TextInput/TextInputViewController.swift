@@ -165,9 +165,17 @@ extension TextInputViewController: UITableViewDelegate {
         } else if currentInputStatus == .textSearchResult {
             //loading to get food text search detail
             let textSearchEntity = searchResultList[indexPath.row]
-            APIService.instance.getFoodSearchDetailResult(foodId: textSearchEntity.id, completion: { (_) in
-                    //perform segue to foodDetailPage
-
+            APIService.instance.getFoodDetail(foodId: textSearchEntity.id, completion: { (foodInfoModel) in
+                if foodInfoModel == nil {
+                    return
+                }
+                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                    dest.foodInfoModel = foodInfoModel!
+                    dest.foodId = Int((foodInfoModel?.foodId)!)
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(dest, animated: true)
+                    }
+                }
             })
         }
 //        selectedFoodDiary = historyDiaryList[indexPath.row]
@@ -251,7 +259,7 @@ extension TextInputViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //switch collectonView underline, refresh list
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
-        UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.animationView.center.x = destX!
         }) { (_) in
 

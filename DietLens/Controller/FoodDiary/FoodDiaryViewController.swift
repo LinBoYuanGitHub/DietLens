@@ -10,9 +10,9 @@ import UIKit
 
 class FoodDiaryViewController: UIViewController {
     @IBOutlet weak var foodImage: UIImageView!
-    @IBOutlet weak var mealTypeCollection: UICollectionView!
+    @IBOutlet weak var mealCollectionView: UICollectionView!
     @IBOutlet weak var foodTableView: UITableView!
-
+    //nutritionPart
     @IBOutlet weak var calorieValueLabel: UILabel!
     @IBOutlet weak var proteinValueLable: UILabel!
     @IBOutlet weak var fatValueLabel: UILabel!
@@ -20,22 +20,27 @@ class FoodDiaryViewController: UIViewController {
 
     //dataSource
     //append foodItem when it can be add
-    var foodItemList = [FoodInfomation]()
+    var foodDiary = FoodDiaryEntity()
     var accumulateCalorie: Double = 0.0
     var accumulateCabohydrate: Double = 0.0
     var accumulateProtein: Double = 0.0
     var accumulateFat: Double = 0.0
     //passing parameter
     var mealType: Meal = .breakfast
+    var userFoodImage: UIImage?
     //mealType data
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
 
     override func viewDidLoad() {
-        mealTypeCollection.delegate = self
-        mealTypeCollection.dataSource = self
+        mealCollectionView.delegate = self
+        mealCollectionView.dataSource = self
         foodTableView.delegate = self
         foodTableView.dataSource = self
+        foodImage.image = userFoodImage
+        //registration for resuable nib cellItem
+        mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
+        mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
     }
 
 }
@@ -77,24 +82,30 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
             break
         }
         //switch collection selection
-        mealTypeCollection.reloadData()
+        mealCollectionView.reloadData()
     }
 
 }
 
 extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodItemList.count
+        return foodDiary.dietItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //name, portion calorie , deleteBtn
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FoodItemListCell") as? FoodItemListCell {
-            let entity = foodItemList[indexPath.row]
-            cell.setUpCell(foodName: entity.foodName, quantity: 1, unit: "portion", calorie: Double(entity.calorie))
-
+            let entity = foodDiary.dietItems[indexPath.row]
+            cell.setUpCell(dietItem: entity)
         }
         return UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.foodDiary.dietItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 
 }

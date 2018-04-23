@@ -601,14 +601,13 @@
         <!--Food Diary-->
         <scene sceneID="0SO-9P-0QS">
             <objects>
-                <viewController id="739-8h-fNd" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FoodCalendarVC" id="739-8h-fNd" customClass="FoodCalendarViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mbG-61-I2M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUz-Ev-r85">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUz-Ev-r85" userLabel="LeftDateBtn">
                                 <rect key="frame" x="16" y="70" width="28" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Back Arrow"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aW4-df-ZRf">
@@ -616,7 +615,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="56" id="22F-ea-try">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodDiaryRecordViewCell" rowHeight="56" id="22F-ea-try" customClass="FoodDiaryRecordViewCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="377" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="22F-ea-try" id="Lbs-SQ-i02">
@@ -643,8 +642,12 @@
                                                 <constraint firstItem="C23-6r-ShA" firstAttribute="leading" secondItem="Lbs-SQ-i02" secondAttribute="leading" constant="16" id="u7P-QN-MtF"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="calorieView" destination="zXi-Is-iDf" id="bAI-bE-Hwe"/>
+                                            <outlet property="foodImageView" destination="C23-6r-ShA" id="6Vu-5D-SRp"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="56" id="r8Z-Xf-XQk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addMoreCell" rowHeight="56" id="r8Z-Xf-XQk">
                                         <rect key="frame" x="0.0" y="84" width="377" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r8Z-Xf-XQk" id="9Mr-dg-f7U">
@@ -663,10 +666,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendarIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ld8-WE-Dhn">
-                                <rect key="frame" x="112" y="70" width="18" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-n6-aD7">
                                 <rect key="frame" x="0.0" y="111" width="377" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -688,20 +687,88 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7. April 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdU-aN-1sr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="7. April 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdU-aN-1sr">
                                 <rect key="frame" x="138" y="73" width="101" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nf-ZA-eOL" userLabel="calendarButton">
+                                <rect key="frame" x="99" y="73" width="31" height="22"/>
+                                <state key="normal" image="calendarIcon"/>
+                                <connections>
+                                    <action selector="bringInCalendar:" destination="739-8h-fNd" eventType="touchUpInside" id="LwX-qb-4j6"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.0" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rgE-tO-ESs" customClass="DiaryDatePicker" customModule="DietLens" customModuleProvider="target">
+                                <rect key="frame" x="5" y="183" width="365" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="yCU-fq-5tQ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
+                                        <color key="value" red="0.99613112209999999" green="0.34797501559999999" blue="0.35370385650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
+                                        <color key="value" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="eventSelectionColor">
+                                        <color key="value" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="eventDefaultColor">
+                                        <color key="value" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="fTy-cd-LxN" id="8fX-I9-8Xv"/>
+                                    <outlet property="delegate" destination="fTy-cd-LxN" id="SNj-X7-wuM"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="CalendarViewController" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Tw-gL-gtc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.2211939852" green="0.22132333039999999" blue="0.2292465491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissCalendar:" destination="fTy-cd-LxN" eventType="touchUpInside" id="Gat-fv-IEj"/>
+                                    <action selector="dismissCalendar:" destination="739-8h-fNd" eventType="touchUpInside" id="Xob-HT-GwK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8Tw-gL-gtc" firstAttribute="centerX" secondItem="sx4-ew-huB" secondAttribute="centerX" id="07S-dx-6bW"/>
+                            <constraint firstItem="rgE-tO-ESs" firstAttribute="top" secondItem="8Tw-gL-gtc" secondAttribute="bottom" constant="-360" id="8ot-cK-Yq1"/>
+                            <constraint firstItem="OdU-aN-1sr" firstAttribute="top" secondItem="sx4-ew-huB" secondAttribute="top" constant="9" id="AXE-um-jLb"/>
+                            <constraint firstItem="rgE-tO-ESs" firstAttribute="centerX" secondItem="sx4-ew-huB" secondAttribute="centerX" id="BkN-hS-Q5s"/>
+                            <constraint firstItem="8nf-ZA-eOL" firstAttribute="leading" secondItem="qUz-Ev-r85" secondAttribute="trailing" constant="55" id="QK0-ah-L12"/>
+                            <constraint firstItem="8Tw-gL-gtc" firstAttribute="height" secondItem="mbG-61-I2M" secondAttribute="height" id="Tza-4b-vPf"/>
+                            <constraint firstItem="8Tw-gL-gtc" firstAttribute="width" secondItem="mbG-61-I2M" secondAttribute="width" id="VQV-O6-VtX"/>
+                            <constraint firstItem="OdU-aN-1sr" firstAttribute="centerX" secondItem="sx4-ew-huB" secondAttribute="centerX" id="VSZ-vz-n3B"/>
+                            <constraint firstItem="sx4-ew-huB" firstAttribute="trailing" secondItem="rgE-tO-ESs" secondAttribute="trailing" constant="5" id="b1f-SX-LYH"/>
+                            <constraint firstItem="rgE-tO-ESs" firstAttribute="leading" secondItem="sx4-ew-huB" secondAttribute="leading" constant="5" id="fDN-9G-d4x"/>
+                            <constraint firstItem="OdU-aN-1sr" firstAttribute="leading" secondItem="8nf-ZA-eOL" secondAttribute="trailing" constant="8" id="iHG-yp-bj9"/>
+                            <constraint firstItem="qUz-Ev-r85" firstAttribute="centerY" secondItem="8nf-ZA-eOL" secondAttribute="centerY" id="kkf-CZ-5b0"/>
+                            <constraint firstItem="8nf-ZA-eOL" firstAttribute="centerY" secondItem="OdU-aN-1sr" secondAttribute="centerY" id="taX-Qu-Veq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sx4-ew-huB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Food Diary" id="iop-Zv-SFj">
                         <barButtonItem key="backBarButtonItem" title="back" id="2Jl-Zq-GQF"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="calendarBtn" destination="8nf-ZA-eOL" id="HRU-lp-5QX"/>
+                        <outlet property="calendarYConstraint" destination="8ot-cK-Yq1" id="Ez1-bk-bcd"/>
+                        <outlet property="closeCalButton" destination="8Tw-gL-gtc" id="nz7-IE-gcN"/>
+                        <outlet property="dateLabel" destination="OdU-aN-1sr" id="9Hl-Uw-R5Y"/>
+                        <outlet property="diaryCalendar" destination="rgE-tO-ESs" id="MLj-jA-jUu"/>
+                        <outlet property="foodCalendarTableView" destination="aW4-df-ZRf" id="aw1-Vy-7QO"/>
+                        <outlet property="nutritionCollectionView" destination="FBV-n6-aD7" id="h75-vz-HNs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9U-UY-nmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -4793,7 +4860,7 @@ A
         <image name="whiteBackArrow" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x6i-Qd-8cW"/>
+        <segue reference="E0y-CB-0Z7"/>
         <segue reference="lNl-KA-hAD"/>
         <segue reference="huu-PE-XeN"/>
         <segue reference="NAD-8N-HRw"/>

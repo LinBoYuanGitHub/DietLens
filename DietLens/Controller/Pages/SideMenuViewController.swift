@@ -22,7 +22,7 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 
     let labels: [String] = ["Home", "Food Diary", "Report", "Steps Counter"]
     let iconNames: [String] = ["blackHomeIcon", "blackFoodDiaryIcon", "blackReportIcon", "blackStepCounterIcon"]
-    let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "StepCounterVC"]
+    let storyboardIDs: [String] = ["DietLens", "FoodCalendarVC", "ReportVC", "StepCounterVC"]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -96,13 +96,8 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 //            revealViewController()?.setMainViewController(controller!, animated: true)
             DataService.instance.screenUserIsIn = 0
         } else if labels[indexPath.row] == "Home"{
-            controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
-                let nc = UINavigationController(rootViewController: controller!)
-                revealViewController()?.pushMainViewController(nc, animated: true)
         } else {
             controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
-//            let nc = UINavigationController(rootViewController: controller!)
-//            revealViewController()?.pushMainViewController(nc, animated: true)
             present(controller!, animated: true, completion: nil)
         }
     }

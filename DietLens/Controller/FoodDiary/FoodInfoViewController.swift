@@ -4,49 +4,46 @@
 //
 //  Created by linby on 10/04/2018.
 //  Copyright © 2018 NExT++. All rights reserved.
-//
 
 import UIKit
 class FoodInfoViewController: UIViewController {
 
     @IBOutlet weak var foodSampleImage: UIImageView!
-    @IBOutlet weak var calorieValueLabel: UILabel!
-    @IBOutlet weak var proteinValueLable: UILabel!
-    @IBOutlet weak var fatValueLabel: UILabel!
-    @IBOutlet weak var carbohydrateValueLabel: UILabel!
     @IBOutlet weak var foodName: UILabel!
     @IBOutlet weak var quantityValue: UITextField!
     @IBOutlet weak var unitValue: UITextField!
     @IBOutlet weak var mealCollectionView: UICollectionView!
-
     //configurable hide view
     @IBOutlet weak var mealTypeView: UIView!
     @IBOutlet weak var portionDataView: UIView!
     @IBOutlet weak var nutritionDataView: UIView!
-
+    //nutrition label
+    @IBOutlet weak var calorieValueLabel: UILabel!
+    @IBOutlet weak var proteinValueLable: UILabel!
+    @IBOutlet weak var fatValueLabel: UILabel!
+    @IBOutlet weak var carbohydrateValueLabel: UILabel!
     //pickerView
     var quantityPickerView = UIPickerView()
     //data source
-    var addedFood = FoodInfomation()
-    var portionUnit = PortionModel()
-    var quantity: Double = 1.0
+    var foodDiaryEntity = FoodDiaryEntity()
+    var foodInfoModel = FoodInfomationModel()
+    var quantity = 1.0
+    var selectedPortionPos: Int = 0
     var quantityIntegerArray = [0]
     var decimalArray = [0, 0.25, 0.5, 0.75]
     var unitArray = ["Standard sizing", "Small sizing", "Large sizing", "Grams"]
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
-
     //parameter for passing value
+    var foodId: Int?
     var userFoodImage: UIImage?
     var mealType: Meal = .breakfast
     var isSetMealByTimeRequired: Bool = false
     var isAddIntoFoodList = false
-    //directly create foodDiary or put it into shouldCreateFoodDiary
     var isAccumulatedDiary: Bool = false
 
     override func viewDidLoad() {
         prepareQuantityIntegerArray()
-        foodSampleImage.image = userFoodImage
         quantityValue.delegate = self
         unitValue.delegate = self
         quantityValue.inputAccessoryView = setUpPickerToolBar()
@@ -56,6 +53,80 @@ class FoodInfoViewController: UIViewController {
         quantityValue.inputView = quantityPickerView
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
+        //set up image
+        foodSampleImage.image = userFoodImage
+        //set up passed value & image
+//        setUpFoodValue()
+        //registration for resuable nib cellItem
+        mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
+        mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
+        requestForDietInformation()
+        unitValue.addTarget(self, action: #selector(showUnitSelectionDialog), for: .touchUpInside)
+        //init foodEntity if directly save
+
+    }
+
+    //used only when isNotAccumulate
+    func initFoodEntity() {
+        var dietItem = DietItem()
+        dietItem.foodName = foodInfoModel.foodName
+        dietItem.foodId = foodInfoModel.foodId
+        dietItem.nutritionInfo.calorie = Double(foodInfoModel.calorie)
+        dietItem.nutritionInfo.protein = Double(foodInfoModel.protein)!
+        dietItem.nutritionInfo.fat = Double(foodInfoModel.fat)!
+        dietItem.nutritionInfo.carbohydrate = Double(foodInfoModel.carbohydrate)!
+        dietItem.quantity = Double(quantityValue.text!)!
+        dietItem.selectedPos =  0
+        for portion in foodInfoModel.portionList {
+            var portionInfo = PortionInfo()
+            portionInfo.rank = portion.rank
+            portionInfo.sizeUnit = portion.sizeUnit
+            portionInfo.sizeValue = portion.sizeValue
+            portionInfo.weightUnit = portion.weightUnit
+            portionInfo.weightValue = portion.weightValue
+            dietItem.portionInfo.append(portionInfo)
+        }
+        dietItem.recordType = RecognitionInteger.recognition
+        foodDiaryEntity.dietItems.append(dietItem)
+        foodDiaryEntity.mealType = mealStringArray[0]
+        foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: Date())
+    }
+
+    //request for dietInformation
+    func requestForDietInformation() {
+        if foodId == nil {
+            return
+        }
+        APIService.instance.getFoodDetail(foodId: foodId!) { (foodInfo) in
+            if foodInfo == nil {
+                return
+            }
+            self.foodInfoModel = foodInfo!
+            if !self.isAccumulatedDiary {
+                self.initFoodEntity()
+            }
+            self.setUpFoodValue()
+        }
+    }
+
+    func setUpFoodValue() {
+        foodName.text = foodInfoModel.foodName
+        let portionRate = Float(Double(quantity) * foodInfoModel.portionList[selectedPortionPos].weightValue/100)
+        calorieValueLabel.text = String(foodInfoModel.calorie*portionRate)+" "+StringConstants.UIString.calorieUnit
+        carbohydrateValueLabel.text = String(portionRate * Float(foodInfoModel.carbohydrate)!)+" "+StringConstants.UIString.diaryIngredientUnit
+        proteinValueLable.text = String(portionRate * Float(foodInfoModel.protein)!) + " "+StringConstants.UIString.diaryIngredientUnit
+        fatValueLabel.text = String(portionRate * Float(foodInfoModel.fat)!) + " "+StringConstants.UIString.diaryIngredientUnit
+    }
+
+    @objc func showUnitSelectionDialog() {
+        let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.alert)
+        for portion in foodInfoModel.portionList {
+            alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
+                self.selectedPortionPos = portion.rank - 1
+                self.setUpFoodValue()
+            }))
+        }
+        self.present(alert, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -121,7 +192,6 @@ class FoodInfoViewController: UIViewController {
         toolBar.isTranslucent = true
         toolBar.tintColor = UIColor(red: 94/255, green: 94/255, blue: 94/255, alpha: 1)
         toolBar.sizeToFit()
-
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
         let scrollTabBtn = UIBarButtonItem(title: "scroll", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToDatePicker))
         let keyboardBtn = UIBarButtonItem(title: "keyboard", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToKeyboard))
@@ -132,29 +202,55 @@ class FoodInfoViewController: UIViewController {
     }
 
     @IBAction func onAddBtnClicked(_ sender: Any) {
+        foodDiaryEntity.dietItems[0].quantity = quantity
         if isAccumulatedDiary {
-            performSegue(withIdentifier: "toAddTextFoodPage", sender: nil)
+            //add to FoodDiaryListViewController & refresh
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+                if let navigator = self.navigationController {
+                    //clear controller to Bottom & add foodCalendar Controller
+                    navigator.pushViewController(dest, animated: true)
+                }
+            }
         } else {
             //redirect to foodDiary page
+            APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
+                if isSuccess {
+                    //request for saving FoodDiary
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
+                        dest.selectedDate = Date()
+                        if let navigator = self.navigationController {
+                            navigator.pushViewController(dest, animated: true)
+
+                        }
+                    }
+                }
+            })
 
         }
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+//        self.navigationController?.popViewController(animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //segue toAddTextFoodPage
         if let dest = segue.destination as? FoodDiaryViewController {
-            dest.foodItemList.append(addedFood)
-            dest.foodImage.image = userFoodImage
+//           dest.foodItemList.append(addedFood)
+            dest.userFoodImage = userFoodImage
         }
     }
 
     //toolBar click event region
     @objc func donePicker() {
         quantityValue.resignFirstResponder()
+        //set quantityValue according to keyboard||pickerView
+        if quantityValue.inputView != nil {
+            let quantityPos =  quantityPickerView.numberOfRows(inComponent: 0)
+            let decimalPos = quantityPickerView.numberOfRows(inComponent: 1)
+            quantityValue.text = String(quantityIntegerArray[quantityPos]) + String(decimalArray[decimalPos])
+        }
     }
 
     @objc func switchToDatePicker() {
@@ -166,6 +262,14 @@ class FoodInfoViewController: UIViewController {
         quantityValue.inputView = nil
         quantityValue.keyboardType = UIKeyboardType.decimalPad
         quantityValue.reloadInputViews()
+//        guard let stack = self.navigationController?.viewControllers else { return }
+//        //get the mainMenu VC
+//        let mainVC = stack.first!
+//        // Rearrange your stack
+//        self.navigationController?.viewControllers = [mainVC, self]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+        self.present(controller, animated: true, completion: nil)
     }
 
     func keyboardWillShow() {

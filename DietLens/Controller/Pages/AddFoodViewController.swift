@@ -24,6 +24,8 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
     }
 
     override func viewDidLoad() {
+        //hid navaigation bar
+        self.navigationController?.navigationBar.isHidden = true
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .clear
         settings.style.buttonBarItemBackgroundColor = .clear
@@ -46,14 +48,11 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
         containerView.scrollsToTop = false
-        NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
-    }
-
-    @objc func onNotifyToDismiss() {
-        dismiss(animated: false, completion: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
+//        dismiss(animated: true, completion: nil)
     }
 }
