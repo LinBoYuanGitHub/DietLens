@@ -41,8 +41,12 @@ class FoodInfoViewController: UIViewController {
     var isSetMealByTimeRequired: Bool = false
     var isAddIntoFoodList = false
     var isAccumulatedDiary: Bool = false
+    var imageKey: String?
 
     override func viewDidLoad() {
+        if imageKey != nil {
+            foodDiaryEntity.imageId = imageKey!
+        }
         prepareQuantityIntegerArray()
         quantityValue.delegate = self
         unitValue.delegate = self
@@ -61,9 +65,13 @@ class FoodInfoViewController: UIViewController {
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
         requestForDietInformation()
-        unitValue.addTarget(self, action: #selector(showUnitSelectionDialog), for: .touchUpInside)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
+        unitValue.addGestureRecognizer(tap)
         //init foodEntity if directly save
+    }
 
+    @objc func tapFunction(_ sender: UITapGestureRecognizer) {
+        showUnitSelectionDialog()
     }
 
     //used only when isNotAccumulate
@@ -123,6 +131,7 @@ class FoodInfoViewController: UIViewController {
         for portion in foodInfoModel.portionList {
             alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
                 self.selectedPortionPos = portion.rank - 1
+                self.unitValue.text = portion.sizeUnit
                 self.setUpFoodValue()
             }))
         }
@@ -220,7 +229,6 @@ class FoodInfoViewController: UIViewController {
                         dest.selectedDate = Date()
                         if let navigator = self.navigationController {
                             navigator.pushViewController(dest, animated: true)
-
                         }
                     }
                 }
@@ -247,8 +255,8 @@ class FoodInfoViewController: UIViewController {
         quantityValue.resignFirstResponder()
         //set quantityValue according to keyboard||pickerView
         if quantityValue.inputView != nil {
-            let quantityPos =  quantityPickerView.numberOfRows(inComponent: 0)
-            let decimalPos = quantityPickerView.numberOfRows(inComponent: 1)
+            let quantityPos =  quantityPickerView.selectedRow(inComponent: 0)
+            let decimalPos = quantityPickerView.selectedRow(inComponent: 1)
             quantityValue.text = String(quantityIntegerArray[quantityPos]) + String(decimalArray[decimalPos])
         }
     }
@@ -267,9 +275,6 @@ class FoodInfoViewController: UIViewController {
 //        let mainVC = stack.first!
 //        // Rearrange your stack
 //        self.navigationController?.viewControllers = [mainVC, self]
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-        self.present(controller, animated: true, completion: nil)
     }
 
     func keyboardWillShow() {

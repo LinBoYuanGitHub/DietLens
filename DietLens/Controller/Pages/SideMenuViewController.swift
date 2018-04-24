@@ -91,30 +91,19 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 
         // deselect food diary
 
-        if labels[indexPath.row] == "Logout" {
-            controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-//            revealViewController()?.setMainViewController(controller!, animated: true)
-            DataService.instance.screenUserIsIn = 0
-        } else if labels[indexPath.row] == "Home"{
-        } else {
+       if labels[indexPath.row] == "Home"{
+            self.hideLeftView()
+       } else {
+//            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardIDs[indexPath.row]) as? UIViewController {
+//            if let navigator = self.rootViewController?.navigationController {
+//                //clear controller to Bottom & add foodCalendar Controller
+//                navigator.pushViewController(dest, animated: true)
+//            }
             controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
             present(controller!, animated: true, completion: nil)
         }
     }
 
-//    func revealController(_ revealController: PBRevealViewController, willShowLeft viewController: UIViewController) {
-//        print ("user was in \(labels[DataService.instance.screenUserIsIn]) and side menu was selected!")
-//
-//        for i in 0..<labels.count {
-//            if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: i, section: 0)) as? SideMenuCell {
-//                cell.cellUnselected()
-//            }
-//        }
-//
-//        if let cell = sideMenuTable.cellForRow(at: IndexPath.init(row: DataService.instance.screenUserIsIn, section: 0)) as? SideMenuCell {
-//            cell.cellSelected()
-//        }
-//    }
     @IBAction func profileButtonPressed(_ sender: Any) {
         print("Go to profile page")
         let preferences = UserDefaults.standard

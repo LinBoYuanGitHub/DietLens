@@ -199,6 +199,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
                         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "recognitionVC") as? RecognitionResultViewController {
                             if self.recordType == RecordType.RecordByImage {
                                 dest.cameraImage = self.chosenImageView.image!
+                                dest.imageKey = imageKey
                                 dest.foodCategoryList = self.displayList
                             } else if self.recordType == RecordType.RecordByBarcode {
                                 dest.cameraImage = #imageLiteral(resourceName: "barcode_sample_icon")

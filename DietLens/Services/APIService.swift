@@ -314,7 +314,7 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.foodSearchListURL)!,
             method: .post,
-            parameters: ["text": keywords],
+            parameters: ["food_name": keywords],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -324,7 +324,6 @@ class APIService {
                     completion(nil)
                     return
                 }
-
                 guard let searchResults = response.result.value else {
                     print("Get searchResult failed due to : Server Data Type Error")
                     completion(nil)
@@ -457,11 +456,7 @@ class APIService {
     */
     public func qiniuImageUpload(imgData: Data, completion: @escaping (String?) -> Void, progressCompletion: @escaping (Int) -> Void) {
 //        let uploadUrl = "http://upload.qiniu.com/"
-        let scope = "dietlens"                                          // Bucket
-        let accessKey = "ExTDSVzfUQiu0wwJXBzXLg_PxNQxbb3tkC4UpyB6"      // AK
-        let secretKey = "8u_GKcaQWMD3L-94OdG8P_o9b8SGqAIjYFoX953A"      // SK
-        let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com"
-        QiniuToken.register(withScope: scope, secretKey: secretKey, accesskey: accessKey)
+        QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
         if let uploadToken = QiniuToken.shared().uploadToken() {
 //            let file = QiniuFile(imgData as NSData)
             let uploader = QiniuUploader()
@@ -470,7 +465,7 @@ class APIService {
             uploader.startUpload(uploadToken, uploadOneFileSucceededHandler: { (index, keyValuePair) in
                 print("upload succeeded : \(index) - \(keyValuePair)")
                 let key = keyValuePair["key"]! as! String
-                let url = "\(rootDomain)/\(accessKey)&token=\(key)"
+                let url = "\(QiniuConfig.rootDomain)/\(QiniuConfig.accessKey)&token=\(key)"
                 print(url)
                 completion(key)
             }, uploadOneFileFailedHandler: { (index, error) in
@@ -482,6 +477,19 @@ class APIService {
                 progressCompletion(progress)
             }, uploadAllFilesComplete: {
                 print("upload complete...")
+            })
+        }
+    }
+
+    //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
+    public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
+        QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
+        if let token = QiniuToken.shared().uploadToken() {
+            let downloadURL = QiniuConfig.rootDomain + "/"+imageKey + "?token=" + token
+            let imageView = UIImageView()
+            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (imageResponse) in
+                let image = UIImage(data: imageResponse.data!)
+                completion(image)
             })
         }
     }
@@ -562,12 +570,12 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("save device token failed due to : \(String(describing: response.result.error))")
+                    print("delete single foodItem failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 guard let scanResult = response.result.value else {
-                    print("save device token failed due to : Server Data Type Error")
+                    print("delete single foodItem failed due to : Server Data Type Error")
                     completion(false)
                     return
                 }
@@ -591,12 +599,12 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("save device token failed due to : \(String(describing: response.result.error))")
+                    print("delete foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 guard let scanResult = response.result.value else {
-                    print("save device token failed due to : Server Data Type Error")
+                    print("delete foodDiary failed due to : Server Data Type Error")
                     completion(false)
                     return
                 }

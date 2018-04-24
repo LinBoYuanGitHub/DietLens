@@ -629,9 +629,8 @@
                                                         <constraint firstAttribute="height" constant="44" id="sSn-Tj-qPl"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="320kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXi-Is-iDf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="320kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXi-Is-iDf">
                                                     <rect key="frame" x="298" y="18" width="64" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -639,7 +638,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="C23-6r-ShA" firstAttribute="centerY" secondItem="Lbs-SQ-i02" secondAttribute="centerY" id="Dfs-VQ-WQJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="zXi-Is-iDf" secondAttribute="trailing" constant="15" id="TrV-Oc-52C"/>
                                                 <constraint firstItem="C23-6r-ShA" firstAttribute="leading" secondItem="Lbs-SQ-i02" secondAttribute="leading" constant="16" id="u7P-QN-MtF"/>
+                                                <constraint firstItem="zXi-Is-iDf" firstAttribute="centerY" secondItem="Lbs-SQ-i02" secondAttribute="centerY" id="vVQ-sP-VCL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

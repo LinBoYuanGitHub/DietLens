@@ -43,6 +43,22 @@ class FoodDiaryViewController: UIViewController {
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
     }
 
+    func updateFoodDiary() {
+        APIService.instance.updateFoodDiary(foodDiary: foodDiary) { (isSuccess) in
+                if isSuccess {
+                    if (self.navigationController?.viewControllers.contains(where: {
+                        return $0 is FoodInfoViewController
+                    }))! {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+        }
+    }
+
+    func addFoodIntoItem(dietItem: DietItem) {
+        foodDiary.dietItems.append(dietItem)
+    }
+
 }
 
 extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDataSource {

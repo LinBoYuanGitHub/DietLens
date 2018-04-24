@@ -161,9 +161,16 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
             }
         } else { //click food Item to edit foodItem again
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-                if let navigator = self.navigationController {
-                    navigator.pushViewController(dest, animated: true)
-                }
+                let imageKey = foodDiaryList[indexPath.row].imageId
+                //download image from Qiniu
+                APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
+                    dest.foodDiary = self.foodDiaryList[indexPath.row]
+                    dest.userFoodImage = image
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(dest, animated: true)
+                    }
+                })
+
             }
         }
 

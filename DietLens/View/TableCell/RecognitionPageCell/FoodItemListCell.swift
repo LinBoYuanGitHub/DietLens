@@ -21,7 +21,7 @@ class FoodItemListCell: UITableViewCell {
     func setUpCell(dietItem: DietItem) {
         foodNameLable.text = dietItem.foodName
         quantityLable.text = String(dietItem.quantity)
-        unitLabel.text = dietItem.portionInfo[dietItem.selectedPos].weightUnit
+//        unitLabel.text = dietItem.portionInfo[dietItem.selectedPos].weightUnit
         calorieLabel.text = String(dietItem.nutritionInfo.calorie)
     }
 

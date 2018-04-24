@@ -46,7 +46,7 @@ struct ServerConfig {
     static let foodDiaryURL = baseURL + "/healthlog/diet/"
     static let saveStepDiaryURL = baseURL + "/healthlog/steps/"
     static let saveHealthCenterDataURL = baseURL + "/healthlog/Medical/"
-    static let foodSearchListURL = labDeskTopURL + "/search/results/"
+    static let foodSearchListURL = labDeskTopURL + "/search/text/"
     static let foodSearchAutocompleteURL = labDeskTopURL + "/search/autocomplete/"
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
@@ -72,6 +72,13 @@ struct NutrtionData {
     static let proteinText = "Protein"
     static let fatText = "Fat"
     static let sugarText = "Sugar"
+}
+
+struct QiniuConfig {
+    static let scope = "dietlens"
+    static let accessKey = "ExTDSVzfUQiu0wwJXBzXLg_PxNQxbb3tkC4UpyB6"
+    static let secretKey = "8u_GKcaQWMD3L-94OdG8P_o9b8SGqAIjYFoX953A"
+    static let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com"
 }
 
 struct RecordType {

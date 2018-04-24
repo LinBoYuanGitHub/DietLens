@@ -20,6 +20,7 @@ class RecognitionResultViewController: UIViewController {
 
     //view controller passing data
     var cameraImage: UIImage?
+    var imageKey: String?
     var recordDate: Date = Date()
 
     //dataSource
@@ -69,6 +70,7 @@ class RecognitionResultViewController: UIViewController {
         if let dest = navVC?.viewControllers.first as? FoodInfoViewController {
             dest.userFoodImage = cameraImage
             dest.isAccumulatedDiary = false
+            dest.imageKey = imageKey!
             dest.foodId = selectedFoodInfo.id
         }
     }

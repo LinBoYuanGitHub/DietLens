@@ -21,7 +21,7 @@ class TextInputViewController: UIViewController {
     //autoComplete & textSearchResult List
     var autoCompleteTextList = [String]()
     var searchResultList = [TextSearchSuggestionEntity]()
-//    var foodResults = [FoodInfomation]()
+    //    var foodResults = [FoodInfomation]()
 
     var selectedImageView: UIImage?
     var addFoodDate: Date?
@@ -76,7 +76,7 @@ class TextInputViewController: UIViewController {
 
     //GoodToHave: local storage to display recent search top2 item
     func loadRecentTextSearchResult() {
-//        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
+        //        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
         textSearchTable.reloadData()
     }
 
@@ -94,14 +94,18 @@ class TextInputViewController: UIViewController {
             APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchAutocompleteURL)
         }
         isSearching = true
-        let autoCompleteText = textSearchField.text
-        APIService.instance.autoCompleteText(keywords: autoCompleteText!) { (textResults) in
-            self.isSearching = false
-            if textResults != nil {
-                self.autoCompleteTextList = textResults!
-                self.textSearchTable.reloadData()
-            }
+        let searchText = textSearchField.text
+        APIService.instance.getFoodSearchResult(keywords: searchText!) { (textResults) in
+            self.searchResultList = textResults!
+            self.textSearchTable.reloadData()
         }
+//        APIService.instance.autoCompleteText(keywords: autoCompleteText!) { (textResults) in
+//            self.isSearching = false
+//            if textResults != nil {
+//                self.autoCompleteTextList = textResults!
+//                self.textSearchTable.reloadData()
+//            }
+//        }
     }
 
 }
@@ -114,34 +118,30 @@ extension TextInputViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if currentInputStatus == .autoComplete {
-            return autoCompleteTextList.count
-        } else if currentInputStatus == .textSearchResult {
-            return searchResultList.count
-        }
-        return 0
+//        if currentInputStatus == .autoComplete {
+//            return autoCompleteTextList.count
+//        }
+        return searchResultList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //fill in tableview
-        if currentInputStatus == .autoComplete {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell") as? AutoCompleteCell else {
-                return UITableViewCell()
-            }
-            let searchText = autoCompleteTextList[indexPath.row]
-            cell.setUpCell(text: searchText)
-            //cell to adapt the autoComplete text
-            return cell
-        } else if currentInputStatus == .textSearchResult {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
-                return UITableViewCell()
-            }
-            let result  = searchResultList[indexPath.row]
-            //cell to adapt the searchResult
-            cell.setUpCell(textResultEntity: result)
-            return cell
+        //        if currentInputStatus == .autoComplete {
+        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell") as? AutoCompleteCell else {
+        //                return UITableViewCell()
+        //            }
+        //            let searchText = autoCompleteTextList[indexPath.row]
+        //            cell.setUpCell(text: searchText)
+        //            //cell to adapt the autoComplete text
+        //            return cell
+        //        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
+            return UITableViewCell()
         }
-        return UITableViewCell()
+        let result  = searchResultList[indexPath.row]
+        //cell to adapt the searchResult
+        cell.setUpCell(textResultEntity: result)
+        return cell
     }
 
 }
@@ -150,40 +150,27 @@ extension TextInputViewController: UITableViewDataSource {
 extension TextInputViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if currentInputStatus == .autoComplete {
-            //change the currentStatus,fill in textSearch content,
-            textSearchField.text = autoCompleteTextList[indexPath.row]
-            APIService.instance.getFoodSearchResult(keywords: autoCompleteTextList[indexPath.row], completion: { (textResultList) in
-                if textResultList == nil {
-                    //handle search failed error
-                    return
+        //loading to get food text search detail
+        let textSearchEntity = searchResultList[indexPath.row]
+        APIService.instance.getFoodDetail(foodId: textSearchEntity.id, completion: { (foodInfoModel) in
+            if foodInfoModel == nil {
+                return
+            }
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                dest.foodInfoModel = foodInfoModel!
+                dest.isAccumulatedDiary = true
+                dest.foodId = Int((foodInfoModel?.foodId)!)
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(dest, animated: true)
                 }
-                self.searchResultList = textResultList!
-                self.currentInputStatus = .textSearchResult
-                self.textSearchTable.reloadData()
-            })
-        } else if currentInputStatus == .textSearchResult {
-            //loading to get food text search detail
-            let textSearchEntity = searchResultList[indexPath.row]
-            APIService.instance.getFoodDetail(foodId: textSearchEntity.id, completion: { (foodInfoModel) in
-                if foodInfoModel == nil {
-                    return
-                }
-                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-                    dest.foodInfoModel = foodInfoModel!
-                    dest.foodId = Int((foodInfoModel?.foodId)!)
-                    if let navigator = self.navigationController {
-                        navigator.pushViewController(dest, animated: true)
-                    }
-                }
-            })
-        }
-//        selectedFoodDiary = historyDiaryList[indexPath.row]
+            }
+        })
+        //        selectedFoodDiary = historyDiaryList[indexPath.row]
         // Row selected, so set textField to relevant value, hide tableView
         //calculation for individual nutrition
-//        selectedImageView = (tableView.cellForRow(at: indexPath) as! HistoryFoodDiaryCell).foodDiaryImage.image
+        //        selectedImageView = (tableView.cellForRow(at: indexPath) as! HistoryFoodDiaryCell).foodDiaryImage.image
         //perform segue
-//        performSegue(withIdentifier: "historyToResult", sender: self)
+        //        performSegue(withIdentifier: "historyToResult", sender: self)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
