@@ -16,6 +16,9 @@ class TextInputViewController: UIViewController {
     @IBOutlet weak var textSearchFilterView: UICollectionView!
     @IBOutlet weak var textSearchTable: UITableView!
     @IBOutlet weak var animationView: UIView!  //for the selected barItem underline effort
+    @IBOutlet weak var emptyView: UIView! // empty view for let user to refresh again
+    @IBOutlet weak var refreshBtn: UIButton!
+
     //tab item for filter the result
     var filterItem = ["All", "Ingredient", "Side dish"]
     //autoComplete & textSearchResult List
@@ -26,8 +29,7 @@ class TextInputViewController: UIViewController {
     var selectedImageView: UIImage?
     var addFoodDate: Date?
     var selectedFoodDiary = FoodDiaryModel()
-    var currentInputStatus = TextInputStatus.autoComplete
-
+    var filterType = TextSearchFilterInterger.allType
     var isSearching = false
     private var lastSearchTime = Date()
     //passed parameter
@@ -56,6 +58,10 @@ class TextInputViewController: UIViewController {
 
     }
 
+    @IBAction func refreshSearch(_ sender: Any) {
+        performTextSearch()
+    }
+
     @objc func keyboardWasShown (notification: NSNotification) {
         let info: NSDictionary = notification.userInfo! as NSDictionary
         //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
@@ -82,7 +88,6 @@ class TextInputViewController: UIViewController {
 
     @IBAction func textFieldChanged(_ sender: UITextField) {
         //load suggestion from net, set time
-        currentInputStatus = .autoComplete
         if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
             lastSearchTime = Date()
             performTextSearch()
@@ -91,21 +96,45 @@ class TextInputViewController: UIViewController {
 
     func performTextSearch() {
         if isSearching {
-            APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchAutocompleteURL)
+            APIService.instance.cancelAllRequest()
+//            APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchListURL + "?category=" + String(filterType))
         }
         isSearching = true
         let searchText = textSearchField.text
-        APIService.instance.getFoodSearchResult(keywords: searchText!) { (textResults) in
+        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!) { (textResults) in
+            if textResults == nil {
+                self.searchResultList.removeAll()
+                self.emptyView.isHidden = false
+                self.textSearchTable.reloadData()
+                return
+            }
+            self.emptyView.isHidden = true
             self.searchResultList = textResults!
             self.textSearchTable.reloadData()
         }
-//        APIService.instance.autoCompleteText(keywords: autoCompleteText!) { (textResults) in
-//            self.isSearching = false
-//            if textResults != nil {
-//                self.autoCompleteTextList = textResults!
-//                self.textSearchTable.reloadData()
-//            }
-//        }
+    }
+
+    func requestForDietInformation(foodId: Int) {
+        if foodId == 0 {
+            return
+        }
+        APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
+            if dietItem == nil {
+                return
+            }
+            var dietEntity = dietItem!
+            dietEntity.recordType = RecordType.RecordByImage
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                dest.dietItem = dietEntity
+                let parentVC = self.parent as! AddFoodViewController
+                dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
+                if let navigator = self.navigationController {
+                    //clear controller to Bottom & add foodCalendar Controller
+                    navigator.pushViewController(dest, animated: true)
+                }
+            }
+        }
     }
 
 }
@@ -118,23 +147,10 @@ extension TextInputViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if currentInputStatus == .autoComplete {
-//            return autoCompleteTextList.count
-//        }
         return searchResultList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //fill in tableview
-        //        if currentInputStatus == .autoComplete {
-        //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "autoCompleteCell") as? AutoCompleteCell else {
-        //                return UITableViewCell()
-        //            }
-        //            let searchText = autoCompleteTextList[indexPath.row]
-        //            cell.setUpCell(text: searchText)
-        //            //cell to adapt the autoComplete text
-        //            return cell
-        //        }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
             return UITableViewCell()
         }
@@ -152,25 +168,7 @@ extension TextInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //loading to get food text search detail
         let textSearchEntity = searchResultList[indexPath.row]
-        APIService.instance.getFoodDetail(foodId: textSearchEntity.id, completion: { (foodInfoModel) in
-            if foodInfoModel == nil {
-                return
-            }
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-                dest.foodInfoModel = foodInfoModel!
-                dest.isAccumulatedDiary = true
-                dest.foodId = Int((foodInfoModel?.foodId)!)
-                if let navigator = self.navigationController {
-                    navigator.pushViewController(dest, animated: true)
-                }
-            }
-        })
-        //        selectedFoodDiary = historyDiaryList[indexPath.row]
-        // Row selected, so set textField to relevant value, hide tableView
-        //calculation for individual nutrition
-        //        selectedImageView = (tableView.cellForRow(at: indexPath) as! HistoryFoodDiaryCell).foodDiaryImage.image
-        //perform segue
-        //        performSegue(withIdentifier: "historyToResult", sender: self)
+        requestForDietInformation(foodId: textSearchEntity.id)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -245,12 +243,27 @@ extension TextInputViewController: UICollectionViewDataSource, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //switch collectonView underline, refresh list
+        filterType = matchFilterType(index: indexPath.row)
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.animationView.center.x = destX!
         }) { (_) in
-
+//            self.textSearchTable.reloadData()
+            if self.textSearchField.text != ""{//search when no empty
+                self.performTextSearch()
+            }
         }
+    }
+
+    func matchFilterType(index: Int) -> Int {
+        if index == 0 {
+            return TextSearchFilterInterger.allType
+        } else if index == 1 {
+            return TextSearchFilterInterger.ingredientType
+        } else if index == 2 {
+            return TextSearchFilterInterger.sideDish
+        }
+        return 0// return default search,but type not found
     }
 
 }

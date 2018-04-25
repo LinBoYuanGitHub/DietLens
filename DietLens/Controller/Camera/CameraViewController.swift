@@ -114,6 +114,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         sessionManager.onViewWillAppear()
+        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -197,13 +199,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
                         self.displayList = resultList!
                         self.recordType = RecordType.RecordByImage
                         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "recognitionVC") as? RecognitionResultViewController {
-                            if self.recordType == RecordType.RecordByImage {
-                                dest.cameraImage = self.chosenImageView.image!
-                                dest.imageKey = imageKey
-                                dest.foodCategoryList = self.displayList
-                            } else if self.recordType == RecordType.RecordByBarcode {
-                                dest.cameraImage = #imageLiteral(resourceName: "barcode_sample_icon")
-                            }
+                            dest.cameraImage = self.chosenImageView.image!
+                            dest.imageKey = imageKey
+                            dest.foodCategoryList = self.displayList
+                            let parentVC = self.parent as! AddFoodViewController
+                            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
                             if let navigator = self.navigationController {
                                 navigator.pushViewController(dest, animated: true)
                             }
@@ -511,19 +511,6 @@ extension CameraViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let parentVC = self.parent as! AddFoodViewController
-//        if let dest = segue.destination as? RecognitionResultsViewController {
-//            dest.foodDiary = foodDiary
-//            dest.imageId = imageId
-//            dest.dateTime = parentVC.addFoodDate
-//            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
-//            dest.whichMeal = parentVC.mealType
-//            dest.foodDiary.recordType = self.recordType
-//            if recordType == RecordType.RecordByImage {
-//                dest.userFoodImage = chosenImageView.image!
-//            } else if recordType == RecordType.RecordByBarcode {
-//                dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
-//            }
-//        }
         if let dest  = segue.destination as? RecognitionResultViewController {
             if recordType == RecordType.RecordByImage {
                 dest.cameraImage = chosenImageView.image!

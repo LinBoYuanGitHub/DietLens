@@ -63,6 +63,7 @@ class FoodCalendarViewController: UIViewController {
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+
     @IBAction func bringInCalendar(_ sender: Any) {
         calendarYConstraint.constant = 20
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
@@ -144,7 +145,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FoodDiaryRecordViewCell") as? FoodDiaryRecordViewCell {
                 let entity = foodDiaryList[indexPath.row]
-                cell.setUpCell(image: #imageLiteral(resourceName: "food_sample_image"), calorieText: entity.mealType)
+                cell.setUpCell(imageId: entity.imageId, calorieText: entity.mealType)
                 return cell
             }
         }
@@ -164,7 +165,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                 let imageKey = foodDiaryList[indexPath.row].imageId
                 //download image from Qiniu
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
-                    dest.foodDiary = self.foodDiaryList[indexPath.row]
+                    dest.foodDiaryEntity = self.foodDiaryList[indexPath.row]
                     dest.userFoodImage = image
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)

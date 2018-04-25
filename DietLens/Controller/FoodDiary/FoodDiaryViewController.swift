@@ -19,14 +19,8 @@ class FoodDiaryViewController: UIViewController {
     @IBOutlet weak var carbohydrateLabel: UILabel!
 
     //dataSource
-    //append foodItem when it can be add
-    var foodDiary = FoodDiaryEntity()
-    var accumulateCalorie: Double = 0.0
-    var accumulateCabohydrate: Double = 0.0
-    var accumulateProtein: Double = 0.0
-    var accumulateFat: Double = 0.0
+    var foodDiaryEntity = FoodDiaryEntity()
     //passing parameter
-    var mealType: Meal = .breakfast
     var userFoodImage: UIImage?
     //mealType data
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
@@ -43,8 +37,12 @@ class FoodDiaryViewController: UIViewController {
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
     }
 
+    func calculateAccumulateFoodDiary() {
+
+    }
+
     func updateFoodDiary() {
-        APIService.instance.updateFoodDiary(foodDiary: foodDiary) { (isSuccess) in
+        APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
                 if isSuccess {
                     if (self.navigationController?.viewControllers.contains(where: {
                         return $0 is FoodInfoViewController
@@ -56,7 +54,7 @@ class FoodDiaryViewController: UIViewController {
     }
 
     func addFoodIntoItem(dietItem: DietItem) {
-        foodDiary.dietItems.append(dietItem)
+        foodDiaryEntity.dietItems.append(dietItem)
     }
 
 }
@@ -84,19 +82,7 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //change the mealType block selection
         currentMealIndex = indexPath.row
-        let mealStr = mealStringArray[indexPath.row]
-        switch mealStr {
-        case StringConstants.MealString.breakfast:
-            mealType = .breakfast
-        case StringConstants.MealString.lunch:
-            mealType = .lunch
-        case StringConstants.MealString.dinner:
-            mealType = .dinner
-        case StringConstants.MealString.snack:
-            mealType = .snack
-        default:
-            break
-        }
+        foodDiaryEntity.mealType = mealStringArray[indexPath.row]
         //switch collection selection
         mealCollectionView.reloadData()
     }
@@ -105,13 +91,13 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodDiary.dietItems.count
+        return foodDiaryEntity.dietItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //name, portion calorie , deleteBtn
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FoodItemListCell") as? FoodItemListCell {
-            let entity = foodDiary.dietItems[indexPath.row]
+            let entity = foodDiaryEntity.dietItems[indexPath.row]
             cell.setUpCell(dietItem: entity)
         }
         return UITableViewCell()
@@ -119,7 +105,7 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.foodDiary.dietItems.remove(at: indexPath.row)
+            self.foodDiaryEntity.dietItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

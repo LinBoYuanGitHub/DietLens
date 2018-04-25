@@ -25,7 +25,7 @@ class FoodInfoViewController: UIViewController {
     //pickerView
     var quantityPickerView = UIPickerView()
     //data source
-    var foodDiaryEntity = FoodDiaryEntity()
+
     var foodInfoModel = FoodInfomationModel()
     var quantity = 1.0
     var selectedPortionPos: Int = 0
@@ -35,46 +35,41 @@ class FoodInfoViewController: UIViewController {
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
     //parameter for passing value
-    var foodId: Int?
-    var userFoodImage: UIImage?
-    var mealType: Meal = .breakfast
+    var userFoodImage: UIImage? //previous viewController need to pass the display image
+    var foodDiaryEntity = FoodDiaryEntity()
+    var dietItem = DietItem()
     var isSetMealByTimeRequired: Bool = false
-    var isAddIntoFoodList = false
-    var isAccumulatedDiary: Bool = false
-    var imageKey: String?
+    var recordType = RecordType.RecordByImage
+//    var isAddIntoFoodList = false
+//    var isAccumulatedDiary: Bool = false
+//    var imageKey: String?
 
     override func viewDidLoad() {
-        if imageKey != nil {
-            foodDiaryEntity.imageId = imageKey!
-        }
+        //init foodInfo data -> setUp View
         prepareQuantityIntegerArray()
+        initFoodInfo()
+        setUpViews()
         quantityValue.delegate = self
         unitValue.delegate = self
-        quantityValue.inputAccessoryView = setUpPickerToolBar()
         //pickerView
         quantityPickerView.delegate = self
         quantityPickerView.dataSource = self
-        quantityValue.inputView = quantityPickerView
+        //mealCollectionView
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
-        //set up image
-        foodSampleImage.image = userFoodImage
-        //set up passed value & image
-//        setUpFoodValue()
         //registration for resuable nib cellItem
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
-        requestForDietInformation()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
-        unitValue.addGestureRecognizer(tap)
-        //init foodEntity if directly save
     }
 
-    @objc func tapFunction(_ sender: UITapGestureRecognizer) {
-        showUnitSelectionDialog()
+/********************************************************
+    Data setting Up part
+********************************************************/
+    func initFoodInfo() {
+        foodDiaryEntity.dietItems.append(dietItem)
+        foodName.text = dietItem.foodName
     }
 
-    //used only when isNotAccumulate
     func initFoodEntity() {
         var dietItem = DietItem()
         dietItem.foodName = foodInfoModel.foodName
@@ -100,23 +95,6 @@ class FoodInfoViewController: UIViewController {
         foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: Date())
     }
 
-    //request for dietInformation
-    func requestForDietInformation() {
-        if foodId == nil {
-            return
-        }
-        APIService.instance.getFoodDetail(foodId: foodId!) { (foodInfo) in
-            if foodInfo == nil {
-                return
-            }
-            self.foodInfoModel = foodInfo!
-            if !self.isAccumulatedDiary {
-                self.initFoodEntity()
-            }
-            self.setUpFoodValue()
-        }
-    }
-
     func setUpFoodValue() {
         foodName.text = foodInfoModel.foodName
         let portionRate = Float(Double(quantity) * foodInfoModel.portionList[selectedPortionPos].weightValue/100)
@@ -126,6 +104,33 @@ class FoodInfoViewController: UIViewController {
         fatValueLabel.text = String(portionRate * Float(foodInfoModel.fat)!) + " "+StringConstants.UIString.diaryIngredientUnit
     }
 
+/********************************************************
+    View setting Up part
+********************************************************/
+    func setUpViews() {
+        setUpImage()
+        quantityValue.inputAccessoryView = setUpPickerToolBar()
+        quantityValue.inputView = quantityPickerView
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
+        unitValue.addGestureRecognizer(tap)
+    }
+
+    func setUpImage() {
+        if recordType == RecordType.RecordByImage {
+            foodSampleImage.image = userFoodImage
+        } else if recordType == RecordType.RecordByBarcode {
+            foodSampleImage.image = #imageLiteral(resourceName: "barcode_sample_icon")
+        } else {
+            //TODO sampling image according to text category
+            foodSampleImage.image = #imageLiteral(resourceName: "food_sample_image")
+        }
+    }
+
+    @objc func tapFunction(_ sender: UITapGestureRecognizer) {
+        showUnitSelectionDialog()
+    }
+
+    //used only when isNotAccumulate
     @objc func showUnitSelectionDialog() {
         let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.alert)
         for portion in foodInfoModel.portionList {
@@ -139,7 +144,7 @@ class FoodInfoViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     //if not passing mealType, then use currentTime to set mealType
@@ -147,36 +152,38 @@ class FoodInfoViewController: UIViewController {
         if isSetMealByTimeRequired {
             let hour: Int = Calendar.current.component(.hour, from: Date())
             if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
-                self.mealType = .breakfast
+                self.foodDiaryEntity.mealType = StringConstants.MealString.breakfast
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
             } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
-                self.mealType = .lunch
+                self.foodDiaryEntity.mealType = StringConstants.MealString.lunch
                 currentMealIndex = 1
                 mealCollectionView.reloadData()
             } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
-                self.mealType = .dinner
+                self.foodDiaryEntity.mealType = StringConstants.MealString.dinner
                 currentMealIndex = 2
                 mealCollectionView.reloadData()
             } else {
-                self.mealType = .snack
+                self.foodDiaryEntity.mealType = StringConstants.MealString.snack
                 currentMealIndex = 3
                 mealCollectionView.reloadData()
             }
         } else {
-            switch self.mealType {
-            case Meal.breakfast:
+            switch self.foodDiaryEntity.mealType {
+            case StringConstants.MealString.breakfast:
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
-            case Meal.lunch:
+            case StringConstants.MealString.lunch:
                 currentMealIndex = 1
                 mealCollectionView.reloadData()
-            case Meal.dinner:
+            case StringConstants.MealString.dinner:
                 currentMealIndex = 2
                 mealCollectionView.reloadData()
-            case Meal.snack:
+            case StringConstants.MealString.snack:
                 currentMealIndex = 3
                 mealCollectionView.reloadData()
+            default:
+                break
             }
         }
     }
@@ -211,13 +218,23 @@ class FoodInfoViewController: UIViewController {
     }
 
     @IBAction func onAddBtnClicked(_ sender: Any) {
-        foodDiaryEntity.dietItems[0].quantity = quantity
-        if isAccumulatedDiary {
-            //add to FoodDiaryListViewController & refresh
+        if dietItem.recordType == RecordType.RecordByAdditionText {
+            //1.from FoodCalendarViewController 2.first TextSearchItem
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 if let navigator = self.navigationController {
-                    //clear controller to Bottom & add foodCalendar Controller
-                    navigator.pushViewController(dest, animated: true)
+                    //pop otherView
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is FoodDiaryViewController
+                    }) {
+                        //pop searchView & foodInfoView
+                        navigator.popViewController(animated: true)
+                        navigator.popViewController(animated: true)
+                        //add foodItem into
+
+                    } else {
+                        navigator.pushViewController(dest, animated: true)
+                    }
+
                 }
             }
         } else {
@@ -228,6 +245,7 @@ class FoodInfoViewController: UIViewController {
                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
                         dest.selectedDate = Date()
                         if let navigator = self.navigationController {
+                            //pop all the view except HomePage
                             navigator.pushViewController(dest, animated: true)
                         }
                     }
@@ -238,8 +256,8 @@ class FoodInfoViewController: UIViewController {
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-//        self.navigationController?.popViewController(animated: true)
+//        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -270,11 +288,6 @@ class FoodInfoViewController: UIViewController {
         quantityValue.inputView = nil
         quantityValue.keyboardType = UIKeyboardType.decimalPad
         quantityValue.reloadInputViews()
-//        guard let stack = self.navigationController?.viewControllers else { return }
-//        //get the mainMenu VC
-//        let mainVC = stack.first!
-//        // Rearrange your stack
-//        self.navigationController?.viewControllers = [mainVC, self]
     }
 
     func keyboardWillShow() {
@@ -343,19 +356,7 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //change the mealType block selection
         currentMealIndex = indexPath.row
-        let mealStr = mealStringArray[indexPath.row]
-        switch mealStr {
-        case StringConstants.MealString.breakfast:
-            mealType = .breakfast
-        case StringConstants.MealString.lunch:
-            mealType = .lunch
-        case StringConstants.MealString.dinner:
-            mealType = .dinner
-        case StringConstants.MealString.snack:
-            mealType = .snack
-        default:
-            break
-        }
+        foodDiaryEntity.mealType = mealStringArray[indexPath.row]
         //switch collection selection
         mealCollectionView.reloadData()
     }

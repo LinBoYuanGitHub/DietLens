@@ -310,13 +310,13 @@ class APIService {
         }
     }
 
-    public func getFoodSearchResult(keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
+    public func getFoodSearchResult(filterType: Int, keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.foodSearchListURL)!,
+            URL(string: ServerConfig.foodSearchListURL + "?category=" + String(filterType))!,
             method: .post,
             parameters: ["food_name": keywords],
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -487,9 +487,8 @@ class APIService {
         if let token = QiniuToken.shared().uploadToken() {
             let downloadURL = QiniuConfig.rootDomain + "/"+imageKey + "?token=" + token
             let imageView = UIImageView()
-            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (imageResponse) in
-                let image = UIImage(data: imageResponse.data!)
-                completion(image)
+            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
+                completion(imageView.image)
             })
         }
     }
@@ -519,7 +518,7 @@ class APIService {
                     return
                 }
                 let jsonObject = JSON(recogResult)["result"]["data"]
-                let displayCategory = MockedUpFoodData.instance.assembleFoodInfoData(data: jsonObject)
+                let displayCategory = FoodInfoDataManager.instance.assembleDisplayFoodCategoryData(data: jsonObject)
                 if jsonObject == JSON.null {
                     //not json data, return null
                     completion(nil)
@@ -531,7 +530,7 @@ class APIService {
     }
 
     //get food detail infomation(nutrition & portion)
-    public func getFoodDetail(foodId: Int, completion: @escaping (FoodInfomationModel?) -> Void) {
+    public func getFoodDetail(foodId: Int, completion: @escaping (DietItem?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryOperationURL+String(foodId))!,
             method: .get,
@@ -540,21 +539,21 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("save device token failed due to : \(String(describing: response.result.error))")
+                    print("get food detail failed due to : \(String(describing: response.result.error))")
                     completion(nil)
                     return
                 }
                 guard let scanResult = response.result.value else {
-                    print("save device token failed due to : Server Data Type Error")
+                    print("get food detail failed due to : Server Data Type Error")
                     completion(nil)
                     return
                 }
                 let jsonObject = JSON(scanResult)
-                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
-                if foodInfo == nil {
+                if jsonObject.count == 0 {
                     completion(nil)
                 } else {
-                    completion(foodInfo)
+                    let dietItem = FoodInfoDataManager.instance.assembleDietItem(jsonObject: jsonObject)
+                    completion(dietItem)
                 }
         }
     }
@@ -579,13 +578,7 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(scanResult)
-                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
-                if foodInfo == nil {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
+                completion(true)
         }
     }
 
@@ -608,13 +601,7 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(scanResult)
-                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
-                if foodInfo == nil {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
+                completion(true)
         }
     }
 
@@ -629,22 +616,16 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("save device token failed due to : \(String(describing: response.result.error))")
+                    print("update foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 guard let scanResult = response.result.value else {
-                    print("save device token failed due to : Server Data Type Error")
+                    print("update foodDiary failed due to : Server Data Type Error")
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(scanResult)
-                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
-                if foodInfo == nil {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
+                completion(true)
         }
     }
     //create a new foodDiary -> save FoodItem & success
@@ -668,13 +649,7 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(scanResult)
-                let foodInfo = FoodInfoDataManager.instance.assembleFoodInfo(jsonObject: jsonObject)
-                if foodInfo == nil {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
+                completion(true)
         }
     }
 
@@ -698,7 +673,7 @@ class APIService {
                     return
                 }
                 let jsonObject = JSON(result)["results"]
-                let foodDiaryList = FoodInfoDataManager.instance.assembleFoodDiaryEntities(jsonObject: jsonObject)
+                let foodDiaryList = FoodDiaryDataManager.instance.assembleFoodDiaryEntities(jsonObject: jsonObject)
                 if foodDiaryList.count == 0 {
                     completion(nil)
                 } else {
@@ -1212,6 +1187,15 @@ class APIService {
                 if ($0.originalRequest?.url?.absoluteString == requestURL) {
                     $0.cancel()
                 }
+            }
+            uploadData.forEach { $0.cancel() }
+            downloadData.forEach { $0.cancel() }
+        }
+    }
+    func cancelAllRequest() {
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
+            sessionDataTask.forEach {
+                $0.cancel()
             }
             uploadData.forEach { $0.cancel() }
             downloadData.forEach { $0.cancel() }

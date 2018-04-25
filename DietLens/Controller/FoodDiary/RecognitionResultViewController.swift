@@ -22,6 +22,7 @@ class RecognitionResultViewController: UIViewController {
     var cameraImage: UIImage?
     var imageKey: String?
     var recordDate: Date = Date()
+    var isSetMealByTimeRequired = false
 
     //dataSource
     var foodCategoryList = [DisplayFoodCategory]()
@@ -65,13 +66,35 @@ class RecognitionResultViewController: UIViewController {
          self.navigationController?.popViewController(animated: true)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navVC = segue.destination as? UINavigationController
-        if let dest = navVC?.viewControllers.first as? FoodInfoViewController {
-            dest.userFoodImage = cameraImage
-            dest.isAccumulatedDiary = false
-            dest.imageKey = imageKey!
-            dest.foodId = selectedFoodInfo.id
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let navVC = segue.destination as? UINavigationController
+//        if let dest = navVC?.viewControllers.first as? FoodInfoViewController {
+//            dest.userFoodImage = cameraImage
+//            dest.isAccumulatedDiary = false
+//            dest.imageKey = imageKey!
+//            dest.foodId = selectedFoodInfo.id
+//        }
+//    }
+
+    func requestForDietInformation(foodId: Int) {
+        if foodId == 0 {
+            return
+        }
+        APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
+            if dietItem == nil {
+                return
+            }
+            var entity = dietItem!
+            entity.recordType = RecordType.RecordByImage
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                dest.userFoodImage = self.cameraImage
+                dest.dietItem = dietItem!
+                dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                if let navigator = self.navigationController {
+                    //clear controller to Bottom & add foodCalendar Controller
+                    navigator.pushViewController(dest, animated: true)
+                }
+            }
         }
     }
 

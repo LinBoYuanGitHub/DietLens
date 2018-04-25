@@ -25,6 +25,7 @@ struct DietItem {
     public var selectedPos: Int = 0
     public var quantity: Double = 1.0
     public var recordType = ""
+    public var category = ""
     public var portionInfo  = [PortionInfo]()
     public var nutritionInfo = NutritionInfo()
 }

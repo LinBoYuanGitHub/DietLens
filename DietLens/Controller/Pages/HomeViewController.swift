@@ -36,6 +36,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.delegate = self
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         //change statusbarcolor
 //        self.navigationItem.leftBarButtonItem = sideMenuButton
 //        UINavigationBar.appearance().shadowImage = UIImage()
@@ -77,6 +78,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //setUp title
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.navigatorTitle.dietlensTitle
+        self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
     }
 
     // calculate Nutrition Data & put into homePage

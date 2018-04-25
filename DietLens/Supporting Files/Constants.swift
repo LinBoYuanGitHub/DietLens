@@ -46,7 +46,7 @@ struct ServerConfig {
     static let foodDiaryURL = baseURL + "/healthlog/diet/"
     static let saveStepDiaryURL = baseURL + "/healthlog/steps/"
     static let saveHealthCenterDataURL = baseURL + "/healthlog/Medical/"
-    static let foodSearchListURL = labDeskTopURL + "/search/text/"
+    static let foodSearchListURL = labDeskTopURL + "/search/auto-suggestion/"
     static let foodSearchAutocompleteURL = labDeskTopURL + "/search/autocomplete/"
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
@@ -85,6 +85,7 @@ struct RecordType {
     static let RecordByImage = "recognition"
     static let RecordByBarcode = "barcode"
     static let RecordByText = "text"
+    static let RecordByAdditionText = "additionaltext"
     static let RecordByCustomized = "customized"
 }
 
@@ -93,6 +94,12 @@ struct RecognitionInteger {
     static let text = "1"
     static let gallery = "2"
     static let barcode = "3"
+}
+
+struct TextSearchFilterInterger {
+    static let allType = 0
+    static let ingredientType = 1
+    static let sideDish = 2
 }
 
 struct ArticleType {

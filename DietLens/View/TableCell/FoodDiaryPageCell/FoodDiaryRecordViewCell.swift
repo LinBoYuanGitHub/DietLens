@@ -16,9 +16,12 @@ class FoodDiaryRecordViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func setUpCell(image: UIImage, calorieText: String) {
-        foodImageView.image = image
+    func setUpCell(imageId: String, calorieText: String) {
         calorieView.text = calorieText
+        APIService.instance.qiniuImageDownload(imageKey: imageId) { (image) in
+            self.foodImageView.image = image
+        }
+
     }
 
 }

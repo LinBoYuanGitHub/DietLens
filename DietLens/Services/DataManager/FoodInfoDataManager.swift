@@ -70,6 +70,26 @@ class FoodInfoDataManager {
         return foodInfo
     }
 
+    func assembleDietItem(jsonObject: JSON) -> DietItem {
+        var dietItem = DietItem()
+        dietItem.foodId = jsonObject["id"].stringValue
+        dietItem.foodName = jsonObject["display_name"].stringValue
+        dietItem.nutritionInfo.calorie = jsonObject["energy"].doubleValue
+        dietItem.nutritionInfo.carbohydrate = jsonObject["carbohydrate"].doubleValue
+        dietItem.nutritionInfo.protein = jsonObject["protein"].doubleValue
+        dietItem.category = jsonObject["subcat"].stringValue
+        for json in jsonObject["portion"].arrayValue {
+            var portion = PortionInfo()
+            portion.sizeValue = json["size_value"].intValue
+            portion.rank = json["rank"].intValue
+            portion.sizeUnit = json["size_unit"].stringValue
+            portion.weightUnit = json["weight_unit"].stringValue
+            portion.weightValue = json["weight_value"].doubleValue
+            dietItem.portionInfo.append(portion)
+        }
+        return dietItem
+    }
+
     func assembleTextFoodInfo(jsonObject: JSON) -> FoodInfomationModel {
         var foodInfo = FoodInfomationModel()
         foodInfo.foodId = jsonObject["id"].stringValue
@@ -207,6 +227,40 @@ class FoodInfoDataManager {
             foodDiaryEntityList.append(foodDiaryEntity)
         }
         return foodDiaryEntityList
+    }
+
+    public func assembleDisplayFoodCategoryData(data: JSON) -> [DisplayFoodCategory] {
+        var resultList = [DisplayFoodCategory]()
+        var bestMatchCategory = DisplayFoodCategory()
+        let bestMatchs = data["best_match"].arrayValue
+        let subcats = data["subcat"].arrayValue
+        for bestMatch in bestMatchs {
+            var match = DisplayFoodInfo()
+            match.id = bestMatch["id"].intValue
+            match.displayName = bestMatch["display_name"].stringValue
+            match.exampleImgUrl = bestMatch["example_img"].stringValue
+            match.calories = bestMatch["nutrition"]["calories"].doubleValue
+            bestMatchCategory.subcateFoodList.append(match)
+        }
+        bestMatchCategory.subcatName = "Best Match" //insert a sample Image that controll by the backend will be better
+        bestMatchCategory.subcatImageUrl = ""
+        resultList.append(bestMatchCategory)
+        for subcat in subcats {
+            var subCategory = DisplayFoodCategory()
+            let foodInfos = subcat["food_info"].arrayValue
+            subCategory.subcatImageUrl = subcat["subcat_image"].stringValue
+            subCategory.subcatName = subcat["subcat"].stringValue
+            for foodInfo in foodInfos {
+                var foodObject = DisplayFoodInfo()
+                foodObject.id = foodInfo["id"].intValue
+                foodObject.displayName = foodInfo["display_name"].stringValue
+                foodObject.exampleImgUrl = foodInfo["example_img"].stringValue
+                foodObject.calories = foodInfo["nutrition"]["calories"].doubleValue
+                subCategory.subcateFoodList.append(foodObject)
+            }
+            resultList.append(subCategory)
+        }
+        return resultList
     }
 
 }

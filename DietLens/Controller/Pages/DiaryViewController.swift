@@ -186,7 +186,7 @@ class DiaryViewController: UIViewController {
     func loadDiaryData(date: Date) {
         let diaryFormatter = DateFormatter()
         diaryFormatter.setLocalizedDateFormatFromTemplate("dd MMM yyyy")
-        foodDiaryDataManager.foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))!
+//        foodDiaryDataManager.foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: diaryFormatter.string(from: date))!
         foodDiaryDataManager.mealEntity.removeAll()
         var breakfastEntity: DiaryDailyFood = DiaryDailyFood()
         var lunchEntity: DiaryDailyFood = DiaryDailyFood()
@@ -198,14 +198,15 @@ class DiaryViewController: UIViewController {
         snackEntity.mealOfDay = .snack
         for foodDiary in foodDiaryDataManager.foodDiaryList {
 //            foodInfo.foodImage = #imageLiteral(resourceName: "laksa")
+            var replacebo = FoodDiaryModel()
             if foodDiary.mealType == "Breakfast" {
-                 breakfastEntity.foodConsumed.append(foodDiary)
+                 breakfastEntity.foodConsumed.append(replacebo)
             } else if foodDiary.mealType == "Lunch" {
-                lunchEntity.foodConsumed.append(foodDiary)
+                lunchEntity.foodConsumed.append(replacebo)
             } else if foodDiary.mealType == "Dinner" {
-                dinnerEntity.foodConsumed.append(foodDiary)
+                dinnerEntity.foodConsumed.append(replacebo)
             } else {
-                snackEntity.foodConsumed.append(foodDiary)
+                snackEntity.foodConsumed.append(replacebo)
             }
         }
         if foodDiaryDataManager.foodDiaryList.count == 0 {
@@ -393,7 +394,7 @@ extension DiaryViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalen
             self.dismissCalendar(date)
             self.addFoodDate = date
             self.dateLabel.text = self.formatter.string(from: date)
-            self.loadDiaryData(date: date)
+//            self.loadDiaryData(date: date)
             self.loadDaysRecordedFromDiary(date: date)
         }
         if monthPosition == .previous || monthPosition == .next {
