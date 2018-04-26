@@ -74,17 +74,18 @@ class FoodInfoDataManager {
         var dietItem = DietItem()
         dietItem.foodId = jsonObject["id"].stringValue
         dietItem.foodName = jsonObject["display_name"].stringValue
-        dietItem.nutritionInfo.calorie = jsonObject["energy"].doubleValue
-        dietItem.nutritionInfo.carbohydrate = jsonObject["carbohydrate"].doubleValue
-        dietItem.nutritionInfo.protein = jsonObject["protein"].doubleValue
+        dietItem.nutritionInfo.calorie = jsonObject["nutrition"]["energy"].doubleValue
+        dietItem.nutritionInfo.carbohydrate = jsonObject["nutrition"]["carbohydrate"].doubleValue
+        dietItem.nutritionInfo.protein = jsonObject["nutrition"]["protein"].doubleValue
+        dietItem.nutritionInfo.fat = jsonObject["nutrition"]["fat"].doubleValue
         dietItem.category = jsonObject["subcat"].stringValue
-        for json in jsonObject["portion"].arrayValue {
+        for json in jsonObject["food_portion"].arrayValue {
             var portion = PortionInfo()
-            portion.sizeValue = json["size_value"].intValue
+//            portion.sizeValue = json["size_value"].intValue
             portion.rank = json["rank"].intValue
-            portion.sizeUnit = json["size_unit"].stringValue
-            portion.weightUnit = json["weight_unit"].stringValue
-            portion.weightValue = json["weight_value"].doubleValue
+            portion.sizeUnit = json["measurement_type"].stringValue
+//            portion.weightUnit = json["weight_unit"].stringValue
+            portion.weightValue = json["weight_g"].doubleValue
             dietItem.portionInfo.append(portion)
         }
         return dietItem

@@ -28,6 +28,7 @@ struct ServerConfig {
 //    static let baseURL = "http://dl.dietlens.com:8000/dl/v1"
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
+//    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
     static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
     static let userURL = baseURL + "/users"
     static let userLoginURL = baseURL + "/login/"

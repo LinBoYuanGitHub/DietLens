@@ -116,16 +116,15 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //jump to selected foodItem add FoodPage
         selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
+        requestForDietInformation(foodId: selectedFoodInfo.id)
 //        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
 //            dest.userFoodImage = cameraImage
-//            dest.isAccumulatedDiary = false
-//            dest.foodId = selectedFoodInfo.id
 //            if let navigator = self.navigationController {
 //                navigator.pushViewController(dest, animated: true)
 //
 //            }
 //        }
-        performSegue(withIdentifier: "toRecognizedFoodPage", sender: nil)
+//        performSegue(withIdentifier: "toRecognizedFoodPage", sender: nil)
     }
 
 }

@@ -23,6 +23,12 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         return [cameraViewController, textInputViewController]
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.containerView.isScrollEnabled = false
+        self.navigationController?.navigationBar.isHidden = true
+        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
+    }
+
     override func viewDidLoad() {
         //hid navaigation bar
         self.navigationController?.navigationBar.isHidden = true

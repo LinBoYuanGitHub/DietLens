@@ -75,6 +75,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         } else {
             print("Location services are not enabled")
         }
+        sessionManager.onViewWillAppear()
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
@@ -114,8 +115,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         sessionManager.onViewWillAppear()
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
-        self.navigationController?.navigationBar.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {

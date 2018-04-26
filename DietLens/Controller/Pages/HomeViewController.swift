@@ -143,10 +143,9 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     }
 
     func didPressArticle(_ indexOfArticleList: Int) {
-//        articleType = ArticleType.ARTICLE
-//        whichArticleIndex = indexOfArticleList
-//        performSegue(withIdentifier: "presentArticlePage", sender: self)
-        self.dismiss(animated: true, completion: nil)
+        articleType = ArticleType.ARTICLE
+        whichArticleIndex = indexOfArticleList
+        performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

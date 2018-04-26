@@ -4879,7 +4879,6 @@ A
         <image name="whiteBackArrow" width="8" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vk4-Nq-TzG"/>
         <segue reference="E0y-CB-0Z7"/>
         <segue reference="lNl-KA-hAD"/>
         <segue reference="huu-PE-XeN"/>

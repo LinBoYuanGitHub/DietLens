@@ -48,6 +48,7 @@ class TextInputViewController: UIViewController {
         textSearchTable.dataSource = self
         textSearchFilterView.delegate = self
         textSearchFilterView.dataSource = self
+        textSearchField.returnKeyType = .search
         loadRecentTextSearchResult()
     }
 
@@ -88,10 +89,10 @@ class TextInputViewController: UIViewController {
 
     @IBAction func textFieldChanged(_ sender: UITextField) {
         //load suggestion from net, set time
-        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
-            lastSearchTime = Date()
-            performTextSearch()
-        }
+//        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
+//            lastSearchTime = Date()
+//            performTextSearch()
+//        }
     }
 
     func performTextSearch() {
@@ -187,6 +188,7 @@ extension TextInputViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        performTextSearch()
         return true
     }
 

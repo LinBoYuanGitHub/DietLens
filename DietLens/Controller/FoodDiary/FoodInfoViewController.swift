@@ -22,11 +22,13 @@ class FoodInfoViewController: UIViewController {
     @IBOutlet weak var proteinValueLable: UILabel!
     @IBOutlet weak var fatValueLabel: UILabel!
     @IBOutlet weak var carbohydrateValueLabel: UILabel!
+    //container
+    @IBOutlet weak var container: UIView!
     //pickerView
     var quantityPickerView = UIPickerView()
-    //data source
 
-    var foodInfoModel = FoodInfomationModel()
+    //data source
+//    var foodInfoModel = FoodInfomationModel()
     var quantity = 1.0
     var selectedPortionPos: Int = 0
     var quantityIntegerArray = [0]
@@ -60,6 +62,19 @@ class FoodInfoViewController: UIViewController {
         //registration for resuable nib cellItem
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
+        //add notification for the keyboard
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: NSNotification.Name.UIKeyboardWillShow,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: NSNotification.Name.UIKeyboardWillHide,
+            object: nil
+        )
     }
 
 /********************************************************
@@ -67,41 +82,16 @@ class FoodInfoViewController: UIViewController {
 ********************************************************/
     func initFoodInfo() {
         foodDiaryEntity.dietItems.append(dietItem)
-        foodName.text = dietItem.foodName
-    }
-
-    func initFoodEntity() {
-        var dietItem = DietItem()
-        dietItem.foodName = foodInfoModel.foodName
-        dietItem.foodId = foodInfoModel.foodId
-        dietItem.nutritionInfo.calorie = Double(foodInfoModel.calorie)
-        dietItem.nutritionInfo.protein = Double(foodInfoModel.protein)!
-        dietItem.nutritionInfo.fat = Double(foodInfoModel.fat)!
-        dietItem.nutritionInfo.carbohydrate = Double(foodInfoModel.carbohydrate)!
-        dietItem.quantity = Double(quantityValue.text!)!
-        dietItem.selectedPos =  0
-        for portion in foodInfoModel.portionList {
-            var portionInfo = PortionInfo()
-            portionInfo.rank = portion.rank
-            portionInfo.sizeUnit = portion.sizeUnit
-            portionInfo.sizeValue = portion.sizeValue
-            portionInfo.weightUnit = portion.weightUnit
-            portionInfo.weightValue = portion.weightValue
-            dietItem.portionInfo.append(portionInfo)
-        }
-        dietItem.recordType = RecognitionInteger.recognition
-        foodDiaryEntity.dietItems.append(dietItem)
-        foodDiaryEntity.mealType = mealStringArray[0]
-        foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: Date())
+        setUpFoodValue()
     }
 
     func setUpFoodValue() {
-        foodName.text = foodInfoModel.foodName
-        let portionRate = Float(Double(quantity) * foodInfoModel.portionList[selectedPortionPos].weightValue/100)
-        calorieValueLabel.text = String(foodInfoModel.calorie*portionRate)+" "+StringConstants.UIString.calorieUnit
-        carbohydrateValueLabel.text = String(portionRate * Float(foodInfoModel.carbohydrate)!)+" "+StringConstants.UIString.diaryIngredientUnit
-        proteinValueLable.text = String(portionRate * Float(foodInfoModel.protein)!) + " "+StringConstants.UIString.diaryIngredientUnit
-        fatValueLabel.text = String(portionRate * Float(foodInfoModel.fat)!) + " "+StringConstants.UIString.diaryIngredientUnit
+        foodName.text = dietItem.foodName
+        let portionRate = Double(dietItem.quantity) * dietItem.portionInfo[selectedPortionPos].weightValue/100
+        calorieValueLabel.text = String(dietItem.nutritionInfo.calorie * portionRate)+" "+StringConstants.UIString.calorieUnit
+        carbohydrateValueLabel.text = String(portionRate * dietItem.nutritionInfo.carbohydrate)+" "+StringConstants.UIString.diaryIngredientUnit
+        proteinValueLable.text = String(portionRate * dietItem.nutritionInfo.protein) + " "+StringConstants.UIString.diaryIngredientUnit
+        fatValueLabel.text = String(portionRate * dietItem.nutritionInfo.fat) + " "+StringConstants.UIString.diaryIngredientUnit
     }
 
 /********************************************************
@@ -111,8 +101,6 @@ class FoodInfoViewController: UIViewController {
         setUpImage()
         quantityValue.inputAccessoryView = setUpPickerToolBar()
         quantityValue.inputView = quantityPickerView
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
-        unitValue.addGestureRecognizer(tap)
     }
 
     func setUpImage() {
@@ -122,24 +110,29 @@ class FoodInfoViewController: UIViewController {
             foodSampleImage.image = #imageLiteral(resourceName: "barcode_sample_icon")
         } else {
             //TODO sampling image according to text category
-            foodSampleImage.image = #imageLiteral(resourceName: "food_sample_image")
+            foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
         }
     }
 
-    @objc func tapFunction(_ sender: UITapGestureRecognizer) {
+    @IBAction func onQuantityBtnClicked(_ sender: Any) {
+        unitValue.becomeFirstResponder()
+    }
+
+    @IBAction func onUnitBtnClicked(_ sender: Any) {
         showUnitSelectionDialog()
     }
 
     //used only when isNotAccumulate
     @objc func showUnitSelectionDialog() {
         let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.alert)
-        for portion in foodInfoModel.portionList {
+        for portion in dietItem.portionInfo {
             alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
                 self.selectedPortionPos = portion.rank - 1
                 self.unitValue.text = portion.sizeUnit
                 self.setUpFoodValue()
             }))
         }
+        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
@@ -275,7 +268,7 @@ class FoodInfoViewController: UIViewController {
         if quantityValue.inputView != nil {
             let quantityPos =  quantityPickerView.selectedRow(inComponent: 0)
             let decimalPos = quantityPickerView.selectedRow(inComponent: 1)
-            quantityValue.text = String(quantityIntegerArray[quantityPos]) + String(decimalArray[decimalPos])
+            quantityValue.text = String(Double(quantityIntegerArray[quantityPos])+Double(decimalArray[decimalPos]))
         }
     }
 
@@ -290,16 +283,16 @@ class FoodInfoViewController: UIViewController {
         quantityValue.reloadInputViews()
     }
 
-    func keyboardWillShow() {
-        self.mealTypeView.frame.origin.y -= (40)
-        self.nutritionDataView.frame.origin.y -= (40)
-        self.portionDataView.frame.origin.y -= (40)
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.container.frame.origin.y = view.frame.height - keyboardHeight-self.container.frame.size.height + CGFloat(50)
+        }
     }
 
-    func keyboardWillHide() {
-        self.mealTypeView.frame.origin.y += (40)
-        self.nutritionDataView.frame.origin.y += (40)
-        self.portionDataView.frame.origin.y += (40)
+    @objc func keyboardWillHide(_ notification: Notification) {
+            self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
     }
 
     func flipToShowNutrition() {
@@ -376,7 +369,6 @@ extension FoodInfoViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == quantityValue {
-            keyboardWillShow()
             return true
         } else if textField == unitValue {
             return false
@@ -386,8 +378,9 @@ extension FoodInfoViewController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == quantityValue {
-            keyboardWillHide()
+            dietItem.quantity = Double(quantityValue.text!)!
            //change the nutrition data
+            setUpFoodValue()
         }
     }
 
