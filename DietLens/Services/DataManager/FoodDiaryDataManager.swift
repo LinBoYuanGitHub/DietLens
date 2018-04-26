@@ -17,6 +17,7 @@ class FoodDiaryDataManager {
 
     public var foodDiaryEntity = FoodDiaryEntity() //for FoodDiary entry
     public var foodDiaryList = [FoodDiaryEntity]() //for all the foodDiary history
+    
 
     init() {
 

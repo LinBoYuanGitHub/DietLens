@@ -85,10 +85,12 @@ class RecognitionResultViewController: UIViewController {
                 return
             }
             var entity = dietItem!
-            entity.recordType = RecordType.RecordByImage
+            entity.recordType = RecognitionInteger.recognition
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                 dest.userFoodImage = self.cameraImage
-                dest.dietItem = dietItem!
+                dest.dietItem = entity
+                dest.recordType = entity.recordType
+                dest.imageKey = self.imageKey
                 dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
                 if let navigator = self.navigationController {
                     //clear controller to Bottom & add foodCalendar Controller

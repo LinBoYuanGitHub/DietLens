@@ -44,7 +44,7 @@ class FoodInfoViewController: UIViewController {
     var recordType = RecordType.RecordByImage
 //    var isAddIntoFoodList = false
 //    var isAccumulatedDiary: Bool = false
-//    var imageKey: String?
+    var imageKey: String?
 
     override func viewDidLoad() {
         //init foodInfo data -> setUp View
@@ -104,18 +104,18 @@ class FoodInfoViewController: UIViewController {
     }
 
     func setUpImage() {
-        if recordType == RecordType.RecordByImage {
+        if recordType ==  RecognitionInteger.recognition {
+            foodDiaryEntity.imageId = imageKey!
             foodSampleImage.image = userFoodImage
-        } else if recordType == RecordType.RecordByBarcode {
+        } else if recordType == RecognitionInteger.barcode {
             foodSampleImage.image = #imageLiteral(resourceName: "barcode_sample_icon")
         } else {
-            //TODO sampling image according to text category
             foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
         }
     }
 
     @IBAction func onQuantityBtnClicked(_ sender: Any) {
-        unitValue.becomeFirstResponder()
+        quantityValue.becomeFirstResponder()
     }
 
     @IBAction func onUnitBtnClicked(_ sender: Any) {
@@ -324,7 +324,7 @@ extension FoodInfoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 }
 
-extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mealStringArray.count
@@ -352,6 +352,10 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
         foodDiaryEntity.mealType = mealStringArray[indexPath.row]
         //switch collection selection
         mealCollectionView.reloadData()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: CGFloat(70), height: CGFloat(35))
     }
 
 }

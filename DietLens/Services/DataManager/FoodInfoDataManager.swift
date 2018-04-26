@@ -240,7 +240,7 @@ class FoodInfoDataManager {
             match.id = bestMatch["id"].intValue
             match.displayName = bestMatch["display_name"].stringValue
             match.exampleImgUrl = bestMatch["example_img"].stringValue
-            match.calories = bestMatch["nutrition"]["calories"].doubleValue
+            match.calories = bestMatch["nutrition"]["energy"].doubleValue
             bestMatchCategory.subcateFoodList.append(match)
         }
         bestMatchCategory.subcatName = "Best Match" //insert a sample Image that controll by the backend will be better
@@ -256,7 +256,7 @@ class FoodInfoDataManager {
                 foodObject.id = foodInfo["id"].intValue
                 foodObject.displayName = foodInfo["display_name"].stringValue
                 foodObject.exampleImgUrl = foodInfo["example_img"].stringValue
-                foodObject.calories = foodInfo["nutrition"]["calories"].doubleValue
+                foodObject.calories = foodInfo["nutrition"]["energy"].doubleValue
                 subCategory.subcateFoodList.append(foodObject)
             }
             resultList.append(subCategory)

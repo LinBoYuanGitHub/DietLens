@@ -99,6 +99,7 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 //                //clear controller to Bottom & add foodCalendar Controller
 //                navigator.pushViewController(dest, animated: true)
 //            }
+//            }
             controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
             present(controller!, animated: true, completion: nil)
         }

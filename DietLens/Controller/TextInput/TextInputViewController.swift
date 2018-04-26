@@ -124,9 +124,10 @@ class TextInputViewController: UIViewController {
                 return
             }
             var dietEntity = dietItem!
-            dietEntity.recordType = RecordType.RecordByImage
+            dietEntity.recordType = RecognitionInteger.text
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                 dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                dest.recordType = dietEntity.recordType
                 dest.dietItem = dietEntity
                 let parentVC = self.parent as! AddFoodViewController
                 dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
