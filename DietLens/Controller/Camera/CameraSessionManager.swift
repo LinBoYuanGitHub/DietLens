@@ -193,11 +193,6 @@ class CameraSessionManager {
             }
             //pinch velocity
             device.videoZoomFactor = max(1.0, min(desiredZoomFactor, maxZoomFactor))
-//            if (vZoomFactor <= device.activeFormat.videoMaxZoomFactor) {
-//                device.videoZoomFactor += (vZoomFactor-1)
-//            } else {
-//                NSLog("Unable to set videoZoom: (max %f, asked %f)", device.activeFormat.videoMaxZoomFactor, vZoomFactor)
-//            }
         } catch error as NSError {
             NSLog("Unable to set videoZoom: %@", error.localizedDescription)
         } catch _ {

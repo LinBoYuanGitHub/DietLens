@@ -58,6 +58,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.previewView.addGestureRecognizer(pinchGestureRecognizer)
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
+
         let previewLayer = previewView.videoPreviewLayer
         previewLayer.videoGravity = .resizeAspectFill
 
@@ -109,6 +110,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewView.videoPreviewLayer.frame.size = previewContainer.frame.size
+//        sessionManager.onViewWillAppear()
 //        previewContainer.bringSubview(toFront: focusViewImg)
     }
 

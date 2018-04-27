@@ -22,7 +22,7 @@ class FoodCalendarViewController: UIViewController {
 
     //dataSource
     var foodMealList = [FoodDiaryMealEntity]()
-    
+
     var nutritionList = [String]()
     //passValue
     var selectedDate = Date()
@@ -48,22 +48,50 @@ class FoodCalendarViewController: UIViewController {
         dateLabel.text = formatter.string(from: date)
         foodCalendarTableView.delegate = self
         foodCalendarTableView.dataSource = self
+        nutritionCollectionView.delegate = self
+        nutritionCollectionView.dataSource = self
         dateLabel.text = formatter.string(from: selectedDate)
         foodCalendarTableView.estimatedRowHeight = 90
         foodCalendarTableView.rowHeight = UITableViewAutomaticDimension
         diaryCalendar.appearance.headerTitleColor = UIColor.black
-        registTableHeader()
+        registerNib()
+        assembleMealList(foodDiaryList: [FoodDiaryEntity]())
     }
 
-    func registTableHeader() {
-        let nib = UINib(nibName: "diaryHeader", bundle: nil)
-        foodCalendarTableView.register(nib, forHeaderFooterViewReuseIdentifier: "DiarySectionHeader")
+    func registerNib() {
+//        let nib = UINib(nibName: "diaryHeader", bundle: nil)
+//        foodCalendarTableView.register(nib, forHeaderFooterViewReuseIdentifier: "DiarySectionHeader")
+        let nib = UINib(nibName: "foodCalendarViewHeader", bundle: nil)
+        foodCalendarTableView.register(nib, forHeaderFooterViewReuseIdentifier: "calendarSectionHeader")
+        let collectionNib = UINib(nibName: "NutritionCollectionCell", bundle: nil)
+        nutritionCollectionView.register(collectionNib, forCellWithReuseIdentifier: "nutritionCollectionCell")
+    }
+
+    func calculateTotalNutrition() {
+        var accumulatedCalorie = 0.0
+        var accumulatedCarbohydrate = 0.0
+        var accumulatedProtein = 0.0
+        var accumulatedFat = 0.0
+        for foodMeal in foodMealList {
+            for foodDiary in foodMeal.foodEntityList {
+                for item in foodDiary.dietItems {
+                    accumulatedCalorie += item.nutritionInfo.calorie
+                    accumulatedCarbohydrate += item.nutritionInfo.carbohydrate
+                    accumulatedProtein += item.nutritionInfo.protein
+                    accumulatedFat += item.nutritionInfo.fat
+                }
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         getFoodDairyByDate(date: selectedDate)
         let dateStr = DateUtil.normalDateToString(date: selectedDate)
         getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     @IBAction func closeButtonPressed(_ sender: Any) {
@@ -81,8 +109,7 @@ class FoodCalendarViewController: UIViewController {
             self.diaryCalendar.alpha = 1
         }
     }
-    
-    
+
     @IBAction func dismissCalendar(_ sender: Any) {
         calendarYConstraint.constant = -360
         UIView.animate(withDuration: 0.2) {
@@ -118,6 +145,7 @@ class FoodCalendarViewController: UIViewController {
 
     //assemble the meal from the server
     func assembleMealList(foodDiaryList: [FoodDiaryEntity]) {
+        foodMealList.removeAll()
         var breakfastEntity = FoodDiaryMealEntity()
         var lunchEntity = FoodDiaryMealEntity()
         var dinnerEntity = FoodDiaryMealEntity()
@@ -126,7 +154,7 @@ class FoodCalendarViewController: UIViewController {
         lunchEntity.meal = StringConstants.MealString.lunch
         dinnerEntity.meal = StringConstants.MealString.dinner
         snackEntity.meal = StringConstants.MealString.snack
-        for foodDiary in foodDiaryList{
+        for foodDiary in foodDiaryList {
             switch foodDiary.mealType {
             case StringConstants.MealString.breakfast:
                 breakfastEntity.foodEntityList.append(foodDiary)
@@ -152,11 +180,12 @@ class FoodCalendarViewController: UIViewController {
 extension FoodCalendarViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return nutritionList.count
+        return 4
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCateogryCell", for: indexPath) as? NutritionCollectionCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nutritionCollectionCell", for: indexPath) as? NutritionCollectionCell {
+            cell.setUpCell(nutritionName: "CALORIE", percentage: 25, nutritionValue: 320, unit: "kcal")
             return cell
         }
         return UICollectionViewCell()
@@ -167,12 +196,16 @@ extension FoodCalendarViewController: UICollectionViewDelegate, UICollectionView
 extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (self.foodMealList[section].foodEntityList.count + 1)
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return foodMealList.count
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+
             APIService.instance.deleteFoodDiary(foodDiaryId: foodMealList[indexPath.section].foodEntityList[indexPath.row].foodDiaryId, completion: { (_) in
                 self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -188,11 +221,31 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FoodDiaryRecordViewCell") as? FoodDiaryRecordViewCell {
                 let entity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
-                cell.setUpCell(imageId: entity.imageId, calorieText: entity.mealType)
+                let calorieText = String(calculateCalorie(foodEntity: entity)) + StringConstants.UIString.calorieUnit
+                cell.setUpCell(imageId: entity.imageId, calorieText: calorieText)
                 return cell
             }
         }
         return UITableViewCell()
+    }
+
+    //calculate nutrition header for this view
+    func calculateCalorie(foodEntity: FoodDiaryEntity) -> Int {
+        var accumulatedCalorie = 0
+        for dietItem in foodEntity.dietItems {
+            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie)
+        }
+        return accumulatedCalorie
+    }
+
+    func calculateCalorie(foodEntityList: [FoodDiaryEntity]) -> Int {
+        var accumulatedCalorie = 0
+        for foodEntity in foodEntityList {
+            for dietItem in foodEntity.dietItems {
+                accumulatedCalorie += Int(dietItem.nutritionInfo.calorie)
+            }
+        }
+        return accumulatedCalorie
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -200,7 +253,15 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 31 //header
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56 //row
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 4 //for section vertical spacing
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -227,35 +288,34 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
         }
 
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DiarySectionHeader") as? DiarySectionHeader else {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "calendarSectionHeader") as? FoodCalendarSectionHeader else {
             return UITableViewHeaderFooterView()
         }
         let meal = foodMealList[section].meal
         switch meal {
         case StringConstants.MealString.breakfast:
-            header.diaryLabel.text = StringConstants.MealString.breakfast
-            header.addLabel.tag = 0
+            header.mealLabel.text = StringConstants.MealString.breakfast
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
         case StringConstants.MealString.lunch:
-            header.diaryLabel.text = StringConstants.MealString.lunch
-            header.addLabel.tag = 1
+            header.mealLabel.text = StringConstants.MealString.lunch
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
         case StringConstants.MealString.dinner:
-            header.diaryLabel.text = StringConstants.MealString.dinner
-            header.addLabel.tag = 2
+            header.mealLabel.text = StringConstants.MealString.dinner
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
         case StringConstants.MealString.snack:
-            header.diaryLabel.text = StringConstants.MealString.snack
-            header.addLabel.tag = 3
+            header.mealLabel.text = StringConstants.MealString.snack
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
         default:
             break
         }
-        header.addLabel.addTarget(self, action: #selector(onAddFoodFromDiary(_:)), for: .touchUpInside)
         return header
     }
-    
+
     //to camera to add foodDiary again
     @objc func onAddFoodFromDiary(_ sender: UIButton) {
-        
+
     }
 
 }

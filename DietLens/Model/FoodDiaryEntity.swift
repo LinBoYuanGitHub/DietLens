@@ -20,7 +20,7 @@ struct FoodDiaryEntity {
 
 struct DietItem {
     public var id: String = ""
-    public var foodId: String = ""
+    public var foodId: Int = 0
     public var foodName: String = ""
     public var selectedPos: Int = 0
     public var quantity: Double = 1.0

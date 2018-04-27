@@ -72,7 +72,7 @@ class FoodInfoDataManager {
 
     func assembleDietItem(jsonObject: JSON) -> DietItem {
         var dietItem = DietItem()
-        dietItem.foodId = jsonObject["id"].stringValue
+        dietItem.foodId = jsonObject["id"].intValue
         dietItem.foodName = jsonObject["display_name"].stringValue
         dietItem.nutritionInfo.calorie = jsonObject["nutrition"]["energy"].doubleValue
         dietItem.nutritionInfo.carbohydrate = jsonObject["nutrition"]["carbohydrate"].doubleValue
@@ -184,7 +184,7 @@ class FoodInfoDataManager {
         for i in 0..<jsonObject["details"].count {
             var foodItem = DietItem()
             var job = jsonObject["details"][i]
-            foodItem.foodId = job["id"].stringValue
+            foodItem.foodId = job["id"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.quantity = Double(job["quantity"].intValue)
             foodItem.recordType = job["search_type"].stringValue

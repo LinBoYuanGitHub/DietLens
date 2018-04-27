@@ -74,6 +74,8 @@
 		3FD08625200EEC6B0052D54B /* HealthRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08624200EEC6B0052D54B /* HealthRecord.swift */; };
 		3FD08627200F21460052D54B /* HealthDeviceDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */; };
 		3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08628200F38500052D54B /* FeedBackViewController.swift */; };
+		3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */; };
+		3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */; };
 		3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */; };
 		3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC34512057D0F80060099A /* DiarySectionHeader.swift */; };
 		3FEC34542057D1380060099A /* diaryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC34532057D1380060099A /* diaryHeader.xib */; };
@@ -250,6 +252,8 @@
 		3FD08624200EEC6B0052D54B /* HealthRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecord.swift; sourceTree = "<group>"; };
 		3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDeviceDataCell.swift; sourceTree = "<group>"; };
 		3FD08628200F38500052D54B /* FeedBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackViewController.swift; sourceTree = "<group>"; };
+		3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCalendarSectionHeader.swift; sourceTree = "<group>"; };
+		3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = foodCalendarViewHeader.xib; sourceTree = "<group>"; };
 		3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientItemCell.swift; sourceTree = "<group>"; };
 		3FEC34512057D0F80060099A /* DiarySectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarySectionHeader.swift; sourceTree = "<group>"; };
 		3FEC34532057D1380060099A /* diaryHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = diaryHeader.xib; sourceTree = "<group>"; };
@@ -509,6 +513,8 @@
 				3F9BFE9F2000A0120011845B /* IngredientHeader.xib */,
 				3FEC34512057D0F80060099A /* DiarySectionHeader.swift */,
 				3FEC34532057D1380060099A /* diaryHeader.xib */,
+				3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */,
+				3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */,
 			);
 			path = TableHeader;
 			sourceTree = "<group>";
@@ -918,6 +924,7 @@
 				3F1AC22E20872654008F5BF2 /* NutritionCollectionCell.xib in Resources */,
 				3F1AC22C20870FC2008F5BF2 /* MealTypeCollectionCell.xib in Resources */,
 				3F8A69E61FE267E8005B83B0 /* GoogleService-Info.plist in Resources */,
+				3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */,
 				3F9BFEA02000A0120011845B /* IngredientHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1254,6 +1261,7 @@
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
 				3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */,
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
+				3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */,
 				3F7DACA120121515009E4DB6 /* Ingredient.swift in Sources */,
 				3F43664D207C9AE00089C63A /* RecognitionResultViewController.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,

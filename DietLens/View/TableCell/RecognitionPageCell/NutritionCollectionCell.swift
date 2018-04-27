@@ -16,18 +16,16 @@ class NutritionCollectionCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setUpOvalView()
     }
 
     private func setUpOvalView() {
-        let layer = CAShapeLayer()
-        layer.cornerRadius = CGFloat(ovalView.frame.width)/2.0
-        ovalView.layer.addSublayer(layer)
+        ovalView.layer.cornerRadius = CGFloat(ovalView.frame.width)/2.0
         ovalView.backgroundColor = UIColor.white
         //set color layer to fill the the oval
     }
 
     func setUpCell(nutritionName: String, percentage: Int, nutritionValue: Double, unit: String) {
+        setUpOvalView()
         percentageLabel.text = String(percentage) + "%"
         nutritionLabel.text = nutritionName
         nutritionValueLabel.text = String(nutritionValue) + unit

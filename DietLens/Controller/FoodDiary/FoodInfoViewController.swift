@@ -82,7 +82,9 @@ class FoodInfoViewController: UIViewController {
 ********************************************************/
     func initFoodInfo() {
         foodDiaryEntity.dietItems.append(dietItem)
+        foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: Date())
         setUpFoodValue()
+        setCorrectMealType()
     }
 
     func setUpFoodValue() {
@@ -239,6 +241,8 @@ class FoodInfoViewController: UIViewController {
                         dest.selectedDate = Date()
                         if let navigator = self.navigationController {
                             //pop all the view except HomePage
+                            navigator.popViewController(animated: false)//pop self foodInfoVC
+                            navigator.popViewController(animated: false)//pop addFoodVC
                             navigator.pushViewController(dest, animated: true)
                         }
                     }

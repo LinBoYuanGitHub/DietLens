@@ -17,7 +17,6 @@ class FoodDiaryDataManager {
 
     public var foodDiaryEntity = FoodDiaryEntity() //for FoodDiary entry
     public var foodDiaryList = [FoodDiaryEntity]() //for all the foodDiary history
-    
 
     init() {
 
@@ -36,10 +35,14 @@ class FoodDiaryDataManager {
         for i in 0..<jsonObject["details"].count {
             var foodItem = DietItem()
             var job = jsonObject["details"][i]
-            foodItem.foodId = job["id"].stringValue
+            foodItem.foodId = job["id"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.quantity = Double(job["quantity"].intValue)
             foodItem.recordType = job["search_type"].stringValue
+            foodItem.nutritionInfo.calorie = job["nutrient"]["energy"].doubleValue
+            foodItem.nutritionInfo.carbohydrate = job["nutrient"]["carbohydrate"].doubleValue
+            foodItem.nutritionInfo.protein = job["nutrient"]["protein"].doubleValue
+            foodItem.nutritionInfo.fat = job["nutrient"]["fat"].doubleValue
             foodDiaryEntity.dietItems.append(foodItem)
         }
         return foodDiaryEntity
