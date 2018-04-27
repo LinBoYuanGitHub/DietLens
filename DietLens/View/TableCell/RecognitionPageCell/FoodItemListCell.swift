@@ -20,9 +20,13 @@ class FoodItemListCell: UITableViewCell {
 
     func setUpCell(dietItem: DietItem) {
         foodNameLable.text = dietItem.foodName
-        quantityLable.text = String(dietItem.quantity)
-//        unitLabel.text = dietItem.portionInfo[dietItem.selectedPos].weightUnit
-        calorieLabel.text = String(dietItem.nutritionInfo.calorie)
+        if floor(dietItem.quantity) == dietItem.quantity {
+            quantityLable.text = String(Int(dietItem.quantity))
+        } else {
+            quantityLable.text = String(dietItem.quantity)
+        }
+//      unitLabel.text = dietItem.portionInfo[dietItem.selectedPos].weightUnit
+        calorieLabel.text = String(Int(dietItem.nutritionInfo.calorie)) + StringConstants.UIString.calorieUnit
     }
 
 }

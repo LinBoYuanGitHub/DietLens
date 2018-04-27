@@ -74,6 +74,7 @@
 		3FD08625200EEC6B0052D54B /* HealthRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08624200EEC6B0052D54B /* HealthRecord.swift */; };
 		3FD08627200F21460052D54B /* HealthDeviceDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */; };
 		3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08628200F38500052D54B /* FeedBackViewController.swift */; };
+		3FD241A920931D6900F1F2EB /* EncryptionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */; };
 		3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */; };
 		3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */; };
 		3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */; };
@@ -252,6 +253,7 @@
 		3FD08624200EEC6B0052D54B /* HealthRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecord.swift; sourceTree = "<group>"; };
 		3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDeviceDataCell.swift; sourceTree = "<group>"; };
 		3FD08628200F38500052D54B /* FeedBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackViewController.swift; sourceTree = "<group>"; };
+		3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionUtil.swift; sourceTree = "<group>"; };
 		3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCalendarSectionHeader.swift; sourceTree = "<group>"; };
 		3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = foodCalendarViewHeader.xib; sourceTree = "<group>"; };
 		3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientItemCell.swift; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 				58F2DF291F9F439100FF3A95 /* DataService.swift */,
 				3FFB569B1FB6ABCE002DCE15 /* APIService.swift */,
 				3F575C322047F0D9009C096C /* DateUtil.swift */,
+				3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1188,6 +1191,7 @@
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				3F9215A420808C3F00F92ECF /* MealTypeCollectionCell.swift in Sources */,
+				3FD241A920931D6900F1F2EB /* EncryptionUtil.swift in Sources */,
 				3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */,
 				589424B01FD7B1B1009AEA4C /* SplashScreenViewController.swift in Sources */,
 				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,

@@ -267,7 +267,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //click add more to directly add new dish into foodDiary
         if indexPath.row == self.foodMealList[indexPath.section].foodEntityList.count {
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "AddFoodVC") as? AddFoodViewController {
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "addFoodVC") as? AddFoodViewController {
                 if let navigator = self.navigationController {
                     navigator.pushViewController(dest, animated: true)
                 }
@@ -297,16 +297,16 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
         switch meal {
         case StringConstants.MealString.breakfast:
             header.mealLabel.text = StringConstants.MealString.breakfast
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         case StringConstants.MealString.lunch:
             header.mealLabel.text = StringConstants.MealString.lunch
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         case StringConstants.MealString.dinner:
             header.mealLabel.text = StringConstants.MealString.dinner
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         case StringConstants.MealString.snack:
             header.mealLabel.text = StringConstants.MealString.snack
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))
+            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         default:
             break
         }

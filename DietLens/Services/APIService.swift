@@ -485,7 +485,9 @@ class APIService {
     public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
         QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
         if let token = QiniuToken.shared().uploadToken() {
-            let downloadURL = QiniuConfig.rootDomain + "/"+imageKey + "?token=" + token
+            let calendar = Calendar.current
+            let date = calendar.date(byAdding: .minute, value: 5, to: Date())
+            let downloadURL = QiniuConfig.rootDomain + "/resource/" + imageKey + ".jpg?e=" + String(Int(date!.timeIntervalSince1970)) + "&token=" + token
             let imageView = UIImageView()
             imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
                 completion(imageView.image)

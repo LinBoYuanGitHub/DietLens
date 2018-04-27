@@ -9,14 +9,16 @@
 import UIKit
 
 class FoodDiaryViewController: UIViewController {
-    @IBOutlet weak var foodImage: UIImageView!
+
+    @IBOutlet weak var foodSampleImage: UIImageView!
     @IBOutlet weak var mealCollectionView: UICollectionView!
     @IBOutlet weak var foodTableView: UITableView!
-    //nutritionPart
+    //sum nutritionPart
     @IBOutlet weak var calorieValueLabel: UILabel!
     @IBOutlet weak var proteinValueLable: UILabel!
     @IBOutlet weak var fatValueLabel: UILabel!
     @IBOutlet weak var carbohydrateLabel: UILabel!
+    //table header: foodImage,mealTypeView,nutritionView
 
     //dataSource
     var foodDiaryEntity = FoodDiaryEntity()
@@ -31,14 +33,34 @@ class FoodDiaryViewController: UIViewController {
         mealCollectionView.dataSource = self
         foodTableView.delegate = self
         foodTableView.dataSource = self
-        foodImage.image = userFoodImage
+        foodSampleImage.image = userFoodImage
         //registration for resuable nib cellItem
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
+        initFoodInfo()
+
     }
 
-    func calculateAccumulateFoodDiary() {
+    func initFoodInfo() {
+        calculateAccumulateFoodValue()
+    }
 
+    func calculateAccumulateFoodValue() {
+        var accumulatedCalorie = 0
+        var accumulatedCarbohydrate = 0
+        var accumulatedProtein = 0
+        var accumulatedFat = 0
+        //get accumualted value
+        for dietItem in foodDiaryEntity.dietItems {
+            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie)
+            accumulatedCarbohydrate += Int(dietItem.nutritionInfo.carbohydrate)
+            accumulatedProtein += Int(dietItem.nutritionInfo.protein)
+            accumulatedFat += Int(dietItem.nutritionInfo.fat)
+        }
+        calorieValueLabel.text = String(accumulatedCalorie) + StringConstants.UIString.calorieUnit
+        carbohydrateLabel.text = String(accumulatedCarbohydrate) + StringConstants.UIString.diaryIngredientUnit
+        proteinValueLable.text = String(accumulatedProtein) + StringConstants.UIString.diaryIngredientUnit
+        fatValueLabel.text = String(accumulatedFat) + StringConstants.UIString.diaryIngredientUnit
     }
 
     func updateFoodDiary() {
@@ -59,7 +81,7 @@ class FoodDiaryViewController: UIViewController {
 
 }
 
-extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mealStringArray.count
     }
@@ -87,6 +109,10 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
         mealCollectionView.reloadData()
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: CGFloat(70), height: CGFloat(35))
+    }
+
 }
 
 extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
@@ -99,12 +125,18 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FoodItemListCell") as? FoodItemListCell {
             let entity = foodDiaryEntity.dietItems[indexPath.row]
             cell.setUpCell(dietItem: entity)
+            return cell
         }
         return UITableViewCell()
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56
+    }
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            //API delete item
             self.foodDiaryEntity.dietItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
