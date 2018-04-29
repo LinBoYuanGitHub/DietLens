@@ -2811,17 +2811,18 @@
                         <barButtonItem key="leftBarButtonItem" title="BackBtn" image="Back Arrow" id="6Mm-nR-9dk">
                             <color key="tintColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="onBackPressed:" destination="oTW-Vy-Hkm" id="QNJ-r8-OUV"/>
+                                <action selector="onBackPressed" destination="P7n-xz-cGi" id="335-Op-qyG"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="6Ip-e7-aby">
                             <color key="tintColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="onAddBtnClicked:" destination="oTW-Vy-Hkm" id="zwD-oD-4Fm"/>
+                                <action selector="onTopRightBtnPressed:" destination="P7n-xz-cGi" id="3GG-l1-g5X"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addMore" destination="EgW-Jn-sYe" id="Xbd-ty-BNN"/>
                         <outlet property="calorieValueLabel" destination="9r8-q0-GcH" id="ttc-9L-ySc"/>
                         <outlet property="carbohydrateLabel" destination="Chr-aW-l7S" id="ZJG-mh-3LN"/>
                         <outlet property="fatValueLabel" destination="M5G-XG-eTy" id="M3R-Ft-eHe"/>

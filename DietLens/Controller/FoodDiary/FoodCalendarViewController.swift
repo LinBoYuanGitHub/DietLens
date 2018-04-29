@@ -45,6 +45,8 @@ class FoodCalendarViewController: UIViewController {
     override func viewDidLoad() {
         let date = Date()
         diaryCalendar.setCurrentPage(date, animated: true)
+        diaryCalendar.dataSource = self
+        diaryCalendar.delegate = self
         dateLabel.text = formatter.string(from: date)
         foodCalendarTableView.delegate = self
         foodCalendarTableView.dataSource = self

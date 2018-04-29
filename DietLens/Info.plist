@@ -23,11 +23,15 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<false/>
+		<true/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>IncludesSubdomains</key>
+			<true/>
+			<key>ExceptionAllowsInsecureHttpLoads</key>
+			<true/>
 			<key>localhost</key>
 			<string></string>
 		</dict>

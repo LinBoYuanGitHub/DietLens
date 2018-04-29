@@ -19,6 +19,7 @@ class FoodDiaryViewController: UIViewController {
     @IBOutlet weak var fatValueLabel: UILabel!
     @IBOutlet weak var carbohydrateLabel: UILabel!
     //table header: foodImage,mealTypeView,nutritionView
+    @IBOutlet weak var addMore: UIView!
 
     //dataSource
     var foodDiaryEntity = FoodDiaryEntity()
@@ -38,6 +39,27 @@ class FoodDiaryViewController: UIViewController {
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
         initFoodInfo()
+        let addMoreGesture = UITapGestureRecognizer(target: self, action: #selector(onAddMoreClick))
+        addMore.addGestureRecognizer(addMoreGesture)
+    }
+
+    @objc func onAddMoreClick() {
+        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
+            dest.addFoodDate = Date()
+//            dest.cameraImage = cameraImage use sample Image
+            if let navigator = self.navigationController {
+                //clear controller to Bottom & add foodCalendar Controller
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
+    }
+
+    @IBAction func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    //save(from text Search) or update foodDiary
+    @IBAction func onTopRightBtnPressed(_ sender: Any) {
 
     }
 
@@ -78,7 +100,6 @@ class FoodDiaryViewController: UIViewController {
     func addFoodIntoItem(dietItem: DietItem) {
         foodDiaryEntity.dietItems.append(dietItem)
     }
-
 }
 
 extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

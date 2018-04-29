@@ -483,16 +483,37 @@ class APIService {
 
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
     public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
-        QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
-        if let token = QiniuToken.shared().uploadToken() {
-            let calendar = Calendar.current
-            let date = calendar.date(byAdding: .minute, value: 5, to: Date())
-            let downloadURL = QiniuConfig.rootDomain + "/resource/" + imageKey + ".jpg?e=" + String(Int(date!.timeIntervalSince1970)) + "&token=" + token
-            let imageView = UIImageView()
-            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
-                completion(imageView.image)
-            })
-        }
+//        QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
+//        if let token = QiniuToken.shared().uploadToken() {
+//            let calendar = Calendar.current
+//            let date = calendar.date(byAdding: .minute, value: 5, to: Date())
+//            let downloadURL = QiniuConfig.rootDomain + "/resource/" + imageKey + ".jpg?e=" + String(Int(date!.timeIntervalSince1970)) + "&token=" + token
+//            let imageView = UIImageView()
+//            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
+//                completion(imageView.image)
+//            })
+//        }
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .minute, value: 5, to: Date())
+        var downloadURL = QiniuConfig.rootDomain + "/" + imageKey + "?e=" + String(Int(date!.timeIntervalSince1970))
+        let token = EncryptionUtil.generateQiniuDownloadToken(originalURL: downloadURL, accessKey: QiniuConfig.accessKey)
+        downloadURL += "&token=" + token
+//        Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
+//            if response.error == nil {
+//                if let data = response.data {
+//                    completion(UIImage(data: data))
+//                }
+//            }
+//        }
+        let imageView = UIImageView()
+        imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,
+                              imageTransition: .crossDissolve(0.5), completion: { _ in
+                               completion(imageView.image)
+        })
+//        let imageView = UIImageView()
+//        imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
+//            completion(imageView.image)
+//        })
     }
 
     /**
