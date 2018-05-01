@@ -18,6 +18,9 @@ class TextInputViewController: UIViewController {
     @IBOutlet weak var animationView: UIView!  //for the selected barItem underline effort
     @IBOutlet weak var emptyView: UIView! // empty view for let user to refresh again
     @IBOutlet weak var refreshBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var textFieldTrailing: NSLayoutConstraint!
+    @IBOutlet weak var textFieldTop: NSLayoutConstraint!
 
     //tab item for filter the result
     var filterItem = ["All", "Ingredient", "Side dish"]
@@ -35,6 +38,8 @@ class TextInputViewController: UIViewController {
     //passed parameter
     var cameraImage: UIImage?
 
+    var shouldShowCancel: Bool = false
+
     //enum for textSearch status
     enum TextInputStatus {
         case autoComplete
@@ -44,23 +49,49 @@ class TextInputViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         textSearchField.delegate = self
+        textSearchField.keyboardType = .asciiCapable
         textSearchTable.delegate = self
         textSearchTable.dataSource = self
         textSearchFilterView.delegate = self
         textSearchFilterView.dataSource = self
         textSearchField.returnKeyType = .search
         loadRecentTextSearchResult()
+        if shouldShowCancel {
+            showCancelBtn()
+        } else {
+            hideCancelBtn()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
         //regist notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        textSearchField.becomeFirstResponder()
     }
 
     @IBAction func refreshSearch(_ sender: Any) {
         performTextSearch()
+    }
+
+    func showCancelBtn() {
+        cancelBtn.isHidden = false
+        textFieldTrailing.constant = 74
+        textFieldTop.constant = 0
+    }
+
+    func hideCancelBtn() {
+        cancelBtn.isHidden = true
+        textFieldTrailing.constant = 16
+        textFieldTop.constant =  20
+    }
+
+    @IBAction func onCancelBtnPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc func keyboardWasShown (notification: NSNotification) {
@@ -124,17 +155,27 @@ class TextInputViewController: UIViewController {
                 return
             }
             var dietEntity = dietItem!
-            dietEntity.recordType = RecognitionInteger.text
+            dietEntity.recordType = RecognitionInteger.additionText
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                 dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
-                dest.recordType = dietEntity.recordType
-                dest.dietItem = dietEntity
-                let parentVC = self.parent as! AddFoodViewController
-                dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
-                if let navigator = self.navigationController {
-                    //clear controller to Bottom & add foodCalendar Controller
-                    navigator.pushViewController(dest, animated: true)
+                if self.shouldShowCancel {
+                    dest.recordType = RecognitionInteger.additionText
+                } else {
+                    dest.recordType = dietEntity.recordType
                 }
+                dest.dietItem = dietEntity
+                if let parentVC = self.parent as? AddFoodViewController {
+                    dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(dest, animated: true)
+                    }
+                } else {
+                     dest.isSetMealByTimeRequired = true
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(dest, animated: true)
+                    }
+                }
+
             }
         }
     }

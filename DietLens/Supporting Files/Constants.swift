@@ -95,6 +95,7 @@ struct RecognitionInteger {
     static let text = "1"
     static let gallery = "2"
     static let barcode = "3"
+    static let additionText = "4"
 }
 
 struct TextSearchFilterInterger {

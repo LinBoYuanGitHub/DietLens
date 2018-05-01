@@ -35,7 +35,8 @@ class FoodDiaryDataManager {
         for i in 0..<jsonObject["details"].count {
             var foodItem = DietItem()
             var job = jsonObject["details"][i]
-            foodItem.foodId = job["id"].intValue
+            foodItem.id = job["id"].stringValue
+            foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.quantity = Double(job["quantity"].intValue)
             foodItem.recordType = job["search_type"].stringValue

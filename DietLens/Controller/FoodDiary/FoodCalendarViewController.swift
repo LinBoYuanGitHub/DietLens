@@ -60,6 +60,16 @@ class FoodCalendarViewController: UIViewController {
         assembleMealList(foodDiaryList: [FoodDiaryEntity]())
     }
 
+    @IBAction func onBackPressed(_ sender: Any) {
+        if self.navigationController!.viewControllers.count > 1 {
+            self.navigationController?.popViewController(animated: false)
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+
+    }
+
     func registerNib() {
 //        let nib = UINib(nibName: "diaryHeader", bundle: nil)
 //        foodCalendarTableView.register(nib, forHeaderFooterViewReuseIdentifier: "DiarySectionHeader")
@@ -94,6 +104,7 @@ class FoodCalendarViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
+        self.foodCalendarTableView.reloadData()
     }
 
     @IBAction func closeButtonPressed(_ sender: Any) {
@@ -207,11 +218,20 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-
             APIService.instance.deleteFoodDiary(foodDiaryId: foodMealList[indexPath.section].foodEntityList[indexPath.row].foodDiaryId, completion: { (_) in
                 self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.reloadData()
             })
+        }
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        //disable addMore delete
+        if indexPath.row == self.foodMealList[indexPath.section].foodEntityList.count {
+            return .none
+        } else {
+            return .delete
         }
     }
 
@@ -280,6 +300,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                 //download image from Qiniu
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
                     dest.foodDiaryEntity = self.self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
+                    dest.isUpdate = true
                     dest.userFoodImage = image
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
@@ -377,6 +398,8 @@ extension FoodCalendarViewController: FSCalendarDelegate, FSCalendarDataSource, 
 
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentDate = calendar.currentPage
-        getFoodDairyByDate(date: currentDate)
+        let dateStr = DateUtil.normalDateToString(date: currentDate)
+        getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
+//        getFoodDairyByDate(date: currentDate)
     }
 }

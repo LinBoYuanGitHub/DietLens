@@ -838,7 +838,11 @@
                         <viewLayoutGuide key="safeArea" id="sx4-ew-huB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Food Diary" id="iop-Zv-SFj">
-                        <barButtonItem key="backBarButtonItem" title="back" id="2Jl-Zq-GQF"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Back Arrow" id="svF-zS-xFp" userLabel="Back">
+                            <connections>
+                                <action selector="onBackPressed:" destination="739-8h-fNd" id="o2b-lL-NhF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarBtn" destination="8nf-ZA-eOL" id="HRU-lp-5QX"/>
@@ -4724,7 +4728,7 @@ specific  recommendation</string>
         <!--Navigation Controller-->
         <scene sceneID="Ha1-MJ-Afa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BmK-zA-OQW" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FoodCalendarNavVC" automaticallyAdjustsScrollViewInsets="NO" id="BmK-zA-OQW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CQW-Os-6eY">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

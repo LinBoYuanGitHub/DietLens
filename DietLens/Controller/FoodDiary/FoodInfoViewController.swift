@@ -126,7 +126,7 @@ class FoodInfoViewController: UIViewController {
 
     //used only when isNotAccumulate
     @objc func showUnitSelectionDialog() {
-        let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.actionSheet)
         for portion in dietItem.portionInfo {
             alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
                 self.selectedPortionPos = portion.rank - 1
@@ -213,20 +213,27 @@ class FoodInfoViewController: UIViewController {
     }
 
     @IBAction func onAddBtnClicked(_ sender: Any) {
-        if dietItem.recordType == RecordType.RecordByAdditionText {
+        if recordType == RecognitionInteger.additionText {
             //1.from FoodCalendarViewController 2.first TextSearchItem
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+                dest.isUpdate = false
                 if let navigator = self.navigationController {
                     //pop otherView
                     if navigator.viewControllers.contains(where: {
                         return $0 is FoodDiaryViewController
                     }) {
+                        //add foodItem into foodDiaryVC
+                        for vc in (self.navigationController?.viewControllers)! {
+                            if let foodDiaryVC = vc as? FoodDiaryViewController {
+                                foodDiaryVC.addFoodIntoItem(dietItem: dietItem)
+                            }
+                        }
                         //pop searchView & foodInfoView
+                        navigator.popViewController(animated: false)
                         navigator.popViewController(animated: true)
-                        navigator.popViewController(animated: true)
-                        //add foodItem into
-
                     } else {
+                        dest.userFoodImage = userFoodImage
+                        dest.foodDiaryEntity = foodDiaryEntity
                         navigator.pushViewController(dest, animated: true)
                     }
 

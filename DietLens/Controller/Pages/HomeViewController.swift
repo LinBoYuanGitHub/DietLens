@@ -77,7 +77,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         super.viewWillAppear(animated)
         //setUp title
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.topItem?.title = StringConstants.navigatorTitle.dietlensTitle
+        self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
     }
 

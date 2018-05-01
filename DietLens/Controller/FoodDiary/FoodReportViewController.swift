@@ -19,7 +19,7 @@ class FoodReportViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = StringConstants.navigatorTitle.reportTitle
+        self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.reportTitle
     }
 
     func uploadReportImageToServer() {

@@ -25,6 +25,7 @@ class FoodDiaryViewController: UIViewController {
     var foodDiaryEntity = FoodDiaryEntity()
     //passing parameter
     var userFoodImage: UIImage?
+    var isUpdate: Bool = false //from foodCalendar then update
     //mealType data
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
@@ -39,13 +40,43 @@ class FoodDiaryViewController: UIViewController {
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
         initFoodInfo()
+        setMealType()
         let addMoreGesture = UITapGestureRecognizer(target: self, action: #selector(onAddMoreClick))
         addMore.addGestureRecognizer(addMoreGesture)
+    }
+
+    func setMealType() {
+        switch self.foodDiaryEntity.mealType {
+        case StringConstants.MealString.breakfast:
+            currentMealIndex = 0
+            mealCollectionView.reloadData()
+        case StringConstants.MealString.lunch:
+            currentMealIndex = 1
+            mealCollectionView.reloadData()
+        case StringConstants.MealString.dinner:
+            currentMealIndex = 2
+            mealCollectionView.reloadData()
+        case StringConstants.MealString.snack:
+            currentMealIndex = 3
+            mealCollectionView.reloadData()
+        default:
+            break
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+        if isUpdate {
+            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.updateBtnText
+        } else {
+            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
+        }
     }
 
     @objc func onAddMoreClick() {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
             dest.addFoodDate = Date()
+            dest.shouldShowCancel = true
 //            dest.cameraImage = cameraImage use sample Image
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
@@ -60,7 +91,28 @@ class FoodDiaryViewController: UIViewController {
 
     //save(from text Search) or update foodDiary
     @IBAction func onTopRightBtnPressed(_ sender: Any) {
-
+        if isUpdate {
+            APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
+                if isSuccess {
+                   self.navigationController?.popViewController(animated: true)//pop back to food calendar
+                }
+            })
+        } else {
+            APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
+                if isSuccess {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
+                        dest.selectedDate = Date()
+                        if let navigator = self.navigationController {
+                            //pop all the view except HomePage
+                            navigator.popViewController(animated: false)//pop foodDiary
+                            navigator.popViewController(animated: false)//pop foodInfo
+                            navigator.popViewController(animated: false)//pop textSearchPage
+                            navigator.pushViewController(dest, animated: true)
+                        }
+                    }
+                }
+            })
+        }
     }
 
     func initFoodInfo() {
@@ -86,6 +138,7 @@ class FoodDiaryViewController: UIViewController {
     }
 
     func updateFoodDiary() {
+        //actually just update mealType
         APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
                 if isSuccess {
                     if (self.navigationController?.viewControllers.contains(where: {
@@ -97,8 +150,19 @@ class FoodDiaryViewController: UIViewController {
         }
     }
 
+    //add foodDiary into item & upload
     func addFoodIntoItem(dietItem: DietItem) {
         foodDiaryEntity.dietItems.append(dietItem)
+        if isUpdate {
+            APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
+                if isSuccess {
+                    self.foodTableView.reloadData()
+                }
+            }
+        } else {//create new item need to wait
+             self.foodTableView.reloadData()
+        }
+
     }
 }
 
@@ -158,8 +222,11 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //API delete item
-            self.foodDiaryEntity.dietItems.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            APIService.instance.deleteFoodItem(foodDiaryId: foodDiaryEntity.foodDiaryId, foodItemId: foodDiaryEntity.dietItems[indexPath.row].id, completion: { (_) in
+                    self.foodDiaryEntity.dietItems.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.calculateAccumulateFoodValue()
+            })
         }
     }
 

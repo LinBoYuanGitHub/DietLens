@@ -630,10 +630,11 @@ class APIService {
 
     //update foodDiary
     public func updateFoodDiary(foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
+        let param = FoodInfoDataManager.instance.paramfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
         Alamofire.request(
-            URL(string: ServerConfig.foodDiaryDietLogs)!,
+            URL(string: ServerConfig.foodDiaryDietLogs+foodDiary.foodDiaryId+"/")!,
             method: .put,
-            parameters: [:],
+            parameters: param,
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()

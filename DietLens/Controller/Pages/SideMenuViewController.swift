@@ -22,7 +22,7 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 
     let labels: [String] = ["Home", "Food Diary", "Report", "Steps Counter"]
     let iconNames: [String] = ["blackHomeIcon", "blackFoodDiaryIcon", "blackReportIcon", "blackStepCounterIcon"]
-    let storyboardIDs: [String] = ["DietLens", "FoodCalendarVC", "ReportVC", "StepCounterVC"]
+    let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "ReportVC", "StepCounterVC"]
 
     override func awakeFromNib() {
         super.awakeFromNib()

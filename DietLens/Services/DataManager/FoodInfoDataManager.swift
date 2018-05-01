@@ -203,10 +203,17 @@ class FoodInfoDataManager {
         var details = [Dictionary<String, Any>]()
         for dietItem in foodDiaryEntity.dietItems {
             var dietDict  = Dictionary<String, Any>()
+            if dietItem.id != ""{
+                 dietDict["id"] = dietItem.id
+            }
             dietDict["name"] = dietItem.foodName
             dietDict["food"] = dietItem.foodId
             dietDict["search_type"] = dietItem.recordType
-            dietDict["unit"] = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
+            if dietItem.portionInfo.count != 0 {
+                dietDict["unit"] = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
+            } else {
+                dietDict["unit"] = "portion"
+            }
             dietDict["quantity"] = dietItem.quantity
             var nutrient = Dictionary<String, Double>()
             nutrient["fat"] = dietItem.nutritionInfo.fat
