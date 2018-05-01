@@ -23,6 +23,7 @@ class RecognitionResultViewController: UIViewController {
     var imageKey: String?
     var recordDate: Date = Date()
     var isSetMealByTimeRequired = false
+    var mealType: String?
 
     //dataSource
     var foodCategoryList = [DisplayFoodCategory]()

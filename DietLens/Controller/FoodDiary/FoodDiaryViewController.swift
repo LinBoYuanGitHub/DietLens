@@ -162,7 +162,20 @@ class FoodDiaryViewController: UIViewController {
         } else {//create new item need to wait
              self.foodTableView.reloadData()
         }
+    }
 
+    //update foodDiary
+    func updateFoodInfoItem(dietItem: DietItem) {
+        for (index, entity) in foodDiaryEntity.dietItems.enumerated() {
+            if entity.id == dietItem.id {
+                foodDiaryEntity.dietItems[index] = dietItem
+            }
+        }
+        APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
+            if isSuccess {
+                self.foodTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -217,6 +230,20 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 56
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //jump to foodInfo page to modify foodInfo Item
+        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+            let dietEntity = foodDiaryEntity.dietItems[indexPath.row]
+            dest.dietItem = dietEntity
+            dest.shouldShowMealBar = false
+            dest.isUpdate = true
+            if let navigator = self.navigationController {
+                //pop all the view except HomePage
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

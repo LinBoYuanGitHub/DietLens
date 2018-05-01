@@ -493,23 +493,26 @@ class APIService {
 //                completion(imageView.image)
 //            })
 //        }
-        let calendar = Calendar.current
-        let date = calendar.date(byAdding: .minute, value: 5, to: Date())
-        var downloadURL = QiniuConfig.rootDomain + "/" + imageKey + "?e=" + String(Int(date!.timeIntervalSince1970))
-        let token = EncryptionUtil.generateQiniuDownloadToken(originalURL: downloadURL, accessKey: QiniuConfig.accessKey)
-        downloadURL += "&token=" + token
-//        Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
-//            if response.error == nil {
-//                if let data = response.data {
-//                    completion(UIImage(data: data))
-//                }
-//            }
+//        let calendar = Calendar.current
+//        let date = calendar.date(byAdding: .minute, value: 5, to: Date())
+//        var downloadURL = QiniuConfig.rootDomain + "/" + imageKey + "?e=" + String(Int(date!.timeIntervalSince1970))
+//        let token = EncryptionUtil.generateQiniuDownloadToken(originalURL: downloadURL, accessKey: QiniuConfig.accessKey)
+//        downloadURL += "&token=" + token
+        let downloadURL = "http://172.29.32.226:8000/dl/v1/foodinfo/img/?key="+imageKey
+        Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
+            if response.error == nil {
+                if let data = response.data {
+                    completion(UIImage(data: data))
+                }
+            }
+        }
+//        let imageView = UIImageView()
+//        DispatchQueue.main.async {
+//            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,
+//                                  imageTransition: .crossDissolve(0.5), completion: { _ in
+//                                    completion(imageView.image)
+//            })
 //        }
-        let imageView = UIImageView()
-        imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,
-                              imageTransition: .crossDissolve(0.5), completion: { _ in
-                               completion(imageView.image)
-        })
 //        let imageView = UIImageView()
 //        imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
 //            completion(imageView.image)

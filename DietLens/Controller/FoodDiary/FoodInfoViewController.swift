@@ -27,6 +27,8 @@ class FoodInfoViewController: UIViewController {
     //pickerView
     var quantityPickerView = UIPickerView()
 
+    @IBOutlet weak var mealIconView: UIImageView!
+    @IBOutlet weak var mealViewHeight: NSLayoutConstraint!
     //data source
 //    var foodInfoModel = FoodInfomationModel()
     var quantity = 1.0
@@ -45,6 +47,8 @@ class FoodInfoViewController: UIViewController {
 //    var isAddIntoFoodList = false
 //    var isAccumulatedDiary: Bool = false
     var imageKey: String?
+    var isUpdate: Bool = false
+    var shouldShowMealBar = true
 
     override func viewDidLoad() {
         //init foodInfo data -> setUp View
@@ -85,15 +89,29 @@ class FoodInfoViewController: UIViewController {
         foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: Date())
         setUpFoodValue()
         setCorrectMealType()
+        setUpMealBar()
+    }
+
+    func setUpMealBar() {
+        if shouldShowMealBar {
+            mealViewHeight.constant = 28
+            mealIconView.isHidden = false
+        } else {
+            mealViewHeight.constant = 0.01
+            mealIconView.isHidden = true
+        }
     }
 
     func setUpFoodValue() {
         foodName.text = dietItem.foodName
-        let portionRate = Double(dietItem.quantity) * dietItem.portionInfo[selectedPortionPos].weightValue/100
-        calorieValueLabel.text = String(dietItem.nutritionInfo.calorie * portionRate)+" "+StringConstants.UIString.calorieUnit
-        carbohydrateValueLabel.text = String(portionRate * dietItem.nutritionInfo.carbohydrate)+" "+StringConstants.UIString.diaryIngredientUnit
-        proteinValueLable.text = String(portionRate * dietItem.nutritionInfo.protein) + " "+StringConstants.UIString.diaryIngredientUnit
-        fatValueLabel.text = String(portionRate * dietItem.nutritionInfo.fat) + " "+StringConstants.UIString.diaryIngredientUnit
+        var portionRate: Double = Double(dietItem.quantity) * 1.0
+        if dietItem.portionInfo.count != 0 {
+            portionRate = Double(dietItem.quantity) * dietItem.portionInfo[selectedPortionPos].weightValue/100
+        }
+        calorieValueLabel.text = String(Int(dietItem.nutritionInfo.calorie * portionRate))+" "+StringConstants.UIString.calorieUnit
+        carbohydrateValueLabel.text = String(Int(portionRate * dietItem.nutritionInfo.carbohydrate))+" "+StringConstants.UIString.diaryIngredientUnit
+        proteinValueLable.text = String(Int(portionRate * dietItem.nutritionInfo.protein)) + " "+StringConstants.UIString.diaryIngredientUnit
+        fatValueLabel.text = String(Int(portionRate * dietItem.nutritionInfo.fat)) + " "+StringConstants.UIString.diaryIngredientUnit
     }
 
 /********************************************************
@@ -103,6 +121,13 @@ class FoodInfoViewController: UIViewController {
         setUpImage()
         quantityValue.inputAccessoryView = setUpPickerToolBar()
         quantityValue.inputView = quantityPickerView
+        quantityValue.text = String(dietItem.quantity)
+        if dietItem.portionInfo.count == 0 {
+             unitValue.text = "portion"
+        } else {
+             unitValue.text = String(dietItem.portionInfo[dietItem.selectedPos].sizeUnit)
+        }
+
     }
 
     func setUpImage() {
@@ -140,6 +165,11 @@ class FoodInfoViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
+        if isUpdate {
+            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.updateBtnText
+        } else {
+            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
+        }
     }
 
     //if not passing mealType, then use currentTime to set mealType
@@ -213,7 +243,16 @@ class FoodInfoViewController: UIViewController {
     }
 
     @IBAction func onAddBtnClicked(_ sender: Any) {
-        if recordType == RecognitionInteger.additionText {
+        if isUpdate {
+            if let navigator = self.navigationController {
+                for vc in (navigator.viewControllers) {
+                    if let foodDiaryVC = vc as? FoodDiaryViewController {
+                        foodDiaryVC.updateFoodInfoItem(dietItem: dietItem)
+                    }
+                }
+                navigator.popViewController(animated: true)
+            }
+        } else if recordType == RecognitionInteger.additionText {
             //1.from FoodCalendarViewController 2.first TextSearchItem
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 dest.isUpdate = false
@@ -303,7 +342,7 @@ class FoodInfoViewController: UIViewController {
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-            self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
+        self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
     }
 
     func flipToShowNutrition() {

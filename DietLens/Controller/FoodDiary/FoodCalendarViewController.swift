@@ -290,6 +290,8 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
         //click add more to directly add new dish into foodDiary
         if indexPath.row == self.foodMealList[indexPath.section].foodEntityList.count {
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "addFoodVC") as? AddFoodViewController {
+                dest.addFoodDate = selectedDate
+                dest.mealType = foodMealList[indexPath.section].meal
                 if let navigator = self.navigationController {
                     navigator.pushViewController(dest, animated: true)
                 }
@@ -305,6 +307,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }
+
                 })
 
             }
@@ -334,11 +337,6 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
             break
         }
         return header
-    }
-
-    //to camera to add foodDiary again
-    @objc func onAddFoodFromDiary(_ sender: UIButton) {
-
     }
 
 }

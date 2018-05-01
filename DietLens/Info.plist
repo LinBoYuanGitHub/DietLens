@@ -23,17 +23,21 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>p7bqh4trt.sabkt.gdipper.com</key>
+			<string></string>
+			<key>api.dietlens.com</key>
+			<string></string>
+			<key>localhost</key>
+			<string></string>
 			<key>IncludesSubdomains</key>
 			<true/>
 			<key>ExceptionAllowsInsecureHttpLoads</key>
 			<true/>
-			<key>localhost</key>
-			<string></string>
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>

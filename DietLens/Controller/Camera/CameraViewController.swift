@@ -114,6 +114,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 //        previewContainer.bringSubview(toFront: focusViewImg)
     }
 
+//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        sessionManager.onViewWillAppear()
+//    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         sessionManager.onViewWillAppear()
@@ -205,6 +209,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
                             dest.foodCategoryList = self.displayList
                             let parentVC = self.parent as! AddFoodViewController
                             dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
+                            dest.recordDate = parentVC.addFoodDate
+                            dest.mealType = parentVC.mealType
                             if let navigator = self.navigationController {
                                 navigator.pushViewController(dest, animated: true)
                             }

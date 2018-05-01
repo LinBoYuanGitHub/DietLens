@@ -241,33 +241,33 @@ extension TextInputViewController: IndicatorInfoProvider {
         return IndicatorInfo(title: "BY TEXT")
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? RecognitionResultsViewController {
-            dest.foodDiary.recordType = selectedFoodDiary.recordType
-            for ingredient in selectedFoodDiary.ingredientList {
-                dest.foodDiary.ingredientList.append(ingredient)
-            }
-            dest.foodDiary = selectedFoodDiary
-            dest.foodDiary.recordType = RecordType.RecordByText
-            dest.userFoodImage = selectedImageView
-            guard let parentVC = self.parent as? AddFoodViewController else {
-                dest.dateTime = Date()
-                return
-            }
-            dest.isSetMealByTimeRequired = false
-            dest.whichMeal = parentVC.mealType
-            dest.dateTime = parentVC.addFoodDate
-        }
-        if let dest = segue.destination as? TextSearchViewController {
-            guard let parentVC = self.parent as? AddFoodViewController else {
-                dest.addFoodDate = Date()
-                return
-            }
-            dest.addFoodDate = parentVC.addFoodDate
-            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
-            dest.mealType = parentVC.mealType
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let dest = segue.destination as? RecognitionResultsViewController {
+//            dest.foodDiary.recordType = selectedFoodDiary.recordType
+//            for ingredient in selectedFoodDiary.ingredientList {
+//                dest.foodDiary.ingredientList.append(ingredient)
+//            }
+//            dest.foodDiary = selectedFoodDiary
+//            dest.foodDiary.recordType = RecordType.RecordByText
+//            dest.userFoodImage = selectedImageView
+//            guard let parentVC = self.parent as? AddFoodViewController else {
+//                dest.dateTime = Date()
+//                return
+//            }
+//            dest.isSetMealByTimeRequired = false
+//            dest.whichMeal = parentVC.mealType
+//            dest.dateTime = parentVC.addFoodDate
+//        }
+//        if let dest = segue.destination as? TextSearchViewController {
+//            guard let parentVC = self.parent as? AddFoodViewController else {
+//                dest.addFoodDate = Date()
+//                return
+//            }
+//            dest.addFoodDate = parentVC.addFoodDate
+//            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
+//            dest.mealType = parentVC.mealType
+//        }
+//    }
 }
 
 extension TextInputViewController: UICollectionViewDataSource, UICollectionViewDelegate {

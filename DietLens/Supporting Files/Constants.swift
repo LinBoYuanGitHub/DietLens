@@ -48,6 +48,7 @@ struct ServerConfig {
     static let saveStepDiaryURL = baseURL + "/healthlog/steps/"
     static let saveHealthCenterDataURL = baseURL + "/healthlog/Medical/"
     static let foodSearchListURL = labDeskTopURL + "/search/auto-suggestion/"
+    static let foodFullTextSearchURL = labDeskTopURL + "/search/full-text/"
     static let foodSearchAutocompleteURL = labDeskTopURL + "/search/autocomplete/"
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
@@ -58,7 +59,7 @@ struct ServerConfig {
     //foodDiary CRUD
     static let foodDiaryOperationURL = labDeskTopURL + "/foodinfo/"
     static let foodDiaryDietLogs = labDeskTopURL + "/dietlogs/"
-    static let foodDiaryDietItems = labDeskTopURL + "/delete-detail/"
+    static let foodDiaryDietItems = labDeskTopURL + "/dietlogs/delete-detail/"
     static let foodDiaryCalendar = labDeskTopURL + "/dietlogs/calendar/"
     static let dietaryGuideURL = labDeskTopURL + "/users/dietary-guide/"
 }
@@ -76,10 +77,12 @@ struct NutrtionData {
 }
 
 struct QiniuConfig {
-    static let scope = "dietlens"
+    static let scope = "dietlog"
     static let accessKey = "ExTDSVzfUQiu0wwJXBzXLg_PxNQxbb3tkC4UpyB6"
     static let secretKey = "8u_GKcaQWMD3L-94OdG8P_o9b8SGqAIjYFoX953A"
-    static let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com"
+    static let rootDomain = "p7bqh4trt.sabkt.gdipper.com"
+//     static let scope = "dietlens" //private scope
+//    static let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com" //private domain
 }
 
 struct RecordType {
