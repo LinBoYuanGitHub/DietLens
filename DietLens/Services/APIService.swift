@@ -503,7 +503,11 @@ class APIService {
             if response.error == nil {
                 if let data = response.data {
                     completion(UIImage(data: data))
+                } else {
+                    completion(nil)
                 }
+            } else {
+                completion(nil)
             }
         }
 //        let imageView = UIImageView()
@@ -1243,7 +1247,8 @@ class APIService {
 
     //for all the new token
     func getTokenHeader() -> Dictionary<String, String> {
-        let header = ["Authorization": "Token c753d57352d501f3f40b89cf0b39e77ded4952a3"]
+//        let header = ["Authorization": "Token c753d57352d501f3f40b89cf0b39e77ded4952a3"]
+        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
         return header
     }
 

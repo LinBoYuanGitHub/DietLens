@@ -271,6 +271,7 @@ class FoodInfoViewController: UIViewController {
                         navigator.popViewController(animated: false)
                         navigator.popViewController(animated: true)
                     } else {
+                        dest.imageKey = imageKey
                         dest.userFoodImage = userFoodImage
                         dest.foodDiaryEntity = foodDiaryEntity
                         navigator.pushViewController(dest, animated: true)
@@ -287,8 +288,7 @@ class FoodInfoViewController: UIViewController {
                         dest.selectedDate = Date()
                         if let navigator = self.navigationController {
                             //pop all the view except HomePage
-                            navigator.popViewController(animated: false)//pop self foodInfoVC
-                            navigator.popViewController(animated: false)//pop addFoodVC
+                            navigator.popToRootViewController(animated: false)
                             navigator.pushViewController(dest, animated: true)
                         }
                     }

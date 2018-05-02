@@ -303,7 +303,11 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
                     dest.foodDiaryEntity = self.self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
                     dest.isUpdate = true
-                    dest.userFoodImage = image
+                    if image != nil {
+                        dest.userFoodImage = image
+                    } else {
+                        dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                    }
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }

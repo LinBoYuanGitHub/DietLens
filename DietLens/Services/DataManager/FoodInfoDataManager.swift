@@ -199,7 +199,7 @@ class FoodInfoDataManager {
         result["meal_type"] = foodDiaryEntity.mealType
         result["image"] = foodDiaryEntity.imageId
         //TODO remove hardcode
-        result["user"] = "b7039d40-4394-11e8-9e66-64006a470149"
+        result["user"] = "eee07452-4daf-11e8-99a9-64006a470149"
         var details = [Dictionary<String, Any>]()
         for dietItem in foodDiaryEntity.dietItems {
             var dietDict  = Dictionary<String, Any>()

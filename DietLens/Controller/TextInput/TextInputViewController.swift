@@ -37,6 +37,7 @@ class TextInputViewController: UIViewController {
     private var lastSearchTime = Date()
     //passed parameter
     var cameraImage: UIImage?
+    var imageKey: String?
 
     var shouldShowCancel: Bool = false
 
@@ -155,9 +156,18 @@ class TextInputViewController: UIViewController {
                 return
             }
             var dietEntity = dietItem!
-            dietEntity.recordType = RecognitionInteger.additionText
+            if self.shouldShowCancel {
+                dietEntity.recordType = RecognitionInteger.additionText
+            } else {
+                dietEntity.recordType = RecognitionInteger.text
+            }
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-                dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                if self.cameraImage == nil {
+                    dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                } else {
+                    dest.userFoodImage = self.cameraImage
+                    dest.imageKey = self.imageKey
+                }
                 if self.shouldShowCancel {
                     dest.recordType = RecognitionInteger.additionText
                 } else {

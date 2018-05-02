@@ -25,6 +25,7 @@ class FoodDiaryViewController: UIViewController {
     var foodDiaryEntity = FoodDiaryEntity()
     //passing parameter
     var userFoodImage: UIImage?
+    var imageKey: String?
     var isUpdate: Bool = false //from foodCalendar then update
     //mealType data
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
@@ -103,10 +104,8 @@ class FoodDiaryViewController: UIViewController {
                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
                         dest.selectedDate = Date()
                         if let navigator = self.navigationController {
-                            //pop all the view except HomePage
-                            navigator.popViewController(animated: false)//pop foodDiary
-                            navigator.popViewController(animated: false)//pop foodInfo
-                            navigator.popViewController(animated: false)//pop textSearchPage
+                            navigator.popToRootViewController(animated: false)
+//                            //pop all the view except HomePage
                             navigator.pushViewController(dest, animated: true)
                         }
                     }
@@ -116,6 +115,9 @@ class FoodDiaryViewController: UIViewController {
     }
 
     func initFoodInfo() {
+        if imageKey != nil {//set imageKey to foodDiaryEntity
+            foodDiaryEntity.imageId = self.imageKey!
+        }
         calculateAccumulateFoodValue()
     }
 

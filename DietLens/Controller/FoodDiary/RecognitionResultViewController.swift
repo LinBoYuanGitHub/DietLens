@@ -56,6 +56,7 @@ class RecognitionResultViewController: UIViewController {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
             dest.addFoodDate = recordDate
             dest.cameraImage = cameraImage
+            dest.imageKey = self.imageKey
             dest.shouldShowCancel = true
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
