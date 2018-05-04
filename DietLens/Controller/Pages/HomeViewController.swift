@@ -58,6 +58,13 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     }
 
+    //TODO add global variable for dietary
+    func getNutritionTarget() {
+        APIService.instance.getDietaryGuideInfo { (_) in
+
+        }
+    }
+
     @IBAction func onDetailClick(_ sender: Any) {
         //segue to nutrition page
         performSegue(withIdentifier: "toDailyNutrtionDetail", sender: nil)

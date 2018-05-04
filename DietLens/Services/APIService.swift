@@ -151,33 +151,6 @@ class APIService {
         }
     }
 
-    public func getDietaryGuideInfo(completion: @escaping (_ targetResult: Bool) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.dietaryGuideURL)!,
-            method: .get,
-            encoding: JSONEncoding.default,
-            headers: getTokenHeader())
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Login Failed due to : \(String(describing: response.result.error))")
-                    completion(false)
-                    return
-                }
-                guard let value = response.result.value else {
-                    print("Login Failed due to : Server Data Type Error")
-                    completion(false)
-                    return
-                }
-                let json = JSON(value)
-                let targetCalorie = json["data"]["energy"].doubleValue
-                let targetProtein = json["data"]["protein"].doubleValue
-                let targetFat = json["data"]["fat"].doubleValue
-                let targetCarbohydrate = json["data"]["carbohydrate"].stringValue
-                completion(true)
-        }
-    }
-
     public func thirdPartyLoginRequest(appUserId: String, nickName: String, platform: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.thirdPartyLoginURL)!,
@@ -1208,6 +1181,71 @@ class APIService {
                 }
                 let jsonObject = JSON(result)
                 completion(true)
+        }
+    }
+
+    //get dietary guide
+    public func getDietaryGuideInfo(completion: @escaping (Dictionary<String, Double>) -> Void) {
+        var guideDict = Dictionary<String, Double>()
+        Alamofire.request(
+            URL(string: ServerConfig.dietaryGuideURL)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Login Failed due to : \(String(describing: response.result.error))")
+                    completion(guideDict)
+                    return
+                }
+                guard let value = response.result.value else {
+                    print("Login Failed due to : Server Data Type Error")
+                    completion(guideDict)
+                    return
+                }
+                let json = JSON(value)
+//                let targetCalorie = json["data"]["energy"].doubleValue
+//                let targetProtein = json["data"]["protein"].doubleValue
+//                let targetFat = json["data"]["fat"].doubleValue
+//                let targetCarbohydrate = json["data"]["carbohydrate"].doubleValue
+                guideDict["energy"] = json["data"]["energy"].doubleValue
+                guideDict["protein"] = json["data"]["protein"].doubleValue
+                guideDict["fat"] = json["data"]["fat"].doubleValue
+                guideDict["carbohydrate"] = json["data"]["carbohydrate"].doubleValue
+                completion(guideDict)
+        }
+    }
+
+    //daily nutrition sum
+    func getDailySum(date: Date, completion: @escaping (Dictionary<String, Double>) -> Void) {
+        let dateStr = DateUtil.normalDateToString(date: date)
+        let param = ["date": "2018-05-02"]
+        var responseDict = [:] as Dictionary<String, Double>
+        Alamofire.request(
+            URL(string: ServerConfig.nutritionDailySum)!,
+            method: .post,
+            parameters: param,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    completion(responseDict)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("Get Daily Sum failed due to : Server Data Type Error")
+                    completion(responseDict)
+                    return
+                }
+                let jsonObject = JSON(result)["data"]
+                responseDict["energy"] = jsonObject["energy"].doubleValue
+                responseDict["protein"] = jsonObject["protein"].doubleValue
+                responseDict["fat"] = jsonObject["fat"].doubleValue
+                responseDict["carbohydrate"] = jsonObject["carbohydrate"].doubleValue
+                completion(responseDict)
         }
     }
 

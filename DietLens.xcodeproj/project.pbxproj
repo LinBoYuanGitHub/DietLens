@@ -81,6 +81,7 @@
 		3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC34512057D0F80060099A /* DiarySectionHeader.swift */; };
 		3FEC34542057D1380060099A /* diaryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC34532057D1380060099A /* diaryHeader.xib */; };
 		3FEC3456205A76190060099A /* FoodDiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC3455205A76190060099A /* FoodDiaryModel.swift */; };
+		3FEED89C2099E99C000D6A90 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 586C99BD1FDF819300B86C9C /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
 		3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */; };
@@ -179,6 +180,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3FEED89C2099E99C000D6A90 /* RealmSwift.framework in Embed Frameworks */,
 				3F1794381FDD711D0047F9C1 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";

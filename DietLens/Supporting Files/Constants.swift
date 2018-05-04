@@ -61,7 +61,10 @@ struct ServerConfig {
     static let foodDiaryDietLogs = labDeskTopURL + "/dietlogs/"
     static let foodDiaryDietItems = labDeskTopURL + "/dietlogs/delete-detail/"
     static let foodDiaryCalendar = labDeskTopURL + "/dietlogs/calendar/"
+    //get nutrition sum
     static let dietaryGuideURL = labDeskTopURL + "/users/dietary-guide/"
+    static let nutritionSum = labDeskTopURL + "/dietlogs/sum/"
+    static let nutritionDailySum = labDeskTopURL + "/dietlogs/daily-sum/"
 }
 
 struct SharedPreferenceKey {

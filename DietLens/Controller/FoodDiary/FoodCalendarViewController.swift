@@ -60,6 +60,18 @@ class FoodCalendarViewController: UIViewController {
         assembleMealList(foodDiaryList: [FoodDiaryEntity]())
     }
 
+    @IBAction func toPersonalPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
+            controller.selectedDate = selectedDate
+            present(controller, animated: true, completion: nil)
+        }
+    }
+
+    @IBAction func showCalendar(_ sender: Any) {
+        bringInCalendar(sender)
+    }
+
     @IBAction func onBackPressed(_ sender: Any) {
         if self.navigationController!.viewControllers.count > 1 {
             self.navigationController?.popViewController(animated: false)
@@ -148,11 +160,12 @@ class FoodCalendarViewController: UIViewController {
         let dateStr = DateUtil.normalDateToString(date: date)
         APIService.instance.getFoodDiaryByDate(selectedDate: dateStr) { (foodDiaryList) in
             if foodDiaryList == nil {
+                let emptyList = [FoodDiaryEntity]()
+                self.assembleMealList(foodDiaryList: emptyList)
                 return
             }
             //show UItableView for all the foodDiary
             self.assembleMealList(foodDiaryList: foodDiaryList!)
-            self.foodCalendarTableView.reloadData()
         }
     }
 

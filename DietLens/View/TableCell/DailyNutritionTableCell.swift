@@ -16,15 +16,20 @@ class DailyNutritionTableCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        progressView.progress = 0.0
     }
 
     //fill up name,value,percentage
-    func setUpCell(name: String, value: Int, progress: Int) {
+    func setUpCell(name: String, value: String, progress: Int) {
         nameLabel.text = name
-        valueLabel.text = String(value) + StringConstants.UIString.calorieUnit
-        progressView.progress = Float(progress/100)
-        percentageLabel.text = "\(Int(progress*100))%"
+        valueLabel.text = value + StringConstants.UIString.calorieUnit
+        progressView.transform = progressView.transform.scaledBy(x: 1, y: 9)
+        progressView.layer.cornerRadius = 20
+        progressView.clipsToBounds = true
+        UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
+            self.progressView.progress = Float(progress)/100
+            self.progressView.setProgress(Float(progress)/100, animated: true)
+        }, completion: nil)
+        percentageLabel.text = "\(Int(progress))%"
 
     }
 
