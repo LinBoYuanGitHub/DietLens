@@ -216,10 +216,16 @@ class FoodInfoDataManager {
             }
             dietDict["quantity"] = dietItem.quantity
             var nutrient = Dictionary<String, Double>()
-            nutrient["fat"] = dietItem.nutritionInfo.fat
-            nutrient["energy"] = dietItem.nutritionInfo.calorie
-            nutrient["protein"] = dietItem.nutritionInfo.protein
-            nutrient["carbohydrate"] = dietItem.nutritionInfo.carbohydrate
+            // judge whether the unit value is existing
+            var unitScale:Double = 1.0
+            if dietItem.portionInfo.count != 0{
+                unitScale = dietItem.portionInfo[dietItem.selectedPos].weightValue
+            }
+            var ratio = dietItem.quantity * unitScale
+            nutrient["fat"] = dietItem.nutritionInfo.fat * ratio
+            nutrient["energy"] = dietItem.nutritionInfo.calorie * ratio
+            nutrient["protein"] = dietItem.nutritionInfo.protein * ratio
+            nutrient["carbohydrate"] = dietItem.nutritionInfo.carbohydrate * ratio
             dietDict["nutrient"] = nutrient
             //add nutrient part to
             details.append(dietDict)

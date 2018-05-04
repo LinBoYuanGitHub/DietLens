@@ -49,6 +49,8 @@ class FoodInfoViewController: UIViewController {
     var imageKey: String?
     var isUpdate: Bool = false
     var shouldShowMealBar = true
+    var currentIntegerPos = 0
+    var currentDecimalPos = 0
 
     override func viewDidLoad() {
         //init foodInfo data -> setUp View
@@ -86,7 +88,6 @@ class FoodInfoViewController: UIViewController {
 ********************************************************/
     func initFoodInfo() {
         foodDiaryEntity.dietItems.append(dietItem)
-        foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: Date())
         setUpFoodValue()
         setCorrectMealType()
         setUpMealBar()
@@ -247,6 +248,7 @@ class FoodInfoViewController: UIViewController {
             if let navigator = self.navigationController {
                 for vc in (navigator.viewControllers) {
                     if let foodDiaryVC = vc as? FoodDiaryViewController {
+                        foodDiaryVC.isSetMealByTimeRequired = self.isSetMealByTimeRequired
                         foodDiaryVC.updateFoodInfoItem(dietItem: dietItem)
                     }
                 }
@@ -256,6 +258,7 @@ class FoodInfoViewController: UIViewController {
             //1.from FoodCalendarViewController 2.first TextSearchItem
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 dest.isUpdate = false
+                dest.isSetMealByTimeRequired = false
                 if let navigator = self.navigationController {
                     //pop otherView
                     if navigator.viewControllers.contains(where: {
@@ -285,11 +288,19 @@ class FoodInfoViewController: UIViewController {
                 if isSuccess {
                     //request for saving FoodDiary
                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
-                        dest.selectedDate = Date()
+                        dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                         if let navigator = self.navigationController {
                             //pop all the view except HomePage
                             navigator.popToRootViewController(animated: false)
                             navigator.pushViewController(dest, animated: true)
+//                            if (self.navigationController?.viewControllers.contains(where: {
+//                                return $0 is FoodCalendarViewController
+//                            }))! {
+//                               //todo refresh foodCalendar
+//                            } else {
+//                                navigator.pushViewController(dest, animated: true)
+//                            }
+
                         }
                     }
                 }
@@ -371,6 +382,16 @@ extension FoodInfoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         } else {
             return String(decimalArray[row])
         }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            currentIntegerPos = row
+        } else {
+            currentDecimalPos = row
+        }
+        quantityValue.text = String(Double(quantityIntegerArray[currentIntegerPos]) + decimalArray[currentDecimalPos])
+        setUpFoodValue()
     }
 }
 

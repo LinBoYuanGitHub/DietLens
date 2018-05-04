@@ -49,6 +49,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     //passing parameter
     var displayList = [DisplayFoodCategory]()
+    //mealTime & mealType
+    var addFoodDate = Date()
+    var mealType: String = StringConstants.MealString.breakfast
+    var isSetMealByTimeRequired = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,10 +211,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
                             dest.cameraImage = self.chosenImageView.image!
                             dest.imageKey = imageKey
                             dest.foodCategoryList = self.displayList
-                            let parentVC = self.parent as! AddFoodViewController
-                            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
-                            dest.recordDate = parentVC.addFoodDate
-                            dest.mealType = parentVC.mealType
+                            //pass display value
+                            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                            dest.recordDate = self.addFoodDate
+                            dest.mealType = self.mealType
                             if let navigator = self.navigationController {
                                 navigator.pushViewController(dest, animated: true)
                             }

@@ -38,11 +38,13 @@
 		3F436656207E07650089C63A /* MockedUpFoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436655207E07650089C63A /* MockedUpFoodData.swift */; };
 		3F436659207EFA6A0089C63A /* RecognitionResultTableCelll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436658207EFA690089C63A /* RecognitionResultTableCelll.swift */; };
 		3F43665B207EFA850089C63A /* FoodCategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43665A207EFA850089C63A /* FoodCategoryCollectionCell.swift */; };
+		3F438D4A209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F438D49209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift */; };
 		3F43DAC61FE7963700A3685A /* ReportChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC51FE7963700A3685A /* ReportChartViewController.swift */; };
 		3F43DAC81FE79BC400A3685A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC71FE79BC400A3685A /* GraphView.swift */; };
 		3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */; };
 		3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACB1FEB661800A3685A /* ReportEntity.swift */; };
 		3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACD1FEBB04600A3685A /* CardView.swift */; };
+		3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */; };
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
@@ -219,11 +221,13 @@
 		3F436655207E07650089C63A /* MockedUpFoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedUpFoodData.swift; sourceTree = "<group>"; };
 		3F436658207EFA690089C63A /* RecognitionResultTableCelll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultTableCelll.swift; sourceTree = "<group>"; };
 		3F43665A207EFA850089C63A /* FoodCategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCollectionCell.swift; sourceTree = "<group>"; };
+		3F438D49209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNutritionEntity.swift; sourceTree = "<group>"; };
 		3F43DAC51FE7963700A3685A /* ReportChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChartViewController.swift; sourceTree = "<group>"; };
 		3F43DAC71FE79BC400A3685A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
 		3F43DACB1FEB661800A3685A /* ReportEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEntity.swift; sourceTree = "<group>"; };
 		3F43DACD1FEBB04600A3685A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedGardientView.swift; sourceTree = "<group>"; };
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
@@ -425,6 +429,7 @@
 				BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */,
 				3F43DAC71FE79BC400A3685A /* GraphView.swift */,
 				3F43DACD1FEBB04600A3685A /* CardView.swift */,
+				3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */,
 			);
 			path = CustomizedView;
 			sourceTree = "<group>";
@@ -476,6 +481,7 @@
 			children = (
 				3F436653207DFCA00089C63A /* DisplayFoodInfo.swift */,
 				3F9215A72086262500F92ECF /* FoodDiaryEntity.swift */,
+				3F438D49209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift */,
 			);
 			name = FoodDiary;
 			sourceTree = "<group>";
@@ -807,7 +813,6 @@
 				5877CF821F9D82BF0022B51E /* Resources */,
 				297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
 				3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */,
-				D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */,
 				BF8441171FA435B200D5018F /* Run Script */,
 			);
 			buildRules = (
@@ -827,8 +832,6 @@
 				5877CF971F9D82BF0022B51E /* Sources */,
 				5877CF981F9D82BF0022B51E /* Frameworks */,
 				5877CF991F9D82BF0022B51E /* Resources */,
-				7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */,
-				9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -848,8 +851,6 @@
 				5877CFA21F9D82BF0022B51E /* Sources */,
 				5877CFA31F9D82BF0022B51E /* Frameworks */,
 				5877CFA41F9D82BF0022B51E /* Resources */,
-				0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */,
-				F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -951,21 +952,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0743A7D8A8AC206A80D21414 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1044,36 +1030,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7A327D78712A1838A307D2C7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9CFA3008E5D5EB7E23D0E019 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1106,21 +1062,6 @@
 			shellPath = /bin/sh;
 			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\necho \"Target architectures: $ARCHS\"\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\nFRAMEWORK_TMP_PATH=\"$FRAMEWORK_EXECUTABLE_PATH-tmp\"\n\n# remove simulator's archs if location is not simulator's directory\ncase \"${TARGET_BUILD_DIR}\" in\n*\"iphonesimulator\")\necho \"No need to remove archs\"\n;;\n*)\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"i386\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"i386\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"i386 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"x86_64\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"x86_64\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"x86_64 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\n;;\nesac\n\necho \"Completed for executable $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\ndone";
 		};
-		D25BC3B4BB67247CD9D9885D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1139,21 +1080,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F735301E5AD6EDE02A33A130 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1163,6 +1089,7 @@
 			files = (
 				58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */,
 				587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */,
+				3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */,
 				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
 				3FEC3456205A76190060099A /* FoodDiaryModel.swift in Sources */,
 				3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */,
@@ -1182,6 +1109,7 @@
 				3F17943D1FDF84EC0047F9C1 /* NotificationName.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
 				3FD0861B200C73E60052D54B /* ExpandedUIButton.swift in Sources */,
+				3F438D4A209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift in Sources */,
 				586124A02043E29A00E727B2 /* ForgetPasswordEmailViewController.swift in Sources */,
 				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				3F4366482079FDEC0089C63A /* SearchResultCell.swift in Sources */,

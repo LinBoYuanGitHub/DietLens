@@ -30,6 +30,7 @@ class FoodDiaryViewController: UIViewController {
     //mealType data
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
+    var isSetMealByTimeRequired: Bool = false
 
     override func viewDidLoad() {
         mealCollectionView.delegate = self
@@ -41,27 +42,48 @@ class FoodDiaryViewController: UIViewController {
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
         initFoodInfo()
-        setMealType()
+        setCorrectMealType()
         let addMoreGesture = UITapGestureRecognizer(target: self, action: #selector(onAddMoreClick))
         addMore.addGestureRecognizer(addMoreGesture)
     }
 
-    func setMealType() {
-        switch self.foodDiaryEntity.mealType {
-        case StringConstants.MealString.breakfast:
-            currentMealIndex = 0
-            mealCollectionView.reloadData()
-        case StringConstants.MealString.lunch:
-            currentMealIndex = 1
-            mealCollectionView.reloadData()
-        case StringConstants.MealString.dinner:
-            currentMealIndex = 2
-            mealCollectionView.reloadData()
-        case StringConstants.MealString.snack:
-            currentMealIndex = 3
-            mealCollectionView.reloadData()
-        default:
-            break
+    func setCorrectMealType() {
+        if isSetMealByTimeRequired {
+            let hour: Int = Calendar.current.component(.hour, from: Date())
+            if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
+                self.foodDiaryEntity.mealType = StringConstants.MealString.breakfast
+                currentMealIndex = 0
+                mealCollectionView.reloadData()
+            } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
+                self.foodDiaryEntity.mealType = StringConstants.MealString.lunch
+                currentMealIndex = 1
+                mealCollectionView.reloadData()
+            } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
+                self.foodDiaryEntity.mealType = StringConstants.MealString.dinner
+                currentMealIndex = 2
+                mealCollectionView.reloadData()
+            } else {
+                self.foodDiaryEntity.mealType = StringConstants.MealString.snack
+                currentMealIndex = 3
+                mealCollectionView.reloadData()
+            }
+        } else {
+            switch self.foodDiaryEntity.mealType {
+            case StringConstants.MealString.breakfast:
+                currentMealIndex = 0
+                mealCollectionView.reloadData()
+            case StringConstants.MealString.lunch:
+                currentMealIndex = 1
+                mealCollectionView.reloadData()
+            case StringConstants.MealString.dinner:
+                currentMealIndex = 2
+                mealCollectionView.reloadData()
+            case StringConstants.MealString.snack:
+                currentMealIndex = 3
+                mealCollectionView.reloadData()
+            default:
+                break
+            }
         }
     }
 
@@ -102,11 +124,18 @@ class FoodDiaryViewController: UIViewController {
             APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
                 if isSuccess {
                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
-                        dest.selectedDate = Date()
+                        dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                         if let navigator = self.navigationController {
                             navigator.popToRootViewController(animated: false)
-//                            //pop all the view except HomePage
+                            //pop all the view except HomePage
                             navigator.pushViewController(dest, animated: true)
+//                            if (self.navigationController?.viewControllers.contains(where: {
+//                                return $0 is FoodCalendarViewController
+//                            }))! {
+//                                //todo refresh foodCalendar
+//                            } else {
+//                                navigator.pushViewController(dest, animated: true)
+//                            }
                         }
                     }
                 }

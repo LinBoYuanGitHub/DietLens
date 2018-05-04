@@ -115,6 +115,13 @@ struct ArticleType {
     static let EVENT = "event"
 }
 
+struct preferenceKey {
+    static let calorieTarget = "calorieTarget"
+    static let carbohydrateTarget = "carbohydrateTarget"
+    static let proteinTarget = "proteinTarget"
+    static let fatTarget = "fatTarget"
+}
+
 struct Dimen {
     static let NewsFeedTableHeight = 198
     static let NewsArticleCollectionHeight = 220

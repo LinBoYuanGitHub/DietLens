@@ -30,7 +30,6 @@ class TextInputViewController: UIViewController {
     //    var foodResults = [FoodInfomation]()
 
     var selectedImageView: UIImage?
-    var addFoodDate: Date?
     var selectedFoodDiary = FoodDiaryModel()
     var filterType = TextSearchFilterInterger.allType
     var isSearching = false
@@ -38,6 +37,10 @@ class TextInputViewController: UIViewController {
     //passed parameter
     var cameraImage: UIImage?
     var imageKey: String?
+    //mealTime & mealType
+    var addFoodDate = Date()
+    var mealType: String = StringConstants.MealString.breakfast
+    var isSetMealByTimeRequired = true
 
     var shouldShowCancel: Bool = false
 
@@ -174,18 +177,13 @@ class TextInputViewController: UIViewController {
                     dest.recordType = dietEntity.recordType
                 }
                 dest.dietItem = dietEntity
-                if let parentVC = self.parent as? AddFoodViewController {
-                    dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
-                    if let navigator = self.navigationController {
-                        navigator.pushViewController(dest, animated: true)
-                    }
-                } else {
-                     dest.isSetMealByTimeRequired = true
-                    if let navigator = self.navigationController {
-                        navigator.pushViewController(dest, animated: true)
-                    }
+                //mealType & mealTime
+                dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
+                dest.foodDiaryEntity.mealType = self.mealType
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(dest, animated: true)
                 }
-
             }
         }
     }

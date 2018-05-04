@@ -11,7 +11,6 @@ import XLPagerTabStrip
 
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
     var addFoodDate = Date()
-//    var mealType: Meal = .dinner
     var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true
 
@@ -20,7 +19,13 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
             as? CameraViewController, let textInputViewController =
             storyboard?.instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController
             else { return [] }
-
+        //passing value to child VC
+        cameraViewController.addFoodDate = addFoodDate
+        cameraViewController.mealType = mealType
+        cameraViewController.isSetMealByTimeRequired = isSetMealByTimeRequired
+        textInputViewController.addFoodDate = addFoodDate
+        textInputViewController.mealType = mealType
+        textInputViewController.isSetMealByTimeRequired = isSetMealByTimeRequired
         return [cameraViewController, textInputViewController]
     }
 
@@ -50,19 +55,15 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
 
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-//            oldCell?.label.textColor = .white
-//            newCell?.label.textColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
         }
 
         super.viewDidLoad()
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
         containerView.scrollsToTop = false
-//        NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
             self.navigationController?.popViewController(animated: true)
-//        dismiss(animated: true, completion: nil)
     }
 }

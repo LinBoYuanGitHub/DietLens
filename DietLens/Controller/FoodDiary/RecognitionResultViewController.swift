@@ -94,7 +94,10 @@ class RecognitionResultViewController: UIViewController {
                 dest.dietItem = entity
                 dest.recordType = entity.recordType
                 dest.imageKey = self.imageKey
+                //mealTime & mealType
+                dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
                 dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                dest.foodDiaryEntity.mealType = self.mealType!
                 if let navigator = self.navigationController {
                     //clear controller to Bottom & add foodCalendar Controller
                     navigator.pushViewController(dest, animated: true)

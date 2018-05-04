@@ -12,10 +12,10 @@ PODS:
   - FirebaseAnalytics (4.0.4):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.10):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
   - FirebaseInstanceID (2.0.5)
   - FirebaseMessaging (2.0.6):
@@ -28,7 +28,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/Logger (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - HFSwipeView (1.2.1):
     - PureLayout
@@ -79,6 +79,37 @@ DEPENDENCIES:
   - SwiftyJSON
   - XLPagerTabStrip (~> 8.0)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - AlamofireImage
+    - CryptoSwift
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - FSCalendar
+    - GoogleToolboxForMac
+    - HFSwipeView
+    - LGSideMenuController
+    - nanopb
+    - ParallaxHeader
+    - PBRevealViewController
+    - Protobuf
+    - PureLayout
+    - QiniuUpload
+    - Realm
+    - RealmSwift
+    - ScrollableGraphView
+    - SnapKit
+    - Socket.IO-Client-Swift
+    - Starscream
+    - SwiftLint
+    - SwiftyJSON
+    - TinyLog
+    - XLPagerTabStrip
+
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
@@ -111,4 +142,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a236a83daeece6d1f40d503e19fb1d3b48d962a0
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.0

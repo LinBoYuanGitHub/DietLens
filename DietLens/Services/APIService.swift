@@ -285,7 +285,7 @@ class APIService {
 
     public func getFoodSearchResult(filterType: Int, keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.foodSearchListURL + "?category=" + String(filterType))!,
+            URL(string: ServerConfig.foodFullTextSearchURL + "?category=" + String(filterType))!,
             method: .post,
             parameters: ["food_name": keywords],
             encoding: JSONEncoding.default,
@@ -1220,7 +1220,7 @@ class APIService {
     //daily nutrition sum
     func getDailySum(date: Date, completion: @escaping (Dictionary<String, Double>) -> Void) {
         let dateStr = DateUtil.normalDateToString(date: date)
-        let param = ["date": "2018-05-02"]
+        let param = ["date": dateStr]
         var responseDict = [:] as Dictionary<String, Double>
         Alamofire.request(
             URL(string: ServerConfig.nutritionDailySum)!,

@@ -22,8 +22,9 @@ class FoodCalendarViewController: UIViewController {
 
     //dataSource
     var foodMealList = [FoodDiaryMealEntity]()
+    var displayDict = [Int: (String, Double)]()
+    var targetDict = [Int: (String, Double)]()
 
-    var nutritionList = [String]()
     //passValue
     var selectedDate = Date()
     var selectedFoodDiary: FoodDiaryEntity?
@@ -31,7 +32,6 @@ class FoodCalendarViewController: UIViewController {
 
     //calendar date attribute
     var datesWithEvent = [Date]()
-    var addFoodDate: Date = Date()
 
     //setting up calendar
     fileprivate let gregorian = Calendar(identifier: .gregorian)
@@ -58,6 +58,7 @@ class FoodCalendarViewController: UIViewController {
         diaryCalendar.appearance.headerTitleColor = UIColor.black
         registerNib()
         assembleMealList(foodDiaryList: [FoodDiaryEntity]())
+        loadDailyNutritionView()
     }
 
     @IBAction func toPersonalPage(_ sender: Any) {
@@ -66,6 +67,33 @@ class FoodCalendarViewController: UIViewController {
             controller.selectedDate = selectedDate
             present(controller, animated: true, completion: nil)
         }
+    }
+
+    func loadDailyNutritionView() {
+        APIService.instance.getDailySum(date: selectedDate) { (resultDict) in
+            if resultDict.count == 0 {
+                return
+            }
+            self.assembleDisplayDict(nutritionDict: resultDict)
+            self.assembleTargetDict()
+            self.nutritionCollectionView.reloadData()
+        }
+    }
+
+    func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
+        //TODO handle hardcode display
+        displayDict[0] = ("CALORIE", nutritionDict["energy"]!)
+        displayDict[1] = ("PROTEIN", nutritionDict["protein"]!)
+        displayDict[2] = ("FAT", nutritionDict["fat"]!)
+        displayDict[3] = ("CARB", nutritionDict["carbohydrate"]!)
+    }
+
+    func assembleTargetDict() {
+        let preferences = UserDefaults.standard
+        targetDict[0] =  (StringConstants.UIString.calorieUnit, preferences.double(forKey: preferenceKey.calorieTarget))
+        targetDict[1] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.proteinTarget))
+        targetDict[2] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.fatTarget))
+        targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.carbohydrateTarget))
     }
 
     @IBAction func showCalendar(_ sender: Any) {
@@ -206,12 +234,16 @@ class FoodCalendarViewController: UIViewController {
 extension FoodCalendarViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return displayDict.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nutritionCollectionCell", for: indexPath) as? NutritionCollectionCell {
-            cell.setUpCell(nutritionName: "CALORIE", percentage: 25, nutritionValue: 320, unit: "kcal")
+            let kvSet = displayDict[indexPath.row]
+            let targetSet = targetDict[indexPath.row]
+            let progress = kvSet!.1/targetSet!.1
+            let unit  = targetSet!.0
+            cell.setUpCell(nutritionName: (kvSet?.0)!, percentage: Int(progress*100), nutritionValue: (kvSet?.1)!, unit: unit)
             return cell
         }
         return UICollectionViewCell()
@@ -305,6 +337,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "addFoodVC") as? AddFoodViewController {
                 dest.addFoodDate = selectedDate
                 dest.mealType = foodMealList[indexPath.section].meal
+                dest.isSetMealByTimeRequired = false
                 if let navigator = self.navigationController {
                     navigator.pushViewController(dest, animated: true)
                 }
@@ -314,7 +347,8 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                 let imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
                 //download image from Qiniu
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
-                    dest.foodDiaryEntity = self.self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
+                    dest.isSetMealByTimeRequired = false
+                    dest.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
                     dest.isUpdate = true
                     if image != nil {
                         dest.userFoodImage = image
@@ -375,9 +409,10 @@ extension FoodCalendarViewController: FSCalendarDelegate, FSCalendarDataSource, 
         let later = DispatchTime.now() + 0.3
         DispatchQueue.main.asyncAfter(deadline: later) {
             self.dismissCalendar(date)
-            self.addFoodDate = date
+            self.selectedDate = date
             self.dateLabel.text = self.formatter.string(from: date)
             self.getFoodDairyByDate(date: date)
+            self.loadDailyNutritionView()
         }
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)

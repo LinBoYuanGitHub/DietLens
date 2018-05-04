@@ -46,14 +46,8 @@ class SplashScreenViewController: UIViewController {
             }
             self.getArticleListToMainPage()
         }
-        getPersonalGoal()
+        loadNutritionTarget()
         // Do any additional setup after loading the view.
-    }
-
-    func getPersonalGoal() {
-        APIService.instance.getDietaryGuideInfo { (isSuccess) in
-            print(isSuccess)
-        }
     }
 
     func getArticleListToMainPage() {
@@ -81,6 +75,16 @@ class SplashScreenViewController: UIViewController {
                     }
                 }
             }
+        }
+    }
+
+    func loadNutritionTarget() {
+        APIService.instance.getDietaryGuideInfo { (guideDict) in
+            let preferences = UserDefaults.standard
+            preferences.setValue(guideDict["energy"], forKey: preferenceKey.calorieTarget)
+            preferences.setValue(guideDict["carbohydrate"], forKey: preferenceKey.carbohydrateTarget)
+            preferences.setValue(guideDict["protein"], forKey: preferenceKey.proteinTarget)
+            preferences.setValue(guideDict["fat"], forKey: preferenceKey.fatTarget)
         }
     }
 

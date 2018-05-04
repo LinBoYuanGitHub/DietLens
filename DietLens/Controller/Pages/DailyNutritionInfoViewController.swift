@@ -15,6 +15,7 @@ class DailyNutritionInfoViewController: UIViewController {
 
     var nutritionDict = Dictionary<String, Double>()
     var displayDict = [Int: (String, Double)]()
+    var targetDict = [Int: (String, Double)]()
     //passed value
     var selectedDate = Date()
 
@@ -22,6 +23,7 @@ class DailyNutritionInfoViewController: UIViewController {
         nutritionTableView.delegate = self
         nutritionTableView.dataSource = self
         requestNutritionDict(requestDate: selectedDate)
+        assembleTargetDict()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +42,14 @@ class DailyNutritionInfoViewController: UIViewController {
         displayDict[1] = ("Protein", nutritionDict["protein"]!)
         displayDict[2] = ("Fat", nutritionDict["fat"]!)
         displayDict[3] = ("Carbohydrate", nutritionDict["carbohydrate"]!)
+    }
+
+    func assembleTargetDict() {
+        let preferences = UserDefaults.standard
+        targetDict[0] =  (StringConstants.UIString.calorieUnit, preferences.double(forKey: preferenceKey.calorieTarget))
+        targetDict[1] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.proteinTarget))
+        targetDict[2] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.fatTarget))
+        targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.carbohydrateTarget))
     }
 
     func requestNutritionDict(requestDate: Date) {
@@ -67,7 +77,10 @@ extension DailyNutritionInfoViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "dailyNutritionTableCell") as? DailyNutritionTableCell {
             let kvSet = displayDict[indexPath.row]
-            cell.setUpCell(name: (kvSet?.0)!, value: String((kvSet?.1)!), progress: 50)
+            let targetSet = targetDict[indexPath.row]
+            let progress = kvSet!.1/targetSet!.1
+            let unit  = targetSet!.0
+            cell.setUpCell(name: (kvSet?.0)!, value: String((kvSet?.1)!), progress: Int(progress*100), unit: unit)
             return cell
         }
         return UITableViewCell()
