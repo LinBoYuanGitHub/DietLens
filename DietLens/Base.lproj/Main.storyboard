@@ -672,6 +672,14 @@
                                     <constraint firstItem="MuO-LM-QrS" firstAttribute="centerY" secondItem="pMb-gg-AMK" secondAttribute="centerY" id="mNa-n2-lCe"/>
                                     <constraint firstAttribute="trailing" secondItem="MuO-LM-QrS" secondAttribute="trailing" constant="16" id="rYZ-Gp-WjJ"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="redtopColor">
+                                        <color key="value" red="0.96470588235294119" green="0.40000000000000002" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="redbottomColor">
+                                        <color key="value" red="0.94901960784313721" green="0.24705882352941178" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aW4-df-ZRf">
                                 <rect key="frame" x="-2" y="236" width="377" height="431"/>
@@ -5087,7 +5095,7 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
     <inferredMetricsTieBreakers>
         <segue reference="E0y-CB-0Z7"/>
         <segue reference="L1g-pL-wT5"/>
-        <segue reference="huu-PE-XeN"/>
+        <segue reference="ROu-Xz-TxG"/>
         <segue reference="NAD-8N-HRw"/>
         <segue reference="skB-Wa-j6S"/>
     </inferredMetricsTieBreakers>

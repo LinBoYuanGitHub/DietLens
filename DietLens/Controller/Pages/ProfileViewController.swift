@@ -60,9 +60,7 @@ class ProfileViewController: UIViewController {
             if userProfile != nil {
                 self.TFWeight.text = String(format: "%.1f", userProfile!.weight)
                 self.TFHeight.text = String(format: "%.1f", userProfile!.height)
-                self.TFAge.text = "\(userProfile!.age)"
-//                self.TFWeight.text = "\(userProfile!.weight)"
-//                self.TFHeight.text = "\(userProfile!.height)"
+                self.TFAge.text = "\(userProfile!.birthday)"
             }
             if userProfile?.gender == 0 {
                 self.TFGender.text = self.genderList[1]
@@ -73,6 +71,8 @@ class ProfileViewController: UIViewController {
             } else {
                 self.TFGender.text = ""
             }
+            let birthDate = DateUtil.normalStringToDate(dateStr: (userProfile?.birthday)!)
+            self.birthDayPickerView.setDate(birthDate, animated: false)
         }
     }
 
@@ -91,7 +91,6 @@ class ProfileViewController: UIViewController {
         let componenets = Calendar.current.dateComponents([.year, .month, .day], from: sender.date)
         if let day = componenets.day, let month = componenets.month, let year = componenets.year {
             TFAge.text = "\(year)-\(month)-\(day)"
-//            print("\(day) \(month) \(year)")
         }
     }
 
@@ -163,11 +162,12 @@ class ProfileViewController: UIViewController {
             //TODO alert fill incomplete warning
             return
         }
-        APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!, age: TFAge.text!) { (isSuccess) in
+        APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!, birthday: TFAge.text!) { (isSuccess) in
             if isSuccess {
                 self.dismiss(animated: true, completion: nil)
             } else {
                 //error alert
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
             }
         }
     }

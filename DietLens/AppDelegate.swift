@@ -262,13 +262,14 @@ extension AppDelegate: MessagingDelegate {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        if userId == nil {
+        let token = preferences.string(forKey: preferenceKey.tokenKey)
+        if token == nil {
             //record fcmToken
             let tokenKey = "fcmToken"
             preferences.set(fcmToken, forKey: tokenKey)
         } else {
             //send token to server
-            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken, status: "1", completion: { (flag) in
+            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken, status: "True", completion: { (flag) in
                 if flag {
                     print("send device token succeed")
                 }

@@ -134,6 +134,11 @@ class APIService {
                     completion(false)
                     return
                 }
+                guard ((response.response?.allHeaderFields) != nil) else {
+                    completion(false)
+                    print("Get Token failed")
+                    return
+                }
                 let jsonObj = JSON(response.result.value)
                 if jsonObj["message"] == "Login success"{
                     //save uuid & nickname, TODO change to save user object
@@ -141,6 +146,8 @@ class APIService {
                     let nicknameKey = "nickname"
                     let userNameKey = "username"
                     let userIdKey = "userId"
+                    let token = response.response!.allHeaderFields["token"]
+                    preferences.setValue(token, forKey: preferenceKey.tokenKey)
                     preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: userIdKey)
                     preferences.setValue(jsonObj["data"]["email"].stringValue, forKey: userNameKey)
                     preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: nicknameKey)
@@ -179,11 +186,11 @@ class APIService {
         }
     }
 
-    public func register(uuid: String, nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
+    public func register(nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void, failedCompletion: @escaping(_ failedMsg:String)-> Void) {
         Alamofire.request(
             URL(string: ServerConfig.registry)!,
             method: .post,
-            parameters: ["id": uuid, "name": nickName, "email": email, "password": password],
+            parameters: ["name": nickName, "email": email, "password": password],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -193,17 +200,29 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(response.result.value)
+                if jsonObj["error_message"] == JSON.null {
+                    completion(false)
+                    failedCompletion(jsonObj["error_message"].stringValue)
+                    return
+                }
+                guard ((response.response?.allHeaderFields) != nil) else {
+                    completion(false)
+                    print("Get Token failed")
+                    return
+                }
                 if jsonObj["message"] == "Register success"{
                     let preferences = UserDefaults.standard
                     let nicknameKey = "nickname"
                     let userNameKey = "username"
                     let userIdKey = "userId"
+                    let token = response.response!.allHeaderFields["token"]
+                    preferences.setValue(token, forKey: preferenceKey.tokenKey)
                     preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: userIdKey)
                     preferences.setValue(jsonObj["data"]["email"].stringValue, forKey: userNameKey)
                     preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: nicknameKey)
                     completion(true)
                 } else {
-                     completion(false)
+                    completion(false)
                 }
 
         }
@@ -797,12 +816,13 @@ class APIService {
      * return: is save success
      */
     public func saveDeviceToken(uuid: String, fcmToken: String, status: String, completion: @escaping (Bool) -> Void) {
+        //device type 1: IOS, 2: Android
         Alamofire.request(
-            URL(string: ServerConfig.userURL+"/\(uuid)/device/")!,
+            URL(string: ServerConfig.saveNotificationTokenURL)!,
             method: .put,
-            parameters: ["token": fcmToken, "status": status, "device_type": "ios"],
+            parameters: ["token": fcmToken, "is_active": status, "device_type": "1"],
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -820,6 +840,34 @@ class APIService {
                     completion(false)
                 } else {
                     completion(true)
+                }
+        }
+    }
+
+    public func logOut(completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.logOutURL)!,
+            method: .post,
+            parameters: [:],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("lgout failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("lgout failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObject = JSON(scanResult)
+                if jsonObject["status"] == "HTTP_200_OK" {
+                    completion(true)
+                } else {
+                    completion(false)
                 }
         }
     }
@@ -864,7 +912,7 @@ class APIService {
      */
     public func getProfile(userId: String, completion: @escaping (UserProfile?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.userURL + "/" + userId + "/profile/")!,
+            URL(string: ServerConfig.userURL + "/" + userId + "/")!,
             method: .get,
             encoding: JSONEncoding.default,
             headers: [:])
@@ -880,7 +928,7 @@ class APIService {
                     completion(nil)
                     return
                 }
-                let jsonObject = JSON(scanResult)["data"]
+                let jsonObject = JSON(scanResult)
                 let userProfile = ProfileDataManager.instance.assembleUserProfile(jsonObj: jsonObject)
                 if jsonObject == nil {
                     completion(nil)
@@ -895,13 +943,13 @@ class APIService {
      * param: all user profile information
      * return: isSuccess
      */
-    public func updateProfile(userId: String, name: String, gender: Int, height: Double, weight: Double, age: String, completion: @escaping (Bool) -> Void) {
+    public func updateProfile(userId: String, name: String, gender: Int, height: Double, weight: Double, birthday: String, completion: @escaping (Bool) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.userURL + "/" + userId + "/profile/")!,
+            URL(string: ServerConfig.userURL + "/" + userId + "/")!,
             method: .put,
-            parameters: ["name": name, "gender": gender, "height": height, "weight": weight, "age": age],
+            parameters: ["name": name, "gender": String(gender), "height": height, "weight": weight, "birthday": birthday],
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -914,12 +962,7 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(scanResult)["message"]
-                if jsonObject == nil {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
+                 completion(true)
         }
     }
 
@@ -1195,12 +1238,12 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("Login Failed due to : \(String(describing: response.result.error))")
+                    print("get Dietary Guide Failed due to : \(String(describing: response.result.error))")
                     completion(guideDict)
                     return
                 }
                 guard let value = response.result.value else {
-                    print("Login Failed due to : Server Data Type Error")
+                    print("get Dietary Guide Failed due to : Server Data Type Error")
                     completion(guideDict)
                     return
                 }

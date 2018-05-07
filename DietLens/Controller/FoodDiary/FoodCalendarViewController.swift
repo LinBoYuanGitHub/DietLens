@@ -267,6 +267,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                 self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.reloadData()
+                self.loadDailyNutritionView()//recalculate nutrition info
             })
         }
     }

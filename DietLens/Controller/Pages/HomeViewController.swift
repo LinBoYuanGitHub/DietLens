@@ -55,12 +55,25 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.tableHeaderView = headerView
         //set up tableview Height
         newsFeedTable.tableHeaderView?.fs_height = CGFloat(Dimen.NewsFeedTableHeight)
-
+        loadArticle()
     }
 
     @IBAction func onDetailClick(_ sender: Any) {
         //segue to nutrition page
         performSegue(withIdentifier: "toDailyNutrtionDetail", sender: nil)
+    }
+
+    //assemble the article & event list and display
+    func loadArticle() {
+        if ArticleDataManager.instance.articleList.count == 0||ArticleDataManager.instance.eventList.count == 0 {
+            APIService.instance.getArticleList(completion: { (_) in
+                self.newsFeedTable.reloadData()
+            })
+            APIService.instance.getEventList(completion: { (_) in
+                self.newsFeedTable.reloadData()
+            })
+        }
+
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

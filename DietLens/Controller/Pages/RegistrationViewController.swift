@@ -52,10 +52,7 @@ class RegistrationViewController: UIViewController {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
             return
         } else {
-            let preferences = UserDefaults.standard
-            let key = "userId"
-            let userId = preferences.string(forKey: key)
-            APIService.instance.register(uuid: userId!, nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
+            APIService.instance.register(nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
                 if isSucceed {
                     // save for basic authentication
                     let preferences = UserDefaults.standard
@@ -65,19 +62,19 @@ class RegistrationViewController: UIViewController {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
                     self.present(vc, animated: true, completion: nil)
-                    //to profile page
-//                    self.performSegue(withIdentifier: "toProfilePage", sender: nil)
                 } else {
                     print("register failed")
                     AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
                 }
+            }, failedCompletion: { (failedMsg) in
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
             })
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? ProfileViewController {
-
+            
         }
     }
 

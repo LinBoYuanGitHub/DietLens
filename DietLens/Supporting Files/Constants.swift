@@ -30,12 +30,14 @@ struct ServerConfig {
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
 //    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
     static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
-    static let userURL = baseURL + "/users"
-    static let userLoginURL = baseURL + "/login/"
-    static let getUUidURL = baseURL + "/anonymous/"
-    static let registry = baseURL + "/register/"
-    static let thirdPartyLoginURL = baseURL + "/3rdlogin"
+    static let userURL = labDeskTopURL + "/users"
+    static let saveNotificationTokenURL = labDeskTopURL + "/users/device/"
+    static let logOutURL = labDeskTopURL + "/users/logout/"
+    static let userLoginURL = labDeskTopURL + "/users/login/"
+    static let registry = labDeskTopURL + "/users/register/"
 
+    static let getUUidURL = baseURL + "/anonymous/"
+    static let thirdPartyLoginURL = baseURL + "/3rdlogin"
     static let acctForgetPwSendEmailURL = baseURL + "/accounts/check/"
     static let acctForgetPwEmailVerifURL = baseURL + "/accounts/verification/"
     static let acctForgetPwResetURL = baseURL + "/accounts/set-password/"
@@ -120,6 +122,7 @@ struct preferenceKey {
     static let carbohydrateTarget = "carbohydrateTarget"
     static let proteinTarget = "proteinTarget"
     static let fatTarget = "fatTarget"
+    static let tokenKey = "TOKEN"
 }
 
 struct Dimen {
