@@ -220,7 +220,7 @@ class FoodInfoDataManager {
             dietDict["quantity"] = dietItem.quantity
             var nutrient = Dictionary<String, Double>()
             // judge whether the unit value is existing
-            var unitScale: Double = 1.0
+            var unitScale: Double = 100
             if dietItem.portionInfo.count != 0 {
                 unitScale = dietItem.portionInfo[dietItem.selectedPos].weightValue
             }

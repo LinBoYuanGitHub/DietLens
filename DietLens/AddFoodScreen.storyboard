@@ -1,30 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kTU-F7-eOW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kTU-F7-eOW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Light</string>
-        </array>
-        <array key="PingFang.ttc">
-            <string>PingFangSC-Light</string>
-            <string>PingFangSC-Medium</string>
-            <string>PingFangSC-Regular</string>
-            <string>PingFangSC-Thin</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Camera View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -334,16 +320,16 @@
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Wwr-nr-O5f">
-                                                    <rect key="frame" x="20" y="112" width="227.5" height="48"/>
+                                                    <rect key="frame" x="20" y="112" width="228.5" height="48"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAi-29-BFx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="227.5" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="228.5" height="30"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30%  of your daily calorie amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C48-F8-TAM">
-                                                            <rect key="frame" x="0.0" y="30" width="227.5" height="18"/>
+                                                            <rect key="frame" x="0.0" y="30" width="228.5" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -1479,7 +1465,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="calorie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVP-Fr-PqS">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="calorie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVP-Fr-PqS">
                                                     <rect key="frame" x="308" y="11" width="51" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2522,7 +2508,7 @@
                         <outlet property="proteinValueLable" destination="tWL-lH-wjh" id="tMP-wN-79b"/>
                         <outlet property="quantityValue" destination="px7-i4-dnv" id="kag-3s-nDb"/>
                         <outlet property="unitValue" destination="cjn-CH-9Q3" id="Znr-Hf-B0H"/>
-                        <segue destination="P7n-xz-cGi" kind="showDetail" identifier="toAddTextFoodPage" action="showViewController:sender:" id="T6P-q9-QWZ"/>
+                        <segue destination="P7n-xz-cGi" kind="showDetail" identifier="toAddTextFoodPage" id="T6P-q9-QWZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OgA-VU-NnH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2541,7 +2527,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="kaE-6E-qQe" userLabel="Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="394"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="396"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Uu-NB-Y6a">
@@ -2617,8 +2603,15 @@
                                                 <constraint firstItem="VUv-1U-51y" firstAttribute="height" secondItem="wCc-E5-d1d" secondAttribute="height" id="wcT-R5-N4V"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbr-x8-bJx" userLabel="Seperator">
+                                            <rect key="frame" x="-0.5" y="326" width="375" height="4"/>
+                                            <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="4" id="Nbh-i4-Klq"/>
+                                            </constraints>
+                                        </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsv-mR-esS" userLabel="NutritionDataView">
-                                            <rect key="frame" x="0.0" y="331" width="375" height="64"/>
+                                            <rect key="frame" x="0.0" y="330" width="375" height="64"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="90kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r8-q0-GcH">
                                                     <rect key="frame" x="8" y="20" width="81" height="21"/>
@@ -2715,22 +2708,25 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
+                                        <constraint firstItem="fbr-x8-bJx" firstAttribute="width" secondItem="kaE-6E-qQe" secondAttribute="width" id="1HE-wr-xqT"/>
                                         <constraint firstItem="3Uu-NB-Y6a" firstAttribute="leading" secondItem="kaE-6E-qQe" secondAttribute="leading" id="1th-bj-QPW"/>
                                         <constraint firstItem="wCc-E5-d1d" firstAttribute="leading" secondItem="kaE-6E-qQe" secondAttribute="leading" id="2uq-OO-rcz"/>
                                         <constraint firstItem="wCc-E5-d1d" firstAttribute="top" secondItem="3Uu-NB-Y6a" secondAttribute="bottom" constant="10" id="3wb-17-u77"/>
                                         <constraint firstItem="hsv-mR-esS" firstAttribute="leading" secondItem="kaE-6E-qQe" secondAttribute="leading" id="IBw-e7-n7I"/>
                                         <constraint firstAttribute="trailing" secondItem="3Uu-NB-Y6a" secondAttribute="trailing" id="PF0-wX-eIU"/>
                                         <constraint firstItem="hsv-mR-esS" firstAttribute="centerX" secondItem="kaE-6E-qQe" secondAttribute="centerX" id="PiY-45-Ii8"/>
+                                        <constraint firstItem="fbr-x8-bJx" firstAttribute="top" secondItem="wCc-E5-d1d" secondAttribute="bottom" id="QvT-2v-QEG"/>
                                         <constraint firstAttribute="trailing" secondItem="VUv-1U-51y" secondAttribute="trailing" constant="21" id="SZl-t3-QKx"/>
                                         <constraint firstAttribute="trailing" secondItem="hsv-mR-esS" secondAttribute="trailing" id="YBb-Hl-DhE"/>
                                         <constraint firstItem="3Uu-NB-Y6a" firstAttribute="top" secondItem="kaE-6E-qQe" secondAttribute="top" id="Zq6-5U-L8u"/>
                                         <constraint firstItem="wCc-E5-d1d" firstAttribute="centerX" secondItem="kaE-6E-qQe" secondAttribute="centerX" id="anf-7p-yQB"/>
-                                        <constraint firstItem="hsv-mR-esS" firstAttribute="top" secondItem="wCc-E5-d1d" secondAttribute="bottom" constant="5" id="fsn-Dx-eCd"/>
+                                        <constraint firstItem="fbr-x8-bJx" firstAttribute="centerX" secondItem="kaE-6E-qQe" secondAttribute="centerX" id="f81-22-e5Z"/>
+                                        <constraint firstItem="hsv-mR-esS" firstAttribute="top" secondItem="wCc-E5-d1d" secondAttribute="bottom" constant="4" id="fsn-Dx-eCd"/>
                                         <constraint firstAttribute="trailing" secondItem="wCc-E5-d1d" secondAttribute="trailing" id="n2n-ZN-3Gc"/>
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="EgW-Jn-sYe" userLabel="FooterView">
-                                    <rect key="frame" x="0.0" y="466" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="468" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjz-Lc-k2O">
@@ -2760,7 +2756,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodItemListCell" id="9Xg-1W-00H" customClass="FoodItemListCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="422" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="424" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Xg-1W-00H" id="obN-dP-PcS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3113,8 +3109,8 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <image name="whiteCross" width="12" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yJI-SH-g0Q"/>
-        <segue reference="QYE-VL-YcU"/>
+        <segue reference="4Be-n0-7O7"/>
+        <segue reference="iT1-VQ-crM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

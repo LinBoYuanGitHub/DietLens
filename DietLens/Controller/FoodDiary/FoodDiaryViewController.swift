@@ -118,6 +118,8 @@ class FoodDiaryViewController: UIViewController {
             APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
                 if isSuccess {
                    self.navigationController?.popViewController(animated: true)//pop back to food calendar
+                } else {
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "update failed")
                 }
             })
         } else {
@@ -177,7 +179,9 @@ class FoodDiaryViewController: UIViewController {
                     }))! {
                         self.navigationController?.popViewController(animated: true)
                     }
-                }
+                } else {
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "update failed")
+            }
         }
     }
 
@@ -205,6 +209,8 @@ class FoodDiaryViewController: UIViewController {
         APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
             if isSuccess {
                 self.foodTableView.reloadData()
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "update failed")
             }
         }
     }

@@ -42,8 +42,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         cpfCollectionView.delegate = self
         cpfCollectionView.dataSource = self
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        //SignPainterHouseScript 28.0
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         //change statusbarcolor
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
@@ -114,9 +112,11 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //setUp title
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
+        //SignPainterHouseScript 28.0
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.backgroundColor = UIColor.red
-        self.navigationController?.navigationBar.barTintColor = UIColor.red
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
         //refresh nutrition part each time view apppear
         requestNutritionDict(requestDate: Date())

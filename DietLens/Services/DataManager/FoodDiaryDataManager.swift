@@ -63,7 +63,7 @@ class FoodDiaryDataManager {
             dietDict["name"] = dietItem.foodName
             dietDict["food"] = dietItem.foodId
             dietDict["search_type"] = dietItem.recordType
-            dietDict["unit"] = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
+            dietDict["measurement_type"] = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
             dietDict["quantity"] = dietItem.quantity
             var nutrient = Dictionary<String, Double>()
             nutrient["fat"] = dietItem.nutritionInfo.fat

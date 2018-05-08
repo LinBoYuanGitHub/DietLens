@@ -467,7 +467,8 @@ class APIService {
 
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
     public func qiniuImageDownload(imageKey: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "http://172.29.32.226:8000/dl/v1/foodinfo/img/?key="+imageKey + "&width="+String(width) + "&height=" + String(height)
+//        let downloadURL = "http://172.29.32.226:8000/dl/v1/foodinfo/img/?key="+imageKey + "&width="+String(width) + "&height=" + String(height)
+        let downloadURL = "http://172.29.32.226:8000/dl/v1/foodinfo/img/?key="+imageKey
         Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
             if response.error == nil {
                 if let data = response.data {
