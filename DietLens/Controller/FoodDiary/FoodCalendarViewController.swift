@@ -90,10 +90,10 @@ class FoodCalendarViewController: UIViewController {
 
     func assembleTargetDict() {
         let preferences = UserDefaults.standard
-        targetDict[0] =  (StringConstants.UIString.calorieUnit, preferences.double(forKey: preferenceKey.calorieTarget))
-        targetDict[1] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.proteinTarget))
-        targetDict[2] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.fatTarget))
-        targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.carbohydrateTarget))
+        targetDict[0] =  (StringConstants.UIString.calorieUnit, preferences.double(forKey: PreferenceKey.calorieTarget))
+        targetDict[1] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.proteinTarget))
+        targetDict[2] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.fatTarget))
+        targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.carbohydrateTarget))
     }
 
     @IBAction func showCalendar(_ sender: Any) {
@@ -241,9 +241,18 @@ extension FoodCalendarViewController: UICollectionViewDelegate, UICollectionView
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nutritionCollectionCell", for: indexPath) as? NutritionCollectionCell {
             let kvSet = displayDict[indexPath.row]
             let targetSet = targetDict[indexPath.row]
-            let progress = kvSet!.1/targetSet!.1
+            var name = ""
+            var progress =  0
             let unit  = targetSet!.0
-            cell.setUpCell(nutritionName: (kvSet?.0)!, percentage: Int(progress*100), nutritionValue: (kvSet?.1)!, unit: unit)
+            if kvSet != nil || targetSet != nil {
+                if targetSet!.1 == 0 {
+                    progress = 0
+                } else {
+                    progress = Int(kvSet!.1/targetSet!.1*100)
+                }
+                name = (kvSet?.0)!
+            }
+            cell.setUpCell(nutritionName: name, percentage: Int(progress), nutritionValue: (kvSet?.1)!, unit: unit)
             return cell
         }
         return UICollectionViewCell()
@@ -347,7 +356,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 let imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
                 //download image from Qiniu
-                APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
+                APIService.instance.qiniuImageDownload(imageKey: imageKey, width: Dimen.foodCalendarImageWidth, height: Dimen.foodCalendarImageHeight, completion: { (image) in
                     dest.isSetMealByTimeRequired = false
                     dest.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
                     dest.isUpdate = true

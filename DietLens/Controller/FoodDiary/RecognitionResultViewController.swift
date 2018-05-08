@@ -54,10 +54,13 @@ class RecognitionResultViewController: UIViewController {
     @IBAction func toTextSearchPage(_ sender: Any) {
 //        performSegue(withIdentifier: "toTextSearchPage", sender: nil)
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
-            dest.addFoodDate = recordDate
             dest.cameraImage = cameraImage
             dest.imageKey = self.imageKey
             dest.shouldShowCancel = true
+            //mealTime & mealType
+            dest.mealType = self.mealType!
+            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+            dest.addFoodDate = recordDate
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
                 navigator.pushViewController(dest, animated: true)

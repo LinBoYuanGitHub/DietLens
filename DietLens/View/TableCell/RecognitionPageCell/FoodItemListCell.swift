@@ -25,7 +25,7 @@ class FoodItemListCell: UITableViewCell {
         } else {
             quantityLable.text = String(dietItem.quantity)
         }
-//      unitLabel.text = dietItem.portionInfo[dietItem.selectedPos].weightUnit
+        unitLabel.text = dietItem.displayUnit
         calorieLabel.text = String(Int(dietItem.nutritionInfo.calorie)) + StringConstants.UIString.calorieUnit
     }
 

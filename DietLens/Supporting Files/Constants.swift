@@ -41,6 +41,7 @@ struct ServerConfig {
     static let acctForgetPwSendEmailURL = baseURL + "/accounts/check/"
     static let acctForgetPwEmailVerifURL = baseURL + "/accounts/verification/"
     static let acctForgetPwResetURL = baseURL + "/accounts/set-password/"
+    static let forgetPwdUrl = labDeskTopURL + "/users/forgot-password/"
 
     static let articleURL = testBaseURL + "/article"
     static let eventURL = testBaseURL + "/event/"
@@ -57,7 +58,7 @@ struct ServerConfig {
     static let feedBackURL = baseURL + "/feedback/"
     static let NotificationURL = baseURL + "/notification"
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
-    static let uploadImageKeyURL = "http://172.29.33.83:8003/webHook"
+    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"
     //foodDiary CRUD
     static let foodDiaryOperationURL = labDeskTopURL + "/foodinfo/"
     static let foodDiaryDietLogs = labDeskTopURL + "/dietlogs/"
@@ -117,12 +118,13 @@ struct ArticleType {
     static let EVENT = "event"
 }
 
-struct preferenceKey {
+struct PreferenceKey {
     static let calorieTarget = "calorieTarget"
     static let carbohydrateTarget = "carbohydrateTarget"
     static let proteinTarget = "proteinTarget"
     static let fatTarget = "fatTarget"
     static let tokenKey = "TOKEN"
+    static let userIdkey = "userId"
 }
 
 struct Dimen {
@@ -130,4 +132,6 @@ struct Dimen {
     static let NewsArticleCollectionHeight = 220
     static let EventsFirstRowHeight = 310
     static let EventsRowHeight = 275
+    static let foodCalendarImageWidth = 400
+    static let foodCalendarImageHeight = 400
 }

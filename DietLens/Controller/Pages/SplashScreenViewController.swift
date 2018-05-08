@@ -16,7 +16,7 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let preferences = UserDefaults.standard
-        let token = preferences.string(forKey: preferenceKey.tokenKey)
+        let token = preferences.string(forKey: PreferenceKey.tokenKey)
         if token == nil {
             //redirect to login page
             DispatchQueue.main.async {
@@ -75,10 +75,10 @@ class SplashScreenViewController: UIViewController {
     func loadNutritionTarget() {
         APIService.instance.getDietaryGuideInfo { (guideDict) in
             let preferences = UserDefaults.standard
-            preferences.setValue(guideDict["energy"], forKey: preferenceKey.calorieTarget)
-            preferences.setValue(guideDict["carbohydrate"], forKey: preferenceKey.carbohydrateTarget)
-            preferences.setValue(guideDict["protein"], forKey: preferenceKey.proteinTarget)
-            preferences.setValue(guideDict["fat"], forKey: preferenceKey.fatTarget)
+            preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
+            preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
+            preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
+            preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
         }
     }
 

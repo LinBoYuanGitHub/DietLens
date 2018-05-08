@@ -357,7 +357,8 @@ extension CameraViewController: CameraViewControllerDelegate {
             button?.isEnabled = true
             button?.backgroundColor = .clear
         }
-//        activeButton.setTitleColor(UIColor(red: 242, green: 64, blue: 93, alpha: 1), for: .disabled)
+        activeButton.setTitleColor(UIColor.red, for: .disabled)
+//        activeButton.setTitleColor(UIColor.red, for: .normal)
         activeButton.isEnabled = false
 //        activeButton.backgroundColor = UIColor(red: 1.00, green: 0.31, blue: 0.31, alpha: 0.7)
 //        activeButton.layer.cornerRadius = 5

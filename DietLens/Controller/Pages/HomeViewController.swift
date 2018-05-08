@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import PBRevealViewController
 import RealmSwift
 
 class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
@@ -15,57 +14,44 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     @IBOutlet weak var homeTitleBar: UINavigationItem!
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
     @IBOutlet weak var newsFeedTable: UITableView!
-    @IBOutlet weak var fatsProgressBar: HomeProgressView!
-    @IBOutlet weak var proteinProgressBar: HomeProgressView!
-    @IBOutlet weak var carbohydrateProgressBar: HomeProgressView!
+    @IBOutlet weak var cpfCollectionView: UICollectionView!
+    @IBOutlet weak var calorieDisplayContainer: UIView!
+    @IBOutlet weak var cpfContainer: UIView!
+
+    @IBOutlet weak var totalCalorie: UILabel!
+    @IBOutlet weak var intakenCalorie: UILabel!
+    @IBOutlet weak var remainCalorie: UILabel!
+    @IBOutlet weak var percentageCalorie: UILabel!
+
     //index to mark article/event
     var whichArticleIndex = 0
     var whichEventIndex = 0
     //article Type
     var articleType = ArticleType.ARTICLE
-
-    @IBOutlet weak var fatLabel: UILabel!
-    @IBOutlet weak var proteinLabel: UILabel!
-    @IBOutlet weak var carboLabel: UILabel!
-
+    //parallax header
+//    weak var parallaxHeaderView: UIView?
     @IBOutlet weak var headerView: UIView!
+
+    var displayDict = [Int: (String, Double)]()
+    var targetDict = [Int: (String, Double)]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         newsFeedTable.dataSource = self
         newsFeedTable.delegate = self
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        cpfCollectionView.delegate = self
+        cpfCollectionView.dataSource = self
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        //SignPainterHouseScript 28.0
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         //change statusbarcolor
-//        self.navigationItem.leftBarButtonItem = sideMenuButton
-//        UINavigationBar.appearance().shadowImage = UIImage()
-//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-//        UINavigationBar.appearance().titleTextAttributes = [
-//            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
-//        sideMenuButton.target = self.openLeftMenu()
-//        sideMenuButton.action = #selector(openLeftMenu)
-//        revealViewController()?.leftViewBlurEffectStyle = .light
-//        newsFeedTable.estimatedRowHeight = 240
-//        newsFeedTable.rowHeight = UITableViewAutomaticDimension
-        self.fatsProgressBar.progress = 0.0
-        self.proteinProgressBar.progress = 0.0
-        self.carbohydrateProgressBar.progress = 0.0
-        // Do any additional setup after loading the view.
         newsFeedTable.tableHeaderView = headerView
-        //set up tableview Height
-        newsFeedTable.tableHeaderView?.fs_height = CGFloat(Dimen.NewsFeedTableHeight)
         loadArticle()
-    }
-
-    @IBAction func onDetailClick(_ sender: Any) {
-        //segue to nutrition page
-        performSegue(withIdentifier: "toDailyNutrtionDetail", sender: nil)
     }
 
     //assemble the article & event list and display
     func loadArticle() {
-        if ArticleDataManager.instance.articleList.count == 0||ArticleDataManager.instance.eventList.count == 0 {
+        if ArticleDataManager.instance.articleList.count == 0 || ArticleDataManager.instance.eventList.count == 0 {
             APIService.instance.getArticleList(completion: { (_) in
                 self.newsFeedTable.reloadData()
             })
@@ -73,7 +59,44 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
                 self.newsFeedTable.reloadData()
             })
         }
+    }
 
+    func loadCalorieData(todayIntakenCal: Int) {
+        let preferences = UserDefaults.standard
+        let totalCal = Int(preferences.double(forKey: PreferenceKey.calorieTarget))
+        if totalCal != 0 {
+            totalCalorie.text = String(totalCal)
+            intakenCalorie.text = String(todayIntakenCal)
+            remainCalorie.text = String(totalCal-todayIntakenCal)
+            percentageCalorie.text = String(todayIntakenCal*100/totalCal) + "%"
+        }
+    }
+
+    func requestNutritionDict(requestDate: Date) {
+        APIService.instance.getDailySum(date: requestDate) { (resultDict) in
+            if resultDict.count == 0 {
+                return
+            }
+            self.assembleDisplayDict(nutritionDict: resultDict)
+            self.assembleTargetDict()
+            self.cpfCollectionView.reloadData()
+            self.loadCalorieData(todayIntakenCal: Int(resultDict["energy"]!))
+        }
+    }
+
+    func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
+        displayDict[0] = ("Calorie", nutritionDict["energy"]!)
+        displayDict[1] = ("Protein", nutritionDict["protein"]!)
+        displayDict[2] = ("Fat", nutritionDict["fat"]!)
+        displayDict[3] = ("Carbohydrate", nutritionDict["carbohydrate"]!)
+    }
+
+    func assembleTargetDict() {
+        let preferences = UserDefaults.standard
+        targetDict[0] =  (StringConstants.UIString.calorieUnit, preferences.double(forKey: PreferenceKey.calorieTarget))
+        targetDict[1] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.proteinTarget))
+        targetDict[2] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.fatTarget))
+        targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.carbohydrateTarget))
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -91,7 +114,12 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //setUp title
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.backgroundColor = UIColor.red
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
+        //refresh nutrition part each time view apppear
+        requestNutritionDict(requestDate: Date())
     }
 
     // calculate Nutrition Data & put into homePage
@@ -108,36 +136,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             dailyCarb += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate as NSString).floatValue * Float(ratio)//standard 300
             dailyProtein += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein as NSString).floatValue * Float(ratio) //standard 100
             dailyFat += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat as NSString).floatValue * Float(ratio) //standard 100
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-            UIView.animate(withDuration: 1.8, delay: 1.2, options: .curveEaseIn, animations: {
-                if dailyFat > 100 {
-                    self.fatsProgressBar.setProgress(1, animated: true)
-                    self.fatLabel.textColor = UIColor.red
-                } else {
-                    self.fatsProgressBar.setProgress(dailyFat/100, animated: true)
-                }
-                self.fatLabel.text = "\(Int(dailyFat))g of 100g"
-            }, completion: nil)
-
-            UIView.animate(withDuration: 1.6, delay: 1.2, options: .curveEaseIn, animations: {
-                if dailyProtein > 100 {
-                    self.proteinProgressBar.setProgress(1, animated: true)
-                    self.proteinLabel.textColor = UIColor.red
-                } else {
-                    self.proteinProgressBar.setProgress(dailyProtein/100, animated: true)
-                }
-                self.proteinLabel.text = "\(Int(dailyProtein))g of 100g"
-            }, completion: nil)
-            UIView.animate(withDuration: 1, delay: 1, options: .curveEaseIn, animations: {
-                if dailyCarb > 300 {
-                    self.carbohydrateProgressBar.setProgress(1, animated: true)
-                    self.carboLabel.textColor = UIColor.red
-                } else {
-                    self.carbohydrateProgressBar.setProgress(dailyCarb/300, animated: true)
-                }
-                self.carboLabel.text = "\(Int(dailyCarb))g of 300g"
-            }, completion: nil)
         }
     }
 
@@ -212,6 +210,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.moreBtn.addTarget(self, action: #selector(performSegueToArticleList), for: .touchUpInside)
                 }
                 cell.setupNewsArticleRow(articles: ArticleDataManager.instance.articleList, whichVCisDelegate: self)
+                cell.refreshCollectionView()
                 cell.selectionStyle = .none
                 return cell
             }
@@ -232,6 +231,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == newsFeedTable {
+            let contentOffset = scrollView.contentOffset.y
+//            if contentOffset > 0 {
+//                cpfContainer.isHidden = true
+//            } else {
+//                cpfContainer.isHidden = false
+//            }
+        }
+    }
+
     @objc func performSegueToArticleList() {
         articleType = ArticleType.ARTICLE
         performSegue(withIdentifier: "showArticleList", sender: self)
@@ -240,6 +250,45 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     @objc func performSegueToEventList() {
         articleType = ArticleType.EVENT
         performSegue(withIdentifier: "showArticleList", sender: self)
+    }
+
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //CPF total 3 item
+        return 3
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cpfCollectionCell", for: indexPath) as? homePageCPFCell {
+            let kvSet = displayDict[indexPath.row+1]
+            let targetSet = targetDict[indexPath.row+1]
+            var name = ""
+            if indexPath.row == 0 {
+                name = "PROTEIN"
+            } else if indexPath.row == 1 {
+                name = "FAT"
+            } else {
+                name = "CARB"
+            }
+            var progress = 0
+            if kvSet != nil || targetSet != nil {
+                if targetSet!.1 == 0 {
+                    progress = 0
+                } else {
+                    progress = Int(kvSet!.1/targetSet!.1*100)
+                }
+            }
+            cell.setupCell(nutritionName: name, progressPercentage: progress)
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: CGFloat(110), height: CGFloat(60))
     }
 
 }

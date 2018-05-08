@@ -22,6 +22,12 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
         // Initialization code
     }
 
+    func refreshCollectionView() {
+        if newsArticleRow != nil {
+            newsArticleRow.reloadData()
+        }
+    }
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

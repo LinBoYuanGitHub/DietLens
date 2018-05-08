@@ -56,12 +56,13 @@ class ProfileViewController: UIViewController {
         let userId = preferences.string(forKey: key)
         APIService.instance.getProfile(userId: userId!) { (userProfile) in
             //set userProfile
-            self.TFName.text = userProfile?.name
-            if userProfile != nil {
-                self.TFWeight.text = String(format: "%.1f", userProfile!.weight)
-                self.TFHeight.text = String(format: "%.1f", userProfile!.height)
-                self.TFAge.text = "\(userProfile!.birthday)"
+            if userProfile == nil {
+                return
             }
+            self.TFName.text = userProfile?.name
+            self.TFWeight.text = String(format: "%.1f", userProfile!.weight)
+            self.TFHeight.text = String(format: "%.1f", userProfile!.height)
+            self.TFAge.text = "\(userProfile!.birthday)"
             if userProfile?.gender == 0 {
                 self.TFGender.text = self.genderList[1]
                 self.genderPickerView.selectRow(1, inComponent: 0, animated: false)

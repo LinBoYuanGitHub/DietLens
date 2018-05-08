@@ -46,13 +46,16 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
             // TODO:Call backend server
             AlertMessageHelper.showLoadingDialog(targetController: self)
-            APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess, verificationNeeded) in
+            APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess) in
                 if isSuccess {
-                    if verificationNeeded {
-                        self.performSegue(withIdentifier: "GoToForgetVerify", sender: nil)
-                    } else {
-                        self.performSegue(withIdentifier: "GoToForgetPwMain", sender: nil)
-                    }
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                    AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
+                        if isPositive {
+                            self.dismiss(animated: true, completion: nil)
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
                 } else {
                     DispatchQueue.main.async {
                         AlertMessageHelper.dismissLoadingDialog(targetController: self)

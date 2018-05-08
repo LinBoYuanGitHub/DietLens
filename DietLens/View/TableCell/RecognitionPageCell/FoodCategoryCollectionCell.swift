@@ -25,7 +25,7 @@ class FoodCategoryCollectionCell: UICollectionViewCell {
                                         self.categoryImage.image = imageView.image
             })
         } else {
-            categoryImage.image = #imageLiteral(resourceName: "loading_img")
+            categoryImage.image = #imageLiteral(resourceName: "BestMatchIcon")
         }
 
     }

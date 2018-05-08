@@ -85,7 +85,6 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
 
     func setupParallaxHeader() {
         //let image = newsArticle.newsImage
-
         let imageView = UIImageView()
         //imageView.image = image
         if articleData?.articleImageURL != "" {

@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         registerForPushNotifications()
-        realmSetting(application)
+//        realmSetting(application)
 
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
@@ -53,50 +53,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 4,
+            schemaVersion: 1,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
-            migrationBlock: { migration, oldSchemaVersion in
+            migrationBlock: { _, _ in
 
-                if oldSchemaVersion <= 1 {
-                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
-                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)
-                    }
-                }
-                if oldSchemaVersion <= 2 {
-                    migration.enumerateObjects(ofType: FoodDiary.className()) { _, newObject in
-                        newObject?["quantity"] = 1.0
-                        newObject?["unit"] = "portion"
-                    }
-                }
-                if oldSchemaVersion <= 3 {
-                    migration.enumerateObjects(ofType: FoodDiary.className()) { oldObject, newObject in
-//                        let foodInfoList = newObject?.dynamicList("foodInfoList")
-                        let foodInfoList =  newObject?["foodInfoList"] as! List<MigrationObject>
-                        let foodInfo = migration.create(FoodInfomation.className(), value: FoodInfomation())
-//                        let foodInfo = MigrationObject()
-                        foodInfo["foodId"] = oldObject?["foodId"]
-                        foodInfo["foodName"] = oldObject?["foodName"]
-                        foodInfo["carbohydrate"] = oldObject?["carbohydrate"]
-                        foodInfo["protein"] = oldObject?["protein"]
-                        foodInfo["fat"] = oldObject?["fat"]
-                        foodInfo["calorie"] = oldObject?["calorie"]
-                        foodInfo["category"] = oldObject?["category"]
-                        foodInfo["sampleImagePath"] = oldObject?["imagePath"]
-                        foodInfoList.append(foodInfo)
-                        //portion part
-                        let portionList = foodInfo["portionList"] as! List<MigrationObject>
-                        let portion = migration.create(Portion.className(), value: Portion())
-                        portion["weightValue"] = 100
-                        portion["sizeUnit"] = oldObject?["unit"]
-                        portionList.append(portion)
-                        //changing part
-                        newObject?["quantity"] = 1
-                        newObject?["selectedFoodInfoPos"] = 0
-                        newObject?["selectedPortionPos"] = 0
-                    }
-                }
+//                if oldSchemaVersion <= 1 {
+//                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
+//                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)
+//                    }
+//                }
+//                if oldSchemaVersion <= 2 {
+//                    migration.enumerateObjects(ofType: FoodDiary.className()) { _, newObject in
+//                        newObject?["quantity"] = 1.0
+//                        newObject?["unit"] = "portion"
+//                    }
+//                }
+//                if oldSchemaVersion <= 3 {
+//                    migration.enumerateObjects(ofType: FoodDiary.className()) { oldObject, newObject in
+////                        let foodInfoList = newObject?.dynamicList("foodInfoList")
+//                        let foodInfoList =  newObject?["foodInfoList"] as! List<MigrationObject>
+//                        let foodInfo = migration.create(FoodInfomation.className(), value: FoodInfomation())
+////                        let foodInfo = MigrationObject()
+//                        foodInfo["foodId"] = oldObject?["foodId"]
+//                        foodInfo["foodName"] = oldObject?["foodName"]
+//                        foodInfo["carbohydrate"] = oldObject?["carbohydrate"]
+//                        foodInfo["protein"] = oldObject?["protein"]
+//                        foodInfo["fat"] = oldObject?["fat"]
+//                        foodInfo["calorie"] = oldObject?["calorie"]
+//                        foodInfo["category"] = oldObject?["category"]
+//                        foodInfo["sampleImagePath"] = oldObject?["imagePath"]
+//                        foodInfoList.append(foodInfo)
+//                        //portion part
+//                        let portionList = foodInfo["portionList"] as! List<MigrationObject>
+//                        let portion = migration.create(Portion.className(), value: Portion())
+//                        portion["weightValue"] = 100
+//                        portion["sizeUnit"] = oldObject?["unit"]
+//                        portionList.append(portion)
+//                        //changing part
+//                        newObject?["quantity"] = 1
+//                        newObject?["selectedFoodInfoPos"] = 0
+//                        newObject?["selectedPortionPos"] = 0
+//                    }
+//                }
 
         })
         Realm.Configuration.defaultConfiguration = config
@@ -262,7 +262,7 @@ extension AppDelegate: MessagingDelegate {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        let token = preferences.string(forKey: preferenceKey.tokenKey)
+        let token = preferences.string(forKey: PreferenceKey.tokenKey)
         if token == nil {
             //record fcmToken
             let tokenKey = "fcmToken"

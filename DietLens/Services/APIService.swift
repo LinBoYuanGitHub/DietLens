@@ -48,8 +48,8 @@ class APIService {
         }
     }
 
-    public func resetPwRequest(userEmail: String, completion: @escaping (_ isSuccess: Bool, _ verificationNeeded: Bool) -> Void) {
-        Alamofire.request(URL(string: ServerConfig.acctForgetPwSendEmailURL)!,
+    public func resetPwRequest(userEmail: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        Alamofire.request(URL(string: ServerConfig.forgetPwdUrl)!,
                           method: .post,
                           parameters: ["email": userEmail],
                           encoding: JSONEncoding.default,
@@ -58,17 +58,10 @@ class APIService {
             .responseJSON {(response) -> Void in
             guard response.result.isSuccess else {
                 print ("Failed to request verification email")
-                completion (false, false)
+                completion (false)
                 return
             }
-            let jsonObj = JSON(response.result.value)
-            if let data = jsonObj["data"].dictionaryObject {
-                if let needVerify = data["verification"] {
-                    completion (true, needVerify as! Bool)
-                    return
-                }
-            }
-            completion(true, false)
+            completion(true)
         }
     }
 
@@ -147,7 +140,7 @@ class APIService {
                     let userNameKey = "username"
                     let userIdKey = "userId"
                     let token = response.response!.allHeaderFields["token"]
-                    preferences.setValue(token, forKey: preferenceKey.tokenKey)
+                    preferences.setValue(token, forKey: PreferenceKey.tokenKey)
                     preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: userIdKey)
                     preferences.setValue(jsonObj["data"]["email"].stringValue, forKey: userNameKey)
                     preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: nicknameKey)
@@ -186,7 +179,7 @@ class APIService {
         }
     }
 
-    public func register(nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void, failedCompletion: @escaping(_ failedMsg:String)-> Void) {
+    public func register(nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void, failedCompletion: @escaping(_ failedMsg: String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.registry)!,
             method: .post,
@@ -200,8 +193,7 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(response.result.value)
-                if jsonObj["error_message"] == JSON.null {
-                    completion(false)
+                if jsonObj["error_message"] != JSON.null {
                     failedCompletion(jsonObj["error_message"].stringValue)
                     return
                 }
@@ -210,13 +202,13 @@ class APIService {
                     print("Get Token failed")
                     return
                 }
-                if jsonObj["message"] == "Register success"{
+                if jsonObj["message"].rawString() == "Register success"{
                     let preferences = UserDefaults.standard
                     let nicknameKey = "nickname"
                     let userNameKey = "username"
                     let userIdKey = "userId"
                     let token = response.response!.allHeaderFields["token"]
-                    preferences.setValue(token, forKey: preferenceKey.tokenKey)
+                    preferences.setValue(token, forKey: PreferenceKey.tokenKey)
                     preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: userIdKey)
                     preferences.setValue(jsonObj["data"]["email"].stringValue, forKey: userNameKey)
                     preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: nicknameKey)
@@ -474,23 +466,8 @@ class APIService {
     }
 
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
-    public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
-//        QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
-//        if let token = QiniuToken.shared().uploadToken() {
-//            let calendar = Calendar.current
-//            let date = calendar.date(byAdding: .minute, value: 5, to: Date())
-//            let downloadURL = QiniuConfig.rootDomain + "/resource/" + imageKey + ".jpg?e=" + String(Int(date!.timeIntervalSince1970)) + "&token=" + token
-//            let imageView = UIImageView()
-//            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
-//                completion(imageView.image)
-//            })
-//        }
-//        let calendar = Calendar.current
-//        let date = calendar.date(byAdding: .minute, value: 5, to: Date())
-//        var downloadURL = QiniuConfig.rootDomain + "/" + imageKey + "?e=" + String(Int(date!.timeIntervalSince1970))
-//        let token = EncryptionUtil.generateQiniuDownloadToken(originalURL: downloadURL, accessKey: QiniuConfig.accessKey)
-//        downloadURL += "&token=" + token
-        let downloadURL = "http://172.29.32.226:8000/dl/v1/foodinfo/img/?key="+imageKey
+    public func qiniuImageDownload(imageKey: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
+        let downloadURL = "http://172.29.32.226:8000/dl/v1/foodinfo/img/?key="+imageKey + "&width="+String(width) + "&height=" + String(height)
         Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
             if response.error == nil {
                 if let data = response.data {
@@ -502,17 +479,6 @@ class APIService {
                 completion(nil)
             }
         }
-//        let imageView = UIImageView()
-//        DispatchQueue.main.async {
-//            imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,
-//                                  imageTransition: .crossDissolve(0.5), completion: { _ in
-//                                    completion(imageView.image)
-//            })
-//        }
-//        let imageView = UIImageView()
-//        imageView.af_setImage(withURL: URL(string: downloadURL)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { (_) in
-//            completion(imageView.image)
-//        })
     }
 
     /**
@@ -1328,8 +1294,10 @@ class APIService {
 
     //for all the new token
     func getTokenHeader() -> Dictionary<String, String> {
-//        let header = ["Authorization": "Token c753d57352d501f3f40b89cf0b39e77ded4952a3"]
-        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
+//        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
+        let preferences = UserDefaults.standard
+        let token = preferences.string(forKey: PreferenceKey.tokenKey)
+        let header = ["Authorization": "Token "+token!]
         return header
     }
 

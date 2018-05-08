@@ -18,7 +18,7 @@ class FoodDiaryRecordViewCell: UITableViewCell {
 
     func setUpCell(imageId: String, calorieText: String) {
         calorieView.text = calorieText
-        APIService.instance.qiniuImageDownload(imageKey: imageId) { (image) in
+        APIService.instance.qiniuImageDownload(imageKey: imageId, width: Dimen.foodCalendarImageWidth, height: Dimen.foodCalendarImageHeight) { (image) in
             self.foodImageView.image = image
         }
 

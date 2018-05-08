@@ -16,20 +16,12 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var clickToEditLabel: UILabel!
 
-//    let labels: [String] = ["Home", "Food Diary", "Report", "Articles", "Steps Counter", "Browser"]
-//      let iconNames: [String] = ["home", "Report", "ReportIcon", "ArticleIcon", "Steps", "healthCenterIcon"]
-//      let storyboardIDs: [String] = ["DietLens", "calendarViewController", "ReportVC", "ArticleVC", "StepCounterVC", "HealthCenterVC"]
-
     let labels: [String] = ["Home", "Food Diary", "Report", "Steps Counter"]
     let iconNames: [String] = ["blackHomeIcon", "blackFoodDiaryIcon", "blackReportIcon", "blackStepCounterIcon"]
     let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "ReportVC", "StepCounterVC"]
 
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 
     override func viewDidLoad() {
@@ -39,10 +31,6 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
         sideMenuTable.backgroundColor = UIColor.white
-
-//        self.revealViewController()!.delegate = self
-//        self.revealViewController()!.toggleAnimationType = .crossDissolve
-//        self.revealViewController()!.leftViewShadowOpacity = 0
         // Do any additional setup after loading the view.
         //set nickname
         let preferences = UserDefaults.standard

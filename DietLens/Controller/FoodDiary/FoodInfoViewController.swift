@@ -171,6 +171,8 @@ class FoodInfoViewController: UIViewController {
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
     //if not passing mealType, then use currentTime to set mealType
@@ -454,7 +456,7 @@ extension FoodInfoViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == quantityValue {
             dietItem.quantity = Double(quantityValue.text!)!
-           //change the nutrition data
+            foodDiaryEntity.dietItems[0].quantity = Double(quantityValue.text!)!
             setUpFoodValue()
         }
     }

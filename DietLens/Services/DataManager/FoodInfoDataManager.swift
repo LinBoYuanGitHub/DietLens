@@ -187,6 +187,7 @@ class FoodInfoDataManager {
             foodItem.foodId = job["id"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.quantity = Double(job["quantity"].intValue)
+            foodItem.displayUnit = job["measurement_type"].stringValue
             foodItem.recordType = job["search_type"].stringValue
             foodDiaryEntity.dietItems.append(foodItem)
         }
@@ -198,21 +199,23 @@ class FoodInfoDataManager {
         result["meal_time"] = foodDiaryEntity.mealTime
         result["meal_type"] = foodDiaryEntity.mealType
         result["image"] = foodDiaryEntity.imageId
-        //TODO remove hardcode
-        result["user"] = "eee07452-4daf-11e8-99a9-64006a470149"
+//        result["user"] = "eee07452-4daf-11e8-99a9-64006a470149"
+        let preferences = UserDefaults.standard
+        let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+        result["user"] = userId
         var details = [Dictionary<String, Any>]()
         for dietItem in foodDiaryEntity.dietItems {
             var dietDict  = Dictionary<String, Any>()
-            if dietItem.id != ""{
+            if dietItem.id != "" {
                  dietDict["id"] = dietItem.id
             }
             dietDict["name"] = dietItem.foodName
             dietDict["food"] = dietItem.foodId
             dietDict["search_type"] = dietItem.recordType
             if dietItem.portionInfo.count != 0 {
-                dietDict["unit"] = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
+                dietDict["measurement_type"] = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
             } else {
-                dietDict["unit"] = "portion"
+                dietDict["measurement_type"] = "portion"
             }
             dietDict["quantity"] = dietItem.quantity
             var nutrient = Dictionary<String, Double>()
@@ -221,7 +224,7 @@ class FoodInfoDataManager {
             if dietItem.portionInfo.count != 0 {
                 unitScale = dietItem.portionInfo[dietItem.selectedPos].weightValue
             }
-            var ratio = dietItem.quantity * unitScale
+            var ratio = dietItem.quantity * unitScale/100
             nutrient["fat"] = dietItem.nutritionInfo.fat * ratio
             nutrient["energy"] = dietItem.nutritionInfo.calorie * ratio
             nutrient["protein"] = dietItem.nutritionInfo.protein * ratio

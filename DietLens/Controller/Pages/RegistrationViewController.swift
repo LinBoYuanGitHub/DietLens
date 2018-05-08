@@ -21,7 +21,9 @@ class RegistrationViewController: UIViewController {
         TFRePassword.delegate = self
         TFEmail.delegate = self
         TFPassword.delegate = self
+        TFEmail.keyboardType = .emailAddress
         // Do any additional setup after loading the view.
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +54,9 @@ class RegistrationViewController: UIViewController {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
             return
         } else {
+            AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.register(nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
+                AlertMessageHelper.dismissLoadingDialog(targetController: self)
                 if isSucceed {
                     // save for basic authentication
                     let preferences = UserDefaults.standard
@@ -74,7 +78,7 @@ class RegistrationViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? ProfileViewController {
-            
+
         }
     }
 
@@ -99,4 +103,16 @@ extension RegistrationViewController: UITextFieldDelegate {
         return true
     }
 
+}
+
+extension RegistrationViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

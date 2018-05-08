@@ -46,10 +46,10 @@ class DailyNutritionInfoViewController: UIViewController {
 
     func assembleTargetDict() {
         let preferences = UserDefaults.standard
-        targetDict[0] =  (StringConstants.UIString.calorieUnit, preferences.double(forKey: preferenceKey.calorieTarget))
-        targetDict[1] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.proteinTarget))
-        targetDict[2] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.fatTarget))
-        targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: preferenceKey.carbohydrateTarget))
+        targetDict[0] =  (StringConstants.UIString.calorieUnit, preferences.double(forKey: PreferenceKey.calorieTarget))
+        targetDict[1] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.proteinTarget))
+        targetDict[2] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.fatTarget))
+        targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.carbohydrateTarget))
     }
 
     func requestNutritionDict(requestDate: Date) {
