@@ -45,6 +45,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //change statusbarcolor
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
+        loadNutritionTarget()
         //for sideMenu toggle leftView
         NotificationCenter.default.addObserver(self, selector: #selector(onToggleLeftView), name: .toggleLeftView, object: nil)
     }
@@ -58,6 +59,17 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             APIService.instance.getEventList(completion: { (_) in
                 self.newsFeedTable.reloadData()
             })
+        }
+    }
+
+    //load personal target whenever go to main page
+    func loadNutritionTarget() {
+        APIService.instance.getDietaryGuideInfo { (guideDict) in
+            let preferences = UserDefaults.standard
+            preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
+            preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
+            preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
+            preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
         }
     }
 
