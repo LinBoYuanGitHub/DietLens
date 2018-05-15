@@ -45,6 +45,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //change statusbarcolor
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
+        //for sideMenu toggle leftView
+        NotificationCenter.default.addObserver(self, selector: #selector(onToggleLeftView), name: .toggleLeftView, object: nil)
     }
 
     //assemble the article & event list and display
@@ -82,6 +84,10 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         }
     }
 
+    @objc func onToggleLeftView() {
+        self.sideMenuController?.toggleLeftViewAnimated()
+    }
+
     func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
         displayDict[0] = ("Calorie", nutritionDict["energy"]!)
         displayDict[1] = ("Protein", nutritionDict["protein"]!)
@@ -113,10 +119,13 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         //SignPainterHouseScript 28.0
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.backgroundColor = UIColor.red
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as! [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.barTintColor = UIColor.clear
+//        self.navigationController?.view.backgroundColor = UIColor.clear
+//        self.navigationController?.navigationBar.isTranslucent =  true
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
         //refresh nutrition part each time view apppear
         requestNutritionDict(requestDate: Date())
@@ -200,7 +209,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         //navigate to article page
         articleType = ArticleType.EVENT
         whichEventIndex = indexPath.row - 1
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

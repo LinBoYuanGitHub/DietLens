@@ -19,7 +19,6 @@ class SearchResultCell: UITableViewCell {
     }
 
     func setUpCell(textResultEntity: TextSearchSuggestionEntity) {
-        //FIXME part of hardCode data
         foodSampleImage.image = #imageLiteral(resourceName: "food_sample_image")
         foodName.text = textResultEntity.name
         foodCalorie.text = "130.0 kcal"

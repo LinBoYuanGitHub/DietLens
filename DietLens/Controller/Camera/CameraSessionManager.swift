@@ -308,6 +308,9 @@ extension CameraSessionManager {
     @objc
     func sessionInterruptionEnded(notification: NSNotification) {
         print("Capture session interruption ended")
+        if viewControllerDelegate == nil {
+            return
+        }
         viewControllerDelegate.onCameraInput(isAvailable: true)
     }
 }

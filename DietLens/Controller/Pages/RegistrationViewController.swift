@@ -71,6 +71,7 @@ class RegistrationViewController: UIViewController {
                     AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
                 }
             }, failedCompletion: { (failedMsg) in
+                AlertMessageHelper.dismissLoadingDialog(targetController: self)
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
             })
         }

@@ -14,6 +14,7 @@ class RecognitionResultViewController: UIViewController {
     @IBOutlet weak var foodCategory: UICollectionView!
     @IBOutlet weak var foodOptionTable: UITableView!
     @IBOutlet weak var textSearchFloatingBtn: UIButton!
+    @IBOutlet weak var animationView: UIView!
 
     //index & tracking data
     var categoryIndex = 0
@@ -28,6 +29,8 @@ class RecognitionResultViewController: UIViewController {
     //dataSource
     var foodCategoryList = [DisplayFoodCategory]()
     var selectedFoodInfo = DisplayFoodInfo()
+
+    var previousOffset: CGFloat = CGFloat(0)
 
     override func viewDidLoad() {
         //get mockup data
@@ -45,10 +48,6 @@ class RecognitionResultViewController: UIViewController {
 
     func mockUpCategoryData() {
         foodCategoryList = MockedUpFoodData.instance.createMockedUpFoodData()
-    }
-
-    @IBAction func onSaveBtnClicked(_ sender: Any) {
-        //save image only , create empty foodDiary
     }
 
     @IBAction func toTextSearchPage(_ sender: Any) {
@@ -128,14 +127,10 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         //jump to selected foodItem add FoodPage
         selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
         requestForDietInformation(foodId: selectedFoodInfo.id)
-//        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-//            dest.userFoodImage = cameraImage
-//            if let navigator = self.navigationController {
-//                navigator.pushViewController(dest, animated: true)
-//
-//            }
-//        }
-//        performSegue(withIdentifier: "toRecognizedFoodPage", sender: nil)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 52
     }
 
 }
@@ -157,8 +152,18 @@ extension RecognitionResultViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //switch tab to show foodList
         categoryIndex = indexPath.row
+        //move indicator to selected item
+        let destX = (collectionView.cellForItem(at: indexPath)?.center.x)! - foodCategory.contentOffset.x
+        UIView.animate(withDuration: 0.2) {
+            self.animationView.center.x = destX
+        }
         //table reload data
         foodOptionTable.reloadData()
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        animationView.center.x += previousOffset - scrollView.contentOffset.x
+        previousOffset = scrollView.contentOffset.x
     }
 
 }

@@ -13,6 +13,7 @@ class FoodInfoViewController: UIViewController {
     @IBOutlet weak var quantityValue: UITextField!
     @IBOutlet weak var unitValue: UITextField!
     @IBOutlet weak var mealCollectionView: UICollectionView!
+    @IBOutlet weak var animationView: UIView!
     //configurable hide view
     @IBOutlet weak var mealTypeView: UIView!
     @IBOutlet weak var portionDataView: UIView!
@@ -35,7 +36,6 @@ class FoodInfoViewController: UIViewController {
     var selectedPortionPos: Int = 0
     var quantityIntegerArray = [0]
     var decimalArray = [0, 0.25, 0.5, 0.75]
-    var unitArray = ["Standard sizing", "Small sizing", "Large sizing", "Grams"]
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
     //parameter for passing value
@@ -103,16 +103,20 @@ class FoodInfoViewController: UIViewController {
         }
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     func setUpFoodValue() {
         foodName.text = dietItem.foodName
         var portionRate: Double = Double(dietItem.quantity) * 1.0
         if dietItem.portionInfo.count != 0 {
             portionRate = Double(dietItem.quantity) * dietItem.portionInfo[selectedPortionPos].weightValue/100
         }
-        calorieValueLabel.text = String(Int(dietItem.nutritionInfo.calorie * portionRate))+" "+StringConstants.UIString.calorieUnit
-        carbohydrateValueLabel.text = String(Int(portionRate * dietItem.nutritionInfo.carbohydrate))+" "+StringConstants.UIString.diaryIngredientUnit
-        proteinValueLable.text = String(Int(portionRate * dietItem.nutritionInfo.protein)) + " "+StringConstants.UIString.diaryIngredientUnit
-        fatValueLabel.text = String(Int(portionRate * dietItem.nutritionInfo.fat)) + " "+StringConstants.UIString.diaryIngredientUnit
+        calorieValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate)+" "+StringConstants.UIString.calorieUnit
+        carbohydrateValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate)+" "+StringConstants.UIString.diaryIngredientUnit
+        proteinValueLable.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
+        fatValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
     }
 
 /********************************************************
@@ -153,10 +157,13 @@ class FoodInfoViewController: UIViewController {
     //used only when isNotAccumulate
     @objc func showUnitSelectionDialog() {
         let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.actionSheet)
-        for portion in dietItem.portionInfo {
+        for (index, portion) in dietItem.portionInfo.enumerated() {
             alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
-                self.selectedPortionPos = portion.rank - 1
+                self.selectedPortionPos = index
+                self.foodDiaryEntity.dietItems[0].selectedPos = index
+                self.dietItem.selectedPos = index
                 self.unitValue.text = portion.sizeUnit
+                self.dietItem.displayUnit = portion.sizeUnit
                 self.setUpFoodValue()
             }))
         }
@@ -257,7 +264,7 @@ class FoodInfoViewController: UIViewController {
                 navigator.popViewController(animated: true)
             }
         } else if recordType == RecognitionInteger.additionText {
-            //1.from FoodCalendarViewController 2.first TextSearchItem
+            //1.multiple times TextSearchItem 2.first time TextSearchItem
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 dest.isUpdate = false
                 dest.isSetMealByTimeRequired = false
@@ -270,15 +277,20 @@ class FoodInfoViewController: UIViewController {
                         for vc in (self.navigationController?.viewControllers)! {
                             if let foodDiaryVC = vc as? FoodDiaryViewController {
                                 foodDiaryVC.addFoodIntoItem(dietItem: dietItem)
+                                navigator.popToViewController(foodDiaryVC, animated: true)
                             }
                         }
-                        //pop searchView & foodInfoView
-                        navigator.popViewController(animated: false)
-                        navigator.popViewController(animated: true)
+                        //pop searchView & foodInfoView back to
+//                        navigator.popViewController(animated: false)
+//                        navigator.popViewController(animated: true)
                     } else {
+                        //firstTime
                         dest.imageKey = imageKey
                         dest.userFoodImage = userFoodImage
                         dest.foodDiaryEntity = foodDiaryEntity
+                        //pop searchView & foodInfoView
+                        navigator.popViewController(animated: false)
+                        navigator.popViewController(animated: false)
                         navigator.pushViewController(dest, animated: true)
                     }
 
@@ -293,16 +305,19 @@ class FoodInfoViewController: UIViewController {
                         dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                         if let navigator = self.navigationController {
                             //pop all the view except HomePage
-                            navigator.popToRootViewController(animated: false)
-                            navigator.pushViewController(dest, animated: true)
-//                            if (self.navigationController?.viewControllers.contains(where: {
-//                                return $0 is FoodCalendarViewController
-//                            }))! {
-//                               //todo refresh foodCalendar
-//                            } else {
-//                                navigator.pushViewController(dest, animated: true)
-//                            }
-
+                            if navigator.viewControllers.contains(where: {
+                                return $0 is FoodCalendarViewController
+                            }) {
+                                //add foodItem into foodDiaryVC
+                                for vc in (self.navigationController?.viewControllers)! {
+                                    if let foodCalendarVC = vc as? FoodCalendarViewController {
+                                        navigator.popToViewController(foodCalendarVC, animated: true)
+                                    }
+                                }
+                            } else {
+                                navigator.popToRootViewController(animated: false)
+                                navigator.pushViewController(dest, animated: true)
+                            }
                         }
                     }
                 }
@@ -350,16 +365,15 @@ class FoodInfoViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.container.frame.origin.y = view.frame.height - keyboardHeight-self.container.frame.size.height + CGFloat(50)
+            self.container.frame.origin.y = view.frame.height - keyboardHeight-self.portionDataView.frame.size.height
+            //set the portionDataView to the top of the container
+            self.portionDataView.frame.origin.y = CGFloat(0)
         }
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
         self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
-    }
-
-    func flipToShowNutrition() {
-
+        self.portionDataView.frame.origin.y =  nutritionDataView.frame.origin.y + nutritionDataView.frame.size.height + CGFloat(4)
     }
 
 }
@@ -404,17 +418,9 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        if currentMealIndex == indexPath.row {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
-                cell.setUpCell(isHightLight: true, mealStr: mealStringArray[indexPath.row])
-                return cell
-            }
-        } else {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
                 cell.setUpCell(isHightLight: false, mealStr: mealStringArray[indexPath.row])
                 return cell
-            }
         }
         return UICollectionViewCell()
     }
@@ -424,11 +430,14 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
         currentMealIndex = indexPath.row
         foodDiaryEntity.mealType = mealStringArray[indexPath.row]
         //switch collection selection
-        mealCollectionView.reloadData()
+        let destX = collectionView.cellForItem(at: indexPath)?.center.x
+        UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.animationView.center.x = destX! + 50
+        })
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: CGFloat(70), height: CGFloat(35))
+        return CGSize(width: CGFloat(70), height: CGFloat(32))
     }
 
 }

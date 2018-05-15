@@ -58,7 +58,6 @@ class FoodCalendarViewController: UIViewController {
         diaryCalendar.appearance.headerTitleColor = UIColor.black
         registerNib()
         assembleMealList(foodDiaryList: [FoodDiaryEntity]())
-        loadDailyNutritionView()
     }
 
     @IBAction func toPersonalPage(_ sender: Any) {
@@ -144,6 +143,9 @@ class FoodCalendarViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        loadDailyNutritionView()
         self.foodCalendarTableView.reloadData()
     }
 

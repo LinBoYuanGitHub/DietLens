@@ -17,7 +17,11 @@ class ProfileDataManager {
         var userProfile = UserProfile()
         userProfile.id = jsonObj["id"].stringValue
         userProfile.name = jsonObj["name"].stringValue
-        userProfile.gender = jsonObj["gender"].intValue
+        if jsonObj["gender"].stringValue == "1"{
+            userProfile.gender = 1
+        } else {
+             userProfile.gender = 0
+        }
         userProfile.birthday = jsonObj["birthday"].stringValue
         userProfile.age = jsonObj["age"].intValue
         userProfile.occupation = jsonObj["occupation"].stringValue

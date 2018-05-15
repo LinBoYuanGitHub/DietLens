@@ -19,9 +19,13 @@ class DailyNutritionTableCell: UITableViewCell {
     }
 
     //fill up name,value,percentage
-    func setUpCell(name: String, value: String, progress: Int, unit: String) {
+    func setUpCell(name: String, value: Double, progress: Int, unit: String) {
         nameLabel.text = name
-        valueLabel.text = value + unit
+        if value == floor(value) {
+             valueLabel.text = String(value) + unit
+        } else {
+             valueLabel.text = String(format: "%.1f", value) + unit
+        }
         progressView.transform = progressView.transform.scaledBy(x: 1, y: 6)
         progressView.layer.cornerRadius = 20
         progressView.clipsToBounds = true

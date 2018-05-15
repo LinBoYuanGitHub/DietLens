@@ -595,8 +595,13 @@ class APIService {
     }
 
     //update foodDiary
-    public func updateFoodDiary(foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
-        let param = FoodInfoDataManager.instance.paramfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
+    public func updateFoodDiary(isPartialUpdate: Bool, foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
+        var param: Dictionary<String, Any> = [:]
+        if isPartialUpdate {
+            param = FoodInfoDataManager.instance.partialParamfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
+        } else {
+            param = FoodInfoDataManager.instance.paramfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
+        }
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietLogs+foodDiary.foodDiaryId+"/")!,
             method: .put,
@@ -911,10 +916,18 @@ class APIService {
      * return: isSuccess
      */
     public func updateProfile(userId: String, name: String, gender: Int, height: Double, weight: Double, birthday: String, completion: @escaping (Bool) -> Void) {
+        var genderText = ""
+        if gender == 0 {
+            genderText = "2"
+        } else if gender == 1 {
+            genderText = "1"
+        } else {
+            genderText = "0"
+        }
         Alamofire.request(
             URL(string: ServerConfig.userURL + "/" + userId + "/")!,
             method: .put,
-            parameters: ["name": name, "gender": String(gender), "height": height, "weight": weight, "birthday": birthday],
+            parameters: ["name": name, "gender": genderText, "height": height, "weight": weight, "birthday": birthday],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()

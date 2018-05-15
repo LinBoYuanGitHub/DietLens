@@ -194,6 +194,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
             if imageKey == nil {
                 //error happen during upload image to Qiniu
+                self.hideReview()
+                self.capturePhotoButton.isEnabled = true
+                self.loadingScreen.alpha = 0
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
                 return
             }
             self.uploadPercentageLabel.text = "retrieving recognition result..."

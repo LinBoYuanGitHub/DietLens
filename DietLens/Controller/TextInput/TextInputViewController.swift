@@ -86,7 +86,7 @@ class TextInputViewController: UIViewController {
     func showCancelBtn() {
         cancelBtn.isHidden = false
         textFieldTrailing.constant = 74
-        textFieldTop.constant = 0
+        textFieldTop.constant = 20
     }
 
     func hideCancelBtn() {
@@ -139,6 +139,9 @@ class TextInputViewController: UIViewController {
         isSearching = true
         let searchText = textSearchField.text
         APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!) { (textResults) in
+            DispatchQueue.main.async {
+                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
+            }
             if textResults == nil {
                 self.searchResultList.removeAll()
                 self.emptyView.isHidden = false

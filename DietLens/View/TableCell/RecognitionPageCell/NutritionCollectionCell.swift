@@ -28,7 +28,7 @@ class NutritionCollectionCell: UICollectionViewCell {
         setUpOvalView()
         percentageLabel.text = String(percentage) + "%"
         nutritionLabel.text = nutritionName
-        nutritionValueLabel.text = String(nutritionValue) + unit
+        nutritionValueLabel.text = String(format: "%.1f", nutritionValue) + unit
     }
 
 }

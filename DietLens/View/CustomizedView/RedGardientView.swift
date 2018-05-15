@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable
 class RedGardientView: UIView {
 
+    private var gradientLayer: CAGradientLayer!
+
     @IBInspectable var redtopColor: UIColor = #colorLiteral(red: 0.9647058824, green: 0.4, blue: 0.2901960784, alpha: 1) {
         didSet {
             self.setNeedsLayout()
@@ -23,14 +25,17 @@ class RedGardientView: UIView {
         }
     }
 
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+
     override func layoutSubviews() {
-        let gradLayer = CAGradientLayer()
-        gradLayer.colors = [UIColor.white, UIColor.white]
-        gradLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradLayer.endPoint = CGPoint(x: 1.3, y: 1.3)
-        gradLayer.frame = self.bounds
-        self.layer.insertSublayer(gradLayer, at: 0)
-        self.layer.masksToBounds = true
+        gradientLayer = self.layer as! CAGradientLayer
+        gradientLayer.colors = [redtopColor.cgColor, redbottomColor.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.3)
+        gradientLayer.frame = self.bounds
+        gradientLayer.masksToBounds = true
     }
 
     override func prepareForInterfaceBuilder() {

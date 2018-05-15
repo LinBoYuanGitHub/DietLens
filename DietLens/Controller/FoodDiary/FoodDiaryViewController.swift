@@ -13,6 +13,7 @@ class FoodDiaryViewController: UIViewController {
     @IBOutlet weak var foodSampleImage: UIImageView!
     @IBOutlet weak var mealCollectionView: UICollectionView!
     @IBOutlet weak var foodTableView: UITableView!
+    @IBOutlet weak var animationView: UIView!
     //sum nutritionPart
     @IBOutlet weak var calorieValueLabel: UILabel!
     @IBOutlet weak var proteinValueLable: UILabel!
@@ -96,6 +97,10 @@ class FoodDiaryViewController: UIViewController {
         }
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     @objc func onAddMoreClick() {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
             dest.addFoodDate = Date()
@@ -115,7 +120,7 @@ class FoodDiaryViewController: UIViewController {
     //save(from text Search) or update foodDiary
     @IBAction func onTopRightBtnPressed(_ sender: Any) {
         if isUpdate {
-            APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
+            APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: foodDiaryEntity, completion: { (isSuccess) in
                 if isSuccess {
                    self.navigationController?.popViewController(animated: true)//pop back to food calendar
                 } else {
@@ -128,16 +133,20 @@ class FoodDiaryViewController: UIViewController {
                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
                         dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                         if let navigator = self.navigationController {
-                            navigator.popToRootViewController(animated: false)
                             //pop all the view except HomePage
-                            navigator.pushViewController(dest, animated: true)
-//                            if (self.navigationController?.viewControllers.contains(where: {
-//                                return $0 is FoodCalendarViewController
-//                            }))! {
-//                                //todo refresh foodCalendar
-//                            } else {
-//                                navigator.pushViewController(dest, animated: true)
-//                            }
+                            if navigator.viewControllers.contains(where: {
+                                return $0 is FoodCalendarViewController
+                            }) {
+                                //add foodItem into foodDiaryVC
+                                for vc in (self.navigationController?.viewControllers)! {
+                                    if let foodCalendarVC = vc as? FoodCalendarViewController {
+                                        navigator.popToViewController(foodCalendarVC, animated: true)
+                                    }
+                                }
+                            } else {
+                                navigator.popToRootViewController(animated: false)
+                                navigator.pushViewController(dest, animated: true)
+                            }
                         }
                     }
                 }
@@ -170,28 +179,14 @@ class FoodDiaryViewController: UIViewController {
         fatValueLabel.text = String(accumulatedFat) + StringConstants.UIString.diaryIngredientUnit
     }
 
-    func updateFoodDiary() {
-        //actually just update mealType
-        APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
-                if isSuccess {
-                    if (self.navigationController?.viewControllers.contains(where: {
-                        return $0 is FoodInfoViewController
-                    }))! {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                } else {
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "update failed")
-            }
-        }
-    }
-
     //add foodDiary into item & upload
     func addFoodIntoItem(dietItem: DietItem) {
         foodDiaryEntity.dietItems.append(dietItem)
         if isUpdate {
-            APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
+            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryEntity) { (isSuccess) in
                 if isSuccess {
                     self.foodTableView.reloadData()
+                    self.calculateAccumulateFoodValue()
                 }
             }
         } else {//create new item need to wait
@@ -206,9 +201,10 @@ class FoodDiaryViewController: UIViewController {
                 foodDiaryEntity.dietItems[index] = dietItem
             }
         }
-        APIService.instance.updateFoodDiary(foodDiary: foodDiaryEntity) { (isSuccess) in
+        APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryEntity) { (isSuccess) in
             if isSuccess {
                 self.foodTableView.reloadData()
+                self.calculateAccumulateFoodValue()
             } else {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "update failed")
             }
@@ -222,16 +218,9 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if currentMealIndex == indexPath.row {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
-                cell.setUpCell(isHightLight: true, mealStr: mealStringArray[indexPath.row])
-                return cell
-            }
-        } else {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
                 cell.setUpCell(isHightLight: false, mealStr: mealStringArray[indexPath.row])
                 return cell
-            }
         }
         return UICollectionViewCell()
     }
@@ -241,7 +230,10 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
         currentMealIndex = indexPath.row
         foodDiaryEntity.mealType = mealStringArray[indexPath.row]
         //switch collection selection
-        mealCollectionView.reloadData()
+        let destX = collectionView.cellForItem(at: indexPath)?.center.x
+        UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.animationView.center.x = destX! + 50
+        })
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -270,9 +262,37 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //request for portion data
+        AlertMessageHelper.showLoadingDialog(targetController: self)
+        let foodId = foodDiaryEntity.dietItems[indexPath.row].foodId
+        APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            if dietItem == nil {
+                return
+            }
+            //TODO replace nutrition & portion value with new request value
+            let displayUnit =  self.foodDiaryEntity.dietItems[indexPath.row].displayUnit
+            let quantity = self.foodDiaryEntity.dietItems[indexPath.row].quantity
+            let id = self.foodDiaryEntity.dietItems[indexPath.row].id
+            self.foodDiaryEntity.dietItems[indexPath.row] = dietItem!
+            self.foodDiaryEntity.dietItems[indexPath.row].id = id
+            self.foodDiaryEntity.dietItems[indexPath.row].displayUnit = displayUnit
+            self.foodDiaryEntity.dietItems[indexPath.row].quantity = quantity
+            for (index, portion) in dietItem!.portionInfo.enumerated() {
+                if portion.sizeUnit == displayUnit {
+                     self.foodDiaryEntity.dietItems[indexPath.row].selectedPos = index
+                }
+            }
+            DispatchQueue.main.async {
+                 self.jumpToFoodInfoPage(dietEntity: self.foodDiaryEntity.dietItems[indexPath.row])
+            }
+        }
+    }
+
+    func jumpToFoodInfoPage(dietEntity: DietItem) {
         //jump to foodInfo page to modify foodInfo Item
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-            let dietEntity = foodDiaryEntity.dietItems[indexPath.row]
+            dest.selectedPortionPos = dietEntity.selectedPos
             dest.dietItem = dietEntity
             dest.shouldShowMealBar = false
             dest.isUpdate = true

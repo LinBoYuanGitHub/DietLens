@@ -21,6 +21,8 @@ class RecognitionResultTableCell: UITableViewCell {
     func setUpCell(foodName: String, imageUrl: String, calorieText: String) {
         foodNameLabel.text = foodName
         calorieLabel.text = calorieText
+        thumbnailImage.image = #imageLiteral(resourceName: "loading_img")
+        //start to load image
         let imageView = UIImageView()
         if imageUrl != "" {
             imageView.af_setImage(withURL: URL(string: imageUrl)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,

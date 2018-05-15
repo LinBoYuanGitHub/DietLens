@@ -80,7 +80,7 @@ extension DailyNutritionInfoViewController: UITableViewDelegate, UITableViewData
             let targetSet = targetDict[indexPath.row]
             let progress = kvSet!.1/targetSet!.1
             let unit  = targetSet!.0
-            cell.setUpCell(name: (kvSet?.0)!, value: String((kvSet?.1)!), progress: Int(progress*100), unit: unit)
+            cell.setUpCell(name: (kvSet?.0)!, value: (kvSet?.1)!, progress: Int(progress*100), unit: unit)
             return cell
         }
         return UITableViewCell()

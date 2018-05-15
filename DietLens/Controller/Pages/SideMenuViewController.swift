@@ -17,7 +17,7 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
     @IBOutlet weak var clickToEditLabel: UILabel!
 
     let labels: [String] = ["Home", "Food Diary", "Report", "Steps Counter"]
-    let iconNames: [String] = ["blackHomeIcon", "blackFoodDiaryIcon", "blackReportIcon", "blackStepCounterIcon"]
+    let iconNames: [String] = ["whiteHomeIcon", "whiteFoodDiaryIcon", "whiteFoodDiaryIcon", "whiteStepCounterIcon"]
     let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "ReportVC", "StepCounterVC"]
 
     override func awakeFromNib() {
@@ -30,14 +30,12 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 //        self.leftViewPresentationStyle = .scaleFromLittle
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
-        sideMenuTable.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         //set nickname
         let preferences = UserDefaults.standard
         let nicknameKey = "nickname"
         let nickname =  preferences.string(forKey: nicknameKey)
         if nickname != nil {
-            clickToEditLabel.isHidden = true
             userNameLabel.text = nickname
         }
     }
@@ -80,14 +78,8 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
         // deselect food diary
 
        if labels[indexPath.row] == "Home"{
-            self.hideLeftView()
+            NotificationCenter.default.post(name: .toggleLeftView, object: nil)
        } else {
-//            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardIDs[indexPath.row]) as? UIViewController {
-//            if let navigator = self.rootViewController?.navigationController {
-//                //clear controller to Bottom & add foodCalendar Controller
-//                navigator.pushViewController(dest, animated: true)
-//            }
-//            }
             controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
             present(controller!, animated: true, completion: nil)
         }
@@ -99,7 +91,7 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
         let nicknameKey = "nickname"
         let nickname =  preferences.string(forKey: nicknameKey)
         if nickname == nil {
-             performSegue(withIdentifier: "menuToLogin", sender: self)
+            performSegue(withIdentifier: "menuToLogin", sender: self)
         } else {
             performSegue(withIdentifier: "MenutoProfile", sender: self)
         }

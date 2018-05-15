@@ -88,6 +88,10 @@ class FoodInfoDataManager {
             portion.weightValue = json["weight_g"].doubleValue
             dietItem.portionInfo.append(portion)
         }
+        //sort for portion according to the rank
+        dietItem.portionInfo.sort { (portionA, portionB) -> Bool in
+            portionA.rank < portionB.rank
+        }
         return dietItem
     }
 
@@ -194,6 +198,17 @@ class FoodInfoDataManager {
         return foodDiaryEntity
     }
 
+    func partialParamfyFoodDiaryEntity(foodDiaryEntity: FoodDiaryEntity) -> Dictionary<String, Any> {
+        var result = Dictionary<String, Any>()
+        result["meal_time"] = foodDiaryEntity.mealTime
+        result["meal_type"] = foodDiaryEntity.mealType
+        result["image"] = foodDiaryEntity.imageId
+        let preferences = UserDefaults.standard
+        let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+        result["user"] = userId
+        return result
+    }
+
     func paramfyFoodDiaryEntity(foodDiaryEntity: FoodDiaryEntity) -> Dictionary<String, Any> {
         var result = Dictionary<String, Any>()
         result["meal_time"] = foodDiaryEntity.mealTime
@@ -224,7 +239,7 @@ class FoodInfoDataManager {
             if dietItem.portionInfo.count != 0 {
                 unitScale = dietItem.portionInfo[dietItem.selectedPos].weightValue
             }
-            var ratio = dietItem.quantity * unitScale/100
+            let ratio = dietItem.quantity * unitScale/100
             nutrient["fat"] = dietItem.nutritionInfo.fat * ratio
             nutrient["energy"] = dietItem.nutritionInfo.calorie * ratio
             nutrient["protein"] = dietItem.nutritionInfo.protein * ratio

@@ -18,8 +18,13 @@ class FoodDiaryRecordViewCell: UITableViewCell {
 
     func setUpCell(imageId: String, calorieText: String) {
         calorieView.text = calorieText
-        APIService.instance.qiniuImageDownload(imageKey: imageId, width: Dimen.foodCalendarImageWidth, height: Dimen.foodCalendarImageHeight) { (image) in
-            self.foodImageView.image = image
+        self.foodImageView.image = #imageLiteral(resourceName: "loading_img")
+        if imageId.isEmpty {
+            self.foodImageView.image = #imageLiteral(resourceName: "dietlens_sample_background")
+        } else {
+            APIService.instance.qiniuImageDownload(imageKey: imageId, width: Dimen.foodCalendarImageWidth, height: Dimen.foodCalendarImageHeight) { (image) in
+                self.foodImageView.image = image
+            }
         }
 
     }
