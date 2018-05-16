@@ -16,9 +16,9 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var clickToEditLabel: UILabel!
 
-    let labels: [String] = ["Home", "Food Diary", "Report", "Steps Counter"]
-    let iconNames: [String] = ["whiteHomeIcon", "whiteFoodDiaryIcon", "whiteFoodDiaryIcon", "whiteStepCounterIcon"]
-    let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "ReportVC", "StepCounterVC"]
+    let labels: [String] = ["Home", "Food Diary", "Steps Counter", "Settings"]
+    let iconNames: [String] = ["whiteHomeIcon", "whiteFoodDiaryIcon", "whiteStepCounterIcon", "whiteSettingIcon"]
+    let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "StepCounterVC", "SettingsPage"]
 
     override func awakeFromNib() {
         super.awakeFromNib()

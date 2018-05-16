@@ -51,6 +51,7 @@ class FoodInfoViewController: UIViewController {
     var shouldShowMealBar = true
     var currentIntegerPos = 0
     var currentDecimalPos = 0
+    @IBOutlet weak var containerTopConstraints: NSLayoutConstraint!
 
     override func viewDidLoad() {
         //init foodInfo data -> setUp View
@@ -113,10 +114,10 @@ class FoodInfoViewController: UIViewController {
         if dietItem.portionInfo.count != 0 {
             portionRate = Double(dietItem.quantity) * dietItem.portionInfo[selectedPortionPos].weightValue/100
         }
-        calorieValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate)+" "+StringConstants.UIString.calorieUnit
-        carbohydrateValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate)+" "+StringConstants.UIString.diaryIngredientUnit
-        proteinValueLable.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
-        fatValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.calorie * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
+        calorieValueLabel.text = String(Int(dietItem.nutritionInfo.calorie * portionRate))+" "+StringConstants.UIString.calorieUnit
+        carbohydrateValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.carbohydrate * portionRate)+" "+StringConstants.UIString.diaryIngredientUnit
+        proteinValueLable.text = String(format: "%.1f", dietItem.nutritionInfo.protein * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
+        fatValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.fat * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
     }
 
 /********************************************************
@@ -182,6 +183,13 @@ class FoodInfoViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        //move indicator to correct position
+        UIView.animate(withDuration: 0.1, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.animationView.center.x = CGFloat(Float(self.currentMealIndex)*Float(80)) + CGFloat(10)
+        })
+    }
+
     //if not passing mealType, then use currentTime to set mealType
     func setCorrectMealType() {
         if isSetMealByTimeRequired {
@@ -225,8 +233,8 @@ class FoodInfoViewController: UIViewController {
 
     func prepareQuantityIntegerArray() {
         quantityIntegerArray.removeAll()
-        for i in 0...20 {
-            quantityIntegerArray.append(i)
+        for index in 0...20 {
+            quantityIntegerArray.append(index)
         }
     }
 
@@ -365,14 +373,19 @@ class FoodInfoViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            self.container.frame.origin.y = view.frame.height - keyboardHeight-self.portionDataView.frame.size.height
-            //set the portionDataView to the top of the container
-            self.portionDataView.frame.origin.y = CGFloat(0)
+            containerTopConstraints.constant = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height - CGFloat(60)
+//            self.container.frame.origin.y = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                UIView.animate(withDuration: 0.2 ) {
+                    self.portionDataView.frame.origin.y = CGFloat(0)
+                }
+            }
         }
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
+        containerTopConstraints.constant = 291
+//        self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
         self.portionDataView.frame.origin.y =  nutritionDataView.frame.origin.y + nutritionDataView.frame.size.height + CGFloat(4)
     }
 
@@ -463,7 +476,7 @@ extension FoodInfoViewController: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == quantityValue {
+        if textField == quantityValue && !(quantityValue.text?.isEmpty)! {
             dietItem.quantity = Double(quantityValue.text!)!
             foodDiaryEntity.dietItems[0].quantity = Double(quantityValue.text!)!
             setUpFoodValue()

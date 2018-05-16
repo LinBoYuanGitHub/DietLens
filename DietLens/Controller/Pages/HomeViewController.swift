@@ -45,7 +45,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //change statusbarcolor
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
-        loadNutritionTarget()
         //for sideMenu toggle leftView
         NotificationCenter.default.addObserver(self, selector: #selector(onToggleLeftView), name: .toggleLeftView, object: nil)
     }
@@ -70,6 +69,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
             preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
             preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
+            self.requestNutritionDict(requestDate: Date())
         }
     }
 
@@ -122,6 +122,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getDailyAccumulateCPF()
+        loadNutritionTarget()
         newsFeedTable.reloadData()
     }
 
@@ -192,6 +193,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             dest.articleType = self.articleType
         }
     }
+
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -221,7 +223,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         //navigate to article page
         articleType = ArticleType.EVENT
         whichEventIndex = indexPath.row - 1
-//        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -252,16 +254,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == newsFeedTable {
-            let contentOffset = scrollView.contentOffset.y
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView == newsFeedTable {
+//            let contentOffset = scrollView.contentOffset.y
 //            if contentOffset > 0 {
 //                cpfContainer.isHidden = true
 //            } else {
 //                cpfContainer.isHidden = false
 //            }
-        }
-    }
+//        }
+//    }
 
     @objc func performSegueToArticleList() {
         articleType = ArticleType.ARTICLE

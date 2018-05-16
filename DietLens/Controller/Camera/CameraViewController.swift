@@ -415,38 +415,12 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDetect(barcode: String) {
-        APIService.instance.getBarcodeScanResult(barcode: barcode) { (foodInformation) in
-            if foodInformation == nil {
-                DispatchQueue.main.async { [weak self] in
-                    guard let wSelf = self else {
-                        return
-                    }
-                    let alertMsg = "Result not found!"
-                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
-                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-                                                            style: .cancel,
-                                                            handler: nil))
-                    wSelf.present(alertController, animated: true, completion: nil)
-                    }
-            } else {
-                self.loadingScreen.alpha = 0
-                do {
-                    try Realm().write {
-                        self.foodDiary.foodInfoList.append(foodInformation!)
-                    }
-                } catch let error as NSError {
-                    //handel error
-                }
-                self.recordType = RecordType.RecordByBarcode
-                self.performSegue(withIdentifier: "test", sender: self)
-            }
-        }
-//        APIService.instance.getBarcodeScanResult(barcode: barcode){ (foodInformation?) in
+        APIService.instance.getBarcodeScanResult(barcode: barcode) { (_) in
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Work in progress")
 //            if foodInformation == nil {
-//                DispatchQueue.main.async { [weak self] in foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos]
+//                DispatchQueue.main.async { [weak self] in
 //                    guard let wSelf = self else {
-//                        returna
+//                        return
 //                    }
 //                    let alertMsg = "Result not found!"
 //                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
@@ -455,32 +429,20 @@ extension CameraViewController: CameraViewControllerDelegate {
 //                                                            style: .cancel,
 //                                                            handler: nil))
 //                    wSelf.present(alertController, animated: true, completion: nil)
-//                }
+//                    }
 //            } else {
 //                self.loadingScreen.alpha = 0
-//                try Realm().write {
-//                    self.foodDiary.foodInfoList.append(foodInformation)
+//                do {
+//                    try Realm().write {
+//                        self.foodDiary.foodInfoList.append(foodInformation!)
+//                    }
+//                } catch let error as NSError {
+//                    //handel error
 //                }
 //                self.recordType = RecordType.RecordByBarcode
 //                self.performSegue(withIdentifier: "test", sender: self)
 //            }
-//
-//        }
-//        DispatchQueue.main.async { [weak self] in
-//            guard let wSelf = self else {
-//                return
-//            }
-//
-//            let alertMsg = "Barcode detected!"
-//            let message = NSLocalizedString("Barcode: \(barcode)", comment: alertMsg)
-//            let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-//
-//            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-//                                                    style: .cancel,
-//                                                    handler: nil))
-//
-//            wSelf.present(alertController, animated: true, completion: nil)
-//        }
+        }
         sessionManager.set(captureMode: .photo)
     }
 }

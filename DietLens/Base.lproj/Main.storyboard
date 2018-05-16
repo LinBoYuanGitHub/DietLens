@@ -476,7 +476,7 @@
                                     <constraint firstItem="eMo-a6-VuN" firstAttribute="top" secondItem="ShY-ca-RHn" secondAttribute="bottom" constant="8" id="z6c-xS-tdV"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0q-yO-kKy">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0q-yO-kKy">
                                 <rect key="frame" x="0.0" y="597" width="250" height="70"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="whiteSettingIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yKX-gJ-JW9">
@@ -716,8 +716,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="377" height="55.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+  AddMore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dw-d8-6PR">
-                                                    <rect key="frame" x="14" y="17" width="89.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+  Add Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dw-d8-6PR">
+                                                    <rect key="frame" x="14" y="17" width="93.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.94901960784313721" green="0.25098039215686274" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2501,7 +2501,7 @@ Click add to record food~</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9O-DU-mrq" userLabel="headerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9O-DU-mrq" userLabel="headerView" customClass="RedGardientView" customModule="DietLens" customModuleProvider="target">
                                 <rect key="frame" x="-0.5" y="0.0" width="375" height="74"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUL-da-k4P" userLabel="BackBtn" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
@@ -2520,7 +2520,7 @@ Click add to record food~</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="zKv-Np-88U" secondAttribute="bottom" constant="10" id="Lwk-VU-F7Y"/>
                                     <constraint firstItem="zKv-Np-88U" firstAttribute="centerX" secondItem="a9O-DU-mrq" secondAttribute="centerX" id="eB0-Sr-kc0"/>
@@ -5081,7 +5081,6 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <image name="whiteSettingIcon" width="20" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vk4-Nq-TzG"/>
         <segue reference="E0y-CB-0Z7"/>
         <segue reference="L1g-pL-wT5"/>
         <segue reference="ROu-Xz-TxG"/>

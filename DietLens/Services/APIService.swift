@@ -849,31 +849,26 @@ class APIService {
      * param: userId, content
      * return: isSuccess:Bool
      */
-    public func sendFeedBack(userId: String, content: String, completion: @escaping (Bool) -> Void) {
+    public func sendFeedBack(content: String, completion: @escaping (Bool) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.feedBackURL+"?user_id="+userId)!,
+            URL(string: ServerConfig.feedBackURL)!,
             method: .post,
-            parameters: ["text": content],
+            parameters: ["content": content],
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("save device token failed due to : \(String(describing: response.result.error))")
+                    print("send feedback failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 guard let scanResult = response.result.value else {
-                    print("save device token failed due to : Server Data Type Error")
+                    print("send feedback failed due to : Server Data Type Error")
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(scanResult)["message"]
-                if jsonObject == nil {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
+                completion(true)
         }
     }
 
