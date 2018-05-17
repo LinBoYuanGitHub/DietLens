@@ -49,7 +49,7 @@ class FoodInfoViewController: UIViewController {
     var imageKey: String?
     var isUpdate: Bool = false
     var shouldShowMealBar = true
-    var currentIntegerPos = 0
+    var currentIntegerPos = 1
     var currentDecimalPos = 0
     @IBOutlet weak var containerTopConstraints: NSLayoutConstraint!
 
@@ -82,6 +82,18 @@ class FoodInfoViewController: UIViewController {
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
+        setUpQuantityPickerIndex()
+    }
+
+    func setUpQuantityPickerIndex() {
+        if isUpdate {
+            currentIntegerPos = Int(floor(dietItem.quantity))
+            for (index, element) in decimalArray.enumerated() {
+                if element == (dietItem.quantity - floor(dietItem.quantity)) {
+                    currentDecimalPos = index
+                }
+            }
+        }
     }
 
 /********************************************************
@@ -98,9 +110,11 @@ class FoodInfoViewController: UIViewController {
         if shouldShowMealBar {
             mealViewHeight.constant = 28
             mealIconView.isHidden = false
+            animationView.isHidden = false
         } else {
             mealViewHeight.constant = 0.01
             mealIconView.isHidden = true
+            animationView.isHidden = true
         }
     }
 
@@ -267,6 +281,7 @@ class FoodInfoViewController: UIViewController {
                     if let foodDiaryVC = vc as? FoodDiaryViewController {
                         foodDiaryVC.isSetMealByTimeRequired = self.isSetMealByTimeRequired
                         foodDiaryVC.updateFoodInfoItem(dietItem: dietItem)
+                        foodDiaryVC.calculateAccumulateFoodValue()
                     }
                 }
                 navigator.popViewController(animated: true)
@@ -285,6 +300,7 @@ class FoodInfoViewController: UIViewController {
                         for vc in (self.navigationController?.viewControllers)! {
                             if let foodDiaryVC = vc as? FoodDiaryViewController {
                                 foodDiaryVC.addFoodIntoItem(dietItem: dietItem)
+                                foodDiaryVC.calculateAccumulateFoodValue()
                                 navigator.popToViewController(foodDiaryVC, animated: true)
                             }
                         }
@@ -468,6 +484,8 @@ extension FoodInfoViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == quantityValue {
+            quantityPickerView.selectRow(currentIntegerPos, inComponent: 0, animated: false)
+            quantityPickerView.selectRow(currentDecimalPos, inComponent: 1, animated: false)
             return true
         } else if textField == unitValue {
             return false

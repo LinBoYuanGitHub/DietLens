@@ -312,7 +312,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
     func calculateCalorie(foodEntity: FoodDiaryEntity) -> Int {
         var accumulatedCalorie = 0
         for dietItem in foodEntity.dietItems {
-            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie)
+            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie*dietItem.quantity)
         }
         return accumulatedCalorie
     }
@@ -321,7 +321,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
         var accumulatedCalorie = 0
         for foodEntity in foodEntityList {
             for dietItem in foodEntity.dietItems {
-                accumulatedCalorie += Int(dietItem.nutritionInfo.calorie)
+                accumulatedCalorie += Int(dietItem.nutritionInfo.calorie*dietItem.quantity)
             }
         }
         return accumulatedCalorie
@@ -358,17 +358,22 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 let imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
                 //download image from Qiniu
-                APIService.instance.qiniuImageDownload(imageKey: imageKey, width: Dimen.foodCalendarImageWidth, height: Dimen.foodCalendarImageHeight, completion: { (image) in
+                AlertMessageHelper.showLoadingDialog(targetController: self)
+                APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self)
                     dest.isSetMealByTimeRequired = false
                     dest.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
                     dest.isUpdate = true
+                    dest.imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
                     if image != nil {
                         dest.userFoodImage = image
                     } else {
                         dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
                     }
                     if let navigator = self.navigationController {
-                        navigator.pushViewController(dest, animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1, execute: {
+                             navigator.pushViewController(dest, animated: true)
+                        })
                     }
 
                 })

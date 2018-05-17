@@ -17,8 +17,8 @@ class FoodCategoryCollectionCell: UICollectionViewCell {
     }
 
     func setUpCell(categoryName: String, categoryImageURL: String) {
-        categoryLabel.text = categoryName
         categoryLabel.lineBreakMode = .byWordWrapping
+        categoryLabel.text = categoryName
         categoryImage.image = #imageLiteral(resourceName: "loading_img")
         //start load image
         let imageView = UIImageView()
@@ -33,5 +33,10 @@ class FoodCategoryCollectionCell: UICollectionViewCell {
             categoryImage.image = #imageLiteral(resourceName: "BestMatchIcon")
         }
 
+//        let attributedString = NSMutableAttributedString(string: categoryName)
+//        let paragraphStyle = NSMutableParagraphStyle()
+//        paragraphStyle.lineSpacing = 0
+//        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+//        categoryLabel.attributedText = attributedString
     }
 }

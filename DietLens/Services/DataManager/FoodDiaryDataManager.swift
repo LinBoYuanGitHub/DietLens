@@ -41,10 +41,10 @@ class FoodDiaryDataManager {
             foodItem.quantity = Double(job["quantity"].intValue)
             foodItem.displayUnit = job["measurement_type"].stringValue
             foodItem.recordType = job["search_type"].stringValue
-            foodItem.nutritionInfo.calorie = job["nutrient"]["energy"].doubleValue
-            foodItem.nutritionInfo.carbohydrate = job["nutrient"]["carbohydrate"].doubleValue
-            foodItem.nutritionInfo.protein = job["nutrient"]["protein"].doubleValue
-            foodItem.nutritionInfo.fat = job["nutrient"]["fat"].doubleValue
+            foodItem.nutritionInfo.calorie = job["nutrient"]["energy"].doubleValue/foodItem.quantity
+            foodItem.nutritionInfo.carbohydrate = job["nutrient"]["carbohydrate"].doubleValue/foodItem.quantity
+            foodItem.nutritionInfo.protein = job["nutrient"]["protein"].doubleValue/foodItem.quantity
+            foodItem.nutritionInfo.fat = job["nutrient"]["fat"].doubleValue/foodItem.quantity
             foodDiaryEntity.dietItems.append(foodItem)
         }
         return foodDiaryEntity

@@ -681,9 +681,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C23-6r-ShA">
-                                                    <rect key="frame" x="16" y="7" width="53" height="42"/>
+                                                    <rect key="frame" x="16" y="7" width="50" height="42"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="53" id="ccq-2U-eY6"/>
+                                                        <constraint firstAttribute="width" constant="50" id="ccq-2U-eY6"/>
                                                         <constraint firstAttribute="height" constant="42" id="sSn-Tj-qPl"/>
                                                     </constraints>
                                                 </imageView>
@@ -1926,7 +1926,7 @@ Click add to record food~</string>
                         <outlet property="sideMenuButton" destination="Ehb-RR-J6W" id="Tkh-x5-npH"/>
                         <outlet property="totalCalorie" destination="n31-mL-o2e" id="GIe-My-6uP"/>
                         <segue destination="q2f-f7-UZG" kind="presentation" identifier="presentArticlePage" id="NAD-8N-HRw"/>
-                        <segue destination="AWq-xS-bl8" kind="presentation" identifier="showArticleList" id="4sq-lw-RnV"/>
+                        <segue destination="AWq-xS-bl8" kind="showDetail" identifier="showArticleList" id="4sq-lw-RnV"/>
                         <segue destination="Nah-Op-YDK" kind="presentation" identifier="toDailyNutrtionDetail" id="RMT-pI-aXM"/>
                     </connections>
                 </viewController>

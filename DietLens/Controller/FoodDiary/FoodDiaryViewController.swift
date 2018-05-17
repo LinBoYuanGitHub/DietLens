@@ -46,6 +46,26 @@ class FoodDiaryViewController: UIViewController {
         setCorrectMealType()
         let addMoreGesture = UITapGestureRecognizer(target: self, action: #selector(onAddMoreClick))
         addMore.addGestureRecognizer(addMoreGesture)
+        loadImage()
+    }
+
+    func loadImage() {
+        self.foodSampleImage.image = #imageLiteral(resourceName: "loading_img")
+        if isUpdate {
+            APIService.instance.qiniuImageDownload(imageKey: imageKey!) { (foodImage) in
+                if foodImage == nil {
+                    return
+                }
+                self.foodSampleImage.image = foodImage
+            }
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        //move indicator to correct position
+        UIView.animate(withDuration: 0.1, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.animationView.center.x = CGFloat(Float(self.currentMealIndex)*Float(80)) + CGFloat(10)
+        })
     }
 
     func setCorrectMealType() {
@@ -168,10 +188,10 @@ class FoodDiaryViewController: UIViewController {
         var accumulatedFat = 0
         //get accumualted value
         for dietItem in foodDiaryEntity.dietItems {
-            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie)
-            accumulatedCarbohydrate += Int(dietItem.nutritionInfo.carbohydrate)
-            accumulatedProtein += Int(dietItem.nutritionInfo.protein)
-            accumulatedFat += Int(dietItem.nutritionInfo.fat)
+            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie*dietItem.quantity)
+            accumulatedCarbohydrate += Int(dietItem.nutritionInfo.carbohydrate*dietItem.quantity)
+            accumulatedProtein += Int(dietItem.nutritionInfo.protein*dietItem.quantity)
+            accumulatedFat += Int(dietItem.nutritionInfo.fat*dietItem.quantity)
         }
         calorieValueLabel.text = String(accumulatedCalorie) + StringConstants.UIString.calorieUnit
         carbohydrateLabel.text = String(accumulatedCarbohydrate) + StringConstants.UIString.diaryIngredientUnit
