@@ -271,12 +271,24 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
     @objc func performSegueToArticleList() {
         articleType = ArticleType.ARTICLE
-        performSegue(withIdentifier: "showArticleList", sender: self)
+//        performSegue(withIdentifier: "showArticleList", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController {
+            dest.articleType = self.articleType
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
     @objc func performSegueToEventList() {
         articleType = ArticleType.EVENT
-        performSegue(withIdentifier: "showArticleList", sender: self)
+//        performSegue(withIdentifier: "showArticleList", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController {
+            dest.articleType = self.articleType
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
 }

@@ -38,7 +38,12 @@ class FoodDiaryDataManager {
             foodItem.id = job["id"].stringValue
             foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
-            foodItem.quantity = Double(job["quantity"].intValue)
+            //prevent quantity equals zero
+            if job["quantity"].intValue == 0 {
+                foodItem.quantity = 1
+            } else {
+                foodItem.quantity = Double(job["quantity"].intValue)
+            }
             foodItem.displayUnit = job["measurement_type"].stringValue
             foodItem.recordType = job["search_type"].stringValue
             foodItem.nutritionInfo.calorie = job["nutrient"]["energy"].doubleValue/foodItem.quantity

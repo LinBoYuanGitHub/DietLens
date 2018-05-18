@@ -2,7 +2,10 @@ PODS:
   - Alamofire (4.5.1)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
   - CryptoSwift (0.8.0)
+  - Fabric (1.7.6)
   - Firebase/Core (4.5.0):
     - FirebaseAnalytics (= 4.0.4)
     - FirebaseCore (= 4.0.10)
@@ -62,7 +65,9 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 3.3)
+  - Crashlytics
   - CryptoSwift
+  - Fabric
   - Firebase/Core
   - Firebase/Messaging
   - FSCalendar
@@ -83,7 +88,9 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
+    - Crashlytics
     - CryptoSwift
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -113,7 +120,9 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   Firebase: d83d287bdb6b1c78320561482706d1fcfc8ddfc1
   FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
   FirebaseCore: da5e8e372cb6046212739a4d81e42d32c22907cc
@@ -140,6 +149,6 @@ SPEC CHECKSUMS:
   TinyLog: 1b19359cd3f32ab4972c595d002efc614e596529
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: a236a83daeece6d1f40d503e19fb1d3b48d962a0
+PODFILE CHECKSUM: 6916b4717efed44979af9248220894a6489ab048
 
 COCOAPODS: 1.5.0

@@ -315,8 +315,10 @@ class APIService {
                 }
                 let jsonArr = JSON(searchResults)["data"]
                 var foodSearchList = [TextSearchSuggestionEntity]()
-                for i in 0..<jsonArr.count {
-                    let entity = TextSearchSuggestionEntity(id: (jsonArr[i].dictionaryValue["id"]?.intValue)!, name: (jsonArr[i].dictionaryValue["name"]?.stringValue)!)
+                for index in 0..<jsonArr.count {
+                    let dict = jsonArr[index].dictionaryValue
+                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!)
+//                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
                     foodSearchList.append(entity)
                 }
                 completion(foodSearchList)
@@ -337,7 +339,6 @@ class APIService {
                     completion(nil)
                     return
                 }
-
                 guard let searchResults = response.result.value else {
                     print("Get  ingredient searchResult failed due to : Server Data Type Error")
                     completion(nil)
@@ -345,8 +346,8 @@ class APIService {
                 }
                 let jsonArr = JSON(searchResults)["data"]
                 var foodSearchList = [TextSearchSuggestionEntity]()
-                for i in 0..<jsonArr.count {
-                    let entity = TextSearchSuggestionEntity(id: (jsonArr[i].dictionaryValue["id"]?.intValue)!, name: (jsonArr[i].dictionaryValue["name"]?.stringValue)!)
+                for index in 0..<jsonArr.count {
+                    let entity = TextSearchSuggestionEntity(id: (jsonArr[index].dictionaryValue["id"]?.intValue)!, name: (jsonArr[index].dictionaryValue["name"]?.stringValue)!, useExpImage: false, expImagePath: "")
                     foodSearchList.append(entity)
                 }
                 completion(foodSearchList)
@@ -467,7 +468,7 @@ class APIService {
 
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
     public func qiniuImageDownload(imageKey: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "https://img.dietlens.com/"+imageKey+"?/imageView2/0/w/"+String(width)+"/h/"+String(height)
+        let downloadURL = "https://img.dietlens.com/"+imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
         Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
             if response.error == nil {
                 if let data = response.data {

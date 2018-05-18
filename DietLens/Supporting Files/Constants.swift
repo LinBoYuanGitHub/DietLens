@@ -135,6 +135,6 @@ struct Dimen {
     static let NewsArticleCollectionHeight = 220
     static let EventsFirstRowHeight = 310
     static let EventsRowHeight = 275
-    static let foodCalendarImageWidth = 400
-    static let foodCalendarImageHeight = 420
+    static let foodCalendarImageWidth = 84
+    static let foodCalendarImageHeight = 100
 }

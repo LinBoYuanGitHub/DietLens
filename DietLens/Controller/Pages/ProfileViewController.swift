@@ -75,6 +75,8 @@ class ProfileViewController: UIViewController {
             let birthDate = DateUtil.normalStringToDate(dateStr: (userProfile?.birthday)!)
             self.birthDayPickerView.setDate(birthDate, animated: false)
         }
+        //setTouch to dismiss keyboard
+        hideKeyboardWhenTappedAround()
     }
 
     func setUpPickerView() {
@@ -114,16 +116,20 @@ class ProfileViewController: UIViewController {
         if TFGender.isFirstResponder {
             //set selectValue
             TFGender.text = genderList[genderPickerView.selectedRow(inComponent: 0)]
-            TFHeight.becomeFirstResponder()
+            TFGender.resignFirstResponder()
+            //            TFHeight.becomeFirstResponder()
         } else if TFHeight.isFirstResponder {
-            TFWeight.becomeFirstResponder()
+            TFHeight.resignFirstResponder()
+            keyboardWillHide()
+            //            TFWeight.becomeFirstResponder()
         } else if TFWeight.isFirstResponder {
-            TFAge.becomeFirstResponder()
+            TFWeight.resignFirstResponder()
+            keyboardWillHide()
+            //            TFAge.becomeFirstResponder()
         } else {
             TFAge.resignFirstResponder()
             keyboardWillHide()
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -199,16 +205,19 @@ extension ProfileViewController: UITextFieldDelegate {
         if textField == TFName {
             TFGender.becomeFirstResponder()
             TFGender.text = genderList[0]
-        } else if textField == TFGender {
-            TFHeight.becomeFirstResponder()
-        } else if textField == TFHeight {
-            TFWeight.becomeFirstResponder()
-        } else if textField == TFAge {
-            TFAge.becomeFirstResponder()
-        } else {
-            textField.resignFirstResponder()
-            keyboardWillHide()
         }
+//        else if textField == TFGender {
+//            TFHeight.becomeFirstResponder()
+//        } else if textField == TFHeight {
+//            TFWeight.becomeFirstResponder()
+//        } else if textField == TFAge {
+//            TFAge.becomeFirstResponder()
+//        } else {
+//            textField.resignFirstResponder()
+//            keyboardWillHide()
+//        }
+//        textField.resignFirstResponder()
+//        keyboardWillHide()
         return false
     }
 

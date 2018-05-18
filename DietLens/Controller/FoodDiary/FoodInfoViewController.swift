@@ -274,7 +274,19 @@ class FoodInfoViewController: UIViewController {
         return toolBar
     }
 
+    func isDietItemValied() -> Bool {
+        if dietItem.quantity == 0 {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter valid quantity")
+            return false
+        }
+        return true
+    }
+
     @IBAction func onAddBtnClicked(_ sender: Any) {
+        //data validation judgement
+        if !isDietItemValied() {
+            return
+        }
         if isUpdate {
             if let navigator = self.navigationController {
                 for vc in (navigator.viewControllers) {

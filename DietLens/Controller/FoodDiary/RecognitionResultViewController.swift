@@ -85,7 +85,9 @@ class RecognitionResultViewController: UIViewController {
         if foodId == 0 {
             return
         }
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if dietItem == nil {
                 return
             }

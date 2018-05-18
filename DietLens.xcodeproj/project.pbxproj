@@ -46,6 +46,8 @@
 		3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */; };
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
+		3F50DCEA20AEA44E005209B8 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCE920AEA44E005209B8 /* Modal.swift */; };
+		3F50DCEC20AEA4B2005209B8 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCEB20AEA4B2005209B8 /* CustomAlertView.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6B872820A1BCD8001063A0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; };
 		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
@@ -233,6 +235,8 @@
 		3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedGardientView.swift; sourceTree = "<group>"; };
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		3F50DCE920AEA44E005209B8 /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
+		3F50DCEB20AEA4B2005209B8 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -445,6 +449,8 @@
 			isa = PBXGroup;
 			children = (
 				3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */,
+				3F50DCE920AEA44E005209B8 /* Modal.swift */,
+				3F50DCEB20AEA4B2005209B8 /* CustomAlertView.swift */,
 			);
 			path = ViewHelper;
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
 				3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */,
 				BF8441171FA435B200D5018F /* Run Script */,
+				3F50DCE820AD72A5005209B8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1037,6 +1044,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3F50DCE820AD72A5005209B8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" ee0719a10b5e98b808ace59214734cb6d50bc07e e0ce033217983b47efff09fd8bce549aeafc997d334da35c885cc28c7b96ee62";
+		};
 		5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1167,6 +1187,7 @@
 				3FD0861D200DACA50052D54B /* HealthCenterViewController.swift in Sources */,
 				3F575C332047F0D9009C096C /* DateUtil.swift in Sources */,
 				3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */,
+				3F50DCEA20AEA44E005209B8 /* Modal.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
 				3F43664B207C97320089C63A /* FoodInfoViewController.swift in Sources */,
 				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
@@ -1182,6 +1203,7 @@
 				3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */,
 				3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */,
 				BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
+				3F50DCEC20AEA4B2005209B8 /* CustomAlertView.swift in Sources */,
 				BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				3FD08627200F21460052D54B /* HealthDeviceDataCell.swift in Sources */,

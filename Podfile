@@ -27,6 +27,9 @@ target 'DietLens' do
   pod 'LGSideMenuController'
   pod 'CryptoSwift'
   pod 'QiniuUpload'
+  # Crashlytics
+  pod 'Fabric'
+  pod 'Crashlytics'
 
   target 'DietLensTests' do
     inherit! :search_paths

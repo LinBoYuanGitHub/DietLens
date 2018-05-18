@@ -11,6 +11,8 @@ import CoreData
 import UserNotifications
 import Firebase
 import RealmSwift
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        Fabric.with([Crashlytics.self])
         Messaging.messaging().delegate = self as! MessagingDelegate
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -36,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         registerForPushNotifications()
-//        realmSetting(application)
+        realmSetting(application)
 
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
@@ -57,8 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
-            migrationBlock: { _, _ in
-
+            migrationBlock: { migration, _ in
+                migration.deleteData(forType: FoodDiary.className())
+                migration.deleteData(forType: IngredientDiary.className())
+                migration.deleteData(forType: FoodInfomation.className())
+                migration.deleteData(forType: Portion.className())
 //                if oldSchemaVersion <= 1 {
 //                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
 //                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)

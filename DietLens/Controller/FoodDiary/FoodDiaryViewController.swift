@@ -64,7 +64,7 @@ class FoodDiaryViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         //move indicator to correct position
         UIView.animate(withDuration: 0.1, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.animationView.center.x = CGFloat(Float(self.currentMealIndex)*Float(80)) + CGFloat(10)
+            self.animationView.center.x = CGFloat(Float(self.currentMealIndex+1)*Float(80)) + CGFloat(10)
         })
     }
 

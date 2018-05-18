@@ -158,7 +158,9 @@ class TextInputViewController: UIViewController {
         if foodId == 0 {
             return
         }
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if dietItem == nil {
                 return
             }
@@ -187,7 +189,9 @@ class TextInputViewController: UIViewController {
                 dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
                 dest.foodDiaryEntity.mealType = self.mealType
                 if let navigator = self.navigationController {
-                    navigator.pushViewController(dest, animated: true)
+                    DispatchQueue.main.async {
+                         navigator.pushViewController(dest, animated: true)
+                    }
                 }
             }
         }
