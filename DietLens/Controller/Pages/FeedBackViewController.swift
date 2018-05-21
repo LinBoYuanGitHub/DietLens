@@ -25,10 +25,7 @@ class FeedBackViewController: UIViewController {
         if feedBackTextView.text.isEmpty {
             return
         }
-        let preferences = UserDefaults.standard
-        let key = "userId"
-        let userId = preferences.string(forKey: key)
-        APIService.instance.sendFeedBack(userId: userId!, content: feedBackTextView.text) { (flag) in
+        APIService.instance.sendFeedBack(content: feedBackTextView.text) { (flag) in
             if(flag) {
                 let alert = UIAlertController(title: "", message: "Thanks for sending the feedback, we will procceed the feedback soon", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: "Default action"), style: .`default`, handler: { _ in

@@ -14,7 +14,6 @@ class SettingViewController: UIViewController {
     @IBAction func unwindToSettingPage(segue: UIStoryboardSegue) {}
     override func viewDidLoad() {
         super.viewDidLoad()
-
 //        UINavigationBar.appearance().titleTextAttributes = [
 //            NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.4509400725, green: 0.4510070682, blue: 0.4509189129, alpha: 1)]
 //        let navigationBar = UINavigationBar.appearance()
@@ -23,7 +22,6 @@ class SettingViewController: UIViewController {
 //        navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        navigationBar.shadowImage = UIImage()
 //        navigationBarItem.backBarButtonItem = nil
-
         // Do any additional setup after loading the view.
     }
 
@@ -44,22 +42,16 @@ class SettingViewController: UIViewController {
         performSegue(withIdentifier: "toFeedBackPage", sender: nil)
     }
     @IBAction func logout(_ sender: Any) {
-        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Confirm to logout?", postiveText: "Confirm", negativeText: "Cancel") { (result) in
-            if (result) {
+        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Confirm to logout?", postiveText: "Confirm", negativeText: "Cancel") { (iSuccess) in
+            if (iSuccess) {
                 let preferences = UserDefaults.standard
-                let key = "userId"
-                let userId = preferences.string(forKey: key)
-                if userId == nil {
+                let token = preferences.string(forKey: PreferenceKey.tokenKey)
+                if token == nil {
                     //no userId cannot Logout
                     return
                 }
-                //request new userId
-                APIService.instance.getUUIDRequest(userId: userId!) { (userID) in
-                    preferences.setValue(userID, forKey: key)
-                    let didSave = preferences.synchronize()
-                    if !didSave {
-                        print("Couldn`t save,fatal exception happened")
-                    } else {
+                APIService.instance.logOut(completion: { (isSuccess) in
+                    if isSuccess {
                         DispatchQueue.main.async {
                             self.clearPersonalData()
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -67,7 +59,7 @@ class SettingViewController: UIViewController {
                             self.present(controller, animated: true, completion: nil)
                         }
                     }
-                }
+                })
             }
         }
 
@@ -77,6 +69,7 @@ class SettingViewController: UIViewController {
         let preferences = UserDefaults.standard
         let nicknameKey = "nickname"
         preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
     }
     /*
     // MARK: - Navigation

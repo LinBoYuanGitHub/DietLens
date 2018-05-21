@@ -11,7 +11,7 @@ import XLPagerTabStrip
 
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
     var addFoodDate = Date()
-    var mealType: Meal = .dinner
+    var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true
 
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -19,41 +19,56 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
             as? CameraViewController, let textInputViewController =
             storyboard?.instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController
             else { return [] }
-
+        //passing value to child VC
+        cameraViewController.addFoodDate = addFoodDate
+        cameraViewController.mealType = mealType
+        cameraViewController.isSetMealByTimeRequired = isSetMealByTimeRequired
+        textInputViewController.addFoodDate = addFoodDate
+        textInputViewController.mealType = mealType
+        textInputViewController.isSetMealByTimeRequired = isSetMealByTimeRequired
         return [cameraViewController, textInputViewController]
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.containerView.isScrollEnabled = false
+        self.navigationController?.navigationBar.isHidden = true
+        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
+        if let cameraVC =  self.viewControllers.first as? CameraViewController {
+            cameraVC.viewWillAppear(false)
+        }
+    }
+
     override func viewDidLoad() {
+        //hid navaigation bar
+        self.navigationController?.navigationBar.isHidden = true
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .clear
         settings.style.buttonBarItemBackgroundColor = .clear
-        settings.style.selectedBarBackgroundColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
-        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 16)!
-        settings.style.selectedBarHeight = 5.0
+        settings.style.selectedBarBackgroundColor = .white
+        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 14)!
+        settings.style.selectedBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarItemTitleColor = .white
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
 
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .black
-            newCell?.label.textColor = UIColor(red: 0.29, green: 0.56, blue: 0.89, alpha: 1.0)
         }
 
         super.viewDidLoad()
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
         containerView.scrollsToTop = false
-        NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
-    }
-
-    @objc func onNotifyToDismiss() {
-        dismiss(animated: false, completion: nil)
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+//        let transition = CATransition()
+//        transition.duration = 0.3
+//        transition.type = kCATransitionReveal
+//        transition.subtype = kCATransitionFromBottom
+//        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        self.navigationController?.popViewController(animated: false)
     }
 }

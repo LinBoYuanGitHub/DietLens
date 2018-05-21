@@ -50,7 +50,7 @@ class TextSearchViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .addDiaryDismiss, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
-         NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onNotifyToDismiss), name: .addDiaryDismiss, object: nil)
 
     }
 
@@ -86,7 +86,7 @@ class TextSearchViewController: UIViewController {
             APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchListURL)
         }
         isSearching = true
-        APIService.instance.getFoodSearchResult(keywords: TFSearch.text!) { (foodSearchList) in
+        APIService.instance.getFoodSearchResult(filterType: 0, keywords: TFSearch.text!) { (foodSearchList) in
             self.isSearching = false
             if foodSearchList == nil {
                 self.suggestions =  [TextSearchSuggestionEntity]()

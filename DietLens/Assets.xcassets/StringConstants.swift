@@ -16,12 +16,18 @@ struct StringConstants {
         static let calorieUnit = "kcal"
         static let updateBtnText = "Update"
         static let addBtnText = "Done"
+        static let saveBtnText = "Save"
     }
     struct MealString {
         static let breakfast = "Breakfast"
         static let lunch = "Lunch"
         static let dinner = "Dinner"
         static let snack = "Snack"
+    }
+
+    struct NavigatorTitle {
+        static let reportTitle = "Report"
+        static let dietlensTitle = "Dietlens"
     }
 
 }

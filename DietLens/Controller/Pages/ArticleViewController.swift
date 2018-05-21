@@ -11,7 +11,9 @@ import UIKit
 class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var articleTable: UITableView!
-    public let articleDatamanager = ArticleDataManager.instance
+    @IBOutlet weak var articleTitle: UILabel!
+    var articleDataSource: [Article] = ArticleDataManager.instance.articleList
+    public var articleType = ArticleType.ARTICLE
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,27 +21,49 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         articleTable.delegate = self
         articleTable.estimatedRowHeight = 90
         articleTable.rowHeight = UITableViewAutomaticDimension
+        if articleType == ArticleType.ARTICLE {
+            articleDataSource = ArticleDataManager.instance.articleList
+            articleTitle.text = "Latest article"
+        } else if articleType == ArticleType.EVENT {
+            articleDataSource = ArticleDataManager.instance.eventList
+            articleTitle.text = "Latest healthy events"
+        }
         // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
         let alertController = UIAlertController(title: nil, message: "Loading...\n\n", preferredStyle: UIAlertControllerStyle.alert)
-        if articleDatamanager.articleList.count == 0 {
+        if articleDataSource.count == 0 {
             let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
             spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
             spinnerIndicator.color = UIColor.black
             spinnerIndicator.startAnimating()
             alertController.view.addSubview(spinnerIndicator)
             self.present(alertController, animated: false, completion: nil)
-        }
-        APIService.instance.getArticleList(completion: { (articleList) in
-            alertController.dismiss(animated: true, completion: nil)
-            if articleList == nil {
-                return
+            if articleType == ArticleType.ARTICLE {
+                APIService.instance.getArticleList(completion: { (articleList) in
+                    alertController.dismiss(animated: true, completion: nil)
+                    if articleList == nil {
+                        return
+                    }
+                    ArticleDataManager.instance.articleList = articleList!
+                    self.articleTable?.reloadData()
+                })
+            } else if articleType == ArticleType.EVENT {
+                APIService.instance.getEventList(completion: { (eventList) in
+                    alertController.dismiss(animated: true, completion: nil)
+                    if eventList == nil {
+                        return
+                    }
+                    ArticleDataManager.instance.eventList = eventList!
+                    self.articleTable?.reloadData()
+                })
             }
-            self.articleDatamanager.articleList = articleList!
-            self.articleTable?.reloadData()
-        })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,10 +72,18 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell") as? NewsArticleTableCell {
-            cell.setupCell(imageURL: articleDatamanager.articleList[indexPath.row].articleImageURL, title: articleDatamanager.articleList[indexPath.row].articleTitle, source: articleDatamanager.articleList[indexPath.row].source, dateStr: "March 27, 2018")
+        if articleType == ArticleType.ARTICLE {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell") as? NewsArticleTableCell {
+                cell.setupCell(imageURL: articleDataSource[indexPath.row].articleImageURL, title: articleDataSource[indexPath.row].articleTitle, source: articleDataSource[indexPath.row].source, dateStr: "March 27, 2018")
                 return cell
             }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as?
+                NewsEventCell {
+                cell.setupCell(imageURL: articleDataSource[indexPath.row].articleImageURL, title: articleDataSource[indexPath.row].articleTitle, source: articleDataSource[indexPath.row].source, dateStr: "March 27, 2018")
+                return cell
+            }
+        }
         return UITableViewCell()
     }
 
@@ -61,19 +93,25 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        //TODO set different height for article & event
+        if articleType == ArticleType.ARTICLE {
+            return 247
+        } else {
+            return 290
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articleDatamanager.articleList.count
+        return articleDataSource.count
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let article: Article = articleDatamanager.articleList[(articleTable.indexPathForSelectedRow?.row)!]
+        let article: Article = articleDataSource[(articleTable.indexPathForSelectedRow?.row)!]
         if let dest = segue.destination as? SingleArticleViewController {
             dest.articleData = article
         }

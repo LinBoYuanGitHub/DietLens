@@ -11,6 +11,8 @@ import CoreData
 import UserNotifications
 import Firebase
 import RealmSwift
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        Fabric.with([Crashlytics.self])
         Messaging.messaging().delegate = self as! MessagingDelegate
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -36,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         registerForPushNotifications()
-        realmSetting(application)
+//        realmSetting(application)
 
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
@@ -53,50 +56,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 4,
+            schemaVersion: 1,
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
-            migrationBlock: { migration, oldSchemaVersion in
-
-                if oldSchemaVersion <= 1 {
-                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
-                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)
-                    }
-                }
-                if oldSchemaVersion <= 2 {
-                    migration.enumerateObjects(ofType: FoodDiary.className()) { _, newObject in
-                        newObject?["quantity"] = 1.0
-                        newObject?["unit"] = "portion"
-                    }
-                }
-                if oldSchemaVersion <= 3 {
-                    migration.enumerateObjects(ofType: FoodDiary.className()) { oldObject, newObject in
-//                        let foodInfoList = newObject?.dynamicList("foodInfoList")
-                        let foodInfoList =  newObject?["foodInfoList"] as! List<MigrationObject>
-                        let foodInfo = migration.create(FoodInfomation.className(), value: FoodInfomation())
-//                        let foodInfo = MigrationObject()
-                        foodInfo["foodId"] = oldObject?["foodId"]
-                        foodInfo["foodName"] = oldObject?["foodName"]
-                        foodInfo["carbohydrate"] = oldObject?["carbohydrate"]
-                        foodInfo["protein"] = oldObject?["protein"]
-                        foodInfo["fat"] = oldObject?["fat"]
-                        foodInfo["calorie"] = oldObject?["calorie"]
-                        foodInfo["category"] = oldObject?["category"]
-                        foodInfo["sampleImagePath"] = oldObject?["imagePath"]
-                        foodInfoList.append(foodInfo)
-                        //portion part
-                        let portionList = foodInfo["portionList"] as! List<MigrationObject>
-                        let portion = migration.create(Portion.className(), value: Portion())
-                        portion["weightValue"] = 100
-                        portion["sizeUnit"] = oldObject?["unit"]
-                        portionList.append(portion)
-                        //question part
-                        newObject?["quantity"] = 1
-                        newObject?["selectedFoodInfoPos"] = 0
-                        newObject?["selectedPortionPos"] = 0
-                    }
-                }
+            migrationBlock: { _, _ in
+//                migration.deleteData(forType: FoodDiary.className())
+//                migration.deleteData(forType: IngredientDiary.className())
+//                migration.deleteData(forType: FoodInfomation.className())
+//                migration.deleteData(forType: Portion.className())
+//                if oldSchemaVersion <= 1 {
+//                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
+//                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)
+//                    }
+//                }
+//                if oldSchemaVersion <= 2 {
+//                    migration.enumerateObjects(ofType: FoodDiary.className()) { _, newObject in
+//                        newObject?["quantity"] = 1.0
+//                        newObject?["unit"] = "portion"
+//                    }
+//                }
+//                if oldSchemaVersion <= 3 {
+//                    migration.enumerateObjects(ofType: FoodDiary.className()) { oldObject, newObject in
+////                        let foodInfoList = newObject?.dynamicList("foodInfoList")
+//                        let foodInfoList =  newObject?["foodInfoList"] as! List<MigrationObject>
+//                        let foodInfo = migration.create(FoodInfomation.className(), value: FoodInfomation())
+////                        let foodInfo = MigrationObject()
+//                        foodInfo["foodId"] = oldObject?["foodId"]
+//                        foodInfo["foodName"] = oldObject?["foodName"]
+//                        foodInfo["carbohydrate"] = oldObject?["carbohydrate"]
+//                        foodInfo["protein"] = oldObject?["protein"]
+//                        foodInfo["fat"] = oldObject?["fat"]
+//                        foodInfo["calorie"] = oldObject?["calorie"]
+//                        foodInfo["category"] = oldObject?["category"]
+//                        foodInfo["sampleImagePath"] = oldObject?["imagePath"]
+//                        foodInfoList.append(foodInfo)
+//                        //portion part
+//                        let portionList = foodInfo["portionList"] as! List<MigrationObject>
+//                        let portion = migration.create(Portion.className(), value: Portion())
+//                        portion["weightValue"] = 100
+//                        portion["sizeUnit"] = oldObject?["unit"]
+//                        portionList.append(portion)
+//                        //changing part
+//                        newObject?["quantity"] = 1
+//                        newObject?["selectedFoodInfoPos"] = 0
+//                        newObject?["selectedPortionPos"] = 0
+//                    }
+//                }
 
         })
         Realm.Configuration.defaultConfiguration = config
@@ -185,7 +191,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             print("Notification settings: \(settings)")
             guard settings.authorizationStatus == .authorized else { return }
-            UIApplication.shared.registerForRemoteNotifications()
+            DispatchQueue.main.async {
+                  UIApplication.shared.registerForRemoteNotifications()
+            }
         }
     }
 
@@ -235,12 +243,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let aps = userInfo["aps"] as? NSDictionary {
             if let alert = aps["alert"] as? NSDictionary {
                 if let message = alert["message"] as? String {
-                    //Do stuff
+                    //TODO notify foodDiary part to update
                     let messageDict: [String: String] = ["message": message]
                     NotificationCenter.default.post(name: .didReceiveNotification, object: nil, userInfo: messageDict)
                 }
             } else if let alert = aps["alert"] as? String {
-                //Do stuff
+                //TODO notify foodDiary part to update
                 let messageDict: [String: String] = ["message": alert]
                 NotificationCenter.default.post(name: .didReceiveNotification, object: nil, userInfo: messageDict)
             }
@@ -260,13 +268,14 @@ extension AppDelegate: MessagingDelegate {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        if userId == nil {
+        let token = preferences.string(forKey: PreferenceKey.tokenKey)
+        if token == nil {
             //record fcmToken
             let tokenKey = "fcmToken"
             preferences.set(fcmToken, forKey: tokenKey)
         } else {
             //send token to server
-            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken, status: "1", completion: { (flag) in
+            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken, status: "True", completion: { (flag) in
                 if flag {
                     print("send device token succeed")
                 }
@@ -281,4 +290,10 @@ extension AppDelegate: MessagingDelegate {
         print("Received data message: \(remoteMessage.appData)")
     }
     // [END ios_10_data_message]
+}
+
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
 }

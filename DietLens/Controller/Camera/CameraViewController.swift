@@ -38,7 +38,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     private var recordType: String = RecordType.RecordByImage
 
-    @IBOutlet weak var focusViewImg: UIImageView!
+//    @IBOutlet weak var focusViewImg: UIImageView!
 
     let locationManager = CLLocationManager()
     var latitude = 0.0
@@ -46,6 +46,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     var imageId: Int = 0
 
     var pinchGestureRecognizer = UIPinchGestureRecognizer()
+
+    //passing parameter
+    var displayList = [DisplayFoodCategory]()
+    //mealTime & mealType
+    var addFoodDate = Date()
+    var mealType: String = StringConstants.MealString.breakfast
+    var isSetMealByTimeRequired = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +62,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.previewView.addGestureRecognizer(pinchGestureRecognizer)
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
+
         let previewLayer = previewView.videoPreviewLayer
         previewLayer.videoGravity = .resizeAspectFill
 
@@ -72,6 +80,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         } else {
             print("Location services are not enabled")
         }
+        sessionManager.onViewWillAppear()
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
@@ -91,7 +100,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             break
             // Disable location features or quit
 //            disableMyLocationBasedFeatures()
-
         case .authorizedWhenInUse:
             // Enable basic location features
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -106,8 +114,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewView.videoPreviewLayer.frame.size = previewContainer.frame.size
-        previewContainer.bringSubview(toFront: focusViewImg)
+//        sessionManager.onViewWillAppear()
+//        previewContainer.bringSubview(toFront: focusViewImg)
     }
+
+//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        sessionManager.onViewWillAppear()
+//    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -149,11 +162,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBAction func switchToPhoto(_ sender: UIButton) {
         capturePhotoButton.isEnabled = true
+        capturePhotoButton.tintColor = UIColor.red
         sessionManager.set(captureMode: .photo)
     }
 
     @IBAction func switchToBarcode(_ sender: UIButton) {
         sessionManager.set(captureMode: .barcode)
+        barcodeButton.tintColor = UIColor.red
     }
 
     @IBAction func switchToGallery(_ sender: UIButton) {
@@ -165,37 +180,93 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             self.loadingScreen.alpha = 1
         }, completion: nil)
         //resize&compress image process
-        let size = CGSize(width: 500, height: 500)
+        let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         chosenImageView.image!.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let imgData = UIImageJPEGRepresentation(newImage!, 0.6)!
-        let preferences = UserDefaults.standard
-        let key = "userId"
-        let userId = preferences.string(forKey: key)
+//        let preferences = UserDefaults.standard
+//        let key = "userId"
+//        let userId = preferences.string(forKey: key)
         //upload image to server
-        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (imageId, results) in
-            // upload result and callback
-            self.imageId = imageId
-            self.capturePhotoButton.isEnabled = true
-            self.loadingScreen.alpha = 0
-            if results == nil || results?.count == 0 {
+        APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
+            if imageKey == nil {
+                //error happen during upload image to Qiniu
+                self.hideReview()
+                self.capturePhotoButton.isEnabled = true
+                self.loadingScreen.alpha = 0
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
-            } else {
-                self.foodDiary.foodInfoList.removeAll()
-                for result in results! {
-                    self.foodDiary.foodInfoList.append(result)
-                }
-                self.recordType = RecordType.RecordByImage
-                self.performSegue(withIdentifier: "test", sender: self)
+                return
             }
-            self.hideReview()
+            self.uploadPercentageLabel.text = "retrieving recognition result..."
+            APIService.instance.postForRecognitionResult(imageKey: imageKey!, latitude: self.latitude, longitude: self.longitude, completion: { (resultList) in
+                    self.hideReview()
+                    self.capturePhotoButton.isEnabled = true
+                    self.loadingScreen.alpha = 0
+                    if resultList == nil || resultList?.count == 0 {
+                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+                    } else {
+                        self.displayList.removeAll()
+                        self.displayList = resultList!
+                        self.recordType = RecordType.RecordByImage
+                        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "recognitionVC") as? RecognitionResultViewController {
+                            dest.cameraImage = self.chosenImageView.image!
+                            dest.imageKey = imageKey
+                            dest.foodCategoryList = self.displayList
+                            //pass display value
+                            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                            dest.recordDate = self.addFoodDate
+                            dest.mealType = self.mealType
+                            if let navigator = self.navigationController {
+                                navigator.pushViewController(dest, animated: true)
+                            }
+                        }
+                    }
+                    self.hideReview()
+            })
+            //upload imageToken to server to get the food recognition results
         }) { (progress) in
-            //TODO update progress dialog to show progress
             self.uploadPercentageLabel.text = "\(progress)%"
         }
+//        APIService.instance.uploadImageForMatrix(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (results) in
+//            // upload result and callback
+//            self.capturePhotoButton.isEnabled = true
+//            self.loadingScreen.alpha = 0
+//            if results == nil || results?.count == 0 {
+//                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+//            } else {
+//                self.displayList.removeAll()
+//                self.displayList = results!
+//                self.recordType = RecordType.RecordByImage
+//                //                self.performSegue(withIdentifier: "test", sender: self)
+//                self.performSegue(withIdentifier: "showResultPage", sender: self)
+//            }
+//            self.hideReview()
+//        }) { (progress) in
+//            self.uploadPercentageLabel.text = "\(progress)%"
+//        }
+//        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (imageId, results) in
+//            // upload result and callback
+//            self.imageId = imageId
+//            self.capturePhotoButton.isEnabled = true
+//            self.loadingScreen.alpha = 0
+//            if results == nil || results?.count == 0 {
+//                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+//            } else {
+//                self.foodDiary.foodInfoList.removeAll()
+//                for result in results! {
+//                    self.foodDiary.foodInfoList.append(result)
+//                }
+//                self.recordType = RecordType.RecordByImage
+////                self.performSegue(withIdentifier: "test", sender: self)
+//                self.performSegue(withIdentifier: "showResultPage", sender: self)
+//            }
+//            self.hideReview()
+//        }) { (progress) in
+//            self.uploadPercentageLabel.text = "\(progress)%"
+//        }
     }
 
     @IBAction func rejectImage(_ sender: UIButton) {
@@ -274,12 +345,12 @@ extension CameraViewController: CameraViewControllerDelegate {
         case .photo:
             activeButton = photoButton
             capturePhotoButton.isHidden = false
-            focusViewImg.isHidden = false
+//            focusViewImg.isHidden = false
             removeBarScannerLine()
         case .barcode:
             activeButton = barcodeButton
             capturePhotoButton.isHidden = true
-            focusViewImg.isHidden = true
+//            focusViewImg.isHidden = true
             addBarScannerLine()
         }
 
@@ -290,10 +361,11 @@ extension CameraViewController: CameraViewControllerDelegate {
             button?.isEnabled = true
             button?.backgroundColor = .clear
         }
-
+        activeButton.setTitleColor(UIColor.red, for: .disabled)
+//        activeButton.setTitleColor(UIColor.red, for: .normal)
         activeButton.isEnabled = false
-        activeButton.backgroundColor = UIColor(red: 1.00, green: 0.31, blue: 0.31, alpha: 0.7)
-        activeButton.layer.cornerRadius = 5
+//        activeButton.backgroundColor = UIColor(red: 1.00, green: 0.31, blue: 0.31, alpha: 0.7)
+//        activeButton.layer.cornerRadius = 5
     }
 
     func onCameraInput(isAvailable: Bool) {
@@ -343,38 +415,12 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDetect(barcode: String) {
-        APIService.instance.getBarcodeScanResult(barcode: barcode) { (foodInformation) in
-            if foodInformation == nil {
-                DispatchQueue.main.async { [weak self] in
-                    guard let wSelf = self else {
-                        return
-                    }
-                    let alertMsg = "Result not found!"
-                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
-                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-                                                            style: .cancel,
-                                                            handler: nil))
-                    wSelf.present(alertController, animated: true, completion: nil)
-                    }
-            } else {
-                self.loadingScreen.alpha = 0
-                do {
-                    try Realm().write {
-                        self.foodDiary.foodInfoList.append(foodInformation!)
-                    }
-                } catch let error as NSError {
-                    //handel error
-                }
-                self.recordType = RecordType.RecordByBarcode
-                self.performSegue(withIdentifier: "test", sender: self)
-            }
-        }
-//        APIService.instance.getBarcodeScanResult(barcode: barcode){ (foodInformation?) in
+        APIService.instance.getBarcodeScanResult(barcode: barcode) { (_) in
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Work in progress")
 //            if foodInformation == nil {
-//                DispatchQueue.main.async { [weak self] in foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos]
+//                DispatchQueue.main.async { [weak self] in
 //                    guard let wSelf = self else {
-//                        returna
+//                        return
 //                    }
 //                    let alertMsg = "Result not found!"
 //                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
@@ -383,32 +429,20 @@ extension CameraViewController: CameraViewControllerDelegate {
 //                                                            style: .cancel,
 //                                                            handler: nil))
 //                    wSelf.present(alertController, animated: true, completion: nil)
-//                }
+//                    }
 //            } else {
 //                self.loadingScreen.alpha = 0
-//                try Realm().write {
-//                    self.foodDiary.foodInfoList.append(foodInformation)
+//                do {
+//                    try Realm().write {
+//                        self.foodDiary.foodInfoList.append(foodInformation!)
+//                    }
+//                } catch let error as NSError {
+//                    //handel error
 //                }
 //                self.recordType = RecordType.RecordByBarcode
 //                self.performSegue(withIdentifier: "test", sender: self)
 //            }
-//
-//        }
-//        DispatchQueue.main.async { [weak self] in
-//            guard let wSelf = self else {
-//                return
-//            }
-//
-//            let alertMsg = "Barcode detected!"
-//            let message = NSLocalizedString("Barcode: \(barcode)", comment: alertMsg)
-//            let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-//
-//            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-//                                                    style: .cancel,
-//                                                    handler: nil))
-//
-//            wSelf.present(alertController, animated: true, completion: nil)
-//        }
+        }
         sessionManager.set(captureMode: .photo)
     }
 }
@@ -443,7 +477,7 @@ extension CameraViewController {
 
     private func showReview(image: UIImage) {
         chosenImageView.image = image
-        chosenImageView.contentMode = .scaleAspectFit
+        chosenImageView.contentMode = .scaleToFill
         chosenImageView.isHidden = false
         reviewImagePalette.isHidden = false
     }
@@ -455,17 +489,12 @@ extension CameraViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let parentVC = self.parent as! AddFoodViewController
-        if let dest = segue.destination as? RecognitionResultsViewController {
-            dest.foodDiary = foodDiary
-            dest.imageId = imageId
-            dest.dateTime = parentVC.addFoodDate
-            dest.isSetMealByTimeRequired = parentVC.isSetMealByTimeRequired
-            dest.whichMeal = parentVC.mealType
-            dest.foodDiary.recordType = self.recordType
+        if let dest  = segue.destination as? RecognitionResultViewController {
             if recordType == RecordType.RecordByImage {
-                dest.userFoodImage = chosenImageView.image!
+                dest.cameraImage = chosenImageView.image!
+                dest.foodCategoryList = displayList
             } else if recordType == RecordType.RecordByBarcode {
-                dest.userFoodImage = #imageLiteral(resourceName: "barcode_sample_icon")
+                dest.cameraImage = #imageLiteral(resourceName: "barcode_sample_icon")
             }
         }
     }

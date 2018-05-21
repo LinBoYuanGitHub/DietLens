@@ -26,6 +26,7 @@ class DateUtil {
     public static func normalStringToDate(dateStr: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         let resultDate = dateFormatter.date(from: String(dateStr))
         return resultDate!
     }

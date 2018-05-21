@@ -23,13 +23,17 @@ class MainViewController: UIViewController {
              AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in password")
             return
         }
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!) { (isSuccess) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if isSuccess {
                 // save for basic authentication
                 let preferences = UserDefaults.standard
                 let pwdKey = "password"
                 preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
-                self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                }
             } else {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
                 print("Login failed")
@@ -45,7 +49,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         TFEmail.delegate = self
         TFPassword.delegate = self
+        TFEmail.keyboardType = .emailAddress
         // Do any additional setup after loading the view.
+        hideKeyboardWhenTappedAround()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,4 +87,16 @@ extension MainViewController: UITextFieldDelegate {
         return true
     }
 
+}
+
+extension MainViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

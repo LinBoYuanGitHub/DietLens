@@ -15,9 +15,23 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.2</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.4</string>
+	<string>1.0.2</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>ee0719a10b5e98b808ace59214734cb6d50bc07e</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -28,7 +42,15 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>ExceptionAllowsInsecureHttpLoads</key>
+			<true/>
+			<key>IncludesSubdomains</key>
+			<true/>
+			<key>api.dietlens.com</key>
+			<string></string>
 			<key>localhost</key>
+			<string></string>
+			<key>p7bqh4trt.sabkt.gdipper.com</key>
 			<string></string>
 		</dict>
 	</dict>

@@ -16,63 +16,69 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let preferences = UserDefaults.standard
-        let key = "userId"
-        var userId = preferences.string(forKey: key)
-        if userId == nil {
-            userId = ""
-        }
-        APIService.instance.getUUIDRequest(userId: userId!) { (userId) in
-            let preferences = UserDefaults.standard
-            let key = "userId"
-            preferences.setValue(userId, forKey: key)
-            let didSave = preferences.synchronize()
-            if !didSave {
-                print("Couldn`t save,fatal exception happened")
-            } else {
-                print("userId:\(userId)")
+        let token = preferences.string(forKey: PreferenceKey.tokenKey)
+        if token == nil {
+            //redirect to login page
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "toLoginPage", sender: self)
             }
-            //send notification to server
-            let tokenKey = "fcmToken"
-            let token = preferences.string(forKey: tokenKey)
-            if token != nil {
-                //send token to server
-                APIService.instance.saveDeviceToken(uuid: userId, fcmToken: token!, status: "1", completion: { (flag) in
-                    if flag {
-                        preferences.setValue(nil, forKey: tokenKey)
-                        print("send device token succeed")
-                    }
-                })
-            }
-            self.getArticleListToMainPage()
+        } else {
+            //redirect to home page
+            getArticleListToMainPage()
+            loadNutritionTarget()
         }
+//        APIService.instance.getUUIDRequest(userId: userId!) { (userId) in
+//            let preferences = UserDefaults.standard
+//            let key = "userId"
+//            preferences.setValue(userId, forKey: key)
+//            let didSave = preferences.synchronize()
+//            if !didSave {
+//                print("Couldn`t save,fatal exception happened")
+//            } else {
+//                print("userId:\(userId)")
+//            }
+//            //send notification to server
+//            let tokenKey = "fcmToken"
+//            let token = preferences.string(forKey: tokenKey)
+//            if token != nil {
+//                //send token to server
+//                APIService.instance.saveDeviceToken(uuid: userId, fcmToken: token!, status: "True", completion: { (flag) in
+//                    if flag {
+//                        preferences.setValue(nil, forKey: tokenKey)
+//                        print("send device token succeed")
+//                    }
+//                })
+//            }
+//            self.getArticleListToMainPage()
+//        }
+
         // Do any additional setup after loading the view.
     }
 
     func getArticleListToMainPage() {
-        let preferences = UserDefaults.standard
-        let nicknameKey = "nickname"
-        let nickName = preferences.string(forKey: nicknameKey)
         APIService.instance.getArticleList { (articleList) in
             if articleList != nil {
                 APIService.instance.getEventList { (_) in
                     DispatchQueue.main.async {
-                        if (nickName == nil) {
-                            self.performSegue(withIdentifier: "toLoginPage", sender: self)
-                        } else {
-                            self.performSegue(withIdentifier: "toMainPage", sender: self)
-                        }
+                        self.performSegue(withIdentifier: "toMainPage", sender: self)
                     }
                 }
             } else {
                 //TODO: handle article list nil
                 DispatchQueue.main.async {
-                  if (nickName == nil) {
-                        self.performSegue(withIdentifier: "toLoginPage", sender: self)
-                    } else {
-                        self.performSegue(withIdentifier: "toMainPage", sender: self)
-                    }
+                    self.performSegue(withIdentifier: "toMainPage", sender: self)
                 }
             }
+        }
+    }
+
+    func loadNutritionTarget() {
+        APIService.instance.getDietaryGuideInfo { (guideDict) in
+            let preferences = UserDefaults.standard
+            preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
+            preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
+            preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
+            preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
         }
     }
 

@@ -10,15 +10,20 @@ import UIKit
 import ParallaxHeader
 import SnapKit
 import AlamofireImage
+import WebKit
 
-class SingleArticleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SingleArticleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var article: UITableView!
     weak var parallaxHeaderView: UIView?
 
+    var contentHeight: CGFloat = 0.0
+
     var articleData: Article?
 
     let headerDarkAlpha = 0.6
+
+    var shouldReload = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +45,19 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         // Dispose of any resources that can be recreated.
     }
 
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        contentHeight = webView.scrollView.contentSize.height
+        if shouldReload {
+            article.reloadData()
+        }
+
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "articleMainBody") as? SinglePageArticleBodyCell {
             cell.setupCell(type: .body, data: articleData?.articleContent)
+            cell.webView.navigationDelegate = self
+            cell.webView.frame = CGRect(x: 0, y: 0, width: cell.frame.size.width, height: contentHeight)
             return cell
         }
         return UITableViewCell()
@@ -53,21 +68,23 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.fs_height
+        if contentHeight != 0 {
+            shouldReload = false
+        }
+        return contentHeight
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let tableView = scrollView as? UITableView {
-            for cell in tableView.visibleCells {
-                guard let cell = cell as? SinglePageArticleBodyCell else { continue }
-                cell.webView?.setNeedsLayout()
-            }
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if let tableView = scrollView as? UITableView {
+//            for cell in tableView.visibleCells {
+//                guard let cell = cell as? SinglePageArticleBodyCell else { continue }
+//                cell.webView?.setNeedsLayout()
+//            }
+//        }
+//    }
 
     func setupParallaxHeader() {
         //let image = newsArticle.newsImage
-
         let imageView = UIImageView()
         //imageView.image = image
         if articleData?.articleImageURL != "" {

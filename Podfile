@@ -16,6 +16,7 @@ target 'DietLens' do
   pod 'RealmSwift'
   pod 'FSCalendar'
   pod 'ParallaxHeader', '~> 2.0.0'
+#  pod 'MXParallaxHeader'
   pod 'SnapKit', '~> 4.0'
   pod 'XLPagerTabStrip', '~> 8.0'
   pod 'AlamofireImage', '~> 3.3'
@@ -24,6 +25,11 @@ target 'DietLens' do
   pod 'ScrollableGraphView'
   pod 'HFSwipeView'
   pod 'LGSideMenuController'
+  pod 'CryptoSwift'
+  pod 'QiniuUpload'
+  # Crashlytics
+  pod 'Fabric'
+  pod 'Crashlytics'
 
   target 'DietLensTests' do
     inherit! :search_paths

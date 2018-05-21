@@ -24,6 +24,11 @@ struct DiaryDailyFood {
     var foodConsumed = [FoodDiaryModel]()
 }
 
+struct FoodDiaryMealEntity {
+    var meal: String = StringConstants.MealString.breakfast
+    var foodEntityList = [FoodDiaryEntity]()
+}
+
 //struct FoodInfo {
 //    var id: Int = 0
 //    var foodName: String = ""
