@@ -15,11 +15,14 @@ protocol SingleOptionAlerViewDelegate: class {
 
 class SingleOptionViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var singleSelectionTable: UITableView!
+
     //delegate for single option
     var delegate: SingleOptionAlerViewDelegate?
     //option item List, for display the item
     var optionList = [String]()
+//    var title = ""
     var selectedPosition = 0
 
     override func viewDidLoad() {
@@ -28,6 +31,10 @@ class SingleOptionViewController: UIViewController {
 
     @IBAction func save() {
         delegate?.onSaveBtnClicked(selectedPosition: selectedPosition)
+    }
+
+    @IBAction func cancel(_ sender: Any) {
+        delegate?.onCancel()
     }
 
 }
@@ -39,6 +46,7 @@ extension SingleOptionViewController: UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         return UITableViewCell()
     }
 

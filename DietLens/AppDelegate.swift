@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         registerForPushNotifications()
-        realmSetting(application)
+//        realmSetting(application)
 
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 //        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
@@ -60,11 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
-            migrationBlock: { migration, _ in
-                migration.deleteData(forType: FoodDiary.className())
-                migration.deleteData(forType: IngredientDiary.className())
-                migration.deleteData(forType: FoodInfomation.className())
-                migration.deleteData(forType: Portion.className())
+            migrationBlock: { _, _ in
+//                migration.deleteData(forType: FoodDiary.className())
+//                migration.deleteData(forType: IngredientDiary.className())
+//                migration.deleteData(forType: FoodInfomation.className())
+//                migration.deleteData(forType: Portion.className())
 //                if oldSchemaVersion <= 1 {
 //                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
 //                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)

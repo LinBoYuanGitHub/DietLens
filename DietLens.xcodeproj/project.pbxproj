@@ -47,7 +47,7 @@
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
 		3F50DCEA20AEA44E005209B8 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCE920AEA44E005209B8 /* Modal.swift */; };
-		3F50DCEC20AEA4B2005209B8 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCEB20AEA4B2005209B8 /* CustomAlertView.swift */; };
+		3F50DCEC20AEA4B2005209B8 /* SingleOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6B872820A1BCD8001063A0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; };
 		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
@@ -236,7 +236,7 @@
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3F50DCE920AEA44E005209B8 /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
-		3F50DCEB20AEA4B2005209B8 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOptionViewController.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -450,7 +450,7 @@
 			children = (
 				3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */,
 				3F50DCE920AEA44E005209B8 /* Modal.swift */,
-				3F50DCEB20AEA4B2005209B8 /* CustomAlertView.swift */,
+				3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */,
 			);
 			path = ViewHelper;
 			sourceTree = "<group>";
@@ -1203,7 +1203,7 @@
 				3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */,
 				3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */,
 				BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
-				3F50DCEC20AEA4B2005209B8 /* CustomAlertView.swift in Sources */,
+				3F50DCEC20AEA4B2005209B8 /* SingleOptionViewController.swift in Sources */,
 				BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
 				3FD08627200F21460052D54B /* HealthDeviceDataCell.swift in Sources */,

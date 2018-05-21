@@ -13,7 +13,7 @@ class FoodDiaryDBOperation {
 
     static var instance = FoodDiaryDBOperation()
     //swiftlint:disable force_try
-    let realm = try! Realm()
+//    let realm = try! Realm()
 
     /// save foodDiary into realm
     ///
@@ -22,6 +22,7 @@ class FoodDiaryDBOperation {
 //        //autoincrease
 //        let nextId = getMaxIngredientId()+1
 //        foodDiary.id = nextId
+        let realm = try! Realm()
         try! realm.write {
             let foodDiary = foodDiaryModel.convertToStorage()
             realm.add(foodDiary)
@@ -29,6 +30,7 @@ class FoodDiaryDBOperation {
     }
 
     func updateFoodDiary(foodDiaryModel: FoodDiaryModel) {
+        let realm = try! Realm()
         try! realm.write {
             //convert model to storage
             let replacedObj = foodDiaryModel.convertToStorage()
@@ -38,6 +40,7 @@ class FoodDiaryDBOperation {
 
     private func getMaxIngredientId() -> Int {
         var maxId = 1
+        let realm = try! Realm()
         try! realm.write {
             if realm.objects(FoodDiary.self).count == 0 {
                 maxId = 1
@@ -52,6 +55,7 @@ class FoodDiaryDBOperation {
     ///
     ///  - Parameter foodDiaryId: foodDiaryId
     func deleteFoodDiary(foodDiaryId: Int) {
+        let realm = try! Realm()
         try! realm.write {
             let deleteTarget = realm.objects(FoodDiary.self).filter("id=\(foodDiaryId)")
             realm.delete(deleteTarget[0])
@@ -63,6 +67,7 @@ class FoodDiaryDBOperation {
     /// - Returns: array of all the foodDiary
     func getAllFoodDiary() -> [FoodDiaryModel]? {
         var results = [FoodDiaryModel]()
+        let realm = try! Realm()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self)
             for foodDiary in foodDiarys {
@@ -76,6 +81,7 @@ class FoodDiaryDBOperation {
 
     //show in history food
     func getRecentAddedFoodDiary(limit: Int) -> [FoodDiaryModel] {
+        let realm = try! Realm()
         var results = [FoodDiaryModel]()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self).filter("recordType='text'").sorted(byKeyPath: "id", ascending: false)
@@ -103,6 +109,7 @@ class FoodDiaryDBOperation {
     /// - Parameter month: foodDiary record month
     /// - Returns: array of foodDiary
     func getFoodDiaryByMonth(year: String, month: String) -> [FoodDiaryModel]? {
+        let realm = try! Realm()
         var results = [FoodDiaryModel]()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self).filter("mealTime CONTAINS '\(month+" "+year)'").sorted(byKeyPath: "mealTime", ascending: false)
@@ -116,6 +123,7 @@ class FoodDiaryDBOperation {
     }
 
     func getFoodDiaryByDate(date: String) -> [FoodDiaryModel]? {
+        let realm = try! Realm()
         var results = [FoodDiaryModel]()
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self)
@@ -129,6 +137,7 @@ class FoodDiaryDBOperation {
     }
 
     func deleteFoodDiary(id: Int) {
+        let realm = try! Realm()
         try! realm.write {
             let deleteObj = realm.objects(FoodDiary.self).filter("id = \(id)")
             realm.delete(deleteObj)
@@ -136,6 +145,7 @@ class FoodDiaryDBOperation {
     }
 
     func getFoodDiaryById(id: Int) -> FoodDiary {
+        let realm = try! Realm()
         var records: Results<FoodDiary>!
         try! realm.write {
             records = realm.objects(FoodDiary.self).filter("id = \(id)")
