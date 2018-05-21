@@ -171,19 +171,30 @@ class FoodInfoViewController: UIViewController {
 
     //used only when isNotAccumulate
     @objc func showUnitSelectionDialog() {
-        let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.actionSheet)
-        for (index, portion) in dietItem.portionInfo.enumerated() {
-            alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
-                self.selectedPortionPos = index
-                self.foodDiaryEntity.dietItems[0].selectedPos = index
-                self.dietItem.selectedPos = index
-                self.unitValue.text = portion.sizeUnit
-                self.dietItem.displayUnit = portion.sizeUnit
-                self.setUpFoodValue()
-            }))
+//        let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.actionSheet)
+//        for (index, portion) in dietItem.portionInfo.enumerated() {
+//            alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
+//                self.selectedPortionPos = index
+//                self.foodDiaryEntity.dietItems[0].selectedPos = index
+//                self.dietItem.selectedPos = index
+//                self.unitValue.text = portion.sizeUnit
+//                self.dietItem.displayUnit = portion.sizeUnit
+//                self.setUpFoodValue()
+//            }))
+//        }
+//        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+        let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as! SingleOptionViewController
+        singleOptionAlert.delegate = self
+        singleOptionAlert.optionList.removeAll()
+        for portion in dietItem.portionInfo {
+            singleOptionAlert.optionList.append(portion.sizeUnit)
         }
-        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        singleOptionAlert.providesPresentationContextTransitionStyle = true
+        singleOptionAlert.definesPresentationContext = true
+        singleOptionAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        singleOptionAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(singleOptionAlert, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -262,12 +273,15 @@ class FoodInfoViewController: UIViewController {
     func setUpPickerToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
+        toolBar.barTintColor = UIColor.white
         toolBar.isTranslucent = true
         toolBar.tintColor = UIColor(red: 94/255, green: 94/255, blue: 94/255, alpha: 1)
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
-        let scrollTabBtn = UIBarButtonItem(title: "scroll", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToDatePicker))
-        let keyboardBtn = UIBarButtonItem(title: "keyboard", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToKeyboard))
+        doneButton.setBackgroundImage(#imageLiteral(resourceName: "RedOvalBackgroundImage"), for: .normal, barMetrics: UIBarMetrics.default)
+        doneButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+        let scrollTabBtn = UIBarButtonItem(title: "Scroll", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToDatePicker))
+        let keyboardBtn = UIBarButtonItem(title: "Keyboard", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToKeyboard))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         toolBar.setItems([scrollTabBtn, keyboardBtn, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -276,7 +290,7 @@ class FoodInfoViewController: UIViewController {
 
     func isDietItemValied() -> Bool {
         if dietItem.quantity == 0 {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter valid quantity")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter a valid quantity")
             return false
         }
         return true
@@ -511,6 +525,25 @@ extension FoodInfoViewController: UITextFieldDelegate {
             foodDiaryEntity.dietItems[0].quantity = Double(quantityValue.text!)!
             setUpFoodValue()
         }
+    }
+
+}
+
+extension FoodInfoViewController: SingleOptionAlerViewDelegate {
+
+    func onSaveBtnClicked(selectedPosition: Int) {
+        let portion = self.dietItem.portionInfo[selectedPosition]
+        self.foodDiaryEntity.dietItems[0].selectedPos = selectedPosition
+        self.dietItem.selectedPos = selectedPosition
+        self.dietItem.displayUnit = portion.sizeUnit
+        self.unitValue.text = portion.sizeUnit
+        self.setUpFoodValue()
+        //dismiss dialog after selection
+        dismiss(animated: true, completion: nil)
+    }
+
+    func onCancel() {
+        dismiss(animated: true, completion: nil)
     }
 
 }

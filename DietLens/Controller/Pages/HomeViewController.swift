@@ -121,7 +121,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        getDailyAccumulateCPF()
+//        getDailyAccumulateCPF()
         loadNutritionTarget()
         newsFeedTable.reloadData()
     }
@@ -146,19 +146,19 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     // calculate Nutrition Data & put into homePage
     func getDailyAccumulateCPF() {
-        var foodDiaryList = [FoodDiaryModel]()
-        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: DateUtil.formatGMTDateToString(date: Date()))!
-        var dailyCarb: Float = 0
-        var dailyProtein: Float = 0
-        var dailyFat: Float = 0
-
-        for foodDiary in foodDiaryList {
-            //quantity * weight divide 100g to get the multiply ratio
-            let ratio = foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightValue * (foodDiary.quantity/100)
-            dailyCarb += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate as NSString).floatValue * Float(ratio)//standard 300
-            dailyProtein += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein as NSString).floatValue * Float(ratio) //standard 100
-            dailyFat += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat as NSString).floatValue * Float(ratio) //standard 100
-        }
+//        var foodDiaryList = [FoodDiaryModel]()
+//        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: DateUtil.formatGMTDateToString(date: Date()))!
+//        var dailyCarb: Float = 0
+//        var dailyProtein: Float = 0
+//        var dailyFat: Float = 0
+//
+//        for foodDiary in foodDiaryList {
+//            //quantity * weight divide 100g to get the multiply ratio
+//            let ratio = foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightValue * (foodDiary.quantity/100)
+//            dailyCarb += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate as NSString).floatValue * Float(ratio)//standard 300
+//            dailyProtein += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein as NSString).floatValue * Float(ratio) //standard 100
+//            dailyFat += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat as NSString).floatValue * Float(ratio) //standard 100
+//        }
     }
 
     @IBAction func presentCamera(_ sender: UIButton) {

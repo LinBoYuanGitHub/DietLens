@@ -48,6 +48,7 @@
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
 		3F50DCEA20AEA44E005209B8 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCE920AEA44E005209B8 /* Modal.swift */; };
 		3F50DCEC20AEA4B2005209B8 /* SingleOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */; };
+		3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCEE20B2BA66005209B8 /* SingleSelectionCell.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6B872820A1BCD8001063A0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; };
 		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
@@ -237,6 +238,7 @@
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		3F50DCE920AEA44E005209B8 /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOptionViewController.swift; sourceTree = "<group>"; };
+		3F50DCEE20B2BA66005209B8 /* SingleSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionCell.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 		3F43663E20773DF10089C63A /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				3F50DCED20B2BA3F005209B8 /* DialogCell */,
 				3F438D4B20A08BFE00F4DAD9 /* HomePageCell */,
 				3FA376A5208DDBBC00D3F7AE /* FoodDiaryPageCell */,
 				3F436657207E10F00089C63A /* RecognitionPageCell */,
@@ -519,6 +522,14 @@
 				3F438D4C20A0956F00F4DAD9 /* homePageCPFCell.swift */,
 			);
 			path = HomePageCell;
+			sourceTree = "<group>";
+		};
+		3F50DCED20B2BA3F005209B8 /* DialogCell */ = {
+			isa = PBXGroup;
+			children = (
+				3F50DCEE20B2BA66005209B8 /* SingleSelectionCell.swift */,
+			);
+			path = DialogCell;
 			sourceTree = "<group>";
 		};
 		3F6B872C20A1DE49001063A0 /* SideMenu */ = {
@@ -1224,6 +1235,7 @@
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
+				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,

@@ -11,18 +11,20 @@ import RealmSwift
 class HealthCenterDBOperation {
     static var instance = HealthCenterDBOperation()
     //swiftlint:disable force_try
-    let realm = try! Realm()
+//    let realm = try! Realm()
 
     /// save foodDiary into realm
     ///
     /// - Parameter foodDiary: the whole foodDiary Object
     func savehealthRecord(healthRecord: HealthRecord) {
+        let realm = try! Realm()
         try! realm.write {
             realm.add(healthRecord)
         }
     }
 
     func getAllHealthRecord(recordId: Int) -> [HealthRecord] {
+        let realm = try! Realm()
         var results = [HealthRecord]()
         try! realm.write {
             let healthRecords = realm.objects(HealthRecord.self)
@@ -35,6 +37,7 @@ class HealthCenterDBOperation {
 
     //get TOP5 result of one recordType
     func getTopHealthRecord(recordType: String) -> [HealthRecord] {
+        let realm = try! Realm()
         var results = [HealthRecord]()
         try! realm.write {
             let healthRecords = realm.objects(HealthRecord.self).filter("type = '\(recordType)' ").sorted(byKeyPath: "date", ascending: false)
@@ -53,6 +56,7 @@ class HealthCenterDBOperation {
     }
 
     func getLatestResultOfRecord(recordType: String) -> HealthRecord {
+        let realm = try! Realm()
         var latestRecord = HealthRecord()
         try! realm.write {
             let healthRecords = realm.objects(HealthRecord.self).filter("type = '\(recordType)' ").sorted(byKeyPath: "date", ascending: false)
