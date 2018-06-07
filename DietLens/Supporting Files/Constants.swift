@@ -32,6 +32,7 @@ struct ServerConfig {
 //    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
 //    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
     static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
+
     static let userURL = labDeskTopURL + "/users"
     static let saveNotificationTokenURL = labDeskTopURL + "/users/device/"
     static let logOutURL = labDeskTopURL + "/users/logout/"
@@ -45,8 +46,8 @@ struct ServerConfig {
     static let acctForgetPwResetURL = baseURL + "/accounts/set-password/"
     static let forgetPwdUrl = labDeskTopURL + "/users/forgot-password/"
 
-    static let articleURL = testBaseURL + "/article"
-    static let eventURL = testBaseURL + "/event/"
+    static let articleURL = labDeskTopURL + "/articles"
+    static let eventURL = labDeskTopURL + "/events/"
 //    static let imageUploadURL = baseURL + "/process"
     static let imageUploadURL = baseURL + "/image-search/"
     static let foodDiaryURL = baseURL + "/healthlog/diet/"
@@ -57,7 +58,7 @@ struct ServerConfig {
     static let foodSearchAutocompleteURL = labDeskTopURL + "/search/autocomplete/"
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
-    static let feedBackURL = baseURL + "/feedback/email/"
+    static let feedBackURL = labDeskTopURL + "/feedback/email/"
     static let NotificationURL = baseURL + "/notification"
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 //    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"

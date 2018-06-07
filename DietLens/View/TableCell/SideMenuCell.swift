@@ -13,6 +13,7 @@ class SideMenuCell: UITableViewCell {
 
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var buttonName: UILabel!
+    @IBOutlet weak var seperator: UIView!
 
     @IBInspectable var leftColor: UIColor = #colorLiteral(red: 0.9725260139, green: 0.9732618928, blue: 0.9726399779, alpha: 0.08448863636) {
         didSet {
@@ -38,7 +39,8 @@ class SideMenuCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func setupSideMenuCell(buttonName name: String, iconImage image: UIImage) {
+    func setupSideMenuCell(buttonName name: String, iconImage image: UIImage, isSelected: Bool ) {
+        seperator.isHidden = !isSelected
         icon.image = image
         icon.image?.withRenderingMode(.alwaysTemplate)
         backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
@@ -46,7 +48,6 @@ class SideMenuCell: UITableViewCell {
         blurView.alpha = 0
         rightColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         leftColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-
     }
 
     func cellSelected() {

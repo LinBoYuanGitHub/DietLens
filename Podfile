@@ -30,6 +30,8 @@ target 'DietLens' do
   # Crashlytics
   pod 'Fabric'
   pod 'Crashlytics'
+  #loading indicator
+  pod 'NVActivityIndicatorView'
 
   target 'DietLensTests' do
     inherit! :search_paths

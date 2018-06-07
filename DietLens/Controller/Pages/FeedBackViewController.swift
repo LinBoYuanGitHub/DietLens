@@ -17,7 +17,7 @@ class FeedBackViewController: UIViewController {
         feedBackTextView.text = "Input your suggestion here…"
         feedBackTextView.textColor = UIColor.lightGray
         feedBackTextView.becomeFirstResponder()
-        feedBackTextView.selectedTextRange = feedBackTextView.textRange(from: feedBackTextView.beginningOfDocument, to: feedBackTextView.beginningOfDocument)
+//        feedBackTextView.selectedTextRange = feedBackTextView.textRange(from: feedBackTextView.beginningOfDocument, to: feedBackTextView.beginningOfDocument)
         feedBackTextView.delegate = self
     }
 

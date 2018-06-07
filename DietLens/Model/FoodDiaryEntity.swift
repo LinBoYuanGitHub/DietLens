@@ -27,6 +27,7 @@ struct DietItem {
     public var displayUnit: String = ""
     public var recordType = ""
     public var category = ""
+    public var sampleImageUrl = ""
     public var portionInfo  = [PortionInfo]()
     public var nutritionInfo = NutritionInfo()
 }

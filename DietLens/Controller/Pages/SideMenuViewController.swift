@@ -19,6 +19,8 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
     let labels: [String] = ["Home", "Food Diary", "Steps Counter", "Settings"]
     let iconNames: [String] = ["whiteHomeIcon", "whiteFoodDiaryIcon", "whiteStepCounterIcon", "whiteSettingIcon"]
     let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "StepCounterVC", "SettingsPage"]
+    //used for mark sideMenu selection
+    var currentSideMenuIndex  = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,7 +60,11 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "menuButtonCell") as? SideMenuCell {
-            cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!)
+            if indexPath.row == currentSideMenuIndex {
+                cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!, isSelected: true)
+            } else {
+                 cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!, isSelected: false)
+            }
             //if indexPath.row == DataService.instance.screenUserIsIn {
                // cell.cellSelected()
             //}
@@ -72,17 +78,21 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
         tableView.deselectRow(at: indexPath, animated: true)
 //        self.revealViewController()!.revealLeftView()
         DataService.instance.screenUserIsIn = 0
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var controller: UIViewController?
-
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        var controller: UIViewController?
         // deselect food diary
-
-       if labels[indexPath.row] == "Home"{
-            NotificationCenter.default.post(name: .toggleLeftView, object: nil)
-       } else {
-            controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
-            present(controller!, animated: true, completion: nil)
-        }
+        currentSideMenuIndex = indexPath.row
+        // use notificationCenter to notify the homeVC to toggle menu
+//        if labels[indexPath.row] == "Home"{
+//            NotificationCenter.default.post(name: .toggleLeftView, object: nil)
+//        } else {
+//            controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
+//            present(controller!, animated: true, completion: nil)
+//        }
+        let dataDict: [String: Int] = ["position": indexPath.row]
+        NotificationCenter.default.post(name: .onSideMenuClick, object: nil, userInfo: dataDict)
+        //reload the indicator position
+        sideMenuTable.reloadData()
     }
 
     @IBAction func profileButtonPressed(_ sender: Any) {
