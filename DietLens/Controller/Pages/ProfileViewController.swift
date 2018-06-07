@@ -54,7 +54,9 @@ class ProfileViewController: UIViewController {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.getProfile(userId: userId!) { (userProfile) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
             //set userProfile
             if userProfile == nil {
                 return
@@ -169,12 +171,15 @@ class ProfileViewController: UIViewController {
             //TODO alert fill incomplete warning
             return
         }
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!, birthday: TFAge.text!) { (isSuccess) in
-            if isSuccess {
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                //error alert
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
+            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                if isSuccess {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    //error alert
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
+                }
             }
         }
     }

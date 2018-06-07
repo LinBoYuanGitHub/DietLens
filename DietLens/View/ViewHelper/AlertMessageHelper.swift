@@ -52,4 +52,10 @@ class AlertMessageHelper {
             alertController?.dismiss(animated: false, completion: nil)
         }
     }
+
+    class func dismissLoadingDialog(targetController: UIViewController, completion: @escaping() -> Void) {
+        if alertController != nil {
+            alertController?.dismiss(animated: false, completion: completion)
+        }
+    }
 }

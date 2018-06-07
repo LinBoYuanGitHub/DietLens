@@ -28,7 +28,12 @@ class NutritionCollectionCell: UICollectionViewCell {
         setUpOvalView()
         percentageLabel.text = String(percentage) + "%"
         nutritionLabel.text = nutritionName
-        nutritionValueLabel.text = String(format: "%.1f", nutritionValue) + unit
+        if nutritionValue == floor(nutritionValue) {
+            nutritionValueLabel.text = String(Int(nutritionValue)) + unit
+        } else {
+            nutritionValueLabel.text = String(format: "%.1f", nutritionValue) + unit
+        }
+
     }
 
 }

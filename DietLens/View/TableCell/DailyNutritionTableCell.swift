@@ -26,10 +26,6 @@ class DailyNutritionTableCell: UITableViewCell {
         } else {
              valueLabel.text = String(format: "%.1f", value) + unit
         }
-        progressView.transform = progressView.transform.scaledBy(x: 1, y: 6)
-        progressView.layer.cornerRadius = 20
-        progressView.clipsToBounds = true
-//        setLayoutLayer()
         UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
             self.progressView.progress = Float(progress)/100
             self.progressView.setProgress(Float(progress)/100, animated: true)

@@ -74,6 +74,7 @@ class FoodInfoDataManager {
         var dietItem = DietItem()
         dietItem.foodId = jsonObject["id"].intValue
         dietItem.foodName = jsonObject["display_name"].stringValue
+        dietItem.sampleImageUrl = jsonObject["example_img"].stringValue
         dietItem.nutritionInfo.calorie = jsonObject["nutrition"]["energy"].doubleValue
         dietItem.nutritionInfo.carbohydrate = jsonObject["nutrition"]["carbohydrate"].doubleValue
         dietItem.nutritionInfo.protein = jsonObject["nutrition"]["protein"].doubleValue
@@ -214,7 +215,6 @@ class FoodInfoDataManager {
         result["meal_time"] = foodDiaryEntity.mealTime
         result["meal_type"] = foodDiaryEntity.mealType
         result["image"] = foodDiaryEntity.imageId
-//        result["user"] = "eee07452-4daf-11e8-99a9-64006a470149"
         let preferences = UserDefaults.standard
         let userId = preferences.string(forKey: PreferenceKey.userIdkey)
         result["user"] = userId
@@ -229,21 +229,26 @@ class FoodInfoDataManager {
             dietDict["search_type"] = dietItem.recordType
             if dietItem.portionInfo.count != 0 {
                 dietDict["measurement_type"] = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
+            } else if dietItem.displayUnit != "" {
+                dietDict["measurement_type"] = dietItem.displayUnit
             } else {
                 dietDict["measurement_type"] = "portion"
             }
             dietDict["quantity"] = dietItem.quantity
-            var nutrient = Dictionary<String, Double>()
-            // judge whether the unit value is existing
-            var unitScale: Double = 100
-            if dietItem.portionInfo.count != 0 {
-                unitScale = dietItem.portionInfo[dietItem.selectedPos].weightValue
+            var portionArr = [Dictionary<String, Any>]()
+            var portionDict = Dictionary<String, Any>()
+            for portion in dietItem.portionInfo {
+                portionDict["type"] = portion.sizeUnit
+                portionDict["weight"] = portion.weightValue
+                portionArr.append(portionDict)
             }
-            let ratio = dietItem.quantity * unitScale/100
-            nutrient["fat"] = dietItem.nutritionInfo.fat * ratio
-            nutrient["energy"] = dietItem.nutritionInfo.calorie * ratio
-            nutrient["protein"] = dietItem.nutritionInfo.protein * ratio
-            nutrient["carbohydrate"] = dietItem.nutritionInfo.carbohydrate * ratio
+            dietDict["portion"] = portionArr
+            dietDict["selected_position"] = dietItem.selectedPos
+            var nutrient = Dictionary<String, Double>()
+            nutrient["fat"] = dietItem.nutritionInfo.fat
+            nutrient["energy"] = dietItem.nutritionInfo.calorie
+            nutrient["protein"] = dietItem.nutritionInfo.protein
+            nutrient["carbohydrate"] = dietItem.nutritionInfo.carbohydrate
             dietDict["nutrient"] = nutrient
             //add nutrient part to
             details.append(dietDict)

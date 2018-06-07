@@ -15,13 +15,16 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var emptyViewIcon: UIImageView!
     @IBOutlet weak var emptyViewLabel: UILabel!
 
+    @IBOutlet weak var clearButton: UIButton!
+
     var listOfNotifications = [NotificationModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
         notificationTable.delegate = self
         notificationTable.dataSource = self
 //        sampleData()
-        getNotifcationData()
+//        getNotifcationData()
+        self.clearButton.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: .didReceiveNotification, object: nil)
         // Do any additional setup after loading the view.
     }
@@ -42,6 +45,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         APIService.instance.getNotificationList(userId: userId!) { (notificationList) in
             self.listOfNotifications.removeAll()
             if notificationList != nil {
+                if notificationList?.count == 0 {
+                    self.clearButton.isHidden = true
+                } else {
+                    self.clearButton.isHidden = false
+                }
                 self.listOfNotifications = notificationList!
                 self.notificationTable.reloadData()
             }

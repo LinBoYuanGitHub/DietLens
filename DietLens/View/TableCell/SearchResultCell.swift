@@ -19,7 +19,11 @@ class SearchResultCell: UITableViewCell {
     }
 
     func setUpCell(textResultEntity: TextSearchSuggestionEntity) {
-        foodSampleImage.image = #imageLiteral(resourceName: "food_sample_image")
+        if textResultEntity.useExpImage {
+            foodSampleImage.af_setImage(withURL: URL(string: textResultEntity.expImagePath)!, placeholderImage: #imageLiteral(resourceName: "food_sample_image"), filter: nil, imageTransition: .crossDissolve(0.5), completion: nil)
+        } else {
+            foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
+        }
         foodName.text = textResultEntity.name
         foodCalorie.text = "130.0 kcal"
     }

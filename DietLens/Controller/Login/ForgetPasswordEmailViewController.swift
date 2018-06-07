@@ -48,20 +48,19 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
             AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess) in
                 if isSuccess {
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self)
-                    AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
-                        if isPositive {
-                            self.dismiss(animated: true, completion: nil)
-                        } else {
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    })
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
+                            if isPositive {
+                                self.dismiss(animated: true, completion: nil)
+                            } else {
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                        })
+                    }
                 } else {
-                    DispatchQueue.main.async {
-                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                         self.alertWithTitle(title: "Error", message: "No such email found!", viewController: self, toFocus: self.emailAddr)
                     }
-
                 }
             }
             // With 2FA

@@ -58,7 +58,11 @@ extension SingleOptionViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SingleSelectionCell") as? SingleSelectionCell {
-            cell.setUpCell(text: optionList[indexPath.row])
+            if indexPath.row == selectedPosition {
+                 cell.setUpCell(text: optionList[indexPath.row], isSelected: true)
+            } else {
+                 cell.setUpCell(text: optionList[indexPath.row], isSelected: false)
+            }
             return cell
         }
         return UITableViewCell()
@@ -67,6 +71,7 @@ extension SingleOptionViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPosition = indexPath.row
         //change the selection indicator
+        singleSelectionTable.reloadData()
     }
 
 }

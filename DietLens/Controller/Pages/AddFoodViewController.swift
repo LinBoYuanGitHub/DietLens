@@ -30,6 +30,8 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        //set status bar appearance
+        UIApplication.shared.statusBarStyle = .lightContent
         self.containerView.isScrollEnabled = false
         self.navigationController?.navigationBar.isHidden = true
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
@@ -69,6 +71,6 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
 //        transition.type = kCATransitionReveal
 //        transition.subtype = kCATransitionFromBottom
 //        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
 }

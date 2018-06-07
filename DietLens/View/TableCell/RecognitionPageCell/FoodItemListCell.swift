@@ -25,8 +25,14 @@ class FoodItemListCell: UITableViewCell {
         } else {
             quantityLable.text = String(dietItem.quantity)
         }
-        unitLabel.text = dietItem.displayUnit
-        calorieLabel.text = String(Int(dietItem.nutritionInfo.calorie)) + StringConstants.UIString.calorieUnit
+        var ratio = 1.0
+        if dietItem.portionInfo.count != 0 {
+            unitLabel.text = dietItem.portionInfo[dietItem.selectedPos].sizeUnit
+            ratio = dietItem.quantity*dietItem.portionInfo[dietItem.selectedPos].weightValue/100
+        } else {
+              unitLabel.text = dietItem.displayUnit
+        }
+        calorieLabel.text = String(Int(dietItem.nutritionInfo.calorie*ratio)) + StringConstants.UIString.calorieUnit
     }
 
 }

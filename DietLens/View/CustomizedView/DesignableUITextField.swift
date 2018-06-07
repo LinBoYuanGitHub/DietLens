@@ -14,6 +14,12 @@ class DesignableUITextField: UITextField {
         return textRect
     }
 
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var textRect = super.rightViewRect(forBounds: bounds)
+        textRect.origin.x -= 2 * imagePadding
+        return textRect
+    }
+
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
 
         let newBound = CGRect(
@@ -26,6 +32,12 @@ class DesignableUITextField: UITextField {
     }
 
     @IBInspectable var leftImage: UIImage? {
+        didSet {
+            updateView()
+        }
+    }
+
+    @IBInspectable var rightImage: UIImage? {
         didSet {
             updateView()
         }
@@ -53,6 +65,15 @@ class DesignableUITextField: UITextField {
             // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
             imageView.tintColor = color
             leftView = imageView
+        } else if let image = rightImage {
+            rightViewMode = .always
+            //set default w/h for icon
+            let imageView = UIImageView(frame: CGRect(x: frame.width - imagePadding, y: imagePadding,
+                                                      width: 15, height: 15))
+            imageView.image = image
+            // Note: In order for your image to use the tint color, you have to select the image in the Assets.xcassets and change the "Render As" property to "Template Image".
+            imageView.tintColor = color
+            rightView = imageView
         } else {
             leftViewMode = .never
             leftView = nil

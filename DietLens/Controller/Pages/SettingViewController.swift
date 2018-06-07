@@ -30,8 +30,12 @@ class SettingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func backButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
     @IBAction func showAboutPage(_ sender: Any) {
@@ -43,26 +47,24 @@ class SettingViewController: UIViewController {
     }
     @IBAction func logout(_ sender: Any) {
         AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Confirm to logout?", postiveText: "Confirm", negativeText: "Cancel") { (iSuccess) in
-            if (iSuccess) {
-                let preferences = UserDefaults.standard
-                let token = preferences.string(forKey: PreferenceKey.tokenKey)
-                if token == nil {
-                    //no userId cannot Logout
-                    return
-                }
-                APIService.instance.logOut(completion: { (isSuccess) in
-                    if isSuccess {
-                        DispatchQueue.main.async {
+            if iSuccess {
+//                let preferences = UserDefaults.standard
+//                let token = preferences.string(forKey: PreferenceKey.tokenKey)
+//                if token == nil {
+//                    //no userId cannot Logout
+//                    return
+//                }
+                APIService.instance.logOut(completion: { (_) in
+                        //signOut no matter request succeed or not
+                    DispatchQueue.main.async {
                             self.clearPersonalData()
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
                             self.present(controller, animated: true, completion: nil)
-                        }
                     }
                 })
             }
         }
-
     }
 
     func clearPersonalData() {

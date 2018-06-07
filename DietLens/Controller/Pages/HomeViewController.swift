@@ -35,8 +35,11 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     var displayDict = [Int: (String, Double)]()
     var targetDict = [Int: (String, Double)]()
 
+    var shouldRefreshMainPageNutrition = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        //delegate for new table view
         newsFeedTable.dataSource = self
         newsFeedTable.delegate = self
         cpfCollectionView.delegate = self
@@ -46,7 +49,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
         //for sideMenu toggle leftView
-        NotificationCenter.default.addObserver(self, selector: #selector(onToggleLeftView), name: .toggleLeftView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
     }
 
     //assemble the article & event list and display
@@ -61,8 +65,12 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         }
     }
 
+    @objc func changeRefreshFlag() {
+        shouldRefreshMainPageNutrition = true
+    }
+
     //load personal target whenever go to main page
-    func loadNutritionTarget() {
+    @objc func loadNutritionTarget() {
         APIService.instance.getDietaryGuideInfo { (guideDict) in
             let preferences = UserDefaults.standard
             preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
@@ -84,6 +92,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         }
     }
 
+    //request when firstTime loading & add food into FoodCalendar by notificationCenter
     func requestNutritionDict(requestDate: Date) {
         APIService.instance.getDailySum(date: requestDate) { (resultDict) in
             if resultDict.count == 0 {
@@ -96,8 +105,89 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         }
     }
 
-    @objc func onToggleLeftView() {
-        self.sideMenuController?.toggleLeftViewAnimated()
+    @objc func onSideMenuClick(_ notification: NSNotification) {
+        guard let position = notification.userInfo?["position"] as? Int else {return}
+        switch position {
+        case 0:
+            //home
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DietLens") as? HomeViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is HomeViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let homeVC = viewController as? HomeViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(homeVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 1:
+            //to food diary page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is FoodCalendarViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? FoodCalendarViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 2:
+            //to step counter page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC") as? StepCounterViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is StepCounterViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? StepCounterViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 3:
+            //to setting page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsPage") as? SettingViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is SettingViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? SettingViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        default:
+            break
+        }
+        self.sideMenuController?.hideLeftView(animated: true, completionHandler: nil)
     }
 
     func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
@@ -115,33 +205,40 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.carbohydrateTarget))
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        getDailyAccumulateCPF()
-        loadNutritionTarget()
         newsFeedTable.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //set status bar appearance
+        UIApplication.shared.statusBarStyle = .lightContent
         //setUp title
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         //SignPainterHouseScript 28.0
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as! [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
+//        self.navigationController?.navigationBar.isTranslucent = true
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-//        self.navigationController?.view.backgroundColor = UIColor.clear
-//        self.navigationController?.navigationBar.isTranslucent =  true
+//        self.navigationController?.navigationBar.tintColor = UIColor.clear
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
+        //load nutrition bar
+        if shouldRefreshMainPageNutrition {
+            loadNutritionTarget()
+            shouldRefreshMainPageNutrition = false
+        }
+        //set navigation bar gardient
+//        let gardientLayer = CAGradientLayer()
+//        gardientLayer.frame = (self.navigationController?.navigationBar.bounds)!
+//        let topColor = UIColor(red: 247/255, green: 108/255, blue: 92/255, alpha: 1.0)
+//        let bottomColor = UIColor(red: 245/255, green: 88/255, blue: 81/255, alpha: 1.0)
+//        gardientLayer.colors = [topColor, bottomColor]
+//        self.navigationController?.navigationBar.setBackgroundImage(imageFromLayer(layer: gardientLayer), for: .default)
         //refresh nutrition part each time view apppear
-        requestNutritionDict(requestDate: Date())
+//        requestNutritionDict(requestDate: Date())
     }
 
     // calculate Nutrition Data & put into homePage

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import XLPagerTabStrip
+import NVActivityIndicatorView
 
 class TextInputViewController: UIViewController {
 
@@ -21,6 +22,12 @@ class TextInputViewController: UIViewController {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var textFieldTrailing: NSLayoutConstraint!
     @IBOutlet weak var textFieldTop: NSLayoutConstraint!
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var emptyResultView: UIView!
+    @IBOutlet weak var animationViewLeading: NSLayoutConstraint!
+
+    //indicator component
+//    let activityIndicator:NVActivityIndicatorView?
 
     //tab item for filter the result
     var filterItem = ["All", "Ingredient", "Side dish"]
@@ -43,6 +50,7 @@ class TextInputViewController: UIViewController {
     var isSetMealByTimeRequired = true
 
     var shouldShowCancel: Bool = false
+    var nextPageLink: String = ""
 
     //enum for textSearch status
     enum TextInputStatus {
@@ -52,8 +60,13 @@ class TextInputViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //set status bar appearance
+        setNeedsStatusBarAppearanceUpdate()
         textSearchField.delegate = self
         textSearchField.keyboardType = .asciiCapable
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.textSearchField.frame.height))
+        textSearchField.leftView = paddingView
+        textSearchField.leftViewMode = UITextFieldViewMode.always
 
         textSearchTable.delegate = self
         textSearchTable.dataSource = self
@@ -134,63 +147,88 @@ class TextInputViewController: UIViewController {
     func performTextSearch() {
         if isSearching {
             APIService.instance.cancelAllRequest()
-//            APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchListURL + "?category=" + String(filterType))
         }
         isSearching = true
         let searchText = textSearchField.text
-        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!) { (textResults) in
+        //show loading indicator & create current search result
+        self.loadingView.alpha = 1
+        self.searchResultList.removeAll()
+        self.textSearchTable.reloadData()
+        //request for new data
+        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, completion: { (textResults) in
+            self.loadingView.alpha = 0
             DispatchQueue.main.async {
-                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
+                self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
             }
             if textResults == nil {
-                self.searchResultList.removeAll()
                 self.emptyView.isHidden = false
                 self.textSearchTable.reloadData()
                 return
             }
+            if textResults?.count == 0 {
+                self.emptyResultView.isHidden = false
+            } else {
+                self.emptyResultView.isHidden = true
+            }
             self.emptyView.isHidden = true
             self.searchResultList = textResults!
             self.textSearchTable.reloadData()
+        }) { (nextPageLink) in
+            self.nextPageLink = nextPageLink!
         }
+//        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!) { (textResults) in
+//            DispatchQueue.main.async {
+//                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
+//            }
+//            if textResults == nil {
+//                self.searchResultList.removeAll()
+//                self.emptyView.isHidden = false
+//                self.textSearchTable.reloadData()
+//                return
+//            }
+//            self.emptyView.isHidden = true
+//            self.searchResultList = textResults!
+//            self.textSearchTable.reloadData()
+//        }
     }
 
-    func requestForDietInformation(foodId: Int) {
-        if foodId == 0 {
+    func requestForDietInformation(foodEntity: TextSearchSuggestionEntity) {
+        if foodEntity.id == 0 {
             return
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
-        APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
-            if dietItem == nil {
-                return
-            }
-            var dietEntity = dietItem!
-            if self.shouldShowCancel {
-                dietEntity.recordType = RecognitionInteger.additionText
-            } else {
-                dietEntity.recordType = RecognitionInteger.text
-            }
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-                if self.cameraImage == nil {
-                    dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
-                } else {
-                    dest.userFoodImage = self.cameraImage
-                    dest.imageKey = self.imageKey
+        APIService.instance.getFoodDetail(foodId: foodEntity.id) { (dietItem) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                if dietItem == nil {
+                    return
+                }
+                var dietEntity = dietItem!
+                if dietItem?.portionInfo.count != 0 {
+                    dietEntity.displayUnit = (dietItem?.portionInfo[0].sizeUnit)!
                 }
                 if self.shouldShowCancel {
-                    dest.recordType = RecognitionInteger.additionText
-                    dest.shouldShowMealBar = false
+                    dietEntity.recordType = RecognitionInteger.additionText
                 } else {
-                    dest.recordType = dietEntity.recordType
+                    dietEntity.recordType = RecognitionInteger.text
                 }
-                dest.dietItem = dietEntity
-                //mealType & mealTime
-                dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
-                dest.foodDiaryEntity.mealType = self.mealType
-                if let navigator = self.navigationController {
-                    DispatchQueue.main.async {
-                         navigator.pushViewController(dest, animated: true)
+                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                    let imageUrl = foodEntity.expImagePath
+                    dest.imageUrl = imageUrl
+                    dest.userFoodImage = self.cameraImage
+                    dest.imageKey = self.imageKey
+                    if self.shouldShowCancel {
+                        dest.recordType = RecognitionInteger.additionText
+                        dest.shouldShowMealBar = false
+                    } else {
+                        dest.recordType = dietEntity.recordType
+                    }
+                    dest.dietItem = dietEntity
+                    //mealType & mealTime
+                    dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                    dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
+                    dest.foodDiaryEntity.mealType = self.mealType
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(dest, animated: true)
                     }
                 }
             }
@@ -228,7 +266,7 @@ extension TextInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //loading to get food text search detail
         let textSearchEntity = searchResultList[indexPath.row]
-        requestForDietInformation(foodId: textSearchEntity.id)
+        requestForDietInformation(foodEntity: textSearchEntity)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -237,9 +275,36 @@ extension TextInputViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == self.textSearchTable {
-            return 60
+            return 52
         }
         return 0
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let  height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            if nextPageLink == ""{
+                //last page
+                return
+            }
+            //show loading indicator
+//            let xAxis  = self.view.center.x
+//            let yAxis = self.view.center.y
+//            let frame = CGRect(x: xAxis, y: yAxis, width: 50, height: 50)
+            APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, completion: { (resultList) in
+                self.searchResultList.append(contentsOf: resultList!)
+                self.textSearchTable.reloadData()
+            }) { (nextPageLink) in
+                if nextPageLink == nil {
+                    // last page
+                    self.nextPageLink = ""
+                } else {
+                    self.nextPageLink = nextPageLink!
+                }
+            }
+        }
     }
 }
 
@@ -280,7 +345,8 @@ extension TextInputViewController: UICollectionViewDataSource, UICollectionViewD
         filterType = matchFilterType(index: indexPath.row)
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.animationView.center.x = destX!
+            self.animationViewLeading.constant = destX! - CGFloat(40)
+//            self.animationView.center.x = destX!
         }) { (_) in
 //            self.textSearchTable.reloadData()
             if self.textSearchField.text != ""{//search when no empty

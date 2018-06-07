@@ -42,6 +42,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (4.2.0):
+    - NVActivityIndicatorView/Presenter (= 4.2.0)
+  - NVActivityIndicatorView/Presenter (4.2.0)
   - ParallaxHeader (2.0.0)
   - PBRevealViewController/Swift (1.2.8)
   - Protobuf (3.4.0)
@@ -73,6 +76,7 @@ DEPENDENCIES:
   - FSCalendar
   - HFSwipeView
   - LGSideMenuController
+  - NVActivityIndicatorView
   - ParallaxHeader (~> 2.0.0)
   - PBRevealViewController/Swift
   - QiniuUpload
@@ -101,6 +105,7 @@ SPEC REPOS:
     - HFSwipeView
     - LGSideMenuController
     - nanopb
+    - NVActivityIndicatorView
     - ParallaxHeader
     - PBRevealViewController
     - Protobuf
@@ -133,6 +138,7 @@ SPEC CHECKSUMS:
   HFSwipeView: cbcd1f01a530ae472f8e645b9b38f479f8d39ae8
   LGSideMenuController: ae40c80983ab8b8801c7cef0a6804d43aaa72d45
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: 75c9634073e03b31d7e2748cd2417feab1206195
   ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
   PBRevealViewController: b1471380464f30b63d73e9b04e9abf9cb7b67093
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
@@ -149,6 +155,6 @@ SPEC CHECKSUMS:
   TinyLog: 1b19359cd3f32ab4972c595d002efc614e596529
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 6916b4717efed44979af9248220894a6489ab048
+PODFILE CHECKSUM: e9728b7da2f812fe215dde2139c0439065d59bb5
 
 COCOAPODS: 1.5.0

@@ -127,7 +127,7 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard ((response.response?.allHeaderFields) != nil) else {
+                guard (response.response?.allHeaderFields) != nil else {
                     completion(false)
                     print("Get Token failed")
                     return
@@ -286,17 +286,17 @@ class APIService {
                 }
                 let jsonArr = JSON(searchResults)["data"]
                 var resultList = [String]()
-                for i in 0..<jsonArr.count {
-                    let result = jsonArr[i].dictionaryValue["name"]?.stringValue
+                for index in 0..<jsonArr.count {
+                    let result = jsonArr[index].dictionaryValue["name"]?.stringValue
                     resultList.append(result!)
                 }
                 completion(resultList)
         }
     }
 
-    public func getFoodSearchResult(filterType: Int, keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
+    public func getFoodSearchResult(requestUrl: String, keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.foodFullTextSearchURL + "?category=" + String(filterType))!,
+            URL(string: requestUrl)!,
             method: .post,
             parameters: ["food_name": keywords],
             encoding: JSONEncoding.default,
@@ -314,15 +314,21 @@ class APIService {
                     return
                 }
                 let jsonArr = JSON(searchResults)["data"]
+                let nextLink = jsonArr["next"].stringValue
                 var foodSearchList = [TextSearchSuggestionEntity]()
                 for index in 0..<jsonArr.count {
                     let dict = jsonArr[index].dictionaryValue
-                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!)
-//                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
                     foodSearchList.append(entity)
                 }
+                nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
+    }
+
+    public func getFoodSearchResult(filterType: Int, keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
+        let url = ServerConfig.foodFullTextSearchURL + "?category=" + String(filterType)
+        self.getFoodSearchResult(requestUrl: url, keywords: keywords, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
     public func getIngredientSearchResult(keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
@@ -695,10 +701,12 @@ class APIService {
     //get available date in month which log foodDiary
     public func getAvailableDate(year: String, month: String, completion:@escaping([Date]?) -> Void) {
         var dateArray = [Date]()
+        let yearParam = Int(year) ?? 2018 //use 2018 as default year
+        let monthParam = Int(month) ?? 1 //use 1 as default month
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryCalendar)!,
             method: .post,
-            parameters: ["year": year, "month": month],
+            parameters: ["year": yearParam, "month": monthParam],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
@@ -715,9 +723,9 @@ class APIService {
                 }
                 let jsonObject = JSON(result)
                 let dateObject = jsonObject["data"]["date"]
-                 for i in 0..<dateObject.count {
+                 for index in 0..<dateObject.count {
                     //convert date string to date
-                    let dateStr = dateObject[i].stringValue
+                    let dateStr = dateObject[index].stringValue
                     let date = DateUtil.normalStringToDate(dateStr: dateStr)
                     dateArray.append(date)
                 }
@@ -1238,10 +1246,6 @@ class APIService {
                     return
                 }
                 let json = JSON(value)
-//                let targetCalorie = json["data"]["energy"].doubleValue
-//                let targetProtein = json["data"]["protein"].doubleValue
-//                let targetFat = json["data"]["fat"].doubleValue
-//                let targetCarbohydrate = json["data"]["carbohydrate"].doubleValue
                 guideDict["energy"] = json["data"]["energy"].doubleValue
                 guideDict["protein"] = json["data"]["protein"].doubleValue
                 guideDict["fat"] = json["data"]["fat"].doubleValue

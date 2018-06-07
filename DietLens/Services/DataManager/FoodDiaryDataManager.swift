@@ -32,9 +32,9 @@ class FoodDiaryDataManager {
             foodDiaryEntity.latitude = Double(jsonObject["latitude"].stringValue)!
             foodDiaryEntity.longitude = Double(jsonObject["longitude"].stringValue)!
         }
-        for i in 0..<jsonObject["details"].count {
+        for index in 0..<jsonObject["details"].count {
             var foodItem = DietItem()
-            var job = jsonObject["details"][i]
+            var job = jsonObject["details"][index]
             foodItem.id = job["id"].stringValue
             foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
@@ -45,11 +45,20 @@ class FoodDiaryDataManager {
                 foodItem.quantity = Double(job["quantity"].intValue)
             }
             foodItem.displayUnit = job["measurement_type"].stringValue
+            foodItem.selectedPos = job["selected_position"].intValue
             foodItem.recordType = job["search_type"].stringValue
-            foodItem.nutritionInfo.calorie = job["nutrient"]["energy"].doubleValue/foodItem.quantity
-            foodItem.nutritionInfo.carbohydrate = job["nutrient"]["carbohydrate"].doubleValue/foodItem.quantity
-            foodItem.nutritionInfo.protein = job["nutrient"]["protein"].doubleValue/foodItem.quantity
-            foodItem.nutritionInfo.fat = job["nutrient"]["fat"].doubleValue/foodItem.quantity
+            foodItem.nutritionInfo.calorie = job["nutrient"]["energy"].doubleValue
+            foodItem.nutritionInfo.carbohydrate = job["nutrient"]["carbohydrate"].doubleValue
+            foodItem.nutritionInfo.protein = job["nutrient"]["protein"].doubleValue
+            foodItem.nutritionInfo.fat = job["nutrient"]["fat"].doubleValue
+            //portion
+            for indexNum in 0..<job["portion"].count {
+                var portionJson = job["portion"][indexNum]
+                var portionObj = PortionInfo()
+                portionObj.sizeUnit = portionJson["type"].stringValue
+                portionObj.weightValue = portionJson["weight"].doubleValue
+                foodItem.portionInfo.append(portionObj)
+            }
             foodDiaryEntity.dietItems.append(foodItem)
         }
         return foodDiaryEntity

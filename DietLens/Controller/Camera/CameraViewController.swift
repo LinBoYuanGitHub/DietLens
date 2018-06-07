@@ -81,6 +81,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             print("Location services are not enabled")
         }
         sessionManager.onViewWillAppear()
+        barcodeButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
@@ -161,9 +162,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     @IBAction func switchToPhoto(_ sender: UIButton) {
-        capturePhotoButton.isEnabled = true
-        capturePhotoButton.tintColor = UIColor.red
-        sessionManager.set(captureMode: .photo)
+//        capturePhotoButton.isEnabled = true
+//        capturePhotoButton.tintColor = UIColor.red
+//        sessionManager.set(captureMode: .photo)
     }
 
     @IBAction func switchToBarcode(_ sender: UIButton) {
@@ -345,27 +346,21 @@ extension CameraViewController: CameraViewControllerDelegate {
         case .photo:
             activeButton = photoButton
             capturePhotoButton.isHidden = false
-//            focusViewImg.isHidden = false
             removeBarScannerLine()
         case .barcode:
             activeButton = barcodeButton
             capturePhotoButton.isHidden = true
-//            focusViewImg.isHidden = true
             addBarScannerLine()
         }
-
-        let allButtons = [photoButton, barcodeButton]
-        let inactiveButtons = allButtons.filter { $0 != activeButton }
-
-        for button in inactiveButtons {
-            button?.isEnabled = true
-            button?.backgroundColor = .clear
-        }
-        activeButton.setTitleColor(UIColor.red, for: .disabled)
-//        activeButton.setTitleColor(UIColor.red, for: .normal)
-        activeButton.isEnabled = false
-//        activeButton.backgroundColor = UIColor(red: 1.00, green: 0.31, blue: 0.31, alpha: 0.7)
-//        activeButton.layer.cornerRadius = 5
+//        let allButtons = [photoButton]
+//        let inactiveButtons = allButtons.filter { $0 != activeButton }
+//
+//        for button in inactiveButtons {
+//            button?.isEnabled = true
+//            button?.backgroundColor = .clear
+//        }
+//        activeButton.setTitleColor(UIColor.red, for: .disabled)
+//        activeButton.isEnabled = false
     }
 
     func onCameraInput(isAvailable: Bool) {

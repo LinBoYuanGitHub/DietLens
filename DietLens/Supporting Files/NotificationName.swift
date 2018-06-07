@@ -12,5 +12,6 @@ extension Notification.Name {
     static let didReceiveNotification = Notification.Name("didreceivenotification")
     static let onIngredientPlusBtnClick = Notification.Name("oningredientplusbtnclick")
     static let addIngredient = Notification.Name("addingredient")
-    static let toggleLeftView = Notification.Name("toggleLeftView")
+    static let onSideMenuClick = Notification.Name("onsidemenuclick")
+    static let shouldRefreshMainPageNutrition = Notification.Name("shouldrefreshmainpagenutrition")
 }

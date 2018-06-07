@@ -86,15 +86,15 @@ class TextSearchViewController: UIViewController {
             APIService.instance.cancelRequest(requestURL: ServerConfig.foodSearchListURL)
         }
         isSearching = true
-        APIService.instance.getFoodSearchResult(filterType: 0, keywords: TFSearch.text!) { (foodSearchList) in
-            self.isSearching = false
-            if foodSearchList == nil {
-                self.suggestions =  [TextSearchSuggestionEntity]()
-            } else {
-                self.suggestions = foodSearchList!
-            }
-            self.suggestionTableView.reloadData()
-        }
+//        APIService.instance.getFoodSearchResult(filterType: 0, keywords: TFSearch.text!) { (foodSearchList) in
+//            self.isSearching = false
+//            if foodSearchList == nil {
+//                self.suggestions =  [TextSearchSuggestionEntity]()
+//            } else {
+//                self.suggestions = foodSearchList!
+//            }
+//            self.suggestionTableView.reloadData()
+//        }
     }
 
     @objc func backToPreviousView() {

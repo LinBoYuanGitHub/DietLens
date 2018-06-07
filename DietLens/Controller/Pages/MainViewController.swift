@@ -17,26 +17,27 @@ class MainViewController: UIViewController {
 
     @IBAction func onLoginBtnClicked(_ sender: Any) {
         if (TFEmail.text?.isEmpty)! {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in email")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: " Please enter your email address")
             return
         } else if (TFPassword.text?.isEmpty)! {
-             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in password")
+             AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your password")
             return
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!) { (isSuccess) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
-            if isSuccess {
-                // save for basic authentication
-                let preferences = UserDefaults.standard
-                let pwdKey = "password"
-                preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                if isSuccess {
+                    // save for basic authentication
+                    let preferences = UserDefaults.standard
+                    let pwdKey = "password"
+                    preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                    }
+                } else {
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
+                    print("Login failed")
                 }
-            } else {
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
-                print("Login failed")
             }
         }
     }

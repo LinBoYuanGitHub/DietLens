@@ -14,12 +14,14 @@ class AboutViewController: UIViewController {
 
     @IBOutlet weak var appImageIcon: UIImageView!
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var buildNumberLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nsObject: AnyObject? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as AnyObject
-        let version = nsObject as! String
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
         versionLabel.text = "Dietlens  V " + version
+        buildNumberLabel.text = "Build " + buildNumber
     }
 
     override func didReceiveMemoryWarning() {

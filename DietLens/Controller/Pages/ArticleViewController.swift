@@ -23,7 +23,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         articleTable.rowHeight = UITableViewAutomaticDimension
         if articleType == ArticleType.ARTICLE {
             articleDataSource = ArticleDataManager.instance.articleList
-            articleTitle.text = "Latest article"
+            articleTitle.text = "Latest articles"
         } else if articleType == ArticleType.EVENT {
             articleDataSource = ArticleDataManager.instance.eventList
             articleTitle.text = "Latest healthy events"
@@ -38,20 +38,17 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         let alertController = UIAlertController(title: nil, message: "Loading...\n\n", preferredStyle: UIAlertControllerStyle.alert)
         if articleDataSource.count == 0 {
-            let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-            spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
-            spinnerIndicator.color = UIColor.black
-            spinnerIndicator.startAnimating()
-            alertController.view.addSubview(spinnerIndicator)
+            AlertMessageHelper.showLoadingDialog(targetController: self)
             self.present(alertController, animated: false, completion: nil)
             if articleType == ArticleType.ARTICLE {
                 APIService.instance.getArticleList(completion: { (articleList) in
-                    alertController.dismiss(animated: true, completion: nil)
-                    if articleList == nil {
-                        return
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                        if articleList == nil {
+                            return
+                        }
+                        ArticleDataManager.instance.articleList = articleList!
+                        self.articleTable?.reloadData()
                     }
-                    ArticleDataManager.instance.articleList = articleList!
-                    self.articleTable?.reloadData()
                 })
             } else if articleType == ArticleType.EVENT {
                 APIService.instance.getEventList(completion: { (eventList) in
