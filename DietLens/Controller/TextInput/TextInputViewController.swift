@@ -294,6 +294,9 @@ extension TextInputViewController: UITableViewDelegate {
 //            let yAxis = self.view.center.y
 //            let frame = CGRect(x: xAxis, y: yAxis, width: 50, height: 50)
             APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, completion: { (resultList) in
+                if resultList == nil {
+                    return
+                }
                 self.searchResultList.append(contentsOf: resultList!)
                 self.textSearchTable.reloadData()
             }) { (nextPageLink) in

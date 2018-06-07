@@ -313,8 +313,9 @@ class APIService {
                     completion(nil)
                     return
                 }
-                let jsonArr = JSON(searchResults)["data"]
-                let nextLink = jsonArr["next"].stringValue
+                let jsonObj = JSON(searchResults)
+                let jsonArr = jsonObj["data"]
+                let nextLink = jsonObj["next"].stringValue
                 var foodSearchList = [TextSearchSuggestionEntity]()
                 for index in 0..<jsonArr.count {
                     let dict = jsonArr[index].dictionaryValue
