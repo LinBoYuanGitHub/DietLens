@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var notificationTable: UITableView!
 
@@ -22,7 +22,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         notificationTable.delegate = self
         notificationTable.dataSource = self
-//        sampleData()
+        sampleData()
 //        getNotifcationData()
         self.clearButton.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: .didReceiveNotification, object: nil)
@@ -31,7 +31,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @objc func refresh(_ notification: NSNotification) {
         if let message = notification.userInfo?["message"] as? String {
-            listOfNotifications.insert(NotificationModel.init(id: "A2", body: message, title: "Reminder", read: false, dateReceived: Date()), at: 0)
+            listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: true, dateReceived: Date()))
             let range = NSRange(location: 0, length: 1)
             let sections = NSIndexSet(indexesIn: range)
             notificationTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
@@ -57,51 +57,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        //set status bar appearance
+        UIApplication.shared.statusBarStyle = .default
+        //reload data
         notificationTable.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as? NotificationTableCell {
-            cell.setupCell(notificationData: listOfNotifications[indexPath.row])
-            return cell
-        }
-        return UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            APIService.instance.deleteNotification(notificationId: listOfNotifications[indexPath.row].id, completion: { (isSuccess) in
-                if isSuccess! {
-                    self.listOfNotifications.remove(at: indexPath.row)
-                    self.notificationTable.reloadData()
-                }
-            })
-        }
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        checkEmpty()
-        return listOfNotifications.count
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showNotificationDetailPage", sender: self)
-        if listOfNotifications[indexPath.row].read == false {
-            APIService.instance.didReceiveNotifcation(notificationId: listOfNotifications[indexPath.row].id) { (isSuccess) in
-                if isSuccess! {
-                    self.listOfNotifications[indexPath.row].read = true
-                }
-            }
-        }
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
@@ -138,9 +102,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func sampleData() {
-        listOfNotifications.append(NotificationModel.init(id: "A1", body: "It's past lunch tine. Don't forget to eat!", title: "Reminder", read: false, dateReceived: Date()))
-        listOfNotifications.append(NotificationModel.init(id: "B2", body: "Tomorrow at 3pm with Dr Lim @ NUH", title: "Appointment tomorrow", read: true, dateReceived: Date()))
-        listOfNotifications.append(NotificationModel.init(id: "B3", body: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", title: "Appointment tomorrow", read: true, dateReceived: Date()))
+        listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: false, dateReceived: Date()))
+        listOfNotifications.append(NotificationModel.init(id: "B2", title: "Appointment tomorrow", body: "Tomorrow at 3pm with Dr Lim @ NUH", content: "Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: true, dateReceived: Date()))
+        listOfNotifications.append(NotificationModel.init(id: "B3", title: "Appointment tomorrow", body: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", content: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: false, dateReceived: Date()))
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -163,4 +127,65 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     */
 
+}
+
+extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 33))
+        let titleLabel = UILabel(frame: CGRect(x: 16, y: 8, width: 42, height: 17))
+        let dateText = "May 23"
+        let titleText = NSMutableAttributedString.init(string: dateText)
+        titleText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 12.0), kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: 0, length: dateText.count))
+        titleLabel.attributedText = titleText
+        headerView.addSubview(titleLabel)
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 33
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as? NotificationTableCell {
+            cell.setupCell(notificationData: listOfNotifications[indexPath.row])
+            return cell
+        }
+        return UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            APIService.instance.deleteNotification(notificationId: listOfNotifications[indexPath.row].id, completion: { (isSuccess) in
+                if isSuccess! {
+                    self.listOfNotifications.remove(at: indexPath.row)
+                    self.notificationTable.reloadData()
+                }
+            })
+        }
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        checkEmpty()
+        return listOfNotifications.count
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "presentNotifcationDetail", sender: self)
+        if listOfNotifications[indexPath.row].read == false {
+            APIService.instance.didReceiveNotifcation(notificationId: listOfNotifications[indexPath.row].id) { (isSuccess) in
+                if isSuccess! {
+                    self.listOfNotifications[indexPath.row].read = true
+                }
+            }
+        }
+    }
 }

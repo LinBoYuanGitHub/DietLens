@@ -173,6 +173,7 @@ class ProfileViewController: UIViewController {
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!, birthday: TFAge.text!) { (isSuccess) in
+            NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
             AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                 if isSuccess {
                     self.dismiss(animated: true, completion: nil)

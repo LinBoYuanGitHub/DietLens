@@ -10,8 +10,12 @@ import Foundation
 
 struct NotificationModel {
     public var id: String = ""
-    public var body: String = ""
     public var title: String = ""
+    public var body: String = ""
+    public var content: String = ""
+    public var prompt: String = ""
+    public var imgUrl = ""
+    public var responseOptions = Dictionary<String, Any>()
     public var read: Bool = false
     public var dateReceived = Date()
 }
