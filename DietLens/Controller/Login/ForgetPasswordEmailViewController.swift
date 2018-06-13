@@ -14,6 +14,7 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailAddr.delegate = self
+        hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
 
@@ -102,4 +103,16 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
         viewController.present(alert, animated: true, completion: nil)
     }
 
+}
+
+extension ForgetPasswordEmailViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

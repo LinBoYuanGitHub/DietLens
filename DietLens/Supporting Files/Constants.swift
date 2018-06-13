@@ -29,9 +29,8 @@ struct ServerConfig {
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
 //    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
-//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
-//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
-    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
+    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
+//    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
 
     static let userURL = labDeskTopURL + "/users"
     static let saveNotificationTokenURL = labDeskTopURL + "/users/device/"
@@ -59,7 +58,6 @@ struct ServerConfig {
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
     static let feedBackURL = labDeskTopURL + "/feedback/email/"
-    static let NotificationURL = baseURL + "/notification"
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 //    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"
     static let uploadImageKeyURL = "https://recognize.dietlens.com/webHook"
@@ -72,6 +70,10 @@ struct ServerConfig {
     static let dietaryGuideURL = labDeskTopURL + "/users/dietary-guide/"
     static let nutritionSum = labDeskTopURL + "/dietlogs/sum/"
     static let nutritionDailySum = labDeskTopURL + "/dietlogs/daily-sum/"
+    //notification part
+    static let notificationURL = labDeskTopURL + "/notifications/"
+    static let notificationDeleteAllURL = labDeskTopURL + "/notifications/all/"
+    static let notificationAnswer = labDeskTopURL + "/answers/"
 }
 
 struct SharedPreferenceKey {
@@ -138,4 +140,13 @@ struct Dimen {
     static let EventsRowHeight = 275
     static let foodCalendarImageWidth = 84
     static let foodCalendarImageHeight = 100
+}
+
+struct NotificationType {
+    static let NoneType = "0"
+    static let SingleOptionType = "1"
+    static let checkBoxType = "2"
+    static let TextFieldType = "3"
+    static let Rating4StarType = "4"
+    static let Rating7StarType = "5"
 }

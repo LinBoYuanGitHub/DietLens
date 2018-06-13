@@ -22,27 +22,25 @@ class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         notificationTable.delegate = self
         notificationTable.dataSource = self
-        sampleData()
-//        getNotifcationData()
+//        sampleData()
+        getNotifcationData()
         self.clearButton.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: .didReceiveNotification, object: nil)
         // Do any additional setup after loading the view.
     }
 
     @objc func refresh(_ notification: NSNotification) {
-        if let message = notification.userInfo?["message"] as? String {
-            listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: true, dateReceived: Date()))
-            let range = NSRange(location: 0, length: 1)
-            let sections = NSIndexSet(indexesIn: range)
-            notificationTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
-        }
+        getNotifcationData()
+//        if (notification.userInfo?["message"] as? String) != nil {
+//            listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseType: "1", responseOptions: [], read: true, dateReceived: Date()))
+//            let range = NSRange(location: 0, length: 1)
+//            let sections = NSIndexSet(indexesIn: range)
+//            notificationTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
+//        }
     }
 
     func getNotifcationData() {
-        let preferences = UserDefaults.standard
-        let key = "userId"
-        let userId = preferences.string(forKey: key)
-        APIService.instance.getNotificationList(userId: userId!) { (notificationList) in
+        APIService.instance.getNotificationList { (notificationList) in
             self.listOfNotifications.removeAll()
             if notificationList != nil {
                 if notificationList?.count == 0 {
@@ -78,10 +76,7 @@ class NotificationsViewController: UIViewController {
         AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Delete All the notifcations?", postiveText: "confirm", negativeText: "cancel") { (flag) in
             if flag {
                 print("clear notifications!")
-                let preferences = UserDefaults.standard
-                let key = "userId"
-                let userId = preferences.string(forKey: key)
-                APIService.instance.deleteAllNotification(userId: userId!) { (isSuccess) in
+                APIService.instance.deleteAllNotification { (isSuccess) in
                     if isSuccess! {
                         self.listOfNotifications.removeAll()
                         self.notificationTable.reloadData()
@@ -102,9 +97,9 @@ class NotificationsViewController: UIViewController {
     }
 
     func sampleData() {
-        listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: false, dateReceived: Date()))
-        listOfNotifications.append(NotificationModel.init(id: "B2", title: "Appointment tomorrow", body: "Tomorrow at 3pm with Dr Lim @ NUH", content: "Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: true, dateReceived: Date()))
-        listOfNotifications.append(NotificationModel.init(id: "B3", title: "Appointment tomorrow", body: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", content: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseOptions: Dictionary(), read: false, dateReceived: Date()))
+        listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseType: "1", responseOptions: [], read: false, dateReceived: Date()))
+        listOfNotifications.append(NotificationModel.init(id: "B2", title: "Appointment tomorrow", body: "Tomorrow at 3pm with Dr Lim @ NUH", content: "Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseType: "2", responseOptions: [], read: true, dateReceived: Date()))
+        listOfNotifications.append(NotificationModel.init(id: "B3", title: "Appointment tomorrow", body: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", content: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseType: "3", responseOptions: [], read: false, dateReceived: Date()))
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,8 +107,8 @@ class NotificationsViewController: UIViewController {
             //print("selected: \(indexPath.row)")
             notificationTable.deselectRow(at: indexPath, animated: true)
             let notificationData = listOfNotifications[indexPath.row]
-            if let dest = segue.destination as? SingleNotificationViewController {
-                dest.notification = notificationData
+            if let dest = segue.destination as? NotificationDetailViewController {
+                dest.notificationModel = notificationData
             }
         }
     }

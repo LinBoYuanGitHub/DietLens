@@ -82,10 +82,8 @@ class FoodInfoDataManager {
         dietItem.category = jsonObject["subcat"].stringValue
         for json in jsonObject["food_portion"].arrayValue {
             var portion = PortionInfo()
-//            portion.sizeValue = json["size_value"].intValue
             portion.rank = json["rank"].intValue
             portion.sizeUnit = json["measurement_type"].stringValue
-//            portion.weightUnit = json["weight_unit"].stringValue
             portion.weightValue = json["weight_g"].doubleValue
             dietItem.portionInfo.append(portion)
         }

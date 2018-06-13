@@ -85,6 +85,18 @@ class RegistrationViewController: UIViewController {
         }
     }
 
+    func keyboardWillShow() {
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= (100)
+        }
+    }
+
+    func keyboardWillHide() {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += (100)
+        }
+    }
+
     @IBAction func signInButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -102,7 +114,28 @@ class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == TFNickName {
+            TFEmail.becomeFirstResponder()
+            keyboardWillShow()
+        } else if textField == TFEmail {
+            TFPassword.becomeFirstResponder()
+            keyboardWillShow()
+        } else if textField == TFPassword {
+            TFRePassword.becomeFirstResponder()
+            keyboardWillShow()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        keyboardWillShow()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        keyboardWillHide()
         return true
     }
 
@@ -117,5 +150,6 @@ extension RegistrationViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+        keyboardWillHide()
     }
 }

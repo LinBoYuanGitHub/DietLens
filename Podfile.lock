@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.5.1)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
+  - Cosmos (15.0.0)
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
   - CryptoSwift (0.8.0)
@@ -68,6 +69,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 3.3)
+  - Cosmos (~> 15.0)
   - Crashlytics
   - CryptoSwift
   - Fabric
@@ -92,6 +94,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
+    - Cosmos
     - Crashlytics
     - CryptoSwift
     - Fabric
@@ -125,6 +128,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
@@ -155,6 +159,6 @@ SPEC CHECKSUMS:
   TinyLog: 1b19359cd3f32ab4972c595d002efc614e596529
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: e9728b7da2f812fe215dde2139c0439065d59bb5
+PODFILE CHECKSUM: 339021301dc2b829412b2fb91a07cb318ba408aa
 
 COCOAPODS: 1.5.0

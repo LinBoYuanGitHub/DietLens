@@ -15,7 +15,8 @@ struct NotificationModel {
     public var content: String = ""
     public var prompt: String = ""
     public var imgUrl = ""
-    public var responseOptions = Dictionary<String, Any>()
+    public var responseType = "1"
+    public var responseOptions = [String]()
     public var read: Bool = false
     public var dateReceived = Date()
 }

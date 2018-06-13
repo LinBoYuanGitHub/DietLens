@@ -970,12 +970,12 @@ class APIService {
      * param: userId
      * return: list of notification
      */
-    public func getNotificationList(userId: String, completion: @escaping ([NotificationModel]?) -> Void) {
+    public func getNotificationList(completion: @escaping ([NotificationModel]?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.NotificationURL + "/list/?user_id=" + userId)!,
+            URL(string: ServerConfig.notificationURL)!,
             method: .get,
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -988,7 +988,7 @@ class APIService {
                     completion(nil)
                     return
                 }
-                let jsonArr = JSON(scanResult)["data"]
+                let jsonArr = JSON(scanResult)["results"]
                 let notications = NotificationDataManager.instance.assembleUserNotification(jsonArr: jsonArr)
                 if jsonArr == nil {
                     completion(nil)
@@ -1005,11 +1005,11 @@ class APIService {
      */
     public func didReceiveNotifcation(notificationId: String, completion: @escaping (Bool?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.NotificationURL + "/" + notificationId + "/")!,
+            URL(string: ServerConfig.notificationURL + notificationId + "/")!,
             method: .put,
-            parameters: ["status": "read"],
+            parameters: ["is_read": true],
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -1031,21 +1031,21 @@ class APIService {
         }
     }
 
-    public func deleteAllNotification(userId: String, completion: @escaping (Bool?) -> Void) {
+    public func deleteAllNotification(completion: @escaping (Bool?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.NotificationURL + "/all/"+"?user_id=" + userId)!,
+            URL(string: ServerConfig.notificationURL + "all/")!,
             method: .delete,
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 204 else {
-                    print("get notifcation failed due to : \(String(describing: response.result.error))")
+                    print("delete notifcation failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 guard let scanResult = response.result.value else {
-                    print("get notifcation failed due to : Server Data Type Error")
+                    print("delete notifcation failed due to : Server Data Type Error")
                     completion(false)
                     return
                 }
@@ -1055,10 +1055,10 @@ class APIService {
 
     public func deleteNotification(notificationId: String, completion: @escaping (Bool?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.NotificationURL + "/"+notificationId+"/")!,
+            URL(string: ServerConfig.notificationURL + notificationId+"/")!,
             method: .delete,
             encoding: JSONEncoding.default,
-            headers: [:])
+            headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 204 else {
@@ -1066,8 +1066,26 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let scanResult = response.result.value else {
+                guard let result = response.result.value else {
                     print("get notifcation failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
+
+    public func answerNotification(notificationId: String, text: String, value: Int, answer: [Int], completion: @escaping(Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.notificationAnswer)!,
+            method: .post,
+            parameters: ["text": text, "value": value, "notification": notificationId],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.response?.statusCode == 201 else {
+                    print("response notifcation answer failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
@@ -1299,6 +1317,8 @@ class APIService {
             downloadData.forEach { $0.cancel() }
         }
     }
+
+    //cancel all task
     func cancelAllRequest() {
         Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
             sessionDataTask.forEach {

@@ -32,6 +32,8 @@ target 'DietLens' do
   pod 'Crashlytics'
   #loading indicator
   pod 'NVActivityIndicatorView'
+  #rating view
+  pod 'Cosmos', '~> 15.0'
 
   target 'DietLensTests' do
     inherit! :search_paths

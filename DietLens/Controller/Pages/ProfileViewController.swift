@@ -212,18 +212,6 @@ extension ProfileViewController: UITextFieldDelegate {
             TFGender.becomeFirstResponder()
             TFGender.text = genderList[0]
         }
-//        else if textField == TFGender {
-//            TFHeight.becomeFirstResponder()
-//        } else if textField == TFHeight {
-//            TFWeight.becomeFirstResponder()
-//        } else if textField == TFAge {
-//            TFAge.becomeFirstResponder()
-//        } else {
-//            textField.resignFirstResponder()
-//            keyboardWillHide()
-//        }
-//        textField.resignFirstResponder()
-//        keyboardWillHide()
         return false
     }
 
