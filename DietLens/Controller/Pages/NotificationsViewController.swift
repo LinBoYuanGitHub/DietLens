@@ -17,13 +17,13 @@ class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var clearButton: UIButton!
 
-    var listOfNotifications = [NotificationModel]()
+    var notificationSectionList = [NotificationSection]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         notificationTable.delegate = self
         notificationTable.dataSource = self
 //        sampleData()
-        getNotifcationData()
         self.clearButton.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: .didReceiveNotification, object: nil)
         // Do any additional setup after loading the view.
@@ -41,14 +41,26 @@ class NotificationsViewController: UIViewController {
 
     func getNotifcationData() {
         APIService.instance.getNotificationList { (notificationList) in
-            self.listOfNotifications.removeAll()
+            self.notificationSectionList.removeAll()
             if notificationList != nil {
                 if notificationList?.count == 0 {
                     self.clearButton.isHidden = true
                 } else {
                     self.clearButton.isHidden = false
                 }
-                self.listOfNotifications = notificationList!
+                for notification in notificationList! {
+                    var flag = true
+                    for (index, section) in self.notificationSectionList.enumerated() where DateUtil.day3MDateToString(date: section.date) == DateUtil.day3MDateToString(date: notification.createTime) {
+                        self.notificationSectionList[index].notificationList.append(notification)
+                        flag = false
+                    }
+                    if flag {
+                        var notificaitonSection = NotificationSection()
+                        notificaitonSection.date = notification.createTime
+                        notificaitonSection.notificationList.append(notification)
+                        self.notificationSectionList.append(notificaitonSection)
+                    }
+                }
                 self.notificationTable.reloadData()
             }
         }
@@ -58,7 +70,7 @@ class NotificationsViewController: UIViewController {
         //set status bar appearance
         UIApplication.shared.statusBarStyle = .default
         //reload data
-        notificationTable.reloadData()
+        getNotifcationData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,7 +82,7 @@ class NotificationsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func clearNotificationPressed(_ sender: Any) {
-        if listOfNotifications.count == 0 {
+        if notificationSectionList.count == 0 {
             return
         }
         AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Delete All the notifcations?", postiveText: "confirm", negativeText: "cancel") { (flag) in
@@ -78,7 +90,7 @@ class NotificationsViewController: UIViewController {
                 print("clear notifications!")
                 APIService.instance.deleteAllNotification { (isSuccess) in
                     if isSuccess! {
-                        self.listOfNotifications.removeAll()
+                        self.notificationSectionList.removeAll()
                         self.notificationTable.reloadData()
                     }
                 }
@@ -87,7 +99,7 @@ class NotificationsViewController: UIViewController {
     }
 
     func checkEmpty() {
-        if listOfNotifications.count == 0 {
+        if notificationSectionList.count == 0 {
             emptyViewIcon.alpha = 1
             emptyViewLabel.alpha = 1
         } else {
@@ -96,17 +108,11 @@ class NotificationsViewController: UIViewController {
         }
     }
 
-    func sampleData() {
-        listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseType: "1", responseOptions: [], read: false, dateReceived: Date()))
-        listOfNotifications.append(NotificationModel.init(id: "B2", title: "Appointment tomorrow", body: "Tomorrow at 3pm with Dr Lim @ NUH", content: "Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseType: "2", responseOptions: [], read: true, dateReceived: Date()))
-        listOfNotifications.append(NotificationModel.init(id: "B3", title: "Appointment tomorrow", body: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", content: "Not suppose to show. Tomorrow at 3pm with Dr Lim @ NUH", prompt: "", imgUrl: "", responseType: "3", responseOptions: [], read: false, dateReceived: Date()))
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = notificationTable.indexPathForSelectedRow {
             //print("selected: \(indexPath.row)")
             notificationTable.deselectRow(at: indexPath, animated: true)
-            let notificationData = listOfNotifications[indexPath.row]
+            let notificationData = notificationSectionList[indexPath.section].notificationList[indexPath.row]
             if let dest = segue.destination as? NotificationDetailViewController {
                 dest.notificationModel = notificationData
             }
@@ -129,7 +135,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 33))
         let titleLabel = UILabel(frame: CGRect(x: 16, y: 8, width: 42, height: 17))
-        let dateText = "May 23"
+        let dateText = DateUtil.day3MDateToString(date: notificationSectionList[section].date)
         let titleText = NSMutableAttributedString.init(string: dateText)
         titleText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 12.0), kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: 0, length: dateText.count))
         titleLabel.attributedText = titleText
@@ -143,7 +149,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as? NotificationTableCell {
-            cell.setupCell(notificationData: listOfNotifications[indexPath.row])
+            cell.setupCell(notificationData: notificationSectionList[indexPath.section].notificationList[indexPath.row])
             return cell
         }
         return UITableViewCell()
@@ -159,9 +165,9 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            APIService.instance.deleteNotification(notificationId: listOfNotifications[indexPath.row].id, completion: { (isSuccess) in
+            APIService.instance.deleteNotification(notificationId: notificationSectionList[indexPath.section].notificationList[indexPath.row].id, completion: { (isSuccess) in
                 if isSuccess! {
-                    self.listOfNotifications.remove(at: indexPath.row)
+                    self.notificationSectionList[indexPath.section].notificationList.remove(at: indexPath.row)
                     self.notificationTable.reloadData()
                 }
             })
@@ -170,15 +176,19 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         checkEmpty()
-        return listOfNotifications.count
+        return notificationSectionList[section].notificationList.count
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return notificationSectionList.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "presentNotifcationDetail", sender: self)
-        if listOfNotifications[indexPath.row].read == false {
-            APIService.instance.didReceiveNotifcation(notificationId: listOfNotifications[indexPath.row].id) { (isSuccess) in
+        if notificationSectionList[indexPath.section].notificationList[indexPath.row].read == false {
+            APIService.instance.didReceiveNotifcation(notificationId: notificationSectionList[indexPath.section].notificationList[indexPath.row].id) { (isSuccess) in
                 if isSuccess! {
-                    self.listOfNotifications[indexPath.row].read = true
+                    self.notificationSectionList[indexPath.section].notificationList[indexPath.row].read = true
                 }
             }
         }

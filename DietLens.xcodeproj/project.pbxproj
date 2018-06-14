@@ -65,6 +65,7 @@
 		3F7DACA520133968009E4DB6 /* ExpandedUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DACA420133968009E4DB6 /* ExpandedUITextField.swift */; };
 		3F7DACA720134B1A009E4DB6 /* FoodNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DACA620134B1A009E4DB6 /* FoodNameCell.swift */; };
 		3F8A69E61FE267E8005B83B0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A69E51FE267E7005B83B0 /* GoogleService-Info.plist */; };
+		3F8B21C820D2349C006E3628 /* NotificationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8B21C720D2349C006E3628 /* NotificationSection.swift */; };
 		3F9215A420808C3F00F92ECF /* MealTypeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9215A320808C3F00F92ECF /* MealTypeCollectionCell.swift */; };
 		3F9215A62085A18F00F92ECF /* FoodItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9215A52085A18F00F92ECF /* FoodItemListCell.swift */; };
 		3F9215A82086262500F92ECF /* FoodDiaryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9215A72086262500F92ECF /* FoodDiaryEntity.swift */; };
@@ -254,6 +255,7 @@
 		3F7DACA420133968009E4DB6 /* ExpandedUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedUITextField.swift; sourceTree = "<group>"; };
 		3F7DACA620134B1A009E4DB6 /* FoodNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNameCell.swift; sourceTree = "<group>"; };
 		3F8A69E51FE267E7005B83B0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3F8B21C720D2349C006E3628 /* NotificationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSection.swift; sourceTree = "<group>"; };
 		3F9215A320808C3F00F92ECF /* MealTypeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTypeCollectionCell.swift; sourceTree = "<group>"; };
 		3F9215A52085A18F00F92ECF /* FoodItemListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemListCell.swift; sourceTree = "<group>"; };
 		3F9215A72086262500F92ECF /* FoodDiaryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryEntity.swift; sourceTree = "<group>"; };
@@ -752,6 +754,7 @@
 				3F14CC45201C78B70032CC77 /* UserProfile.swift */,
 				3FEC3455205A76190060099A /* FoodDiaryModel.swift */,
 				3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */,
+				3F8B21C720D2349C006E3628 /* NotificationSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1190,6 +1193,7 @@
 				3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */,
 				581809B21FA877D700373763 /* SideMenuCell.swift in Sources */,
 				3FD08621200DEE4B0052D54B /* DeviceRecordDetailViewController.swift in Sources */,
+				3F8B21C820D2349C006E3628 /* NotificationSection.swift in Sources */,
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				3F9215A420808C3F00F92ECF /* MealTypeCollectionCell.swift in Sources */,

@@ -12,15 +12,16 @@ import Cosmos
 class NotificationDetailViewController: UIViewController {
 
     @IBOutlet weak var messageView: UITextView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var questionView: UIView!
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var messageContent: UIView!
     @IBOutlet weak var messageContentHeight: NSLayoutConstraint!
-    @IBOutlet weak var questionContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var scroller: UIScrollView!
     @IBOutlet weak var promptHeight: NSLayoutConstraint!
     @IBOutlet weak var promptView: UITextView!
+    @IBOutlet weak var scrollerBottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var contentView: UIView!
 
     //radio button set
     var buttons = [UIButton]()
@@ -28,10 +29,15 @@ class NotificationDetailViewController: UIViewController {
     var notificationModel = NotificationModel()
 
     override func viewDidLoad() {
+        // setting for scroller
+        scroller.isUserInteractionEnabled = true
+        scroller.isExclusiveTouch = true
+        scroller.canCancelContentTouches = true
+        scroller.delaysContentTouches = true
+        // other textView setting
         messageView.text = notificationModel.content
 //        adjustUITextViewHeight(textView: messageView)
-        messageContentHeight.constant = messageView.fs_height + CGFloat(110)
-        //hide saveBtn when it's None type
+        messageContentHeight.constant =  messageView.fs_height + CGFloat(110)
         if notificationModel.responseType == NotificationType.NoneType {
             saveBtn.isHidden = true
         }
@@ -45,12 +51,12 @@ class NotificationDetailViewController: UIViewController {
             promptHeight.constant = 0
         } else {
             promptView.text = notificationModel.prompt
-            promptView.isScrollEnabled = false
+            adjustUITextViewHeight(textView: promptView)
         }
     }
 
     func adjustUITextViewHeight(textView: UITextView) {
-        textView.translatesAutoresizingMaskIntoConstraints = true
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.sizeToFit()
         textView.isScrollEnabled = false
     }
@@ -67,7 +73,6 @@ class NotificationDetailViewController: UIViewController {
         } else if notificationModel.responseType == NotificationType.checkBoxType {
             generateCheckBox()
         }
-        //scroller height calculation
     }
 
     func generateRatingView(totalStars: Int) {
@@ -86,22 +91,22 @@ class NotificationDetailViewController: UIViewController {
         ratingView.settings.totalStars = totalStars
         ratingView.settings.emptyImage = #imageLiteral(resourceName: "emptyStarIcon")
         ratingView.settings.filledImage = #imageLiteral(resourceName: "filledStar")
-        contentView.addSubview(ratingView)
+        questionView.addSubview(ratingView)
     }
 
     func generateSingleOptionView() {
         //create button set
         let screenWidth = UIScreen.main.bounds.width
-
+//        let cgsize = CGSize(width: screenWidth, height: 5000.0)
         for index in 0..<notificationModel.responseOptions.count {
-            let childButton = UIButton(frame: CGRect(x: 20, y: 20+60*index, width: Int(screenWidth), height: 20))
+            let childButton = UIButton(frame: CGRect(x: 20, y: 20+60*index, width: Int(screenWidth), height: Int(20)))
             childButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
             childButton.setTitleColor(UIColor.black, for: .normal)
             childButton.setTitle(notificationModel.responseOptions[index], for: .normal)
-            childButton.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 24, bottom: 0.0, right: 0.0)
+            childButton.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 24, bottom: 0.0, right: 23.0)
             //image state setting
-            childButton.setImage(UIImage(named: "checkboxuntick.png")!, for: .normal)
-            childButton.setImage(UIImage(named: "checkboxtick.png")!, for: .selected)
+            childButton.setImage(UIImage(named: "option_unselected.png")!, for: .normal)
+            childButton.setImage(UIImage(named: "option_selected.png")!, for: .selected)
             childButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
             //text color setting
             childButton.setTitleColor(UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), for: .normal)
@@ -109,11 +114,10 @@ class NotificationDetailViewController: UIViewController {
             //add underline
             let underLine = UIView(frame: CGRect(x: 16, y: 49+60*index, width: 344, height: 1))
             underLine.backgroundColor = UIColor(red: 227/255, green: 228/255, blue: 229/255, alpha: 1.0)
-            contentView.addSubview(childButton)
-            contentView.addSubview(underLine)
+            questionView.addSubview(childButton)
+            questionView.addSubview(underLine)
             buttons.append(childButton)
         }
-
     }
 
     func generateCheckBox() {
@@ -123,10 +127,11 @@ class NotificationDetailViewController: UIViewController {
             childButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
             childButton.setTitleColor(UIColor.black, for: .normal)
             childButton.setTitle(notificationModel.responseOptions[index], for: .normal)
-            childButton.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 24, bottom: 0.0, right: 0.0)
+            childButton.titleEdgeInsets = UIEdgeInsets(top: 0.0, left: 24, bottom: 0.0, right: 23.0)
+            childButton.titleLabel?.lineBreakMode = .byWordWrapping
             //image state setting
-            childButton.setImage(UIImage(named: "checkboxuntick.png")!, for: .normal)
-            childButton.setImage(UIImage(named: "checkboxtick.png")!, for: .selected)
+            childButton.setImage(UIImage(named: "checkbox_untick.png")!, for: .normal)
+            childButton.setImage(UIImage(named: "checkbox_tick.png")!, for: .selected)
             childButton.addTarget(self, action: #selector(onCheckBoxSelected), for: .touchUpInside)
             //text color setting
             childButton.setTitleColor(UIColor(red: 146/255, green: 146/255, blue: 146/255, alpha: 1.0), for: .normal)
@@ -134,8 +139,9 @@ class NotificationDetailViewController: UIViewController {
             //add underline
             let underLine = UIView(frame: CGRect(x: 16, y: 49+60*index, width: 344, height: 1))
             underLine.backgroundColor = UIColor(red: 227/255, green: 228/255, blue: 229/255, alpha: 1.0)
-            contentView.addSubview(childButton)
-            contentView.addSubview(underLine)
+            questionView.addSubview(childButton)
+            questionView.addSubview(underLine)
+            buttons.append(childButton)
         }
     }
 
@@ -155,7 +161,7 @@ class NotificationDetailViewController: UIViewController {
         responseTextField.placeholder = "It's placeholder here"
         //address hardcode tag
         responseTextField.tag = 100
-        contentView.addSubview(responseTextField)
+        questionView.addSubview(responseTextField)
         //add underline border
         let border = CALayer()
         let width = CGFloat(1.0)
@@ -173,18 +179,32 @@ class NotificationDetailViewController: UIViewController {
     @IBAction func onSaveBtnPressed(_ sender: Any) {
         switch notificationModel.responseType {
         case NotificationType.SingleOptionType:
-            if let responseTextField = self.view.viewWithTag(100) as? UITextField {
-                APIService.instance.answerNotification(notificationId: notificationModel.id, text: responseTextField.text!, value: 1, answer: []) { (isSuccess) in
-                    if isSuccess {
-                        self.dismiss(animated: true, completion: nil)
-                    }
+            var answers = [Int]()
+            for (index, button) in buttons.enumerated() {
+                if button.isSelected {
+                    answers.append(index)
+                }
+            }
+            APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: 0, answer: answers) { (isSuccess) in
+                if isSuccess {
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         case NotificationType.checkBoxType:
-            break
+            var answers = [Int]()
+            for (index, button) in buttons.enumerated() {
+                if button.isSelected {
+                    answers.append(index)
+                }
+            }
+            APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: 0, answer: answers) { (isSuccess) in
+                if isSuccess {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
         case NotificationType.TextFieldType:
             if let responseTextField = self.view.viewWithTag(100) as? UITextField {
-                APIService.instance.answerNotification(notificationId: notificationModel.id, text: responseTextField.text!, value: 1, answer: []) { (isSuccess) in
+                APIService.instance.answerNotification(notificationId: notificationModel.id, text: responseTextField.text!, value: 0, answer: []) { (isSuccess) in
                     if isSuccess {
                         self.dismiss(animated: true, completion: nil)
                     }
@@ -192,7 +212,7 @@ class NotificationDetailViewController: UIViewController {
             }
         case NotificationType.Rating4StarType:
             if let ratingView = self.view.viewWithTag(100) as? CosmosView {
-                APIService.instance.answerNotification(notificationId: notificationModel.id, text: String(ratingView.rating), value: 4, answer: []) { (isSuccess) in
+                APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: Int(ratingView.rating), answer: []) { (isSuccess) in
                     if isSuccess {
                         self.dismiss(animated: true, completion: nil)
                     }
@@ -200,7 +220,7 @@ class NotificationDetailViewController: UIViewController {
             }
         case NotificationType.Rating7StarType:
             if let ratingView = self.view.viewWithTag(100) as? CosmosView {
-                APIService.instance.answerNotification(notificationId: notificationModel.id, text: String(ratingView.rating), value: 7, answer: []) { (isSuccess) in
+                APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: Int(ratingView.rating), answer: []) { (isSuccess) in
                     if isSuccess {
                         self.dismiss(animated: true, completion: nil)
                     }

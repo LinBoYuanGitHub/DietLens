@@ -1079,7 +1079,7 @@ class APIService {
         Alamofire.request(
             URL(string: ServerConfig.notificationAnswer)!,
             method: .post,
-            parameters: ["text": text, "value": value, "notification": notificationId],
+            parameters: ["text": text, "value": value, "notification": notificationId, "answer": answer],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()

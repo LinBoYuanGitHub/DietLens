@@ -27,6 +27,9 @@ class NotificationDataManager {
             for json in jsonobj["response_options"].arrayValue {
                 notification.responseOptions.append(json.stringValue)
             }
+            let dateStr = String(jsonobj["created_time"].stringValue.split(separator: ".")[0])
+            let createDate = DateUtil.standardStringToDate(dateStr: dateStr)
+            notification.createTime = createDate
             notification.dateReceived = Date()
             notification.imgUrl = jsonobj["img_url"].stringValue
             notification.read = jsonobj["is_read"].boolValue

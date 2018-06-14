@@ -479,7 +479,8 @@ class FoodInfoViewController: UIViewController {
         if quantityValue.inputView != nil {
             let quantityPos =  quantityPickerView.selectedRow(inComponent: 0)
             let decimalPos = quantityPickerView.selectedRow(inComponent: 1)
-            quantityValue.text = String(Double(quantityIntegerArray[quantityPos])+Double(decimalArray[decimalPos]))
+            dietItem.quantity = Double(quantityIntegerArray[quantityPos])+Double(decimalArray[decimalPos])
+            quantityValue.text = String(dietItem.quantity)
         }
     }
 

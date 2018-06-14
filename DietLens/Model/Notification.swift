@@ -19,4 +19,5 @@ struct NotificationModel {
     public var responseOptions = [String]()
     public var read: Bool = false
     public var dateReceived = Date()
+    public var createTime = Date()
 }
