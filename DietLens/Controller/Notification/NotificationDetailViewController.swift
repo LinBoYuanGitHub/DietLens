@@ -18,10 +18,10 @@ class NotificationDetailViewController: UIViewController {
     @IBOutlet weak var messageContent: UIView!
     @IBOutlet weak var messageContentHeight: NSLayoutConstraint!
     @IBOutlet weak var scroller: UIScrollView!
-    @IBOutlet weak var promptHeight: NSLayoutConstraint!
+//    @IBOutlet weak var promptHeight: NSLayoutConstraint!
     @IBOutlet weak var promptView: UITextView!
-    @IBOutlet weak var scrollerBottomSpace: NSLayoutConstraint!
-    @IBOutlet weak var contentView: UIView!
+//    @IBOutlet weak var scrollerBottomSpace: NSLayoutConstraint!
+//    @IBOutlet weak var contentView: UIView!
 
     //radio button set
     var buttons = [UIButton]()
@@ -37,7 +37,7 @@ class NotificationDetailViewController: UIViewController {
         // other textView setting
         messageView.text = notificationModel.content
 //        adjustUITextViewHeight(textView: messageView)
-        messageContentHeight.constant =  messageView.fs_height + CGFloat(110)
+        messageContentHeight.constant = messageView.fs_height + CGFloat(110)
         if notificationModel.responseType == NotificationType.NoneType {
             saveBtn.isHidden = true
         }
@@ -48,7 +48,8 @@ class NotificationDetailViewController: UIViewController {
 
     func configPromptView() {
         if notificationModel.prompt.isEmpty {
-            promptHeight.constant = 0
+            promptView.isHidden = true
+//            promptHeight.constant = 0
         } else {
             promptView.text = notificationModel.prompt
             adjustUITextViewHeight(textView: promptView)
@@ -187,7 +188,7 @@ class NotificationDetailViewController: UIViewController {
             }
             APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: 0, answer: answers) { (isSuccess) in
                 if isSuccess {
-                    self.dismiss(animated: true, completion: nil)
+                    self.showConfirmView()
                 }
             }
         case NotificationType.checkBoxType:
@@ -199,14 +200,14 @@ class NotificationDetailViewController: UIViewController {
             }
             APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: 0, answer: answers) { (isSuccess) in
                 if isSuccess {
-                    self.dismiss(animated: true, completion: nil)
+                     self.showConfirmView()
                 }
             }
         case NotificationType.TextFieldType:
             if let responseTextField = self.view.viewWithTag(100) as? UITextField {
                 APIService.instance.answerNotification(notificationId: notificationModel.id, text: responseTextField.text!, value: 0, answer: []) { (isSuccess) in
                     if isSuccess {
-                        self.dismiss(animated: true, completion: nil)
+                        self.showConfirmView()
                     }
                 }
             }
@@ -214,7 +215,7 @@ class NotificationDetailViewController: UIViewController {
             if let ratingView = self.view.viewWithTag(100) as? CosmosView {
                 APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: Int(ratingView.rating), answer: []) { (isSuccess) in
                     if isSuccess {
-                        self.dismiss(animated: true, completion: nil)
+                         self.showConfirmView()
                     }
                 }
             }
@@ -222,12 +223,19 @@ class NotificationDetailViewController: UIViewController {
             if let ratingView = self.view.viewWithTag(100) as? CosmosView {
                 APIService.instance.answerNotification(notificationId: notificationModel.id, text: "", value: Int(ratingView.rating), answer: []) { (isSuccess) in
                     if isSuccess {
-                        self.dismiss(animated: true, completion: nil)
+                        self.showConfirmView()
                     }
                 }
             }
         default:
             break
+        }
+
+    }
+
+    func showConfirmView() {
+        AlertMessageHelper.showMessage(targetController: self, title: "Thanks for filling the questionnaire", message: "Your answer is submitted successfully", confirmText: "OK") {
+            self.dismiss(animated: true, completion: nil)
         }
 
     }

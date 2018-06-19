@@ -42,7 +42,7 @@ class FoodDiaryDataManager {
             if job["quantity"].intValue == 0 {
                 foodItem.quantity = 1
             } else {
-                foodItem.quantity = Double(job["quantity"].intValue)
+                foodItem.quantity = job["quantity"].doubleValue
             }
             foodItem.displayUnit = job["measurement_type"].stringValue
             foodItem.selectedPos = job["selected_position"].intValue

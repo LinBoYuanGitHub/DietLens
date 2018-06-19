@@ -189,7 +189,7 @@ class FoodInfoDataManager {
             var job = jsonObject["details"][i]
             foodItem.foodId = job["id"].intValue
             foodItem.foodName = job["name"].stringValue
-            foodItem.quantity = Double(job["quantity"].intValue)
+            foodItem.quantity = Double(job["quantity"].doubleValue)
             foodItem.displayUnit = job["measurement_type"].stringValue
             foodItem.recordType = job["search_type"].stringValue
             foodDiaryEntity.dietItems.append(foodItem)

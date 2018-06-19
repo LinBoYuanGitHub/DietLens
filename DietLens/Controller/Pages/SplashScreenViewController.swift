@@ -27,6 +27,7 @@ class SplashScreenViewController: UIViewController {
             getArticleListToMainPage()
             loadNutritionTarget()
         }
+        uploadStepDataWhenNecessary()
 //        APIService.instance.getUUIDRequest(userId: userId!) { (userId) in
 //            let preferences = UserDefaults.standard
 //            let key = "userId"
@@ -53,6 +54,35 @@ class SplashScreenViewController: UIViewController {
 //        }
 
         // Do any additional setup after loading the view.
+    }
+
+    func uploadStepDataWhenNecessary() {
+        let preferences = UserDefaults.standard
+        guard let stepUploadLatestTime = preferences.object(forKey: PreferenceKey.stepUploadLatestTime) as? Date else {
+            //no record so direct upload
+            requestHourlyStepData()
+            return
+        }
+        if Calendar.current.compare(stepUploadLatestTime, to: Date(), toGranularity: .day) == .orderedAscending {
+            //request step data & check sahredPreference then send to server
+            requestHourlyStepData()
+        }
+    }
+
+    func requestHourlyStepData() {
+        //request step data & check sahredPreference then send to server
+        HKHealthStore().getHourlyStepsCountList { (steps, error) in
+            if error == nil {
+                //upload stepValue to server
+                APIService.instance.uploadStepData(stepList: steps, completion: { (isSuccess) in
+                    if isSuccess {
+                        //record current date
+                        let preferences = UserDefaults.standard
+                        preferences.setValue(Date(), forKey: PreferenceKey.stepUploadLatestTime)
+                    }
+                })
+            }
+        }
     }
 
     func getArticleListToMainPage() {

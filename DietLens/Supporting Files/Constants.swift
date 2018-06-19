@@ -52,6 +52,7 @@ struct ServerConfig {
     static let imageUploadURL = baseURL + "/image-search/"
     static let foodDiaryURL = baseURL + "/healthlog/diet/"
     static let saveStepDiaryURL = baseURL + "/healthlog/steps/"
+    static let saveHourlyStepURL = labDeskTopURL+"/steps/"
     static let saveHealthCenterDataURL = baseURL + "/healthlog/Medical/"
     static let foodSearchListURL = labDeskTopURL + "/search/auto-suggestion/"
     static let foodFullTextSearchURL = labDeskTopURL + "/search/full-text/"
@@ -132,6 +133,7 @@ struct PreferenceKey {
     static let fatTarget = "fatTarget"
     static let tokenKey = "TOKEN"
     static let userIdkey = "userId"
+    static let stepUploadLatestTime = "stepUploadKey"
 }
 
 struct Dimen {

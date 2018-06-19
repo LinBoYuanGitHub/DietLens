@@ -128,6 +128,64 @@ extension HKHealthStore {
         self.execute(query)
     }
 
+    func getHourlyStepsCountList(completion completionHandler: (([StepEntity], Error?) -> Void)?) {
+
+        let calendar = Calendar.current
+        var interval = DateComponents()
+        interval.hour = 1
+        var anchorComponents = calendar.dateComponents([.hour, .day, .month, .year], from: Date())
+        anchorComponents.hour = 8
+        guard let anchorDate = calendar.date(from: anchorComponents) else {
+            fatalError("*** unable to create a valid date from the given components ***")
+        }
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
+            fatalError("*** Unable to create a step count type ***")
+        }
+        // Create the query
+        let query = HKStatisticsCollectionQuery(quantityType: quantityType,
+                                                quantitySamplePredicate: nil,
+                                                options: .cumulativeSum,
+                                                anchorDate: anchorDate,
+                                                intervalComponents: interval)
+        // Set the results handler
+        query.initialResultsHandler = {
+            query, results, error in
+
+            guard let statsCollection = results else {
+                // Perform proper error handling here
+                if completionHandler != nil {
+                    completionHandler!([], error)
+                }
+                return
+            }
+            let endDate = Date()
+            guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate)
+                else {
+                    fatalError("*** Unable to calculate the start date ***")
+                    if completionHandler != nil {
+                        completionHandler!([], error)
+                    }
+            }
+            var stepList = [StepEntity]()
+            // Plot the weekly step counts over the past 3 months
+            statsCollection.enumerateStatistics(from: startDate, to: endDate) { [unowned self] statistics, _ in
+
+                let date = statistics.startDate
+                if let quantity = statistics.sumQuantity() {
+                    let value = quantity.doubleValue(for: HKUnit.count())
+                    let stepEntity = StepEntity(date: date, stepValue: value)
+                    // Call a custom method to plot each data point.
+                    stepList.append(stepEntity)
+                } else {
+                    let stepEntity = StepEntity(date: date, stepValue: 0)
+                    stepList.append(stepEntity)
+                }
+            }
+            completionHandler!(stepList, error)
+        }
+        self.execute(query)
+    }
+
     func getWeeklyStepsCountList(anyDayOfTheWeek date: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
         let calendar = Calendar.current
         var interval = DateComponents()

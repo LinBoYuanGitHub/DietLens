@@ -1194,6 +1194,34 @@ class APIService {
         return ingredientString
     }
 
+    public func uploadStepData(stepList: [StepEntity], completion: @escaping (Bool) -> Void) {
+        var params = Dictionary<String, Any>()
+        var steps = [Dictionary<String, Any>]()
+        for step in stepList {
+            var params = Dictionary<String, Any>()
+            let dateStr = DateUtil.templateDateToString(date: step.date!)
+            params["date"] = dateStr
+            params["value"] = step.stepValue
+            steps.append(params)
+        }
+        params["steps"] = steps
+        Alamofire.request(
+            URL(string: ServerConfig.saveHourlyStepURL)!,
+            method: .post,
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.response?.statusCode == 201 else {
+                    print("Save hourly step data failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
+
     public func uploadStepData(userId: String, params: Dictionary<String, Any>, completion: @escaping (Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.saveStepDiaryURL+"?user_id="+userId)!,

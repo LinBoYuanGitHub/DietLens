@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
-
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
@@ -37,6 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
+        }
+        if let payload = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary, let identifier = payload["notificationListVC"] as? String {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
+            window?.rootViewController = viewController
         }
         registerForPushNotifications()
 //        realmSetting(application)
@@ -230,6 +234,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         // Change this to your preferred presentation option
         completionHandler([])
+        //foreGround, notify user to update the list
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -255,6 +260,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         // Print full message
         completionHandler()
+        //open the notification page from the background
+        if let viewController =  UIApplication.shared.keyWindow?.rootViewController as? HomeViewController {
+            viewController.performSegue(withIdentifier: "presentNotificationList", sender: self)
+        }
+//        let viewController = self.window!.rootViewController!.storyboard!.instantiateViewController(withIdentifier: "DietLens") as! HomeViewController
+
     }
 }
 // [END ios_10_message_handling]

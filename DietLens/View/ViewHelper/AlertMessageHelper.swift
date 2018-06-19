@@ -24,6 +24,14 @@ class AlertMessageHelper {
         targetController.present(alert, animated: true, completion: nil)
     }
 
+    class func showMessage(targetController: UIViewController, title: String, message: String, confirmText: String, completion: @escaping () -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(confirmText, comment: "Default action"), style: .`default`, handler: { _ in
+           completion()
+        }))
+        targetController.present(alert, animated: true, completion: nil)
+    }
+
     class func showOkCancelDialog(targetController: UIViewController, title: String, message: String, postiveText: String, negativeText: String, callback: @escaping (Bool) -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString(postiveText, comment: "Default action"), style: .`default`, handler: { _ in

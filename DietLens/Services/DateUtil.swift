@@ -23,6 +23,13 @@ class DateUtil {
         return resultStr
     }
 
+    public static func hourMinDateToString(date: Date) -> String {
+        let hourFormatter = DateFormatter()
+        hourFormatter.dateFormat = "HH:mm"
+        let resultStr = hourFormatter.string(from: date)
+        return resultStr
+    }
+
     public static func normalStringToDate(dateStr: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

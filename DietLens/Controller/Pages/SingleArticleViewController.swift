@@ -58,6 +58,7 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
             cell.setupCell(type: .body, data: articleData?.articleContent)
             cell.webView.navigationDelegate = self
             cell.webView.frame = CGRect(x: 0, y: 0, width: cell.frame.size.width, height: contentHeight)
+            cell.webView.bounds = CGRect(x: 0, y: 0, width: cell.frame.size.width, height: contentHeight)
             return cell
         }
         return UITableViewCell()

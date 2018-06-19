@@ -29,12 +29,14 @@ class NotificationTableCell: UITableViewCell {
     func setupCell(notificationData: NotificationModel) {
         title.text = notificationData.title
         content.text = notificationData.body
+        //set hh:mm
+        time.text = DateUtil.hourMinDateToString(date: notificationData.createTime)
         if notificationData.read {
             readIcon.isHidden = true
             title.textColor = #colorLiteral(red: 0.5725490196, green: 0.5725490196, blue: 0.5725490196, alpha: 1)
             content.textColor = #colorLiteral(red: 0.5725490196, green: 0.5725490196, blue: 0.5725490196, alpha: 1)
         } else {
-             readIcon.isHidden = false
+            readIcon.isHidden = false
             title.textColor = #colorLiteral(red: 0.262745098, green: 0.262745098, blue: 0.262745098, alpha: 1)
             content.textColor = #colorLiteral(red: 0.262745098, green: 0.262745098, blue: 0.262745098, alpha: 1)
         }

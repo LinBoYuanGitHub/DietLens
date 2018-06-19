@@ -47,22 +47,23 @@ class StepCounterViewController: UIViewController {
 //    }
 
     func requestAuthFromHealthKit() {
-        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
+        if HKHealthStore.isHealthDataAvailable() {
+            HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
 
-            guard authorized else {
+                guard authorized else {
 
-                let baseMessage = "HealthKit Authorization Failed"
-                self.emptyView.isHidden = false
-                if let error = error {
-                    print("\(baseMessage). Reason: \(error.localizedDescription)")
-                } else {
-                    print(baseMessage)
+                    let baseMessage = "HealthKit Authorization Failed"
+                    self.emptyView.isHidden = false
+                    if let error = error {
+                        print("\(baseMessage). Reason: \(error.localizedDescription)")
+                    } else {
+                        print(baseMessage)
+                    }
+                    return
                 }
-                return
+                self.requestStepData()
             }
-            self.requestStepData()
         }
-
     }
 
     func getMaxValue() -> Double {
