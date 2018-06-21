@@ -27,6 +27,7 @@ class NotificationDetailViewController: UIViewController {
     var buttons = [UIButton]()
 
     var notificationModel = NotificationModel()
+    var notificationId = ""
 
     override func viewDidLoad() {
         // setting for scroller
@@ -35,15 +36,33 @@ class NotificationDetailViewController: UIViewController {
         scroller.canCancelContentTouches = true
         scroller.delaysContentTouches = true
         // other textView setting
+        if notificationId == "" {
+           initViews()
+        } else {
+            //request notification detail
+            AlertMessageHelper.showLoadingDialog(targetController: self)
+            scroller.isHidden = true
+            APIService.instance.getSingleNotification(notificationId: notificationId) { (notificationModel) in
+                AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                self.scroller.isHidden = false
+                if notificationModel != nil {
+                    self.notificationModel = notificationModel!
+                    self.initViews()
+                }
+            }
+        }
+        hideKeyboardWhenTappedAround()
+    }
+
+    func initViews() {
         messageView.text = notificationModel.content
-//        adjustUITextViewHeight(textView: messageView)
+        //        adjustUITextViewHeight(textView: messageView)
         messageContentHeight.constant = messageView.fs_height + CGFloat(110)
         if notificationModel.responseType == NotificationType.NoneType {
             saveBtn.isHidden = true
         }
         configPromptView()
         addResponseToContent()
-        hideKeyboardWhenTappedAround()
     }
 
     func configPromptView() {
@@ -80,8 +99,9 @@ class NotificationDetailViewController: UIViewController {
         let screenWidth = UIScreen.main.bounds.width
         let ratingView = CosmosView(frame: CGRect(x: 20, y: 8, width: screenWidth, height: 60))
         ratingView.tag = 100
+        //set initial rating to 0
+        ratingView.rating = 0
         ratingView.settings.fillMode = .full
-
         if totalStars == 7 {
             ratingView.settings.starSize = 28
             ratingView.settings.starMargin = 15

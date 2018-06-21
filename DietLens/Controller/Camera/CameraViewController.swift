@@ -53,6 +53,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     var addFoodDate = Date()
     var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true
+    @IBOutlet weak var sampleImagCollectionView: UICollectionView!
+
+    var imageArray = [#imageLiteral(resourceName: "sampleCategoryNuts"), #imageLiteral(resourceName: "sampleCategoryEggs"), #imageLiteral(resourceName: "sampleCategoryMeats"), #imageLiteral(resourceName: "sampleCategoryBreads"), #imageLiteral(resourceName: "sampleCategoryFruits"), #imageLiteral(resourceName: "sampleCategoryDessert")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +84,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             print("Location services are not enabled")
         }
         sessionManager.onViewWillAppear()
+        sampleImagCollectionView.delegate = self
+        sampleImagCollectionView.dataSource = self
         barcodeButton.setTitleColor(UIColor.lightGray, for: .disabled)
+        sampleImagCollectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
@@ -341,14 +347,14 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onSwitchTo(captureMode: CameraSessionManager.CameraCaptureMode) {
-        var activeButton: UIButton
+//        var activeButton: UIButton
         switch captureMode {
         case .photo:
-            activeButton = photoButton
+//            activeButton = photoButton
             capturePhotoButton.isHidden = false
             removeBarScannerLine()
         case .barcode:
-            activeButton = barcodeButton
+//            activeButton = barcodeButton
             capturePhotoButton.isHidden = true
             addBarScannerLine()
         }
@@ -483,7 +489,6 @@ extension CameraViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let parentVC = self.parent as! AddFoodViewController
         if let dest  = segue.destination as? RecognitionResultViewController {
             if recordType == RecordType.RecordByImage {
                 dest.cameraImage = chosenImageView.image!
@@ -504,8 +509,32 @@ extension CameraViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.latitude = (locations.last?.coordinate.latitude)!
         self.longitude = (locations.last?.coordinate.longitude)!
-        print("latitude:\(locations.last?.coordinate.latitude)")
-        print("longitude\(locations.last?.coordinate.longitude)")
         locationManager.stopUpdatingLocation()
     }
+}
+
+extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageArray.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sampleImageCell", for: indexPath) as? UICollectionViewCell {
+            let displayImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+            displayImage.image = imageArray[indexPath.row]
+            cell.addSubview(displayImage)
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showReview(image: imageArray[indexPath.row])
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: CGFloat(40), height: CGFloat(40))
+    }
+
 }

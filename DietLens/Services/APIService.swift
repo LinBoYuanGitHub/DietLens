@@ -826,18 +826,8 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let scanResult = response.result.value else {
-                    print("save device token failed due to : Server Data Type Error")
-                    completion(false)
-                    return
-                }
-                let jsonObject = JSON(scanResult)
-                if jsonObject == nil {
-                    completion(false)
-                } else {
-                    completion(true)
-                }
-        }
+                completion(true)
+            }
     }
 
     public func logOut(completion: @escaping (Bool) -> Void) {
@@ -995,6 +985,30 @@ class APIService {
                 } else {
                     completion(notications)
                 }
+        }
+    }
+
+    public func getSingleNotification(notificationId: String, completion: @escaping (NotificationModel?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.notificationURL+notificationId+"/")!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get notifcation failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("get notifcation failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonObj = JSON(result)
+                let notication = NotificationDataManager.instance.assembleSingleUserNotification(jsonobj: jsonObj)
+                completion(notication)
         }
     }
 
@@ -1195,10 +1209,10 @@ class APIService {
     }
 
     public func uploadStepData(stepList: [StepEntity], completion: @escaping (Bool) -> Void) {
-        var params = Dictionary<String, Any>()
-        var steps = [Dictionary<String, Any>]()
+        var params = [String: Any]()
+        var steps = [params]
         for step in stepList {
-            var params = Dictionary<String, Any>()
+            var params = [String: Any]()
             let dateStr = DateUtil.templateDateToString(date: step.date!)
             params["date"] = dateStr
             params["value"] = step.stepValue
@@ -1222,7 +1236,7 @@ class APIService {
         }
     }
 
-    public func uploadStepData(userId: String, params: Dictionary<String, Any>, completion: @escaping (Bool) -> Void) {
+    public func uploadStepData(userId: String, params: [String: Any], completion: @escaping (Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.saveStepDiaryURL+"?user_id="+userId)!,
             method: .put,
@@ -1241,7 +1255,6 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(result)
                 completion(true)
         }
     }

@@ -133,6 +133,7 @@ struct PreferenceKey {
     static let fatTarget = "fatTarget"
     static let tokenKey = "TOKEN"
     static let userIdkey = "userId"
+    static let fcmTokenKey = "FCMTOKEN"
     static let stepUploadLatestTime = "stepUploadKey"
 }
 

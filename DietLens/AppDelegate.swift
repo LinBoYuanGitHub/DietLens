@@ -13,6 +13,8 @@ import Firebase
 import RealmSwift
 import Fabric
 import Crashlytics
+import LGSideMenuController
+import HealthKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,12 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-        if let payload = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary, let identifier = payload["notificationListVC"] as? String {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
-            window?.rootViewController = viewController
-        }
         registerForPushNotifications()
+//        if let payload = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary, let identifier = payload["notificationListVC"] as? String {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
+//            window?.rootViewController = viewController
+//        }
+
 //        realmSetting(application)
 
 //        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -128,6 +131,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //upload user step to backend
+        uploadStepDataWhenNecessary()
+    }
+
+    //judege whether should upload step data to backend
+    func uploadStepDataWhenNecessary() {
+        let preferences = UserDefaults.standard
+        guard let stepUploadLatestTime = preferences.object(forKey: PreferenceKey.stepUploadLatestTime) as? Date else {
+            //no record so direct upload
+            requestHourlyStepData()
+            return
+        }
+        if Calendar.current.compare(stepUploadLatestTime, to: Date(), toGranularity: .day) == .orderedAscending {
+            //request step data & check sahredPreference then send to server
+            requestHourlyStepData()
+        }
+    }
+    //request today's data hourly
+    func requestHourlyStepData() {
+        //request step data & check sahredPreference then send to server
+        HKHealthStore().getHourlyStepsCountList { (steps, error) in
+            if error == nil {
+                //upload stepValue to server
+                APIService.instance.uploadStepData(stepList: steps, completion: { (isSuccess) in
+                    if isSuccess {
+                        //record current date
+                        let preferences = UserDefaults.standard
+                        preferences.setValue(Date(), forKey: PreferenceKey.stepUploadLatestTime)
+                    }
+                })
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -257,13 +292,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 let messageDict: [String: String] = ["message": alert]
                 NotificationCenter.default.post(name: .didReceiveNotification, object: nil, userInfo: messageDict)
             }
+            if let notificationId = userInfo["gcm.notification.id"] as? String {
+                //jump to notification detail page with notificationID
+                print("Notification ID: \(notificationId)")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController else {
+                    return
+                }
+                window?.rootViewController = viewController
+                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationDetailVC") as?  NotificationDetailViewController {
+                    dest.notificationId = notificationId
+                    window?.rootViewController?.sideMenuController?.rootViewController?.present(dest, animated: true, completion: nil)
+                }
+                //to notification detail
+//                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as?  NotificationsViewController {
+//                    window?.rootViewController?.sideMenuController?.rootViewController?.present(dest, animated: true, completion: nil)
+//                }
+
+            }
         }
         // Print full message
         completionHandler()
         //open the notification page from the background
-        if let viewController =  UIApplication.shared.keyWindow?.rootViewController as? HomeViewController {
-            viewController.performSegue(withIdentifier: "presentNotificationList", sender: self)
-        }
+
 //        let viewController = self.window!.rootViewController!.storyboard!.instantiateViewController(withIdentifier: "DietLens") as! HomeViewController
 
     }
@@ -274,23 +325,19 @@ extension AppDelegate: MessagingDelegate {
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
-        // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
         let preferences = UserDefaults.standard
-        let key = "userId"
-        let userId = preferences.string(forKey: key)
-        let token = preferences.string(forKey: PreferenceKey.tokenKey)
-        if token == nil {
-            //record fcmToken
-            let tokenKey = "fcmToken"
-            preferences.set(fcmToken, forKey: tokenKey)
-        } else {
-            //send token to server
+        let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+        if userId != nil {
+             //send token to server
             APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken, status: "True", completion: { (flag) in
                 if flag {
                     print("send device token succeed")
                 }
             })
+        }else{
+            //restore fcm token waitting for Login/Register to upload token
+            preferences.setValue(fcmToken, forKey: PreferenceKey.fcmTokenKey)
         }
     }
     // [END refresh_token]

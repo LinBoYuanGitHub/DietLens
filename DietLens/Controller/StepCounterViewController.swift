@@ -68,10 +68,8 @@ class StepCounterViewController: UIViewController {
 
     func getMaxValue() -> Double {
         var max: Double = 0.0
-        for stepEntity in stepsList {
-            if stepEntity.stepValue > max {
-                max = stepEntity.stepValue
-            }
+        for stepEntity in stepsList where stepEntity.stepValue > max {
+            max = stepEntity.stepValue
         }
         return max
     }
@@ -93,13 +91,11 @@ class StepCounterViewController: UIViewController {
 
     func uploadStepData() {
         var stepArray = [[String: Any]]()
-        for i in 0..<stepsList.count {
+        for index in 0..<stepsList.count {
             var step: [String: Any] = [:]
-            let dateStr = DateUtil.normalDateToString(date: stepsList[i].date!)
-//            let dataArr = dateStr.split(separator: "/")
-//            step["exercise_datetime"] = String(dataArr[2]) + "-" + String(dataArr[1]) + "-" + String(dataArr[0])
+            let dateStr = DateUtil.normalDateToString(date: stepsList[index].date!)
             step["exercise_datetime"] = dateStr
-            step["exercise_amount"] = String(stepsList[i].stepValue)
+            step["exercise_amount"] = String(stepsList[index].stepValue)
             stepArray.append(step)
         }
         let params = ["steps": stepArray]

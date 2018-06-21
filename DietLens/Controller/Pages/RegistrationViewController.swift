@@ -64,8 +64,18 @@ class RegistrationViewController: UIViewController {
                         preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
                         //to main page
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-                        self.present(vc, animated: true, completion: nil)
+                        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+                        self.present(viewController, animated: true, completion: nil)
+                        //save token to backend
+                        let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                        let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                        if userId != nil && fcmToken != nil {
+                            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: "true", completion: { (flag) in
+                                if flag {
+                                    print("send device token succeed")
+                                }
+                            })
+                        }
                     } else {
                         print("register failed")
                         AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
