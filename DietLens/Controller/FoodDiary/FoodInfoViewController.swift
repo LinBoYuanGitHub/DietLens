@@ -167,10 +167,8 @@ class FoodInfoViewController: UIViewController {
         quantityValue.text = String(dietItem.quantity)
         if isUpdate {
             //match portion by text
-            for portion in dietItem.portionInfo {
-                if portion.sizeUnit == dietItem.displayUnit {
+            for portion in dietItem.portionInfo where portion.sizeUnit == dietItem.displayUnit {
                     unitValue.text = portion.sizeUnit
-                }
             }
         } else if dietItem.portionInfo.count == 0 {
              unitValue.text = "portion"
@@ -428,7 +426,7 @@ class FoodInfoViewController: UIViewController {
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
                         //request for saving FoodDiary
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
+                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
                             dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                             if let navigator = self.navigationController {
                                 //pop all the view except HomePage
@@ -437,10 +435,10 @@ class FoodInfoViewController: UIViewController {
                                 }) {
                                     //add foodItem into foodDiaryVC
                                     for viewController in (self.navigationController?.viewControllers)! {
-                                        if let foodCalendarVC = viewController as? FoodCalendarViewController {
+                                        if let FoodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                navigator.popToViewController(foodCalendarVC, animated: true)
-                                                foodCalendarVC.shouldRefreshDiary = true
+                                            navigator.popToViewController(FoodDiaryHistoryVC, animated: true)
+                                                FoodDiaryHistoryVC.shouldRefreshDiary = true
                                             }
                                         }
                                     }

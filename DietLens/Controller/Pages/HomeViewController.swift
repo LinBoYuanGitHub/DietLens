@@ -129,13 +129,13 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             }
         case 1:
             //to food diary page
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
                 if let navigator = self.navigationController {
                     if navigator.viewControllers.contains(where: {
-                        return $0 is FoodCalendarViewController
+                        return $0 is FoodDiaryHistoryViewController
                     }) {
                         for viewController in (self.navigationController?.viewControllers)! {
-                            if let targetVC = viewController as? FoodCalendarViewController {
+                            if let targetVC = viewController as? FoodDiaryHistoryViewController {
                                 DispatchQueue.main.async {
                                     navigator.popToViewController(targetVC, animated: false)
                                 }

@@ -4,7 +4,32 @@
 //
 //  Created by next on 23/10/17.
 //  Copyright © 2017 NExT++. All rights reserved.
-//
+//                         _0_
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//*****************************************************
+//     ¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥¥
+//         €€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€
+//               $$$$$$$$$$$$$$$$$$$$$$$
+//                   BUDDHA_BLESS_YOU
+//                      AWAY_FROM
+//                         BUG
 
 import UIKit
 import CoreData
@@ -335,7 +360,7 @@ extension AppDelegate: MessagingDelegate {
                     print("send device token succeed")
                 }
             })
-        }else{
+        } else {
             //restore fcm token waitting for Login/Register to upload token
             preferences.setValue(fcmToken, forKey: PreferenceKey.fcmTokenKey)
         }

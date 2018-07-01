@@ -32,8 +32,12 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 //        self.leftViewPresentationStyle = .scaleFromLittle
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
-        // Do any additional setup after loading the view.
         //set nickname
+        refreshUserName()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshUserName), name: .shouldRefreshSideBarHeader, object: nil)
+    }
+
+    @objc func refreshUserName() {
         let preferences = UserDefaults.standard
         let nicknameKey = "nickname"
         let nickname =  preferences.string(forKey: nicknameKey)

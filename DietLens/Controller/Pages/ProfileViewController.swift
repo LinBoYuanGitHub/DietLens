@@ -174,6 +174,8 @@ class ProfileViewController: UIViewController {
         AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!, birthday: TFAge.text!) { (isSuccess) in
             NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
+            NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
+            //refresh the profile sharedPreference
             AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                 if isSuccess {
                     self.dismiss(animated: true, completion: nil)
@@ -207,6 +209,7 @@ extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 extension ProfileViewController: UITextFieldDelegate {
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == TFName {
             TFGender.becomeFirstResponder()

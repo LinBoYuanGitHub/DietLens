@@ -99,13 +99,13 @@ class TextInputViewController: UIViewController {
     func showCancelBtn() {
         cancelBtn.isHidden = false
         textFieldTrailing.constant = 74
-        textFieldTop.constant = 20
+        textFieldTop.constant = 10
     }
 
     func hideCancelBtn() {
         cancelBtn.isHidden = true
         textFieldTrailing.constant = 16
-        textFieldTop.constant =  20
+        textFieldTop.constant =  10
     }
 
     @IBAction func onCancelBtnPressed(_ sender: Any) {

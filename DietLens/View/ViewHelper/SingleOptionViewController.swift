@@ -19,7 +19,7 @@ class SingleOptionViewController: UIViewController {
     @IBOutlet weak var singleSelectionTable: UITableView!
 
     //delegate for single option
-    var delegate: SingleOptionAlerViewDelegate?
+    weak var delegate: SingleOptionAlerViewDelegate?
     //option item List, for display the item
 //    var optionList = [String]()
      var optionList = ["Standard sizing (200g)", "Small sizing (100g)", "Larget sizing (350g)", "Grams"]

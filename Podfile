@@ -34,6 +34,7 @@ target 'DietLens' do
   pod 'NVActivityIndicatorView'
   #rating view
   pod 'Cosmos', '~> 15.0'
+  pod 'CRRulerControl'
 
   target 'DietLensTests' do
     inherit! :search_paths

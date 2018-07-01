@@ -9,7 +9,7 @@
 import UIKit
 import FSCalendar
 
-class FoodCalendarViewController: UIViewController {
+class FoodCalendarViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var foodCalendarTableView: UITableView!
     @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
@@ -19,6 +19,7 @@ class FoodCalendarViewController: UIViewController {
     @IBOutlet weak var nutritionCollectionView: UICollectionView!
     @IBOutlet weak var calendarBtn: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var calendarClickableView: UIButton!
 
     var foodMealList = [FoodDiaryMealEntity]()
     var displayDict = [Int: (String, Double)]()
@@ -80,8 +81,7 @@ class FoodCalendarViewController: UIViewController {
         }
     }
 
-    func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
-        //TODO handle hardcode display
+    func assembleDisplayDict(nutritionDict: [String: Double]) {
         displayDict[0] = ("CALORIE", floor(nutritionDict["energy"]!))
         displayDict[1] = ("PROTEIN", nutritionDict["protein"]!)
         displayDict[2] = ("FAT", nutritionDict["fat"]!)
@@ -98,6 +98,23 @@ class FoodCalendarViewController: UIViewController {
 
     @IBAction func showCalendar(_ sender: Any) {
         bringInCalendar(sender)
+//        if let calendarDialog = self.storyboard?.instantiateViewController(withIdentifier: "calendarDialogVC") as? CalendarDialogViewController {
+//            calendarDialog.calendarDelegate = self
+//            calendarDialog.providesPresentationContextTransitionStyle = true
+//            calendarDialog.preferredContentSize = CGSize(width: self.view.frame.width, height: 300)
+//            calendarDialog.popoverPresentationController?.permittedArrowDirections = .down
+//            calendarDialog.modalPresentationStyle = UIModalPresentationStyle.popover
+//            //set up popover presentation controller
+//            calendarDialog.popoverPresentationController?.backgroundColor = UIColor.white
+//            calendarDialog.popoverPresentationController?.sourceView = self.calendarBtn
+//            calendarDialog.popoverPresentationController?.sourceRect = calendarBtn.bounds
+//            calendarDialog.popoverPresentationController?.delegate = self
+//            self.present(calendarDialog, animated: true, completion: nil)
+//        }
+    }
+
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
 
     func registerNib() {
@@ -332,13 +349,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
     func calculateCalorie(foodEntityList: [FoodDiaryEntity]) -> Int {
         var accumulatedCalorie = 0
         for foodEntity in foodEntityList {
-            for dietItem in foodEntity.dietItems {
-                var ratio = dietItem.quantity
-                if dietItem.portionInfo.count != 0 {
-                    ratio = dietItem.quantity*dietItem.portionInfo[dietItem.selectedPos].weightValue/100
-                }
-                accumulatedCalorie += Int(dietItem.nutritionInfo.calorie*ratio)
-            }
+            accumulatedCalorie += calculateCalorie(foodEntity: foodEntity)
         }
         return accumulatedCalorie
     }
@@ -483,4 +494,24 @@ extension FoodCalendarViewController: FSCalendarDelegate, FSCalendarDataSource, 
         let dateStr = DateUtil.normalDateToString(date: currentDate)
         getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
     }
+}
+
+extension FoodCalendarViewController: CalendarAlertDelegate {
+
+    func onCalendarDateSelected(selectedDate: Date) {
+        let later = DispatchTime.now() + 0.3
+        DispatchQueue.main.asyncAfter(deadline: later) {
+            self.dismissCalendar(selectedDate)
+            self.selectedDate = selectedDate
+            self.dateLabel.text = self.formatter.string(from: selectedDate)
+            self.getFoodDairyByDate(date: selectedDate)
+            self.loadDailyNutritionView()
+        }
+    }
+
+    func onCalendarCurrentPageDidChange(changedDate: Date) {
+        let dateStr = DateUtil.normalDateToString(date: changedDate)
+        getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
+    }
+
 }

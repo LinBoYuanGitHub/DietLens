@@ -14,4 +14,5 @@ extension Notification.Name {
     static let addIngredient = Notification.Name("addingredient")
     static let onSideMenuClick = Notification.Name("onsidemenuclick")
     static let shouldRefreshMainPageNutrition = Notification.Name("shouldrefreshmainpagenutrition")
+    static let shouldRefreshSideBarHeader = Notification.Name("shouldRefreshSideBarHeader")
 }

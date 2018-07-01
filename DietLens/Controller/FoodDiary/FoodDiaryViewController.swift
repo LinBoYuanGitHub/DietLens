@@ -175,7 +175,7 @@ class FoodDiaryViewController: UIViewController {
             APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
+                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
                             dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                             if let navigator = self.navigationController {
                                 //pop all the view except HomePage
@@ -184,10 +184,10 @@ class FoodDiaryViewController: UIViewController {
                                 }) {
                                     //add foodItem into foodDiaryVC
                                     for viewController in (self.navigationController?.viewControllers)! {
-                                        if let foodCalendarVC = viewController as? FoodCalendarViewController {
+                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
                                             DispatchQueue.main.async {
-                                                navigator.popToViewController(foodCalendarVC, animated: true)
-                                                foodCalendarVC.shouldRefreshDiary = true
+                                                navigator.popToViewController(foodDiaryHistoryVC, animated: true)
+                                                foodDiaryHistoryVC.shouldRefreshDiary = true
                                             }
                                         }
                                     }

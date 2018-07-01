@@ -112,6 +112,33 @@ class APIService {
                 completion(true)
         }
     }
+    
+    public func emailValidationRequest(userEmail:String,completion:@escaping (_ isSuccess: Bool) -> Void,failedComoletion: @escaping (_ failedMsg: String) -> Void){
+        Alamofire.request(
+            URL(string: ServerConfig.checkEmailURL)!,
+            method: .post,
+            parameters: ["email": userEmail],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Email checking web API invoke failed")
+                    completion(false)
+                    return
+                }
+                let jsonObj = JSON(response.result.value)
+                let status = jsonObj["status"].intValue
+                if status == 1 {
+                    completion(true)
+                } else {
+                    let errMsg = jsonObj["message"].stringValue
+                    failedComoletion(errMsg)
+                }
+        }
+    }
+    
+    
 
     public func loginRequest(userEmail: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         Alamofire.request(
@@ -170,8 +197,8 @@ class APIService {
                     completion(false)
                     return
                 }
-                let userId = value["id"].stringValue
-                let nickname = value["nickname"].stringValue
+//                let userId = value["id"].stringValue
+//                let nickname = value["nickname"].stringValue
                 //                let rooms = rows.flatMap({ (roomDict) -> RemoteRoom? in
                 //                    return RemoteRoom(jsonData: roomDict)
                 //                })
@@ -408,8 +435,8 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(detail)["data"]
-                let Ingredient = FoodInfoDataManager.instance.assembleIngredientInfo(jsonObject: jsonObj)
-                completion(Ingredient)
+                let ingredient = FoodInfoDataManager.instance.assembleIngredientInfo(jsonObject: jsonObj)
+                completion(ingredient)
         }
     }
 
@@ -615,10 +642,33 @@ class APIService {
                 completion(true)
         }
     }
+    
+    public func deleteFoodDiaryList(foodDiaryIds:[String],completion:@escaping(Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.foodDiaryDeleteAll)!,
+            method: .post,
+            parameters: ["discarded_logs":foodDiaryIds],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("delete foodDiary failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("delete foodDiary failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
 
     //update foodDiary
     public func updateFoodDiary(isPartialUpdate: Bool, foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
-        var param: Dictionary<String, Any> = [:]
+        var param: [String: Any] = [:]
         if isPartialUpdate {
             param = FoodInfoDataManager.instance.partialParamfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
         } else {
@@ -946,12 +996,11 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let scanResult = response.result.value else {
-                    print("update profile failed due to : Server Data Type Error")
-                    completion(false)
-                    return
-                }
-                 completion(true)
+                //save profile into sharedPreference
+                let preferences = UserDefaults.standard
+                let nicknameKey = "nickname"
+                preferences.set(name, forKey: nicknameKey)
+                completion(true)
         }
     }
 
@@ -1259,7 +1308,7 @@ class APIService {
         }
     }
 
-    //healthCenter
+    //healthCenter logs
     func uploadHealthCenterData(userId: String, title: String, content: String, unit: String, amount: String, datetime: String, completion: @escaping (Bool) -> Void) {
         let params = ["title": title, "content": content, "unit": unit, "amount": amount, "datetime": datetime]
         Alamofire.request(
@@ -1286,8 +1335,8 @@ class APIService {
     }
 
     //get dietary guide
-    public func getDietaryGuideInfo(completion: @escaping (Dictionary<String, Double>) -> Void) {
-        var guideDict = Dictionary<String, Double>()
+    public func getDietaryGuideInfo(completion: @escaping ([String: Double]) -> Void) {
+        var guideDict = [String: Double]()
         Alamofire.request(
             URL(string: ServerConfig.dietaryGuideURL)!,
             method: .get,
@@ -1315,10 +1364,10 @@ class APIService {
     }
 
     //daily nutrition sum
-    func getDailySum(date: Date, completion: @escaping (Dictionary<String, Double>) -> Void) {
+    func getDailySum(date: Date, completion: @escaping ([String: Double]) -> Void) {
         let dateStr = DateUtil.normalDateToString(date: date)
         let param = ["date": dateStr]
-        var responseDict = [:] as Dictionary<String, Double>
+        var responseDict = [:] as [String: Double]
         Alamofire.request(
             URL(string: ServerConfig.nutritionDailySum)!,
             method: .post,
@@ -1370,7 +1419,7 @@ class APIService {
         }
     }
     //basic authentication header
-    func getBasicAuthenticationHeader() -> Dictionary<String, String> {
+    func getBasicAuthenticationHeader() -> [String: String] {
         let preferences = UserDefaults.standard
         let userNameKey = "username"
         let pwdKey = "password"
@@ -1392,7 +1441,7 @@ class APIService {
     }
 
     //special header for webhook
-    func getHardCodeBasicAuthenticationHeader() -> Dictionary<String, String> {
+    func getHardCodeBasicAuthenticationHeader() -> [String: String] {
         let header = ["Authorization": "Basic YThkMjM2MzYxZmRkZjJmZTlmZmYxNjE2ZTAzNzU1NDI6ODYwMzBiZWVkMjEyNGY0YmRjZmU3MGU3YzE4YTA1YmI="]
         return header
     }

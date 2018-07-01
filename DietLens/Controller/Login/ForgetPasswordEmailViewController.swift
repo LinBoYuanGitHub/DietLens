@@ -45,7 +45,7 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func cfmEmailPressed(_ sender: Any) {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
-            // TODO:Call backend server
+            // call backend server
             AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess) in
                 if isSuccess {

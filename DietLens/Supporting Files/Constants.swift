@@ -38,6 +38,7 @@ struct ServerConfig {
     static let logOutURL = labDeskTopURL + "/users/logout/"
     static let userLoginURL = labDeskTopURL + "/users/login/"
     static let registry = labDeskTopURL + "/users/register/"
+    static let checkEmailURL = labDeskTopURL + "/users/email-check/"
 
     static let getUUidURL = baseURL + "/anonymous/"
     static let thirdPartyLoginURL = baseURL + "/3rdlogin"
@@ -63,9 +64,12 @@ struct ServerConfig {
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 //    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"
     static let uploadImageKeyURL = "https://recognize.dietlens.com/webHook"
+    //health center log
+    static let uploadHealthCenterData = labDeskTopURL + "/healthlogs/"
     //foodDiary CRUD
     static let foodDiaryOperationURL = labDeskTopURL + "/foodinfo/"
     static let foodDiaryDietLogs = labDeskTopURL + "/dietlogs/"
+    static let foodDiaryDeleteAll = labDeskTopURL + "/dietlogs/delete-logs/"
     static let foodDiaryDietItems = labDeskTopURL + "/dietlogs/delete-detail/"
     static let foodDiaryCalendar = labDeskTopURL + "/dietlogs/calendar/"
     //get nutrition sum
@@ -142,8 +146,8 @@ struct Dimen {
     static let NewsArticleCollectionHeight = 220
     static let EventsFirstRowHeight = 310
     static let EventsRowHeight = 275
-    static let foodCalendarImageWidth = 84
-    static let foodCalendarImageHeight = 100
+    static let foodCalendarImageWidth = 68
+    static let foodCalendarImageHeight = 68
 }
 
 struct NotificationType {
