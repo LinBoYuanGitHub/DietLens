@@ -8,19 +8,18 @@
 
 import UIKit
 
-class HealthCenterMainCell:UITableViewCell {
-    @IBOutlet weak var container:UIView!
+class HealthCenterMainCell: UITableViewCell {
+    @IBOutlet weak var container: UIView!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var itemName: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var dateLabel:UILabel!
-    
-    
+    @IBOutlet weak var dateLabel: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    func setUpCell(recordType:String, latestValue:String, dateTime:String){
+
+    func setUpCell(recordType: String, latestValue: String, dateTime: String) {
         switch recordType {
         case "0":
             itemName.text = "Weight"
@@ -32,6 +31,5 @@ class HealthCenterMainCell:UITableViewCell {
             break
         }
     }
-    
-    
+
 }

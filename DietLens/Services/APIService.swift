@@ -112,8 +112,8 @@ class APIService {
                 completion(true)
         }
     }
-    
-    public func emailValidationRequest(userEmail:String,completion:@escaping (_ isSuccess: Bool) -> Void,failedComoletion: @escaping (_ failedMsg: String) -> Void){
+
+    public func emailValidationRequest(userEmail: String, completion:@escaping (_ isSuccess: Bool) -> Void, failedComoletion: @escaping (_ failedMsg: String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.checkEmailURL)!,
             method: .post,
@@ -137,8 +137,6 @@ class APIService {
                 }
         }
     }
-    
-    
 
     public func loginRequest(userEmail: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         Alamofire.request(
@@ -642,12 +640,12 @@ class APIService {
                 completion(true)
         }
     }
-    
-    public func deleteFoodDiaryList(foodDiaryIds:[String],completion:@escaping(Bool) -> Void) {
+
+    public func deleteFoodDiaryList(foodDiaryIds: [String], completion:@escaping(Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDeleteAll)!,
             method: .post,
-            parameters: ["discarded_logs":foodDiaryIds],
+            parameters: ["discarded_logs": foodDiaryIds],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
@@ -1332,6 +1330,31 @@ class APIService {
                 let jsonObject = JSON(result)
                 completion(true)
         }
+    }
+
+    func uploadHealthCenterData(category: String, value: Int, date: String, time: String, completion: @escaping (Bool) -> Void) {
+        let params = ["category": category, "value": value, "date": date, "time": time] as [String: Any]
+        Alamofire.request(URL(string: ServerConfig.uploadHealthCenterData)!,
+                          method: .post,
+                          parameters: params,
+                          encoding: JSONEncoding.default,
+                          headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("Save exercise data failed due to : Server Data Type Error")
+                    completion(false)
+                    return
+                }
+                let jsonObject = JSON(result)
+                completion(true)
+        }
+
     }
 
     //get dietary guide

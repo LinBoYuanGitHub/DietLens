@@ -193,7 +193,7 @@ extension HKHealthStore {
         var anchorComponents = calendar.dateComponents([.day, .month, .year, .weekday], from: Date())
 //        let offset = (7 + anchorComponents.weekday! - 2) % 7
 //        anchorComponents.day! -= offset
-        anchorComponents.hour = 8
+        anchorComponents.hour = 0
         guard let anchorDate = calendar.date(from: anchorComponents) else {
             fatalError("*** unable to create a valid date from the given components ***")
         }
