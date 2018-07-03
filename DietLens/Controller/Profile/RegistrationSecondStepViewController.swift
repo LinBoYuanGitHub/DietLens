@@ -9,11 +9,13 @@
 import UIKit
 class RegistrationSecondStepViewController: UIViewController {
     @IBOutlet weak var TFDate: UITextField!
-    @IBOutlet weak var datePicker: UIDatePicker!
+    var datePicker: UIDatePicker!
      //buttons
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var skipBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
+    //entity
+    var profile = UserProfile()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,7 @@ class RegistrationSecondStepViewController: UIViewController {
         let componenets = Calendar.current.dateComponents([.year, .month, .day], from: sender.date)
         if let day = componenets.day, let month = componenets.month, let year = componenets.year {
             TFDate.text = "\(year)-\(month)-\(day)"
+            profile.birthday = TFDate.text!
         }
     }
 
@@ -54,13 +57,18 @@ class RegistrationSecondStepViewController: UIViewController {
 
     @IBAction func next(_ sender: UIButton) {
         //fill in data & jump to final
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC3") as? RegistrationSecondStepViewController {
-            self.navigationController?.pushViewController(dest, animated: true)
+        if profile.birthday.isEmpty {
+            return
+        }
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC3") as? RegistrationThirdStepViewController {
+                dest.profile = profile
+                self.navigationController?.pushViewController(dest, animated: true)
         }
     }
 
     @IBAction func skip(_ sender: UIButton) {
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC3") as? RegistrationSecondStepViewController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC3") as? RegistrationThirdStepViewController {
+            dest.profile = profile
             self.navigationController?.pushViewController(dest, animated: true)
         }
     }

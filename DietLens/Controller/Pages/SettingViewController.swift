@@ -59,7 +59,7 @@ class SettingViewController: UIViewController {
                     DispatchQueue.main.async {
                             self.clearPersonalData()
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+                            let controller = storyboard.instantiateViewController(withIdentifier: "LoginVC")
                             self.present(controller, animated: true, completion: nil)
                     }
                 })

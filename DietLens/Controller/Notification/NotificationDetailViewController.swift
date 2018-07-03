@@ -20,6 +20,7 @@ class NotificationDetailViewController: UIViewController {
     @IBOutlet weak var scroller: UIScrollView!
 //    @IBOutlet weak var promptHeight: NSLayoutConstraint!
     @IBOutlet weak var promptView: UITextView!
+    @IBOutlet weak var dateLabel: UILabel!
 //    @IBOutlet weak var scrollerBottomSpace: NSLayoutConstraint!
 //    @IBOutlet weak var contentView: UIView!
 
@@ -55,7 +56,9 @@ class NotificationDetailViewController: UIViewController {
     }
 
     func initViews() {
+        // - May 22, 2018
         messageView.text = notificationModel.content
+        dateLabel.text = " - " + DateUtil.formatNotificationDateToString(date: notificationModel.createTime)
         //        adjustUITextViewHeight(textView: messageView)
         messageContentHeight.constant = messageView.fs_height + CGFloat(110)
         if notificationModel.responseType == NotificationType.NoneType {

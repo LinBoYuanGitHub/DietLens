@@ -16,6 +16,8 @@ class RegistrationForthStepViewController: UIViewController {
     @IBOutlet weak var signInBtn: UIButton!
     //slider
     @IBOutlet weak var  activitySlider: UISlider!
+    //profile entity
+    var profile: UserProfile?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +31,34 @@ class RegistrationForthStepViewController: UIViewController {
     }
 
     @IBAction func next(_ sender: UIButton) {
+        //upload Profile
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        //upload APIService
+        if profile != nil {
+            APIService.instance.updateProfile(userId: userId!, name: profile!.name, gender: profile!.gender, height: profile!.height, weight: profile!.weight, birthday: profile!.birthday) { (isSuccess) in
+                if isSuccess {
 
+                } else {
+
+                }
+            }
+        } else {
+            //update profile err msg
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
+        }
     }
 
     @IBAction func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func skip(_ sender: UIButton) {
+        //to main page
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+//        self.present(viewController, animated: true, completion: nil)
     }
 
     @IBAction func toSignInPage(_ sender: UIButton) {

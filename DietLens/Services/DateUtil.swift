@@ -80,4 +80,12 @@ class DateUtil {
         return resultStr
     }
 
+    public static func formatNotificationDateToString(date: Date) -> String {
+        //- May 22, 2018
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
 }

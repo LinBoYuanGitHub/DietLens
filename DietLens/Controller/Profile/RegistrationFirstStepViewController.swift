@@ -18,6 +18,10 @@ class RegistrationFirstStepViewController: UIViewController {
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var skipBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
+    //text reminder
+    @IBOutlet weak var emailCheckerLabel: UILabel!
+    @IBOutlet weak var errMsgLabel: UILabel!
+    @IBOutlet weak var redTick: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,22 +32,59 @@ class RegistrationFirstStepViewController: UIViewController {
         hideKeyboardWhenTappedAround()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
+        //navigation controller
+        self.navigationController?.navigationBar.isHidden = false
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+    }
+
+    @objc func onBackPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    func checkEmail(email: String) {
+        //return if email is empty
+        if email.isEmpty {
+            return
+        }
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
+            self.navigationController?.pushViewController(dest, animated: true)
+        }
+//        APIService.instance.emailValidationRequest(userEmail: email, completion: { (isSuccess) in
+//            self.redTick.isHidden = !isSuccess
+//            self.emailCheckerLabel.isHidden = isSuccess
+//        }) { (errMessage) in
+//            self.emailCheckerLabel.alpha = 1
+//            self.emailCheckerLabel.text = errMessage
+//            self.redTick.isHidden = true
+//        }
+    }
+
     @IBAction func signUp(_ sender: UIButton) {
         if (TFuserName.text?.isEmpty)! {
             print("please fill in nick name")
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter a nickname")
+            errMsgLabel.text = "Please enter a nickname"
+//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter a nickname")
             return
         } else if (TFemail.text?.isEmpty)! {
             print("please fill in email")
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
+            errMsgLabel.text = "please fill in email"
+//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if (TFpassword.text?.isEmpty)! {
             print("please fill in password")
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
+            errMsgLabel.text = "please fill in password"
+//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if TFconfirmPassword.text != TFpassword.text {
             print("please confirm password again")
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
+            errMsgLabel.text = "please confirm password again"
+//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
@@ -55,9 +96,13 @@ class RegistrationFirstStepViewController: UIViewController {
                         let pwdKey = "password"
                         preferences.setValue(self.TFpassword.text!, forKey: pwdKey)
                         //to main page
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-                        self.present(viewController, animated: true, completion: nil)
+//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+//                        self.present(viewController, animated: true, completion: nil)
+                        //to registration VC2 page
+                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
+                            self.navigationController?.pushViewController(dest, animated: true)
+                        }
                         //save token to backend
                         let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
                         let userId = preferences.string(forKey: PreferenceKey.userIdkey)
@@ -102,13 +147,6 @@ class RegistrationFirstStepViewController: UIViewController {
          dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func next(_ sender: UIButton) {
-        //fill in data & jump to final
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
-            self.navigationController?.pushViewController(dest, animated: true)
-        }
-    }
-
 }
 
 extension RegistrationFirstStepViewController: UITextFieldDelegate {
@@ -134,6 +172,9 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == TFemail {
+            checkEmail(email: TFemail.text!)
+        }
         keyboardWillHide()
         return true
     }

@@ -13,6 +13,7 @@ class ForgetPasswordVerifyViewController: UIViewController, UITextFieldDelegate 
     var emailFromForgetPw: String = ""
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var verificationField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         verificationField.delegate = self

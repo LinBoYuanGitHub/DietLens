@@ -16,8 +16,9 @@ class NotificationsViewController: UIViewController {
     @IBOutlet weak var emptyViewLabel: UILabel!
 
     @IBOutlet weak var clearButton: UIButton!
-
+    //notification data & pagination
     var notificationSectionList = [NotificationSection]()
+    var currentLink = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,22 +32,20 @@ class NotificationsViewController: UIViewController {
 
     @objc func refresh(_ notification: NSNotification) {
         getNotifcationData()
-//        if (notification.userInfo?["message"] as? String) != nil {
-//            listOfNotifications.append(NotificationModel.init(id: "A1", title: "Reminder", body: "It's past lunch tine. Don't forget to eat!", content: "It's past lunch tine. Don't forget to eat!", prompt: "", imgUrl: "", responseType: "1", responseOptions: [], read: true, dateReceived: Date()))
-//            let range = NSRange(location: 0, length: 1)
-//            let sections = NSIndexSet(indexesIn: range)
-//            notificationTable.reloadSections(sections as IndexSet, with: UITableViewRowAnimation.automatic)
-//        }
     }
 
     func getNotifcationData() {
-        APIService.instance.getNotificationList { (notificationList) in
+        APIService.instance.getNotificationList(completion: { (notificationList) in
             self.notificationSectionList.removeAll()
             if notificationList != nil {
                 if notificationList?.count == 0 {
                     self.clearButton.isHidden = true
+                    self.emptyViewIcon.isHidden = false
+                    self.emptyViewLabel.isHidden = false
                 } else {
                     self.clearButton.isHidden = false
+                    self.emptyViewIcon.isHidden = true
+                    self.emptyViewLabel.isHidden = true
                 }
                 for notification in notificationList! {
                     var flag = true
@@ -63,6 +62,8 @@ class NotificationsViewController: UIViewController {
                 }
                 self.notificationTable.reloadData()
             }
+        }) { (nextLink) in
+            self.currentLink = nextLink
         }
     }
 

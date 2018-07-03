@@ -134,6 +134,7 @@ class APIService {
                 } else {
                     let errMsg = jsonObj["message"].stringValue
                     failedComoletion(errMsg)
+                    completion(false)
                 }
         }
     }
@@ -860,6 +861,7 @@ class APIService {
      * return: is save success
      */
     public func saveDeviceToken(uuid: String, fcmToken: String, status: String, completion: @escaping (Bool) -> Void) {
+        //consider the case that user haven't got the token
         //device type 1: IOS, 2: Android
         Alamofire.request(
             URL(string: ServerConfig.saveNotificationTokenURL)!,
@@ -1007,9 +1009,41 @@ class APIService {
      * param: userId
      * return: list of notification
      */
-    public func getNotificationList(completion: @escaping ([NotificationModel]?) -> Void) {
+    public func getNotificationList(completion: @escaping ([NotificationModel]?) -> Void, nextLinkCompletion: @escaping (String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.notificationURL)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get notifcation failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("get notifcation failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonArr = JSON(scanResult)["results"]
+                //return next link
+                let nextLink = jsonArr["next"].stringValue
+                nextLinkCompletion(nextLink)
+                //use notifications
+                let notications = NotificationDataManager.instance.assembleUserNotification(jsonArr: jsonArr)
+                if jsonArr == nil {
+                    completion(nil)
+                } else {
+                    completion(notications)
+                }
+        }
+    }
+
+    public func getNotificationList(link: String, completion: @escaping ([NotificationModel]?) -> Void) {
+        Alamofire.request(
+            link,
             method: .get,
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
@@ -1458,8 +1492,8 @@ class APIService {
     func getTokenHeader() -> Dictionary<String, String> {
 //        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
         let preferences = UserDefaults.standard
-        let token = preferences.string(forKey: PreferenceKey.tokenKey)
-        let header = ["Authorization": "Token "+token!]
+        let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
+        let header = ["Authorization": "Token "+token]
         return header
     }
 

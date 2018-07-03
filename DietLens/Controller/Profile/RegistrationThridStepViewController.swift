@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegistrationThridStepViewController: UIViewController {
+class RegistrationThirdStepViewController: UIViewController {
     //ruler view
     @IBOutlet weak var weightRulerView: UIView!
     @IBOutlet weak var heightRulerView: UIView!
@@ -39,7 +39,7 @@ class RegistrationThridStepViewController: UIViewController {
         }
     }
 
-    @IBAction func back(_ sender: UIButton) {
+    func back() {
         self.navigationController?.popViewController(animated: true)
     }
 
