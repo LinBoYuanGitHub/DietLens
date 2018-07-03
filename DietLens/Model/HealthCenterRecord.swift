@@ -15,8 +15,8 @@ class HealthCenterRecord {
     var value: Float = 0.0
     var unit = ""
     var date = Date()
-    
-    init(type: String, itemName: String, value: Float, unit:String, date:Date) {
+
+    init(type: String, itemName: String, value: Float, unit: String, date: Date) {
         self.type = type
         self.itemName = itemName
         self.value = value

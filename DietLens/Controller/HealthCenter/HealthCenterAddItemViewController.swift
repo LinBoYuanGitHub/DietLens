@@ -8,20 +8,20 @@
 
 import UIKit
 
-class HealthCenterAddItemViewController:UIViewController {
+class HealthCenterAddItemViewController: UIViewController {
     //recordType
     var recordType = ""
     var recordName = ""
     //component
-    @IBOutlet weak var TFValue:UITextField!
-    @IBOutlet weak var TFDate:UITextField!
-    @IBOutlet weak var TFTime:UITextField!
+    @IBOutlet weak var TFValue: UITextField!
+    @IBOutlet weak var TFDate: UITextField!
+    @IBOutlet weak var TFTime: UITextField!
     //3 type of input dialog(UISlider,ruler,keyboard)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
         //add record name
@@ -31,6 +31,5 @@ class HealthCenterAddItemViewController:UIViewController {
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
-    
-    
+
 }

@@ -7,21 +7,21 @@
 //
 
 import UIKit
-class HealthCenterTableViewController:UIViewController {
-    
-    @IBOutlet weak var healthCenterBarTable:UITableView!
+class HealthCenterTableViewController: UIViewController {
+
+    @IBOutlet weak var healthCenterBarTable: UITableView!
     //data passing part
     var recordType = ""
     var recordName = ""
     //data type
     var recordList = [HealthCenterRecord]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         healthCenterBarTable.delegate = self
         healthCenterBarTable.dataSource = self
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
         //add record name
@@ -31,13 +31,13 @@ class HealthCenterTableViewController:UIViewController {
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
-    
-    func addRightNavigationButton(){
+
+    func addRightNavigationButton() {
         let rightNavButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(onAddItem))
         self.navigationItem.rightBarButtonItem = rightNavButton
     }
-    
-    @objc func onAddItem(){
+
+    @objc func onAddItem() {
         //to add single item page
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HealthCenterAddItemVC") as? HealthCenterAddItemViewController {
             dest.recordType  = recordType
@@ -48,16 +48,13 @@ class HealthCenterTableViewController:UIViewController {
 }
 
 extension HealthCenterTableViewController: UITableViewDataSource, UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recordList.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
-    
-    
-    
-    
+
 }

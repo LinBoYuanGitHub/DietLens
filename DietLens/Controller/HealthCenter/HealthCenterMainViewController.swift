@@ -8,15 +8,15 @@
 
 import UIKit
 
-class HealthCenterMainViewController:UIViewController {
-    
-    @IBOutlet weak var healthCenterTable:UITableView!
+class HealthCenterMainViewController: UIViewController {
+
+    @IBOutlet weak var healthCenterTable: UITableView!
     //data part
 //    let iconArray = []
-    
-    let itemArray = ["Weight","Blood glucose","Mood"]
+
+    let itemArray = ["Weight", "Blood glucose", "Mood"]
     var latestRecordArray = [HealthCenterRecord]() // 3 latest item
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         healthCenterTable.delegate = self
@@ -31,8 +31,8 @@ class HealthCenterMainViewController:UIViewController {
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
-    
-    func getLatestHealthCenterItemValue(){
+
+    func getLatestHealthCenterItemValue() {
         //use mockedUp data
         let latestWeight = HealthCenterRecord.init(type: "0", itemName: "Weight", value: 50, unit: "kg", date: Date())
         let latestBloodGlucose = HealthCenterRecord.init(type: "1", itemName: "Blood glucose", value: 5.6, unit: "mmol/L", date: Date())
@@ -43,23 +43,22 @@ class HealthCenterMainViewController:UIViewController {
         healthCenterTable.reloadData()
     }
 
-
 }
 
-extension HealthCenterMainViewController:UITableViewDelegate, UITableViewDataSource {
-    
+extension HealthCenterMainViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //jump to healthCenterTableViewVC
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HealthCenterTable") as? HealthCenterTableViewController {
@@ -69,6 +68,5 @@ extension HealthCenterMainViewController:UITableViewDelegate, UITableViewDataSou
             self.navigationController?.pushViewController(dest, animated: true)
         }
     }
-    
-    
+
 }
