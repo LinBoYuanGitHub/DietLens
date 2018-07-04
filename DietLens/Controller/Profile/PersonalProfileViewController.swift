@@ -17,6 +17,8 @@ class PersonalProfileViewController: UIViewController {
     //profile entity list
     var profileSectionList = [profileSection]()
     let genderList = ["male", "female", "others"]
+    //profile
+    var profile = UserProfile()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +72,7 @@ class PersonalProfileViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //set sideBar menu
     }
 
     @IBAction func closePage() {
@@ -87,13 +90,35 @@ class PersonalProfileViewController: UIViewController {
         genderPickerView.delegate = self
     }
 
+    @IBAction func save(_ sender: Any) {
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        APIService.instance.updateProfile(userId: userId!, name: profile.name, gender: profile.gender, height: profile.height, weight: profile.weight, birthday: profile.birthday) { (isSuccess) in
+            if isSuccess {
+                NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
+                NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
+                //refresh the profile sharedPreference
+                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                    if isSuccess {
+                        self.dismiss(animated: true, completion: nil)
+                    } else {
+                        //error alert
+                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
+                    }
+                }
+            }
+        }
+    }
+
     @objc func dateChanged(_ sender: UIDatePicker) {
         let componenets = Calendar.current.dateComponents([.year, .month, .day], from: sender.date)
         if let day = componenets.day, let month = componenets.month, let year = componenets.year {
             //set data into component
             let indxPath = IndexPath(row: 1, section: 1)
             if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
-                dateCell.inptText.text = "\(year)-\(month)-\(day)"
+                let monthStr = DateUtil.formatMonthToString(date: sender.date)
+                dateCell.inptText.text = "\(day)-\(monthStr)-\(year)"
             }
         }
     }
@@ -147,10 +172,15 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
             //textField
             if let cell = tableView.dequeueReusableCell(withIdentifier: "profileTextFieldCell", for: indexPath) as? ProfileTextFieldCell {
                 cell.setUpCell(keyText: profileEntity.profileName, valueText: profileEntity.profileValue)
+                if indexPath.row == 1 && indexPath.section == 0 {
+                    cell.inptText.placeholder = ""
+                }
                 if indexPath.row == 0 && indexPath.section == 1 {
                     cell.inptText.inputView = genderPickerView
+                    cell.inptText.placeholder = "Select Gender"
                 } else if indexPath.row == 1 && indexPath.section == 1 {
-                     cell.inptText.inputView = birthDayPickerView
+                    cell.inptText.placeholder = "birthday"
+                    cell.inptText.inputView = birthDayPickerView
                 }
                 return cell
             }

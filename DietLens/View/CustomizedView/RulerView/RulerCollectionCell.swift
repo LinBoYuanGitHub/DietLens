@@ -36,7 +36,7 @@ class RulerCollectionCell: UICollectionViewCell {
             if index % 5 == 0 {
                 textLabel = UILabel()
                 textLabel?.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-                textLabel?.text = "\(index * 100)"
+                textLabel?.text = "\(index)"
                 textLabel?.sizeToFit()
                 textLabel?.center.x = line.frame.minX
                 contentView.addSubview(textLabel!)

@@ -39,8 +39,10 @@ class RegistrationThirdStepViewController: UIViewController {
         buttons.append(male)
         buttons.append(female)
         //set up rulerView
-        let rulerView = RulerView(origin: CGPoint(x: 0, y: 0))
-        weightRulerView.addSubview(rulerView)
+        let weightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
+        let heightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
+        weightRulerView.addSubview(weightRuler)
+        heightRulerView.addSubview(heightRuler)
     }
 
     @objc func selectGender(sender: UIButton!) {
