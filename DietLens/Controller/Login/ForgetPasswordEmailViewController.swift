@@ -11,6 +11,7 @@ import UIKit
 class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     var emailFromLogin: String = ""
     @IBOutlet weak var emailAddr: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         emailAddr.delegate = self

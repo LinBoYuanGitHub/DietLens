@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RulerInputView" customModule="DietLens" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suy-fU-Kf7">
+                    <rect key="frame" x="0.0" y="517" width="375" height="150"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wXQ-hB-RHn">
+                            <rect key="frame" x="0.0" y="42.5" width="375" height="65"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="65" id="0WT-Lj-kpx"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="wXQ-hB-RHn" secondAttribute="trailing" id="7Sd-Rr-6wF"/>
+                        <constraint firstItem="wXQ-hB-RHn" firstAttribute="centerY" secondItem="suy-fU-Kf7" secondAttribute="centerY" id="AMR-qC-9hT"/>
+                        <constraint firstAttribute="height" constant="150" id="GGr-4P-052"/>
+                        <constraint firstItem="wXQ-hB-RHn" firstAttribute="leading" secondItem="suy-fU-Kf7" secondAttribute="leading" id="dQ7-AU-7Sh"/>
+                        <constraint firstItem="wXQ-hB-RHn" firstAttribute="centerX" secondItem="suy-fU-Kf7" secondAttribute="centerX" id="e12-bA-5fS"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="suy-fU-Kf7" secondAttribute="trailing" id="5XK-CZ-22W"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="suy-fU-Kf7" secondAttribute="bottom" id="8vt-Ho-ohZ"/>
+                <constraint firstItem="suy-fU-Kf7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Cr6-UD-KjA"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="rulerView" destination="wXQ-hB-RHn" id="8qZ-bo-NID"/>
+            </connections>
+            <point key="canvasLocation" x="99.5" y="53.5"/>
+        </view>
+    </objects>
+</document>

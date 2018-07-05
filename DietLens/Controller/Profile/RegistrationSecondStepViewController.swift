@@ -26,6 +26,16 @@ class RegistrationSecondStepViewController: UIViewController {
         TFDate.inputView = datePicker
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
+        self.navigationItem.title = "Sign Up"
+    }
+
+    @objc func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
     func setUpPickerToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default

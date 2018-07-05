@@ -19,6 +19,10 @@
 		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
 		3F25C4752043EC7700DFA459 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C4742043EC7700DFA459 /* StringConstants.swift */; };
 		3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C47620440F1500DFA459 /* ConfigVariable.swift */; };
+		3F2D162B20ECB2B400348160 /* RulerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162A20ECB2B400348160 /* RulerDialog.swift */; };
+		3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */; };
+		3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162E20EE15D200348160 /* RulerInputView.swift */; };
+		3F2D163120EE175400348160 /* RulerLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2D163020EE175400348160 /* RulerLayout.xib */; };
 		3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */; };
 		3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436636206CC44B0089C63A /* ReportStatisticController.swift */; };
 		3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436638206F7ACF0089C63A /* NewsEventCell.swift */; };
@@ -236,6 +240,10 @@
 		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3F25C4742043EC7700DFA459 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringConstants.swift; path = DietLens/Assets.xcassets/StringConstants.swift; sourceTree = SOURCE_ROOT; };
 		3F25C47620440F1500DFA459 /* ConfigVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigVariable.swift; sourceTree = "<group>"; };
+		3F2D162A20ECB2B400348160 /* RulerDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerDialog.swift; sourceTree = "<group>"; };
+		3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActivityLvlViewController.swift; sourceTree = "<group>"; };
+		3F2D162E20EE15D200348160 /* RulerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerInputView.swift; sourceTree = "<group>"; };
+		3F2D163020EE175400348160 /* RulerLayout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulerLayout.xib; sourceTree = "<group>"; };
 		3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCountingEntity.swift; sourceTree = "<group>"; };
 		3F436636206CC44B0089C63A /* ReportStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatisticController.swift; sourceTree = "<group>"; };
 		3F436638206F7ACF0089C63A /* NewsEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEventCell.swift; sourceTree = "<group>"; };
@@ -649,6 +657,9 @@
 			isa = PBXGroup;
 			children = (
 				3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */,
+				3F2D162A20ECB2B400348160 /* RulerDialog.swift */,
+				3F2D162E20EE15D200348160 /* RulerInputView.swift */,
+				3F2D163020EE175400348160 /* RulerLayout.xib */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -661,6 +672,7 @@
 				3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */,
 				3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */,
 				3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */,
+				3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1125,6 +1137,7 @@
 				58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */,
 				5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */,
 				3F1AC22E20872654008F5BF2 /* NutritionCollectionCell.xib in Resources */,
+				3F2D163120EE175400348160 /* RulerLayout.xib in Resources */,
 				3F1AC22C20870FC2008F5BF2 /* MealTypeCollectionCell.xib in Resources */,
 				3F8A69E61FE267E8005B83B0 /* GoogleService-Info.plist in Resources */,
 				3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */,
@@ -1323,6 +1336,7 @@
 				3F436651207CB6FA0089C63A /* FoodReportViewController.swift in Sources */,
 				3FA376A7208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift in Sources */,
 				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
+				3F2D162B20ECB2B400348160 /* RulerDialog.swift in Sources */,
 				3FB6E68920E38ABE00462591 /* ProfileViewHeader.swift in Sources */,
 				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
 				3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */,
@@ -1408,12 +1422,14 @@
 				3F88189920E9D80F00FE6C11 /* LoginViewController.swift in Sources */,
 				587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */,
 				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,
+				3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */,
 				3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
+				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,

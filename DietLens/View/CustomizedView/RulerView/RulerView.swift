@@ -28,7 +28,7 @@ private let itemCount = 10000
 private let titleSpace: CGFloat = flat((1 - goldenRatio) * reulerViewHeight)
 
 protocol RulerViewDelegate: class {
-    func didSelectItem(with index: Int)
+    func didSelectItem(rulerView: RulerView, with index: Int)
 }
 
 class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -81,7 +81,7 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
         let indicatorImage = UIImageView(frame: CGRect(x: 0, y: bottomLineMinY - titleSpace, width: 15, height: 15))
         indicatorImage.center = CGPoint(x: (self.frame.width - 1) / 2, y: bottomLineMinY - titleSpace)
         indicatorImage.image = #imageLiteral(resourceName: "rulerIndicator")
-        addSubview(textLabel)
+//        addSubview(textLabel)
         addSubview(indicatorImage)
         layer.addSublayer(verticalLine)
         layer.addSublayer(bottomLine)
@@ -102,13 +102,13 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
 
         let index = (scrollView.contentOffset.x + scrollView.contentInset.left) / itemWidth
 
-        textLabel.alpha = 0
-        UIView.animate(withDuration: 0.25) {
-            self.textLabel.alpha = 1
-            // 这里有次显示为负数，做一下特殊处理
-            self.textLabel.text = String(format: "%.2f", max(Double(index * 100), 0))
-        }
+//        textLabel.alpha = 0
+//        UIView.animate(withDuration: 0.25) {
+//            self.textLabel.alpha = 1
+//            // 这里有次显示为负数，做一下特殊处理
+//            self.textLabel.text = String(format: "%.2f", max(Double(index), 0))
+//        }
 
-        rulerViewDelegate?.didSelectItem(with: Int(index))
+        rulerViewDelegate?.didSelectItem(rulerView: self, with: Int(index))
     }
 }

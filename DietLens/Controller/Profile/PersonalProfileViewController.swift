@@ -19,6 +19,11 @@ class PersonalProfileViewController: UIViewController {
     let genderList = ["male", "female", "others"]
     //profile
     var profile = UserProfile()
+    let weightDialog = UIView()
+    let heightDialog = UIView()
+    //tag
+    let heightRulerTag = 0
+    let weightRulerTag = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +77,7 @@ class PersonalProfileViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
-        //set sideBar menu
+
     }
 
     @IBAction func closePage() {
@@ -113,16 +118,28 @@ class PersonalProfileViewController: UIViewController {
 
     @objc func dateChanged(_ sender: UIDatePicker) {
         let componenets = Calendar.current.dateComponents([.year, .month, .day], from: sender.date)
-        if let day = componenets.day, let month = componenets.month, let year = componenets.year {
+        if let day = componenets.day, let year = componenets.year {
             //set data into component
             let indxPath = IndexPath(row: 1, section: 1)
             if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
-                let monthStr = DateUtil.formatMonthToString(date: sender.date)
-                dateCell.inptText.text = "\(day)-\(monthStr)-\(year)"
+                let monthStr = DateUtil.formatMonthToString(
+                    date: sender.date)
+                let birthdayString = "\(day)-\(monthStr)-\(year)"
+                profile.birthday = birthdayString
+                dateCell.inptText.text = birthdayString
             }
         }
     }
 
+}
+
+extension PersonalProfileViewController: UITextFieldDelegate {
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag ==  1 {
+            profile.name = textField.text!
+        }
+    }
 }
 
 extension PersonalProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -144,6 +161,11 @@ extension PersonalProfileViewController: UIPickerViewDelegate, UIPickerViewDataS
         let indxPath = IndexPath(row: 0, section: 1)
         if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
             dateCell.inptText.text = genderList[row]
+            if(genderList[row] == "male") {
+                profile.gender = 1
+            } else {
+                profile.gender = 0
+            }
         }
     }
 
@@ -181,6 +203,10 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                 } else if indexPath.row == 1 && indexPath.section == 1 {
                     cell.inptText.placeholder = "birthday"
                     cell.inptText.inputView = birthDayPickerView
+                } else if indexPath.row == 2 && indexPath.section == 1 {
+                    cell.inptText.inputView = weightDialog
+                } else {
+                    cell.inptText.inputView = heightDialog
                 }
                 return cell
             }
@@ -201,19 +227,21 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
         switch profileEntity.profileType {
             case 0:
                 //avatar
-
                 break
             case 1:
                 //textField
                 if let cell = tableView.cellForRow(at: indexPath) as? ProfileTextFieldCell {
-                      cell.inptText.becomeFirstResponder()
+                    cell.inptText.becomeFirstResponder()
                 }
                 break
             case 2:
                 //jump to dest
                 if let cell = tableView.cellForRow(at: indexPath) as? ProfileArrowCell {
                     //Navigate to dest
-
+                    if let dest = storyboard?.instantiateViewController(withIdentifier: "activityLevelVC") as? ProfileActivityLvlViewController {
+                         self.navigationController?.pushViewController(dest, animated: true)
+                        dest.activitySelectDelegate = self
+                    }
                 }
                 break
         default:
@@ -245,6 +273,37 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
 
+}
+
+extension PersonalProfileViewController: activitySelectDelegate {
+
+    func onActivitySelect(index: Int) {
+        let indexPath = IndexPath(row: 0, section: 2)
+        if let cell = profileTableView.cellForRow(at: indexPath) as? ProfileArrowCell {
+            cell.textComponent.text = StringConstants.ExerciseLvlText.exerciseLvlArr[index]
+        }
+    }
+
+}
+
+extension PersonalProfileViewController: RulerViewDelegate {
+
+    func didSelectItem(rulerView: RulerView, with index: Int) {
+       
+        if heightRulerTag == rulerView.tag {
+            //weight
+            let weightIndex = IndexPath(row: 2, section: 1)
+            if let weightCell = profileTableView.cellForRow(at: weightIndex) as? ProfileTextFieldCell {
+                weightCell.inptText.text = "\(index)kg"
+            }
+        } else {
+            //height
+            let heightIndex = IndexPath(row: 3, section: 1)
+            if let heightCell = profileTableView.cellForRow(at: heightIndex) as? ProfileTextFieldCell {
+                heightCell.inptText.text = "\(index)cm"
+            }
+        }
+    }
 }
 
 extension PersonalProfileViewController {

@@ -14,7 +14,7 @@ class RulerCollectionCell: UICollectionViewCell {
 
     private lazy var line: CALayer = {
         let line = CALayer()
-        line.frame = CGRect(x: (self.frame.width - 1) / 2, y: 0, width: 1, height: self.frame.height)
+        line.frame = CGRect(x: (self.frame.width - 1) / 2, y: 0, width: 1, height: 0)
         let lineColor = UIColor(red: CGFloat(227/255.0), green: CGFloat(228/255.0), blue: CGFloat(229/255.0), alpha: 1.0)
         line.backgroundColor = lineColor.cgColor
         return line
@@ -31,18 +31,20 @@ class RulerCollectionCell: UICollectionViewCell {
 
     var index: Int = 0 {
         didSet {
+            //add index
             textLabel?.removeFromSuperview()
-            let goldenRatio: CGFloat = 0.618
             if index % 5 == 0 {
+                //add scale
                 textLabel = UILabel()
                 textLabel?.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
                 textLabel?.text = "\(index)"
                 textLabel?.sizeToFit()
-                textLabel?.center.x = line.frame.minX
+//                textLabel?.center.x = line.frame.minX
+                textLabel?.frame = CGRect(x: (self.frame.width - 1) / 2, y: line.frame.height, width: 1, height: 20)
                 contentView.addSubview(textLabel!)
-                line.frame.size.height = (frame.height * goldenRatio)
+                line.frame.size.height = CGFloat(70)
             } else {
-                line.frame.size.height = (frame.height * goldenRatio * goldenRatio)
+                line.frame.size.height = CGFloat(40)
             }
             line.frame.origin.y = frame.height - line.frame.height
         }

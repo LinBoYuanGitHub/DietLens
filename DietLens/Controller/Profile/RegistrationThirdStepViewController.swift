@@ -24,6 +24,9 @@ class RegistrationThirdStepViewController: UIViewController {
     @IBOutlet weak var signInBtn: UIButton!
     //profile entity
     var profile: UserProfile?
+    //tag
+    let weightTag = 0
+    let heightTag = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +41,36 @@ class RegistrationThirdStepViewController: UIViewController {
         //button group
         buttons.append(male)
         buttons.append(female)
+        for button in buttons {
+            let redColor = UIColor(red: 244/255, green: 50/255, blue: 84/255, alpha: 1.0)
+            button.setTitleColor(redColor, for: .selected)
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
         //set up rulerView
+        //weight ruler
         let weightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
+        weightRuler.tag = self.weightTag
+        weightRuler.rulerViewDelegate = self
+        //height ruler
         let heightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
+        heightRuler.tag = self.heightTag
+        heightRuler.rulerViewDelegate = self
+        //setUp w/h Value
+        setAttributeText(textStr: "50kg", textLabel: weightValue)
+        setAttributeText(textStr: "165cm", textLabel: heightValue)
+        //add sub view
         weightRulerView.addSubview(weightRuler)
         heightRulerView.addSubview(heightRuler)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
+        self.navigationItem.title = "Sign Up"
+    }
+
+    @objc func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc func selectGender(sender: UIButton!) {
@@ -50,6 +78,7 @@ class RegistrationThirdStepViewController: UIViewController {
             button.isSelected = false
         }
         sender.isSelected = true
+        sender.titleLabel?.textColor = UIColor.red
     }
 
     @IBAction func next(_ sender: UIButton) {
@@ -80,5 +109,28 @@ class RegistrationThirdStepViewController: UIViewController {
 
     @IBAction func toSignInPage(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension RegistrationThirdStepViewController: RulerViewDelegate {
+
+    func didSelectItem(rulerView: RulerView, with index: Int) {
+        //return value to ruler
+        if rulerView.tag == weightTag {
+            let textStr = "\(index)kg"
+            setAttributeText(textStr: textStr, textLabel: weightValue)
+            profile?.weight = Double(index)
+        } else if rulerView.tag == heightTag {
+            let textStr = "\(index)cm"
+            setAttributeText(textStr: textStr, textLabel: heightValue)
+            profile?.height = Double(index)
+        }
+    }
+
+    func setAttributeText(textStr: String, textLabel: UILabel) {
+        let textAttr = NSMutableAttributedString.init(string: textStr)
+        textAttr.setAttributes([ kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray, NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0) as Any
+                               ], range: NSRange(location: textStr.count - 2, length: 2))
+        textLabel.attributedText = textAttr
     }
 }
