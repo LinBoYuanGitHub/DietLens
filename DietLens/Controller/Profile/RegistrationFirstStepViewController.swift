@@ -22,6 +22,8 @@ class RegistrationFirstStepViewController: UIViewController {
     @IBOutlet weak var emailCheckerLabel: UILabel!
     @IBOutlet weak var errMsgLabel: UILabel!
     @IBOutlet weak var redTick: UIImageView!
+    //user profile
+    var profile = UserProfile()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,39 +54,32 @@ class RegistrationFirstStepViewController: UIViewController {
         if email.isEmpty {
             return
         }
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
-            self.navigationController?.pushViewController(dest, animated: true)
+        APIService.instance.emailValidationRequest(userEmail: email, completion: { (isSuccess) in
+            self.redTick.isHidden = !isSuccess
+            self.emailCheckerLabel.isHidden = isSuccess
+        }) { (errMessage) in
+            self.emailCheckerLabel.alpha = 1
+            self.emailCheckerLabel.text = errMessage
+            self.redTick.isHidden = true
         }
-//        APIService.instance.emailValidationRequest(userEmail: email, completion: { (isSuccess) in
-//            self.redTick.isHidden = !isSuccess
-//            self.emailCheckerLabel.isHidden = isSuccess
-//        }) { (errMessage) in
-//            self.emailCheckerLabel.alpha = 1
-//            self.emailCheckerLabel.text = errMessage
-//            self.redTick.isHidden = true
-//        }
     }
 
     @IBAction func signUp(_ sender: UIButton) {
         if (TFuserName.text?.isEmpty)! {
             print("please fill in nick name")
             errMsgLabel.text = "Please enter a nickname"
-//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter a nickname")
             return
         } else if (TFemail.text?.isEmpty)! {
             print("please fill in email")
             errMsgLabel.text = "please fill in email"
-//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if (TFpassword.text?.isEmpty)! {
             print("please fill in password")
             errMsgLabel.text = "please fill in password"
-//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if TFconfirmPassword.text != TFpassword.text {
             print("please confirm password again")
             errMsgLabel.text = "please confirm password again"
-//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
@@ -95,12 +90,16 @@ class RegistrationFirstStepViewController: UIViewController {
                         let preferences = UserDefaults.standard
                         let pwdKey = "password"
                         preferences.setValue(self.TFpassword.text!, forKey: pwdKey)
+                        //set up profile
+                        self.profile.name = self.TFuserName.text!
+                        self.profile.email = self.TFemail.text!
                         //to main page
 //                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //                        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
 //                        self.present(viewController, animated: true, completion: nil)
                         //to registration VC2 page
                         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
+                            dest.profile = self.profile
                             self.navigationController?.pushViewController(dest, animated: true)
                         }
                         //save token to backend
@@ -136,10 +135,6 @@ class RegistrationFirstStepViewController: UIViewController {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y += (100)
         }
-    }
-
-    @IBAction func back(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func toSignInPage(_ sender: UIButton) {

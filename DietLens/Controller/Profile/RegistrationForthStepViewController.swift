@@ -15,7 +15,11 @@ class RegistrationForthStepViewController: UIViewController {
     @IBOutlet weak var skipBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     //slider
-    @IBOutlet weak var  activitySlider: UISlider!
+    @IBOutlet weak var activitySlider: UISlider!
+    //activity text
+    @IBOutlet weak var exerciseLabel: UILabel!
+    @IBOutlet weak var frequencyLabel: UILabel!
+    @IBOutlet weak var activityText: UITextView!
     //profile entity
     var profile: UserProfile?
 
@@ -40,6 +44,13 @@ class RegistrationForthStepViewController: UIViewController {
         activitySlider.setMaximumTrackImage(clearImage, for: .normal)
     }
 
+    @IBAction func onSliderValueChanged(_ sender: UISlider) {
+        let indexValue = Int(sender.value)
+        exerciseLabel.text = StringConstants.ExerciseLvlText.exerciseLvlArr[indexValue]
+        frequencyLabel.text = StringConstants.ExerciseLvlText.exerciseFrequencyArr[indexValue]
+        activityText.text = StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexValue]
+    }
+
     @IBAction func next(_ sender: UIButton) {
         //upload Profile
         let preferences = UserDefaults.standard
@@ -49,9 +60,10 @@ class RegistrationForthStepViewController: UIViewController {
         if profile != nil {
             APIService.instance.updateProfile(userId: userId!, name: profile!.name, gender: profile!.gender, height: profile!.height, weight: profile!.weight, birthday: profile!.birthday) { (isSuccess) in
                 if isSuccess {
-
-                } else {
-
+                    //to registrationFinal page
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+                        self.navigationController?.pushViewController(dest, animated: true)
+                    }
                 }
             }
         } else {
@@ -60,15 +72,10 @@ class RegistrationForthStepViewController: UIViewController {
         }
     }
 
-    @IBAction func back(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
-
     @IBAction func skip(_ sender: UIButton) {
-        //to main page
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-//        self.present(viewController, animated: true, completion: nil)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+            self.navigationController?.pushViewController(dest, animated: true)
+        }
     }
 
     @IBAction func toSignInPage(_ sender: UIButton) {

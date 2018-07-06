@@ -289,7 +289,7 @@ extension PersonalProfileViewController: activitySelectDelegate {
 extension PersonalProfileViewController: RulerViewDelegate {
 
     func didSelectItem(rulerView: RulerView, with index: Int) {
-       
+
         if heightRulerTag == rulerView.tag {
             //weight
             let weightIndex = IndexPath(row: 2, section: 1)

@@ -47,6 +47,7 @@ class RegistrationThirdStepViewController: UIViewController {
             button.setTitleColor(UIColor.black, for: .normal)
         }
         //set up rulerView
+
         //weight ruler
         let weightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
         weightRuler.tag = self.weightTag
@@ -88,8 +89,6 @@ class RegistrationThirdStepViewController: UIViewController {
         } else {
             profile?.gender = 0
         }
-        profile?.height = 1.80
-        profile?.weight = 60.0
         //check data
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC4") as? RegistrationForthStepViewController {
             dest.profile = self.profile
@@ -99,6 +98,7 @@ class RegistrationThirdStepViewController: UIViewController {
 
     @IBAction func skip(_ sender: UIButton) {
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC4") as? RegistrationForthStepViewController {
+            dest.profile = self.profile
             self.navigationController?.pushViewController(dest, animated: true)
         }
     }
