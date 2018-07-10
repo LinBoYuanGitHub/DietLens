@@ -80,6 +80,8 @@ struct ServerConfig {
     static let notificationURL = labDeskTopURL + "/notifications/"
     static let notificationDeleteAllURL = labDeskTopURL + "/notifications/all/"
     static let notificationAnswer = labDeskTopURL + "/answers/"
+
+    static let healthCenterLogURL = labDeskTopURL + "/healthlogs/latest/"
 }
 
 struct SharedPreferenceKey {
@@ -148,6 +150,10 @@ struct Dimen {
     static let EventsRowHeight = 275
     static let foodCalendarImageWidth = 68
     static let foodCalendarImageHeight = 68
+}
+
+struct HealthCenterConstants {
+    static let moodList = ["Bad", "Not so good", "Ok", "Happy", "Excellent"]
 }
 
 struct NotificationType {

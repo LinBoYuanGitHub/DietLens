@@ -24,6 +24,7 @@
 		3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162E20EE15D200348160 /* RulerInputView.swift */; };
 		3F2D163120EE175400348160 /* RulerLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2D163020EE175400348160 /* RulerLayout.xib */; };
 		3F2D163320EE8A6000348160 /* RegistrationFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */; };
+		3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163420F2899900348160 /* HealthCenterDataManager.swift */; };
 		3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */; };
 		3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436636206CC44B0089C63A /* ReportStatisticController.swift */; };
 		3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436638206F7ACF0089C63A /* NewsEventCell.swift */; };
@@ -53,6 +54,12 @@
 		3F50DCEA20AEA44E005209B8 /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCE920AEA44E005209B8 /* Modal.swift */; };
 		3F50DCEC20AEA4B2005209B8 /* SingleOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */; };
 		3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50DCEE20B2BA66005209B8 /* SingleSelectionCell.swift */; };
+		3F5608EF20F309590007B3AF /* HealthCenterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608EE20F309590007B3AF /* HealthCenterItem.swift */; };
+		3F5608F120F30C010007B3AF /* EmojiInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F020F30C010007B3AF /* EmojiInputView.swift */; };
+		3F5608F320F30DF90007B3AF /* EmojiLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F5608F220F30DF90007B3AF /* EmojiLayout.xib */; };
+		3F5608F520F335480007B3AF /* HealthCenterTableValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */; };
+		3F5608F720F3357D0007B3AF /* HealthCenterEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */; };
+		3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6B872820A1BCD8001063A0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; };
 		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
@@ -108,7 +115,6 @@
 		3FCBEC1520E639240092948C /* HealthCenterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1420E639240092948C /* HealthCenterRecord.swift */; };
 		3FCBEC1820E662440092948C /* HealthCenterMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1720E662440092948C /* HealthCenterMainCell.swift */; };
 		3FD0861B200C73E60052D54B /* ExpandedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0861A200C73E60052D54B /* ExpandedUIButton.swift */; };
-		3FD0861D200DACA50052D54B /* HealthCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0861C200DACA40052D54B /* HealthCenterViewController.swift */; };
 		3FD0861F200DE1B20052D54B /* HealthToolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0861E200DE1B20052D54B /* HealthToolCell.swift */; };
 		3FD08621200DEE4B0052D54B /* DeviceRecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08620200DEE4B0052D54B /* DeviceRecordDetailViewController.swift */; };
 		3FD08623200EEC160052D54B /* HealthCenterDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08622200EEC160052D54B /* HealthCenterDBOperation.swift */; };
@@ -246,6 +252,7 @@
 		3F2D162E20EE15D200348160 /* RulerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerInputView.swift; sourceTree = "<group>"; };
 		3F2D163020EE175400348160 /* RulerLayout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulerLayout.xib; sourceTree = "<group>"; };
 		3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFinishViewController.swift; sourceTree = "<group>"; };
+		3F2D163420F2899900348160 /* HealthCenterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterDataManager.swift; sourceTree = "<group>"; };
 		3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCountingEntity.swift; sourceTree = "<group>"; };
 		3F436636206CC44B0089C63A /* ReportStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatisticController.swift; sourceTree = "<group>"; };
 		3F436638206F7ACF0089C63A /* NewsEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEventCell.swift; sourceTree = "<group>"; };
@@ -275,6 +282,12 @@
 		3F50DCE920AEA44E005209B8 /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOptionViewController.swift; sourceTree = "<group>"; };
 		3F50DCEE20B2BA66005209B8 /* SingleSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionCell.swift; sourceTree = "<group>"; };
+		3F5608EE20F309590007B3AF /* HealthCenterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterItem.swift; sourceTree = "<group>"; };
+		3F5608F020F30C010007B3AF /* EmojiInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiInputView.swift; sourceTree = "<group>"; };
+		3F5608F220F30DF90007B3AF /* EmojiLayout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiLayout.xib; sourceTree = "<group>"; };
+		3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableValueCell.swift; sourceTree = "<group>"; };
+		3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterEmojiCell.swift; sourceTree = "<group>"; };
+		3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterBarCell.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -533,6 +546,7 @@
 				3FFB56951FB2F858002DCE15 /* FoodInfoDataManager.swift */,
 				3F14CC47201C79FF0032CC77 /* ProfileDataManager.swift */,
 				3F4906EC201E119900D1F388 /* NotificationDataManager.swift */,
+				3F2D163420F2899900348160 /* HealthCenterDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -662,6 +676,8 @@
 				3F2D162A20ECB2B400348160 /* RulerDialog.swift */,
 				3F2D162E20EE15D200348160 /* RulerInputView.swift */,
 				3F2D163020EE175400348160 /* RulerLayout.xib */,
+				3F5608F020F30C010007B3AF /* EmojiInputView.swift */,
+				3F5608F220F30DF90007B3AF /* EmojiLayout.xib */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -703,6 +719,7 @@
 			isa = PBXGroup;
 			children = (
 				3FCBEC1420E639240092948C /* HealthCenterRecord.swift */,
+				3F5608EE20F309590007B3AF /* HealthCenterItem.swift */,
 			);
 			name = HealthCenter;
 			sourceTree = "<group>";
@@ -711,6 +728,9 @@
 			isa = PBXGroup;
 			children = (
 				3FCBEC1720E662440092948C /* HealthCenterMainCell.swift */,
+				3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */,
+				3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */,
+				3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */,
 			);
 			path = HealthCenterCell;
 			sourceTree = "<group>";
@@ -1138,6 +1158,7 @@
 				3FB6E68B20E38B8E00462591 /* profileViewHeader.xib in Resources */,
 				5877CF921F9D82BF0022B51E /* Assets.xcassets in Resources */,
 				58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */,
+				3F5608F320F30DF90007B3AF /* EmojiLayout.xib in Resources */,
 				5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */,
 				3F1AC22E20872654008F5BF2 /* NutritionCollectionCell.xib in Resources */,
 				3F2D163120EE175400348160 /* RulerLayout.xib in Resources */,
@@ -1322,6 +1343,7 @@
 				58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */,
 				587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */,
 				3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */,
+				3F5608F520F335480007B3AF /* HealthCenterTableValueCell.swift in Sources */,
 				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
 				3FEC3456205A76190060099A /* FoodDiaryModel.swift in Sources */,
 				3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */,
@@ -1368,6 +1390,7 @@
 				3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */,
 				589424B01FD7B1B1009AEA4C /* SplashScreenViewController.swift in Sources */,
 				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
+				3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */,
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
 				3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */,
 				588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */,
@@ -1382,7 +1405,6 @@
 				3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
 				3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */,
-				3FD0861D200DACA50052D54B /* HealthCenterViewController.swift in Sources */,
 				3F575C332047F0D9009C096C /* DateUtil.swift in Sources */,
 				3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */,
 				3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */,
@@ -1391,6 +1413,7 @@
 				3FB6E67C20DCE96200462591 /* FoodDairyTableViewCell.swift in Sources */,
 				3F43664B207C97320089C63A /* FoodInfoViewController.swift in Sources */,
 				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
+				3F5608F720F3357D0007B3AF /* HealthCenterEmojiCell.swift in Sources */,
 				58BCDA641FA83F5300375D5F /* MainSlideMenuViewController.swift in Sources */,
 				3F6B872E20A1DEC1001063A0 /* sideMainViewController.swift in Sources */,
 				3F9215A82086262500F92ECF /* FoodDiaryEntity.swift in Sources */,
@@ -1436,6 +1459,7 @@
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
+				3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */,
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
 				3FCBEC1820E662440092948C /* HealthCenterMainCell.swift in Sources */,
@@ -1448,6 +1472,7 @@
 				3F436656207E07650089C63A /* MockedUpFoodData.swift in Sources */,
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
 				58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */,
+				3F5608EF20F309590007B3AF /* HealthCenterItem.swift in Sources */,
 				3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */,
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
 				3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */,
@@ -1476,6 +1501,7 @@
 				3FB6E68720E383E600462591 /* ProfileEntity.swift in Sources */,
 				3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */,
 				3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */,
+				3F5608F120F30C010007B3AF /* EmojiInputView.swift in Sources */,
 				5841A5071FCE5939006201C5 /* Notification.swift in Sources */,
 				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
 				3F9BFE5C1FF0D4E40011845B /* StepCounterViewController.swift in Sources */,

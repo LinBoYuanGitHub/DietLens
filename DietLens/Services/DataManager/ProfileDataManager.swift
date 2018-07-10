@@ -22,6 +22,7 @@ class ProfileDataManager {
         } else {
              userProfile.gender = 0
         }
+        userProfile.activityLevel = Int(jsonObj["activity_level"].stringValue)!
         userProfile.birthday = jsonObj["birthday"].stringValue
         userProfile.age = jsonObj["age"].intValue
         userProfile.occupation = jsonObj["occupation"].stringValue

@@ -64,22 +64,25 @@ class RegistrationFirstStepViewController: UIViewController {
         }
     }
 
+    func showErrMsg(errMsg: String) {
+        print(errMsg)
+        errMsgLabel.text = errMsg
+        errMsgLabel.alpha = 1
+    }
+
     @IBAction func signUp(_ sender: UIButton) {
+        //temp direct jump
         if (TFuserName.text?.isEmpty)! {
-            print("please fill in nick name")
-            errMsgLabel.text = "Please enter a nickname"
+            showErrMsg(errMsg: "please fill in nick name")
             return
         } else if (TFemail.text?.isEmpty)! {
-            print("please fill in email")
-            errMsgLabel.text = "please fill in email"
+            showErrMsg(errMsg: "please fill in email")
             return
         } else if (TFpassword.text?.isEmpty)! {
-            print("please fill in password")
-            errMsgLabel.text = "please fill in password"
+            showErrMsg(errMsg: "please fill in password")
             return
         } else if TFconfirmPassword.text != TFpassword.text {
-            print("please confirm password again")
-            errMsgLabel.text = "please confirm password again"
+            showErrMsg(errMsg: "please confirm password againd")
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
@@ -93,10 +96,6 @@ class RegistrationFirstStepViewController: UIViewController {
                         //set up profile
                         self.profile.name = self.TFuserName.text!
                         self.profile.email = self.TFemail.text!
-                        //to main page
-//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-//                        self.present(viewController, animated: true, completion: nil)
                         //to registration VC2 page
                         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
                             dest.profile = self.profile
@@ -119,7 +118,8 @@ class RegistrationFirstStepViewController: UIViewController {
                 }
             }, failedCompletion: { (failedMsg) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
+                    self.showErrMsg(errMsg: failedMsg)
+//                    AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
                 }
             })
         }

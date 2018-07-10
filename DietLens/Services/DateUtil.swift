@@ -73,6 +73,13 @@ class DateUtil {
         return resultStr
     }
 
+    public static func formatGMTDateToStringWithDash(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MMM-yyyy"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
     public static func formatMonthToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM"

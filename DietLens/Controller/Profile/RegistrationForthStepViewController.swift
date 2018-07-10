@@ -45,7 +45,11 @@ class RegistrationForthStepViewController: UIViewController {
     }
 
     @IBAction func onSliderValueChanged(_ sender: UISlider) {
-        let indexValue = Int(sender.value)
+        var indexValue = Int(sender.value)
+        if indexValue > 3 {
+            indexValue = 3
+        }
+        profile?.activityLevel = indexValue
         exerciseLabel.text = StringConstants.ExerciseLvlText.exerciseLvlArr[indexValue]
         frequencyLabel.text = StringConstants.ExerciseLvlText.exerciseFrequencyArr[indexValue]
         activityText.text = StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexValue]
@@ -58,9 +62,8 @@ class RegistrationForthStepViewController: UIViewController {
         let userId = preferences.string(forKey: key)
         //upload APIService
         if profile != nil {
-            APIService.instance.updateProfile(userId: userId!, name: profile!.name, gender: profile!.gender, height: profile!.height, weight: profile!.weight, birthday: profile!.birthday) { (isSuccess) in
+            APIService.instance.updateProfile(userId: userId!, profile: profile!) { (isSuccess) in
                 if isSuccess {
-                    //to registrationFinal page
                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
                         self.navigationController?.pushViewController(dest, animated: true)
                     }

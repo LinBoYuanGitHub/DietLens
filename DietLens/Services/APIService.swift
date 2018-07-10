@@ -969,12 +969,47 @@ class APIService {
         }
     }
 
+    public func updateProfile(userId: String, profile: UserProfile, completion: @escaping (Bool) -> Void) {
+        var genderText = ""
+        if profile.gender == 0 {
+            genderText = "2"
+        } else if profile.gender == 1 {
+            genderText = "1"
+        } else {
+            genderText = "0"
+        }
+        Alamofire.request(
+            URL(string: ServerConfig.userURL + "/" + userId + "/")!,
+            method: .put,
+            parameters: ["name": profile.name, "activity_level": String(profile.activityLevel), "gender": genderText, "height": profile.height, "weight": profile.weight, "birthday": profile.birthday],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("update profile failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                //save profile into sharedPreference
+                let preferences = UserDefaults.standard
+                let nicknameKey = "nickname"
+                preferences.set(profile.name, forKey: nicknameKey)
+                completion(true)
+        }
+    }
+
     /**
      * update profile
      * param: all user profile information
      * return: isSuccess
      */
     public func updateProfile(userId: String, name: String, gender: Int, height: Double, weight: Double, birthday: String, completion: @escaping (Bool) -> Void) {
+        //get user id
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        //gender
         var genderText = ""
         if gender == 0 {
             genderText = "2"
@@ -984,7 +1019,7 @@ class APIService {
             genderText = "0"
         }
         Alamofire.request(
-            URL(string: ServerConfig.userURL + "/" + userId + "/")!,
+            URL(string: ServerConfig.userURL + "/" + userId! + "/")!,
             method: .put,
             parameters: ["name": name, "gender": genderText, "height": height, "weight": weight, "birthday": birthday],
             encoding: JSONEncoding.default,
@@ -1340,6 +1375,54 @@ class APIService {
         }
     }
 
+    func getHealthLogByCategory(category: String, completion: @escaping ([HealthCenterItem]?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.uploadHealthCenterData+"?category=" + category)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("Save exercise data failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let json = JSON(result)["results"]
+                let healthRecordList = HealthCenterDataManager.instance.assembleHealthCenterItem(jsonArr: json)
+                completion(healthRecordList)
+        }
+    }
+
+    func getLatestHealthLog(completion: @escaping ([HealthCenterItem]?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.healthCenterLogURL)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let result = response.result.value else {
+                    print("Save exercise data failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let json = JSON(result)["data"]
+                let healthRecordList = HealthCenterDataManager.instance.assembleHealthCenterMainData(jsonObj: json)
+                completion(healthRecordList)
+        }
+    }
+
     //healthCenter logs
     func uploadHealthCenterData(userId: String, title: String, content: String, unit: String, amount: String, datetime: String, completion: @escaping (Bool) -> Void) {
         let params = ["title": title, "content": content, "unit": unit, "amount": amount, "datetime": datetime]
@@ -1361,7 +1444,6 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObject = JSON(result)
                 completion(true)
         }
     }
@@ -1372,7 +1454,7 @@ class APIService {
                           method: .post,
                           parameters: params,
                           encoding: JSONEncoding.default,
-                          headers: [:])
+                          headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
@@ -1380,12 +1462,6 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let result = response.result.value else {
-                    print("Save exercise data failed due to : Server Data Type Error")
-                    completion(false)
-                    return
-                }
-                let jsonObject = JSON(result)
                 completion(true)
         }
 

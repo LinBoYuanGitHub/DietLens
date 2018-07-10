@@ -87,6 +87,11 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
         layer.addSublayer(bottomLine)
     }
 
+    func setCurrentItem(position: Int, animated: Bool) {
+        let indexPath = IndexPath(row: position, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: [], animated: animated)
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return itemCount + 1
     }

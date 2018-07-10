@@ -166,6 +166,25 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
                 }
             }
         case 3:
+            //to healthCenter page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "healthCenterVC") as? HealthCenterMainViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is HealthCenterMainViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? HealthCenterMainViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 4:
             //to setting page
             if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsPage") as? SettingViewController {
                 if let navigator = self.navigationController {
@@ -220,42 +239,16 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //SignPainterHouseScript 28.0
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as! [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
-//        self.navigationController?.navigationBar.isTranslucent = true
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-//        self.navigationController?.navigationBar.tintColor = UIColor.clear
+
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
-        //load nutrition bar
         if shouldRefreshMainPageNutrition {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
         }
-        //set navigation bar gardient
-//        let gardientLayer = CAGradientLayer()
-//        gardientLayer.frame = (self.navigationController?.navigationBar.bounds)!
-//        let topColor = UIColor(red: 247/255, green: 108/255, blue: 92/255, alpha: 1.0)
-//        let bottomColor = UIColor(red: 245/255, green: 88/255, blue: 81/255, alpha: 1.0)
-//        gardientLayer.colors = [topColor, bottomColor]
-//        self.navigationController?.navigationBar.setBackgroundImage(imageFromLayer(layer: gardientLayer), for: .default)
-        //refresh nutrition part each time view apppear
-//        requestNutritionDict(requestDate: Date())
     }
 
     // calculate Nutrition Data & put into homePage
     func getDailyAccumulateCPF() {
-//        var foodDiaryList = [FoodDiaryModel]()
-//        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: DateUtil.formatGMTDateToString(date: Date()))!
-//        var dailyCarb: Float = 0
-//        var dailyProtein: Float = 0
-//        var dailyFat: Float = 0
-//
-//        for foodDiary in foodDiaryList {
-//            //quantity * weight divide 100g to get the multiply ratio
-//            let ratio = foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightValue * (foodDiary.quantity/100)
-//            dailyCarb += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate as NSString).floatValue * Float(ratio)//standard 300
-//            dailyProtein += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein as NSString).floatValue * Float(ratio) //standard 100
-//            dailyFat += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat as NSString).floatValue * Float(ratio) //standard 100
-//        }
     }
 
     @IBAction func presentCamera(_ sender: UIButton) {

@@ -8,32 +8,48 @@
 
 import UIKit
 
-protocol RulerDelegate: class {
-    func onRulerScaleSelect(index: Int)
+protocol RulerInputDelegate: class {
+    func onRulerDidSelectItem(tag: Int, index: Int)
 }
 
 class RulerInputView: UIView {
 
-    weak var delegate: RulerDelegate?
-    @IBOutlet var rulerView: UIView!
+    @IBOutlet weak var rulerViewContainer: UIView!
+    @IBOutlet weak var textLabel: UILabel!
+    weak var delegate: RulerInputDelegate?
+    var rulerView: RulerView!
+    var unit = ""
+    var rulerTag = 0
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        initializeSubviews()
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeSubviews()
-        let subView = RulerView(origin: CGPoint(x: 0, y: 0))
-        rulerView.addSubview(subView)
     }
 
     func initializeSubviews() {
         let xibFileName = "RulerLayout" // xib extension not included
-        let view = Bundle.main.loadNibNamed(xibFileName, owner: self, options: nil)![0] as! UIView
-        self.addSubview(view)
-        self.addSubview(rulerView)
-        view.frame = self.bounds
+        if let view =  Bundle.main.loadNibNamed(xibFileName, owner: self, options: nil)?[0] as? UIView {
+            rulerView = RulerView(origin: CGPoint(x: 0, y: 0))
+            rulerView.rulerViewDelegate = self
+            rulerViewContainer.addSubview(rulerView)
+            self.addSubview(view)
+            view.frame = self.bounds
+        }
+
+    }
+
+}
+
+extension RulerInputView: RulerViewDelegate {
+
+    func didSelectItem(rulerView: RulerView, with index: Int) {
+        textLabel.text = String(index) + unit
+        delegate?.onRulerDidSelectItem(tag: rulerTag, index: index)
     }
 
 }

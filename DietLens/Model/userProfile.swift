@@ -11,6 +11,7 @@ import Foundation
 struct UserProfile {
     var id: String = ""
     var name: String = ""
+    var email: String = ""
     var gender: Int = 2
     var birthday: String = ""
     var age: Int = 0
@@ -19,4 +20,5 @@ struct UserProfile {
     var maritalStatus: String = ""
     var height: Double = 0.0
     var weight: Double = 0.0
+    var activityLevel: Int = 1
 }

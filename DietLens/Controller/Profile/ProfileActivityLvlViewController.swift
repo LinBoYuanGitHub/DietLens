@@ -17,12 +17,16 @@ class ProfileActivityLvlViewController: UIViewController {
 
     @IBOutlet weak var activityLvlSlider: UISlider!
     @IBOutlet weak var activityLVlTextView: UITextView!
+    @IBOutlet weak var exerciseFrequencyLabel: UILabel!
+    @IBOutlet weak var exerciseTitleLabel: UILabel!
 
     var activitySelectDelegate: activitySelectDelegate?
+    var indexValue: Int  = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSliderBar()
+        setUpActivtyLevel(indexValue: indexValue)
     }
 
     func setUpSliderBar() {
@@ -32,8 +36,23 @@ class ProfileActivityLvlViewController: UIViewController {
     }
 
     @IBAction func onSliderValueChanged(_ sender: UISlider) {
-        let indexValue = Int(sender.value)
-        activityLVlTextView.text = StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexValue]
+        indexValue = Int(sender.value)
+        if indexValue > 3 {
+            indexValue = 3
+            return
+        }
+       setUpActivtyLevel(indexValue: indexValue)
+    }
+
+    func setUpActivtyLevel(indexValue: Int) {
+        activityLvlSlider.setValue(Float(indexValue), animated: true)
+        exerciseTitleLabel.text =  StringConstants.ExerciseLvlText.exerciseLvlArr[indexValue]
+        exerciseFrequencyLabel.text = StringConstants.ExerciseLvlText.exerciseFrequencyArr[indexValue]
+        activityLVlTextView.text =  StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexValue]
+    }
+
+    @objc func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,12 +63,16 @@ class ProfileActivityLvlViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //back btn
+        self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
     }
 
     @IBAction func save(_ sender: UIBarButtonItem) {
         if activitySelectDelegate != nil {
-            activitySelectDelegate?.onActivitySelect(index: Int(activityLvlSlider.value))
+            activitySelectDelegate?.onActivitySelect(index: indexValue)
         }
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

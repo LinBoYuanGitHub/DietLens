@@ -46,8 +46,6 @@ class RegistrationThirdStepViewController: UIViewController {
             button.setTitleColor(redColor, for: .selected)
             button.setTitleColor(UIColor.black, for: .normal)
         }
-        //set up rulerView
-
         //weight ruler
         let weightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
         weightRuler.tag = self.weightTag
@@ -59,6 +57,9 @@ class RegistrationThirdStepViewController: UIViewController {
         //setUp w/h Value
         setAttributeText(textStr: "50kg", textLabel: weightValue)
         setAttributeText(textStr: "165cm", textLabel: heightValue)
+        //set current Item
+        weightRuler.setCurrentItem(position: 50, animated: false)
+        heightRuler.setCurrentItem(position: 165, animated: false)
         //add sub view
         weightRulerView.addSubview(weightRuler)
         heightRulerView.addSubview(heightRuler)
