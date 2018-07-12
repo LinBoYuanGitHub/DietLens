@@ -16,7 +16,7 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var clickToEditLabel: UILabel!
 
-    let labels: [String] = ["Home", "Food Diary", "Steps Counter", "Health Center", "Settings"]
+    let labels: [String] = ["Home", "Food Diary", "Steps Counter", "Health Log", "Settings"]
     let iconNames: [String] = ["whiteHomeIcon", "whiteFoodDiaryIcon", "whiteStepCounterIcon", "healthCenterIcon", "whiteSettingIcon"]
     let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "StepCounterVC", "healthCenterNavVC", "SettingsPage"]
     //used for mark sideMenu selection

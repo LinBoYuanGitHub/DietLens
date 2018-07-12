@@ -26,6 +26,7 @@ class ProfileActivityLvlViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSliderBar()
+        activityLvlSlider.setValue(Float(indexValue), animated: false)
         setUpActivtyLevel(indexValue: indexValue)
     }
 
@@ -33,6 +34,9 @@ class ProfileActivityLvlViewController: UIViewController {
         let clearImage = UIImage().stretchableImage(withLeftCapWidth: 14, topCapHeight: 0)
         activityLvlSlider.setMinimumTrackImage(clearImage, for: .normal)
         activityLvlSlider.setMaximumTrackImage(clearImage, for: .normal)
+        //set slider bar tap event
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onSliderTapped(_:)))
+        activityLvlSlider.addGestureRecognizer(tapGestureRecognizer)
     }
 
     @IBAction func onSliderValueChanged(_ sender: UISlider) {
@@ -45,10 +49,19 @@ class ProfileActivityLvlViewController: UIViewController {
     }
 
     func setUpActivtyLevel(indexValue: Int) {
-        activityLvlSlider.setValue(Float(indexValue), animated: true)
         exerciseTitleLabel.text =  StringConstants.ExerciseLvlText.exerciseLvlArr[indexValue]
         exerciseFrequencyLabel.text = StringConstants.ExerciseLvlText.exerciseFrequencyArr[indexValue]
         activityLVlTextView.text =  StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexValue]
+    }
+
+    @objc func onSliderTapped(_ gestureRecognizer: UIGestureRecognizer) {
+        let pointTapped: CGPoint = gestureRecognizer.location(in: self.view)
+        let positionOfSlider: CGPoint = activityLvlSlider.frame.origin
+        let widthOfSlider: CGFloat = activityLvlSlider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activityLvlSlider.maximumValue) / widthOfSlider)
+        activityLvlSlider.setValue(Float(newValue), animated: true)
+        indexValue = Int(newValue)
+        setUpActivtyLevel(indexValue: indexValue)
     }
 
     @objc func onBackPressed() {

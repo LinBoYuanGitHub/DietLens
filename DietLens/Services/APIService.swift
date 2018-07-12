@@ -1448,7 +1448,7 @@ class APIService {
         }
     }
 
-    func uploadHealthCenterData(category: String, value: Int, date: String, time: String, completion: @escaping (Bool) -> Void) {
+    func uploadHealthCenterData(category: String, value: Double, date: String, time: String, completion: @escaping (Bool) -> Void) {
         let params = ["category": category, "value": value, "date": date, "time": time] as [String: Any]
         Alamofire.request(URL(string: ServerConfig.uploadHealthCenterData)!,
                           method: .post,

@@ -15,7 +15,7 @@ func flat(_ value: CGFloat) -> CGFloat {
 
 let goldenRatio: CGFloat = 0.618
 
-private let reulerViewHeight: CGFloat = 50
+private let reulerViewHeight: CGFloat = 110
 
 private let bottomLineMinY = (reulerViewHeight + itemHeight + titleSpace) / 2
 
@@ -34,13 +34,14 @@ protocol RulerViewDelegate: class {
 class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
 
     weak var rulerViewDelegate: RulerViewDelegate?
+    var divisor: Int = 1
 
     private lazy var collectionView: UICollectionView = {
         let layout = RulerLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
         layout.minimumLineSpacing = padding
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: titleSpace, width: self.frame.width, height: self.frame.height - titleSpace), collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height - titleSpace), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -59,7 +60,7 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
 
     private lazy var verticalLine: CALayer = {
         let verticalLine = CALayer()
-        verticalLine.frame = CGRect(x: (self.frame.width - 1) / 2, y: 0, width: 1, height: bottomLineMinY - titleSpace)
+        verticalLine.frame = CGRect(x: (self.frame.width - 1) / 2, y: 0, width: 1, height: 40)
         verticalLine.backgroundColor = UIColor.red.cgColor
         return verticalLine
     }()
@@ -78,8 +79,8 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
         backgroundColor = UIColor.white
         addSubview(collectionView)
         collectionView.register(RulerCollectionCell.self, forCellWithReuseIdentifier: "rulerCell")
-        let indicatorImage = UIImageView(frame: CGRect(x: 0, y: bottomLineMinY - titleSpace, width: 15, height: 15))
-        indicatorImage.center = CGPoint(x: (self.frame.width - 1) / 2, y: bottomLineMinY - titleSpace)
+        let indicatorImage = UIImageView(frame: CGRect(x: 0, y: 40, width: 15, height: 15))
+        indicatorImage.center = CGPoint(x: (self.frame.width - 1) / 2, y: 40)
         indicatorImage.image = #imageLiteral(resourceName: "rulerIndicator")
 //        addSubview(textLabel)
         addSubview(indicatorImage)
@@ -99,13 +100,19 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "rulerCell", for: indexPath)
+        (cell as? RulerCollectionCell)?.divisor = divisor
         (cell as? RulerCollectionCell)?.index = indexPath.row
         return cell
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+         let index = (scrollView.contentOffset.x + scrollView.contentInset.left)
+         rulerViewDelegate?.didSelectItem(rulerView: self, with: Int(index/itemWidth))
+    }
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
-        let index = (scrollView.contentOffset.x + scrollView.contentInset.left) / itemWidth
+//        let index = (scrollView.contentOffset.x + scrollView.contentInset.left) / itemWidth
 
 //        textLabel.alpha = 0
 //        UIView.animate(withDuration: 0.25) {
@@ -114,6 +121,6 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
 //            self.textLabel.text = String(format: "%.2f", max(Double(index), 0))
 //        }
 
-        rulerViewDelegate?.didSelectItem(rulerView: self, with: Int(index))
+//        rulerViewDelegate?.didSelectItem(rulerView: self, with: Int(index))
     }
 }

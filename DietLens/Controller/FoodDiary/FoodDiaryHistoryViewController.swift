@@ -22,7 +22,7 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
     @IBOutlet weak var foodDiaryMealTable: UITableView!
     @IBOutlet weak var editBtn: UIBarButtonItem!
 
-    var calendarDialog: UIView!
+    var calendarDialog: CalendarDialogViewController!
     //bottom dialog view
     @IBOutlet weak var bottomDialog: UIView!
     @IBOutlet weak var distanceToBottom: NSLayoutConstraint!
@@ -31,13 +31,16 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
     var foodMealList = [FoodDiaryMealEntity]()
     var displayDict = [Int: (String, Double)]()
     var targetDict = [Int: (String, Double)]()
-    var trashItems = [FoodDiaryMealEntity]()
-
+    var trashItemIds = [String]()
+    //edit or norm status
     var currentEditStatus = FoodDiaryStatus.normal
 
     //passValue
     var selectedDate = Date()
     var shouldRefreshDiary = true
+
+    //calendar date attribute
+    var datesWithEvent = [Date]()
 
     fileprivate let gregorian = Calendar(identifier: .gregorian)
     fileprivate let formatter: DateFormatter = {
@@ -52,6 +55,7 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
         foodDiaryMealTable.dataSource = self
         nutritionCollectionView.delegate = self
         nutritionCollectionView.dataSource = self
+        dateLabel.text = formatter.string(from: selectedDate)
         registerNib()
     }
 
@@ -137,10 +141,19 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
         editBtn.title = "Edit"
         distanceToBottom.constant = 0
         dialogContainer.isHidden = true
+        //remove all the trash items
+        trashItemIds.removeAll()
     }
 
     @IBAction func performDeleteFood(_ sender: Any) {
-
+        APIService.instance.deleteFoodDiaryList(foodDiaryIds: trashItemIds) { (isSuccess) in
+            if isSuccess {
+                self.switchToNormalStatus(self)
+                self.getFoodDairyByDate(date: self.selectedDate)
+                NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
+                self.loadDailyNutritionView()
+            }
+        }
     }
 
     //************************************************************************************
@@ -220,9 +233,11 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
     }
 
     func getAvailableDate(year: String, month: String) {
-        APIService.instance.getAvailableDate(year: year, month: month) { (_) in
+        APIService.instance.getAvailableDate(year: year, month: month) { (dateList) in
             //mark redDot for this date
-
+            if dateList != nil {
+                 self.calendarDialog.setUpEventsDate(eventDateList: dateList!)
+            }
         }
     }
 
@@ -241,28 +256,39 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
         }
     }
 
-    func didSelectFoodDiaryItem(foodDiary: FoodDiaryEntity) {
-        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-            let imageKey = foodDiary.imageId
-            //download image from Qiniu
-            AlertMessageHelper.showLoadingDialog(targetController: self)
-            APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    dest.isSetMealByTimeRequired = false
-                    dest.foodDiaryEntity = foodDiary
-                    dest.isUpdate = true
-                    dest.imageKey = foodDiary.imageId
-                    if image != nil {
-                        dest.userFoodImage = image
-                    } else {
-                        dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
-                    }
-                    if let navigator = self.navigationController {
-                        navigator.pushViewController(dest, animated: true)
-                    }
-                }
-            })
+    func toggleFoodDiaryTrashItem(foodDiaryId: String, isAddedToTrash: Bool) {
+        if isAddedToTrash {
+            trashItemIds.append(foodDiaryId)
+        } else {
+            let index = trashItemIds.index(of: foodDiaryId)
+            if index != nil {
+                trashItemIds.remove(at: index!)
+            }
         }
+    }
+
+    func didSelectFoodDiaryItem(foodDiary: FoodDiaryEntity) {
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+                let imageKey = foodDiary.imageId
+                //download image from Qiniu
+                AlertMessageHelper.showLoadingDialog(targetController: self)
+                APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                        dest.isSetMealByTimeRequired = false
+                        dest.foodDiaryEntity = foodDiary
+                        dest.isUpdate = true
+                        dest.imageKey = foodDiary.imageId
+                        if image != nil {
+                            dest.userFoodImage = image
+                        } else {
+                            dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                        }
+                        if let navigator = self.navigationController {
+                            navigator.pushViewController(dest, animated: true)
+                        }
+                    }
+                })
+            }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

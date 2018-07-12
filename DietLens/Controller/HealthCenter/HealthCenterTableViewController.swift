@@ -24,7 +24,9 @@ class HealthCenterTableViewController: UIViewController {
     }
 
     func getHealthItemData() {
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.getHealthLogByCategory(category: recordName) { (healthLogs) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if healthLogs == nil {
                 return
             }
@@ -37,6 +39,8 @@ class HealthCenterTableViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
+        //disable sidebarMenu effort
+        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
         //add record name
         self.navigationItem.title = recordName
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)

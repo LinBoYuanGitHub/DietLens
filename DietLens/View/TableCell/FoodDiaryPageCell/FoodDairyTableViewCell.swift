@@ -12,6 +12,8 @@ protocol FoodDiaryTableCellDelegate {
 
     func didSelectFoodDiaryItem(foodDiary: FoodDiaryEntity)
 
+    func toggleFoodDiaryTrashItem(foodDiaryId: String, isAddedToTrash: Bool)
+
     func didEnterAddFoodPage(mealPos: Int)
 
 }
@@ -84,7 +86,14 @@ extension FoodDairyTableViewCell: UICollectionViewDelegate, UICollectionViewData
         if indexPath.row == foodDiaryList.count {
             delegate?.didEnterAddFoodPage(mealPos: indexPath.section)
         } else {
-            delegate?.didSelectFoodDiaryItem(foodDiary: foodDiaryList[indexPath.row])
+            if currentEditStatus == .edit {
+                if let cell = collectionView.cellForItem(at: indexPath) as? FoodDiaryCollectionViewCell {
+                    let flag = cell.toggleTick()
+                    delegate?.toggleFoodDiaryTrashItem(foodDiaryId: foodDiaryList[indexPath.row].foodDiaryId, isAddedToTrash: flag)
+                }
+            } else {
+                 delegate?.didSelectFoodDiaryItem(foodDiary: foodDiaryList[indexPath.row])
+            }
 
         }
 

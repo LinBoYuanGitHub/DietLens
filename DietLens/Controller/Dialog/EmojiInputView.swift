@@ -33,6 +33,7 @@ class EmojiInputView: UIView {
         let xibFileName = "EmojiLayout" // xib extension not included
         if let view =  Bundle.main.loadNibNamed(xibFileName, owner: self, options: nil)?[0] as? UIView {
             self.addSubview(view)
+            emojiImageView.center.x = self.frame.width/10
             view.frame = self.bounds
         }
     }
@@ -46,18 +47,23 @@ class EmojiInputView: UIView {
         case 0:
             emojiLabel.text = "Bad"
             emojiImageView.image = #imageLiteral(resourceName: "healthCenter_badMood")
+            emojiImageView.center.x = self.frame.width/10
         case 1:
             emojiLabel.text = "Not so good"
             emojiImageView.image = #imageLiteral(resourceName: "healthCenter_notSoGoodMood")
+            emojiImageView.center.x = self.frame.width*3/10
         case 2:
             emojiLabel.text = "Ok"
             emojiImageView.image = #imageLiteral(resourceName: "healthCenter_okMood")
+             emojiImageView.center.x = self.frame.width*1/2
         case 3:
             emojiLabel.text = "Happy"
             emojiImageView.image = #imageLiteral(resourceName: "healthCenter_happyMood")
+            emojiImageView.center.x = self.frame.width*7/10
         case 4:
             emojiLabel.text = "Excellent"
             emojiImageView.image = #imageLiteral(resourceName: "healthCenter_excellent")
+            emojiImageView.center.x = self.frame.width*9/10
         default:
             break
         }

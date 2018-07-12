@@ -22,6 +22,18 @@ class FoodDiaryCollectionViewCell: UICollectionViewCell {
 
     func hideEdit() {
         tickIcon.isHidden = true
+        //reset all the tick
+        tickIcon.image = #imageLiteral(resourceName: "edit_gray_tick_icon")
+    }
+
+    func toggleTick() -> Bool {
+        if tickIcon.image == #imageLiteral(resourceName: "edit_red_tick_icon") {
+            tickIcon.image = #imageLiteral(resourceName: "edit_gray_tick_icon")
+            return false
+        } else {
+            tickIcon.image = #imageLiteral(resourceName: "edit_red_tick_icon")
+            return true
+        }
     }
 
     func checkTick() {

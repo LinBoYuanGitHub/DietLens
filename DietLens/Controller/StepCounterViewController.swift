@@ -77,6 +77,8 @@ class StepCounterViewController: UIViewController {
     func requestStepData() {
         HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: Date()) { (steps, _) in
             self.stepsList = steps
+            //reverse sequence to let latest setp date rank first
+            self.stepsList.reverse()
             DispatchQueue.main.async {
                 if self.stepsList.count == 0 {
                     self.emptyView.isHidden = false

@@ -435,10 +435,10 @@ class FoodInfoViewController: UIViewController {
                                 }) {
                                     //add foodItem into foodDiaryVC
                                     for viewController in (self.navigationController?.viewControllers)! {
-                                        if let FoodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
+                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            navigator.popToViewController(FoodDiaryHistoryVC, animated: true)
-                                                FoodDiaryHistoryVC.shouldRefreshDiary = true
+                                            navigator.popToViewController(foodDiaryHistoryVC, animated: true)
+                                                foodDiaryHistoryVC.shouldRefreshDiary = true
                                             }
                                         }
                                     }

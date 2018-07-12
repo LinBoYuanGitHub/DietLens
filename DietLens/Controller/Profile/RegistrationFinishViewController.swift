@@ -32,7 +32,10 @@ class RegistrationFinishViewController: UIViewController {
 
     func getGoalCalorie() {
         APIService.instance.getDietaryGuideInfo { (guideDict) in
-            self.calorieText.text = "\(guideDict["energy"])kcal"
+            if let calorie = guideDict["energy"] {
+                self.calorieText.text = "\(Int(calorie))kcal"
+            }
+
         }
     }
 

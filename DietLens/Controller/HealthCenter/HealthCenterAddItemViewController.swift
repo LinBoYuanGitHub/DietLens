@@ -17,7 +17,7 @@ class HealthCenterAddItemViewController: UIViewController {
     //3 type of input dialog(UISlider,ruler,keyboard)
     var dateStr = ""
     var timeStr = ""
-    var itemValue = 0
+    var itemValue: Double = 0.0
     var unit = ""
     //picker view
     var datePickerView: UIDatePicker!
@@ -72,7 +72,7 @@ class HealthCenterAddItemViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = false
         //add record name
-        self.navigationItem.title = "Add" + recordName
+        self.navigationItem.title = "Add " + recordName
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
         self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
@@ -115,9 +115,15 @@ class HealthCenterAddItemViewController: UIViewController {
     }
 
     @objc func addHealthItem() {
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.uploadHealthCenterData(category: recordName, value: itemValue, date: dateStr, time: timeStr) { (isSuccess) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
             if isSuccess {
                 self.navigationController?.popViewController(animated: true)
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "add Health log failed")
             }
         }
     }
@@ -146,19 +152,21 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
                 //set first one as default mood
                 cell.healthCenterTextField.text = HealthCenterConstants.moodList[0]
             } else if recordType == "1" {//weight ruler
-                let glucoseInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
+                let glucoseInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 10)
                 self.unit = "mmol/L"
+                glucoseInputView.decimalDivisor = 10
+                glucoseInputView.rulerView.setCurrentItem(position: HealthCenterConstants.GLUCOSEDEFAULT, animated: false)
                 glucoseInputView.unit = "mmol/L"
-                glucoseInputView.textLabel.text = "0mmol/L"
+                glucoseInputView.textLabel.text = "\(HealthCenterConstants.GLUCOSEDEFAULT/10)mmol/L"
                 glucoseInputView.delegate = self
                 cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Blood glucose")
                 cell.healthCenterTextField.inputView = glucoseInputView
             } else { // glucose ruler
-
-                let weightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
+                let weightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 1)
+                 weightInputView.rulerView.setCurrentItem(position: HealthCenterConstants.WEIGHTDEFAULT, animated: false)
                 self.unit = "kg"
                 weightInputView.unit = "kg"
-                weightInputView.textLabel.text = "0kg"
+                weightInputView.textLabel.text = "\(HealthCenterConstants.WEIGHTDEFAULT)kg"
                 weightInputView.delegate = self
                 cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Weight")
                 cell.healthCenterTextField.inputView = weightInputView
@@ -203,11 +211,11 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
 
 extension HealthCenterAddItemViewController: RulerInputDelegate {
 
-    func onRulerDidSelectItem(tag: Int, index: Int) {
+    func onRulerDidSelectItem(tag: Int, value: Double) {
             let rulerIndex = IndexPath(row: 0, section: 0)
             if let valueCell = addItemTableView.cellForRow(at: rulerIndex) as? HealthCenterTableValueCell {
-                valueCell.healthCenterTextField.text = String(index) + unit
-                itemValue = index
+                valueCell.healthCenterTextField.text = String(value) + unit
+                itemValue = Double(value)
             }
     }
 }
@@ -217,8 +225,8 @@ extension HealthCenterAddItemViewController: EmojiInputDelegate {
     func onEmojiDidSelectItem(index: Int) {
         let indexPath = IndexPath(row: 0, section: 0)
         if let cell = addItemTableView.cellForRow(at: indexPath) as? HealthCenterTableValueCell {
-            itemValue = index
             cell.healthCenterTextField.text = HealthCenterConstants.moodList[index]
+            itemValue = Double(index)
         }
 
     }

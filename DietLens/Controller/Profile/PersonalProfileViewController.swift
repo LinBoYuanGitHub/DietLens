@@ -24,6 +24,7 @@ class PersonalProfileViewController: UIViewController {
     //tag
     let heightRulerTag = 0
     let weightRulerTag = 1
+    @IBOutlet weak var saveBtn: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,7 +145,9 @@ class PersonalProfileViewController: UIViewController {
         if let cell = profileTableView.cellForRow(at: profileNameIndexPath) as? ProfileTextFieldCell {
             profile.name = cell.inptText.text!
         }
+        saveBtn.isEnabled = false
         APIService.instance.updateProfile(userId: userId!, profile: profile) { (isSuccess) in
+            self.saveBtn.isEnabled = true
             if isSuccess {
                 NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
                 NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
@@ -361,21 +364,21 @@ extension PersonalProfileViewController: activitySelectDelegate {
 
 extension PersonalProfileViewController: RulerInputDelegate {
 
-    func onRulerDidSelectItem(tag: Int, index: Int) {
+    func onRulerDidSelectItem(tag: Int, value: Double) {
 
         if weightRulerTag == tag {
             //weight
             let weightIndex = IndexPath(row: 2, section: 1)
             if let weightCell = profileTableView.cellForRow(at: weightIndex) as? ProfileTextFieldCell {
-                weightCell.inptText.text = "\(index)kg"
-                profile.weight = Double(index)
+                weightCell.inptText.text = "\(value)kg"
+                profile.weight = value
             }
         } else {
             //height
             let heightIndex = IndexPath(row: 3, section: 1)
             if let heightCell = profileTableView.cellForRow(at: heightIndex) as? ProfileTextFieldCell {
-                heightCell.inptText.text = "\(index)cm"
-                profile.height = Double(index)
+                heightCell.inptText.text = "\(value)cm"
+                profile.height = value
             }
         }
     }

@@ -154,6 +154,8 @@ struct Dimen {
 
 struct HealthCenterConstants {
     static let moodList = ["Bad", "Not so good", "Ok", "Happy", "Excellent"]
+    static let GLUCOSEDEFAULT = 65
+    static let WEIGHTDEFAULT = 60
 }
 
 struct NotificationType {
