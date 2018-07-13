@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import BAFluidView
 
 class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
@@ -31,6 +32,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     //parallax header
 //    weak var parallaxHeaderView: UIView?
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var calorieContainer: UIView!
+    var calorieFluidView: BAFluidView!
 
     var displayDict = [Int: (String, Double)]()
     var targetDict = [Int: (String, Double)]()
@@ -51,6 +54,16 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //for sideMenu toggle leftView
         NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
+        //setUp BAFluid view
+//      calorieFluidView = BAFluidView(frame: self.calorieContainer.frame, startElevation: 0)
+        calorieFluidView = BAFluidView(frame: CGRect(x: 0, y: 0, width: calorieContainer.frame.width, height: calorieContainer.frame.height), startElevation: 0)
+        calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.6)
+        calorieFluidView.strokeColor = UIColor.white
+        calorieFluidView.keepStationary()
+        calorieFluidView.maxAmplitude = 8
+        calorieFluidView.minAmplitude = 4
+        calorieFluidView.fillDuration = 1
+        calorieContainer.addSubview(calorieFluidView)
     }
 
     //assemble the article & event list and display
@@ -88,7 +101,10 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             totalCalorie.text = String(totalCal)
             intakenCalorie.text = String(todayIntakenCal)
             remainCalorie.text = String(totalCal-todayIntakenCal)
-            percentageCalorie.text = String(todayIntakenCal*100/totalCal) + "%"
+            let percentageValue = Int(todayIntakenCal*100/totalCal)
+            percentageCalorie.text = String(percentageValue) + "%"
+            calorieFluidView.fill(to: Float(percentageValue)/100 as NSNumber)
+            calorieFluidView.startAnimation()
         }
     }
 

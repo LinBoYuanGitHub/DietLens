@@ -24,7 +24,7 @@ class NotificationDetailViewController: UIViewController {
 //    @IBOutlet weak var scrollerBottomSpace: NSLayoutConstraint!
 //    @IBOutlet weak var contentView: UIView!
 
-    //radio button set
+    //radio button
     var buttons = [UIButton]()
 
     var notificationModel = NotificationModel()

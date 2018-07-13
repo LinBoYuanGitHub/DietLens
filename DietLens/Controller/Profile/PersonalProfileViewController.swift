@@ -146,8 +146,10 @@ class PersonalProfileViewController: UIViewController {
             profile.name = cell.inptText.text!
         }
         saveBtn.isEnabled = false
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.updateProfile(userId: userId!, profile: profile) { (isSuccess) in
             self.saveBtn.isEnabled = true
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if isSuccess {
                 NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
                 NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
@@ -305,7 +307,6 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                 if let cell = tableView.cellForRow(at: indexPath) as? ProfileTextFieldCell {
                     cell.inptText.becomeFirstResponder()
                 }
-                break
             case 2:
                 //jump to dest
                 if let cell = tableView.cellForRow(at: indexPath) as? ProfileArrowCell {
@@ -316,7 +317,6 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                         dest.indexValue = profile.activityLevel
                     }
                 }
-                break
         default:
             break
         }

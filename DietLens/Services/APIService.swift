@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import QiniuUpload
+import Kingfisher
 
 class APIService {
     static var instance = APIService()
@@ -502,31 +503,19 @@ class APIService {
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
     public func qiniuImageDownload(imageKey: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
         let downloadURL = "https://img.dietlens.com/"+imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
-        Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
-            if response.error == nil {
-                if let data = response.data {
-                    completion(UIImage(data: data))
-                } else {
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        let downloadImageView = UIImageView()
+        let url = URL(string: downloadURL)!
+        downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
+            completion(image)
         }
     }
 
     public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
         let downloadURL = "https://img.dietlens.com/"+imageKey
-        Alamofire.request(URL(string: downloadURL)!).responseData { (response) in
-            if response.error == nil {
-                if let data = response.data {
-                    completion(UIImage(data: data))
-                } else {
-                    completion(nil)
-                }
-            } else {
-                completion(nil)
-            }
+        let downloadImageView = UIImageView()
+        let url = URL(string: downloadURL)!
+        downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
+            completion(image)
         }
     }
 

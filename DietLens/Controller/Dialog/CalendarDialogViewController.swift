@@ -26,6 +26,7 @@ class CalendarDialogViewController: UIViewController, UIPopoverControllerDelegat
         diaryCalendar.delegate = self
         //diary style setting
         diaryCalendar.appearance.headerTitleColor = UIColor.black
+        diaryCalendar.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,11 +36,6 @@ class CalendarDialogViewController: UIViewController, UIPopoverControllerDelegat
     func setupView() {
         self.view.backgroundColor = UIColor.clear
         self.view.isOpaque = false
-    }
-
-    func setUpEventsDate(eventDateList: [Date]) {
-        self.datesWithEvent = eventDateList
-        diaryCalendar.reloadData()
     }
 
     func setCurrentPage(selectedDate: Date) {
@@ -52,6 +48,18 @@ class CalendarDialogViewController: UIViewController, UIPopoverControllerDelegat
 
     func dismissDialog() {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    func getAvailableDate(year: String, month: String) {
+        APIService.instance.getAvailableDate(year: year, month: month) { (dateList) in
+            //mark redDot for this date
+            if dateList != nil {
+                self.datesWithEvent = dateList!
+            }
+            if self.diaryCalendar != nil {
+                self.diaryCalendar.reloadData()
+            }
+        }
     }
 
 }
@@ -107,6 +115,8 @@ extension CalendarDialogViewController: FSCalendarDelegate, FSCalendarDataSource
     }
 
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let dateStr = DateUtil.normalDateToString(date: calendar.currentPage)
+        getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
         if calendarDelegate != nil {
             calendarDelegate?.onCalendarCurrentPageDidChange(changedDate: calendar.currentPage)
         }

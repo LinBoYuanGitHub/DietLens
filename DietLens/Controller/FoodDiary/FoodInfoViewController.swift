@@ -218,20 +218,21 @@ class FoodInfoViewController: UIViewController {
 //        }
 //        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
 //        self.present(alert, animated: true, completion: nil)
-        let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as! SingleOptionViewController
-        singleOptionAlert.delegate = self
-        singleOptionAlert.optionList.removeAll()
-        singleOptionAlert.selectedPosition = dietItem.selectedPos
-        for portion in dietItem.portionInfo {
-            singleOptionAlert.optionList.append(portion.sizeUnit)
+        if let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as? SingleOptionViewController {
+            singleOptionAlert.delegate = self
+            singleOptionAlert.optionList.removeAll()
+            singleOptionAlert.selectedPosition = dietItem.selectedPos
+            for portion in dietItem.portionInfo {
+                singleOptionAlert.optionList.append(portion.sizeUnit)
+            }
+            singleOptionAlert.providesPresentationContextTransitionStyle = true
+            singleOptionAlert.definesPresentationContext = true
+            singleOptionAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            singleOptionAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(singleOptionAlert, animated: true, completion: {
+                self.setUpFoodValue()
+            })
         }
-        singleOptionAlert.providesPresentationContextTransitionStyle = true
-        singleOptionAlert.definesPresentationContext = true
-        singleOptionAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        singleOptionAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(singleOptionAlert, animated: true, completion: {
-            self.setUpFoodValue()
-        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -245,7 +246,7 @@ class FoodInfoViewController: UIViewController {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
          let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
     }
@@ -255,7 +256,8 @@ class FoodInfoViewController: UIViewController {
         let indexPath = IndexPath(item: currentMealIndex, section: 0)
         let destX = mealCollectionView.cellForItem(at: indexPath)?.center.x
         if destX != nil {
-            UIView.animate(withDuration: 0.1, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0.1,
+                           usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
                 self.animationLeading.constant = destX! + CGFloat(10)
             })
         }

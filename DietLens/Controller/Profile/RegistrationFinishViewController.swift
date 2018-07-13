@@ -23,7 +23,7 @@ class RegistrationFinishViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         self.navigationItem.hidesBackButton = true
         self.navigationItem.title = "Sign Up"
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
@@ -35,7 +35,6 @@ class RegistrationFinishViewController: UIViewController {
             if let calorie = guideDict["energy"] {
                 self.calorieText.text = "\(Int(calorie))kcal"
             }
-
         }
     }
 

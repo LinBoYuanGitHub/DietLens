@@ -44,7 +44,7 @@ class HealthCenterTableViewController: UIViewController {
         //add record name
         self.navigationItem.title = recordName
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
@@ -85,10 +85,8 @@ extension HealthCenterTableViewController: UITableViewDataSource, UITableViewDel
 
     func findMaxValue(recordList: [HealthCenterItem]) -> Float {
         var maxValue: Float = 0
-        for record in recordList {
-            if record.value > maxValue {
+        for record in recordList where record.value > maxValue {
                 maxValue = record.value
-            }
         }
         return maxValue
     }
@@ -96,7 +94,8 @@ extension HealthCenterTableViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "healthCenterBarCell") as? HealthCenterBarCell {
             let entity = recordList[indexPath.row]
-            cell.setUpCell(category: entity.category, value: entity.value, maxValue: findMaxValue(recordList: recordList), dateStr: entity.date, timeStr: entity.time)
+            cell.setUpCell(category: entity.category, value: entity.value,
+                           maxValue: findMaxValue(recordList: recordList), dateStr: entity.date, timeStr: entity.time)
             return cell
         }
         return UITableViewCell()

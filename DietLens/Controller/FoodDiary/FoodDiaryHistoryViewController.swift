@@ -22,7 +22,6 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
     @IBOutlet weak var foodDiaryMealTable: UITableView!
     @IBOutlet weak var editBtn: UIBarButtonItem!
 
-    var calendarDialog: CalendarDialogViewController!
     //bottom dialog view
     @IBOutlet weak var bottomDialog: UIView!
     @IBOutlet weak var distanceToBottom: NSLayoutConstraint!
@@ -111,8 +110,10 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
             calendarDialog.popoverPresentationController?.sourceView = self.calendarBtn
             calendarDialog.popoverPresentationController?.sourceRect = calendarBtn.bounds
             calendarDialog.popoverPresentationController?.delegate = self
+            calendarDialog.datesWithEvent = datesWithEvent
             self.present(calendarDialog, animated: true, completion: nil)
         }
+
     }
 
     @IBAction func onMoreBtnClick(_ sender: Any) {
@@ -236,7 +237,7 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
         APIService.instance.getAvailableDate(year: year, month: month) { (dateList) in
             //mark redDot for this date
             if dateList != nil {
-                 self.calendarDialog.setUpEventsDate(eventDateList: dateList!)
+                self.datesWithEvent = dateList!
             }
         }
     }
@@ -303,6 +304,7 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FoodDiaryTableViewCell") as? FoodDairyTableViewCell {
             cell.setUpCell(foodDiaryList: self.foodMealList[indexPath.section].foodEntityList, currentEditStatus: currentEditStatus, delegate: self)
+            cell.mealSection = indexPath.section
             return cell
         }
         return UITableViewCell()
@@ -412,8 +414,7 @@ extension FoodDiaryHistoryViewController: CalendarAlertDelegate {
     }
 
     func onCalendarCurrentPageDidChange(changedDate: Date) {
-        let dateStr = DateUtil.normalDateToString(date: changedDate)
-        getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
+      //current page change callback
     }
 
 }

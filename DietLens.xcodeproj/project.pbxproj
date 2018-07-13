@@ -19,7 +19,6 @@
 		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
 		3F25C4752043EC7700DFA459 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C4742043EC7700DFA459 /* StringConstants.swift */; };
 		3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C47620440F1500DFA459 /* ConfigVariable.swift */; };
-		3F2D162B20ECB2B400348160 /* RulerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162A20ECB2B400348160 /* RulerDialog.swift */; };
 		3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */; };
 		3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162E20EE15D200348160 /* RulerInputView.swift */; };
 		3F2D163120EE175400348160 /* RulerLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2D163020EE175400348160 /* RulerLayout.xib */; };
@@ -93,7 +92,6 @@
 		3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE9D20009C300011845B /* IngredientSectionHeader.swift */; };
 		3F9BFEA02000A0120011845B /* IngredientHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9BFE9F2000A0120011845B /* IngredientHeader.xib */; };
 		3FA376A7208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA376A6208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift */; };
-		3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */; };
 		3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */; };
 		3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */; };
 		3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */; };
@@ -169,11 +167,9 @@
 		5877CFA01F9D82BF0022B51E /* DietLensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF9F1F9D82BF0022B51E /* DietLensTests.swift */; };
 		5877CFAB1F9D82BF0022B51E /* DietLensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */; };
 		587C66EB1FB2C596005AD616 /* FoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */; };
-		588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */; };
 		5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */; };
 		589424B01FD7B1B1009AEA4C /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589424AF1FD7B1B1009AEA4C /* SplashScreenViewController.swift */; };
 		58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */; };
-		58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA52181FA1BA420072779C /* DiaryViewController.swift */; };
 		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
 		58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
 		58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */; };
@@ -247,7 +243,6 @@
 		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		3F25C4742043EC7700DFA459 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringConstants.swift; path = DietLens/Assets.xcassets/StringConstants.swift; sourceTree = SOURCE_ROOT; };
 		3F25C47620440F1500DFA459 /* ConfigVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigVariable.swift; sourceTree = "<group>"; };
-		3F2D162A20ECB2B400348160 /* RulerDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerDialog.swift; sourceTree = "<group>"; };
 		3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActivityLvlViewController.swift; sourceTree = "<group>"; };
 		3F2D162E20EE15D200348160 /* RulerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerInputView.swift; sourceTree = "<group>"; };
 		3F2D163020EE175400348160 /* RulerLayout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulerLayout.xib; sourceTree = "<group>"; };
@@ -319,7 +314,6 @@
 		3F9BFE9D20009C300011845B /* IngredientSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientSectionHeader.swift; sourceTree = "<group>"; };
 		3F9BFE9F2000A0120011845B /* IngredientHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IngredientHeader.xib; sourceTree = "<group>"; };
 		3FA376A6208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryRecordViewCell.swift; sourceTree = "<group>"; };
-		3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchViewController.swift; sourceTree = "<group>"; };
 		3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
 		3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryRecordViewController.swift; sourceTree = "<group>"; };
 		3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDialogViewController.swift; sourceTree = "<group>"; };
@@ -403,11 +397,9 @@
 		5877CFAA1F9D82BF0022B51E /* DietLensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietLensUITests.swift; sourceTree = "<group>"; };
 		5877CFAC1F9D82BF0022B51E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		587C66EA1FB2C596005AD616 /* FoodDiaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDiaryCell.swift; sourceTree = "<group>"; };
-		588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultsViewController.swift; sourceTree = "<group>"; };
 		5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		589424AF1FD7B1B1009AEA4C /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDatePicker.swift; sourceTree = "<group>"; };
-		58AA52181FA1BA420072779C /* DiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
 		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
 		58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
@@ -673,7 +665,6 @@
 			isa = PBXGroup;
 			children = (
 				3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */,
-				3F2D162A20ECB2B400348160 /* RulerDialog.swift */,
 				3F2D162E20EE15D200348160 /* RulerInputView.swift */,
 				3F2D163020EE175400348160 /* RulerLayout.xib */,
 				3F5608F020F30C010007B3AF /* EmojiInputView.swift */,
@@ -755,7 +746,6 @@
 			children = (
 				3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */,
 				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
-				58AA52181FA1BA420072779C /* DiaryViewController.swift */,
 				58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */,
 				58BCDA631FA83F5300375D5F /* MainSlideMenuViewController.swift */,
 				580443621FB017DD00D59DFF /* StepsViewController.swift */,
@@ -987,7 +977,6 @@
 			isa = PBXGroup;
 			children = (
 				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
-				3FA6B0211FCFD14800C0DF1C /* TextSearchViewController.swift */,
 				3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */,
 				3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */,
 			);
@@ -1001,7 +990,6 @@
 				BF7894011FA4518200DA1667 /* PhotoCaptureProcessor.swift */,
 				BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */,
 				BFC0D9A21FAD71A7003F8241 /* BarcodeScannerProcessor.swift */,
-				588BE96B1FBAD2B500811B08 /* RecognitionResultsViewController.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -1195,12 +1183,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/CRRulerControl/CRRulerControl.framework",
+				"${BUILT_PRODUCTS_DIR}/BAFluidView/BAFluidView.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HFSwipeView/HFSwipeView.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LGSideMenuController/LGSideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PBRevealViewController/PBRevealViewController.framework",
@@ -1223,12 +1212,13 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CRRulerControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BAFluidView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HFSwipeView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LGSideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
@@ -1361,7 +1351,6 @@
 				3F436651207CB6FA0089C63A /* FoodReportViewController.swift in Sources */,
 				3FA376A7208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift in Sources */,
 				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
-				3F2D162B20ECB2B400348160 /* RulerDialog.swift in Sources */,
 				3FB6E68920E38ABE00462591 /* ProfileViewHeader.swift in Sources */,
 				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
 				3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */,
@@ -1393,7 +1382,6 @@
 				3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */,
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
 				3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */,
-				588BE96C1FBAD2B500811B08 /* RecognitionResultsViewController.swift in Sources */,
 				3F9BFE9C1FF3957C0011845B /* AlertMessageHelper.swift in Sources */,
 				580443631FB017DD00D59DFF /* StepsViewController.swift in Sources */,
 				3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */,
@@ -1404,7 +1392,6 @@
 				3F436659207EFA6A0089C63A /* RecognitionResultTableCelll.swift in Sources */,
 				3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
-				3FA6B0221FCFD14800C0DF1C /* TextSearchViewController.swift in Sources */,
 				3F575C332047F0D9009C096C /* DateUtil.swift in Sources */,
 				3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */,
 				3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */,
@@ -1458,7 +1445,6 @@
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
-				58AA52191FA1BA420072779C /* DiaryViewController.swift in Sources */,
 				3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */,
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,

@@ -24,6 +24,7 @@ class FoodDairyTableViewCell: UITableViewCell {
     var foodDiaryList = [FoodDiaryEntity]()
     var delegate: FoodDiaryTableCellDelegate?
     var currentEditStatus: FoodDiaryStatus?
+    var mealSection = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -84,7 +85,7 @@ extension FoodDairyTableViewCell: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == foodDiaryList.count {
-            delegate?.didEnterAddFoodPage(mealPos: indexPath.section)
+            delegate?.didEnterAddFoodPage(mealPos: mealSection)
         } else {
             if currentEditStatus == .edit {
                 if let cell = collectionView.cellForItem(at: indexPath) as? FoodDiaryCollectionViewCell {

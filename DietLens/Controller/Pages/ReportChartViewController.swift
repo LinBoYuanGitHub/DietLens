@@ -72,10 +72,11 @@ class ReportChartViewController: UIViewController {
         let diaryDateFormatter = DateFormatter()
         diaryDateFormatter.setLocalizedDateFormatFromTemplate("yyyyMMM")
         let dateString: String = diaryDateFormatter.string(from: Date())
-        let year = String(dateString[4...])
-        let month = String(dateString[..<3])
-//        let year = "2017"
-//        let month = "Dec"
+        let componenets = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+//        let year = componenets.year
+//        let month = componenets.month
+        let year = "2017"
+        let month = "Dec"
         foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByMonth(year: String(year), month: String(month))!
         //calculate meal counting part, count times & average
         for _ in 0..<4 {

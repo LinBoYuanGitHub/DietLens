@@ -393,19 +393,19 @@ extension CameraViewController: CameraViewControllerDelegate {
         let originalWidth = original.size.width
         let originalHeight = original.size.height
 
-        let A = previewImageLayerBounds.origin
-        let B = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.origin.y)
-        let D = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.size.height)
+        let APoint = previewImageLayerBounds.origin
+        let BPoint = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.origin.y)
+        let DPoint = CGPoint(x: previewImageLayerBounds.size.width, y: previewImageLayerBounds.size.height)
 
-        let a = previewLayer.captureDevicePointConverted(fromLayerPoint: A)
-        let b = previewLayer.captureDevicePointConverted(fromLayerPoint: B)
-        let d = previewLayer.captureDevicePointConverted(fromLayerPoint: D)
+        let aPoint = previewLayer.captureDevicePointConverted(fromLayerPoint: APoint)
+        let bPoint = previewLayer.captureDevicePointConverted(fromLayerPoint: BPoint)
+        let dPoint = previewLayer.captureDevicePointConverted(fromLayerPoint: DPoint)
 
-        let posX = floor(b.x * originalHeight)
-        let posY = floor(b.y * originalWidth)
+        let posX = floor(bPoint.x * originalHeight)
+        let posY = floor(bPoint.y * originalWidth)
 
-        let width: CGFloat = d.x * originalHeight - b.x * originalHeight
-        let height: CGFloat = a.y * originalWidth - b.y * originalWidth
+        let width: CGFloat = dPoint.x * originalHeight - bPoint.x * originalHeight
+        let height: CGFloat = aPoint.y * originalWidth - bPoint.y * originalWidth
 
         let cropRect = CGRect(x: posX, y: posY, width: width, height: height)
 
