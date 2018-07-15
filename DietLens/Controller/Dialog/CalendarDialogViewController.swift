@@ -18,10 +18,11 @@ class CalendarDialogViewController: UIViewController, UIPopoverControllerDelegat
     @IBOutlet weak var diaryCalendar: DiaryDatePicker!
     weak var calendarDelegate: CalendarAlertDelegate?
     var datesWithEvent = [Date]()
+    var selectedDate = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        diaryCalendar.setCurrentPage(Date(), animated: true)
+        diaryCalendar.setCurrentPage(selectedDate, animated: true)
         diaryCalendar.dataSource = self
         diaryCalendar.delegate = self
         //diary style setting

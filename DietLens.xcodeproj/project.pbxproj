@@ -107,6 +107,7 @@
 		3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */; };
 		3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */; };
 		3FB6E69620E4D58B00462591 /* RegistrationForthStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */; };
+		3FBA55BB20F883C600258808 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BA20F883C600258808 /* BaseViewController.swift */; };
 		3FCBEC0E20E632750092948C /* HealthCenterAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */; };
 		3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */; };
 		3FCBEC1220E632CB0092948C /* HealthCenterMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */; };
@@ -329,6 +330,7 @@
 		3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSecondStepViewController.swift; sourceTree = "<group>"; };
 		3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationThirdStepViewController.swift; sourceTree = "<group>"; };
 		3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForthStepViewController.swift; sourceTree = "<group>"; };
+		3FBA55BA20F883C600258808 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterAddItemViewController.swift; sourceTree = "<group>"; };
 		3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableViewController.swift; sourceTree = "<group>"; };
 		3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterMainViewController.swift; sourceTree = "<group>"; };
@@ -946,6 +948,7 @@
 				58199C871FB1D63A003F6104 /* Delegate */,
 				BF794BB01FA46D7100D30550 /* Camera */,
 				580443611FB0176700D59DFF /* Pages */,
+				3FBA55BA20F883C600258808 /* BaseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1351,6 +1354,7 @@
 				3F436651207CB6FA0089C63A /* FoodReportViewController.swift in Sources */,
 				3FA376A7208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift in Sources */,
 				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
+				3FBA55BB20F883C600258808 /* BaseViewController.swift in Sources */,
 				3FB6E68920E38ABE00462591 /* ProfileViewHeader.swift in Sources */,
 				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
 				3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */,
