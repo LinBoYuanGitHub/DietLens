@@ -381,6 +381,7 @@ extension CameraViewController: CameraViewControllerDelegate {
 
     func onDidFinishCapturePhoto(image: UIImage) {
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
+        CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
         showReview(image: croppedImage)
     }
 
