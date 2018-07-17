@@ -66,11 +66,11 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
-//        let transition = CATransition()
-//        transition.duration = 0.3
-//        transition.type = kCATransitionReveal
-//        transition.subtype = kCATransitionFromBottom
-//        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionReveal
+        transition.subtype = kCATransitionFromBottom
+        self.view.window?.layer.add(transition, forKey: kCATransition)
         self.navigationController?.popViewController(animated: true)
     }
 }

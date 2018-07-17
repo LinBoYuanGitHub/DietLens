@@ -40,6 +40,8 @@ import Fabric
 import Crashlytics
 import LGSideMenuController
 import HealthKit
+import FBSDKCoreKit
+import Photos
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,8 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         Fabric.with([Crashlytics.self])
-        Messaging.messaging().delegate = self as! MessagingDelegate
+        CustomPhotoAlbum.init()
+        Messaging.messaging().delegate = self as MessagingDelegate
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -65,22 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         registerForPushNotifications()
-//        if let payload = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary, let identifier = payload["notificationListVC"] as? String {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let viewController = storyboard.instantiateViewController(withIdentifier: identifier)
-//            window?.rootViewController = viewController
-//        }
-
-//        realmSetting(application)
-
-//        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-//        let leftViewController = mainStoryboard.instantiateViewController(withIdentifier: "SideViewController") as! SideMenuViewController
-//
-//        let slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController)
-//        self.window?.rootViewController = slideMenuController
-//        self.window?.makeKeyAndVisible()
-        //UIApplication.shared.statusBarView?.backgroundColor = UIColor.clear
         return true
     }
 
@@ -140,6 +128,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = config
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+    }
+
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -157,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //upload user step to backend
+        FBSDKAppEvents.activateApp()
         uploadStepDataWhenNecessary()
     }
 

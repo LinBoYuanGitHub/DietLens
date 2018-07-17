@@ -108,6 +108,7 @@
 		3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */; };
 		3FB6E69620E4D58B00462591 /* RegistrationForthStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */; };
 		3FBA55BB20F883C600258808 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BA20F883C600258808 /* BaseViewController.swift */; };
+		3FBA55BD20FDB40000258808 /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */; };
 		3FCBEC0E20E632750092948C /* HealthCenterAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */; };
 		3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */; };
 		3FCBEC1220E632CB0092948C /* HealthCenterMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */; };
@@ -331,6 +332,7 @@
 		3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationThirdStepViewController.swift; sourceTree = "<group>"; };
 		3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForthStepViewController.swift; sourceTree = "<group>"; };
 		3FBA55BA20F883C600258808 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterAddItemViewController.swift; sourceTree = "<group>"; };
 		3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableViewController.swift; sourceTree = "<group>"; };
 		3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterMainViewController.swift; sourceTree = "<group>"; };
@@ -894,6 +896,7 @@
 				3FFB569B1FB6ABCE002DCE15 /* APIService.swift */,
 				3F575C322047F0D9009C096C /* DateUtil.swift */,
 				3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */,
+				3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1187,9 +1190,14 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/BAFluidView/BAFluidView.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HFSwipeView/HFSwipeView.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
@@ -1216,9 +1224,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BAFluidView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HFSwipeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
@@ -1401,6 +1414,7 @@
 				3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */,
 				3F50DCEA20AEA44E005209B8 /* Modal.swift in Sources */,
 				BF7894031FA4518200DA1667 /* PhotoCaptureProcessor.swift in Sources */,
+				3FBA55BD20FDB40000258808 /* CustomPhotoAlbum.swift in Sources */,
 				3FB6E67C20DCE96200462591 /* FoodDairyTableViewCell.swift in Sources */,
 				3F43664B207C97320089C63A /* FoodInfoViewController.swift in Sources */,
 				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,

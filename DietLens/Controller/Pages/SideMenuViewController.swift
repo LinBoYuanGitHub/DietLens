@@ -13,6 +13,7 @@ import LGSideMenuController
 class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var sideMenuTable: UITableView!
+    @IBOutlet weak var profileAvatar: RoundedImage!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var clickToEditLabel: UILabel!
 
@@ -34,7 +35,15 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
         sideMenuTable.dataSource = self
         //set nickname
         refreshUserName()
+        loadAvatar()
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshUserName), name: .shouldRefreshSideBarHeader, object: nil)
+    }
+
+    func loadAvatar() {
+        let preferences = UserDefaults.standard
+        let facebookId = preferences.value(forKey: "facebookId")
+        let profileAvatarURL = URL(string: "https://graph.facebook.com/\(facebookId ?? "")/picture?type=normal")
+        profileAvatar.kf.setImage(with: profileAvatarURL)
     }
 
     @objc func refreshUserName() {

@@ -138,9 +138,11 @@ struct PreferenceKey {
     static let proteinTarget = "proteinTarget"
     static let fatTarget = "fatTarget"
     static let tokenKey = "TOKEN"
+    static let facebookId = "facebookId"
     static let userIdkey = "userId"
     static let fcmTokenKey = "FCMTOKEN"
     static let stepUploadLatestTime = "stepUploadKey"
+    static let nickNameKey = "nickname"
 }
 
 struct Dimen {

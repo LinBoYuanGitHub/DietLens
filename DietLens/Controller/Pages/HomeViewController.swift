@@ -271,10 +271,11 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
-//                let transition = CATransition()
-//                transition.duration = 0.3
-//                transition.type = kCATransitionMoveIn
-//                transition.subtype = kCATransitionFromTop
+                let transition = CATransition()
+                transition.duration = 0.3
+                transition.type = kCATransitionMoveIn
+                transition.subtype = kCATransitionFromTop
+                self.view.window?.layer.add(transition, forKey: kCATransition)
 //                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
                 navigator.pushViewController(dest, animated: true)
             }

@@ -34,8 +34,14 @@ target 'DietLens' do
   pod 'NVActivityIndicatorView'
   #rating view
   pod 'Cosmos', '~> 15.0'
+  #Fluid view
   pod 'BAFluidView'
+  #image loader
   pod 'Kingfisher', '~> 4.0'
+  #facebookLogin
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  
 
   target 'DietLensTests' do
     inherit! :search_paths

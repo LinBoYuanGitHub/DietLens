@@ -17,6 +17,7 @@ class ProfileDataManager {
         var userProfile = UserProfile()
         userProfile.id = jsonObj["id"].stringValue
         userProfile.name = jsonObj["name"].stringValue
+        userProfile.email = jsonObj["user"].stringValue
         if jsonObj["gender"].stringValue == "1"{
             userProfile.gender = 1
         } else {

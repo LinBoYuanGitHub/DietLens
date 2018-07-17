@@ -61,8 +61,10 @@ class PersonalProfileViewController: UIViewController {
         let sectionHeader = profileSection()
         let avatar = ProfileEntity(profileName: "Avatar", profileValue: "", profileType: 0)
         let userName = ProfileEntity(profileName: "Username", profileValue: "", profileType: 1)
+        let email = ProfileEntity(profileName: "Email", profileValue: "", profileType: 1)
         sectionHeader.profileList.append(avatar)
         sectionHeader.profileList.append(userName)
+        sectionHeader.profileList.append(email)
         //second section
         let secondSectionHeader = profileSection()
         secondSectionHeader.sectionHeaderText = "Your basic information"
@@ -204,9 +206,8 @@ extension PersonalProfileViewController: UIPickerViewDelegate, UIPickerViewDataS
         //gender fill in value
         let indxPath = IndexPath(row: 0, section: 1)
         if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
-
             dateCell.inptText.text = genderList[row]
-            if(genderList[row] == "male") {
+            if genderList[row] == "male" {
                 profile.gender = 1
             } else {
                 profile.gender = 0
@@ -233,6 +234,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
             //avatar
             if let cell = tableView.dequeueReusableCell(withIdentifier: "profileAvatarCell", for: indexPath) as? ProfileAvatarCell {
                 cell.setUpCell(textTitle: profileEntity.profileName)
+                loadAvatar(profileAvatar: cell.avatarImageView)
                 return cell
             }
         case 1:
@@ -243,8 +245,12 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.placeholder = ""
                     cell.inptText.text = profile.name
                     cell.inptText.keyboardType = .asciiCapable
-                }
-                if indexPath.row == 0 && indexPath.section == 1 {
+                } else if indexPath.row == 2 && indexPath.section == 0 {
+                    cell.inptText.placeholder = ""
+                    cell.inptText.text = profile.email
+                    cell.inptText.textColor = UIColor(red: 148/255, green: 148/255, blue: 148/255, alpha: 1)
+                    cell.inptText.isEnabled = false
+                } else if indexPath.row == 0 && indexPath.section == 1 {
                     cell.inptText.inputView = genderPickerView
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Gender")
                     cell.inptText.placeholder = "Select Gender"
@@ -268,7 +274,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Weight")
                     cell.inptText.inputView = weightInputView
                     cell.inptText.placeholder = "input weight"
-                    cell.inptText.text = "\(Int(profile.weight))kg"
+                    setAttributeText(textStr: "\(Int(profile.weight))kg", textField: cell.inptText)
                 } else if indexPath.row == 3 && indexPath.section == 1 {
                      let heightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
                     heightInputView.unit = "cm"
@@ -279,7 +285,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Height")
                     cell.inptText.inputView = heightInputView
                     cell.inptText.placeholder = "input height"
-                    cell.inptText.text = "\(Int(profile.height))cm"
+                    setAttributeText(textStr: "\(Int(profile.height))cm", textField: cell.inptText)
                 }
                 return cell
             }
@@ -317,8 +323,8 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                         dest.indexValue = profile.activityLevel
                     }
                 }
-        default:
-            break
+            default:
+                break
         }
     }
 
@@ -346,6 +352,17 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
 
+    func loadAvatar(profileAvatar: UIImageView) {
+        let preferences = UserDefaults.standard
+        let facebookId = preferences.value(forKey: "facebookId")
+        if facebookId != nil {
+            let profileAvatarURL = URL(string: "https://graph.facebook.com/\(facebookId ?? "")/picture?type=normal")
+            profileAvatar.layer.cornerRadius = profileAvatar.frame.size.width/2
+            profileAvatar.clipsToBounds = true
+            profileAvatar.kf.setImage(with: profileAvatarURL)
+        }
+    }
+
 }
 
 extension PersonalProfileViewController: activitySelectDelegate {
@@ -370,14 +387,14 @@ extension PersonalProfileViewController: RulerInputDelegate {
             //weight
             let weightIndex = IndexPath(row: 2, section: 1)
             if let weightCell = profileTableView.cellForRow(at: weightIndex) as? ProfileTextFieldCell {
-                weightCell.inptText.text = "\(value)kg"
+                setAttributeText(textStr: "\(value)kg", textField: weightCell.inptText)
                 profile.weight = value
             }
         } else {
             //height
             let heightIndex = IndexPath(row: 3, section: 1)
             if let heightCell = profileTableView.cellForRow(at: heightIndex) as? ProfileTextFieldCell {
-                heightCell.inptText.text = "\(value)cm"
+                setAttributeText(textStr: "\(value)cm", textField: heightCell.inptText)
                 profile.height = value
             }
         }
@@ -393,5 +410,12 @@ extension PersonalProfileViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+
+    func setAttributeText(textStr: String, textField: UITextField) {
+        let textAttr = NSMutableAttributedString.init(string: textStr)
+        textAttr.setAttributes([ kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray, NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0) as Any
+            ], range: NSRange(location: textStr.count - 2, length: 2))
+        textField.attributedText = textAttr
     }
 }

@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1030286813801046</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1030286813801046</string>
+	<key>FacebookDisplayName</key>
+	<string>DietLens</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -17,7 +30,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.2</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.8</string>
+	<string>1.0.9</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -66,6 +79,8 @@
 	<string>This app requires access to your location when in use to include location info in photo metadata</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This will allow you to upload photos from photo library</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>This will allow access to save photo in your photo library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

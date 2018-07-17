@@ -7,11 +7,24 @@
 //
 
 import UIKit
+import FacebookLogin
+import FacebookCore
+
+struct FBProfileRequest: GraphRequestProtocol {
+    typealias Response = GraphResponse
+
+    var graphPath: String = "/me"
+    var parameters: [String: Any]? = ["fields": "id, name, birthday, gender"]
+    var accessToken: AccessToken? = .current
+    var httpMethod: GraphRequestHTTPMethod = .GET
+    var apiVersion: GraphAPIVersion = 2.7
+}
 
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var TFEmail: UITextField!
     @IBOutlet weak var TFPassword: UITextField!
+    @IBOutlet weak var facebookLoginBtn: UIButton!
 
     @IBAction func unwindToMainPage(segue: UIStoryboardSegue) {}
 
@@ -24,6 +37,7 @@ class LoginViewController: UIViewController {
             return
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
+        //login request
         APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!) { (isSuccess) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                 if isSuccess {
@@ -59,6 +73,46 @@ class LoginViewController: UIViewController {
         TFEmail.keyboardType = .emailAddress
         // Do any additional setup after loading the view.
         hideKeyboardWhenTappedAround()
+    }
+
+    @IBAction func loginButtonClicked(_ sender: Any) {
+        let loginManager = LoginManager()
+        loginManager.logIn(readPermissions: [.publicProfile], viewController: self) { (loginResult) in
+            switch loginResult {
+            case .failed(let error):
+                print(error)
+            case .cancelled:
+                print("user cancelled login.")
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                //TODO pass token & userId to server
+                print("Logged in!")
+                let request = FBProfileRequest()
+                request.start({ (_, result) in
+                    switch result {
+                    case .success(let response):
+                        let facebookUserId = response.dictionaryValue!["id"]
+                        let facebookUserName = response.dictionaryValue!["name"]
+                        let preferences = UserDefaults.standard
+                        preferences.setValue(facebookUserId, forKey: "facebookId")
+                        preferences.setValue(facebookUserName, forKey: "nickname")
+                        var profile = UserProfile()
+                        if let name = facebookUserName as? String {
+                            profile.name = name
+                        }
+                        DispatchQueue.main.async {
+//                            self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
+                                dest.profile = profile
+                                self.navigationController?.pushViewController(dest, animated: true)
+                            }
+                        }
+                        print("Graph Request Succeeded: \(response)")
+                    case .failed(let error):
+                        print("Graph Request Failed: \(error)")
+                    }
+                })
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

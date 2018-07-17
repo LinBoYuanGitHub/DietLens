@@ -8,6 +8,7 @@
 
 import UIKit
 import PBRevealViewController
+import FacebookLogin
 
 class SettingViewController: UIViewController {
     @IBOutlet weak var navigationBarItem: UINavigationItem!
@@ -54,6 +55,7 @@ class SettingViewController: UIViewController {
 //                    //no userId cannot Logout
 //                    return
 //                }
+
                 APIService.instance.logOut(completion: { (_) in
                         //signOut no matter request succeed or not
                     DispatchQueue.main.async {
@@ -71,7 +73,11 @@ class SettingViewController: UIViewController {
         let preferences = UserDefaults.standard
         let nicknameKey = "nickname"
         preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
+        preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        //facebook login
+        LoginManager().logOut()
     }
     /*
     // MARK: - Navigation

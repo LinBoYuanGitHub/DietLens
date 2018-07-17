@@ -3,11 +3,29 @@ PODS:
   - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
   - BAFluidView (0.2.3)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
   - Cosmos (15.0.0)
   - Crashlytics (3.10.5):
     - Fabric (~> 1.7.9)
   - CryptoSwift (0.10.0)
   - Fabric (1.7.9)
+  - FacebookCore (0.3.1):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.33)
+  - FacebookLogin (0.3.1):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3.1)
+    - FBSDKCoreKit (~> 4.33)
+    - FBSDKLoginKit (~> 4.33)
+  - FBSDKCoreKit (4.34.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.34.0):
+    - FBSDKCoreKit
   - Firebase/Core (5.4.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.0.1)
@@ -77,6 +95,8 @@ DEPENDENCIES:
   - Crashlytics
   - CryptoSwift
   - Fabric
+  - FacebookCore
+  - FacebookLogin
   - Firebase/Core
   - Firebase/Messaging
   - FSCalendar
@@ -100,10 +120,15 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - BAFluidView
+    - Bolts
     - Cosmos
     - Crashlytics
     - CryptoSwift
     - Fabric
+    - FacebookCore
+    - FacebookLogin
+    - FBSDKCoreKit
+    - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -136,10 +161,15 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   BAFluidView: 5d84ef109831b97740f75b6d785e51f13fa08398
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
+  FacebookCore: 33078ef1d7d76b73f7e8c990dca7d3ea6db8d22f
+  FacebookLogin: 6f15bf4fefd7a8865abbfa8fcd7f3dfd87aa275f
+  FBSDKCoreKit: 0ff57f093b85c8c9d5aba697d3edf68a8960ce78
+  FBSDKLoginKit: 8c78f57a145afb756e4755e69195ebe08a42466e
   Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
   FirebaseCore: 42b3267233bd21a5abd54117ccc38ca3dd0f8e83
@@ -168,6 +198,6 @@ SPEC CHECKSUMS:
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 9bd549bad7e48d7bb44e1276b82e08f3b44f15ef
+PODFILE CHECKSUM: ebd4ceaa865c7c8ef5fb4a8b715ca0886e06e13c
 
 COCOAPODS: 1.5.0
