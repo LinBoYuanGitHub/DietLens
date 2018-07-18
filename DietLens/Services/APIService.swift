@@ -114,6 +114,24 @@ class APIService {
         }
     }
 
+    public func facebookIdValidationRequest(accessToken: String, uuid: String, completion:@escaping (_ isSuccess: Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.facebookIdValidationURL)!,
+            method: .post,
+            parameters: ["access_token": accessToken, "uid": uuid],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("facebook uid validation failed")
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
+
     public func emailValidationRequest(userEmail: String, completion:@escaping (_ isSuccess: Bool) -> Void, failedComoletion: @escaping (_ failedMsg: String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.checkEmailURL)!,

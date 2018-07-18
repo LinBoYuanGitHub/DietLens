@@ -59,6 +59,7 @@ extension HealthCenterMainViewController: UITableViewDelegate, UITableViewDataSo
         if let cell = tableView.dequeueReusableCell(withIdentifier: "healthCenterMainCell", for: indexPath) as? HealthCenterMainCell {
             let item = healthCenterItemList[indexPath.row]
             cell.setUpCell(recordType: item.type, latestValue: item.value, dateTime: item.date + " , " + item.time)
+            return cell
         }
         return UITableViewCell()
     }

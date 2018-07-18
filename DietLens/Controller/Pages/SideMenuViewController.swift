@@ -42,8 +42,10 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
     func loadAvatar() {
         let preferences = UserDefaults.standard
         let facebookId = preferences.value(forKey: "facebookId")
-        let profileAvatarURL = URL(string: "https://graph.facebook.com/\(facebookId ?? "")/picture?type=normal")
-        profileAvatar.kf.setImage(with: profileAvatarURL)
+        if facebookId != nil {
+            let profileAvatarURL = URL(string: "https://graph.facebook.com/\(facebookId ?? "")/picture?type=normal")
+            profileAvatar.kf.setImage(with: profileAvatarURL)
+        }
     }
 
     @objc func refreshUserName() {

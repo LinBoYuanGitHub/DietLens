@@ -69,7 +69,9 @@ extension CalendarDialogViewController: FSCalendarDelegate, FSCalendarDataSource
 
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         let currentMonth = DateUtil.formatMonthToString(date: calendar.currentPage)
-        if DateUtil.formatMonthToString(date: date) == currentMonth {
+        if Calendar.current.isDate(selectedDate, inSameDayAs: date) && !Calendar.current.isDate(Date(), inSameDayAs: date) {
+            return #colorLiteral(red: 0.9782002568, green: 0.9782230258, blue: 0.9782107472, alpha: 1)
+        } else if DateUtil.formatMonthToString(date: date) == currentMonth {
             return #colorLiteral(red: 0.2319577109, green: 0.2320933503, blue: 0.2404021281, alpha: 1)
         }
         return #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -100,6 +102,8 @@ extension CalendarDialogViewController: FSCalendarDelegate, FSCalendarDataSource
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         if Calendar.current.isDate(Date(), inSameDayAs: date) {
             return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        } else if Calendar.current.isDate(selectedDate, inSameDayAs: date) {
+            return #colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)
         }
         return nil
     }

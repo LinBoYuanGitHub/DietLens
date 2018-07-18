@@ -58,7 +58,6 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
         }
-
         super.viewDidLoad()
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false

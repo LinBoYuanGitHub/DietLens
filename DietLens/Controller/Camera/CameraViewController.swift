@@ -183,6 +183,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     @IBAction func approveImage(_ sender: UIButton) {
+        if !Reachability.isConnectedToNetwork() {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "No Internet Connection...")
+            return
+        }
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
             self.loadingScreen.alpha = 1
         }, completion: nil)

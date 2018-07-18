@@ -84,7 +84,6 @@ class LoginViewController: UIViewController {
             case .cancelled:
                 print("user cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                //TODO pass token & userId to server
                 print("Logged in!")
                 let request = FBProfileRequest()
                 request.start({ (_, result) in
@@ -95,17 +94,21 @@ class LoginViewController: UIViewController {
                         let preferences = UserDefaults.standard
                         preferences.setValue(facebookUserId, forKey: "facebookId")
                         preferences.setValue(facebookUserName, forKey: "nickname")
-                        var profile = UserProfile()
-                        if let name = facebookUserName as? String {
-                            profile.name = name
-                        }
-                        DispatchQueue.main.async {
-//                            self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
-                            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
-                                dest.profile = profile
-                                self.navigationController?.pushViewController(dest, animated: true)
+                        //validate FacebookId
+                        APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: facebookUserId as! String, completion: { (isSuccess) in
+                            if isSuccess {
+                                var profile = UserProfile()
+                                if let name = facebookUserName as? String {
+                                    profile.name = name
+                                }
+                                DispatchQueue.main.async {
+                                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
+                                        dest.profile = profile
+                                        self.navigationController?.pushViewController(dest, animated: true)
+                                    }
+                                }
                             }
-                        }
+                        })
                         print("Graph Request Succeeded: \(response)")
                     case .failed(let error):
                         print("Graph Request Failed: \(error)")
