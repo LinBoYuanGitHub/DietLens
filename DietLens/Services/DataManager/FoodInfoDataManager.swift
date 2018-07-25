@@ -291,6 +291,7 @@ class FoodInfoDataManager {
                 foodObject.displayName = foodInfo["display_name"].stringValue
                 foodObject.exampleImgUrl = foodInfo["example_img"].stringValue
                 foodObject.calories = foodInfo["nutrition"]["energy"].doubleValue
+                foodObject.unit = foodInfo["unit"].stringValue
                 subCategory.subcateFoodList.append(foodObject)
             }
             resultList.append(subCategory)

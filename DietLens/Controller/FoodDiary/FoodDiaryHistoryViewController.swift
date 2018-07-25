@@ -13,7 +13,7 @@ enum FoodDiaryStatus {
     case normal
 }
 
-class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var dialogContainer: UIView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -59,14 +59,7 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        //set status bar appearance
-        UIApplication.shared.statusBarStyle = .default
-        //navigation controller
-        self.navigationController?.navigationBar.isHidden = false
-        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        super.viewWillAppear(animated)
         loadDailyNutritionView()
         //load available date & load calendar data
         if shouldRefreshDiary {
@@ -111,6 +104,7 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
             calendarDialog.popoverPresentationController?.sourceRect = calendarBtn.bounds
             calendarDialog.popoverPresentationController?.delegate = self
             calendarDialog.datesWithEvent = datesWithEvent
+            calendarDialog.selectedDate = selectedDate
             self.present(calendarDialog, animated: true, completion: nil)
         }
 
@@ -120,7 +114,8 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
             controller.selectedDate = selectedDate
-            present(controller, animated: true, completion: nil)
+            self.navigationController?.pushViewController(controller, animated: true)
+//            present(controller, animated: true, completion: nil)
         }
     }
 
@@ -163,9 +158,11 @@ class FoodDiaryHistoryViewController: UIViewController, UIPopoverPresentationCon
 
     func getFoodDairyByDate(date: Date) {
         let dateStr = DateUtil.normalDateToString(date: date)
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+//        AlertMessageHelper.showLoadingDialog(targetController: self)
+//        self.showLoadingDialog()
         APIService.instance.getFoodDiaryByDate(selectedDate: dateStr) { (foodDiaryList) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+//            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+//            self.hideLoadingDialog()
             if foodDiaryList == nil {
                 let emptyList = [FoodDiaryEntity]()
                 self.assembleMealList(foodDiaryList: emptyList)

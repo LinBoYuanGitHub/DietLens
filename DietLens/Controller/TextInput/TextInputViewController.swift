@@ -79,6 +79,9 @@ class TextInputViewController: UIViewController {
         } else {
             hideCancelBtn()
         }
+        //set loading footerView
+//        textSearchTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: textSearchTable.frame.size.width, height: 40))
+//        textSearchTable.tableFooterView?.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -293,7 +296,9 @@ extension TextInputViewController: UITableViewDelegate {
 //            let xAxis  = self.view.center.x
 //            let yAxis = self.view.center.y
 //            let frame = CGRect(x: xAxis, y: yAxis, width: 50, height: 50)
+//            textSearchTable.tableFooterView?.isHidden = false
             APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, completion: { (resultList) in
+//                self.textSearchTable.tableFooterView?.isHidden = true
                 if resultList == nil {
                     return
                 }

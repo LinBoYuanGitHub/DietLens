@@ -14,7 +14,6 @@ class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var emptyViewIcon: UIImageView!
     @IBOutlet weak var emptyViewLabel: UILabel!
-
     @IBOutlet weak var clearButton: UIButton!
     //notification data & pagination
     var notificationSectionList = [NotificationSection]()
@@ -37,31 +36,30 @@ class NotificationsViewController: UIViewController {
     func getNotifcationData() {
         APIService.instance.getNotificationList(completion: { (notificationList) in
             self.notificationSectionList.removeAll()
-            if notificationList != nil {
-                if notificationList?.count == 0 {
-                    self.clearButton.isHidden = true
-                    self.emptyViewIcon.isHidden = false
-                    self.emptyViewLabel.isHidden = false
-                } else {
-                    self.clearButton.isHidden = false
-                    self.emptyViewIcon.isHidden = true
-                    self.emptyViewLabel.isHidden = true
-                }
-                for notification in notificationList! {
-                    var flag = true
-                    for (index, section) in self.notificationSectionList.enumerated() where DateUtil.day3MDateToString(date: section.date) == DateUtil.day3MDateToString(date: notification.createTime) {
-                        self.notificationSectionList[index].notificationList.append(notification)
-                        flag = false
-                    }
-                    if flag {
-                        var notificaitonSection = NotificationSection()
-                        notificaitonSection.date = notification.createTime
-                        notificaitonSection.notificationList.append(notification)
-                        self.notificationSectionList.append(notificaitonSection)
-                    }
-                }
-                self.notificationTable.reloadData()
+            if notificationList == nil || notificationList?.count == 0 {
+                self.clearButton.isHidden = true
+                self.emptyViewIcon.isHidden = false
+                self.emptyViewLabel.isHidden = false
+                return
+            } else {
+                self.clearButton.isHidden = false
+                self.emptyViewIcon.isHidden = true
+                self.emptyViewLabel.isHidden = true
             }
+            for notification in notificationList! {
+                var flag = true
+                for (index, section) in self.notificationSectionList.enumerated() where DateUtil.day3MDateToString(date: section.date) == DateUtil.day3MDateToString(date: notification.createTime) {
+                    self.notificationSectionList[index].notificationList.append(notification)
+                    flag = false
+                }
+                if flag {
+                    var notificaitonSection = NotificationSection()
+                    notificaitonSection.date = notification.createTime
+                    notificaitonSection.notificationList.append(notification)
+                    self.notificationSectionList.append(notificaitonSection)
+                }
+            }
+            self.notificationTable.reloadData()
         }) { (nextLink) in
             self.currentLink = nextLink
         }
@@ -99,15 +97,15 @@ class NotificationsViewController: UIViewController {
         }
     }
 
-    func checkEmpty() {
-        if notificationSectionList.count == 0 {
-            emptyViewIcon.alpha = 1
-            emptyViewLabel.alpha = 1
-        } else {
-            emptyViewIcon.alpha = 0
-            emptyViewLabel.alpha = 0
-        }
-    }
+//    func checkEmpty() {
+//        if notificationSectionList.count == 0 {
+//            emptyViewIcon.alpha = 1
+//            emptyViewLabel.alpha = 1
+//        } else {
+//            emptyViewIcon.alpha = 0
+//            emptyViewLabel.alpha = 0
+//        }
+//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = notificationTable.indexPathForSelectedRow {
@@ -176,7 +174,6 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        checkEmpty()
         return notificationSectionList[section].notificationList.count
     }
 

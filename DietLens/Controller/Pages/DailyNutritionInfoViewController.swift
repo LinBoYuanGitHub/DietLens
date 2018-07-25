@@ -8,12 +8,12 @@
 
 import UIKit
 
-class DailyNutritionInfoViewController: UIViewController {
+class DailyNutritionInfoViewController: BaseViewController {
 
     @IBOutlet weak var nutritionTableView: UITableView!
     @IBOutlet weak var tableFooter: UIView!
 
-    var nutritionDict = Dictionary<String, Double>()
+    var nutritionDict = [String: Double]()
     var displayDict = [Int: (String, Double)]()
     var targetDict = [Int: (String, Double)]()
     //passed value
@@ -27,17 +27,19 @@ class DailyNutritionInfoViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = "Nutrition Information"
-        self.navigationController?.navigationBar.backItem?.title = ""
-        self.navigationController?.navigationBar.backItem?.titleView?.tintColor = UIColor.white
-        self.navigationController?.navigationBar.backgroundColor = UIColor.red
+        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.topItem?.title = "Nutrition Information"
+//        self.navigationController?.navigationBar.backItem?.title = ""
+//        self.navigationController?.navigationBar.backItem?.titleView?.tintColor = UIColor.white
+//        self.navigationController?.navigationBar.backgroundColor = UIColor.red
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
-    func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
+    func assembleDisplayDict(nutritionDict: [String: Double]) {
         displayDict[0] = ("Calorie", nutritionDict["energy"]!)
         displayDict[1] = ("Protein", nutritionDict["protein"]!)
         displayDict[2] = ("Fat", nutritionDict["fat"]!)

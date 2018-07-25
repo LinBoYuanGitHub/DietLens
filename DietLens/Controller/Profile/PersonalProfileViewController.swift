@@ -102,6 +102,7 @@ class PersonalProfileViewController: UIViewController {
     }
 
     @IBAction func closePage() {
+        view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
 

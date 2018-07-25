@@ -83,6 +83,7 @@ class HealthCenterAddItemViewController: UIViewController {
     }
 
     @objc func onBackPressed() {
+        view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -144,12 +145,13 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
         case 0:
             //value
             cell.healthCenterLabel.text = recordName
-            if recordType == "2"{
+            if recordType == "2"{//emoji ruler
                 let emojiInputView = EmojiInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
                 cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Mood")
                 emojiInputView.delegate = self
                 cell.healthCenterTextField.inputView = emojiInputView
                 //set first one as default mood
+                cell.healthCenterTextField.delegate = self
                 cell.healthCenterTextField.text = HealthCenterConstants.moodList[0]
             } else if recordType == "1" {//weight ruler
                 let glucoseInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 10)
@@ -160,6 +162,7 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
                 glucoseInputView.textLabel.text = "\(HealthCenterConstants.GLUCOSEDEFAULT/10)mmol/L"
                 glucoseInputView.delegate = self
                 cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Blood glucose")
+                cell.healthCenterTextField.delegate = self
                 cell.healthCenterTextField.inputView = glucoseInputView
             } else { // glucose ruler
                 let weightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 1)
@@ -169,12 +172,14 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
                 weightInputView.textLabel.text = "\(HealthCenterConstants.WEIGHTDEFAULT)kg"
                 weightInputView.delegate = self
                 cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Weight")
+                cell.healthCenterTextField.delegate = self
                 cell.healthCenterTextField.inputView = weightInputView
             }
             return cell
         case 1:
             //date
             cell.healthCenterTextField.placeholder = ""
+            cell.healthCenterTextField.delegate = self
             cell.healthCenterLabel.text = "Date"
             cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Date")
             cell.healthCenterTextField.inputView = datePickerView
@@ -184,6 +189,7 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
         case 2:
             //time
             cell.healthCenterTextField.placeholder = ""
+            cell.healthCenterTextField.delegate = self
             cell.healthCenterLabel.text = "Time"
             cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Time")
             cell.healthCenterTextField.inputView = timePickerView
@@ -207,6 +213,16 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
         }
     }
 
+}
+
+extension HealthCenterAddItemViewController: UITextFieldDelegate {
+
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.cut(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
 }
 
 extension HealthCenterAddItemViewController: RulerInputDelegate {

@@ -867,7 +867,7 @@ class APIService {
      * param: uuid,status,fcmToken
      * return: is save success
      */
-    public func saveDeviceToken(uuid: String, fcmToken: String, status: String, completion: @escaping (Bool) -> Void) {
+    public func saveDeviceToken(uuid: String, fcmToken: String, status: Bool, completion: @escaping (Bool) -> Void) {
         //consider the case that user haven't got the token
         //device type 1: IOS, 2: Android
         Alamofire.request(
@@ -1561,10 +1561,8 @@ class APIService {
     //basic authentication header
     func getBasicAuthenticationHeader() -> [String: String] {
         let preferences = UserDefaults.standard
-        let userNameKey = "username"
-        let pwdKey = "password"
-        let userName = preferences.string(forKey: userNameKey)
-        let password = preferences.string(forKey: pwdKey)
+        let userName = preferences.string(forKey: PreferenceKey.userNameKey)
+        let password = preferences.string(forKey: PreferenceKey.passwordKey)
         let credentialData = "\(userName):\(password)".data(using: String.Encoding.utf8)!
         let base64Credentials = credentialData.base64EncodedString(options: [])
         let headers = ["Authorization": "Basic \(base64Credentials)"]

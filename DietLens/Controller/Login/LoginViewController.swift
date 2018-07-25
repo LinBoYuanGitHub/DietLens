@@ -9,6 +9,7 @@
 import UIKit
 import FacebookLogin
 import FacebookCore
+import SkyFloatingLabelTextField
 
 struct FBProfileRequest: GraphRequestProtocol {
     typealias Response = GraphResponse
@@ -22,18 +23,18 @@ struct FBProfileRequest: GraphRequestProtocol {
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var TFEmail: UITextField!
-    @IBOutlet weak var TFPassword: UITextField!
+    @IBOutlet weak var TFEmail: SkyFloatingLabelTextField!
+    @IBOutlet weak var TFPassword: SkyFloatingLabelTextField!
     @IBOutlet weak var facebookLoginBtn: UIButton!
 
     @IBAction func unwindToMainPage(segue: UIStoryboardSegue) {}
 
     @IBAction func onLoginBtnClicked(_ sender: Any) {
         if (TFEmail.text?.isEmpty)! {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: " Please enter your email address")
+            TFEmail.errorMessage = "Please enter your email address"
             return
         } else if (TFPassword.text?.isEmpty)! {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your password")
+            TFPassword.errorMessage = "Please enter your password"
             return
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
@@ -43,13 +44,13 @@ class LoginViewController: UIViewController {
                 if isSuccess {
                     // save for basic authentication
                     let preferences = UserDefaults.standard
-                    let pwdKey = "password"
+                    let pwdKey = PreferenceKey.passwordKey
                     preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
                     //upload the device token to server
                     let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
                     let userId = preferences.string(forKey: PreferenceKey.userIdkey)
                     if userId != nil && fcmToken != nil {
-                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: "true", completion: { (flag) in
+                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
                             if flag {
                                 print("send device token succeed")
                             }
@@ -71,8 +72,21 @@ class LoginViewController: UIViewController {
         TFEmail.delegate = self
         TFPassword.delegate = self
         TFEmail.keyboardType = .emailAddress
+        setUpSkyFloatingLable()
         // Do any additional setup after loading the view.
         hideKeyboardWhenTappedAround()
+    }
+
+    func setUpSkyFloatingLable() {
+        TFEmail.placeholder = "Email"
+        TFEmail.font = UIFont(name: "PingFang SC-Light", size: 16)
+        TFEmail.title = "Email"
+        TFPassword.placeholder = "Password"
+        TFPassword.font = UIFont(name: "PingFang SC-Light", size: 16)
+        TFPassword.title = "at least 8 characters with letters"
+        //delegate
+        TFEmail.delegate = self
+        TFPassword.delegate = self
     }
 
     @IBAction func loginButtonClicked(_ sender: Any) {
@@ -149,6 +163,20 @@ extension LoginViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text {
+            //Email validator
+            if textField == TFEmail {
+                if text.count > 3 && !TextValidtor.isValidEmail(testStr: text) {
+                    TFEmail.errorMessage = "Invalid email"
+                } else {
+                    TFEmail.errorMessage = ""
+                }
+            }
+        }
         return true
     }
 

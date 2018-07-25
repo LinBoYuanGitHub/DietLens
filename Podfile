@@ -41,6 +41,8 @@ target 'DietLens' do
   #facebookLogin
   pod 'FacebookCore'
   pod 'FacebookLogin'
+  #sky floating label
+  pod 'SkyFloatingLabelTextField'
   
 
   target 'DietLensTests' do

@@ -78,6 +78,7 @@ PODS:
   - RealmSwift (3.7.4):
     - Realm (= 3.7.4)
   - ScrollableGraphView (4.0.5)
+  - SkyFloatingLabelTextField (3.5.1)
   - SnapKit (4.0.0)
   - Socket.IO-Client-Swift (13.2.1):
     - Starscream (~> 3.0.2)
@@ -109,6 +110,7 @@ DEPENDENCIES:
   - QiniuUpload
   - RealmSwift
   - ScrollableGraphView
+  - SkyFloatingLabelTextField
   - SnapKit (~> 4.0)
   - Socket.IO-Client-Swift
   - SwiftLint
@@ -149,6 +151,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - ScrollableGraphView
+    - SkyFloatingLabelTextField
     - SnapKit
     - Socket.IO-Client-Swift
     - Starscream
@@ -190,6 +193,7 @@ SPEC CHECKSUMS:
   Realm: a469bb59e33f9926102ccaea4349822c53b9117e
   RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
   ScrollableGraphView: 6386dbae8d92e8ec9fda9f386f2ba6e2c90c59a3
+  SkyFloatingLabelTextField: 4cbeece9c3aae97c6019d8fae511cb5b755874f7
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Socket.IO-Client-Swift: b94943e2fb916fe2f95244b9ed21828634002280
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
@@ -198,6 +202,6 @@ SPEC CHECKSUMS:
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: ebd4ceaa865c7c8ef5fb4a8b715ca0886e06e13c
+PODFILE CHECKSUM: c132cd0a57dcc2a14ad298a9b2046d1cb06c0f1f
 
 COCOAPODS: 1.5.0

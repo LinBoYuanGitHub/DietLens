@@ -6,7 +6,7 @@ import RealmSwift
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
-    @IBOutlet weak var capturePhotoButton: UIButton!
+    @IBOutlet weak var capturePhotoButton: LoadingButton!
 
     @IBOutlet weak var previewContainer: UIView!
 
@@ -15,9 +15,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet private weak var photoButton: UIButton!
 
     // MARK: Scanning barcodes
-
     @IBOutlet weak var barcodeButton: UIButton!
-    @IBOutlet weak var reviewImagePalette: UIView!
+    @IBOutlet weak var selectionView: UIView!
     @IBOutlet weak var chosenImageView: UIImageView!
 
     private let sessionManager = CameraSessionManager()
@@ -55,7 +54,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     var isSetMealByTimeRequired = true
     @IBOutlet weak var sampleImagCollectionView: UICollectionView!
 
-    var imageArray = [#imageLiteral(resourceName: "sampleCategoryNuts"), #imageLiteral(resourceName: "sampleCategoryEggs"), #imageLiteral(resourceName: "sampleCategoryMeats"), #imageLiteral(resourceName: "sampleCategoryBreads"), #imageLiteral(resourceName: "sampleCategoryFruits"), #imageLiteral(resourceName: "sampleCategoryDessert")]
+    let imageArray = [#imageLiteral(resourceName: "CameraExampleHokkienMee"), #imageLiteral(resourceName: "CameraExampleAyamPenyet"), #imageLiteral(resourceName: "CameraExampleRotiPrata"), #imageLiteral(resourceName: "CameraExampleChickenRice"), #imageLiteral(resourceName: "CameraExampleChickenChop"), #imageLiteral(resourceName: "CameraExampleSatay")]
+    let imageKeyArray = ["sample/3_Hokkien_Mee.png", "sample/6_Ayam_Penyet.png", "sample/2_Roti_Prata.png", "sample/4_Chicken_Rice.png",
+        "sample/5_Chicken_Chop.png", "sample/1_Satay.png"]
+    var currentImageIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +78,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         imagePicker.allowsEditing = false
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         imagePicker.navigationBar.isTranslucent = false
-        loadingScreen.alpha = 0
+//        loadingScreen.alpha = 0
         //setup location manager
         if CLLocationManager.locationServicesEnabled() {
             enableLocationServices()
@@ -105,16 +107,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             locationManager.startUpdatingLocation()
         case .restricted, .denied:
             break
-            // Disable location features or quit
-//            disableMyLocationBasedFeatures()
         case .authorizedWhenInUse:
             // Enable basic location features
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         case .authorizedAlways:
             break
-            // Enable any of your app's location features
-//            enableMyAlwaysFeatures()
         }
     }
 
@@ -155,11 +153,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     @IBAction func dismissCamera(_ sender: UIButton) {
-        if reviewImagePalette.isHidden {
-            super.dismiss(animated: true)
-        } else {
-            hideReview()
-        }
+        super.dismiss(animated: true)
     }
 
     @IBAction func capturePhoto(_ sender: UIButton) {
@@ -182,14 +176,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         present(imagePicker, animated: false, completion: nil)
     }
 
-    @IBAction func approveImage(_ sender: UIButton) {
+    func approveImage() {
         if !Reachability.isConnectedToNetwork() {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "No Internet Connection...")
             return
         }
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
-            self.loadingScreen.alpha = 1
-        }, completion: nil)
+//        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+//            self.loadingScreen.alpha = 1
+//        }, completion: nil)
         //resize&compress image process
         let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -203,81 +197,51 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 //        let userId = preferences.string(forKey: key)
         //upload image to server
         APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
-            if imageKey == nil {
-                //error happen during upload image to Qiniu
+            if imageKey != nil {
+                self.postImageKeyToServer(imageKey: imageKey!, isUsingSample: false)
+            } else {//error happen during upload image to Qiniu
                 self.hideReview()
                 self.capturePhotoButton.isEnabled = true
-                self.loadingScreen.alpha = 0
+//                self.loadingScreen.alpha = 0
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
-                return
             }
-            self.uploadPercentageLabel.text = "retrieving recognition result..."
-            APIService.instance.postForRecognitionResult(imageKey: imageKey!, latitude: self.latitude, longitude: self.longitude, completion: { (resultList) in
-                    self.hideReview()
-                    self.capturePhotoButton.isEnabled = true
-                    self.loadingScreen.alpha = 0
-                    if resultList == nil || resultList?.count == 0 {
-                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
-                    } else {
-                        self.displayList.removeAll()
-                        self.displayList = resultList!
-                        self.recordType = RecordType.RecordByImage
-                        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "recognitionVC") as? RecognitionResultViewController {
-                            dest.cameraImage = self.chosenImageView.image!
-                            dest.imageKey = imageKey
-                            dest.foodCategoryList = self.displayList
-                            //pass display value
-                            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                            dest.recordDate = self.addFoodDate
-                            dest.mealType = self.mealType
-                            if let navigator = self.navigationController {
-                                navigator.pushViewController(dest, animated: true)
-                            }
-                        }
-                    }
-                    self.hideReview()
-            })
             //upload imageToken to server to get the food recognition results
         }) { (progress) in
             self.uploadPercentageLabel.text = "\(progress)%"
         }
-//        APIService.instance.uploadImageForMatrix(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (results) in
-//            // upload result and callback
-//            self.capturePhotoButton.isEnabled = true
+    }
+
+    func postImageKeyToServer(imageKey: String, isUsingSample: Bool) {
+        self.uploadPercentageLabel.text = "Retrieving recognition results..."
+        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: self.latitude, longitude: self.longitude, completion: { (resultList) in
+            self.hideReview()
+            self.capturePhotoButton.isEnabled = true
 //            self.loadingScreen.alpha = 0
-//            if results == nil || results?.count == 0 {
-//                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
-//            } else {
-//                self.displayList.removeAll()
-//                self.displayList = results!
-//                self.recordType = RecordType.RecordByImage
-//                //                self.performSegue(withIdentifier: "test", sender: self)
-//                self.performSegue(withIdentifier: "showResultPage", sender: self)
-//            }
-//            self.hideReview()
-//        }) { (progress) in
-//            self.uploadPercentageLabel.text = "\(progress)%"
-//        }
-//        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: userId!, latitude: latitude, longitude: longitude, completion: { (imageId, results) in
-//            // upload result and callback
-//            self.imageId = imageId
-//            self.capturePhotoButton.isEnabled = true
-//            self.loadingScreen.alpha = 0
-//            if results == nil || results?.count == 0 {
-//                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
-//            } else {
-//                self.foodDiary.foodInfoList.removeAll()
-//                for result in results! {
-//                    self.foodDiary.foodInfoList.append(result)
-//                }
-//                self.recordType = RecordType.RecordByImage
-////                self.performSegue(withIdentifier: "test", sender: self)
-//                self.performSegue(withIdentifier: "showResultPage", sender: self)
-//            }
-//            self.hideReview()
-//        }) { (progress) in
-//            self.uploadPercentageLabel.text = "\(progress)%"
-//        }
+            if resultList == nil || resultList?.count == 0 {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+            } else {
+                self.displayList.removeAll()
+                self.displayList = resultList!
+                self.recordType = RecordType.RecordByImage
+                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "recognitionVC") as? RecognitionResultViewController {
+                    if isUsingSample {
+                        dest.cameraImage = self.imageArray[self.currentImageIndex]
+                    } else {
+                        dest.cameraImage = self.chosenImageView.image!
+                    }
+                    dest.imageKey = imageKey
+                    dest.foodCategoryList = self.displayList
+                    //pass display value
+                    dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                    dest.recordDate = self.addFoodDate
+                    dest.mealType = self.mealType
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(dest, animated: true)
+                    }
+                }
+            }
+            self.hideReview()
+        })
     }
 
     @IBAction func rejectImage(_ sender: UIButton) {
@@ -387,6 +351,7 @@ extension CameraViewController: CameraViewControllerDelegate {
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
         CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
         showReview(image: croppedImage)
+        approveImage()
     }
 
     func cropCameraImage(_ original: UIImage, previewLayer: AVCaptureVideoPreviewLayer) -> UIImage? {
@@ -485,12 +450,19 @@ extension CameraViewController {
         chosenImageView.image = image
         chosenImageView.contentMode = .scaleToFill
         chosenImageView.isHidden = false
-        reviewImagePalette.isHidden = false
+        capturePhotoButton.showLoading()
+        capturePhotoButton.setImage(nil, for: .normal)
+        selectionView.isHidden = true
+//        reviewImagePalette.isHidden = false
     }
 
     private func hideReview() {
         chosenImageView.isHidden = true
-        reviewImagePalette.isHidden = true
+        capturePhotoButton.isHidden = false
+        selectionView.isHidden = false
+        capturePhotoButton.hideLoading()
+        capturePhotoButton.setImage(#imageLiteral(resourceName: "capture"), for: .normal)
+//        reviewImagePalette.isHidden = true
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -535,6 +507,13 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //show loading progress dialog
+//        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+//            self.loadingScreen.alpha = 1
+//        }, completion: nil)
+        //post recognition imageKey
+        currentImageIndex = indexPath.row
+        self.postImageKeyToServer(imageKey: imageKeyArray[currentImageIndex], isUsingSample: true)
         showReview(image: imageArray[indexPath.row])
     }
 

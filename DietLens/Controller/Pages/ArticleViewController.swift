@@ -88,7 +88,17 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+            if articleType == ArticleType.ARTICLE {
+                dest.articleData = ArticleDataManager.instance.articleList[indexPath.row]
+            } else {
+                dest.articleData = ArticleDataManager.instance.eventList[indexPath.row]
+            }
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

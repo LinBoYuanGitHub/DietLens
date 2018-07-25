@@ -12,7 +12,7 @@ import SnapKit
 import AlamofireImage
 import WebKit
 
-class SingleArticleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, WKNavigationDelegate {
+class SingleArticleViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var article: UITableView!
     weak var parallaxHeaderView: UIView?
@@ -34,6 +34,10 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         article.parallaxHeader.progress = 0
         setupParallaxHeader()
         // Do any additional setup after loading the view.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -88,7 +92,7 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         //let image = newsArticle.newsImage
         let imageView = UIImageView()
         //imageView.image = image
-        if articleData?.articleImageURL != "" {
+        if articleData?.articleImageURL != nil && articleData?.articleImageURL != "" {
             imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: nil)
         } else {
             imageView.image = #imageLiteral(resourceName: "runner")
@@ -107,10 +111,14 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
         backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         backButton.imageView?.tintColor = UIColor.white
         imageView.addSubview(backButton)
-
         backButton.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
-            make.centerY.equalTo(view.snp.top).offset(39)
+            if #available(iOS 11.0, *) {
+                make.centerY.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
+            } else {
+                // Fallback on earlier versions
+                make.centerY.equalTo(self.view.snp.top).offset(40)
+            }
         }
         article.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             //update alpha of blur view on top of image view
@@ -170,6 +178,7 @@ class SingleArticleViewController: UIViewController, UITableViewDataSource, UITa
 //            //do anything here
 //        }
         print("click click")
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+//        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -29,13 +29,12 @@ class MainViewController: UIViewController {
                 if isSuccess {
                     // save for basic authentication
                     let preferences = UserDefaults.standard
-                    let pwdKey = "password"
-                    preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
+                    preferences.setValue(self.TFPassword.text!, forKey: PreferenceKey.passwordKey)
                     //upload the device token to server
                     let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
                     let userId = preferences.string(forKey: PreferenceKey.userIdkey)
                     if userId != nil && fcmToken != nil {
-                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: "true", completion: { (flag) in
+                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
                             if flag {
                                 print("send device token succeed")
                             }

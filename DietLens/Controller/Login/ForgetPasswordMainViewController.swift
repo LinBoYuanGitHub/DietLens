@@ -60,8 +60,7 @@ class ForgetPasswordMainViewController: UIViewController, UITextFieldDelegate {
                                         if isSuccess {
                                             // save for basic authentication
                                             let preferences = UserDefaults.standard
-                                            let pwdKey = "password"
-                                            preferences.setValue(cfmPwd, forKey: pwdKey)
+                                            preferences.setValue(cfmPwd, forKey: PreferenceKey.passwordKey)
                                             self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
                                         } else {
                                             AlertMessageHelper.showMessage(targetController: self, title: "Error", message: "Change pw request failed")

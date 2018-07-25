@@ -30,14 +30,14 @@
                     </constraints>
                 </view>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="aj1-U7-fKk">
-                    <rect key="frame" x="16" y="167" width="345" height="31"/>
+                    <rect key="frame" x="28" y="167" width="319" height="31"/>
                     <color key="minimumTrackTintColor" red="0.95686274509803915" green="0.19607843137254902" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="onEmojiValueChange:" destination="-1" eventType="valueChanged" id="4N7-Xz-IvW"/>
                     </connections>
                 </slider>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="healthCenter_badMood" translatesAutoresizingMaskIntoConstraints="NO" id="OdV-xd-OaV">
-                    <rect key="frame" x="309" y="99" width="50" height="50"/>
+                    <rect key="frame" x="30" y="99" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="gty-9K-kJL"/>
                         <constraint firstAttribute="height" constant="50" id="tkI-r2-jdb"/>
@@ -55,13 +55,13 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LxA-l3-M99" secondAttribute="trailing" id="1f7-4G-lyr"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KzY-4f-IL1" secondAttribute="trailing" constant="15" id="3OW-HO-m2P"/>
                 <constraint firstItem="LxA-l3-M99" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5f9-Zl-iGi"/>
-                <constraint firstItem="aj1-U7-fKk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="18" id="Ds6-ZN-J5t"/>
+                <constraint firstItem="aj1-U7-fKk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Ds6-ZN-J5t"/>
                 <constraint firstItem="LxA-l3-M99" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="GCc-OK-DUf"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OdV-xd-OaV" secondAttribute="trailing" constant="16" id="K4a-9I-qqe"/>
                 <constraint firstItem="aj1-U7-fKk" firstAttribute="top" secondItem="OdV-xd-OaV" secondAttribute="bottom" constant="18" id="Kj6-k2-g18"/>
                 <constraint firstItem="OdV-xd-OaV" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="79" id="Le7-zx-2VA"/>
+                <constraint firstItem="OdV-xd-OaV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="Vxs-Ey-jf6"/>
                 <constraint firstItem="KzY-4f-IL1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="a29-pn-5Sv"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aj1-U7-fKk" secondAttribute="trailing" constant="16" id="cuF-7e-RRx"/>
+                <constraint firstItem="aj1-U7-fKk" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-30" id="cuF-7e-RRx"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="99.5" y="80.5"/>

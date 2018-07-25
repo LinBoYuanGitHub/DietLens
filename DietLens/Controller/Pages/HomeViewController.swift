@@ -290,7 +290,14 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     func didPressArticle(_ indexOfArticleList: Int) {
         articleType = ArticleType.ARTICLE
         whichArticleIndex = indexOfArticleList
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+//            dest.articleType = self.articleType
+            dest.articleData = ArticleDataManager.instance.articleList[indexOfArticleList]
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -333,9 +340,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         //navigate to article page
-        articleType = ArticleType.EVENT
-        whichEventIndex = indexPath.row - 1
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+            dest.articleData = ArticleDataManager.instance.eventList[indexPath.row - 1]
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

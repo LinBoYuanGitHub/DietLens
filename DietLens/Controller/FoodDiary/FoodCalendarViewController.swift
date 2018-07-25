@@ -66,7 +66,10 @@ class FoodCalendarViewController: UIViewController, UIPopoverPresentationControl
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
             controller.selectedDate = selectedDate
-            present(controller, animated: true, completion: nil)
+            if let navigator = self.navigationController {
+                navigator.pushViewController(controller, animated: true)
+            }
+//            present(controller, animated: true, completion: nil)
         }
     }
 

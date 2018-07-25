@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SkyFloatingLabelTextField
 
 class RegistrationFirstStepViewController: UIViewController {
     //step one field
-    @IBOutlet weak var TFuserName: UITextField!
-    @IBOutlet weak var TFemail: UITextField!
-    @IBOutlet weak var TFpassword: UITextField!
-    @IBOutlet weak var TFconfirmPassword: UITextField!
+    @IBOutlet weak var TFuserName: SkyFloatingLabelTextField!
+    @IBOutlet weak var TFemail: SkyFloatingLabelTextField!
+    @IBOutlet weak var TFpassword: SkyFloatingLabelTextField!
+    @IBOutlet weak var TFconfirmPassword: SkyFloatingLabelTextField!
     //step one btn
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var skipBtn: UIButton!
@@ -32,6 +33,26 @@ class RegistrationFirstStepViewController: UIViewController {
         TFpassword.delegate = self
         TFconfirmPassword.delegate = self
         hideKeyboardWhenTappedAround()
+        setUpSkyFloatingLabel()
+    }
+
+    func setUpSkyFloatingLabel() {
+        //username
+        TFuserName.placeholder = "Username"
+        TFuserName.font = UIFont(name: "PingFang SC-Light", size: 16)
+        TFuserName.title = "Username"
+        //email
+        TFemail.placeholder = "Email"
+        TFemail.font = UIFont(name: "PingFang SC-Light", size: 16)
+        TFemail.title = "Email"
+        //password
+        TFpassword.placeholder = "Password"
+        TFpassword.font = UIFont(name: "PingFang SC-Light", size: 16)
+        TFpassword.title = "at least 8 characters with letters"
+        //confirm password
+        TFconfirmPassword.placeholder = "confirm password"
+        TFconfirmPassword.font = UIFont(name: "PingFang SC-Light", size: 16)
+        TFconfirmPassword.title = "confirm password"
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,16 +94,16 @@ class RegistrationFirstStepViewController: UIViewController {
     @IBAction func signUp(_ sender: UIButton) {
         //temp direct jump
         if (TFuserName.text?.isEmpty)! {
-            showErrMsg(errMsg: "please fill in nick name")
+            showErrMsg(errMsg: "Please enter a nickname")
             return
         } else if (TFemail.text?.isEmpty)! {
-            showErrMsg(errMsg: "please fill in email")
+            showErrMsg(errMsg: "Please enter your email address")
             return
         } else if (TFpassword.text?.isEmpty)! {
-            showErrMsg(errMsg: "please fill in password")
+            showErrMsg(errMsg: "Please fill in your password")
             return
         } else if TFconfirmPassword.text != TFpassword.text {
-            showErrMsg(errMsg: "please confirm password againd")
+            showErrMsg(errMsg: "Verify password failed")
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
@@ -91,8 +112,7 @@ class RegistrationFirstStepViewController: UIViewController {
                     if isSucceed {
                         // save for basic authentication
                         let preferences = UserDefaults.standard
-                        let pwdKey = "password"
-                        preferences.setValue(self.TFpassword.text!, forKey: pwdKey)
+                        preferences.setValue(self.TFpassword.text!, forKey: PreferenceKey.passwordKey)
                         //set up profile
                         self.profile.name = self.TFuserName.text!
                         self.profile.email = self.TFemail.text!
@@ -105,7 +125,7 @@ class RegistrationFirstStepViewController: UIViewController {
                         let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
                         let userId = preferences.string(forKey: PreferenceKey.userIdkey)
                         if userId != nil && fcmToken != nil {
-                            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: "true", completion: { (flag) in
+                            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
                                 if flag {
                                     print("send device token succeed")
                                 }
