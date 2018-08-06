@@ -26,17 +26,16 @@ class DailyNutritionTableCell: UITableViewCell {
         } else {
              valueLabel.text = String(format: "%.1f", value) + unit
         }
-        self.progressView.progress = 0.01
+//        self.progressView.fs_height = 10
+//        self.setLayoutLayer()
         UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseIn, animations: {
             self.progressView.progress = Float(progress)/100
             self.progressView.setProgress(Float(progress)/100, animated: true)
-            self.progressView.layoutIfNeeded()
         }, completion: nil)
         percentageLabel.text = "\(Int(progress))%"
     }
 
     func setLayoutLayer() {
-        self.progressView.fs_height = 10
         let maskLayerPath = UIBezierPath(roundedRect: bounds, cornerRadius: 4.0)
         let maskLayer = CAShapeLayer()
         maskLayer.frame = self.bounds

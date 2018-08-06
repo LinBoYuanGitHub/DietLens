@@ -27,11 +27,8 @@ class DailyNutritionInfoViewController: BaseViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
         self.navigationController?.navigationBar.isHidden = true
-//        self.navigationController?.navigationBar.topItem?.title = "Nutrition Information"
-//        self.navigationController?.navigationBar.backItem?.title = ""
-//        self.navigationController?.navigationBar.backItem?.titleView?.tintColor = UIColor.white
-//        self.navigationController?.navigationBar.backgroundColor = UIColor.red
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
