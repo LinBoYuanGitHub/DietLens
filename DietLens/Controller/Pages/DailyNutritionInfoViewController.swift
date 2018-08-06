@@ -55,7 +55,7 @@ class DailyNutritionInfoViewController: BaseViewController {
     }
 
     func requestNutritionDict(requestDate: Date) {
-        APIService.instance.getDailySum(date: requestDate) { (resultDict) in
+        APIService.instance.getDailySum(source: self, date: requestDate) { (resultDict) in
             if resultDict.count == 0 {
                 return
             }

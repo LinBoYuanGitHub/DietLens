@@ -24,16 +24,23 @@ class RegistrationSecondStepViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         TFDate.inputAccessoryView = setUpPickerToolBar()
         TFDate.inputView = datePicker
+        //set initial timing
+        datePicker.date = DateUtil.normalStringToDate(dateStr: "1990-01-01")
+        TFDate.text = "1990-1-1"
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationItem.title = "Sign Up"
     }
 
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func onSelectDate(_ sender: Any) {
+
+        TFDate.becomeFirstResponder()
     }
 
     func setUpPickerToolBar() -> UIToolbar {
@@ -63,7 +70,7 @@ class RegistrationSecondStepViewController: UIViewController {
     }
 
     @objc func donePicker() {
-        TFDate.resignFirstResponder()
+        view.endEditing(true)
     }
 
     @IBAction func next(_ sender: UIButton) {

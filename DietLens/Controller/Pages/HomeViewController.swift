@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         if ArticleDataManager.instance.articleList.count == 0 || ArticleDataManager.instance.eventList.count == 0 {
             APIService.instance.getArticleList(completion: { (_) in
                 self.newsFeedTable.reloadData()
-            })
+            }) {(_) in }
             APIService.instance.getEventList(completion: { (_) in
                 self.newsFeedTable.reloadData()
             })
@@ -110,7 +110,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     //request when firstTime loading & add food into FoodCalendar by notificationCenter
     func requestNutritionDict(requestDate: Date) {
-        APIService.instance.getDailySum(date: requestDate) { (resultDict) in
+        APIService.instance.getDailySum(source: self, date: requestDate) { (resultDict) in
             if resultDict.count == 0 {
                 return
             }
@@ -243,6 +243,20 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         newsFeedTable.reloadData()
+        let preferences = UserDefaults.standard
+        let shouldPopUpFlag = preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfiling_Dialog)
+        if shouldPopUpFlag {
+            popUpDialog()
+        }
+    }
+
+    //popUp dialog
+    func popUpDialog() {
+        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "should filling the profile page", postiveText: "To Profile Page", negativeText: "Stay At Home Page") { (isPositive) in
+            if isPositive {
+
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

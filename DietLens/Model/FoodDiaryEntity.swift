@@ -28,6 +28,7 @@ struct DietItem {
     public var recordType = ""
     public var category = ""
     public var sampleImageUrl = ""
+    public var isMixFood = false
     public var portionInfo  = [PortionInfo]()
     public var nutritionInfo = NutritionInfo()
 }

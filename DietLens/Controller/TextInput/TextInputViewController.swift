@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import XLPagerTabStrip
 import NVActivityIndicatorView
+import CoreLocation
 
 class TextInputViewController: UIViewController {
 
@@ -30,7 +31,8 @@ class TextInputViewController: UIViewController {
 //    let activityIndicator:NVActivityIndicatorView?
 
     //tab item for filter the result
-    var filterItem = ["All", "Ingredient", "Side dish"]
+//    var filterItem = ["All", "Ingredient", "Side dish"]
+    var filterItem = ["All", "Nus Canteen"]
     //autoComplete & textSearchResult List
     var autoCompleteTextList = [String]()
     var searchResultList = [TextSearchSuggestionEntity]()
@@ -51,6 +53,13 @@ class TextInputViewController: UIViewController {
 
     var shouldShowCancel: Bool = false
     var nextPageLink: String = ""
+
+    var isLoading = false
+
+    //location service
+    let locationManager = CLLocationManager()
+    var latitude = 0.0
+    var longitude = 0.0
 
     //enum for textSearch status
     enum TextInputStatus {
@@ -80,8 +89,14 @@ class TextInputViewController: UIViewController {
             hideCancelBtn()
         }
         //set loading footerView
-//        textSearchTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: textSearchTable.frame.size.width, height: 40))
-//        textSearchTable.tableFooterView?.isHidden = true
+        textSearchTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: textSearchTable.frame.size.width, height: 52))
+        textSearchTable.tableFooterView?.isHidden = true
+        //set up location manager
+        if CLLocationManager.locationServicesEnabled() {
+            enableLocationServices()
+        } else {
+            print("Location services are not enabled")
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -158,7 +173,7 @@ class TextInputViewController: UIViewController {
         self.searchResultList.removeAll()
         self.textSearchTable.reloadData()
         //request for new data
-        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, completion: { (textResults) in
+        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
             self.loadingView.alpha = 0
             DispatchQueue.main.async {
                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
@@ -288,7 +303,7 @@ extension TextInputViewController: UITableViewDelegate {
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
-            if nextPageLink == ""{
+            if nextPageLink == "" || isLoading {
                 //last page
                 return
             }
@@ -296,9 +311,11 @@ extension TextInputViewController: UITableViewDelegate {
 //            let xAxis  = self.view.center.x
 //            let yAxis = self.view.center.y
 //            let frame = CGRect(x: xAxis, y: yAxis, width: 50, height: 50)
-//            textSearchTable.tableFooterView?.isHidden = false
-            APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, completion: { (resultList) in
-//                self.textSearchTable.tableFooterView?.isHidden = true
+            textSearchTable.tableFooterView?.isHidden = false
+            self.isLoading = true
+            APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
+                self.textSearchTable.tableFooterView?.isHidden = true
+                self.isLoading = false
                 if resultList == nil {
                     return
                 }
@@ -335,8 +352,8 @@ extension TextInputViewController: IndicatorInfoProvider {
 
 extension TextInputViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //All,Ingredient,SideDish
-        return 3
+        //All,NUS Canteen
+        return 2
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -357,7 +374,7 @@ extension TextInputViewController: UICollectionViewDataSource, UICollectionViewD
 //            self.animationView.center.x = destX!
         }) { (_) in
 //            self.textSearchTable.reloadData()
-            if self.textSearchField.text != ""{//search when no empty
+            if self.textSearchField.text != ""{ //search when no empty
                 self.performTextSearch()
             }
         }
@@ -374,4 +391,35 @@ extension TextInputViewController: UICollectionViewDataSource, UICollectionViewD
         return 0// return default search,but type not found
     }
 
+    func enableLocationServices() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        case .restricted, .denied:
+            break
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        case .authorizedAlways:
+            break
+        }
+    }
+
+}
+
+extension TextInputViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.latitude = (locations.last?.coordinate.latitude)!
+        self.longitude = (locations.last?.coordinate.longitude)!
+        locationManager.stopUpdatingLocation()
+    }
 }

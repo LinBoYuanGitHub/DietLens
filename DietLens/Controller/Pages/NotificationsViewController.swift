@@ -11,13 +11,13 @@ import UIKit
 class NotificationsViewController: UIViewController {
 
     @IBOutlet weak var notificationTable: UITableView!
-
     @IBOutlet weak var emptyViewIcon: UIImageView!
     @IBOutlet weak var emptyViewLabel: UILabel!
     @IBOutlet weak var clearButton: UIButton!
     //notification data & pagination
     var notificationSectionList = [NotificationSection]()
-    var currentLink = ""
+    var isLoading = false
+    var nextPageLink = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,8 @@ class NotificationsViewController: UIViewController {
         self.clearButton.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: .didReceiveNotification, object: nil)
         // Do any additional setup after loading the view.
+        notificationTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 52))
+        notificationTable.tableFooterView?.isHidden = true
     }
 
     @objc func refresh(_ notification: NSNotification) {
@@ -46,22 +48,31 @@ class NotificationsViewController: UIViewController {
                 self.emptyViewIcon.isHidden = true
                 self.emptyViewLabel.isHidden = true
             }
-            for notification in notificationList! {
-                var flag = true
-                for (index, section) in self.notificationSectionList.enumerated() where DateUtil.day3MDateToString(date: section.date) == DateUtil.day3MDateToString(date: notification.createTime) {
-                    self.notificationSectionList[index].notificationList.append(notification)
-                    flag = false
-                }
-                if flag {
-                    var notificaitonSection = NotificationSection()
-                    notificaitonSection.date = notification.createTime
-                    notificaitonSection.notificationList.append(notification)
-                    self.notificationSectionList.append(notificaitonSection)
-                }
-            }
+            self.asembleNoficationSection(notificationList: notificationList!)
             self.notificationTable.reloadData()
         }) { (nextLink) in
-            self.currentLink = nextLink
+            if self.nextPageLink == nil {
+                // last page
+                self.nextPageLink = ""
+            } else {
+                self.nextPageLink = nextLink
+            }
+        }
+    }
+
+    func asembleNoficationSection(notificationList: [NotificationModel]) {
+        for notification in notificationList {
+            var flag = true
+            for (index, section) in self.notificationSectionList.enumerated() where DateUtil.day3MDateToString(date: section.date) == DateUtil.day3MDateToString(date: notification.createTime) {
+                self.notificationSectionList[index].notificationList.append(notification)
+                flag = false
+            }
+            if flag {
+                var notificaitonSection = NotificationSection()
+                notificaitonSection.date = notification.createTime
+                notificaitonSection.notificationList.append(notification)
+                self.notificationSectionList.append(notificaitonSection)
+            }
         }
     }
 
@@ -96,16 +107,6 @@ class NotificationsViewController: UIViewController {
             }
         }
     }
-
-//    func checkEmpty() {
-//        if notificationSectionList.count == 0 {
-//            emptyViewIcon.alpha = 1
-//            emptyViewLabel.alpha = 1
-//        } else {
-//            emptyViewIcon.alpha = 0
-//            emptyViewLabel.alpha = 0
-//        }
-//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = notificationTable.indexPathForSelectedRow {
@@ -182,13 +183,48 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "presentNotifcationDetail", sender: self)
+        let notification = notificationSectionList[indexPath.section].notificationList[indexPath.row]
+        if notification.messageType == MessageType.questionnaireType {
+            performSegue(withIdentifier: "presentNotifcationDetail", sender: self)
+        } else {
+            performSegue(withIdentifier: "showNotificationDetailPage", sender: self)
+        }
         if notificationSectionList[indexPath.section].notificationList[indexPath.row].read == false {
             APIService.instance.didReceiveNotifcation(notificationId: notificationSectionList[indexPath.section].notificationList[indexPath.row].id) { (isSuccess) in
                 if isSuccess! {
                     self.notificationSectionList[indexPath.section].notificationList[indexPath.row].read = true
                 }
             }
+        }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let  height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            if nextPageLink == "" || isLoading {
+                //last page
+                return
+            }
+            notificationTable.tableFooterView?.isHidden = false
+            self.isLoading = true
+            APIService.instance.getNotificationList(link: nextPageLink, completion: { (notificationList) in
+                self.notificationTable.tableFooterView?.isHidden = true
+                self.isLoading = false
+                if notificationList == nil {
+                    return
+                }
+                self.asembleNoficationSection(notificationList: notificationList!)
+                self.notificationTable.reloadData()
+            }, nextCompletion: { (nextLink) in
+                if nextLink == nil {
+                    // last page
+                    self.nextPageLink = ""
+                } else {
+                    self.nextPageLink = nextLink!
+                }
+            })
         }
     }
 }

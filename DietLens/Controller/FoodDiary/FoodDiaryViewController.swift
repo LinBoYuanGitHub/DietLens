@@ -157,10 +157,10 @@ class FoodDiaryViewController: UIViewController {
         if isUpdate {
             APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryEntity, completion: { (isSuccess) in
                 if isSuccess {
-                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
                         for viewController in (self.navigationController?.viewControllers)! {
-                            if let foodCalendarVC = viewController as? FoodCalendarViewController {
-                                foodCalendarVC.shouldRefreshDiary = true
+                            if let foodHistoryVC = viewController as? FoodDiaryHistoryViewController {
+                                foodHistoryVC.shouldRefreshDiary = true
                             }
                         }
                         self.navigationController?.popViewController(animated: true) //pop back to food calendar
@@ -180,7 +180,7 @@ class FoodDiaryViewController: UIViewController {
                             if let navigator = self.navigationController {
                                 //pop all the view except HomePage
                                 if navigator.viewControllers.contains(where: {
-                                    return $0 is FoodCalendarViewController
+                                    return $0 is FoodDiaryHistoryViewController
                                 }) {
                                     //add foodItem into foodDiaryVC
                                     for viewController in (self.navigationController?.viewControllers)! {

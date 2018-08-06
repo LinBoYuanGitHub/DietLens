@@ -13,6 +13,8 @@ struct TextSearchSuggestionEntity {
     public var name: String = ""
     public var useExpImage: Bool = false
     public var expImagePath = ""
+    public var location = ""
+    public var stall = ""
 
     init(id: Int, name: String) {
         self.id = id

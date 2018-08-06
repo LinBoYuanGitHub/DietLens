@@ -16,47 +16,32 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let preferences = UserDefaults.standard
-        let token = preferences.string(forKey: PreferenceKey.tokenKey)
-        if token == nil {
-            //redirect to login page
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "toLoginPage", sender: self)
+        let introFlag = preferences.bool(forKey: FirstTimeFlag.isFirstTime_Login)
+        if introFlag {
+            //to introduction page
+            let token = preferences.string(forKey: PreferenceKey.tokenKey)
+            if token == nil {
+                //redirect to login page
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "toLoginPage", sender: self)
+                }
+            } else {
+                //redirect to home page
+                getArticleListToMainPage()
+                loadNutritionTarget()
             }
         } else {
-            //redirect to home page
-            getArticleListToMainPage()
-            loadNutritionTarget()
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as? IntroductionViewController {
+                 DispatchQueue.main.async {
+                    self.present(dest, animated: true, completion: nil)
+                }
+                preferences.setValue(true, forKey: FirstTimeFlag.isFirstTime_Login)
+            }
         }
-//        APIService.instance.getUUIDRequest(userId: userId!) { (userId) in
-//            let preferences = UserDefaults.standard
-//            let key = "userId"
-//            preferences.setValue(userId, forKey: key)
-//            let didSave = preferences.synchronize()
-//            if !didSave {
-//                print("Couldn`t save,fatal exception happened")
-//            } else {
-//                print("userId:\(userId)")
-//            }
-//            //send notification to server
-//            let tokenKey = "fcmToken"
-//            let token = preferences.string(forKey: tokenKey)
-//            if token != nil {
-//                //send token to server
-//                APIService.instance.saveDeviceToken(uuid: userId, fcmToken: token!, status: "True", completion: { (flag) in
-//                    if flag {
-//                        preferences.setValue(nil, forKey: tokenKey)
-//                        print("send device token succeed")
-//                    }
-//                })
-//            }
-//            self.getArticleListToMainPage()
-//        }
-
-        // Do any additional setup after loading the view.
     }
 
     func getArticleListToMainPage() {
-        APIService.instance.getArticleList { (articleList) in
+        APIService.instance.getArticleList(completion: { (articleList) in
             if articleList != nil {
                 APIService.instance.getEventList { (_) in
                     DispatchQueue.main.async {
@@ -69,6 +54,7 @@ class SplashScreenViewController: UIViewController {
                     self.performSegue(withIdentifier: "toMainPage", sender: self)
                 }
             }
+        }) { (_) in
         }
     }
 

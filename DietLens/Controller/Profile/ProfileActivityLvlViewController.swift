@@ -9,7 +9,6 @@
 import UIKit
 
 protocol activitySelectDelegate {
-
     func onActivitySelect(index: Int)
 }
 
@@ -28,6 +27,7 @@ class ProfileActivityLvlViewController: UIViewController {
         setUpSliderBar()
         activityLvlSlider.setValue(Float(indexValue), animated: false)
         setUpActivtyLevel(indexValue: indexValue)
+        activityLvlSlider.value = 2.5 //set the initial value to heavy exercise
     }
 
     func setUpSliderBar() {
@@ -43,8 +43,8 @@ class ProfileActivityLvlViewController: UIViewController {
         indexValue = Int(sender.value)
         if indexValue > 3 {
             indexValue = 3
-            return
         }
+        activityLvlSlider.setValue(Float(Int(indexValue)) + 0.5, animated: true)
        setUpActivtyLevel(indexValue: indexValue)
     }
 
@@ -59,7 +59,7 @@ class ProfileActivityLvlViewController: UIViewController {
         let positionOfSlider: CGPoint = activityLvlSlider.frame.origin
         let widthOfSlider: CGFloat = activityLvlSlider.frame.size.width
         let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activityLvlSlider.maximumValue) / widthOfSlider)
-        activityLvlSlider.setValue(Float(newValue), animated: true)
+        activityLvlSlider.setValue(Float(Int(newValue)) + 0.5, animated: true)
         indexValue = Int(newValue)
         setUpActivtyLevel(indexValue: indexValue)
     }

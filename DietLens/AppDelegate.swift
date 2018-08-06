@@ -42,12 +42,15 @@ import LGSideMenuController
 import HealthKit
 import FBSDKCoreKit
 import Photos
+import FacebookLogin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
+
+    var isInSignOutProcess: Bool = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -69,7 +72,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         registerForPushNotifications()
+        NotificationCenter.default.addObserver(self, selector: #selector(signOut), name: .signOutErrFlag, object: nil)
         return true
+    }
+
+    @objc func signOut() {
+//        APIService.instance.logOut(completion: { (_) in
+//            //signOut no matter request succeed or not
+//            DispatchQueue.main.async {
+//                self.clearPersonalData()
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                if let destController = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController {
+//                    self.window?.rootViewController?.present(destController, animated: true, completion: nil)
+//
+//                }
+//            }
+//        })
+    }
+
+    func clearPersonalData() {
+        let preferences = UserDefaults.standard
+        let nicknameKey = "nickname"
+        preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.facebookId)
+        preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
+        preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        //facebook login
+        LoginManager().logOut()
     }
 
     func realmSetting(_ application: UIApplication) {

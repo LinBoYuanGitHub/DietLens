@@ -17,10 +17,9 @@ class FoodInfoDataManager {
     func assembleFoodInfos(jsonObj: JSON) -> [FoodInfomationModel] {
          foodInfoList.removeAll()
          var jsonArr = jsonObj["data"]["food_info"]
-         for i in 0..<jsonArr.count {
-            var jsonObject = jsonArr[i]
+         for index in 0..<jsonArr.count {
+            var jsonObject = jsonArr[index]
             var foodInfo = FoodInfomationModel()
-//            foodInfo.foodId = jsonObject["food_id"].stringValue
             foodInfo.foodName = jsonObject["food_name"].stringValue
             if foodInfo.foodName == "Non-food" {
                 foodInfo.calorie = 0.0
@@ -43,7 +42,7 @@ class FoodInfoDataManager {
                 portion.weightValue = json["weight_value"].doubleValue
                 foodInfo.portionList.append(portion)
             }
-            foodInfo.rank = i+1
+            foodInfo.rank = index+1
             foodInfoList.append(foodInfo)
         }
         return foodInfoList
@@ -73,6 +72,7 @@ class FoodInfoDataManager {
     func assembleDietItem(jsonObject: JSON) -> DietItem {
         var dietItem = DietItem()
         dietItem.foodId = jsonObject["id"].intValue
+        dietItem.isMixFood = jsonObject["is_mix_food"].boolValue
         dietItem.foodName = jsonObject["display_name"].stringValue
         dietItem.sampleImageUrl = jsonObject["example_img"].stringValue
         dietItem.nutritionInfo.calorie = jsonObject["nutrition"]["energy"].doubleValue
@@ -161,9 +161,9 @@ class FoodInfoDataManager {
         } else {
             ingredient.sugarsTotal = jsonObject["Sugar"].stringValue
         }
-        for i in 0..<jsonObject["unit_list"].count {
+        for index in 0..<jsonObject["unit_list"].count {
             var unit = IngredientUnit()
-            var job = jsonObject["unit_list"][i]
+            var job = jsonObject["unit_list"][index]
             unit.unitId = job["id"].intValue
             unit.seq = job["seq"].stringValue
             unit.amount = job["amount"].stringValue
@@ -184,9 +184,9 @@ class FoodInfoDataManager {
             foodDiaryEntity.latitude = Double(jsonObject["latitude"].stringValue)!
             foodDiaryEntity.longitude = Double(jsonObject["longitude"].stringValue)!
         }
-        for i in 0..<jsonObject["details"].count {
+        for index in 0..<jsonObject["details"].count {
             var foodItem = DietItem()
-            var job = jsonObject["details"][i]
+            var job = jsonObject["details"][index]
             foodItem.foodId = job["id"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.quantity = Double(job["quantity"].doubleValue)
@@ -198,7 +198,7 @@ class FoodInfoDataManager {
     }
 
     func partialParamfyFoodDiaryEntity(foodDiaryEntity: FoodDiaryEntity) -> Dictionary<String, Any> {
-        var result = Dictionary<String, Any>()
+        var result = [String: Any]()
         result["meal_time"] = foodDiaryEntity.mealTime
         result["meal_type"] = foodDiaryEntity.mealType
         result["image"] = foodDiaryEntity.imageId
@@ -209,7 +209,7 @@ class FoodInfoDataManager {
     }
 
     func paramfyFoodDiaryEntity(foodDiaryEntity: FoodDiaryEntity) -> Dictionary<String, Any> {
-        var result = Dictionary<String, Any>()
+        var result = [String: Any]()
         result["meal_time"] = foodDiaryEntity.mealTime
         result["meal_type"] = foodDiaryEntity.mealType
         result["image"] = foodDiaryEntity.imageId
@@ -291,6 +291,7 @@ class FoodInfoDataManager {
                 foodObject.displayName = foodInfo["display_name"].stringValue
                 foodObject.exampleImgUrl = foodInfo["example_img"].stringValue
                 foodObject.calories = foodInfo["nutrition"]["energy"].doubleValue
+                foodObject.isMultiDish = foodInfo["is_mix_food"].boolValue
                 foodObject.unit = foodInfo["unit"].stringValue
                 subCategory.subcateFoodList.append(foodObject)
             }

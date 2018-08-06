@@ -49,8 +49,6 @@ class HealthCenterAddItemViewController: UIViewController {
             //set data into component
             let indxPath = IndexPath(row: 1, section: 0)
             if let dateCell = addItemTableView.cellForRow(at: indxPath) as? HealthCenterTableValueCell {
-//                let monthStr = DateUtil.formatMonthToString(
-//                    date: sender.date)
                 dateStr = "\(year)-\(month)-\(day)"
                 dateCell.healthCenterTextField.text = dateStr
             }

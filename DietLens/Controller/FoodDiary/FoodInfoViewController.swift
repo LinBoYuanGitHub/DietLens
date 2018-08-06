@@ -190,7 +190,7 @@ class FoodInfoViewController: UIViewController {
         if imageUrl == nil || imageUrl?.count == 0 {
             foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
         } else {
-            foodSampleImage.af_setImage(withURL: URL(string: imageUrl!)!, placeholderImage: #imageLiteral(resourceName: "dietlens_sample_background"), filter: nil, imageTransition: .crossDissolve(0.5), completion: nil)
+            foodSampleImage.kf.setImage(with: URL(string: imageUrl!)!, placeholder: #imageLiteral(resourceName: "dietlens_sample_background"), options: nil, progressBlock: nil, completionHandler: nil)
         }
 
     }
@@ -205,19 +205,6 @@ class FoodInfoViewController: UIViewController {
 
     //used only when isNotAccumulate
     @objc func showUnitSelectionDialog() {
-//        let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.actionSheet)
-//        for (index, portion) in dietItem.portionInfo.enumerated() {
-//            alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
-//                self.selectedPortionPos = index
-//                self.foodDiaryEntity.dietItems[0].selectedPos = index
-//                self.dietItem.selectedPos = index
-//                self.unitValue.text = portion.sizeUnit
-//                self.dietItem.displayUnit = portion.sizeUnit
-//                self.setUpFoodValue()
-//            }))
-//        }
-//        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
         if let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as? SingleOptionViewController {
             singleOptionAlert.delegate = self
             singleOptionAlert.optionList.removeAll()

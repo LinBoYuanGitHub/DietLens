@@ -26,7 +26,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>1.0.1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -78,9 +78,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app requires access to your location when in use to include location info in photo metadata</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This will allow access to save photo in your photo library</string>
+	<string>This will allow you to save your food photo to photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This will allow you to upload photos from photo library</string>
+	<string>This will allow you to upload your food photos from photo library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

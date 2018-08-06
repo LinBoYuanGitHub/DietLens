@@ -26,13 +26,12 @@ class SingleNotificationViewController: UIViewController {
         super.viewDidLoad()
         notificationTitle.text = notification.title
         dateTime.text = formatter.string(from: notification.dateReceived)
-        body.text = notification.body
+        body.text = notification.content
         // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
     }
 
     override func didReceiveMemoryWarning() {

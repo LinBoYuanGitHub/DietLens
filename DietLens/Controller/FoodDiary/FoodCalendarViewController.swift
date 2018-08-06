@@ -74,7 +74,7 @@ class FoodCalendarViewController: UIViewController, UIPopoverPresentationControl
     }
 
     func loadDailyNutritionView() {
-        APIService.instance.getDailySum(date: selectedDate) { (resultDict) in
+        APIService.instance.getDailySum(source: self, date: selectedDate) { (resultDict) in
             if resultDict.count == 0 {
                 return
             }

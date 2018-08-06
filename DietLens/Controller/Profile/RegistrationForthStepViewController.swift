@@ -43,18 +43,18 @@ class RegistrationForthStepViewController: UIViewController {
         activitySlider.setMinimumTrackImage(clearImage, for: .normal)
         activitySlider.setMaximumTrackImage(clearImage, for: .normal)
         //set slider bar tap event
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "sliderTapped:")
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector((onSliderTapped(_:))))
         activitySlider.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
+    @objc func onSliderTapped(_ gestureRecognizer: UIGestureRecognizer) {
         let pointTapped: CGPoint = gestureRecognizer.location(in: self.view)
 
         let positionOfSlider: CGPoint = activitySlider.frame.origin
         let widthOfSlider: CGFloat = activitySlider.frame.size.width
         let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activitySlider.maximumValue) / widthOfSlider)
         profile?.activityLevel = Int(newValue)
-        activitySlider.setValue(Float((profile?.activityLevel)!), animated: true)
+        activitySlider.setValue(Float(Int(newValue)) + 0.5, animated: true)
         setUpActivtyLevel(indexValue: (profile?.activityLevel)!)
     }
 
@@ -63,12 +63,12 @@ class RegistrationForthStepViewController: UIViewController {
         if indexValue > 3 {
             indexValue = 3
         }
+        activitySlider.setValue(Float(Int(indexValue)) + 0.5, animated: true)
         profile?.activityLevel = indexValue
         setUpActivtyLevel(indexValue: indexValue)
     }
 
     func setUpActivtyLevel(indexValue: Int) {
-        activitySlider.setValue(Float(indexValue), animated: true)
         exerciseLabel.text = StringConstants.ExerciseLvlText.exerciseLvlArr[indexValue]
         frequencyLabel.text = StringConstants.ExerciseLvlText.exerciseFrequencyArr[indexValue]
         activityText.text = StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexValue]

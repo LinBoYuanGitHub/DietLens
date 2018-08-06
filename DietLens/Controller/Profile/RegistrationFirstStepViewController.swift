@@ -38,9 +38,9 @@ class RegistrationFirstStepViewController: UIViewController {
 
     func setUpSkyFloatingLabel() {
         //username
-        TFuserName.placeholder = "Username"
+        TFuserName.placeholder = "Nickname"
         TFuserName.font = UIFont(name: "PingFang SC-Light", size: 16)
-        TFuserName.title = "Username"
+        TFuserName.title = "Nickname"
         //email
         TFemail.placeholder = "Email"
         TFemail.font = UIFont(name: "PingFang SC-Light", size: 16)
@@ -50,7 +50,7 @@ class RegistrationFirstStepViewController: UIViewController {
         TFpassword.font = UIFont(name: "PingFang SC-Light", size: 16)
         TFpassword.title = "at least 8 characters with letters"
         //confirm password
-        TFconfirmPassword.placeholder = "confirm password"
+        TFconfirmPassword.placeholder = "Confirm password"
         TFconfirmPassword.font = UIFont(name: "PingFang SC-Light", size: 16)
         TFconfirmPassword.title = "confirm password"
     }
@@ -77,33 +77,41 @@ class RegistrationFirstStepViewController: UIViewController {
         }
         APIService.instance.emailValidationRequest(userEmail: email, completion: { (isSuccess) in
             self.redTick.isHidden = !isSuccess
-            self.emailCheckerLabel.isHidden = isSuccess
+//            self.emailCheckerLabel.isHidden = isSuccess
         }) { (errMessage) in
-            self.emailCheckerLabel.alpha = 1
-            self.emailCheckerLabel.text = errMessage
+//            self.emailCheckerLabel.alpha = 1
+//            self.emailCheckerLabel.text = errMessage
+            self.TFemail.errorMessage = errMessage
             self.redTick.isHidden = true
         }
     }
 
     func showErrMsg(errMsg: String) {
-        print(errMsg)
+        errMsgLabel.isHidden = false
         errMsgLabel.text = errMsg
         errMsgLabel.alpha = 1
     }
 
     @IBAction func signUp(_ sender: UIButton) {
-        //temp direct jump
-        if (TFuserName.text?.isEmpty)! {
-            showErrMsg(errMsg: "Please enter a nickname")
+        //internet connection
+        if !Reachability.isConnectedToNetwork() {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
+            return
+        } else if (TFuserName.text?.isEmpty)! {
+            TFuserName.errorMessage = "Please enter a nickname"
+//            showErrMsg(errMsg: "Please enter a nickname")
             return
         } else if (TFemail.text?.isEmpty)! {
-            showErrMsg(errMsg: "Please enter your email address")
+            TFemail.errorMessage = "Please enter your email address"
+//            showErrMsg(errMsg: "Please enter your email address")
             return
         } else if (TFpassword.text?.isEmpty)! {
-            showErrMsg(errMsg: "Please fill in your password")
+            TFpassword.errorMessage = "Please fill in your password"
+//            showErrMsg(errMsg: "Please fill in your password")
             return
         } else if TFconfirmPassword.text != TFpassword.text {
-            showErrMsg(errMsg: "Verify password failed")
+            TFconfirmPassword.errorMessage = "Verify password failed"
+//            showErrMsg(errMsg: "Verify password failed")
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
@@ -183,6 +191,10 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         keyboardWillShow()
+        TFuserName.errorMessage = ""
+        TFemail.errorMessage = ""
+        TFpassword.errorMessage = ""
+        TFconfirmPassword.errorMessage = ""
         return true
     }
 

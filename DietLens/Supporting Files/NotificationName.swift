@@ -15,4 +15,5 @@ extension Notification.Name {
     static let onSideMenuClick = Notification.Name("onsidemenuclick")
     static let shouldRefreshMainPageNutrition = Notification.Name("shouldrefreshmainpagenutrition")
     static let shouldRefreshSideBarHeader = Notification.Name("shouldRefreshSideBarHeader")
+    static let signOutErrFlag = Notification.Name("signOutErrorFlag")
 }

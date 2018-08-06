@@ -14,6 +14,9 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var articleTitle: UILabel!
     var articleDataSource: [Article] = ArticleDataManager.instance.articleList
     public var articleType = ArticleType.ARTICLE
+    //pagination flag
+    var isLoading = false
+    var nextPageLink = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +29,11 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
             articleTitle.text = "Latest articles"
         } else if articleType == ArticleType.EVENT {
             articleDataSource = ArticleDataManager.instance.eventList
-            articleTitle.text = "Latest healthy events"
+            articleTitle.text = "Latest health events"
         }
         // Do any additional setup after loading the view.
+        articleTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 52))
+        articleTable.tableFooterView?.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +57,13 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
                         ArticleDataManager.instance.articleList = articleList!
                         self.articleTable?.reloadData()
                     }
-                })
+                }) { (nextLink) in
+                    if self.nextPageLink == nil {
+                        self.nextPageLink = ""
+                    } else {
+                        self.nextPageLink = nextLink
+                    }
+                }
             } else if articleType == ArticleType.EVENT {
                 APIService.instance.getEventList(completion: { (eventList) in
                     alertController.dismiss(animated: true, completion: nil)
@@ -113,6 +124,36 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleDataSource.count
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let  height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            if nextPageLink == "" || isLoading {
+                return
+            }
+            articleTable.tableFooterView?.isHidden = true
+            self.isLoading = false
+            APIService.instance.getArticleList(link: nextPageLink, completion: { (articleList) in
+                self.articleTable.tableFooterView?.isHidden = true
+                self.isLoading = false
+                if articleList == nil {
+                    return
+                }
+                for article in articleList! {
+                     ArticleDataManager.instance.articleList.append(article)
+                }
+                self.articleTable.reloadData()
+            }, nextLinkCompletion: { (nextLink) in
+                if nextLink == nil {
+                    self.nextPageLink = ""
+                } else {
+                    self.nextPageLink = nextLink
+                }
+            })
+        }
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {

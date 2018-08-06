@@ -57,14 +57,14 @@ struct ServerConfig {
     static let saveHourlyStepURL = labDeskTopURL+"/steps/"
     static let saveHealthCenterDataURL = baseURL + "/healthlog/Medical/"
     static let foodSearchListURL = labDeskTopURL + "/search/auto-suggestion/"
-    static let foodFullTextSearchURL = labDeskTopURL + "/search/full-text/"
+    static let foodFullTextSearchURL = labDeskTopURL + "/foodinfo/full-text/"
     static let foodSearchAutocompleteURL = labDeskTopURL + "/search/autocomplete/"
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
     static let feedBackURL = labDeskTopURL + "/feedback/email/"
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 //    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"
-    static let uploadImageKeyURL = "https://recognize.dietlens.com/webHook"
+    static let uploadImageKeyURL = labDeskTopURL+"/foodinfo/recognition/"
     //health center log
     static let uploadHealthCenterData = labDeskTopURL + "/healthlogs/"
     //foodDiary CRUD
@@ -170,4 +170,17 @@ struct NotificationType {
     static let TextFieldType = "3"
     static let Rating4StarType = "4"
     static let Rating7StarType = "5"
+}
+
+struct FirstTimeFlag {
+    static let isFirstTime_Login = "isFirstTimeLogin" //show IntroductionPage
+    static let isFirstTime_View_AddMore = "isFirstTimeAddMore" //show addMore indication cover
+    static let isFirstTime_View_Home = "isFirstTimeViewHome" //show camera indication cover
+    static let isFirstTime_View_RecogResult = "isFirstTimeViewRecogResult" //show recogResult indication cover
+    static let shouldPopUpProfiling_Dialog = "shouldPopUpProfilingDialog" //should pop up profiling dialog
+}
+
+struct MessageType {
+    static let messageType = "0"
+    static let questionnaireType = "1"
 }

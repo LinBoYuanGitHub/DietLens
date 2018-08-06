@@ -10,6 +10,7 @@ import UIKit
 import FacebookLogin
 import FacebookCore
 import SkyFloatingLabelTextField
+import FBSDKLoginKit
 
 struct FBProfileRequest: GraphRequestProtocol {
     typealias Response = GraphResponse
@@ -27,9 +28,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var TFPassword: SkyFloatingLabelTextField!
     @IBOutlet weak var facebookLoginBtn: UIButton!
 
-    @IBAction func unwindToMainPage(segue: UIStoryboardSegue) {}
-
     @IBAction func onLoginBtnClicked(_ sender: Any) {
+        if !Reachability.isConnectedToNetwork() {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.noInternetErrorMsg)
+            return
+        }
         if (TFEmail.text?.isEmpty)! {
             TFEmail.errorMessage = "Please enter your email address"
             return
@@ -39,7 +42,7 @@ class LoginViewController: UIViewController {
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
         //login request
-        APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!) { (isSuccess) in
+        APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!, completion: { (isSuccess) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                 if isSuccess {
                     // save for basic authentication
@@ -60,10 +63,13 @@ class LoginViewController: UIViewController {
                         self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
                     }
                 } else {
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
                     print("Login failed")
                 }
             }
+        }) { (errMsg) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: errMsg)
         }
     }
 
@@ -109,18 +115,32 @@ class LoginViewController: UIViewController {
                         preferences.setValue(facebookUserId, forKey: "facebookId")
                         preferences.setValue(facebookUserName, forKey: "nickname")
                         //validate FacebookId
-                        APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: facebookUserId as! String, completion: { (isSuccess) in
+                        APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: facebookUserId as! String, completion: { (isSuccess, _) in
                             if isSuccess {
-                                var profile = UserProfile()
-                                if let name = facebookUserName as? String {
-                                    profile.name = name
-                                }
-                                DispatchQueue.main.async {
-                                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
-                                        dest.profile = profile
-                                        self.navigationController?.pushViewController(dest, animated: true)
+                                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
+                                    var profile = UserProfile()
+                                    if let name = facebookUserName as? String {
+                                        profile.name = name
+                                    }
+                                    if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                                        destVC.profile = profile
+                                        self.present(dest, animated: true, completion: nil)
                                     }
                                 }
+//                                if isNewUser {
+//                                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
+//                                        var profile = UserProfile()
+//                                        if let name = facebookUserName as? String {
+//                                            profile.name = name
+//                                        }
+//                                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+//                                            destVC.profile = profile
+//                                            self.present(dest, animated: true, completion: nil)
+//                                        }
+//                                    }
+//                                } else {
+//                                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+//                                }
                             }
                         })
                         print("Graph Request Succeeded: \(response)")
@@ -166,11 +186,12 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString str: String) -> Bool {
         if let text = textField.text {
             //Email validator
             if textField == TFEmail {
-                if text.count > 3 && !TextValidtor.isValidEmail(testStr: text) {
+                let validationString = textField.text! + str
+                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
                     TFEmail.errorMessage = "Invalid email"
                 } else {
                     TFEmail.errorMessage = ""

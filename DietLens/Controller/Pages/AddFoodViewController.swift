@@ -6,10 +6,13 @@
 //  Copyright © 2017 NExT++. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import XLPagerTabStrip
+import CoreLocation
 
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
+
     var addFoodDate = Date()
     var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true

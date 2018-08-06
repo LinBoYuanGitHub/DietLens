@@ -71,6 +71,7 @@
 		3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */; };
 		3F6CF82A1FD8FABC00D7556E /* PlainTextTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */; };
 		3F6DBCEF20AC17CB006BD8F6 /* SideMenuContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6DBCEE20AC17CB006BD8F6 /* SideMenuContainerViewController.swift */; };
+		3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F73A7522109C1360031B01E /* IntroductionViewController.swift */; };
 		3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DEE20EB6195003A31DE /* RulerView.swift */; };
 		3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */; };
 		3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */; };
@@ -300,6 +301,7 @@
 		3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientDelegate.swift; sourceTree = "<group>"; };
 		3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextTableAdapter.swift; sourceTree = "<group>"; };
 		3F6DBCEE20AC17CB006BD8F6 /* SideMenuContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContainerViewController.swift; sourceTree = "<group>"; };
+		3F73A7522109C1360031B01E /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		3F764DEE20EB6195003A31DE /* RulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerCollectionCell.swift; sourceTree = "<group>"; };
 		3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
@@ -640,6 +642,14 @@
 			path = Adapter;
 			sourceTree = "<group>";
 		};
+		3F73A7512109C0B00031B01E /* IntroductionPage */ = {
+			isa = PBXGroup;
+			children = (
+				3F73A7522109C1360031B01E /* IntroductionViewController.swift */,
+			);
+			path = IntroductionPage;
+			sourceTree = "<group>";
+		};
 		3F764DF220EB67B5003A31DE /* RulerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,7 +862,6 @@
 				58F2DF281F9F437F00FF3A95 /* Services */,
 				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
 				58FCCFED1F9D886E00E4F421 /* Controller */,
-				58FCCFEC1F9D886900E4F421 /* View */,
 				58FCCFEB1F9D886400E4F421 /* Model */,
 				5877CF871F9D82BF0022B51E /* AppDelegate.swift */,
 				5877CF8B1F9D82BF0022B51E /* Main.storyboard */,
@@ -954,6 +963,7 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3F73A7512109C0B00031B01E /* IntroductionPage */,
 				3FCBEC0C20E632090092948C /* HealthCenter */,
 				3FB6E67F20E3701300462591 /* Profile */,
 				3FB6E67620DBA01B00462591 /* Dialog */,
@@ -967,6 +977,7 @@
 				BF794BB01FA46D7100D30550 /* Camera */,
 				580443611FB0176700D59DFF /* Pages */,
 				3FBA55BA20F883C600258808 /* BaseViewController.swift */,
+				58FCCFEC1F9D886900E4F421 /* View */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1401,6 +1412,7 @@
 				3F6DBCEF20AC17CB006BD8F6 /* SideMenuContainerViewController.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
+				3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */,
 				3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */,
 				581809B21FA877D700373763 /* SideMenuCell.swift in Sources */,
 				3F8818A020EA574900FE6C11 /* ProfileArrowCell.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class DataService {
     static var instance = DataService()

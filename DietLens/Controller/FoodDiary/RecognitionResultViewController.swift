@@ -101,6 +101,10 @@ class RecognitionResultViewController: UIViewController {
                     return
                 }
                 var entity = dietItem!
+                if entity.isMixFood {
+                    self.redirectToFoodDiaryPage()
+                    return
+                }
                 entity.recordType = RecognitionInteger.recognition
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                     dest.userFoodImage = self.cameraImage
@@ -144,6 +148,22 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 52
+    }
+
+    func redirectToFoodDiaryPage() {
+        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+            dest.userFoodImage = self.cameraImage
+            dest.imageKey = self.imageKey
+            dest.isUpdate = false
+            //mealTime & mealType
+            dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
+            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+            dest.foodDiaryEntity.mealType = self.mealType!
+            if let navigator = self.navigationController {
+                //clear controller to Bottom & add foodCalendar Controller
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
 }

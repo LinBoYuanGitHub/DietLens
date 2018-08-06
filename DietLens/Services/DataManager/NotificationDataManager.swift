@@ -29,6 +29,7 @@ class NotificationDataManager {
         notification.body = jsonobj["message_body"].stringValue
         notification.content = jsonobj["content"].stringValue
         notification.prompt = jsonobj["prompt"].stringValue
+        notification.messageType = jsonobj["message_type"].stringValue
         notification.responseType = jsonobj["response_type"].stringValue
         for json in jsonobj["response_options"].arrayValue {
             notification.responseOptions.append(json.stringValue)

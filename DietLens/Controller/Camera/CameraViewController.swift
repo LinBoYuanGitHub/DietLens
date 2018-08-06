@@ -38,10 +38,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     private var recordType: String = RecordType.RecordByImage
 
 //    @IBOutlet weak var focusViewImg: UIImageView!
-
-    let locationManager = CLLocationManager()
-    var latitude = 0.0
-    var longitude = 0.0
     var imageId: Int = 0
 
     var pinchGestureRecognizer = UIPinchGestureRecognizer()
@@ -58,6 +54,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     let imageKeyArray = ["sample/3_Hokkien_Mee.png", "sample/6_Ayam_Penyet.png", "sample/2_Roti_Prata.png", "sample/4_Chicken_Rice.png",
         "sample/5_Chicken_Chop.png", "sample/1_Satay.png"]
     var currentImageIndex = 0
+
+    //location service
+    let locationManager = CLLocationManager()
+    var latitude = 0.0
+    var longitude = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,42 +79,23 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         imagePicker.allowsEditing = false
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         imagePicker.navigationBar.isTranslucent = false
-//        loadingScreen.alpha = 0
         //setup location manager
-        if CLLocationManager.locationServicesEnabled() {
-            enableLocationServices()
-        } else {
-            print("Location services are not enabled")
-        }
         sessionManager.onViewWillAppear()
         sampleImagCollectionView.delegate = self
         sampleImagCollectionView.dataSource = self
         barcodeButton.setTitleColor(UIColor.lightGray, for: .disabled)
         sampleImagCollectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        //set up location manager
+        if CLLocationManager.locationServicesEnabled() {
+            enableLocationServices()
+        } else {
+            print("Location services are not enabled")
+        }
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
         //TODO camera zoom in & out according to pinch
         sessionManager.pinch(pinch: sender)
-    }
-
-    func enableLocationServices() {
-        locationManager.delegate = self
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            // Request when-in-use authorization initially
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-        case .restricted, .denied:
-            break
-        case .authorizedWhenInUse:
-            // Enable basic location features
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        case .authorizedAlways:
-            break
-        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -178,7 +160,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     func approveImage() {
         if !Reachability.isConnectedToNetwork() {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "No Internet Connection...")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.noInternetErrorMsg)
             return
         }
 //        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
@@ -213,7 +195,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     func postImageKeyToServer(imageKey: String, isUsingSample: Bool) {
         self.uploadPercentageLabel.text = "Retrieving recognition results..."
-        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: self.latitude, longitude: self.longitude, completion: { (resultList) in
+        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: latitude, longitude: longitude, completion: { (resultList) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true
 //            self.loadingScreen.alpha = 0
@@ -242,6 +224,25 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
             }
             self.hideReview()
         })
+    }
+
+    func enableLocationServices() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        case .restricted, .denied:
+            break
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        case .authorizedAlways:
+            break
+        }
     }
 
     @IBAction func rejectImage(_ sender: UIButton) {
@@ -427,12 +428,16 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             imagePicker.dismiss(animated: true, completion: nil)
             return
         }
-        showReview(image: image)
+        imagePicker.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.showReview(image: image)
+            self.approveImage()
+        }
 //        let imgData = UIImagePNGRepresentation(image)!
 //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
 //            // upload result and callback
 //        }
-        imagePicker.dismiss(animated: true, completion: nil)
+
     }
 }
 
@@ -451,6 +456,7 @@ extension CameraViewController {
         chosenImageView.contentMode = .scaleToFill
         chosenImageView.isHidden = false
         capturePhotoButton.showLoading()
+        capturePhotoButton.isEnabled = false
         capturePhotoButton.setImage(nil, for: .normal)
         selectionView.isHidden = true
 //        reviewImagePalette.isHidden = false
@@ -461,6 +467,7 @@ extension CameraViewController {
         capturePhotoButton.isHidden = false
         selectionView.isHidden = false
         capturePhotoButton.hideLoading()
+        capturePhotoButton.isEnabled = true
         capturePhotoButton.setImage(#imageLiteral(resourceName: "capture"), for: .normal)
 //        reviewImagePalette.isHidden = true
     }
@@ -476,18 +483,6 @@ extension CameraViewController {
         }
     }
 
-}
-
-extension CameraViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.latitude = (locations.last?.coordinate.latitude)!
-        self.longitude = (locations.last?.coordinate.longitude)!
-        locationManager.stopUpdatingLocation()
-    }
 }
 
 extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -521,4 +516,16 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: CGFloat(40), height: CGFloat(40))
     }
 
+}
+
+extension CameraViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.latitude = (locations.last?.coordinate.latitude)!
+        self.longitude = (locations.last?.coordinate.longitude)!
+        locationManager.stopUpdatingLocation()
+    }
 }

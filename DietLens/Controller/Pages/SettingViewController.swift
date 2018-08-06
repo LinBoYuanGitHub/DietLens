@@ -46,16 +46,10 @@ class SettingViewController: UIViewController {
     @IBAction func showFeedBackPage(_ sender: Any) {
         performSegue(withIdentifier: "toFeedBackPage", sender: nil)
     }
+
     @IBAction func logout(_ sender: Any) {
         AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Confirm to logout?", postiveText: "Confirm", negativeText: "Cancel") { (iSuccess) in
             if iSuccess {
-//                let preferences = UserDefaults.standard
-//                let token = preferences.string(forKey: PreferenceKey.tokenKey)
-//                if token == nil {
-//                    //no userId cannot Logout
-//                    return
-//                }
-
                 APIService.instance.logOut(completion: { (_) in
                         //signOut no matter request succeed or not
                     DispatchQueue.main.async {

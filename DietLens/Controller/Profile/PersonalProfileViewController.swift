@@ -16,7 +16,7 @@ class PersonalProfileViewController: UIViewController {
     var genderPickerView: UIPickerView!
     //profile entity list
     var profileSectionList = [profileSection]()
-    let genderList = ["male", "female", "others"]
+    let genderList = ["Male", "Female", "Others"]
     //profile
     var profile = UserProfile()
     let weightInputView = RulerInputView()
@@ -60,14 +60,14 @@ class PersonalProfileViewController: UIViewController {
         //first section
         let sectionHeader = profileSection()
         let avatar = ProfileEntity(profileName: "Avatar", profileValue: "", profileType: 0)
-        let userName = ProfileEntity(profileName: "Username", profileValue: "", profileType: 1)
+        let userName = ProfileEntity(profileName: "Nickname", profileValue: "", profileType: 1)
         let email = ProfileEntity(profileName: "Email", profileValue: "", profileType: 1)
         sectionHeader.profileList.append(avatar)
         sectionHeader.profileList.append(userName)
         sectionHeader.profileList.append(email)
         //second section
         let secondSectionHeader = profileSection()
-        secondSectionHeader.sectionHeaderText = "Your basic information"
+        secondSectionHeader.sectionHeaderText = "Your Basic Information"
         let genderEntity =  ProfileEntity(profileName: "Gender", profileValue: "", profileType: 1)
         let birthDayEntity = ProfileEntity(profileName: "Date of Birth", profileValue: "", profileType: 1)
         let weightEntity =  ProfileEntity(profileName: "Weight", profileValue: "", profileType: 1)
@@ -79,7 +79,7 @@ class PersonalProfileViewController: UIViewController {
         //third section
         let thirdSectionHeader = profileSection()
         thirdSectionHeader.sectionHeaderText = "Your Activity Level"
-        let activityLevelEntity =  ProfileEntity(profileName: "moderate exercise", profileValue: "", profileType: 2)
+        let activityLevelEntity =  ProfileEntity(profileName: "Moderate exercise", profileValue: "", profileType: 2)
         thirdSectionHeader.profileList.append(activityLevelEntity)
         //append all the header together
         profileSectionList.append(sectionHeader)
@@ -187,6 +187,13 @@ extension PersonalProfileViewController: UITextFieldDelegate {
             profile.name = textField.text!
         }
     }
+
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.cut(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
 }
 
 extension PersonalProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -208,7 +215,7 @@ extension PersonalProfileViewController: UIPickerViewDelegate, UIPickerViewDataS
         let indxPath = IndexPath(row: 0, section: 1)
         if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
             dateCell.inptText.text = genderList[row]
-            if genderList[row] == "male" {
+            if genderList[row] == "Male" {
                 profile.gender = 1
             } else {
                 profile.gender = 0
@@ -254,15 +261,22 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                 } else if indexPath.row == 0 && indexPath.section == 1 {
                     cell.inptText.inputView = genderPickerView
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Gender")
+                    cell.inptText.delegate = self
                     cell.inptText.placeholder = "Select Gender"
                     if profile.gender == 0 {
-                        cell.inptText.text = "female"
+                        cell.inptText.text = "Female"
+                        genderPickerView.selectRow(1, inComponent: 0, animated: false)
+                    } else if profile.gender == 1 {
+                        cell.inptText.text = "Male"
+                        genderPickerView.selectRow(0, inComponent: 0, animated: false)
                     } else {
-                        cell.inptText.text = "male"
+                        cell.inptText.text = "Others"
+                        genderPickerView.selectRow(2, inComponent: 0, animated: false)
                     }
                 } else if indexPath.row == 1 && indexPath.section == 1 {
                     cell.inptText.placeholder = "birthday"
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Date of Birth")
+                    cell.inptText.delegate = self
                     cell.inptText.inputView = birthDayPickerView
                     cell.inptText.text = profile.birthday
                 } else if indexPath.row == 2 && indexPath.section == 1 {
@@ -273,6 +287,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     weightInputView.delegate = self
                     weightInputView.rulerTag = weightRulerTag
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Weight")
+                    cell.inptText.delegate = self
                     cell.inptText.inputView = weightInputView
                     cell.inptText.placeholder = "input weight"
                     setAttributeText(textStr: "\(Int(profile.weight))kg", textField: cell.inptText)
@@ -284,6 +299,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     heightInputView.delegate = self
                     heightInputView.rulerTag = heightRulerTag
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Height")
+                    cell.inptText.delegate = self
                     cell.inptText.inputView = heightInputView
                     cell.inptText.placeholder = "input height"
                     setAttributeText(textStr: "\(Int(profile.height))cm", textField: cell.inptText)

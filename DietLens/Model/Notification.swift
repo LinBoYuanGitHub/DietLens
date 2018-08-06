@@ -20,4 +20,5 @@ struct NotificationModel {
     public var read: Bool = false
     public var dateReceived = Date()
     public var createTime = Date()
+    public var messageType = ""
 }
