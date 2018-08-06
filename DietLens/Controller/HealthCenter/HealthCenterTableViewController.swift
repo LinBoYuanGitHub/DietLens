@@ -15,6 +15,7 @@ class HealthCenterTableViewController: UIViewController {
     var recordName = ""
     //data type
     var recordList = [HealthCenterItem]()
+    @IBOutlet weak var emptyViewContainer: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,13 @@ class HealthCenterTableViewController: UIViewController {
         APIService.instance.getHealthLogByCategory(category: recordName) { (healthLogs) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if healthLogs == nil {
+                self.emptyViewContainer.isHidden = false
                 return
+            }
+            if healthLogs?.count == 0 {
+                 self.emptyViewContainer.isHidden = false
+            } else {
+                 self.emptyViewContainer.isHidden = true
             }
             self.recordList = healthLogs!
             self.healthCenterBarTable.reloadData()
