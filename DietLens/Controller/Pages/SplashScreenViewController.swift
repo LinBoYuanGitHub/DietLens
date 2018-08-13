@@ -16,7 +16,7 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let preferences = UserDefaults.standard
-        let introFlag = preferences.bool(forKey: FirstTimeFlag.isFirstTime_Login)
+        let introFlag = preferences.bool(forKey: FirstTimeFlag.isFirstTimeLogin)
         if introFlag {
             //to introduction page
             let token = preferences.string(forKey: PreferenceKey.tokenKey)
@@ -35,7 +35,7 @@ class SplashScreenViewController: UIViewController {
                  DispatchQueue.main.async {
                     self.present(dest, animated: true, completion: nil)
                 }
-                preferences.setValue(true, forKey: FirstTimeFlag.isFirstTime_Login)
+                preferences.setValue(true, forKey: FirstTimeFlag.isFirstTimeLogin)
             }
         }
     }

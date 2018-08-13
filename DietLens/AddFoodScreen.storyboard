@@ -3010,8 +3010,8 @@
                                     <rect key="frame" x="0.0" y="490" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjz-Lc-k2O">
-                                            <rect key="frame" x="45" y="11.666666666666666" width="72" height="22.333333333333336"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Side Dishes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vjz-Lc-k2O">
+                                            <rect key="frame" x="45.000000000000007" y="11.666666666666666" width="119.66666666666669" height="22.333333333333336"/>
                                             <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
                                             <color key="textColor" red="0.94901960784313721" green="0.25098039215686274" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -3395,7 +3395,7 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <image name="whiteCross" width="12" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Be-n0-7O7"/>
+        <segue reference="yJI-SH-g0Q"/>
         <segue reference="QYE-VL-YcU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

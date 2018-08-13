@@ -173,11 +173,13 @@ struct NotificationType {
 }
 
 struct FirstTimeFlag {
-    static let isFirstTime_Login = "isFirstTimeLogin" //show IntroductionPage
-    static let isFirstTime_View_AddMore = "isFirstTimeAddMore" //show addMore indication cover
-    static let isFirstTime_View_Home = "isFirstTimeViewHome" //show camera indication cover
-    static let isFirstTime_View_RecogResult = "isFirstTimeViewRecogResult" //show recogResult indication cover
-    static let shouldPopUpProfiling_Dialog = "shouldPopUpProfilingDialog" //should pop up profiling dialog
+    static let isFirstTimeLogin = "isFirstTimeLogin" //show IntroductionPage
+    static let isFirstTimeViewAddMore = "isFirstTimeAddMore" //show addMore coach mark
+    static let isNotFirstTimeViewHome = "isFirstTimeViewHome" //show camera coach mark
+    static let isFirstTimeViewRecogResult = "isFirstTimeViewRecogResult" //show recogResult coach mark
+    static let isNotFirstTimeViewMixFood = "isFirstTimeViewMixFood" //show mix food coach mark
+    static let shouldPopUpProfilingDialog = "shouldPopUpProfilingDialog" //should pop up profiling dialog
+
 }
 
 struct MessageType {

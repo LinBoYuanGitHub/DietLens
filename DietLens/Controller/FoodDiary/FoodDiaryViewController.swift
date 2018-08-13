@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Instructions
 
 class FoodDiaryViewController: UIViewController {
 
@@ -28,11 +29,14 @@ class FoodDiaryViewController: UIViewController {
     var userFoodImage: UIImage?
     var imageKey: String?
     var isUpdate: Bool = false //from foodCalendar then update
+    var isMixVeg: Bool = false //mix veg
     //mealType data
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
     var isSetMealByTimeRequired: Bool = false
     @IBOutlet weak var animationViewLeading: NSLayoutConstraint!
+    //add coachMarks
+    let coachMarksController = CoachMarksController()
 
     override func viewDidLoad() {
         mealCollectionView.delegate = self
@@ -49,6 +53,9 @@ class FoodDiaryViewController: UIViewController {
         let addMoreGesture = UITapGestureRecognizer(target: self, action: #selector(onAddMoreClick))
         addMore.addGestureRecognizer(addMoreGesture)
         loadImage()
+        //set instruction label dataSource
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
     }
 
     func loadImage() {
@@ -72,6 +79,13 @@ class FoodDiaryViewController: UIViewController {
         UIView.animate(withDuration: 0.1, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.animationViewLeading.constant = destX! + CGFloat(10)
         })
+        //show markView
+        let preference = UserDefaults.standard
+        let showCoachMarkFlag = preference.bool(forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
+        if isMixVeg && showCoachMarkFlag {
+            self.coachMarksController.start(on: self)
+            preference.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
+        }
     }
 
     func setCorrectMealType() {
@@ -340,10 +354,8 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
                 self.foodDiaryEntity.dietItems[indexPath.row].id = id
                 self.foodDiaryEntity.dietItems[indexPath.row].displayUnit = displayUnit
                 self.foodDiaryEntity.dietItems[indexPath.row].quantity = quantity
-                for (index, portion) in dietItem!.portionInfo.enumerated() {
-                    if portion.sizeUnit == displayUnit {
+                for (index, portion) in dietItem!.portionInfo.enumerated() where portion.sizeUnit == displayUnit {
                         self.foodDiaryEntity.dietItems[indexPath.row].selectedPos = index
-                    }
                 }
                 DispatchQueue.main.async {
                     self.jumpToFoodInfoPage(dietEntity: self.foodDiaryEntity.dietItems[indexPath.row])
@@ -383,9 +395,27 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-extension FoodDiaryViewController {
-    //toTextSearchPage -> addmore, save to foodDiary, detail page to edit
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//    }
+extension FoodDiaryViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+//        coachViews.bodyView.nextLabel.textColor = UIColor.white
+//        coachViews.bodyView.hintLabel.textColor = UIColor.white
+//        let dietlensRed =  UIColor(red: 242/255, green: 64/255, blue: 93/255, alpha: 1.0)
+//        coachViews.bodyView.tintColor = dietlensRed
+//        coachViews.bodyView.hintLabel.backgroundColor = dietlensRed
+//        coachViews.bodyView.nextLabel.backgroundColor = dietlensRed
+        coachViews.bodyView.nextLabel.text = "Got it"
+        coachViews.bodyView.hintLabel.text = "Add side dishes to complete your meal"
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        return coachMarksController.helper.makeCoachMark(for: foodTableView.tableFooterView)
+    }
+
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+
 }

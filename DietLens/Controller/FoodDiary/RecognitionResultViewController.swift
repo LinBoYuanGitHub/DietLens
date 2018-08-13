@@ -154,6 +154,7 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
             dest.userFoodImage = self.cameraImage
             dest.imageKey = self.imageKey
+            dest.isMixVeg = true
             dest.isUpdate = false
             //mealTime & mealType
             dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)

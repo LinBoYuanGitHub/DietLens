@@ -43,6 +43,7 @@ target 'DietLens' do
   pod 'FacebookLogin'
   #sky floating label
   pod 'SkyFloatingLabelTextField'
+  pod 'Instructions', '~> 1.2.0'
   
 
   target 'DietLensTests' do

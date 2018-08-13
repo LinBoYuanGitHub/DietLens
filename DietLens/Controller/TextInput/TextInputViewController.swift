@@ -97,6 +97,12 @@ class TextInputViewController: UIViewController {
         } else {
             print("Location services are not enabled")
         }
+        self.emptyResultView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+    }
+
+    @objc func handleTap() {
+        let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
+        self.present(dest, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -196,20 +202,6 @@ class TextInputViewController: UIViewController {
         }) { (nextPageLink) in
             self.nextPageLink = nextPageLink!
         }
-//        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!) { (textResults) in
-//            DispatchQueue.main.async {
-//                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
-//            }
-//            if textResults == nil {
-//                self.searchResultList.removeAll()
-//                self.emptyView.isHidden = false
-//                self.textSearchTable.reloadData()
-//                return
-//            }
-//            self.emptyView.isHidden = true
-//            self.searchResultList = textResults!
-//            self.textSearchTable.reloadData()
-//        }
     }
 
     func requestForDietInformation(foodEntity: TextSearchSuggestionEntity) {

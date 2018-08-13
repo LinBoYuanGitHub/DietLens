@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import BAFluidView
+import Instructions
 
 class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
@@ -18,6 +19,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     @IBOutlet weak var cpfCollectionView: UICollectionView!
     @IBOutlet weak var calorieDisplayContainer: UIView!
     @IBOutlet weak var cpfContainer: UIView!
+    @IBOutlet weak var homePlusButton: UIButton!
 
     @IBOutlet weak var totalCalorie: UILabel!
     @IBOutlet weak var intakenCalorie: UILabel!
@@ -40,6 +42,9 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     var shouldRefreshMainPageNutrition = true
 
+    //add coachMarks
+    let coachMarksController = CoachMarksController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //delegate for new table view
@@ -54,8 +59,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //for sideMenu toggle leftView
         NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
-        //setUp BAFluid view
-//      calorieFluidView = BAFluidView(frame: self.calorieContainer.frame, startElevation: 0)
         calorieFluidView = BAFluidView(frame: CGRect(x: 0, y: 0, width: calorieContainer.frame.width, height: calorieContainer.frame.height), startElevation: 0)
         calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.6)
         calorieFluidView.strokeColor = UIColor.white
@@ -64,6 +67,9 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         calorieFluidView.minAmplitude = 4
         calorieFluidView.fillDuration = 1
         calorieContainer.addSubview(calorieFluidView)
+        //set instruction label dataSource
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
     }
 
     //assemble the article & event list and display
@@ -244,17 +250,26 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         super.viewDidAppear(animated)
         newsFeedTable.reloadData()
         let preferences = UserDefaults.standard
-        let shouldPopUpFlag = preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfiling_Dialog)
+        let shouldPopUpFlag = !preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
         if shouldPopUpFlag {
             popUpDialog()
+            preferences.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
         }
+        //show markView for tap
+//        let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+//        if shouldShowCoachMark {
+//            self.coachMarksController.start(on: self)
+//            preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+//        }
     }
 
     //popUp dialog
     func popUpDialog() {
-        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "should filling the profile page", postiveText: "To Profile Page", negativeText: "Stay At Home Page") { (isPositive) in
+        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Please filling the profile page", postiveText: "To Profile Page", negativeText: "Stay At Home Page") { (isPositive) in
             if isPositive {
-
+//                self.sideMenuController?.performSegue(withIdentifier: "MenutoProfile", sender: self)
+                let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "personalProfileNaVVC")
+                self.present(dest, animated: true, completion: nil)
             }
         }
     }
@@ -460,6 +475,25 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(110), height: CGFloat(60))
+    }
+
+}
+
+extension HomeViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        coachViews.bodyView.nextLabel.text = "Got it"
+        coachViews.bodyView.hintLabel.text = " Tap to start "
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        return coachMarksController.helper.makeCoachMark(for: homePlusButton)
+    }
+
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
     }
 
 }
