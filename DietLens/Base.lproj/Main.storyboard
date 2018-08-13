@@ -3760,7 +3760,7 @@ Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI
                                     <constraint firstAttribute="height" constant="25" id="Ce9-tg-VLW"/>
                                 </constraints>
                             </imageView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="9EM-A1-ARs">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.5" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="9EM-A1-ARs">
                                 <rect key="frame" x="14" y="101" width="292" height="31"/>
                                 <connections>
                                     <action selector="onSliderValueChanged:" destination="Hfh-14-9lB" eventType="valueChanged" id="RYc-gF-IOY"/>
@@ -5547,26 +5547,26 @@ What is it?</string>
                                 </prototypes>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRQ-eV-RXG" userLabel="EmptyViewContainer">
-                                <rect key="frame" x="39" y="215.5" width="243" height="114"/>
+                                <rect key="frame" x="32.5" y="183" width="256.5" height="114"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HealthCenterEmptyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="uc2-NH-n37">
-                                        <rect key="frame" x="96" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="102.5" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="H4a-jO-ppy"/>
                                             <constraint firstAttribute="width" constant="50" id="o25-TJ-R4i"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no notes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqz-Ro-CCE">
-                                        <rect key="frame" x="19" y="53" width="205" height="25.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no records here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqz-Ro-CCE">
+                                        <rect key="frame" x="18" y="53" width="220" height="25.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="205" id="C30-SN-025"/>
+                                            <constraint firstAttribute="width" constant="220" id="C30-SN-025"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
                                         <color key="textColor" red="0.77647058823529413" green="0.77647058823529413" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap &quot;Add&quot; on top to add a new note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L61-Yt-T0k">
-                                        <rect key="frame" x="0.0" y="81.5" width="242.5" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap &quot;Add&quot; on top to add a new record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L61-Yt-T0k">
+                                        <rect key="frame" x="0.0" y="81.5" width="256" height="20"/>
                                         <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="14"/>
                                         <color key="textColor" red="0.77647058823529413" green="0.77647058823529413" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -5588,7 +5588,7 @@ What is it?</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Sh2-xq-ed4" firstAttribute="trailing" secondItem="L15-S9-OfN" secondAttribute="trailing" constant="12" id="AX9-vt-eS7"/>
-                            <constraint firstItem="PRQ-eV-RXG" firstAttribute="centerY" secondItem="2zV-hv-NfX" secondAttribute="centerY" constant="32" id="JOi-y4-3C4"/>
+                            <constraint firstItem="PRQ-eV-RXG" firstAttribute="centerY" secondItem="2zV-hv-NfX" secondAttribute="centerY" id="JOi-y4-3C4"/>
                             <constraint firstItem="PRQ-eV-RXG" firstAttribute="centerX" secondItem="L15-S9-OfN" secondAttribute="centerX" id="MbC-mo-Cy5"/>
                             <constraint firstItem="L15-S9-OfN" firstAttribute="top" secondItem="Sh2-xq-ed4" secondAttribute="top" constant="16" id="mkg-2K-ooP"/>
                             <constraint firstItem="Sh2-xq-ed4" firstAttribute="bottom" secondItem="L15-S9-OfN" secondAttribute="bottom" id="pwy-Qf-p3x"/>
@@ -6315,7 +6315,7 @@ What is it?</string>
                                     <constraint firstAttribute="height" constant="25" id="xpR-Rd-ryf"/>
                                 </constraints>
                             </imageView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="W3p-tu-R4b">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="W3p-tu-R4b">
                                 <rect key="frame" x="14" y="211.5" width="292" height="31"/>
                                 <connections>
                                     <action selector="onSliderValueChanged:" destination="nkg-9Q-jL3" eventType="valueChanged" id="brL-CR-ZV3"/>

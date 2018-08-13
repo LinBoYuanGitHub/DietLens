@@ -116,6 +116,9 @@ class NotificationsViewController: UIViewController {
             if let dest = segue.destination as? NotificationDetailViewController {
                 dest.notificationModel = notificationData
             }
+            if let dest = segue.destination as? SingleNotificationViewController {
+                dest.notification = notificationData
+            }
         }
     }
     /*

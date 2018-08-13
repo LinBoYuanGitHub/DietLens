@@ -23,6 +23,9 @@ class HealthCenterDataManager {
         glucose.itemName = "glucose"
         glucose.type = "1"
         var mood = assembleSingleHealthCenterData(jsonObj: jsonObj["mood"])
+        if jsonObj["mood"].count == 0 {
+            mood.value = -1
+        }
         mood.itemName = "mood"
         mood.type = "2"
         //append list

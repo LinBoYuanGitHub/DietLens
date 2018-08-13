@@ -104,6 +104,8 @@ class TextInputViewController: UIViewController {
         //regist notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+        //set animation view position
+        self.animationViewLeading.constant = 50
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -350,10 +352,14 @@ extension TextInputViewController: IndicatorInfoProvider {
 
 }
 
-extension TextInputViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension TextInputViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //All,NUS Canteen
         return 2
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.size.width/2, height: 50)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -115,32 +115,24 @@ class LoginViewController: UIViewController {
                         preferences.setValue(facebookUserId, forKey: "facebookId")
                         preferences.setValue(facebookUserName, forKey: "nickname")
                         //validate FacebookId
-                        APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: facebookUserId as! String, completion: { (isSuccess, _) in
+                        AlertMessageHelper.showLoadingDialog(targetController: self)
+                        APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: facebookUserId as! String, completion: { (isSuccess, isNewUser) in
+                            AlertMessageHelper.dismissLoadingDialog(targetController: self)
                             if isSuccess {
-                                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
-                                    var profile = UserProfile()
-                                    if let name = facebookUserName as? String {
-                                        profile.name = name
+                                if isNewUser {
+                                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
+                                        var profile = UserProfile()
+                                        if let name = facebookUserName as? String {
+                                            profile.name = name
+                                        }
+                                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                                            destVC.profile = profile
+                                            self.present(dest, animated: true, completion: nil)
+                                        }
                                     }
-                                    if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
-                                        destVC.profile = profile
-                                        self.present(dest, animated: true, completion: nil)
-                                    }
+                                } else {
+                                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
                                 }
-//                                if isNewUser {
-//                                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
-//                                        var profile = UserProfile()
-//                                        if let name = facebookUserName as? String {
-//                                            profile.name = name
-//                                        }
-//                                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
-//                                            destVC.profile = profile
-//                                            self.present(dest, animated: true, completion: nil)
-//                                        }
-//                                    }
-//                                } else {
-//                                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
-//                                }
                             }
                         })
                         print("Graph Request Succeeded: \(response)")

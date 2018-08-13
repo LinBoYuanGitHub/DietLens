@@ -53,7 +53,11 @@ class HealthCenterMainCell: UITableViewCell {
             itemName.text = "Mood"
             icon.image = #imageLiteral(resourceName: "healthCenter_mood")
             let index = Int(latestValue)
-            valueLabel.text = HealthCenterConstants.moodList[index]
+            if index == -1 {
+                valueLabel.text = "----"
+            } else {
+                 valueLabel.text = HealthCenterConstants.moodList[index]
+            }
             container.backgroundColor = UIColor(red: 255/255, green: 183/255, blue: 33/255, alpha: 1)
         default:
             break
