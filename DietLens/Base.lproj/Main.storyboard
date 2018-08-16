@@ -1629,7 +1629,7 @@ Click add to record food~</string>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cpfCollectionCell" id="ARY-Cc-iDR" customClass="homePageCPFCell" customModule="DietLens" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cpfCollectionCell" id="ARY-Cc-iDR" customClass="HomePageCPFCell" customModule="DietLens" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="1" width="110" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -3467,9 +3467,9 @@ Complete your profile for a more accurate recommendation.
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXy-W6-8yf">
                                 <rect key="frame" x="16" y="285" width="288" height="131"/>
-                                <string key="text">DietLens is a lifestyle mobile application that enables users to track and log the nutritional values of their food intake coupled with exercise patterns using HealthKit  to assist them in achieving better overall well-being. Supported by a various deep learning technology and extensive food database, this mobile app provides accurate nutrient values of actual food consumed based on serving sizes.
+                                <mutableString key="text">DietLens is a lifestyle mobile application that enables users to track and log the nutritional values of their food intake coupled with exercise patterns using HealthKit to assist them in achieving better overall well-being. Supported by a various deep learning technology and extensive food database, this mobile app provides accurate nutrient values of actual food consumed based on serving sizes.
 
-Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI assistant to improve your overall-well-being by promoting healthy eating habits, advocating active lifestyle, and influencing positive behavioural changes.</string>
+Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI assistant to improve your overall-well-being by promoting healthy eating habits, advocating active lifestyle, and influencing positive behavioural changes.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -7104,7 +7104,7 @@ Your recommended daily calorie intake is:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="It3-Hy-xAU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5892" y="-2643.3283358320841"/>
+            <point key="canvasLocation" x="5949" y="-2711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7H3-5d-Cas">
@@ -7416,7 +7416,7 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <segue reference="E0y-CB-0Z7"/>
         <segue reference="sSF-cA-KEC"/>
         <segue reference="L1g-pL-wT5"/>
-        <segue reference="HbX-Ud-iTQ"/>
+        <segue reference="Tel-Bb-wis"/>
         <segue reference="NAD-8N-HRw"/>
     </inferredMetricsTieBreakers>
 </document>

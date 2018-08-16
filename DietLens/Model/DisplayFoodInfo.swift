@@ -21,4 +21,6 @@ struct DisplayFoodInfo {
     var calories: Double = 0.0
     var unit: String = "100g"
     var isMultiDish: Bool = false
+    var location: String = ""
+    var stall: String = ""
 }

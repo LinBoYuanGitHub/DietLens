@@ -15,7 +15,7 @@ class PersonalProfileViewController: UIViewController {
     var birthDayPickerView: UIDatePicker!
     var genderPickerView: UIPickerView!
     //profile entity list
-    var profileSectionList = [profileSection]()
+    var profileSectionList = [ProfileSection]()
     let genderList = ["Male", "Female", "Others"]
     //profile
     var profile = UserProfile()
@@ -58,7 +58,7 @@ class PersonalProfileViewController: UIViewController {
 
     func initProfileEntity() {
         //first section
-        let sectionHeader = profileSection()
+        let sectionHeader = ProfileSection()
         let avatar = ProfileEntity(profileName: "Avatar", profileValue: "", profileType: 0)
         let userName = ProfileEntity(profileName: "Nickname", profileValue: "", profileType: 1)
         let email = ProfileEntity(profileName: "Email", profileValue: "", profileType: 1)
@@ -66,7 +66,7 @@ class PersonalProfileViewController: UIViewController {
         sectionHeader.profileList.append(userName)
         sectionHeader.profileList.append(email)
         //second section
-        let secondSectionHeader = profileSection()
+        let secondSectionHeader = ProfileSection()
         secondSectionHeader.sectionHeaderText = "Your Basic Information"
         let genderEntity =  ProfileEntity(profileName: "Gender", profileValue: "", profileType: 1)
         let birthDayEntity = ProfileEntity(profileName: "Date of Birth", profileValue: "", profileType: 1)
@@ -77,7 +77,7 @@ class PersonalProfileViewController: UIViewController {
         secondSectionHeader.profileList.append(weightEntity)
         secondSectionHeader.profileList.append(heightEntity)
         //third section
-        let thirdSectionHeader = profileSection()
+        let thirdSectionHeader = ProfileSection()
         thirdSectionHeader.sectionHeaderText = "Your Activity Level"
         let activityLevelEntity =  ProfileEntity(profileName: "Moderate exercise", profileValue: "", profileType: 2)
         thirdSectionHeader.profileList.append(activityLevelEntity)
@@ -96,7 +96,9 @@ class PersonalProfileViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         self.navigationController?.navigationBar.isHidden = false
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as?  [NSAttributedStringKey: Any] {
+            self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
+        }
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
@@ -110,11 +112,20 @@ class PersonalProfileViewController: UIViewController {
         birthDayPickerView = UIDatePicker()
         birthDayPickerView.datePickerMode = .date
         birthDayPickerView.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        setDateLimitation()
         genderPickerView = UIPickerView()
         genderPickerView.showsSelectionIndicator = true
         genderPickerView.accessibilityViewIsModal = true
         genderPickerView.dataSource = self
         genderPickerView.delegate = self
+    }
+
+    func setDateLimitation() {
+        var dayComp = DateComponents()
+        dayComp.year = -200
+        let minDate = Calendar.current.date(byAdding: dayComp, to: Date())
+        birthDayPickerView.maximumDate = Date()
+        birthDayPickerView.minimumDate = minDate
     }
 
     func setUpPickerToolBar(text: String) -> UIToolbar {

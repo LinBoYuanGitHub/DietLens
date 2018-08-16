@@ -67,11 +67,12 @@ extension HealthCenterMainViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //jump to healthCenterTableViewVC
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HealthCenterTableVC")
-            as? HealthCenterTableViewController {
+            as? HealthCenterTableViewController, let cell = tableView.cellForRow(at: indexPath) as? HealthCenterMainCell {
             tableView.deselectRow(at: indexPath, animated: true)
             let entity = healthCenterItemList[indexPath.row]
             dest.recordType  = entity.type
             dest.recordName = entity.itemName
+            dest.titleName = cell.itemName!.text!
             self.navigationController?.pushViewController(dest, animated: true)
         }
     }

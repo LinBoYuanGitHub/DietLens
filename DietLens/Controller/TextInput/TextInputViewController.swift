@@ -261,13 +261,20 @@ extension TextInputViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
-            return UITableViewCell()
-        }
         let result  = searchResultList[indexPath.row]
-        //cell to adapt the searchResult
-        cell.setUpCell(textResultEntity: result)
-        return cell
+        if result.location.isEmpty && result.location.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
+                return UITableViewCell()
+            }
+            cell.setUpCell(textResultEntity: result)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "foodSearchLocationCell")  as? SearchResultLocationCell else {
+                return UITableViewCell()
+            }
+            cell.setUpCell(textResultEntity: result)
+            return cell
+        }
     }
 
 }

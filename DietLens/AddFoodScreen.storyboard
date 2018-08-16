@@ -1564,6 +1564,68 @@
                                             <outlet property="textLabel" destination="8cX-nB-KIv" id="xlH-Pu-h6m"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodSearchLocationCell" rowHeight="52" id="7iT-yY-kNP" userLabel="TextSearchLocationResultCell" customClass="SearchResultLocationCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="145" width="414" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7iT-yY-kNP" id="B3v-tZ-Ouu">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u1C-2z-1kC">
+                                                    <rect key="frame" x="16" y="6" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="4RI-62-Bfc"/>
+                                                        <constraint firstAttribute="width" constant="40" id="qKM-hF-kuY"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="foodName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnO-a5-Cx7">
+                                                    <rect key="frame" x="60.000000000000007" y="6" width="67.666666666666686" height="20"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                    <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="calorie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwu-uf-Q8X">
+                                                    <rect key="frame" x="347" y="15" width="51" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpL-ee-V91" userLabel="location">
+                                                    <rect key="frame" x="60" y="26" width="51.666666666666657" height="19.666666666666671"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                    <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycx-3w-nG8" userLabel="SeperatorLine">
+                                                    <rect key="frame" x="0.0" y="48" width="414" height="4"/>
+                                                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="4" id="5ev-7g-NrA"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="u1C-2z-1kC" firstAttribute="leading" secondItem="B3v-tZ-Ouu" secondAttribute="leading" constant="16" id="3ZI-UP-kus"/>
+                                                <constraint firstItem="VpL-ee-V91" firstAttribute="top" secondItem="B3v-tZ-Ouu" secondAttribute="centerY" id="5Rb-Th-A24"/>
+                                                <constraint firstItem="ycx-3w-nG8" firstAttribute="width" secondItem="B3v-tZ-Ouu" secondAttribute="width" id="6g8-8R-x3K"/>
+                                                <constraint firstItem="vnO-a5-Cx7" firstAttribute="bottom" secondItem="B3v-tZ-Ouu" secondAttribute="centerY" id="7dK-hR-9xi"/>
+                                                <constraint firstAttribute="bottom" secondItem="ycx-3w-nG8" secondAttribute="bottom" id="A4y-4i-QdR"/>
+                                                <constraint firstItem="VpL-ee-V91" firstAttribute="leading" secondItem="u1C-2z-1kC" secondAttribute="trailing" constant="4" id="Azc-px-TZa"/>
+                                                <constraint firstItem="ycx-3w-nG8" firstAttribute="centerX" secondItem="B3v-tZ-Ouu" secondAttribute="centerX" id="Lg8-70-h5L"/>
+                                                <constraint firstItem="cwu-uf-Q8X" firstAttribute="centerY" secondItem="B3v-tZ-Ouu" secondAttribute="centerY" id="NPe-i5-fCm"/>
+                                                <constraint firstAttribute="trailing" secondItem="cwu-uf-Q8X" secondAttribute="trailing" constant="16" id="XdB-nV-pQZ"/>
+                                                <constraint firstItem="u1C-2z-1kC" firstAttribute="centerY" secondItem="B3v-tZ-Ouu" secondAttribute="centerY" id="ZE9-rV-u2Y"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VpL-ee-V91" secondAttribute="trailing" constant="8" id="l6Y-K2-uSS"/>
+                                                <constraint firstItem="vnO-a5-Cx7" firstAttribute="leading" secondItem="u1C-2z-1kC" secondAttribute="trailing" constant="4" id="pxg-MW-fte"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="foodCalorie" destination="cwu-uf-Q8X" id="CQ8-RY-UuR"/>
+                                            <outlet property="foodName" destination="vnO-a5-Cx7" id="EIN-W8-n7t"/>
+                                            <outlet property="foodSampleImage" destination="u1C-2z-1kC" id="fbE-9L-dLt"/>
+                                            <outlet property="locationLabel" destination="VpL-ee-V91" id="3d1-AF-G2C"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gah-VM-mjj" userLabel="Loading View">
@@ -2198,9 +2260,73 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="calorieLabel" destination="Sub-Z1-XWh" id="N4b-xn-5ag"/>
+                                            <outlet property="foodNameCenterY" destination="LH7-be-OGt" id="s7E-Mh-52j"/>
                                             <outlet property="foodNameLabel" destination="tdU-4p-DCv" id="xmM-b3-e1d"/>
                                             <outlet property="thumbnailImage" destination="ueM-ed-SSy" id="r9x-z7-hZu"/>
                                             <outlet property="unitLabel" destination="Yao-TO-fZz" id="4Fh-TU-WVZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recognitonLocationResultCell" rowHeight="52" id="iJ7-zI-seP" userLabel="recognitonLocationResultCell" customClass="RecognitonLocationResultCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="80" width="414" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iJ7-zI-seP" id="SxG-2u-Bje">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="51.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HYn-0v-8ty">
+                                                    <rect key="frame" x="16" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="PUh-xt-kTD"/>
+                                                        <constraint firstAttribute="width" constant="40" id="mK0-1d-g1a"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FoodName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzN-wC-Ycs">
+                                                    <rect key="frame" x="59.999999999999993" y="6" width="70.333333333333314" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="zR2-iG-vzd"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                    <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="384.0  Kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMD-PZ-05e">
+                                                    <rect key="frame" x="322.66666666666669" y="6" width="75.333333333333314" height="20"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                    <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100g" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGa-fq-51e">
+                                                    <rect key="frame" x="371.66666666666669" y="26" width="26.333333333333314" height="17"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
+                                                    <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-hp-gTk">
+                                                    <rect key="frame" x="60" y="26" width="52.666666666666657" height="18.333333333333329"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
+                                                    <color key="textColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HYn-0v-8ty" firstAttribute="centerY" secondItem="SxG-2u-Bje" secondAttribute="centerY" id="17A-Y1-IdQ"/>
+                                                <constraint firstItem="HYn-0v-8ty" firstAttribute="leading" secondItem="SxG-2u-Bje" secondAttribute="leading" constant="16" id="4Dm-Ey-qRe"/>
+                                                <constraint firstItem="uzN-wC-Ycs" firstAttribute="leading" secondItem="HYn-0v-8ty" secondAttribute="trailing" constant="4" id="838-z1-hfq"/>
+                                                <constraint firstItem="GUo-hp-gTk" firstAttribute="top" secondItem="SxG-2u-Bje" secondAttribute="centerY" id="9GO-do-rqN"/>
+                                                <constraint firstItem="GUo-hp-gTk" firstAttribute="leading" secondItem="HYn-0v-8ty" secondAttribute="trailing" constant="4" id="FNZ-nX-jza"/>
+                                                <constraint firstAttribute="trailing" secondItem="kGa-fq-51e" secondAttribute="trailing" constant="16" id="Ofw-US-Itf"/>
+                                                <constraint firstItem="kGa-fq-51e" firstAttribute="top" secondItem="SxG-2u-Bje" secondAttribute="centerY" id="dVp-hw-rdl"/>
+                                                <constraint firstItem="uzN-wC-Ycs" firstAttribute="bottom" secondItem="SxG-2u-Bje" secondAttribute="centerY" id="dg8-y9-jgQ"/>
+                                                <constraint firstItem="HMD-PZ-05e" firstAttribute="bottom" secondItem="SxG-2u-Bje" secondAttribute="centerY" id="pw1-Ry-Y9I"/>
+                                                <constraint firstAttribute="trailing" secondItem="HMD-PZ-05e" secondAttribute="trailing" constant="16" id="uq9-v6-GK1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="calorieLabel" destination="HMD-PZ-05e" id="r6h-9O-hWe"/>
+                                            <outlet property="foodNameLabel" destination="uzN-wC-Ycs" id="B1a-Ov-t1q"/>
+                                            <outlet property="locationLabel" destination="GUo-hp-gTk" id="fUr-gB-rex"/>
+                                            <outlet property="thumbnailImage" destination="HYn-0v-8ty" id="yyx-E9-PBr"/>
+                                            <outlet property="unitLabel" destination="kGa-fq-51e" id="gcR-I3-2LV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3395,7 +3521,7 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <image name="whiteCross" width="12" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yJI-SH-g0Q"/>
+        <segue reference="4Be-n0-7O7"/>
         <segue reference="QYE-VL-YcU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -39,6 +39,10 @@ class RegistrationFinishViewController: UIViewController {
     }
 
     @IBAction func onRegistrationBtnClicked(_ sender: Any) {
+        //set registration profile filling flag to true
+        let preference = UserDefaults.standard
+//        preference.set(<#T##value: Any?##Any?#>, forKey: FirstTimeFlag.shouldPopUpProfilingDialo)
+        preference.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
         self.present(viewController, animated: true, completion: nil)

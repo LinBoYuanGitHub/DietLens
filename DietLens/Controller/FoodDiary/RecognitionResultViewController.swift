@@ -133,11 +133,19 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recognitonResultCell") as? RecognitionResultTableCell
+
         let entity = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
-        let calorieValue = String(Int(entity.calories))+StringConstants.UIString.calorieUnit
-        cell?.setUpCell(foodName: entity.displayName, imageUrl: entity.exampleImgUrl, calorieText: calorieValue, unitText: entity.unit)
-        return cell!
+        if entity.location.isEmpty && entity.stall.isEmpty {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recognitonResultCell") as? RecognitionResultTableCell
+            let calorieValue = String(Int(entity.calories))+StringConstants.UIString.calorieUnit
+            cell?.setUpCell(foodName: entity.displayName, imageUrl: entity.exampleImgUrl, calorieText: calorieValue, unitText: entity.unit)
+            return cell!
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recognitonLocationResultCell") as? RecognitonLocationResultCell
+            let calorieValue = String(Int(entity.calories))+StringConstants.UIString.calorieUnit
+            cell?.setUpCell(foodName: entity.displayName, imageUrl: entity.exampleImgUrl, calorieText: calorieValue, locationText: entity.location)
+            return cell!
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

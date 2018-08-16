@@ -139,7 +139,9 @@ class FoodDiaryViewController: UIViewController {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as?  [NSAttributedStringKey: Any] {
+             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
+        }
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = false

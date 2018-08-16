@@ -13,6 +13,7 @@ class HealthCenterTableViewController: UIViewController {
     //data passing part
     var recordType = ""
     var recordName = ""
+    var titleName = ""
     //data type
     var recordList = [HealthCenterItem]()
     @IBOutlet weak var emptyViewContainer: UIView!
@@ -49,7 +50,7 @@ class HealthCenterTableViewController: UIViewController {
         //disable sidebarMenu effort
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
         //add record name
-        self.navigationItem.title = recordName
+        self.navigationItem.title = titleName
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))

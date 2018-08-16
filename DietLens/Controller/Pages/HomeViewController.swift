@@ -132,106 +132,46 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         switch position {
         case 0:
             //home
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DietLens") as? HomeViewController {
-                if let navigator = self.navigationController {
-                    if navigator.viewControllers.contains(where: {
-                        return $0 is HomeViewController
-                    }) {
-                        for viewController in (self.navigationController?.viewControllers)! {
-                            if let homeVC = viewController as? HomeViewController {
-                                DispatchQueue.main.async {
-                                    navigator.popToViewController(homeVC, animated: false)
-                                }
-                            }
-                        }
-                    } else {
-                        navigator.pushViewController(dest, animated: false)
-                    }
-                }
-            }
+            jumpToDestPage(identifyId: "DietLens", mType: HomeViewController.self)
         case 1:
             //to food diary page
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
-                if let navigator = self.navigationController {
-                    if navigator.viewControllers.contains(where: {
-                        return $0 is FoodDiaryHistoryViewController
-                    }) {
-                        for viewController in (self.navigationController?.viewControllers)! {
-                            if let targetVC = viewController as? FoodDiaryHistoryViewController {
-                                DispatchQueue.main.async {
-                                    navigator.popToViewController(targetVC, animated: false)
-                                }
-                            }
-                        }
-                    } else {
-                        navigator.pushViewController(dest, animated: false)
-                    }
-                }
-            }
+            jumpToDestPage(identifyId: "FoodDiaryHistoryVC", mType: FoodDiaryHistoryViewController.self)
         case 2:
             //to step counter page
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC") as? StepCounterViewController {
-                if let navigator = self.navigationController {
-                    if navigator.viewControllers.contains(where: {
-                        return $0 is StepCounterViewController
-                    }) {
-                        for viewController in (self.navigationController?.viewControllers)! {
-                            if let targetVC = viewController as? StepCounterViewController {
-                                DispatchQueue.main.async {
-                                    navigator.popToViewController(targetVC, animated: false)
-                                }
-                            }
-                        }
-                    } else {
-                        navigator.pushViewController(dest, animated: false)
-                    }
-                }
-            }
+            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
         case 3:
             //to healthCenter page
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "healthCenterVC") as? HealthCenterMainViewController {
-                if let navigator = self.navigationController {
-                    if navigator.viewControllers.contains(where: {
-                        return $0 is HealthCenterMainViewController
-                    }) {
-                        for viewController in (self.navigationController?.viewControllers)! {
-                            if let targetVC = viewController as? HealthCenterMainViewController {
-                                DispatchQueue.main.async {
-                                    navigator.popToViewController(targetVC, animated: false)
-                                }
-                            }
-                        }
-                    } else {
-                        navigator.pushViewController(dest, animated: false)
-                    }
-                }
-            }
+            jumpToDestPage(identifyId: "healthCenterVC", mType: HealthCenterMainViewController.self)
         case 4:
             //to setting page
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsPage") as? SettingViewController {
-                if let navigator = self.navigationController {
-                    if navigator.viewControllers.contains(where: {
-                        return $0 is SettingViewController
-                    }) {
-                        for viewController in (self.navigationController?.viewControllers)! {
-                            if let targetVC = viewController as? SettingViewController {
-                                DispatchQueue.main.async {
-                                    navigator.popToViewController(targetVC, animated: false)
-                                }
-                            }
-                        }
-                    } else {
-                        navigator.pushViewController(dest, animated: false)
-                    }
-                }
-            }
+            jumpToDestPage(identifyId: "SettingsPage", mType: SettingViewController.self)
         default:
             break
         }
         self.sideMenuController?.hideLeftView(animated: true, completionHandler: nil)
     }
 
-    func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
+    func jumpToDestPage<T: UIViewController>(identifyId: String, mType: T.Type) {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifyId) as? T {
+            if let navigator = self.navigationController {
+                if navigator.viewControllers.contains(where: {
+                    return $0 is T
+                }) {
+                    for viewController in (self.navigationController?.viewControllers)! {
+                        if let targetVC = viewController as? T {
+                            DispatchQueue.main.async {
+                                navigator.popToViewController(targetVC, animated: false)
+                            }
+                        }
+                    }
+                } else {
+                    navigator.pushViewController(dest, animated: false)
+                }
+            }
+        }
+    }
+
+    func assembleDisplayDict(nutritionDict: [String: Double]) {
         displayDict[0] = ("Calorie", nutritionDict["energy"]!)
         displayDict[1] = ("Protein", nutritionDict["protein"]!)
         displayDict[2] = ("Fat", nutritionDict["fat"]!)
@@ -250,17 +190,17 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         super.viewDidAppear(animated)
         newsFeedTable.reloadData()
         let preferences = UserDefaults.standard
-        let shouldPopUpFlag = !preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-        if shouldPopUpFlag {
-            popUpDialog()
-            preferences.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-        }
-        //show markView for tap
-//        let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
-//        if shouldShowCoachMark {
-//            self.coachMarksController.start(on: self)
-//            preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+//        let shouldPopUpFlag = !preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
+//        if shouldPopUpFlag {
+//            popUpDialog()
+//            preferences.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
 //        }
+        //show markView for tap
+        let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+        if shouldShowCoachMark {
+            self.coachMarksController.start(on: self)
+            preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+        }
     }
 
     //popUp dialog
@@ -282,7 +222,9 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         //SignPainterHouseScript 28.0
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as! [NSAttributedStringKey: Any]
+        if let attributeGroup = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as? [NSAttributedStringKey: Any] {
+            self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
+        }
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         //backbtn
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
@@ -448,7 +390,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cpfCollectionCell", for: indexPath) as? homePageCPFCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cpfCollectionCell", for: indexPath) as? HomePageCPFCell {
             let kvSet = displayDict[indexPath.row+1]
             let targetSet = targetDict[indexPath.row+1]
             var name = ""

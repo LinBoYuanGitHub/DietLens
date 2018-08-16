@@ -30,12 +30,13 @@ class RedGardientView: UIView {
     }
 
     override func layoutSubviews() {
-        gradientLayer = self.layer as! CAGradientLayer
-        gradientLayer.colors = [redtopColor.cgColor, redbottomColor.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.3)
-        gradientLayer.frame = self.bounds
-        gradientLayer.masksToBounds = true
+        if let gradientLayer = self.layer as? CAGradientLayer {
+            gradientLayer.colors = [redtopColor.cgColor, redbottomColor.cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.3)
+            gradientLayer.frame = self.bounds
+            gradientLayer.masksToBounds = true
+        }
     }
 
     override func prepareForInterfaceBuilder() {

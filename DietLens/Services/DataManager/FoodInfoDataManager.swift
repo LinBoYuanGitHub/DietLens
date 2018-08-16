@@ -293,6 +293,8 @@ class FoodInfoDataManager {
                 foodObject.calories = foodInfo["nutrition"]["energy"].doubleValue
                 foodObject.isMultiDish = foodInfo["is_mix_food"].boolValue
                 foodObject.unit = foodInfo["unit"].stringValue
+                foodObject.location = foodInfo["location"].stringValue
+                foodObject.stall = foodInfo["stall"].stringValue
                 subCategory.subcateFoodList.append(foodObject)
             }
             resultList.append(subCategory)

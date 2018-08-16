@@ -42,8 +42,8 @@ class HealthCenterDBOperation {
         try! realm.write {
             let healthRecords = realm.objects(HealthRecord.self).filter("type = '\(recordType)' ").sorted(byKeyPath: "date", ascending: false)
             if healthRecords.count > 5 {
-                for i in 0..<5 {
-                    results.append(healthRecords[i])
+                for index in 0..<5 {
+                    results.append(healthRecords[index])
                 }
             } else {
                 for healthRecord in healthRecords {

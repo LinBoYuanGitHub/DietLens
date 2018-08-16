@@ -9,7 +9,7 @@
 import UIKit
 import HealthKit
 import SwiftyJSON
-class StepCounterViewController: UIViewController {
+class StepCounterViewController: BaseViewController {
 
     @IBOutlet weak var standardLabel: UILabel!
 
@@ -31,14 +31,6 @@ class StepCounterViewController: UIViewController {
 
     @objc func willEnterForeground() {
         requestAuthFromHealthKit()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = false
-        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
 //    @IBAction func onBackPressed(_ sender: Any) {

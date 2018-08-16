@@ -58,8 +58,8 @@ class GraphView: UIView {
         let graphHeight = height - topBorder - bottomBorder
         let maxValue = self.graphPoints.max()!
         let columnYPoint = { (graphPoint: Int) -> CGFloat in
-            let y = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
-            return graphHeight + topBorder - y // Flip the graph
+            let yPoint = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
+            return graphHeight + topBorder - yPoint // Flip the graph
         }
         // draw the line graph
         UIColor.white.setFill()
@@ -71,8 +71,8 @@ class GraphView: UIView {
 
         // add points for each item in the graphPoints array
         // at the correct (x, y) for the point
-        for i in 1..<self.graphPoints.count {
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(self.graphPoints[i]))
+        for index in 1..<self.graphPoints.count {
+            let nextPoint = CGPoint(x: columnXPoint(index), y: columnYPoint(self.graphPoints[index]))
             graphPath.addLine(to: nextPoint)
         }
         graphPath.lineWidth = 2.0

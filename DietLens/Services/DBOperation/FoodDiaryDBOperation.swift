@@ -86,8 +86,8 @@ class FoodDiaryDBOperation {
         try! realm.write {
             let foodDiarys = realm.objects(FoodDiary.self).filter("recordType='text'").sorted(byKeyPath: "id", ascending: false)
             if foodDiarys.count > limit {
-                for i in 0..<limit {
-                    let foodDiary = foodDiarys[i]
+                for index in 0..<limit {
+                    let foodDiary = foodDiarys[index]
                     var foodDiaryModel = FoodDiaryModel()
                     foodDiaryModel.convertToObject(foodDiary: foodDiary)
                     results.append(foodDiaryModel)

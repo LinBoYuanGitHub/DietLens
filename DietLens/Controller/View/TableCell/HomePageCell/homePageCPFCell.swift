@@ -8,7 +8,7 @@
 
 import UIKit
 
-class homePageCPFCell: UICollectionViewCell {
+class HomePageCPFCell: UICollectionViewCell {
 
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var nutritionLabel: UILabel!

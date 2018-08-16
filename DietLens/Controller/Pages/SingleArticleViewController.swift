@@ -24,6 +24,7 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
     let headerDarkAlpha = 0.6
 
     var shouldReload = true
+    var loadCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +52,16 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         contentHeight = webView.scrollView.contentSize.height
+        print("webview content height: \(contentHeight)")
         if shouldReload {
             article.reloadData()
         }
-
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "articleMainBody") as? SinglePageArticleBodyCell {
             cell.setupCell(type: .body, data: articleData?.articleContent)
+            cell.webView.contentMode = .scaleAspectFit
             cell.webView.navigationDelegate = self
             cell.webView.frame = CGRect(x: 0, y: 0, width: cell.frame.size.width, height: contentHeight)
             cell.webView.bounds = CGRect(x: 0, y: 0, width: cell.frame.size.width, height: contentHeight)
@@ -73,9 +75,10 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if contentHeight != 0 {
+        if loadCount == 4 { //load 5 times to determine the height of the tableView cell height
             shouldReload = false
         }
+        loadCount += 1
         return contentHeight
     }
 
@@ -103,7 +106,7 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
         imageView.blurView.setup(style: UIBlurEffectStyle.dark, alpha: CGFloat(headerDarkAlpha)).enable()
         article.parallaxHeader.view = imageView
         article.parallaxHeader.height = 400
-        article.parallaxHeader.minimumHeight = 65
+        article.parallaxHeader.minimumHeight = 100
         article.parallaxHeader.mode = .centerFill
 
         let backButton = ExpandedUIButton()
@@ -112,12 +115,13 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
         backButton.imageView?.tintColor = UIColor.white
         imageView.addSubview(backButton)
         backButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
             if #available(iOS 11.0, *) {
-                make.centerY.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(0)
+                make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
             } else {
                 // Fallback on earlier versions
-                make.centerY.equalTo(self.view.snp.top).offset(40)
+                make.left.equalTo(self.view.snp.left).offset(20)
+                make.top.equalTo(self.view.snp.top).offset(40)
             }
         }
         article.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
@@ -128,13 +132,6 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
             parallaxHeader.view.blurView.alpha = CGFloat(self.headerDarkAlpha) - parallaxHeader.progress
             //backButton.imageView?.alpha = parallaxHeader.progress
         }
-//        let originalLabel = UILabel()
-//        originalLabel.text = articleData?.articleTitle
-//        originalLabel.numberOfLines = 1
-//        originalLabel.font = UIFont.systemFont(ofSize: 35.0)
-//        originalLabel.sizeToFit()
-//        originalLabel.textAlignment = .left
-//        originalLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         // Label for vibrant text
         let vibrantLabel = UILabel()
         vibrantLabel.text = articleData?.articleTitle
@@ -145,20 +142,11 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
         vibrantLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         imageView.blurView.blurContentView?.addSubview(vibrantLabel)
         vibrantLabel.snp.makeConstraints { make in
-           make.centerY.equalTo(view.snp.top).offset(39)
+            make.centerY.equalTo(backButton.snp.centerY).offset(0)
+            make.left.equalTo(self.view.snp.left).offset(50)
+            make.trailing.equalTo(self.view.snp.trailing).offset(10)
         }
-//        imageView.addSubview(originalLabel)
-        //add constraints using SnapKit library
-        vibrantLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 45, bottom: 5, right: 5))
-        }
-
-//        originalLabel.snp.makeConstraints { make in
-//            make.bottom.equalToSuperview()
-//            make.left.equalToSuperview().offset(5)
-//            make.right.equalToSuperview().offset(5)
-//        }
-
+        //calculation
         imageView.bringSubview(toFront: backButton)
         imageView.isUserInteractionEnabled = true
     }

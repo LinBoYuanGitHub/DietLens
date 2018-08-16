@@ -35,6 +35,7 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
 
     weak var rulerViewDelegate: RulerViewDelegate?
     var divisor: Int = 1
+    var currentIndex: Int = 0
 
     private lazy var collectionView: UICollectionView = {
         let layout = RulerLayout()
@@ -89,8 +90,13 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     }
 
     func setCurrentItem(position: Int, animated: Bool) {
+        currentIndex = position
         let indexPath = IndexPath(row: position, section: 0)
         collectionView.scrollToItem(at: indexPath, at: [], animated: animated)
+    }
+
+    func getCurrentIndex() -> Int {
+        return currentIndex
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

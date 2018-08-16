@@ -22,11 +22,21 @@ class RegistrationSecondStepViewController: UIViewController {
         datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        //set up start date & end date
+        setDateLimitation()
         TFDate.inputAccessoryView = setUpPickerToolBar()
         TFDate.inputView = datePicker
         //set initial timing
         datePicker.date = DateUtil.normalStringToDate(dateStr: "1990-01-01")
         TFDate.text = "1990-1-1"
+    }
+
+    func setDateLimitation() {
+        var dayComp = DateComponents()
+        dayComp.year = -200
+        let minDate = Calendar.current.date(byAdding: dayComp, to: Date())
+        datePicker.maximumDate = Date()
+        datePicker.minimumDate = minDate
     }
 
     override func viewWillAppear(_ animated: Bool) {

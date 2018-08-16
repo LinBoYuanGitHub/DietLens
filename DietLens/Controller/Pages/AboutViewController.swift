@@ -18,10 +18,10 @@ class AboutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-        versionLabel.text = "Dietlens  V " + version
-        buildNumberLabel.text = "Build " + buildNumber
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            versionLabel.text = "Dietlens  V " + version
+            buildNumberLabel.text = "Build " + buildNumber
+        }
     }
 
     override func didReceiveMemoryWarning() {

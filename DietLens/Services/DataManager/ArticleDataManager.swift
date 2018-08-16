@@ -37,12 +37,12 @@ class ArticleDataManager {
 
     func assembleEvents(jsonArr: JSON) -> [Article] {
         eventList.removeAll()
-        for i in 0..<jsonArr["results"].count {
+        for index in 0..<jsonArr["results"].count {
             var article = Article()
-            article.articleId = jsonArr["results"][i]["id"].stringValue
-            article.articleTitle = jsonArr["results"][i]["title"].stringValue
-            article.articleContent = jsonArr["results"][i]["content"].stringValue
-            article.articleImageURL = jsonArr["results"][i]["image"].stringValue
+            article.articleId = jsonArr["results"][index]["id"].stringValue
+            article.articleTitle = jsonArr["results"][index]["title"].stringValue
+            article.articleContent = jsonArr["results"][index]["content"].stringValue
+            article.articleImageURL = jsonArr["results"][index]["image"].stringValue
             eventList.append(article)
         }
         return eventList

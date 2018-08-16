@@ -13,6 +13,7 @@ import QiniuUpload
 import Kingfisher
 
 class APIService {
+
     static var instance = APIService()
 
     private init() {
@@ -405,7 +406,9 @@ class APIService {
                 var foodSearchList = [TextSearchSuggestionEntity]()
                 for index in 0..<jsonArr.count {
                     let dict = jsonArr[index].dictionaryValue
-                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+                    entity.location = dict["location"]!.stringValue
+                    entity.stall = dict["stall"]!.stringValue
                     foodSearchList.append(entity)
                 }
                 nextPageCompletion(nextLink)
@@ -542,10 +545,11 @@ class APIService {
             uploader.files.append(file)
             uploader.startUpload(uploadToken, uploadOneFileSucceededHandler: { (index, keyValuePair) in
                 print("upload succeeded : \(index) - \(keyValuePair)")
-                let key = keyValuePair["key"]! as! String
-                let url = "\(QiniuConfig.rootDomain)/\(QiniuConfig.accessKey)&token=\(key)"
-                print(url)
-                completion(key)
+                if let key = keyValuePair["key"] as? String {
+//                    let url = "\(QiniuConfig.rootDomain)/\(QiniuConfig.accessKey)&token=\(key)"
+//                    print(url)
+                    completion(key)
+                }
             }, uploadOneFileFailedHandler: { (index, error) in
                 print("upload Failed : \(index) - \(error)")
                 print("upload failed")
@@ -1655,7 +1659,7 @@ class APIService {
     func cancelRequest(requestURL: String) {
         Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
             sessionDataTask.forEach {
-                if ($0.originalRequest?.url?.absoluteString == requestURL) {
+                if $0.originalRequest?.url?.absoluteString == requestURL {
                     $0.cancel()
                 }
             }
@@ -1686,10 +1690,11 @@ class APIService {
     }
 
     //for all the new token
-    func getTokenHeader() -> Dictionary<String, String> {
+    func getTokenHeader() -> [String: String] {
 //        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
         let preferences = UserDefaults.standard
         let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
+//        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
         let header = ["Authorization": "Token "+token]
         return header
     }

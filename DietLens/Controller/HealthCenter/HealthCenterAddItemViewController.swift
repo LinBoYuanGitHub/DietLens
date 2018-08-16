@@ -111,6 +111,22 @@ class HealthCenterAddItemViewController: UIViewController {
 
     @objc func donePicker() {
         view.endEditing(true)
+        //set current value
+        let indexPath = IndexPath(row: 0, section: 0)
+        if let cell = addItemTableView.cellForRow(at: indexPath) as? HealthCenterTableValueCell {
+            if let inputView =  cell.healthCenterTextField.textInputView as? RulerInputView {
+                let returnValue = Float(inputView.rulerView.getCurrentIndex())/Float(inputView.rulerView.divisor)
+                cell.healthCenterTextField.text = String(returnValue) + unit
+                itemValue = Double(returnValue)
+                return
+            }
+            if let inputView =  cell.healthCenterTextField.textInputView as? EmojiInputView {
+                let index = Int(inputView.emojiSlider.value)
+                cell.healthCenterTextField.text = HealthCenterConstants.moodList[index]
+                itemValue = Double(index)
+                return
+            }
+        }
     }
 
     @objc func addHealthItem() {

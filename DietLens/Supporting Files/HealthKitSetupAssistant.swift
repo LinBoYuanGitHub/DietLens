@@ -115,8 +115,8 @@ extension HKHealthStore {
         let completionHandler: (HKSampleQuery, [HKSample]?, Error?) -> Void = {
             (_, results, error) -> Void in
             var steps = [Double]()
-            if results!.count > 0 {
-                for result in results as! [HKQuantitySample] {
+            if results!.count > 0, let samples = results as? [HKQuantitySample] {
+                for result in samples {
                     steps.append(result.quantity.doubleValue(for: HKUnit.count()))
                 }
             }

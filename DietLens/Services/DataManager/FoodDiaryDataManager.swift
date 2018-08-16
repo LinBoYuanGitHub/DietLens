@@ -39,7 +39,7 @@ class FoodDiaryDataManager {
             foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
             //prevent quantity equals zero
-            if job["quantity"].intValue == 0 {
+            if job["quantity"].doubleValue == 0 {
                 foodItem.quantity = 1
             } else {
                 foodItem.quantity = job["quantity"].doubleValue

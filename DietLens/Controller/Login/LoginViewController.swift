@@ -111,14 +111,16 @@ class LoginViewController: UIViewController {
                     case .success(let response):
                         let facebookUserId = response.dictionaryValue!["id"]
                         let facebookUserName = response.dictionaryValue!["name"]
-                        let preferences = UserDefaults.standard
-                        preferences.setValue(facebookUserId, forKey: "facebookId")
-                        preferences.setValue(facebookUserName, forKey: "nickname")
                         //validate FacebookId
                         AlertMessageHelper.showLoadingDialog(targetController: self)
-                        APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: facebookUserId as! String, completion: { (isSuccess, isNewUser) in
+                        guard let fbUserId = facebookUserId as? String else { return }
+                        APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: fbUserId, completion: { (isSuccess, isNewUser) in
                             AlertMessageHelper.dismissLoadingDialog(targetController: self)
                             if isSuccess {
+                                //record userId & userName
+                                let preferences = UserDefaults.standard
+                                preferences.setValue(facebookUserId, forKey: "facebookId")
+                                preferences.setValue(facebookUserName, forKey: "nickname")
                                 if isNewUser {
                                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                         var profile = UserProfile()

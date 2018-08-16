@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HealthCenterViewController: UIViewController {
+class HealthCenterViewController: BaseViewController {
 
     @IBOutlet weak var healthCenterTable: UITableView!
 //    var recordList = [HealthCenterItem]()
@@ -17,16 +17,6 @@ class HealthCenterViewController: UIViewController {
         healthCenterTable.delegate = self
         healthCenterTable.dataSource = self
         healthCenterTable.tableFooterView = UIView()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .default
-        //navigation controller
-        self.navigationController?.navigationBar.isHidden = false
-        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
 }
