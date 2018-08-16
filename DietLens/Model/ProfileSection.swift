@@ -8,7 +8,7 @@
 
 import Foundation
 
-class profileSection {
+class ProfileSection {
     var profileList = [ProfileEntity]()
     var sectionHeaderText = ""
 }

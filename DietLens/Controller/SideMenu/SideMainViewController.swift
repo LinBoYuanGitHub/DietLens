@@ -9,7 +9,7 @@
 import UIKit
 import LGSideMenuController
 
-class sideMainViewController: LGSideMenuController {
+class SideMainViewController: LGSideMenuController {
 
     override func viewDidLoad() {
         let rootViewController = HomeViewController()
