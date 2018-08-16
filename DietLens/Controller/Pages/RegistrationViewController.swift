@@ -39,15 +39,15 @@ class RegistrationViewController: UIViewController {
     @IBAction func signUpButtonPressed(_ sender: Any) {
         if (TFNickName.text?.isEmpty)! {
             print("please fill in nick name")
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in nick")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter a nickname")
             return
         } else if (TFEmail.text?.isEmpty)! {
             print("please fill in email")
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in email")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if (TFPassword.text?.isEmpty)! {
              print("please fill in password")
-             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in password")
+             AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if TFRePassword.text != TFPassword.text {
             print("please confirm password again")
@@ -56,23 +56,34 @@ class RegistrationViewController: UIViewController {
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.register(nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self)
-                if isSucceed {
-                    // save for basic authentication
-                    let preferences = UserDefaults.standard
-                    let pwdKey = "password"
-                    preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
-                    //to main page
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-                    self.present(vc, animated: true, completion: nil)
-                } else {
-                    print("register failed")
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
+                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                    if isSucceed {
+                        // save for basic authentication
+                        let preferences = UserDefaults.standard
+                        preferences.setValue(self.TFPassword.text!, forKey: PreferenceKey.passwordKey)
+                        //to main page
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+                        self.present(viewController, animated: true, completion: nil)
+                        //save token to backend
+                        let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                        let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                        if userId != nil && fcmToken != nil {
+                            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                                if flag {
+                                    print("send device token succeed")
+                                }
+                            })
+                        }
+                    } else {
+                        print("register failed")
+                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
+                    }
                 }
             }, failedCompletion: { (failedMsg) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self)
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
+                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                     AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
+                }
             })
         }
     }
@@ -80,6 +91,18 @@ class RegistrationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? ProfileViewController {
 
+        }
+    }
+
+    func keyboardWillShow() {
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= (100)
+        }
+    }
+
+    func keyboardWillHide() {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += (100)
         }
     }
 
@@ -100,7 +123,28 @@ class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == TFNickName {
+            TFEmail.becomeFirstResponder()
+            keyboardWillShow()
+        } else if textField == TFEmail {
+            TFPassword.becomeFirstResponder()
+            keyboardWillShow()
+        } else if textField == TFPassword {
+            TFRePassword.becomeFirstResponder()
+            keyboardWillShow()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        keyboardWillShow()
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        keyboardWillHide()
         return true
     }
 
@@ -115,5 +159,6 @@ extension RegistrationViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+        keyboardWillHide()
     }
 }

@@ -17,28 +17,39 @@ class MainViewController: UIViewController {
 
     @IBAction func onLoginBtnClicked(_ sender: Any) {
         if (TFEmail.text?.isEmpty)! {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in email")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: " Please enter your email address")
             return
         } else if (TFPassword.text?.isEmpty)! {
-             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please fill in password")
+             AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your password")
             return
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
-        APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!) { (isSuccess) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
-            if isSuccess {
-                // save for basic authentication
-                let preferences = UserDefaults.standard
-                let pwdKey = "password"
-                preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
-                }
-            } else {
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
-                print("Login failed")
-            }
-        }
+//        APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!, completion: (isSuccess) in
+//            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+//            if isSuccess {
+//            // save for basic authentication
+//            let preferences = UserDefaults.standard
+//            preferences.setValue(self.TFPassword.text!, forKey: PreferenceKey.passwordKey)
+//            //upload the device token to server
+//            let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+//            let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+//            if userId != nil && fcmToken != nil {
+//            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+//            if flag {
+//            print("send device token succeed")
+//            }
+//            })
+//            }
+//            DispatchQueue.main.async {
+//            self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+//            }
+//            } else {
+//            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Login failed")
+//            print("Login failed")
+//            }
+//        }) { (errMsg) in
+//           AlertMessageHelper.showMessage(targetController: self, title: "", message: errMsg)
+//        }
     }
 
     @IBAction func onBackPressed(_ sender: Any) {

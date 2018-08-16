@@ -33,36 +33,43 @@ class StepCounterViewController: UIViewController {
         requestAuthFromHealthKit()
     }
 
-    @IBAction func onBackPressed(_ sender: Any) {
-        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
-        dismiss(animated: true, completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
+//    @IBAction func onBackPressed(_ sender: Any) {
+//        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+//        dismiss(animated: true, completion: nil)
+//    }
+
     func requestAuthFromHealthKit() {
-        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
+        if HKHealthStore.isHealthDataAvailable() {
+            HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
 
-            guard authorized else {
+                guard authorized else {
 
-                let baseMessage = "HealthKit Authorization Failed"
-                self.emptyView.isHidden = false
-                if let error = error {
-                    print("\(baseMessage). Reason: \(error.localizedDescription)")
-                } else {
-                    print(baseMessage)
+                    let baseMessage = "HealthKit Authorization Failed"
+                    self.emptyView.isHidden = false
+                    if let error = error {
+                        print("\(baseMessage). Reason: \(error.localizedDescription)")
+                    } else {
+                        print(baseMessage)
+                    }
+                    return
                 }
-                return
+                self.requestStepData()
             }
-            self.requestStepData()
         }
-
     }
 
     func getMaxValue() -> Double {
         var max: Double = 0.0
-        for stepEntity in stepsList {
-            if stepEntity.stepValue > max {
-                max = stepEntity.stepValue
-            }
+        for stepEntity in stepsList where stepEntity.stepValue > max {
+            max = stepEntity.stepValue
         }
         return max
     }
@@ -70,6 +77,8 @@ class StepCounterViewController: UIViewController {
     func requestStepData() {
         HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: Date()) { (steps, _) in
             self.stepsList = steps
+            //reverse sequence to let latest setp date rank first
+            self.stepsList.reverse()
             DispatchQueue.main.async {
                 if self.stepsList.count == 0 {
                     self.emptyView.isHidden = false
@@ -84,13 +93,11 @@ class StepCounterViewController: UIViewController {
 
     func uploadStepData() {
         var stepArray = [[String: Any]]()
-        for i in 0..<stepsList.count {
+        for index in 0..<stepsList.count {
             var step: [String: Any] = [:]
-            let dateStr = DateUtil.normalDateToString(date: stepsList[i].date!)
-//            let dataArr = dateStr.split(separator: "/")
-//            step["exercise_datetime"] = String(dataArr[2]) + "-" + String(dataArr[1]) + "-" + String(dataArr[0])
+            let dateStr = DateUtil.normalDateToString(date: stepsList[index].date!)
             step["exercise_datetime"] = dateStr
-            step["exercise_amount"] = String(stepsList[i].stepValue)
+            step["exercise_amount"] = String(stepsList[index].stepValue)
             stepArray.append(step)
         }
         let params = ["steps": stepArray]

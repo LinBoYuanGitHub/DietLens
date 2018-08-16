@@ -1,83 +1,118 @@
 PODS:
-  - Alamofire (4.5.1)
-  - AlamofireImage (3.3.0):
+  - Alamofire (4.7.3)
+  - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
-  - CryptoSwift (0.8.0)
-  - Fabric (1.7.6)
-  - Firebase/Core (4.5.0):
-    - FirebaseAnalytics (= 4.0.4)
-    - FirebaseCore (= 4.0.10)
-  - Firebase/Messaging (4.5.0):
-    - Firebase/Core
-    - FirebaseMessaging (= 2.0.6)
-  - FirebaseAnalytics (4.0.4):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
+  - BAFluidView (0.2.3)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
+  - Cosmos (15.0.0)
+  - Crashlytics (3.10.5):
+    - Fabric (~> 1.7.9)
+  - CryptoSwift (0.10.0)
+  - Fabric (1.7.9)
+  - FacebookCore (0.3.1):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.33)
+  - FacebookLogin (0.3.1):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3.1)
+    - FBSDKCoreKit (~> 4.33)
+    - FBSDKLoginKit (~> 4.33)
+  - FBSDKCoreKit (4.34.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.34.0):
+    - FBSDKCoreKit
+  - Firebase/Core (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.1)
+  - Firebase/CoreOnly (5.4.0):
+    - FirebaseCore (= 5.0.5)
+  - Firebase/Messaging (5.4.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.0.3)
+  - FirebaseAnalytics (5.0.1):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.10):
+  - FirebaseCore (5.0.5):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-    - nanopb (~> 0.3)
-  - FirebaseInstanceID (2.0.5)
-  - FirebaseMessaging (2.0.6):
-    - FirebaseAnalytics (~> 4.0)
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
+  - FirebaseInstanceID (3.1.1):
+    - FirebaseCore (~> 5.0)
+  - FirebaseMessaging (3.0.3):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
     - GoogleToolboxForMac/Logger (~> 2.1)
     - Protobuf (~> 3.1)
   - FSCalendar (2.7.9)
-  - GoogleToolboxForMac/Defines (2.1.3)
-  - GoogleToolboxForMac/Logger (2.1.3):
-    - GoogleToolboxForMac/Defines (= 2.1.3)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
-    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - GoogleToolboxForMac/Logger (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - HFSwipeView (1.2.1):
     - PureLayout
     - TinyLog
+  - Instructions (1.2.0)
+  - Kingfisher (4.8.0)
   - LGSideMenuController (2.1.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (4.3.0):
+    - NVActivityIndicatorView/Presenter (= 4.3.0)
+  - NVActivityIndicatorView/Presenter (4.3.0)
   - ParallaxHeader (2.0.0)
-  - PBRevealViewController/Swift (1.2.8)
-  - Protobuf (3.4.0)
+  - PBRevealViewController/Swift (1.2.9)
+  - Protobuf (3.6.0)
   - PureLayout (3.0.2)
   - QiniuUpload (3.0.0)
-  - Realm (3.0.1):
-    - Realm/Headers (= 3.0.1)
-  - Realm/Headers (3.0.1)
-  - RealmSwift (3.0.1):
-    - Realm (= 3.0.1)
-  - ScrollableGraphView (4.0.4)
+  - Realm (3.7.4):
+    - Realm/Headers (= 3.7.4)
+  - Realm/Headers (3.7.4)
+  - RealmSwift (3.7.4):
+    - Realm (= 3.7.4)
+  - ScrollableGraphView (4.0.5)
+  - SkyFloatingLabelTextField (3.5.1)
   - SnapKit (4.0.0)
-  - Socket.IO-Client-Swift (12.1.2):
-    - Starscream (~> 2.1.1)
-  - Starscream (2.1.1)
-  - SwiftLint (0.23.1)
-  - SwiftyJSON (3.1.4)
-  - TinyLog (2.0.4)
-  - XLPagerTabStrip (8.0.0)
+  - Socket.IO-Client-Swift (13.2.1):
+    - Starscream (~> 3.0.2)
+  - Starscream (3.0.5)
+  - SwiftLint (0.26.0)
+  - SwiftyJSON (4.1.0)
+  - TinyLog (2.0.7)
+  - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 3.3)
+  - BAFluidView
+  - Cosmos (~> 15.0)
   - Crashlytics
   - CryptoSwift
   - Fabric
+  - FacebookCore
+  - FacebookLogin
   - Firebase/Core
   - Firebase/Messaging
   - FSCalendar
   - HFSwipeView
+  - Instructions (~> 1.2.0)
+  - Kingfisher (~> 4.0)
   - LGSideMenuController
+  - NVActivityIndicatorView
   - ParallaxHeader (~> 2.0.0)
   - PBRevealViewController/Swift
   - QiniuUpload
   - RealmSwift
   - ScrollableGraphView
+  - SkyFloatingLabelTextField
   - SnapKit (~> 4.0)
   - Socket.IO-Client-Swift
   - SwiftLint
@@ -88,9 +123,16 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
+    - BAFluidView
+    - Bolts
+    - Cosmos
     - Crashlytics
     - CryptoSwift
     - Fabric
+    - FacebookCore
+    - FacebookLogin
+    - FBSDKCoreKit
+    - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -99,8 +141,11 @@ SPEC REPOS:
     - FSCalendar
     - GoogleToolboxForMac
     - HFSwipeView
+    - Instructions
+    - Kingfisher
     - LGSideMenuController
     - nanopb
+    - NVActivityIndicatorView
     - ParallaxHeader
     - PBRevealViewController
     - Protobuf
@@ -109,6 +154,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - ScrollableGraphView
+    - SkyFloatingLabelTextField
     - SnapKit
     - Socket.IO-Client-Swift
     - Starscream
@@ -118,37 +164,48 @@ SPEC REPOS:
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
-  CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
-  Firebase: d83d287bdb6b1c78320561482706d1fcfc8ddfc1
-  FirebaseAnalytics: 722b53c7b32bfc7806b06e0093a2f5180d4f2c5a
-  FirebaseCore: da5e8e372cb6046212739a4d81e42d32c22907cc
-  FirebaseInstanceID: f2b688c66b972f30d7fa9f5f9f91455454a03b47
-  FirebaseMessaging: 75d83375b0f7a9911568d7bdd1a1a8261cbcbdef
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
+  BAFluidView: 5d84ef109831b97740f75b6d785e51f13fa08398
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
+  Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
+  FacebookCore: 33078ef1d7d76b73f7e8c990dca7d3ea6db8d22f
+  FacebookLogin: 6f15bf4fefd7a8865abbfa8fcd7f3dfd87aa275f
+  FBSDKCoreKit: 0ff57f093b85c8c9d5aba697d3edf68a8960ce78
+  FBSDKLoginKit: 8c78f57a145afb756e4755e69195ebe08a42466e
+  Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
+  FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
+  FirebaseCore: 42b3267233bd21a5abd54117ccc38ca3dd0f8e83
+  FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
+  FirebaseMessaging: f43eb0c0e1da096e659de6f713038e74862a62cd
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
-  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   HFSwipeView: cbcd1f01a530ae472f8e645b9b38f479f8d39ae8
+  Instructions: 763c2452bd78e05d8f969a21c1cbc3c07deef33a
+  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   LGSideMenuController: ae40c80983ab8b8801c7cef0a6804d43aaa72d45
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
-  PBRevealViewController: b1471380464f30b63d73e9b04e9abf9cb7b67093
-  Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
+  PBRevealViewController: 1ca9d511f1b0be4f6f5ca46046f86251be9cad9a
+  Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   QiniuUpload: b1b3dda4883b9bacf9e2efc9e28978cdd6a26c70
-  Realm: ba6144c74f835f7497791f6599d63a7755377b83
-  RealmSwift: 7d13b1ac4b6022a13f841e3143e7789c9e40ad0d
-  ScrollableGraphView: 072ea302f4ca27779692656a49d51fe537b2b1e7
+  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
+  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
+  ScrollableGraphView: 6386dbae8d92e8ec9fda9f386f2ba6e2c90c59a3
+  SkyFloatingLabelTextField: 4cbeece9c3aae97c6019d8fae511cb5b755874f7
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  Socket.IO-Client-Swift: ba3cb1c4bf0a6ca90080406a2c22685c25ad1f60
-  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
-  SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  TinyLog: 1b19359cd3f32ab4972c595d002efc614e596529
-  XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
+  Socket.IO-Client-Swift: b94943e2fb916fe2f95244b9ed21828634002280
+  Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
+  SwiftLint: f6b83e8d95ee1e91e11932d843af4fdcbf3fc764
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
+  XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 6916b4717efed44979af9248220894a6489ab048
+PODFILE CHECKSUM: 4cdd9d4dfb9ab0b6dd410083d33cf69b1d83adf0
 
 COCOAPODS: 1.5.0

@@ -29,14 +29,17 @@ struct ServerConfig {
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
 //    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
-//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
-//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1"
+//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
     static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
+//    static let labDeskTopURL = "http://54.169.160.107:8000/dl/v1" //mocklet test environment
+
     static let userURL = labDeskTopURL + "/users"
     static let saveNotificationTokenURL = labDeskTopURL + "/users/device/"
     static let logOutURL = labDeskTopURL + "/users/logout/"
     static let userLoginURL = labDeskTopURL + "/users/login/"
     static let registry = labDeskTopURL + "/users/register/"
+    static let checkEmailURL = labDeskTopURL + "/users/email-check/"
+    static let facebookIdValidationURL = labDeskTopURL + "/social-acc/facebook/"
 
     static let getUUidURL = baseURL + "/anonymous/"
     static let thirdPartyLoginURL = baseURL + "/3rdlogin"
@@ -45,32 +48,41 @@ struct ServerConfig {
     static let acctForgetPwResetURL = baseURL + "/accounts/set-password/"
     static let forgetPwdUrl = labDeskTopURL + "/users/forgot-password/"
 
-    static let articleURL = testBaseURL + "/article"
-    static let eventURL = testBaseURL + "/event/"
+    static let articleURL = labDeskTopURL + "/articles"
+    static let eventURL = labDeskTopURL + "/events/"
 //    static let imageUploadURL = baseURL + "/process"
     static let imageUploadURL = baseURL + "/image-search/"
     static let foodDiaryURL = baseURL + "/healthlog/diet/"
     static let saveStepDiaryURL = baseURL + "/healthlog/steps/"
+    static let saveHourlyStepURL = labDeskTopURL+"/steps/"
     static let saveHealthCenterDataURL = baseURL + "/healthlog/Medical/"
     static let foodSearchListURL = labDeskTopURL + "/search/auto-suggestion/"
-    static let foodFullTextSearchURL = labDeskTopURL + "/search/full-text/"
+    static let foodFullTextSearchURL = labDeskTopURL + "/foodinfo/full-text/"
     static let foodSearchAutocompleteURL = labDeskTopURL + "/search/autocomplete/"
     static let ingredientSearchURL = baseURL + "/ingre-search/"
     static let barcodeSearchURL = baseURL + "/barcode-search/"
-    static let feedBackURL = baseURL + "/feedback/email/"
-    static let NotificationURL = baseURL + "/notification"
+    static let feedBackURL = labDeskTopURL + "/feedback/email/"
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 //    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"
-    static let uploadImageKeyURL = "https://recognize.dietlens.com/webHook"
+    static let uploadImageKeyURL = labDeskTopURL+"/foodinfo/recognition/"
+    //health center log
+    static let uploadHealthCenterData = labDeskTopURL + "/healthlogs/"
     //foodDiary CRUD
     static let foodDiaryOperationURL = labDeskTopURL + "/foodinfo/"
     static let foodDiaryDietLogs = labDeskTopURL + "/dietlogs/"
+    static let foodDiaryDeleteAll = labDeskTopURL + "/dietlogs/delete-logs/"
     static let foodDiaryDietItems = labDeskTopURL + "/dietlogs/delete-detail/"
     static let foodDiaryCalendar = labDeskTopURL + "/dietlogs/calendar/"
     //get nutrition sum
     static let dietaryGuideURL = labDeskTopURL + "/users/dietary-guide/"
     static let nutritionSum = labDeskTopURL + "/dietlogs/sum/"
     static let nutritionDailySum = labDeskTopURL + "/dietlogs/daily-sum/"
+    //notification part
+    static let notificationURL = labDeskTopURL + "/notifications/"
+    static let notificationDeleteAllURL = labDeskTopURL + "/notifications/all/"
+    static let notificationAnswer = labDeskTopURL + "/answers/"
+
+    static let healthCenterLogURL = labDeskTopURL + "/healthlogs/latest/"
 }
 
 struct SharedPreferenceKey {
@@ -127,7 +139,13 @@ struct PreferenceKey {
     static let proteinTarget = "proteinTarget"
     static let fatTarget = "fatTarget"
     static let tokenKey = "TOKEN"
+    static let facebookId = "facebookId"
     static let userIdkey = "userId"
+    static let fcmTokenKey = "FCMTOKEN"
+    static let stepUploadLatestTime = "stepUploadKey"
+    static let nickNameKey = "nickname"
+    static let userNameKey = "username"
+    static let passwordKey = "password"
 }
 
 struct Dimen {
@@ -135,6 +153,36 @@ struct Dimen {
     static let NewsArticleCollectionHeight = 220
     static let EventsFirstRowHeight = 310
     static let EventsRowHeight = 275
-    static let foodCalendarImageWidth = 84
-    static let foodCalendarImageHeight = 100
+    static let foodCalendarImageWidth = 68
+    static let foodCalendarImageHeight = 68
+}
+
+struct HealthCenterConstants {
+    static let moodList = ["Bad", "Not so good", "Ok", "Happy", "Excellent"]
+    static let GLUCOSEDEFAULT = 60
+    static let WEIGHTDEFAULT = 60
+}
+
+struct NotificationType {
+    static let NoneType = "0"
+    static let SingleOptionType = "1"
+    static let checkBoxType = "2"
+    static let TextFieldType = "3"
+    static let Rating4StarType = "4"
+    static let Rating7StarType = "5"
+}
+
+struct FirstTimeFlag {
+    static let isFirstTimeLogin = "isFirstTimeLogin" //show IntroductionPage
+    static let isFirstTimeViewAddMore = "isFirstTimeAddMore" //show addMore coach mark
+    static let isNotFirstTimeViewHome = "isFirstTimeViewHome" //show camera coach mark
+    static let isFirstTimeViewRecogResult = "isFirstTimeViewRecogResult" //show recogResult coach mark
+    static let isNotFirstTimeViewMixFood = "isFirstTimeViewMixFood" //show mix food coach mark
+    static let shouldPopUpProfilingDialog = "shouldPopUpProfilingDialog" //should pop up profiling dialog
+
+}
+
+struct MessageType {
+    static let messageType = "0"
+    static let questionnaireType = "1"
 }

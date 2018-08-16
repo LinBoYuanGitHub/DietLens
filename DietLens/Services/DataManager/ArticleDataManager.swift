@@ -23,13 +23,13 @@ class ArticleDataManager {
 
     func assembleArticles(jsonArr: JSON) -> [Article] {
         articleList.removeAll()
-        for i in 0..<jsonArr.count {
+        for index in 0..<jsonArr["results"].count {
             var article = Article()
-            article.articleId = jsonArr[i]["id"].stringValue
-            article.articleTitle = jsonArr[i]["title"].stringValue
-            article.articleContent = jsonArr[i]["content"].stringValue
-            article.articleImageURL = jsonArr[i]["image"].stringValue
-            article.source = jsonArr[i]["source"].stringValue
+            article.articleId = jsonArr["results"][index]["id"].stringValue
+            article.articleTitle = jsonArr["results"][index]["title"].stringValue
+            article.articleContent = jsonArr["results"][index]["content"].stringValue
+            article.articleImageURL = jsonArr["results"][index]["image"].stringValue
+            article.source = jsonArr["results"][index]["source"].stringValue
             articleList.append(article)
         }
         return articleList
@@ -37,12 +37,12 @@ class ArticleDataManager {
 
     func assembleEvents(jsonArr: JSON) -> [Article] {
         eventList.removeAll()
-        for i in 0..<jsonArr.count {
+        for i in 0..<jsonArr["results"].count {
             var article = Article()
-            article.articleId = jsonArr[i]["id"].stringValue
-            article.articleTitle = jsonArr[i]["title"].stringValue
-            article.articleContent = jsonArr[i]["content"].stringValue
-            article.articleImageURL = jsonArr[i]["image"].stringValue
+            article.articleId = jsonArr["results"][i]["id"].stringValue
+            article.articleTitle = jsonArr["results"][i]["title"].stringValue
+            article.articleContent = jsonArr["results"][i]["content"].stringValue
+            article.articleImageURL = jsonArr["results"][i]["image"].stringValue
             eventList.append(article)
         }
         return eventList

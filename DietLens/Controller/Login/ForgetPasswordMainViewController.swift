@@ -52,24 +52,24 @@ class ForgetPasswordMainViewController: UIViewController, UITextFieldDelegate {
                     // TODO:Update backend server with new password
                     AlertMessageHelper.showLoadingDialog(targetController: self)
                     APIService.instance.resetChangePwRequest(userEmail: emailToDisplay, password: pwd, completion: { (succeeded) in
-                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
-                        if succeeded {
-                            let alert = UIAlertController(title: "Successfully change password", message: "Signing you in now..", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .`default`, handler: { _ in
-                                APIService.instance.loginRequest(userEmail: self.emailToDisplay, password: cfmPwd) { (isSuccess) in
-                                    if isSuccess {
-                                        // save for basic authentication
-                                        let preferences = UserDefaults.standard
-                                        let pwdKey = "password"
-                                        preferences.setValue(cfmPwd, forKey: pwdKey)
-                                        self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
-                                    } else {
-                                        AlertMessageHelper.showMessage(targetController: self, title: "Error", message: "Change pw request failed")
-                                    }
-                                }
-                            }))
-                            self.present(alert, animated: true, completion: nil)
-                            AlertMessageHelper.showMessage(targetController: self, title: "Successfully change password", message: "Signing you in now..")
+                        AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                            if succeeded {
+                                let alert = UIAlertController(title: "Successfully change password", message: "Signing you in now..", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Default action"), style: .`default`, handler: { _ in
+//                                    APIService.instance.loginRequest(userEmail: self.emailToDisplay, password: cfmPwd) { (isSuccess) in
+//                                        if isSuccess {
+//                                            // save for basic authentication
+//                                            let preferences = UserDefaults.standard
+//                                            preferences.setValue(cfmPwd, forKey: PreferenceKey.passwordKey)
+//                                            self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+//                                        } else {
+//                                            AlertMessageHelper.showMessage(targetController: self, title: "Error", message: "Change pw request failed")
+//                                        }
+//                                    }
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                                AlertMessageHelper.showMessage(targetController: self, title: "Successfully change password", message: "Signing you in now..")
+                            }
                         }
                     })
 

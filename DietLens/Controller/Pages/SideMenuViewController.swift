@@ -13,12 +13,15 @@ import LGSideMenuController
 class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var sideMenuTable: UITableView!
+    @IBOutlet weak var profileAvatar: RoundedImage!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var clickToEditLabel: UILabel!
 
-    let labels: [String] = ["Home", "Food Diary", "Steps Counter", "Settings"]
-    let iconNames: [String] = ["whiteHomeIcon", "whiteFoodDiaryIcon", "whiteStepCounterIcon", "whiteSettingIcon"]
-    let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "StepCounterVC", "SettingsPage"]
+    let labels: [String] = ["Home", "Food Diary", "Steps Counter", "Health Log", "Settings"]
+    let iconNames: [String] = ["whiteHomeIcon", "whiteFoodDiaryIcon", "whiteStepCounterIcon", "healthCenterIcon", "whiteSettingIcon"]
+    let storyboardIDs: [String] = ["DietLens", "FoodCalendarNavVC", "StepCounterVC", "healthCenterNavVC", "SettingsPage"]
+    //used for mark sideMenu selection
+    var currentSideMenuIndex  = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,8 +33,22 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 //        self.leftViewPresentationStyle = .scaleFromLittle
         sideMenuTable.delegate = self
         sideMenuTable.dataSource = self
-        // Do any additional setup after loading the view.
         //set nickname
+        refreshUserName()
+        loadAvatar()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshUserName), name: .shouldRefreshSideBarHeader, object: nil)
+    }
+
+    func loadAvatar() {
+        let preferences = UserDefaults.standard
+        let facebookId = preferences.value(forKey: "facebookId")
+        if facebookId != nil {
+            let profileAvatarURL = URL(string: "https://graph.facebook.com/\(facebookId ?? "")/picture?type=normal")
+            profileAvatar.kf.setImage(with: profileAvatarURL)
+        }
+    }
+
+    @objc func refreshUserName() {
         let preferences = UserDefaults.standard
         let nicknameKey = "nickname"
         let nickname =  preferences.string(forKey: nicknameKey)
@@ -58,7 +75,11 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "menuButtonCell") as? SideMenuCell {
-            cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!)
+            if indexPath.row == currentSideMenuIndex {
+                cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!, isSelected: true)
+            } else {
+                 cell.setupSideMenuCell(buttonName: labels[indexPath.row], iconImage: UIImage(named: iconNames[indexPath.row])!, isSelected: false)
+            }
             //if indexPath.row == DataService.instance.screenUserIsIn {
                // cell.cellSelected()
             //}
@@ -72,17 +93,21 @@ class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITable
         tableView.deselectRow(at: indexPath, animated: true)
 //        self.revealViewController()!.revealLeftView()
         DataService.instance.screenUserIsIn = 0
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var controller: UIViewController?
-
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        var controller: UIViewController?
         // deselect food diary
-
-       if labels[indexPath.row] == "Home"{
-            NotificationCenter.default.post(name: .toggleLeftView, object: nil)
-       } else {
-            controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
-            present(controller!, animated: true, completion: nil)
-        }
+        currentSideMenuIndex = indexPath.row
+        // use notificationCenter to notify the homeVC to toggle menu
+//        if labels[indexPath.row] == "Home"{
+//            NotificationCenter.default.post(name: .toggleLeftView, object: nil)
+//        } else {
+//            controller = storyboard.instantiateViewController(withIdentifier: storyboardIDs[indexPath.row])
+//            present(controller!, animated: true, completion: nil)
+//        }
+        let dataDict: [String: Int] = ["position": indexPath.row]
+        NotificationCenter.default.post(name: .onSideMenuClick, object: nil, userInfo: dataDict)
+        //reload the indicator position
+        sideMenuTable.reloadData()
     }
 
     @IBAction func profileButtonPressed(_ sender: Any) {

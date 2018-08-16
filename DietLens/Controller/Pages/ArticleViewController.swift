@@ -14,6 +14,9 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var articleTitle: UILabel!
     var articleDataSource: [Article] = ArticleDataManager.instance.articleList
     public var articleType = ArticleType.ARTICLE
+    //pagination flag
+    var isLoading = false
+    var nextPageLink = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,36 +26,44 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         articleTable.rowHeight = UITableViewAutomaticDimension
         if articleType == ArticleType.ARTICLE {
             articleDataSource = ArticleDataManager.instance.articleList
-            articleTitle.text = "Latest article"
+            articleTitle.text = "Latest articles"
         } else if articleType == ArticleType.EVENT {
             articleDataSource = ArticleDataManager.instance.eventList
-            articleTitle.text = "Latest healthy events"
+            articleTitle.text = "Latest health events"
         }
         // Do any additional setup after loading the view.
+        articleTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 52))
+        articleTable.tableFooterView?.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.tintColor = UIColor.clear
         self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
         let alertController = UIAlertController(title: nil, message: "Loading...\n\n", preferredStyle: UIAlertControllerStyle.alert)
         if articleDataSource.count == 0 {
-            let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-            spinnerIndicator.center = CGPoint(x: 135.0, y: 65.5)
-            spinnerIndicator.color = UIColor.black
-            spinnerIndicator.startAnimating()
-            alertController.view.addSubview(spinnerIndicator)
+            AlertMessageHelper.showLoadingDialog(targetController: self)
             self.present(alertController, animated: false, completion: nil)
             if articleType == ArticleType.ARTICLE {
                 APIService.instance.getArticleList(completion: { (articleList) in
-                    alertController.dismiss(animated: true, completion: nil)
-                    if articleList == nil {
-                        return
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                        if articleList == nil {
+                            return
+                        }
+                        ArticleDataManager.instance.articleList = articleList!
+                        self.articleTable?.reloadData()
                     }
-                    ArticleDataManager.instance.articleList = articleList!
-                    self.articleTable?.reloadData()
-                })
+                }) { (nextLink) in
+                    if self.nextPageLink == nil {
+                        self.nextPageLink = ""
+                    } else {
+                        self.nextPageLink = nextLink
+                    }
+                }
             } else if articleType == ArticleType.EVENT {
                 APIService.instance.getEventList(completion: { (eventList) in
                     alertController.dismiss(animated: true, completion: nil)
@@ -88,7 +99,17 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+            if articleType == ArticleType.ARTICLE {
+                dest.articleData = ArticleDataManager.instance.articleList[indexPath.row]
+            } else {
+                dest.articleData = ArticleDataManager.instance.eventList[indexPath.row]
+            }
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -103,6 +124,36 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articleDataSource.count
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let  height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            if nextPageLink == "" || isLoading {
+                return
+            }
+            articleTable.tableFooterView?.isHidden = true
+            self.isLoading = false
+            APIService.instance.getArticleList(link: nextPageLink, completion: { (articleList) in
+                self.articleTable.tableFooterView?.isHidden = true
+                self.isLoading = false
+                if articleList == nil {
+                    return
+                }
+                for article in articleList! {
+                     ArticleDataManager.instance.articleList.append(article)
+                }
+                self.articleTable.reloadData()
+            }, nextLinkCompletion: { (nextLink) in
+                if nextLink == nil {
+                    self.nextPageLink = ""
+                } else {
+                    self.nextPageLink = nextLink
+                }
+            })
+        }
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {

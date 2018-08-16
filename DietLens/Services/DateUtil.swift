@@ -23,6 +23,13 @@ class DateUtil {
         return resultStr
     }
 
+    public static func hourMinDateToString(date: Date) -> String {
+        let hourFormatter = DateFormatter()
+        hourFormatter.dateFormat = "HH:mm"
+        let resultStr = hourFormatter.string(from: date)
+        return resultStr
+    }
+
     public static func normalStringToDate(dateStr: String) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -62,6 +69,28 @@ class DateUtil {
     public static func formatGMTDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM yyyy"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+    public static func formatGMTDateToStringWithDash(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MMM-yyyy"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+    public static func formatMonthToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+    public static func formatNotificationDateToString(date: Date) -> String {
+        //- May 22, 2018
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
         let resultStr = dateFormatter.string(from: date)
         return resultStr
     }

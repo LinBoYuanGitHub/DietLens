@@ -30,6 +30,21 @@ target 'DietLens' do
   # Crashlytics
   pod 'Fabric'
   pod 'Crashlytics'
+  #loading indicator
+  pod 'NVActivityIndicatorView'
+  #rating view
+  pod 'Cosmos', '~> 15.0'
+  #Fluid view
+  pod 'BAFluidView'
+  #image loader
+  pod 'Kingfisher', '~> 4.0'
+  #facebookLogin
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  #sky floating label
+  pod 'SkyFloatingLabelTextField'
+  pod 'Instructions', '~> 1.2.0'
+  
 
   target 'DietLensTests' do
     inherit! :search_paths

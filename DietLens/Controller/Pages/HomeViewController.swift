@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import BAFluidView
+import Instructions
 
 class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
@@ -17,6 +19,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     @IBOutlet weak var cpfCollectionView: UICollectionView!
     @IBOutlet weak var calorieDisplayContainer: UIView!
     @IBOutlet weak var cpfContainer: UIView!
+    @IBOutlet weak var homePlusButton: UIButton!
 
     @IBOutlet weak var totalCalorie: UILabel!
     @IBOutlet weak var intakenCalorie: UILabel!
@@ -31,12 +34,20 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     //parallax header
 //    weak var parallaxHeaderView: UIView?
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var calorieContainer: UIView!
+    var calorieFluidView: BAFluidView!
 
     var displayDict = [Int: (String, Double)]()
     var targetDict = [Int: (String, Double)]()
 
+    var shouldRefreshMainPageNutrition = true
+
+    //add coachMarks
+    let coachMarksController = CoachMarksController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        //delegate for new table view
         newsFeedTable.dataSource = self
         newsFeedTable.delegate = self
         cpfCollectionView.delegate = self
@@ -46,7 +57,19 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
         //for sideMenu toggle leftView
-        NotificationCenter.default.addObserver(self, selector: #selector(onToggleLeftView), name: .toggleLeftView, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
+        calorieFluidView = BAFluidView(frame: CGRect(x: 0, y: 0, width: calorieContainer.frame.width, height: calorieContainer.frame.height), startElevation: 0)
+        calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.6)
+        calorieFluidView.strokeColor = UIColor.white
+        calorieFluidView.keepStationary()
+        calorieFluidView.maxAmplitude = 8
+        calorieFluidView.minAmplitude = 4
+        calorieFluidView.fillDuration = 1
+        calorieContainer.addSubview(calorieFluidView)
+        //set instruction label dataSource
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
     }
 
     //assemble the article & event list and display
@@ -54,15 +77,19 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         if ArticleDataManager.instance.articleList.count == 0 || ArticleDataManager.instance.eventList.count == 0 {
             APIService.instance.getArticleList(completion: { (_) in
                 self.newsFeedTable.reloadData()
-            })
+            }) {(_) in }
             APIService.instance.getEventList(completion: { (_) in
                 self.newsFeedTable.reloadData()
             })
         }
     }
 
+    @objc func changeRefreshFlag() {
+        shouldRefreshMainPageNutrition = true
+    }
+
     //load personal target whenever go to main page
-    func loadNutritionTarget() {
+    @objc func loadNutritionTarget() {
         APIService.instance.getDietaryGuideInfo { (guideDict) in
             let preferences = UserDefaults.standard
             preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
@@ -80,12 +107,16 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             totalCalorie.text = String(totalCal)
             intakenCalorie.text = String(todayIntakenCal)
             remainCalorie.text = String(totalCal-todayIntakenCal)
-            percentageCalorie.text = String(todayIntakenCal*100/totalCal) + "%"
+            let percentageValue = Int(todayIntakenCal*100/totalCal)
+            percentageCalorie.text = String(percentageValue) + "%"
+            calorieFluidView.fill(to: Float(percentageValue)/100 as NSNumber)
+            calorieFluidView.startAnimation()
         }
     }
 
+    //request when firstTime loading & add food into FoodCalendar by notificationCenter
     func requestNutritionDict(requestDate: Date) {
-        APIService.instance.getDailySum(date: requestDate) { (resultDict) in
+        APIService.instance.getDailySum(source: self, date: requestDate) { (resultDict) in
             if resultDict.count == 0 {
                 return
             }
@@ -96,8 +127,108 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         }
     }
 
-    @objc func onToggleLeftView() {
-        self.sideMenuController?.toggleLeftViewAnimated()
+    @objc func onSideMenuClick(_ notification: NSNotification) {
+        guard let position = notification.userInfo?["position"] as? Int else {return}
+        switch position {
+        case 0:
+            //home
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DietLens") as? HomeViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is HomeViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let homeVC = viewController as? HomeViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(homeVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 1:
+            //to food diary page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is FoodDiaryHistoryViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? FoodDiaryHistoryViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 2:
+            //to step counter page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC") as? StepCounterViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is StepCounterViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? StepCounterViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 3:
+            //to healthCenter page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "healthCenterVC") as? HealthCenterMainViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is HealthCenterMainViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? HealthCenterMainViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        case 4:
+            //to setting page
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsPage") as? SettingViewController {
+                if let navigator = self.navigationController {
+                    if navigator.viewControllers.contains(where: {
+                        return $0 is SettingViewController
+                    }) {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let targetVC = viewController as? SettingViewController {
+                                DispatchQueue.main.async {
+                                    navigator.popToViewController(targetVC, animated: false)
+                                }
+                            }
+                        }
+                    } else {
+                        navigator.pushViewController(dest, animated: false)
+                    }
+                }
+            }
+        default:
+            break
+        }
+        self.sideMenuController?.hideLeftView(animated: true, completionHandler: nil)
     }
 
     func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
@@ -115,60 +246,65 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         targetDict[3] =  (StringConstants.UIString.diaryIngredientUnit, preferences.double(forKey: PreferenceKey.carbohydrateTarget))
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        getDailyAccumulateCPF()
-        loadNutritionTarget()
         newsFeedTable.reloadData()
+        let preferences = UserDefaults.standard
+        let shouldPopUpFlag = !preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
+        if shouldPopUpFlag {
+            popUpDialog()
+            preferences.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
+        }
+        //show markView for tap
+//        let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+//        if shouldShowCoachMark {
+//            self.coachMarksController.start(on: self)
+//            preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+//        }
+    }
+
+    //popUp dialog
+    func popUpDialog() {
+        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "Please filling the profile page", postiveText: "To Profile Page", negativeText: "Stay At Home Page") { (isPositive) in
+            if isPositive {
+//                self.sideMenuController?.performSegue(withIdentifier: "MenutoProfile", sender: self)
+                let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "personalProfileNaVVC")
+                self.present(dest, animated: true, completion: nil)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //set status bar appearance
+        UIApplication.shared.statusBarStyle = .lightContent
         //setUp title
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         //SignPainterHouseScript 28.0
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as! [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.barTintColor = UIColor.clear
-//        self.navigationController?.view.backgroundColor = UIColor.clear
-//        self.navigationController?.navigationBar.isTranslucent =  true
+        //backbtn
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
-        //refresh nutrition part each time view apppear
-        requestNutritionDict(requestDate: Date())
+        if shouldRefreshMainPageNutrition {
+            loadNutritionTarget()
+            shouldRefreshMainPageNutrition = false
+        }
     }
 
     // calculate Nutrition Data & put into homePage
     func getDailyAccumulateCPF() {
-//        var foodDiaryList = [FoodDiaryModel]()
-//        foodDiaryList = FoodDiaryDBOperation.instance.getFoodDiaryByDate(date: DateUtil.formatGMTDateToString(date: Date()))!
-//        var dailyCarb: Float = 0
-//        var dailyProtein: Float = 0
-//        var dailyFat: Float = 0
-//
-//        for foodDiary in foodDiaryList {
-//            //quantity * weight divide 100g to get the multiply ratio
-//            let ratio = foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightValue * (foodDiary.quantity/100)
-//            dailyCarb += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate as NSString).floatValue * Float(ratio)//standard 300
-//            dailyProtein += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein as NSString).floatValue * Float(ratio) //standard 100
-//            dailyFat += (foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat as NSString).floatValue * Float(ratio) //standard 100
-//        }
     }
 
     @IBAction func presentCamera(_ sender: UIButton) {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
-//                let transition = CATransition()
-//                transition.duration = 0.3
-//                transition.type = kCATransitionMoveIn
-//                transition.subtype = kCATransitionFromTop
+                let transition = CATransition()
+                transition.duration = 0.3
+                transition.type = kCATransitionMoveIn
+                transition.subtype = kCATransitionFromTop
+                self.view.window?.layer.add(transition, forKey: kCATransition)
 //                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
                 navigator.pushViewController(dest, animated: true)
             }
@@ -183,7 +319,14 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     func didPressArticle(_ indexOfArticleList: Int) {
         articleType = ArticleType.ARTICLE
         whichArticleIndex = indexOfArticleList
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+//            dest.articleType = self.articleType
+            dest.articleData = ArticleDataManager.instance.articleList[indexOfArticleList]
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -226,9 +369,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         //navigate to article page
-        articleType = ArticleType.EVENT
-        whichEventIndex = indexPath.row - 1
-        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+            dest.articleData = ArticleDataManager.instance.eventList[indexPath.row - 1]
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
+//        performSegue(withIdentifier: "presentArticlePage", sender: self)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -328,6 +475,25 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(110), height: CGFloat(60))
+    }
+
+}
+
+extension HomeViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        coachViews.bodyView.nextLabel.text = "Got it"
+        coachViews.bodyView.hintLabel.text = " Tap to start "
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        return coachMarksController.helper.makeCoachMark(for: homePlusButton)
+    }
+
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
     }
 
 }

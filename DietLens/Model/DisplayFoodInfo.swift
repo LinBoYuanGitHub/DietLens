@@ -19,4 +19,6 @@ struct DisplayFoodInfo {
     var displayName: String = ""
     var exampleImgUrl: String = ""
     var calories: Double = 0.0
+    var unit: String = "100g"
+    var isMultiDish: Bool = false
 }

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "CNY edition.png",
+      "filename" : "Splash1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "CNY edition-1.png",
+      "filename" : "Splash2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "CNY edition-2.png",
+      "filename" : "Splash3x.png",
       "scale" : "3x"
     }
   ],

@@ -30,6 +30,9 @@ class FoodInfoViewController: UIViewController {
 
     @IBOutlet weak var mealIconView: UIImageView!
     @IBOutlet weak var mealViewHeight: NSLayoutConstraint!
+
+    let redUnderLine: UIView = UIView(frame: CGRect(x: 12, y: 32, width: 50, height: 2))
+
     //data source
 //    var foodInfoModel = FoodInfomationModel()
     var quantity = 1.0
@@ -47,11 +50,14 @@ class FoodInfoViewController: UIViewController {
 //    var isAddIntoFoodList = false
 //    var isAccumulatedDiary: Bool = false
     var imageKey: String?
+    var imageUrl: String?
+
     var isUpdate: Bool = false
     var shouldShowMealBar = true
     var currentIntegerPos = 1
     var currentDecimalPos = 0
     @IBOutlet weak var containerTopConstraints: NSLayoutConstraint!
+    @IBOutlet weak var animationLeading: NSLayoutConstraint!
 
     override func viewDidLoad() {
         //init foodInfo data -> setUp View
@@ -69,6 +75,7 @@ class FoodInfoViewController: UIViewController {
         //registration for resuable nib cellItem
         mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
+        mealCollectionView.isScrollEnabled = false
         //add notification for the keyboard
         NotificationCenter.default.addObserver(
             self,
@@ -118,20 +125,36 @@ class FoodInfoViewController: UIViewController {
         }
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-
     func setUpFoodValue() {
         foodName.text = dietItem.foodName
         var portionRate: Double = Double(dietItem.quantity) * 1.0
         if dietItem.portionInfo.count != 0 {
             portionRate = Double(dietItem.quantity) * dietItem.portionInfo[selectedPortionPos].weightValue/100
         }
-        calorieValueLabel.text = String(Int(dietItem.nutritionInfo.calorie * portionRate))+" "+StringConstants.UIString.calorieUnit
-        carbohydrateValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.carbohydrate * portionRate)+" "+StringConstants.UIString.diaryIngredientUnit
-        proteinValueLable.text = String(format: "%.1f", dietItem.nutritionInfo.protein * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
-        fatValueLabel.text = String(format: "%.1f", dietItem.nutritionInfo.fat * portionRate) + " "+StringConstants.UIString.diaryIngredientUnit
+        //calorieValue
+        let calorieStr = String(Int(dietItem.nutritionInfo.calorie * portionRate))+StringConstants.UIString.calorieUnit
+        let calorieText = NSMutableAttributedString.init(string: calorieStr)
+        calorieText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: calorieStr.count - 4, length: 4))
+        calorieValueLabel.attributedText = calorieText
+        //carbohydrateValue
+        let carbohydrateStr = String(format: "%.1f", dietItem.nutritionInfo.carbohydrate * portionRate)+StringConstants.UIString.diaryIngredientUnit
+        let carbohydrateText = NSMutableAttributedString.init(string: carbohydrateStr)
+        carbohydrateText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: carbohydrateStr.count - 1, length: 1))
+        carbohydrateValueLabel.attributedText = carbohydrateText
+        //protein
+        let proteinStr = String(format: "%.1f", dietItem.nutritionInfo.protein * portionRate) + StringConstants.UIString.diaryIngredientUnit
+        let proteinText = NSMutableAttributedString.init(string: proteinStr)
+        proteinText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: proteinStr.count - 1, length: 1))
+        proteinValueLable.attributedText = proteinText
+        //fat
+        let fatStr =  String(format: "%.1f", dietItem.nutritionInfo.fat * portionRate) + StringConstants.UIString.diaryIngredientUnit
+        let fatText = NSMutableAttributedString.init(string: fatStr)
+        fatText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: fatStr.count - 1, length: 1))
+        fatValueLabel.attributedText = fatText
     }
 
 /********************************************************
@@ -142,7 +165,12 @@ class FoodInfoViewController: UIViewController {
         quantityValue.inputAccessoryView = setUpPickerToolBar()
         quantityValue.inputView = quantityPickerView
         quantityValue.text = String(dietItem.quantity)
-        if dietItem.portionInfo.count == 0 {
+        if isUpdate {
+            //match portion by text
+            for portion in dietItem.portionInfo where portion.sizeUnit == dietItem.displayUnit {
+                    unitValue.text = portion.sizeUnit
+            }
+        } else if dietItem.portionInfo.count == 0 {
              unitValue.text = "portion"
         } else {
              unitValue.text = String(dietItem.portionInfo[dietItem.selectedPos].sizeUnit)
@@ -151,14 +179,20 @@ class FoodInfoViewController: UIViewController {
     }
 
     func setUpImage() {
-        if recordType ==  RecognitionInteger.recognition {
-            foodDiaryEntity.imageId = imageKey!
-            foodSampleImage.image = userFoodImage
-        } else if recordType == RecognitionInteger.barcode {
-            foodSampleImage.image = #imageLiteral(resourceName: "barcode_sample_icon")
-        } else {
-            foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
+        loadImageFromWeb(imageUrl: dietItem.sampleImageUrl)
+        if imageKey != nil {
+             foodDiaryEntity.imageId = imageKey!
         }
+    }
+
+    //load sample image from textSerch Item
+    func loadImageFromWeb(imageUrl: String?) {
+        if imageUrl == nil || imageUrl?.count == 0 {
+            foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
+        } else {
+            foodSampleImage.kf.setImage(with: URL(string: imageUrl!)!, placeholder: #imageLiteral(resourceName: "dietlens_sample_background"), options: nil, progressBlock: nil, completionHandler: nil)
+        }
+
     }
 
     @IBAction func onQuantityBtnClicked(_ sender: Any) {
@@ -171,48 +205,49 @@ class FoodInfoViewController: UIViewController {
 
     //used only when isNotAccumulate
     @objc func showUnitSelectionDialog() {
-//        let alert = UIAlertController(title: "", message: "Please select preferred unit", preferredStyle: UIAlertControllerStyle.actionSheet)
-//        for (index, portion) in dietItem.portionInfo.enumerated() {
-//            alert.addAction(UIAlertAction(title: portion.sizeUnit, style: UIAlertActionStyle.default, handler: { (_) in
-//                self.selectedPortionPos = index
-//                self.foodDiaryEntity.dietItems[0].selectedPos = index
-//                self.dietItem.selectedPos = index
-//                self.unitValue.text = portion.sizeUnit
-//                self.dietItem.displayUnit = portion.sizeUnit
-//                self.setUpFoodValue()
-//            }))
-//        }
-//        alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-        let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as! SingleOptionViewController
-        singleOptionAlert.delegate = self
-        singleOptionAlert.optionList.removeAll()
-        for portion in dietItem.portionInfo {
-            singleOptionAlert.optionList.append(portion.sizeUnit)
+        if let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as? SingleOptionViewController {
+            singleOptionAlert.delegate = self
+            singleOptionAlert.optionList.removeAll()
+            singleOptionAlert.selectedPosition = dietItem.selectedPos
+            for portion in dietItem.portionInfo {
+                singleOptionAlert.optionList.append(portion.sizeUnit)
+            }
+            singleOptionAlert.providesPresentationContextTransitionStyle = true
+            singleOptionAlert.definesPresentationContext = true
+            singleOptionAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            singleOptionAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(singleOptionAlert, animated: true, completion: {
+                self.setUpFoodValue()
+            })
         }
-        singleOptionAlert.providesPresentationContextTransitionStyle = true
-        singleOptionAlert.definesPresentationContext = true
-        singleOptionAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        singleOptionAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(singleOptionAlert, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        //set status bar appearance
+        UIApplication.shared.statusBarStyle = .default
+        //navigation controller
         self.navigationController?.navigationBar.isHidden = false
         if isUpdate {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.updateBtnText
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
     }
 
     override func viewDidAppear(_ animated: Bool) {
         //move indicator to correct position
-        UIView.animate(withDuration: 0.1, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.animationView.center.x = CGFloat(Float(self.currentMealIndex)*Float(80)) + CGFloat(10)
-        })
+        let indexPath = IndexPath(item: currentMealIndex, section: 0)
+        let destX = mealCollectionView.cellForItem(at: indexPath)?.center.x
+        if destX != nil {
+            UIView.animate(withDuration: 0.1, delay: 0.1,
+                           usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.animationLeading.constant = destX! + CGFloat(10)
+            })
+        }
     }
 
     //if not passing mealType, then use currentTime to set mealType
@@ -279,18 +314,39 @@ class FoodInfoViewController: UIViewController {
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(donePicker))
         doneButton.setBackgroundImage(#imageLiteral(resourceName: "RedOvalBackgroundImage"), for: .normal, barMetrics: UIBarMetrics.default)
-        doneButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+        doneButton.width = CGFloat(56)
+        doneButton.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName as NSAttributedStringKey: UIFont(name: "PingFangSC-Regular", size: 16)!], for: .normal)
         let scrollTabBtn = UIBarButtonItem(title: "Scroll", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToDatePicker))
         let keyboardBtn = UIBarButtonItem(title: "Keyboard", style: UIBarButtonItemStyle.plain, target: self, action: #selector(switchToKeyboard))
+        setUpBarItemTextFont(barItem: scrollTabBtn)
+        setUpBarItemTextFont(barItem: keyboardBtn)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         toolBar.setItems([scrollTabBtn, keyboardBtn, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
+        addRedUnderLine(toolBar: toolBar)
         return toolBar
+    }
+
+    func setUpBarItemTextFont(barItem: UIBarButtonItem) {
+        let textColor = UIColor(red: 94/255, green: 94/255, blue: 94/255, alpha: 1.0)
+        let attribute = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName as NSAttributedStringKey: UIFont(name: "PingFangSC-Light", size: 14)!]
+        barItem.setTitleTextAttributes(attribute, for: .normal)
+        barItem.setTitleTextAttributes(attribute, for: .selected)
+    }
+
+    func addRedUnderLine(toolBar: UIToolbar) {
+        redUnderLine.backgroundColor = UIColor(red: 242/255, green: 64/255, blue: 93/255, alpha: 1.0)
+        toolBar.addSubview(redUnderLine)
+        //first Item center
+        redUnderLine.center.x = CGFloat(37)
     }
 
     func isDietItemValied() -> Bool {
         if dietItem.quantity == 0 {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter a valid quantity")
+            return false
+        } else if dietItem.quantity > 100 {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter quantity less than 100")
             return false
         }
         return true
@@ -301,16 +357,19 @@ class FoodInfoViewController: UIViewController {
         if !isDietItemValied() {
             return
         }
+        NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
         if isUpdate {
             if let navigator = self.navigationController {
-                for vc in (navigator.viewControllers) {
-                    if let foodDiaryVC = vc as? FoodDiaryViewController {
+                for viewController in (navigator.viewControllers) {
+                    if let foodDiaryVC = viewController as? FoodDiaryViewController {
                         foodDiaryVC.isSetMealByTimeRequired = self.isSetMealByTimeRequired
                         foodDiaryVC.updateFoodInfoItem(dietItem: dietItem)
                         foodDiaryVC.calculateAccumulateFoodValue()
                     }
                 }
-                navigator.popViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    navigator.popViewController(animated: true)
+                }
             }
         } else if recordType == RecognitionInteger.additionText {
             //1.multiple times TextSearchItem 2.first time TextSearchItem
@@ -323,11 +382,13 @@ class FoodInfoViewController: UIViewController {
                         return $0 is FoodDiaryViewController
                     }) {
                         //add foodItem into foodDiaryVC
-                        for vc in (self.navigationController?.viewControllers)! {
-                            if let foodDiaryVC = vc as? FoodDiaryViewController {
+                        for viewController in (self.navigationController?.viewControllers)! {
+                            if let foodDiaryVC = viewController as? FoodDiaryViewController {
                                 foodDiaryVC.addFoodIntoItem(dietItem: dietItem)
                                 foodDiaryVC.calculateAccumulateFoodValue()
-                                navigator.popToViewController(foodDiaryVC, animated: true)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    navigator.popToViewController(foodDiaryVC, animated: true)
+                                }
                             }
                         }
                         //pop searchView & foodInfoView back to
@@ -339,40 +400,49 @@ class FoodInfoViewController: UIViewController {
                         dest.userFoodImage = userFoodImage
                         dest.foodDiaryEntity = foodDiaryEntity
                         //pop searchView & foodInfoView
-                        navigator.popViewController(animated: false)
-                        navigator.popViewController(animated: false)
-                        navigator.pushViewController(dest, animated: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                            navigator.popViewController(animated: false)
+                            navigator.popViewController(animated: false)
+                            navigator.pushViewController(dest, animated: true)
+                        }
                     }
-
                 }
             }
         } else {
             //redirect to foodDiary page
+            AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
-                if isSuccess {
-                    //request for saving FoodDiary
-                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodCalendarVC") as? FoodCalendarViewController {
-                        dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
-                        if let navigator = self.navigationController {
-                            //pop all the view except HomePage
-                            if navigator.viewControllers.contains(where: {
-                                return $0 is FoodCalendarViewController
-                            }) {
-                                //add foodItem into foodDiaryVC
-                                for vc in (self.navigationController?.viewControllers)! {
-                                    if let foodCalendarVC = vc as? FoodCalendarViewController {
-                                        navigator.popToViewController(foodCalendarVC, animated: true)
+                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                    if isSuccess {
+                        //request for saving FoodDiary
+                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
+                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
+                            if let navigator = self.navigationController {
+                                //pop all the view except HomePage
+                                if navigator.viewControllers.contains(where: {
+                                    return $0 is FoodCalendarViewController
+                                }) {
+                                    //add foodItem into foodDiaryVC
+                                    for viewController in (self.navigationController?.viewControllers)! {
+                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                            navigator.popToViewController(foodDiaryHistoryVC, animated: true)
+                                                foodDiaryHistoryVC.shouldRefreshDiary = true
+                                            }
+                                        }
                                     }
+                                } else {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                        navigator.popToRootViewController(animated: false)
+                                        navigator.pushViewController(dest, animated: true)
+                                        dest.shouldRefreshDiary = true
+                                    })
                                 }
-                            } else {
-                                navigator.popToRootViewController(animated: false)
-                                navigator.pushViewController(dest, animated: true)
                             }
                         }
                     }
                 }
             })
-
         }
     }
 
@@ -396,16 +466,20 @@ class FoodInfoViewController: UIViewController {
         if quantityValue.inputView != nil {
             let quantityPos =  quantityPickerView.selectedRow(inComponent: 0)
             let decimalPos = quantityPickerView.selectedRow(inComponent: 1)
-            quantityValue.text = String(Double(quantityIntegerArray[quantityPos])+Double(decimalArray[decimalPos]))
+            dietItem.quantity = Double(quantityIntegerArray[quantityPos])+Double(decimalArray[decimalPos])
+            quantityValue.text = String(dietItem.quantity)
         }
     }
 
     @objc func switchToDatePicker() {
+        redUnderLine.center.x = CGFloat(37)
         quantityValue.inputView = quantityPickerView
         quantityValue.reloadInputViews()
     }
 
     @objc func switchToKeyboard() {
+        redUnderLine.center.x = CGFloat(100)
+        quantityValue.selectAll(nil)
         quantityValue.inputView = nil
         quantityValue.keyboardType = UIKeyboardType.decimalPad
         quantityValue.reloadInputViews()
@@ -487,7 +561,7 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
         //switch collection selection
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.animationView.center.x = destX! + 50
+             self.animationLeading.constant = destX! + CGFloat(10)
         })
     }
 
@@ -510,6 +584,7 @@ extension FoodInfoViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == quantityValue {
+            quantityValue.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
             quantityPickerView.selectRow(currentIntegerPos, inComponent: 0, animated: false)
             quantityPickerView.selectRow(currentDecimalPos, inComponent: 1, animated: false)
             return true
@@ -533,6 +608,7 @@ extension FoodInfoViewController: SingleOptionAlerViewDelegate {
 
     func onSaveBtnClicked(selectedPosition: Int) {
         let portion = self.dietItem.portionInfo[selectedPosition]
+        self.selectedPortionPos = selectedPosition
         self.foodDiaryEntity.dietItems[0].selectedPos = selectedPosition
         self.dietItem.selectedPos = selectedPosition
         self.dietItem.displayUnit = portion.sizeUnit

@@ -11,9 +11,11 @@ import UIKit
 class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     var emailFromLogin: String = ""
     @IBOutlet weak var emailAddr: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         emailAddr.delegate = self
+        hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
 
@@ -44,24 +46,23 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func cfmEmailPressed(_ sender: Any) {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
-            // TODO:Call backend server
+            // call backend server
             AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess) in
                 if isSuccess {
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self)
-                    AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
-                        if isPositive {
-                            self.dismiss(animated: true, completion: nil)
-                        } else {
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    })
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
+                            if isPositive {
+                                self.dismiss(animated: true, completion: nil)
+                            } else {
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                        })
+                    }
                 } else {
-                    DispatchQueue.main.async {
-                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                         self.alertWithTitle(title: "Error", message: "No such email found!", viewController: self, toFocus: self.emailAddr)
                     }
-
                 }
             }
             // With 2FA
@@ -103,4 +104,16 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
         viewController.present(alert, animated: true, completion: nil)
     }
 
+}
+
+extension ForgetPasswordEmailViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

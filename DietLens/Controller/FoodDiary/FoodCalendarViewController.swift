@@ -9,7 +9,7 @@
 import UIKit
 import FSCalendar
 
-class FoodCalendarViewController: UIViewController {
+class FoodCalendarViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var foodCalendarTableView: UITableView!
     @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
@@ -19,8 +19,8 @@ class FoodCalendarViewController: UIViewController {
     @IBOutlet weak var nutritionCollectionView: UICollectionView!
     @IBOutlet weak var calendarBtn: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var calendarClickableView: UIButton!
 
-    //dataSource
     var foodMealList = [FoodDiaryMealEntity]()
     var displayDict = [Int: (String, Double)]()
     var targetDict = [Int: (String, Double)]()
@@ -29,6 +29,8 @@ class FoodCalendarViewController: UIViewController {
     var selectedDate = Date()
     var selectedFoodDiary: FoodDiaryEntity?
     var selectedImage: UIImage?
+
+    var shouldRefreshDiary = true
 
     //calendar date attribute
     var datesWithEvent = [Date]()
@@ -64,12 +66,15 @@ class FoodCalendarViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
             controller.selectedDate = selectedDate
-            present(controller, animated: true, completion: nil)
+            if let navigator = self.navigationController {
+                navigator.pushViewController(controller, animated: true)
+            }
+//            present(controller, animated: true, completion: nil)
         }
     }
 
     func loadDailyNutritionView() {
-        APIService.instance.getDailySum(date: selectedDate) { (resultDict) in
+        APIService.instance.getDailySum(source: self, date: selectedDate) { (resultDict) in
             if resultDict.count == 0 {
                 return
             }
@@ -79,9 +84,8 @@ class FoodCalendarViewController: UIViewController {
         }
     }
 
-    func assembleDisplayDict(nutritionDict: Dictionary<String, Double>) {
-        //TODO handle hardcode display
-        displayDict[0] = ("CALORIE", nutritionDict["energy"]!)
+    func assembleDisplayDict(nutritionDict: [String: Double]) {
+        displayDict[0] = ("CALORIE", floor(nutritionDict["energy"]!))
         displayDict[1] = ("PROTEIN", nutritionDict["protein"]!)
         displayDict[2] = ("FAT", nutritionDict["fat"]!)
         displayDict[3] = ("CARB", nutritionDict["carbohydrate"]!)
@@ -97,16 +101,23 @@ class FoodCalendarViewController: UIViewController {
 
     @IBAction func showCalendar(_ sender: Any) {
         bringInCalendar(sender)
+//        if let calendarDialog = self.storyboard?.instantiateViewController(withIdentifier: "calendarDialogVC") as? CalendarDialogViewController {
+//            calendarDialog.calendarDelegate = self
+//            calendarDialog.providesPresentationContextTransitionStyle = true
+//            calendarDialog.preferredContentSize = CGSize(width: self.view.frame.width, height: 300)
+//            calendarDialog.popoverPresentationController?.permittedArrowDirections = .down
+//            calendarDialog.modalPresentationStyle = UIModalPresentationStyle.popover
+//            //set up popover presentation controller
+//            calendarDialog.popoverPresentationController?.backgroundColor = UIColor.white
+//            calendarDialog.popoverPresentationController?.sourceView = self.calendarBtn
+//            calendarDialog.popoverPresentationController?.sourceRect = calendarBtn.bounds
+//            calendarDialog.popoverPresentationController?.delegate = self
+//            self.present(calendarDialog, animated: true, completion: nil)
+//        }
     }
 
-    @IBAction func onBackPressed(_ sender: Any) {
-        if self.navigationController!.viewControllers.count > 1 {
-            self.navigationController?.popViewController(animated: false)
-            self.navigationController?.popViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
-
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
 
     func registerNib() {
@@ -135,17 +146,28 @@ class FoodCalendarViewController: UIViewController {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    func refreshFoodDiaryData() {
         getFoodDairyByDate(date: selectedDate)
         let dateStr = DateUtil.normalDateToString(date: selectedDate)
         getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
+        //set refresh falg to false
+        shouldRefreshDiary = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        //set status bar appearance
+        UIApplication.shared.statusBarStyle = .default
+        //navigation controller
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         loadDailyNutritionView()
+        //load available date & load calendar data
+        if shouldRefreshDiary {
+            refreshFoodDiaryData()
+        }
         self.foodCalendarTableView.reloadData()
     }
 
@@ -180,15 +202,17 @@ class FoodCalendarViewController: UIViewController {
             //mark redDot for this date
             if dateList != nil {
                 self.datesWithEvent = dateList!
-                self.diaryCalendar.reloadData()
             }
+            self.diaryCalendar.reloadData()
         }
     }
 
     //get foodDiary form date
     func getFoodDairyByDate(date: Date) {
         let dateStr = DateUtil.normalDateToString(date: date)
+        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.getFoodDiaryByDate(selectedDate: dateStr) { (foodDiaryList) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if foodDiaryList == nil {
                 let emptyList = [FoodDiaryEntity]()
                 self.assembleMealList(foodDiaryList: emptyList)
@@ -274,11 +298,15 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.deleteFoodDiary(foodDiaryId: foodMealList[indexPath.section].foodEntityList[indexPath.row].foodDiaryId, completion: { (_) in
-                self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                tableView.reloadData()
-                self.loadDailyNutritionView()//recalculate nutrition info
+                NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
+                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                    self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    tableView.reloadData()
+                    self.loadDailyNutritionView()//recalculate nutrition info
+                }
             })
         }
     }
@@ -312,7 +340,11 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
     func calculateCalorie(foodEntity: FoodDiaryEntity) -> Int {
         var accumulatedCalorie = 0
         for dietItem in foodEntity.dietItems {
-            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie*dietItem.quantity)
+            var ratio = dietItem.quantity
+            if dietItem.portionInfo.count != 0 {
+                ratio = dietItem.quantity*dietItem.portionInfo[dietItem.selectedPos].weightValue/100
+            }
+            accumulatedCalorie += Int(dietItem.nutritionInfo.calorie*ratio)
         }
         return accumulatedCalorie
     }
@@ -320,9 +352,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
     func calculateCalorie(foodEntityList: [FoodDiaryEntity]) -> Int {
         var accumulatedCalorie = 0
         for foodEntity in foodEntityList {
-            for dietItem in foodEntity.dietItems {
-                accumulatedCalorie += Int(dietItem.nutritionInfo.calorie*dietItem.quantity)
-            }
+            accumulatedCalorie += calculateCalorie(foodEntity: foodEntity)
         }
         return accumulatedCalorie
     }
@@ -360,24 +390,21 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                 //download image from Qiniu
                 AlertMessageHelper.showLoadingDialog(targetController: self)
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self)
-                    dest.isSetMealByTimeRequired = false
-                    dest.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
-                    dest.isUpdate = true
-                    dest.imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
-                    if image != nil {
-                        dest.userFoodImage = image
-                    } else {
-                        dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                        dest.isSetMealByTimeRequired = false
+                        dest.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
+                        dest.isUpdate = true
+                        dest.imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
+                        if image != nil {
+                            dest.userFoodImage = image
+                        } else {
+                            dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                        }
+                        if let navigator = self.navigationController {
+                            navigator.pushViewController(dest, animated: true)
+                        }
                     }
-                    if let navigator = self.navigationController {
-                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1, execute: {
-                             navigator.pushViewController(dest, animated: true)
-                        })
-                    }
-
                 })
-
             }
         }
 
@@ -387,29 +414,35 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "calendarSectionHeader") as? FoodCalendarSectionHeader else {
             return UITableViewHeaderFooterView()
         }
+        header.contentView.backgroundColor = UIColor.white
         let meal = foodMealList[section].meal
         switch meal {
         case StringConstants.MealString.breakfast:
             header.mealLabel.text = StringConstants.MealString.breakfast
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         case StringConstants.MealString.lunch:
             header.mealLabel.text = StringConstants.MealString.lunch
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         case StringConstants.MealString.dinner:
             header.mealLabel.text = StringConstants.MealString.dinner
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         case StringConstants.MealString.snack:
             header.mealLabel.text = StringConstants.MealString.snack
-            header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         default:
             break
         }
+        header.calorieLable.text = String(calculateCalorie(foodEntityList: foodMealList[section].foodEntityList))+StringConstants.UIString.calorieUnit
         return header
     }
 
 }
 
 extension FoodCalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        let currentMonth = DateUtil.formatMonthToString(date: calendar.currentPage)
+        if DateUtil.formatMonthToString(date: date) == currentMonth {
+            return #colorLiteral(red: 0.2319577109, green: 0.2320933503, blue: 0.2404021281, alpha: 1)
+        }
+        return #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         for dateWithEvent in datesWithEvent {
@@ -448,10 +481,6 @@ extension FoodCalendarViewController: FSCalendarDelegate, FSCalendarDataSource, 
         return nil
     }
 
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        return #colorLiteral(red: 0.2319577109, green: 0.2320933503, blue: 0.2404021281, alpha: 1)
-    }
-
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, borderDefaultColorFor date: Date) -> UIColor? {
         if Calendar.current.isDate(Date(), inSameDayAs: date) {
             return #colorLiteral(red: 0.9961311221, green: 0.3479750156, blue: 0.3537038565, alpha: 1)
@@ -467,6 +496,25 @@ extension FoodCalendarViewController: FSCalendarDelegate, FSCalendarDataSource, 
         let currentDate = calendar.currentPage
         let dateStr = DateUtil.normalDateToString(date: currentDate)
         getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
-//        getFoodDairyByDate(date: currentDate)
     }
+}
+
+extension FoodCalendarViewController: CalendarAlertDelegate {
+
+    func onCalendarDateSelected(selectedDate: Date) {
+        let later = DispatchTime.now() + 0.3
+        DispatchQueue.main.asyncAfter(deadline: later) {
+            self.dismissCalendar(selectedDate)
+            self.selectedDate = selectedDate
+            self.dateLabel.text = self.formatter.string(from: selectedDate)
+            self.getFoodDairyByDate(date: selectedDate)
+            self.loadDailyNutritionView()
+        }
+    }
+
+    func onCalendarCurrentPageDidChange(changedDate: Date) {
+        let dateStr = DateUtil.normalDateToString(date: changedDate)
+        getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
+    }
+
 }

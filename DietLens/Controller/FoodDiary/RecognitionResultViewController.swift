@@ -38,6 +38,15 @@ class RecognitionResultViewController: UIViewController {
         foodImage.image = cameraImage
         foodOptionTable.delegate = self
         foodOptionTable.dataSource = self
+        //add footerView
+        let footerView = UIView()
+        let seperatorLine = UIView()
+        seperatorLine.frame = CGRect(x: 16, y: 0, width: foodOptionTable.fs_width, height: 0.5)
+        seperatorLine.backgroundColor = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1)
+        footerView.addSubview(seperatorLine)
+        footerView.fs_height = 60
+        foodOptionTable.tableFooterView = footerView
+        //food category delegate
         foodCategory.delegate = self
         foodCategory.dataSource = self
     }
@@ -87,24 +96,29 @@ class RecognitionResultViewController: UIViewController {
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
-            if dietItem == nil {
-                return
-            }
-            var entity = dietItem!
-            entity.recordType = RecognitionInteger.recognition
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-                dest.userFoodImage = self.cameraImage
-                dest.dietItem = entity
-                dest.recordType = entity.recordType
-                dest.imageKey = self.imageKey
-                //mealTime & mealType
-                dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
-                dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                dest.foodDiaryEntity.mealType = self.mealType!
-                if let navigator = self.navigationController {
-                    //clear controller to Bottom & add foodCalendar Controller
-                    navigator.pushViewController(dest, animated: true)
+            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                if dietItem == nil {
+                    return
+                }
+                var entity = dietItem!
+                if entity.isMixFood {
+                    self.redirectToFoodDiaryPage()
+                    return
+                }
+                entity.recordType = RecognitionInteger.recognition
+                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                    dest.userFoodImage = self.cameraImage
+                    dest.dietItem = entity
+                    dest.recordType = entity.recordType
+                    dest.imageKey = self.imageKey
+                    //mealTime & mealType
+                    dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
+                    dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                    dest.foodDiaryEntity.mealType = self.mealType!
+                    if let navigator = self.navigationController {
+                        //clear controller to Bottom & add foodCalendar Controller
+                        navigator.pushViewController(dest, animated: true)
+                    }
                 }
             }
         }
@@ -120,8 +134,9 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recognitonResultCell") as? RecognitionResultTableCell
-        let calorieValue = String(foodCategoryList[categoryIndex].subcateFoodList[indexPath.row].calories)+StringConstants.UIString.calorieUnit
-        cell?.setUpCell(foodName: foodCategoryList[categoryIndex].subcateFoodList[indexPath.row].displayName, imageUrl: foodCategoryList[categoryIndex].subcateFoodList[indexPath.row].exampleImgUrl, calorieText: calorieValue)
+        let entity = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
+        let calorieValue = String(Int(entity.calories))+StringConstants.UIString.calorieUnit
+        cell?.setUpCell(foodName: entity.displayName, imageUrl: entity.exampleImgUrl, calorieText: calorieValue, unitText: entity.unit)
         return cell!
     }
 
@@ -133,6 +148,23 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 52
+    }
+
+    func redirectToFoodDiaryPage() {
+        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+            dest.userFoodImage = self.cameraImage
+            dest.imageKey = self.imageKey
+            dest.isMixVeg = true
+            dest.isUpdate = false
+            //mealTime & mealType
+            dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
+            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+            dest.foodDiaryEntity.mealType = self.mealType!
+            if let navigator = self.navigationController {
+                //clear controller to Bottom & add foodCalendar Controller
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
 }

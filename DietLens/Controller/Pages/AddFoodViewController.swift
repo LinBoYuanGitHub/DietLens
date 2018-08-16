@@ -6,10 +6,13 @@
 //  Copyright © 2017 NExT++. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import XLPagerTabStrip
+import CoreLocation
 
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
+
     var addFoodDate = Date()
     var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true
@@ -30,6 +33,8 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        //set status bar appearance
+        UIApplication.shared.statusBarStyle = .lightContent
         self.containerView.isScrollEnabled = false
         self.navigationController?.navigationBar.isHidden = true
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
@@ -56,7 +61,6 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
         }
-
         super.viewDidLoad()
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
@@ -64,11 +68,11 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
-//        let transition = CATransition()
-//        transition.duration = 0.3
-//        transition.type = kCATransitionReveal
-//        transition.subtype = kCATransitionFromBottom
-//        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-        self.navigationController?.popViewController(animated: false)
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionReveal
+        transition.subtype = kCATransitionFromBottom
+        self.view.window?.layer.add(transition, forKey: kCATransition)
+        self.navigationController?.popViewController(animated: true)
     }
 }

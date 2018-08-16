@@ -7,79 +7,51 @@
 //
 
 import UIKit
+
 class HealthCenterViewController: UIViewController {
 
-    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var healthCenterTable: UITableView!
-
-    var selectedDeviceType = ""
-    var selectedDeviceUnit = ""
+//    var recordList = [HealthCenterItem]()
 
     override func viewDidLoad() {
         healthCenterTable.delegate = self
         healthCenterTable.dataSource = self
+        healthCenterTable.tableFooterView = UIView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        healthCenterTable.reloadData()
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
+        //navigation controller
+        self.navigationController?.navigationBar.isHidden = false
+        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as! [NSAttributedStringKey: Any]
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
 
-    @IBAction func onBackPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
 }
+
 extension HealthCenterViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+//        return recordList.count
+        return 3
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 130
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TODO search last record from the database
-        let latestWeight: HealthRecord = HealthCenterDBOperation.instance.getLatestResultOfRecord(recordType: "Weight")
-        let latestBloodGlucose: HealthRecord = HealthCenterDBOperation.instance.getLatestResultOfRecord(recordType: "BloodGlucose")
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "healthCenterToolCell") as? HealthToolCell {
-            switch indexPath.row {
-                case (0):
-                    cell.setupCell(icon: #imageLiteral(resourceName: "weightDevice"), title: "WEIGHT", lastRecord: String(latestWeight.value)+latestWeight.unit)
-                    break
-                case (1):
-                     cell.setupCell(icon: #imageLiteral(resourceName: "bloodGlucoseDevice"), title: "BLOOD GLUCOSE", lastRecord: String(latestBloodGlucose.value)+latestBloodGlucose.unit)
-                    break
-                default:
-                    break
-            }
-            return cell
-        } else {
-            return UITableViewCell()
-        }
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: "healthCenterMainCell", for: indexPath) as? HealthCenterMainCell {
+//            let entity = recordList[indexPath.row]
+//            cell.setUpCell(recordType: entity.type, latestValue: String(entity.value) + entity.unit , dateTime: "Today,6:06PM")
+//        }
+        return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case (0):
-            selectedDeviceType = "Weight"
-            selectedDeviceUnit = "KG"
-            break
-        case (1):
-            selectedDeviceType = "BloodGlucose"
-            selectedDeviceUnit = "mmol/L"
-            break
-        default:
-            break
-        }
-        performSegue(withIdentifier: "toHealthCenterDetail", sender: nil)
-    }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? DeviceRecordDetailViewController {
-            dest.deviceType = selectedDeviceType
-            dest.unit = selectedDeviceUnit
-        }
     }
 
 }

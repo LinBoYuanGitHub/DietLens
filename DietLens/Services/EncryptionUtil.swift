@@ -11,6 +11,7 @@ import CryptoSwift
 
 class EncryptionUtil {
 
+    //for generate QiniuToken to download image
     public static func generateQiniuDownloadToken(originalURL: String, accessKey: String) -> String {
         do {
             let hmac = try HMAC(key: QiniuConfig.secretKey, variant: .sha1)

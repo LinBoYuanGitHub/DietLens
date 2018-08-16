@@ -62,12 +62,12 @@ class MockedUpFoodData {
         waterMelon.exampleImgUrl = "http://137.132.179.21:8002/media/sampleImage/125.png"
         waterMelon.calories = 37.1
         bestMatch.subcateFoodList.append(waterMelon)
-        var Guava = DisplayFoodInfo()
-        Guava.id = 2
-        Guava.displayName = "Guava"
-        Guava.exampleImgUrl = "http://137.132.179.21:8002/media/sampleImage/2.png"
-        Guava.calories = 46
-        bestMatch.subcateFoodList.append(Guava)
+        var guava = DisplayFoodInfo()
+        guava.id = 2
+        guava.displayName = "Guava"
+        guava.exampleImgUrl = "http://137.132.179.21:8002/media/sampleImage/2.png"
+        guava.calories = 46
+        bestMatch.subcateFoodList.append(guava)
         resultList.append(bestMatch)
         //subcat1
         var subcat1 = DisplayFoodCategory()
@@ -75,7 +75,7 @@ class MockedUpFoodData {
         subcat1.subcatImageUrl = "http://137.132.179.21:8002/media/sampleImage/125.png"
         subcat1.subcateFoodList = [DisplayFoodInfo]()
         subcat1.subcateFoodList.append(waterMelon)
-        subcat1.subcateFoodList.append(Guava)
+        subcat1.subcateFoodList.append(guava)
         resultList.append(subcat1)
         //subcat2
         var subcat2 = DisplayFoodCategory()
@@ -83,7 +83,7 @@ class MockedUpFoodData {
         subcat2.subcatImageUrl = "http://137.132.179.21:8002/media/sampleImage/2.png"
         subcat2.subcateFoodList = [DisplayFoodInfo]()
         subcat2.subcateFoodList.append(waterMelon)
-        subcat2.subcateFoodList.append(Guava)
+        subcat2.subcateFoodList.append(guava)
         resultList.append(subcat2)
         return resultList
     }
