@@ -36,6 +36,15 @@
                                     <action selector="capturePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WKQ-K6-Yb9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gef-5q-GdC" userLabel="Gallery" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
+                                <rect key="frame" x="16" y="607" width="77" height="22"/>
+                                <state key="normal" title="Gallery" image="galleryIcon">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchToGallery:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9m2-g4-aLX"/>
+                                </connections>
+                            </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z2p-uY-GfY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                 <subviews>
@@ -117,79 +126,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ph0-jG-JM2" userLabel="selectionView">
-                                <rect key="frame" x="0.0" y="686" width="414" height="20"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRT-dK-6dM" userLabel="Record">
-                                        <rect key="frame" x="16" y="-6" width="45" height="32"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                                        <state key="normal" title="Gallery">
-                                            <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="switchToGallery:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Sfq-g5-fKm"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCj-6P-mHF" userLabel="Photo">
-                                        <rect key="frame" x="187.66666666666666" y="-6" width="39" height="32"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                                        <state key="normal" title="Photo">
-                                            <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="capturePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o5K-SC-fYn"/>
-                                            <action selector="switchToPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mdk-ii-az0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUJ-G6-RPv">
-                                        <rect key="frame" x="343" y="-6" width="55" height="32"/>
-                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                                        <state key="normal" title="Barcode">
-                                            <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="switchToBarcode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h5t-6I-WZb"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="7HJ-5v-hpt"/>
-                                    <constraint firstItem="uCj-6P-mHF" firstAttribute="centerY" secondItem="ph0-jG-JM2" secondAttribute="centerY" id="Kmd-fU-fre"/>
-                                    <constraint firstItem="eRT-dK-6dM" firstAttribute="centerY" secondItem="ph0-jG-JM2" secondAttribute="centerY" id="XrC-du-3ie"/>
-                                    <constraint firstItem="eRT-dK-6dM" firstAttribute="leading" secondItem="ph0-jG-JM2" secondAttribute="leading" constant="16" id="bmS-RB-yX1"/>
-                                    <constraint firstItem="uCj-6P-mHF" firstAttribute="centerX" secondItem="ph0-jG-JM2" secondAttribute="centerX" id="pjB-hg-cbE"/>
-                                    <constraint firstItem="rUJ-G6-RPv" firstAttribute="centerY" secondItem="ph0-jG-JM2" secondAttribute="centerY" id="pjU-nS-abq"/>
-                                    <constraint firstAttribute="trailing" secondItem="rUJ-G6-RPv" secondAttribute="trailing" constant="16" id="q5F-Gj-Syp"/>
-                                </constraints>
-                            </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWM-zY-rPF" userLabel="LoadingView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
@@ -253,7 +189,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="ph0-jG-JM2" firstAttribute="bottom" secondItem="nyU-fN-aJh" secondAttribute="bottom" constant="-30" id="67k-iy-gZu"/>
                             <constraint firstItem="Z2p-uY-GfY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6Vm-pY-94W"/>
                             <constraint firstItem="uD5-2X-vYT" firstAttribute="leading" secondItem="Z2p-uY-GfY" secondAttribute="leading" id="7ej-AH-n47"/>
                             <constraint firstItem="nyU-fN-aJh" firstAttribute="trailing" secondItem="Z2p-uY-GfY" secondAttribute="trailing" id="7jZ-Ze-UA8"/>
@@ -263,33 +198,31 @@
                             <constraint firstItem="uD5-2X-vYT" firstAttribute="bottom" secondItem="Z2p-uY-GfY" secondAttribute="bottom" id="BsC-kw-Tmf"/>
                             <constraint firstAttribute="trailing" secondItem="Z2p-uY-GfY" secondAttribute="trailing" id="C5V-PG-pmP"/>
                             <constraint firstItem="diM-8N-scT" firstAttribute="centerX" secondItem="nyU-fN-aJh" secondAttribute="centerX" id="Eg7-nd-h8G"/>
+                            <constraint firstItem="gef-5q-GdC" firstAttribute="top" secondItem="diM-8N-scT" secondAttribute="centerY" id="MIn-Wq-MTt"/>
                             <constraint firstItem="kWM-zY-rPF" firstAttribute="trailing" secondItem="nyU-fN-aJh" secondAttribute="trailing" id="Ozh-bk-mqa"/>
                             <constraint firstItem="kWM-zY-rPF" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="Unu-HW-GR8"/>
                             <constraint firstItem="Z2p-uY-GfY" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="VLy-bH-QxL"/>
                             <constraint firstItem="dgc-nV-BWn" firstAttribute="width" secondItem="nyU-fN-aJh" secondAttribute="width" id="W0g-PT-hCp"/>
                             <constraint firstItem="kWM-zY-rPF" firstAttribute="leading" secondItem="nyU-fN-aJh" secondAttribute="leading" id="Zhz-mo-bZZ"/>
-                            <constraint firstItem="ph0-jG-JM2" firstAttribute="centerX" secondItem="nyU-fN-aJh" secondAttribute="centerX" id="cvf-d5-SGs"/>
+                            <constraint firstItem="gef-5q-GdC" firstAttribute="leading" secondItem="nyU-fN-aJh" secondAttribute="leading" constant="16" id="cqR-Up-jLM"/>
                             <constraint firstItem="nyU-fN-aJh" firstAttribute="leading" secondItem="dgc-nV-BWn" secondAttribute="leading" id="jWR-CE-NtK"/>
                             <constraint firstItem="nyU-fN-aJh" firstAttribute="bottom" secondItem="diM-8N-scT" secondAttribute="bottom" constant="99" id="m3w-vv-37C"/>
                             <constraint firstItem="kWM-zY-rPF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qJP-BM-J85"/>
                             <constraint firstItem="uD5-2X-vYT" firstAttribute="trailing" secondItem="Z2p-uY-GfY" secondAttribute="trailing" id="siN-DM-x44"/>
                             <constraint firstItem="Z2p-uY-GfY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uB3-bI-tKr"/>
-                            <constraint firstItem="ph0-jG-JM2" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="xB1-YZ-6vu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nyU-fN-aJh"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="barcodeButton" destination="rUJ-G6-RPv" id="r5c-if-mLf"/>
                         <outlet property="cameraUnavailableLabel" destination="zf0-db-esM" id="P9W-lb-Pb8"/>
                         <outlet property="capturePhotoButton" destination="diM-8N-scT" id="XQ0-yi-HOt"/>
                         <outlet property="chosenImageView" destination="uD5-2X-vYT" id="j0O-KV-C0Q"/>
+                        <outlet property="galleryBtn" destination="gef-5q-GdC" id="Cdv-GG-Izp"/>
                         <outlet property="loadingScreen" destination="kWM-zY-rPF" id="4C1-hm-qZC"/>
-                        <outlet property="photoButton" destination="uCj-6P-mHF" id="Ha8-ua-hxy"/>
                         <outlet property="previewContainer" destination="Z2p-uY-GfY" id="Q2m-mi-hge"/>
                         <outlet property="sampleImagCollectionView" destination="qCa-hF-RiK" id="cYh-BR-vSn"/>
-                        <outlet property="selectionView" destination="ph0-jG-JM2" id="HH5-Ub-lCx"/>
                         <outlet property="uploadPercentageLabel" destination="lx8-Up-GlH" id="wo4-yF-LeU"/>
                         <segue destination="eXk-Vq-hJQ" kind="show" identifier="showResultPage" id="vLb-IZ-InB"/>
                     </connections>
@@ -3296,6 +3229,7 @@
         <image name="cross" width="20" height="20"/>
         <image name="dietlens_sample_background" width="333" height="222"/>
         <image name="floatingBtn" width="184" height="32"/>
+        <image name="galleryIcon" width="20" height="20"/>
         <image name="imageView:33n-zZ-8yu:image" width="6" height="6">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU

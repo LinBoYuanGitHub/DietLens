@@ -137,6 +137,7 @@
 		3FEC34542057D1380060099A /* diaryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC34532057D1380060099A /* diaryHeader.xib */; };
 		3FEC3456205A76190060099A /* FoodDiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC3455205A76190060099A /* FoodDiaryModel.swift */; };
 		3FF3B97C20EB6EED00E428C1 /* RulerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B97B20EB6EED00E428C1 /* RulerLayout.swift */; };
+		3FF8950A212AC04500495B0C /* BottomLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF89509212AC04500495B0C /* BottomLabelButton.swift */; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
 		3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */; };
@@ -370,6 +371,7 @@
 		3FEC34532057D1380060099A /* diaryHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = diaryHeader.xib; sourceTree = "<group>"; };
 		3FEC3455205A76190060099A /* FoodDiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryModel.swift; sourceTree = "<group>"; };
 		3FF3B97B20EB6EED00E428C1 /* RulerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerLayout.swift; sourceTree = "<group>"; };
+		3FF89509212AC04500495B0C /* BottomLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLabelButton.swift; sourceTree = "<group>"; };
 		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
 		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
 		3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDataManager.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				3FB791082106155C000D6A94 /* LoadingFooterView.swift */,
 				3FB7910C2107061F000D6A94 /* LoadingButton.swift */,
 				3F13694621086FF8007D9772 /* ActionDisabledTextField.swift */,
+				3FF89509212AC04500495B0C /* BottomLabelButton.swift */,
 			);
 			path = CustomizedView;
 			sourceTree = "<group>";
@@ -1497,6 +1500,7 @@
 				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,
 				3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */,
 				3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */,
+				3FF8950A212AC04500495B0C /* BottomLabelButton.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,

@@ -12,11 +12,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet private weak var cameraUnavailableLabel: UILabel!
 
-    @IBOutlet private weak var photoButton: UIButton!
-
     // MARK: Scanning barcodes
-    @IBOutlet weak var barcodeButton: UIButton!
-    @IBOutlet weak var selectionView: UIView!
     @IBOutlet weak var chosenImageView: UIImageView!
 
     private let sessionManager = CameraSessionManager()
@@ -60,6 +56,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     var latitude = 0.0
     var longitude = 0.0
 
+    @IBOutlet weak var galleryBtn: ExpandedUIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         hideReview()
@@ -83,8 +81,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.onViewWillAppear()
         sampleImagCollectionView.delegate = self
         sampleImagCollectionView.dataSource = self
-        barcodeButton.setTitleColor(UIColor.lightGray, for: .disabled)
         sampleImagCollectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        //gallery button
+        galleryBtn.centerVertically()
         //set up location manager
         if CLLocationManager.locationServicesEnabled() {
             enableLocationServices()
@@ -143,16 +142,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.capturePhoto()
     }
 
-    @IBAction func switchToPhoto(_ sender: UIButton) {
-//        capturePhotoButton.isEnabled = true
-//        capturePhotoButton.tintColor = UIColor.red
-//        sessionManager.set(captureMode: .photo)
-    }
-
-    @IBAction func switchToBarcode(_ sender: UIButton) {
-        sessionManager.set(captureMode: .barcode)
-        barcodeButton.tintColor = UIColor.red
-    }
+//    @IBAction func switchToBarcode(_ sender: UIButton) {
+//        sessionManager.set(captureMode: .barcode)
+//    }
 
     @IBAction func switchToGallery(_ sender: UIButton) {
         present(imagePicker, animated: false, completion: nil)
@@ -458,14 +450,12 @@ extension CameraViewController {
         capturePhotoButton.showLoading()
         capturePhotoButton.isEnabled = false
         capturePhotoButton.setImage(nil, for: .normal)
-        selectionView.isHidden = true
 //        reviewImagePalette.isHidden = false
     }
 
     private func hideReview() {
         chosenImageView.isHidden = true
         capturePhotoButton.isHidden = false
-        selectionView.isHidden = false
         capturePhotoButton.hideLoading()
         capturePhotoButton.isEnabled = true
         capturePhotoButton.setImage(#imageLiteral(resourceName: "capture"), for: .normal)
