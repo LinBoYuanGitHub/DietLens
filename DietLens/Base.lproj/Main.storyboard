@@ -3467,7 +3467,7 @@ Complete your profile for a more accurate recommendation.
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXy-W6-8yf">
                                 <rect key="frame" x="16" y="285" width="288" height="131"/>
-                                <mutableString key="text">DietLens is a lifestyle mobile application that enables users to track and log the nutritional values of their food intake coupled with exercise patterns using HealthKit to assist them in achieving better overall well-being. Supported by a various deep learning technology and extensive food database, this mobile app provides accurate nutrient values of actual food consumed based on serving sizes.
+                                <string key="text">DietLens is a lifestyle mobile application that enables users to track and log the nutritional values of their food intake coupled with exercise patterns using HealthKit to assist them in achieving better overall well-being. Supported by a various deep learning technology and extensive food database, this mobile app provides accurate nutrient values of actual food consumed based on serving sizes.
 
 Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI assistant to improve your overall-well-being by promoting healthy eating habits, advocating active lifestyle, and influencing positive behavioural changes.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
