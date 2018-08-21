@@ -30,7 +30,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var loadingScreen: UIView!
 
     @IBOutlet weak var uploadPercentageLabel: UILabel!
-    
+
     @IBOutlet weak var galleryBtn: ExpandedUIButton!
 
     private var recordType: String = RecordType.RecordByImage
@@ -57,8 +57,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     let locationManager = CLLocationManager()
     var latitude = 0.0
     var longitude = 0.0
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()

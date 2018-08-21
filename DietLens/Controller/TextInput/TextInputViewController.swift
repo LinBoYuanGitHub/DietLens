@@ -32,7 +32,7 @@ class TextInputViewController: UIViewController {
 
     //tab item for filter the result
 //    var filterItem = ["All", "Ingredient", "Side dish"]
-    var filterItem = ["All", "Nus Canteen"]
+    var filterItem = ["All", "NUS Canteen"]
     //autoComplete & textSearchResult List
     var autoCompleteTextList = [String]()
     var searchResultList = [TextSearchSuggestionEntity]()
