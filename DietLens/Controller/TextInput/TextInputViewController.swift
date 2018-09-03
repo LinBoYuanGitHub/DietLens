@@ -71,6 +71,8 @@ class TextInputViewController: UIViewController {
         super.viewDidLoad()
         //set status bar appearance
         setNeedsStatusBarAppearanceUpdate()
+        textSearchFilterView.isHidden = true
+        animationView.isHidden = true
         textSearchField.delegate = self
         textSearchField.keyboardType = .asciiCapable
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.textSearchField.frame.height))

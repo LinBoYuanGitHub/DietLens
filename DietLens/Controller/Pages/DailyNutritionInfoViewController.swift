@@ -18,7 +18,7 @@ class DailyNutritionInfoViewController: BaseViewController {
     var targetDict = [Int: (String, Double)]()
     //passed value
     var selectedDate = Date()
-    var noInternetAlert: NoInternetDialog?
+//    var noInternetAlert: NoInternetDialog?
 
     override func viewDidLoad() {
         nutritionTableView.delegate = self
@@ -36,20 +36,22 @@ class DailyNutritionInfoViewController: BaseViewController {
     }
 
     func refresh() {
-        if !Reachability.isConnectedToNetwork() {
-            //show no Internet connect dialog
-            let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
-            if let noInternetAlert =  storyboard.instantiateViewController(withIdentifier: "NoInternetVC") as? NoInternetDialog {
-                self.noInternetAlert = noInternetAlert
-                noInternetAlert.delegate = self
-                noInternetAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                noInternetAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                present(noInternetAlert, animated: true, completion: nil)
-            }
-        } else {
-            requestNutritionDict(requestDate: selectedDate)
-            assembleTargetDict()
-        }
+        requestNutritionDict(requestDate: selectedDate)
+        assembleTargetDict()
+//        if !Reachability.isConnectedToNetwork() {
+//            //show no Internet connect dialog
+//            let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+//            if let noInternetAlert =  storyboard.instantiateViewController(withIdentifier: "NoInternetVC") as? NoInternetDialog {
+//                self.noInternetAlert = noInternetAlert
+//                noInternetAlert.delegate = self
+//                noInternetAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+//                noInternetAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+//                present(noInternetAlert, animated: true, completion: nil)
+//            }
+//        } else {
+//            requestNutritionDict(requestDate: selectedDate)
+//            assembleTargetDict()
+//        }
     }
 
     func assembleDisplayDict(nutritionDict: [String: Double]) {
@@ -110,7 +112,7 @@ extension DailyNutritionInfoViewController: UITableViewDelegate, UITableViewData
 extension DailyNutritionInfoViewController: RefreshDeleagte {
 
     func onRefresh() {
-        self.noInternetAlert?.dismiss(animated: true, completion: nil)
+//        self.noInternetAlert?.dismiss(animated: true, completion: nil)
         refresh()
     }
 
