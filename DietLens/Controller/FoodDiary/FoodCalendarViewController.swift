@@ -171,6 +171,10 @@ class FoodCalendarViewController: UIViewController, UIPopoverPresentationControl
             refreshFoodDiaryData()
         }
         self.foodCalendarTableView.reloadData()
+        //show reachability to detect whether we should should dialog
+        if !Reachability.isConnectedToNetwork() {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "")
+        }
     }
 
     @IBAction func closeButtonPressed(_ sender: Any) {

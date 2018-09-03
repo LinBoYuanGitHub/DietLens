@@ -48,6 +48,9 @@
 		3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */; };
 		3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACB1FEB661800A3685A /* ReportEntity.swift */; };
 		3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACD1FEBB04600A3685A /* CardView.swift */; };
+		3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */; };
+		3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D32137E950005F3260 /* NoInternetDialog.swift */; };
+		3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */; };
 		3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */; };
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
@@ -117,6 +120,7 @@
 		3FBA55BB20F883C600258808 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BA20F883C600258808 /* BaseViewController.swift */; };
 		3FBA55BD20FDB40000258808 /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */; };
 		3FBA55BF20FEE6D900258808 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BE20FEE6D800258808 /* Reachability.swift */; };
+		3FC13058213690AC000605E3 /* HttpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13057213690AC000605E3 /* HttpExtension.swift */; };
 		3FCBEC0E20E632750092948C /* HealthCenterAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */; };
 		3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */; };
 		3FCBEC1220E632CB0092948C /* HealthCenterMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */; };
@@ -283,6 +287,9 @@
 		3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
 		3F43DACB1FEB661800A3685A /* ReportEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEntity.swift; sourceTree = "<group>"; };
 		3F43DACD1FEBB04600A3685A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogController.swift; sourceTree = "<group>"; };
+		3F4812D32137E950005F3260 /* NoInternetDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetDialog.swift; sourceTree = "<group>"; };
+		3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToAlbumDialog.swift; sourceTree = "<group>"; };
 		3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedGardientView.swift; sourceTree = "<group>"; };
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
@@ -350,6 +357,7 @@
 		3FBA55BA20F883C600258808 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
 		3FBA55BE20FEE6D800258808 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		3FC13057213690AC000605E3 /* HttpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpExtension.swift; sourceTree = "<group>"; };
 		3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterAddItemViewController.swift; sourceTree = "<group>"; };
 		3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableViewController.swift; sourceTree = "<group>"; };
 		3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterMainViewController.swift; sourceTree = "<group>"; };
@@ -553,6 +561,9 @@
 				3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */,
 				3F50DCE920AEA44E005209B8 /* Modal.swift */,
 				3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */,
+				3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */,
+				3F4812D32137E950005F3260 /* NoInternetDialog.swift */,
+				3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */,
 			);
 			path = ViewHelper;
 			sourceTree = "<group>";
@@ -930,6 +941,7 @@
 				3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */,
 				3FBA55BE20FEE6D800258808 /* Reachability.swift */,
 				3FB7910A2106D1D4000D6A94 /* TextValidtor.swift */,
+				3FC13057213690AC000605E3 /* HttpExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1236,6 +1248,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HFSwipeView/HFSwipeView.framework",
 				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
+				"${BUILT_PRODUCTS_DIR}/JPSVolumeButtonHandler/JPSVolumeButtonHandler.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LGSideMenuController/LGSideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
@@ -1272,6 +1285,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HFSwipeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPSVolumeButtonHandler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LGSideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
@@ -1502,11 +1516,14 @@
 				3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */,
 				3FF8950A212AC04500495B0C /* BottomLabelButton.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
+				3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */,
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
+				3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */,
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
+				3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */,
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,
@@ -1558,6 +1575,7 @@
 				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
 				3F9BFE5C1FF0D4E40011845B /* StepCounterViewController.swift in Sources */,
 				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
+				3FC13058213690AC000605E3 /* HttpExtension.swift in Sources */,
 				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 				3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */,
 				3F14CC48201C79FF0032CC77 /* ProfileDataManager.swift in Sources */,

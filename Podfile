@@ -27,6 +27,7 @@ target 'DietLens' do
   pod 'LGSideMenuController'
   pod 'CryptoSwift'
   pod 'QiniuUpload'
+  pod 'JPSVolumeButtonHandler'
   # Crashlytics
   pod 'Fabric'
   pod 'Crashlytics'

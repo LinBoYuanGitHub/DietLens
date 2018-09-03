@@ -58,6 +58,7 @@ PODS:
     - PureLayout
     - TinyLog
   - Instructions (1.2.0)
+  - JPSVolumeButtonHandler (1.0.5)
   - Kingfisher (4.8.0)
   - LGSideMenuController (2.1.1)
   - nanopb (0.3.8):
@@ -104,6 +105,7 @@ DEPENDENCIES:
   - FSCalendar
   - HFSwipeView
   - Instructions (~> 1.2.0)
+  - JPSVolumeButtonHandler
   - Kingfisher (~> 4.0)
   - LGSideMenuController
   - NVActivityIndicatorView
@@ -142,6 +144,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - HFSwipeView
     - Instructions
+    - JPSVolumeButtonHandler
     - Kingfisher
     - LGSideMenuController
     - nanopb
@@ -185,6 +188,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   HFSwipeView: cbcd1f01a530ae472f8e645b9b38f479f8d39ae8
   Instructions: 763c2452bd78e05d8f969a21c1cbc3c07deef33a
+  JPSVolumeButtonHandler: 53110330c9168ed325def93eabff39f0fe3e8082
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   LGSideMenuController: ae40c80983ab8b8801c7cef0a6804d43aaa72d45
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -206,6 +210,6 @@ SPEC CHECKSUMS:
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 4cdd9d4dfb9ab0b6dd410083d33cf69b1d83adf0
+PODFILE CHECKSUM: 583b72b60e10d97773b5f3fd2a643551f085421c
 
 COCOAPODS: 1.5.0

@@ -3,6 +3,7 @@ import AVFoundation
 import Photos
 import XLPagerTabStrip
 import RealmSwift
+import JPSVolumeButtonHandler
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
@@ -58,6 +59,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     var latitude = 0.0
     var longitude = 0.0
 
+//    var volumeHandler: JPSVolumeButtonHandler?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         hideReview()
@@ -67,6 +70,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
 
+//        self.volumeHandler = JPSVolumeButtonHandler(up: {self.sessionManager.capturePhoto()}, downBlock: {self.sessionManager.capturePhoto()})
         let previewLayer = previewView.videoPreviewLayer
         previewLayer.videoGravity = .resizeAspectFill
 
@@ -110,12 +114,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        volumeHandler?.start(true)
         sessionManager.onViewWillAppear()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         // Order matters here
         sessionManager.onViewWillDisappear()
+//        volumeHandler?.stop()
         super.viewWillDisappear(animated)
     }
 
@@ -137,9 +143,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         super.dismiss(animated: true)
     }
 
-    @IBAction func capturePhoto(_ sender: UIButton) {
-        capturePhotoButton.isEnabled = false
+    func takePhoto() {
         sessionManager.capturePhoto()
+    }
+
+    @IBAction func capturePhoto (_ sender: UIButton) {
+        sessionManager.capturePhoto()
+        capturePhotoButton.isEnabled = false
     }
 
 //    @IBAction func switchToBarcode(_ sender: UIButton) {
@@ -342,7 +352,10 @@ extension CameraViewController: CameraViewControllerDelegate {
 
     func onDidFinishCapturePhoto(image: UIImage) {
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
-        CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
+        let saveToAblumFlag = UserDefaults.standard.bool(forKey: PreferenceKey.saveToAlbumFlag)
+        if saveToAblumFlag {
+            CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
+        }
         showReview(image: croppedImage)
         approveImage()
     }

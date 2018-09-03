@@ -27,7 +27,7 @@ class ProfileActivityLvlViewController: UIViewController {
         setUpSliderBar()
         activityLvlSlider.setValue(Float(indexValue), animated: false)
         setUpActivtyLevel(indexValue: indexValue)
-        activityLvlSlider.value = 2.5 //set the initial value to heavy exercise
+        activityLvlSlider.value = Float(indexValue) + 0.5 //set the initial value to heavy exercise
     }
 
     func setUpSliderBar() {
@@ -41,11 +41,13 @@ class ProfileActivityLvlViewController: UIViewController {
 
     @IBAction func onSliderValueChanged(_ sender: UISlider) {
         indexValue = Int(sender.value)
-        if indexValue > 3 {
-            indexValue = 3
+        if indexValue >= 5 {
+            indexValue = 4
+        } else if indexValue <= 0 {
+            indexValue = 1
         }
-        activityLvlSlider.setValue(Float(Int(indexValue)) + 0.5, animated: true)
-       setUpActivtyLevel(indexValue: indexValue)
+        activityLvlSlider.setValue(Float(indexValue) + 0.5, animated: true)
+        setUpActivtyLevel(indexValue: indexValue)
     }
 
     func setUpActivtyLevel(indexValue: Int) {
@@ -58,10 +60,12 @@ class ProfileActivityLvlViewController: UIViewController {
         let pointTapped: CGPoint = gestureRecognizer.location(in: self.view)
         let positionOfSlider: CGPoint = activityLvlSlider.frame.origin
         let widthOfSlider: CGFloat = activityLvlSlider.frame.size.width
-        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activityLvlSlider.maximumValue) / widthOfSlider)
-        activityLvlSlider.setValue(Float(Int(newValue)) + 0.5, animated: true)
-        indexValue = Int(newValue)
-        setUpActivtyLevel(indexValue: indexValue)
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activityLvlSlider.maximumValue-activityLvlSlider.minimumValue) / widthOfSlider)
+        indexValue = Int(newValue) + 1  //strat from 1
+         if indexValue > 0 && indexValue < 5 {
+            activityLvlSlider.setValue(Float(indexValue) + 0.5, animated: true)
+            setUpActivtyLevel(indexValue: indexValue)
+        }
     }
 
     @objc func onBackPressed() {

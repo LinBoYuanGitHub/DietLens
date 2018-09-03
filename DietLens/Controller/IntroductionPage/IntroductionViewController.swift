@@ -72,6 +72,9 @@ extension IntroductionViewController: UIScrollViewDelegate {
         let pageNumber = floor((scrollView.contentOffset.x - viewWidth / 50) / viewWidth) + 1
         pageControl.currentPage = Int(pageNumber)
         currentIndex = Int(pageNumber)
+        if currentIndex > 3 && scrollView.contentOffset.x > CGFloat(StringConstants.ThresholdValue.introductionOffsetThreshold) {//reach third page & offsetX distance is over a certain value
+            redirectToLoginPage()
+        }
     }
 
 }

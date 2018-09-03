@@ -22,6 +22,7 @@ class RegistrationForthStepViewController: UIViewController {
     @IBOutlet weak var activityText: UITextView!
     //profile entity
     var profile: UserProfile?
+    var indexValue: Int  = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,21 +50,24 @@ class RegistrationForthStepViewController: UIViewController {
 
     @objc func onSliderTapped(_ gestureRecognizer: UIGestureRecognizer) {
         let pointTapped: CGPoint = gestureRecognizer.location(in: self.view)
-
         let positionOfSlider: CGPoint = activitySlider.frame.origin
         let widthOfSlider: CGFloat = activitySlider.frame.size.width
-        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activitySlider.maximumValue) / widthOfSlider)
-        profile?.activityLevel = Int(newValue)
-        activitySlider.setValue(Float(Int(newValue)) + 0.5, animated: true)
-        setUpActivtyLevel(indexValue: (profile?.activityLevel)!)
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activitySlider.maximumValue-activitySlider.minimumValue) / widthOfSlider)
+        indexValue = Int(newValue) + 1  //strat from 1
+        if indexValue > 0 && indexValue < 5 {
+            activitySlider.setValue(Float(indexValue) + 0.5, animated: true)
+            setUpActivtyLevel(indexValue: indexValue)
+        }
     }
 
     @IBAction func onSliderValueChanged(_ sender: UISlider) {
-        var indexValue = Int(sender.value)
-        if indexValue > 3 {
-            indexValue = 3
+        indexValue = Int(sender.value)
+        if indexValue >= 5 {
+            indexValue = 4
+        } else if indexValue <= 0 {
+            indexValue = 1
         }
-        activitySlider.setValue(Float(Int(indexValue)) + 0.5, animated: true)
+        activitySlider.setValue(Float(indexValue) + 0.5, animated: true)
         profile?.activityLevel = indexValue
         setUpActivtyLevel(indexValue: indexValue)
     }

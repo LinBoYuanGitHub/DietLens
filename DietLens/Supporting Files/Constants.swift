@@ -85,6 +85,11 @@ struct ServerConfig {
     static let healthCenterLogURL = labDeskTopURL + "/healthlogs/latest/"
 }
 
+struct RedirectAddress {
+    static let AppStoreURL = "https://itunes.apple.com/us/app/dietlens/id1415528218"
+    static let DietLensURL = "https://www.dietlens.com"
+}
+
 struct SharedPreferenceKey {
     static let textSearchHistoryKey = "textSearchKey"
 }
@@ -146,6 +151,7 @@ struct PreferenceKey {
     static let nickNameKey = "nickname"
     static let userNameKey = "username"
     static let passwordKey = "password"
+    static let saveToAlbumFlag = "saveToAlbumFlag"
 }
 
 struct Dimen {
@@ -170,6 +176,11 @@ struct NotificationType {
     static let TextFieldType = "3"
     static let Rating4StarType = "4"
     static let Rating7StarType = "5"
+}
+
+struct BirthDayLimitation {
+    static let minAge = 10
+    static let maxAge = 100
 }
 
 struct FirstTimeFlag {

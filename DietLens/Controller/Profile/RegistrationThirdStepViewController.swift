@@ -60,7 +60,7 @@ class RegistrationThirdStepViewController: UIViewController {
         //set current Item
         weightRuler.setCurrentItem(position: 50, animated: false)
         heightRuler.setCurrentItem(position: 165, animated: false)
-        //add sub view
+        //add subView
         weightRulerView.addSubview(weightRuler)
         heightRulerView.addSubview(heightRuler)
     }

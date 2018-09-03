@@ -73,7 +73,7 @@ class FoodInfoViewController: UIViewController {
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
         //registration for resuable nib cellItem
-        mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
+    mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.isScrollEnabled = false
         //add notification for the keyboard

@@ -18,12 +18,12 @@ class DailyNutritionInfoViewController: BaseViewController {
     var targetDict = [Int: (String, Double)]()
     //passed value
     var selectedDate = Date()
+    var noInternetAlert: NoInternetDialog?
 
     override func viewDidLoad() {
         nutritionTableView.delegate = self
         nutritionTableView.dataSource = self
-        requestNutritionDict(requestDate: selectedDate)
-        assembleTargetDict()
+        refresh()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -32,8 +32,24 @@ class DailyNutritionInfoViewController: BaseViewController {
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
+    }
+
+    func refresh() {
+        if !Reachability.isConnectedToNetwork() {
+            //show no Internet connect dialog
+            let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+            if let noInternetAlert =  storyboard.instantiateViewController(withIdentifier: "NoInternetVC") as? NoInternetDialog {
+                self.noInternetAlert = noInternetAlert
+                noInternetAlert.delegate = self
+                noInternetAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                noInternetAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                present(noInternetAlert, animated: true, completion: nil)
+            }
+        } else {
+            requestNutritionDict(requestDate: selectedDate)
+            assembleTargetDict()
+        }
     }
 
     func assembleDisplayDict(nutritionDict: [String: Double]) {
@@ -87,6 +103,15 @@ extension DailyNutritionInfoViewController: UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+    }
+
+}
+
+extension DailyNutritionInfoViewController: RefreshDeleagte {
+
+    func onRefresh() {
+        self.noInternetAlert?.dismiss(animated: true, completion: nil)
+        refresh()
     }
 
 }
