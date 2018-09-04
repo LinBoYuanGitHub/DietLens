@@ -26,7 +26,7 @@ class FeedBackViewController: UIViewController {
             return
         }
         APIService.instance.sendFeedBack(content: feedBackTextView.text) { (flag) in
-            if(flag) {
+            if flag {
                 let alert = UIAlertController(title: "", message: "Thanks for sending the feedback, we will procceed the feedback soon", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: "Default action"), style: .`default`, handler: { _ in
                     self.dismiss(animated: true, completion: nil)
@@ -39,7 +39,20 @@ class FeedBackViewController: UIViewController {
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+        if feedBackTextView.text.isEmpty {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+        if let confirmationAlert =  storyboard.instantiateViewController(withIdentifier: "confirmationVC") as? ConfirmationDialog {
+            confirmationAlert.delegate = self
+            confirmationAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            confirmationAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            present(confirmationAlert, animated: true) {
+                confirmationAlert.setUpDialogData(titleText: "Are you sure you want to leave?", labelText: "You have unsaved data")
+            }
+        }
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -89,6 +102,21 @@ extension FeedBackViewController: UITextViewDelegate {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+
+}
+
+extension FeedBackViewController: ConfirmationDelegate {
+
+    func onPositiveBtnPressed() {
+        //dismiss feedback page
+         dismiss(animated: true, completion: nil)
+         dismiss(animated: true, completion: nil)
+    }
+
+    func onNegativeBtnPressed() {
+        //dismiss dialog only
+        dismiss(animated: true, completion: nil)
     }
 
 }
