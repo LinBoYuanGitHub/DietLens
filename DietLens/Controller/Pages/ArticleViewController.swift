@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Reachability
 
 class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var articleTable: UITableView!
     @IBOutlet weak var articleTitle: UILabel!
+    @IBOutlet weak var emptyView: UIView!
+
     var articleDataSource: [Article] = ArticleDataManager.instance.articleList
     public var articleType = ArticleType.ARTICLE
     //pagination flag
@@ -44,36 +47,49 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        let alertController = UIAlertController(title: nil, message: "Loading...\n\n", preferredStyle: UIAlertControllerStyle.alert)
         if articleDataSource.count == 0 {
-            AlertMessageHelper.showLoadingDialog(targetController: self)
-            self.present(alertController, animated: false, completion: nil)
-            if articleType == ArticleType.ARTICLE {
-                APIService.instance.getArticleList(completion: { (articleList) in
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                        if articleList == nil {
-                            return
-                        }
-                        ArticleDataManager.instance.articleList = articleList!
-                        self.articleTable?.reloadData()
-                    }
-                }) { (nextLink) in
-                    if self.nextPageLink == nil {
-                        self.nextPageLink = ""
-                    } else {
-                        self.nextPageLink = nextLink
-                    }
-                }
-            } else if articleType == ArticleType.EVENT {
-                APIService.instance.getEventList(completion: { (eventList) in
-                    alertController.dismiss(animated: true, completion: nil)
-                    if eventList == nil {
+            //networking judegement
+            refresh()
+        }
+    }
+
+    @IBAction func onRefreshBtnPressed(_ sender: UIButton) {
+        emptyView.isHidden = true
+        refresh()
+    }
+
+    func refresh() {
+        if Reachability()!.connection == .none {
+            emptyView.isHidden = false
+            return
+        }
+        AlertMessageHelper.showLoadingDialog(targetController: self)
+        if articleType == ArticleType.ARTICLE {
+            APIService.instance.getArticleList(completion: { (articleList) in
+                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+                    if articleList == nil {
                         return
                     }
-                    ArticleDataManager.instance.eventList = eventList!
+                    self.articleDataSource = articleList!
+                    ArticleDataManager.instance.articleList = articleList!
                     self.articleTable?.reloadData()
-                })
+                }
+            }) { (nextLink) in
+                if self.nextPageLink == nil {
+                    self.nextPageLink = ""
+                } else {
+                    self.nextPageLink = nextLink
+                }
             }
+        } else if articleType == ArticleType.EVENT {
+            APIService.instance.getEventList(completion: { (eventList) in
+                if eventList == nil {
+                    return
+                }
+                self.articleDataSource = eventList!
+                ArticleDataManager.instance.eventList = eventList!
+                self.articleTable?.reloadData()
+            })
         }
     }
 

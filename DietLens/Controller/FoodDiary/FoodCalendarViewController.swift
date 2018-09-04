@@ -8,8 +8,9 @@
 
 import UIKit
 import FSCalendar
+import Reachability
 
-class FoodCalendarViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class FoodCalendarViewController: BaseViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var foodCalendarTableView: UITableView!
     @IBOutlet weak var calendarYConstraint: NSLayoutConstraint!
@@ -45,6 +46,7 @@ class FoodCalendarViewController: UIViewController, UIPopoverPresentationControl
     }()
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         let date = Date()
         diaryCalendar.setCurrentPage(date, animated: true)
         diaryCalendar.dataSource = self
@@ -155,26 +157,14 @@ class FoodCalendarViewController: UIViewController, UIPopoverPresentationControl
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        //set status bar appearance
-        UIApplication.shared.statusBarStyle = .default
-        //navigation controller
-        self.navigationController?.navigationBar.isHidden = false
-        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any] {
-            self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
-        }
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        internetDelegate = self
+        super.viewWillAppear(animated)
         loadDailyNutritionView()
         //load available date & load calendar data
         if shouldRefreshDiary {
             refreshFoodDiaryData()
         }
         self.foodCalendarTableView.reloadData()
-        //show reachability to detect whether we should should dialog
-        if !Reachability.isConnectedToNetwork() {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "")
-        }
     }
 
     @IBAction func closeButtonPressed(_ sender: Any) {
@@ -521,6 +511,19 @@ extension FoodCalendarViewController: CalendarAlertDelegate {
     func onCalendarCurrentPageDidChange(changedDate: Date) {
         let dateStr = DateUtil.normalDateToString(date: changedDate)
         getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
+    }
+
+}
+
+extension FoodCalendarViewController: InternetDelegate {
+
+    func onInternetConnected() {
+        refreshFoodDiaryData()
+        loadDailyNutritionView()
+    }
+
+    func onLosingInternetConnection() {
+
     }
 
 }

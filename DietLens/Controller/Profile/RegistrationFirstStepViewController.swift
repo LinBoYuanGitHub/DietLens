@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import Reachability
 
 class RegistrationFirstStepViewController: UIViewController {
     //step one field
@@ -96,7 +97,7 @@ class RegistrationFirstStepViewController: UIViewController {
 
     @IBAction func signUp(_ sender: UIButton) {
         //internet connection
-        if !Reachability.isConnectedToNetwork() {
+         if Reachability()!.connection == .none {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
             return
         } else if (TFuserName.text?.isEmpty)! {

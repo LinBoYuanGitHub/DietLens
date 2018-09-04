@@ -278,7 +278,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="97.5" y="87" width="180" height="60"/>
+                                <rect key="frame" x="98" y="87" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -913,7 +913,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyX-aS-zcl" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="15" y="35" width="25" height="20"/>
+                                <rect key="frame" x="16" y="35" width="25" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="HXA-Kb-Ise"/>
                                     <constraint firstAttribute="height" constant="20" id="k7i-FJ-GUp"/>
@@ -2073,6 +2073,11 @@ Click add to record food~</string>
                                 <color key="textColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3yu-Q2-2jQ">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="330" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="xlP-bx-uEh">
                                 <rect key="frame" x="0.0" y="64.5" width="375" height="602.5"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2240,9 +2245,50 @@ Click add to record food~</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbJ-d6-fNc" userLabel="emptyView">
+                                <rect key="frame" x="59" y="268.5" width="256" height="150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet connection found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Yh-Ta-uRU">
+                                        <rect key="frame" x="21" y="65" width="212.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.53725490200000003" green="0.55294117649999996" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pineappleIcon" translatesAutoresizingMaskIntoConstraints="NO" id="k21-8W-bTD" userLabel="Icon">
+                                        <rect key="frame" x="68" y="-34.5" width="120" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="mJT-Vh-jqh"/>
+                                            <constraint firstAttribute="width" constant="120" id="u7D-JB-eTH"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gU6-Oi-tqR">
+                                        <rect key="frame" x="78" y="95" width="100" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="ThM-mQ-dTw"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Refresh" backgroundImage="smallBtnBackground"/>
+                                        <connections>
+                                            <action selector="onRefreshBtnPressed:" destination="AWq-xS-bl8" eventType="touchUpInside" id="aN4-LY-5zM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="gU6-Oi-tqR" firstAttribute="top" secondItem="0Yh-Ta-uRU" secondAttribute="bottom" constant="10" id="L9f-Qa-dZb"/>
+                                    <constraint firstItem="0Yh-Ta-uRU" firstAttribute="centerX" secondItem="wbJ-d6-fNc" secondAttribute="centerX" id="LP9-Vu-rLE"/>
+                                    <constraint firstAttribute="width" constant="256" id="Rme-sN-JIO"/>
+                                    <constraint firstItem="0Yh-Ta-uRU" firstAttribute="centerY" secondItem="wbJ-d6-fNc" secondAttribute="centerY" id="Tgo-1j-dvE"/>
+                                    <constraint firstAttribute="height" constant="150" id="U9C-PJ-Lsm"/>
+                                    <constraint firstItem="k21-8W-bTD" firstAttribute="centerX" secondItem="wbJ-d6-fNc" secondAttribute="centerX" id="WkH-Jr-ivM"/>
+                                    <constraint firstItem="gU6-Oi-tqR" firstAttribute="centerX" secondItem="wbJ-d6-fNc" secondAttribute="centerX" id="jaz-qk-mLq"/>
+                                    <constraint firstItem="k21-8W-bTD" firstAttribute="bottom" secondItem="0Yh-Ta-uRU" secondAttribute="top" constant="-10" id="nVf-iL-VCp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wbJ-d6-fNc" firstAttribute="centerX" secondItem="eGc-5Q-BmS" secondAttribute="centerX" id="1if-DP-7c4"/>
                             <constraint firstItem="xlP-bx-uEh" firstAttribute="bottom" secondItem="eGc-5Q-BmS" secondAttribute="bottom" id="79O-jx-wNt"/>
                             <constraint firstItem="aky-m1-I7S" firstAttribute="top" secondItem="eGc-5Q-BmS" secondAttribute="top" constant="6" id="8kq-o9-Bnq"/>
                             <constraint firstItem="xlP-bx-uEh" firstAttribute="top" secondItem="vi5-9y-6AY" secondAttribute="bottom" constant="4" id="8ss-Se-Btg"/>
@@ -2255,18 +2301,20 @@ Click add to record food~</string>
                             <constraint firstItem="aky-m1-I7S" firstAttribute="leading" secondItem="eGc-5Q-BmS" secondAttribute="leading" constant="16" id="ha4-om-7ys"/>
                             <constraint firstItem="SBc-W0-Vdn" firstAttribute="centerY" secondItem="aky-m1-I7S" secondAttribute="centerY" id="mhw-nH-zdq"/>
                             <constraint firstItem="xlP-bx-uEh" firstAttribute="leading" secondItem="eGc-5Q-BmS" secondAttribute="leading" id="ryL-7K-XQl"/>
+                            <constraint firstItem="wbJ-d6-fNc" firstAttribute="centerY" secondItem="eGc-5Q-BmS" secondAttribute="centerY" id="usv-w2-ORk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eGc-5Q-BmS"/>
                     </view>
                     <connections>
                         <outlet property="articleTable" destination="xlP-bx-uEh" id="aC6-bJ-OpE"/>
                         <outlet property="articleTitle" destination="SBc-W0-Vdn" id="Rmy-zZ-apP"/>
+                        <outlet property="emptyView" destination="wbJ-d6-fNc" id="BsF-bz-NWM"/>
                         <segue destination="q2f-f7-UZG" kind="presentation" identifier="presentArticlePage" id="8Rw-F9-HXm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ypI-iI-0EJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3588" y="292.80359820089956"/>
+            <point key="canvasLocation" x="3575" y="293"/>
         </scene>
         <!--Single Article View Controller-->
         <scene sceneID="aRP-64-quw">
@@ -5758,7 +5806,7 @@ What is it?</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaH-iz-JNq">
-                                                <rect key="frame" x="97.5" y="60" width="180" height="60"/>
+                                                <rect key="frame" x="98" y="60" width="180" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="YaU-Xe-SRL"/>
                                                     <constraint firstAttribute="height" constant="60" id="dhG-HU-Rea"/>
@@ -7597,6 +7645,7 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <image name="option_selected" width="20" height="20"/>
         <image name="option_unselected" width="20" height="20"/>
         <image name="personIcon" width="55" height="60"/>
+        <image name="pineappleIcon" width="99" height="79"/>
         <image name="profileBackground" width="302" height="208"/>
         <image name="redPlusIcon" width="12" height="11"/>
         <image name="red_tick" width="66" height="66"/>

@@ -4,6 +4,7 @@ import Photos
 import XLPagerTabStrip
 import RealmSwift
 import JPSVolumeButtonHandler
+import Reachability
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
@@ -161,8 +162,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     func approveImage() {
-        if !Reachability.isConnectedToNetwork() {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.noInternetErrorMsg)
+        if Reachability()!.connection == .none {
+            let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+            if let confirmationAlert =  storyboard.instantiateViewController(withIdentifier: "confirmationVC") as? ConfirmationDialog {
+                confirmationAlert.delegate = self
+                confirmationAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                confirmationAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                present(confirmationAlert, animated: true, completion: nil)
+            }
             return
         }
 //        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
@@ -353,7 +360,7 @@ extension CameraViewController: CameraViewControllerDelegate {
     func onDidFinishCapturePhoto(image: UIImage) {
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
         let saveToAblumFlag = UserDefaults.standard.bool(forKey: PreferenceKey.saveToAlbumFlag)
-        if saveToAblumFlag {
+        if saveToAblumFlag && !(Reachability()!.connection == .none) { //with network & save to album flag
             CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
         }
         showReview(image: croppedImage)
@@ -531,4 +538,20 @@ extension CameraViewController: CLLocationManagerDelegate {
         self.longitude = (locations.last?.coordinate.longitude)!
         locationManager.stopUpdatingLocation()
     }
+}
+
+extension CameraViewController: ConfirmationDelegate {
+
+    func onPositiveBtnPressed() {
+        let croppedImage = cropCameraImage(chosenImageView.image!, previewLayer: previewView.videoPreviewLayer)!
+        CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
+        dismiss(animated: true, completion: nil)
+        self.hideReview()
+    }
+
+    func onNegativeBtnPressed() {
+        dismiss(animated: true, completion: nil)
+        self.hideReview()
+    }
+
 }

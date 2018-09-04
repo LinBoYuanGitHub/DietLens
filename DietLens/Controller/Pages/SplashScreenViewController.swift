@@ -9,12 +9,13 @@
 import UIKit
 import HealthKit
 
-class SplashScreenViewController: UIViewController {
+class SplashScreenViewController: BaseViewController {
 
     var healthStore: HKHealthStore?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        internetDelegate = self
         let preferences = UserDefaults.standard
         let introFlag = preferences.bool(forKey: FirstTimeFlag.isFirstTimeLogin)
         if introFlag {
@@ -180,6 +181,18 @@ class SplashScreenViewController: UIViewController {
         if let dest = segue.destination as? HomeViewController {
 
         }
+    }
+
+}
+
+extension SplashScreenViewController: InternetDelegate {
+
+    func onInternetConnected() {
+        super.dismissNoInternetDialog()
+    }
+
+    func onLosingInternetConnection() {
+        super.showNoInternetDialog()
     }
 
 }

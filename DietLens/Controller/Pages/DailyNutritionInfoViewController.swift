@@ -108,12 +108,3 @@ extension DailyNutritionInfoViewController: UITableViewDelegate, UITableViewData
     }
 
 }
-
-extension DailyNutritionInfoViewController: RefreshDeleagte {
-
-    func onRefresh() {
-//        self.noInternetAlert?.dismiss(animated: true, completion: nil)
-        refresh()
-    }
-
-}

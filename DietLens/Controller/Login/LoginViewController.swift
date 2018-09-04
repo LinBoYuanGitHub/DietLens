@@ -11,6 +11,7 @@ import FacebookLogin
 import FacebookCore
 import SkyFloatingLabelTextField
 import FBSDKLoginKit
+import Reachability
 
 struct FBProfileRequest: GraphRequestProtocol {
     typealias Response = GraphResponse
@@ -29,7 +30,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var facebookLoginBtn: UIButton!
 
     @IBAction func onLoginBtnClicked(_ sender: Any) {
-        if !Reachability.isConnectedToNetwork() {
+
+        if Reachability()!.connection == .none {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.noInternetErrorMsg)
             return
         }

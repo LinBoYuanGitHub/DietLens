@@ -50,6 +50,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     }()
 
     override func viewDidLoad() {
+        internetDelegate = self
         foodDiaryMealTable.delegate = self
         foodDiaryMealTable.dataSource = self
         nutritionCollectionView.delegate = self
@@ -412,6 +413,20 @@ extension FoodDiaryHistoryViewController: CalendarAlertDelegate {
 
     func onCalendarCurrentPageDidChange(changedDate: Date) {
       //current page change callback
+    }
+
+}
+
+extension FoodDiaryHistoryViewController: InternetDelegate {
+
+    func onInternetConnected() {
+        super.dismissNoInternetDialog()
+        refreshFoodDiaryData()
+        loadDailyNutritionView()
+    }
+
+    func onLosingInternetConnection() {
+       super.showNoInternetDialog()
     }
 
 }
