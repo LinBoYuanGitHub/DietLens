@@ -8,12 +8,7 @@
 
 import UIKit
 
-protocol RefreshDeleagte: class {
-    func onRefresh()
-}
-
 class NoInternetDialog: UIViewController {
-    weak var delegate: RefreshDeleagte?
 
     override func viewWillAppear(_ animated: Bool) {
         setupView()
@@ -23,7 +18,4 @@ class NoInternetDialog: UIViewController {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.63)
     }
 
-    @IBAction func onRefresh() {
-        delegate?.onRefresh()
-    }
 }

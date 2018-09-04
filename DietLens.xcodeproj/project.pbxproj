@@ -51,6 +51,7 @@
 		3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */; };
 		3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D32137E950005F3260 /* NoInternetDialog.swift */; };
 		3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */; };
+		3F4812D8213D3BA0005F3260 /* ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */; };
 		3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */; };
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
@@ -119,7 +120,6 @@
 		3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7910C2107061F000D6A94 /* LoadingButton.swift */; };
 		3FBA55BB20F883C600258808 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BA20F883C600258808 /* BaseViewController.swift */; };
 		3FBA55BD20FDB40000258808 /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */; };
-		3FBA55BF20FEE6D900258808 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BE20FEE6D800258808 /* Reachability.swift */; };
 		3FC13058213690AC000605E3 /* HttpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13057213690AC000605E3 /* HttpExtension.swift */; };
 		3FCBEC0E20E632750092948C /* HealthCenterAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */; };
 		3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */; };
@@ -290,6 +290,7 @@
 		3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogController.swift; sourceTree = "<group>"; };
 		3F4812D32137E950005F3260 /* NoInternetDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetDialog.swift; sourceTree = "<group>"; };
 		3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToAlbumDialog.swift; sourceTree = "<group>"; };
+		3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialog.swift; sourceTree = "<group>"; };
 		3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedGardientView.swift; sourceTree = "<group>"; };
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
@@ -356,7 +357,6 @@
 		3FB7910C2107061F000D6A94 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		3FBA55BA20F883C600258808 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
-		3FBA55BE20FEE6D800258808 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3FC13057213690AC000605E3 /* HttpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpExtension.swift; sourceTree = "<group>"; };
 		3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterAddItemViewController.swift; sourceTree = "<group>"; };
 		3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableViewController.swift; sourceTree = "<group>"; };
@@ -564,6 +564,7 @@
 				3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */,
 				3F4812D32137E950005F3260 /* NoInternetDialog.swift */,
 				3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */,
+				3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */,
 			);
 			path = ViewHelper;
 			sourceTree = "<group>";
@@ -939,7 +940,6 @@
 				3F575C322047F0D9009C096C /* DateUtil.swift */,
 				3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */,
 				3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */,
-				3FBA55BE20FEE6D800258808 /* Reachability.swift */,
 				3FB7910A2106D1D4000D6A94 /* TextValidtor.swift */,
 				3FC13057213690AC000605E3 /* HttpExtension.swift */,
 			);
@@ -1257,6 +1257,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/QiniuUpload/QiniuUpload.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ScrollableGraphView/ScrollableGraphView.framework",
@@ -1294,6 +1295,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QiniuUpload.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScrollableGraphView.framework",
@@ -1414,7 +1416,6 @@
 				3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				3FB6E67E20DCF19000462591 /* FoodDiaryCollectionViewCell.swift in Sources */,
-				3FBA55BF20FEE6D900258808 /* Reachability.swift in Sources */,
 				3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */,
 				3FB6E69020E4D55F00462591 /* RegistrationFirstStepViewController.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
@@ -1432,6 +1433,7 @@
 				3FCBEC0E20E632750092948C /* HealthCenterAddItemViewController.swift in Sources */,
 				3F438D4A209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift in Sources */,
 				586124A02043E29A00E727B2 /* ForgetPasswordEmailViewController.swift in Sources */,
+				3F4812D8213D3BA0005F3260 /* ConfirmationDialog.swift in Sources */,
 				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				3F4366482079FDEC0089C63A /* SearchResultCell.swift in Sources */,
 				3F6DBCEF20AC17CB006BD8F6 /* SideMenuContainerViewController.swift in Sources */,
