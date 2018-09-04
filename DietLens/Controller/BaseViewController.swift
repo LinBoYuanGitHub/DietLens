@@ -7,6 +7,15 @@
 //
 
 import UIKit
+import Reachability
+
+protocol InternetDelegate: class {
+
+    func onInternetConnected()
+
+    func onLosingInternetConnection()
+}
+
 class BaseViewController: UIViewController {
     let loadingView = UIView()
     let loadingIndicatonLength: CGFloat = 40 //indicator length
@@ -14,6 +23,14 @@ class BaseViewController: UIViewController {
     let viewWidth: CGFloat = 200
     let textLabelWidth: CGFloat = 200
     let textLabelHeight: CGFloat = 20
+
+    var noInternetAlert: NoInternetDialog! // no Internet dialog reference
+
+    weak var internetDelegate: InternetDelegate?
+    var connectionStatus: Reachability.Connection?
+
+    //reachability
+    let reachability = Reachability()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +47,39 @@ class BaseViewController: UIViewController {
         }
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //reachability setting
+        reachability.whenReachable = { reachability in
+            if reachability.connection != self.connectionStatus {
+                self.connectionStatus = reachability.connection
+                if self.internetDelegate != nil {
+                    self.internetDelegate?.onInternetConnected()
+                }
+                if reachability.connection == .wifi {
+                    print("Reachable via WiFi")
+                } else {
+                    print("Reachable via Cellular")
+                }
+            }
+
+        }
+        reachability.whenUnreachable = { reachability in
+            if reachability.connection != self.connectionStatus {
+                self.connectionStatus = reachability.connection
+                print("Not reachable")
+                if self.internetDelegate != nil {
+                    self.internetDelegate?.onLosingInternetConnection()
+                }
+            }
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        reachability.stopNotifier()
     }
 
     func showLoadingDialog() {
@@ -54,6 +104,22 @@ class BaseViewController: UIViewController {
 
     func hideLoadingDialog() {
         loadingView.removeFromSuperview()
+    }
+
+    func dismissNoInternetDialog() {
+        if noInternetAlert != nil {
+            noInternetAlert.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    func showNoInternetDialog() {
+        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+        if let noInternetAlert =  storyboard.instantiateViewController(withIdentifier: "NoInternetVC") as? NoInternetDialog {
+            self.noInternetAlert = noInternetAlert
+            noInternetAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            noInternetAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            present(noInternetAlert, animated: true, completion: nil)
+        }
     }
 
 }

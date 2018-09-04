@@ -45,6 +45,8 @@ target 'DietLens' do
   #sky floating label
   pod 'SkyFloatingLabelTextField'
   pod 'Instructions', '~> 1.2.0'
+  #swift reachability
+  pod 'ReachabilitySwift'
   
 
   target 'DietLensTests' do

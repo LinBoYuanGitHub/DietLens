@@ -74,6 +74,7 @@ PODS:
   - Protobuf (3.6.0)
   - PureLayout (3.0.2)
   - QiniuUpload (3.0.0)
+  - ReachabilitySwift (4.1.0)
   - Realm (3.7.4):
     - Realm/Headers (= 3.7.4)
   - Realm/Headers (3.7.4)
@@ -112,6 +113,7 @@ DEPENDENCIES:
   - ParallaxHeader (~> 2.0.0)
   - PBRevealViewController/Swift
   - QiniuUpload
+  - ReachabilitySwift
   - RealmSwift
   - ScrollableGraphView
   - SkyFloatingLabelTextField
@@ -154,6 +156,7 @@ SPEC REPOS:
     - Protobuf
     - PureLayout
     - QiniuUpload
+    - ReachabilitySwift
     - Realm
     - RealmSwift
     - ScrollableGraphView
@@ -198,6 +201,7 @@ SPEC CHECKSUMS:
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   QiniuUpload: b1b3dda4883b9bacf9e2efc9e28978cdd6a26c70
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: a469bb59e33f9926102ccaea4349822c53b9117e
   RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
   ScrollableGraphView: 6386dbae8d92e8ec9fda9f386f2ba6e2c90c59a3
@@ -210,6 +214,6 @@ SPEC CHECKSUMS:
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 583b72b60e10d97773b5f3fd2a643551f085421c
+PODFILE CHECKSUM: 76bda48191f789442a7ffb22febb5d3c943b5e4f
 
 COCOAPODS: 1.5.0
