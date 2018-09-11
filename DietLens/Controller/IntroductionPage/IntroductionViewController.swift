@@ -11,7 +11,7 @@ import UIKit
 class IntroductionViewController: UIViewController {
 
 //    var pageTitles: [String] = ["miscItems", "cannedSoup", "categoryBreads"]
-    var pageImages: [UIImage] = [#imageLiteral(resourceName: "IntroductionPage1"), #imageLiteral(resourceName: "IntroductionPage2"), #imageLiteral(resourceName: "IntroductionPage3"), #imageLiteral(resourceName: "IntroductionPage4")]
+    var pageImages: [UIImage] = [#imageLiteral(resourceName: "IntroductionPage1"), #imageLiteral(resourceName: "IntroductionPage2"), #imageLiteral(resourceName: "IntroductionPage3")]
 
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrMain: UIScrollView!
@@ -37,14 +37,14 @@ class IntroductionViewController: UIViewController {
         for index in 0..<pageImages.count {
             let image = UIImageView(frame: CGRect(x: self.view.frame.size.width * CGFloat(index), y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
             image.image = pageImages[index]
-            image.contentMode = UIViewContentMode.scaleToFill
+            image.contentMode = UIViewContentMode.scaleAspectFit
             self.scrMain.addSubview(image)
         }
     }
 
     @objc func handleTap() {
         if currentIndex == pageImages.count - 1 {
-            redirectToLoginPage()
+            redirectToWelcomePage()
         }
     }
 
@@ -56,12 +56,15 @@ class IntroductionViewController: UIViewController {
         scrMain.scrollRectToVisible(frame, animated: true)
     }
 
-    func redirectToLoginPage() {
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController {
+    func redirectToWelcomePage() {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeNVC") as? UINavigationController {
              self.present(dest, animated: true, completion: nil)
         }
     }
 
+    @IBAction func onSkipBtnPressed(_ sender: Any) {
+        redirectToWelcomePage()
+    }
 }
 
 extension IntroductionViewController: UIScrollViewDelegate {
@@ -72,8 +75,8 @@ extension IntroductionViewController: UIScrollViewDelegate {
         let pageNumber = floor((scrollView.contentOffset.x - viewWidth / 50) / viewWidth) + 1
         pageControl.currentPage = Int(pageNumber)
         currentIndex = Int(pageNumber)
-        if currentIndex > 3 && scrollView.contentOffset.x > CGFloat(StringConstants.ThresholdValue.introductionOffsetThreshold) {//reach third page & offsetX distance is over a certain value
-            redirectToLoginPage()
+        if currentIndex > pageImages.count - 1 && scrollView.contentOffset.x > CGFloat(StringConstants.ThresholdValue.introductionOffsetThreshold) {//reach third page & offsetX distance is over a certain value
+            redirectToWelcomePage()
         }
     }
 
