@@ -168,6 +168,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
                 confirmationAlert.delegate = self
                 confirmationAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
                 confirmationAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                confirmationAlert.contentText = "Do you want to save image to photo album and recognize it later?"
+                confirmationAlert.reminderText = "No Internet connection found"
                 present(confirmationAlert, animated: true, completion: nil)
             }
             return

@@ -23,13 +23,13 @@ class ConfirmationDialog: UIViewController {
 
     var delegate: ConfirmationDelegate?
 
+    var reminderText: String = ""
+    var contentText: String = ""
+
     override func viewWillAppear(_ animated: Bool) {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.63)
-    }
-
-    func setUpDialogData(titleText: String, labelText: String) {
-        remindLabel.text = titleText
-        textContent.text = labelText
+        remindLabel.text = reminderText
+        textContent.text = contentText
     }
 
     @IBAction func onPositiveBtnPressed(_ sender: UIButton) {

@@ -39,7 +39,6 @@ class FeedBackViewController: UIViewController {
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
         if feedBackTextView.text.isEmpty {
             dismiss(animated: true, completion: nil)
             return
@@ -49,9 +48,9 @@ class FeedBackViewController: UIViewController {
             confirmationAlert.delegate = self
             confirmationAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             confirmationAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            present(confirmationAlert, animated: true) {
-                confirmationAlert.setUpDialogData(titleText: "Are you sure you want to leave?", labelText: "You have unsaved data")
-            }
+            confirmationAlert.contentText = "You have unsaved data"
+            confirmationAlert.reminderText = "Are you sure you want to leave?"
+            present(confirmationAlert, animated: true)
         }
     }
 

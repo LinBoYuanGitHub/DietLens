@@ -21,12 +21,14 @@ class DailyNutritionInfoViewController: BaseViewController {
 //    var noInternetAlert: NoInternetDialog?
 
     override func viewDidLoad() {
+        internetDelegate = self
         nutritionTableView.delegate = self
         nutritionTableView.dataSource = self
         refresh()
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -105,6 +107,19 @@ extension DailyNutritionInfoViewController: UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+    }
+
+}
+
+extension DailyNutritionInfoViewController: InternetDelegate {
+
+    func onInternetConnected() {
+        super.dismissNoInternetDialog()
+        refresh()
+    }
+
+    func onLosingInternetConnection() {
+        super.showNoInternetDialog()
     }
 
 }

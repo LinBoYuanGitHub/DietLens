@@ -43,7 +43,7 @@ struct StringConstants {
     }
 
     struct ThresholdValue {
-        static let introductionOffsetThreshold = 1000
+        static let introductionOffsetThreshold = 900
     }
 
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import Reachability
 
 class SplashScreenViewController: BaseViewController {
 
@@ -16,6 +17,13 @@ class SplashScreenViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         internetDelegate = self
+        //internet jduegement
+        if Reachability()!.connection == .none {
+            return
+        }
+    }
+
+    func pageJumpLogic() {
         let preferences = UserDefaults.standard
         let introFlag = preferences.bool(forKey: FirstTimeFlag.isFirstTimeLogin)
         if introFlag {
@@ -24,7 +32,9 @@ class SplashScreenViewController: BaseViewController {
             if token == nil {
                 //redirect to login page
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "toLoginPage", sender: self)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "WelcomeNVC")
+                    self.present(controller, animated: true, completion: nil)
                 }
             } else {
                 //redirect to home page
@@ -33,7 +43,7 @@ class SplashScreenViewController: BaseViewController {
             }
         } else {
             if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as? IntroductionViewController {
-                 DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.present(dest, animated: true, completion: nil)
                 }
                 preferences.setValue(true, forKey: FirstTimeFlag.isFirstTimeLogin)
@@ -50,7 +60,6 @@ class SplashScreenViewController: BaseViewController {
                     }
                 }
             } else {
-                //TODO: handle article list nil
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "toMainPage", sender: self)
                 }
@@ -189,6 +198,7 @@ extension SplashScreenViewController: InternetDelegate {
 
     func onInternetConnected() {
         super.dismissNoInternetDialog()
+        pageJumpLogic()
     }
 
     func onLosingInternetConnection() {
