@@ -60,7 +60,11 @@ class RegistrationFirstStepViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = .gray
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onDonePressed))
+        self.navigationItem.rightBarButtonItem?.tintColor = .gray
+        self.navigationItem.title = "Sign Up"
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as?  [NSAttributedStringKey: Any] {
             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
@@ -70,7 +74,12 @@ class RegistrationFirstStepViewController: UIViewController {
     }
 
     @objc func onBackPressed() {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc func onDonePressed() {
+        signUpFunction()
     }
 
     func checkEmail(email: String) {
@@ -97,24 +106,28 @@ class RegistrationFirstStepViewController: UIViewController {
 
     @IBAction func signUp(_ sender: UIButton) {
         //internet connection
-         if Reachability()!.connection == .none {
+        signUpFunction()
+    }
+
+    func signUpFunction() {
+        if Reachability()!.connection == .none {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
             return
         } else if (TFuserName.text?.isEmpty)! {
             TFuserName.errorMessage = "Please enter a nickname"
-//            showErrMsg(errMsg: "Please enter a nickname")
+            //            showErrMsg(errMsg: "Please enter a nickname")
             return
         } else if (TFemail.text?.isEmpty)! {
             TFemail.errorMessage = "Please enter your email address"
-//            showErrMsg(errMsg: "Please enter your email address")
+            //            showErrMsg(errMsg: "Please enter your email address")
             return
         } else if (TFpassword.text?.isEmpty)! {
             TFpassword.errorMessage = "Please fill in your password"
-//            showErrMsg(errMsg: "Please fill in your password")
+            //            showErrMsg(errMsg: "Please fill in your password")
             return
         } else if TFconfirmPassword.text != TFpassword.text {
             TFconfirmPassword.errorMessage = "Verify password failed"
-//            showErrMsg(errMsg: "Verify password failed")
+            //            showErrMsg(errMsg: "Verify password failed")
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
@@ -150,7 +163,7 @@ class RegistrationFirstStepViewController: UIViewController {
             }, failedCompletion: { (failedMsg) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     self.showErrMsg(errMsg: failedMsg)
-//                    AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
+                    //                    AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
                 }
             })
         }
@@ -170,7 +183,9 @@ class RegistrationFirstStepViewController: UIViewController {
 
     @IBAction func toSignInPage(_ sender: UIButton) {
         //dismiss to sign in page
-         dismiss(animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+        self.present(controller, animated: true, completion: nil)
     }
 
 }

@@ -13,8 +13,13 @@ import FacebookLogin
 class SettingViewController: UIViewController {
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     @IBAction func unwindToSettingPage(segue: UIStoryboardSegue) {}
+    @IBOutlet weak var albumSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let preference = UserDefaults.standard
+        let flag = preference.bool(forKey: PreferenceKey.saveToAlbumFlag)
+        albumSwitch.setOn(flag, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,10 +60,10 @@ class SettingViewController: UIViewController {
                 APIService.instance.logOut(completion: { (_) in
                         //signOut no matter request succeed or not
                     DispatchQueue.main.async {
-                            self.clearPersonalData()
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let controller = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-                            self.present(controller, animated: true, completion: nil)
+                        self.clearPersonalData()
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "WelcomeNVC")
+                        self.present(controller, animated: true, completion: nil)
                     }
                 })
             }
@@ -73,7 +78,7 @@ class SettingViewController: UIViewController {
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
         //facebook login
-        LoginManager().logOut()
+//        LoginManager().logOut()
     }
     /*
     // MARK: - Navigation

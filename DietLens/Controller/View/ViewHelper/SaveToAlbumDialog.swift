@@ -14,5 +14,5 @@ protocol AlbumDialogDelegate {
 }
 
 class SaveToAlbumDialog: UIViewController {
-    
+
 }

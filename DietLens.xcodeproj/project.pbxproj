@@ -52,6 +52,7 @@
 		3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D32137E950005F3260 /* NoInternetDialog.swift */; };
 		3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */; };
 		3F4812D8213D3BA0005F3260 /* ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */; };
+		3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D921424517005F3260 /* WelcomeViewController.swift */; };
 		3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */; };
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
@@ -291,6 +292,7 @@
 		3F4812D32137E950005F3260 /* NoInternetDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetDialog.swift; sourceTree = "<group>"; };
 		3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToAlbumDialog.swift; sourceTree = "<group>"; };
 		3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialog.swift; sourceTree = "<group>"; };
+		3F4812D921424517005F3260 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedGardientView.swift; sourceTree = "<group>"; };
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
@@ -848,6 +850,7 @@
 				586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */,
 				586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */,
 				3F88189820E9D80F00FE6C11 /* LoginViewController.swift */,
+				3F4812D921424517005F3260 /* WelcomeViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1551,6 +1554,7 @@
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
 				3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */,
 				3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */,
+				3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */,
 				3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */,
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
 				3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */,

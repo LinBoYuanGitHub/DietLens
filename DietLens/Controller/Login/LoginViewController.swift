@@ -83,6 +83,19 @@ class LoginViewController: UIViewController {
         setUpSkyFloatingLable()
         // Do any additional setup after loading the view.
         hideKeyboardWhenTappedAround()
+//        facebookLoginBtn.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = .gray
+        self.navigationItem.title = "Sign In"
+    }
+
+    @objc func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     func setUpSkyFloatingLable() {
@@ -98,7 +111,8 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonClicked(_ sender: Any) {
-        let loginManager = LoginManager()
+        let loginManager = LoginManager(loginBehavior: .systemAccount, defaultAudience: .everyone)
+        loginManager.loginBehavior = .native
         loginManager.logIn(readPermissions: [.publicProfile], viewController: self) { (loginResult) in
             switch loginResult {
             case .failed(let error):
@@ -195,6 +209,61 @@ extension LoginViewController: UITextFieldDelegate {
             }
         }
         return true
+    }
+
+}
+
+extension LoginViewController: FBSDKLoginButtonDelegate {
+
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            print(error)
+            return
+        } else if result.isCancelled {
+            print("cancelled")
+        } else {
+            let request = FBProfileRequest()
+            request.start({ (_, requestResult) in
+                switch requestResult {
+                case .success(let response):
+                    let facebookUserId = response.dictionaryValue!["id"]
+                    let facebookUserName = response.dictionaryValue!["name"]
+                    //validate FacebookId
+                    AlertMessageHelper.showLoadingDialog(targetController: self)
+                    guard let fbUserId = facebookUserId as? String else { return }
+                    APIService.instance.facebookIdValidationRequest(accessToken: result.token.tokenString, uuid: fbUserId, completion: { (isSuccess, isNewUser) in
+                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                        if isSuccess {
+                            //record userId & userName
+                            let preferences = UserDefaults.standard
+                            preferences.setValue(facebookUserId, forKey: "facebookId")
+                            preferences.setValue(facebookUserName, forKey: "nickname")
+                            if isNewUser {
+                                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
+                                    var profile = UserProfile()
+                                    if let name = facebookUserName as? String {
+                                        profile.name = name
+                                    }
+                                    if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                                        destVC.profile = profile
+                                        self.present(dest, animated: true, completion: nil)
+                                    }
+                                }
+                            } else {
+                                self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                            }
+                        }
+                    })
+                    print("Graph Request Succeeded: \(response)")
+                case .failed(let error):
+                    print("Graph Request Failed: \(error)")
+                }
+            })
+        }
+    }
+
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+
     }
 
 }

@@ -118,6 +118,9 @@ class APIService {
                 guard response.result.isSuccess else {
                     print("facebook uid validation failed")
                     completion(false, false)
+                    if response.response?.statusCode == 401 {
+                        //redirect to login page
+                    }
                     return
                 }
                 guard (response.response?.allHeaderFields) != nil else {
@@ -1695,8 +1698,19 @@ class APIService {
         let preferences = UserDefaults.standard
         let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
 //        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
-        let header = ["Authorization": "Token "+token]
+        let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]
         return header
+    }
+
+    func getUserAgentString() -> String {
+        let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+//        let appIdentifier = Bundle.main.bundleIdentifier!
+        let systemIOSVersion = UIDevice.current.systemVersion
+        let modelName = UIDevice.modelName
+//        let reqeustToolVersion = ""
+        return appName + "/" + appVersion + " (iOS; " + "build:" + buildVersion + "; system version " + systemIOSVersion + ")" + modelName
     }
 
     //special header for webhook
