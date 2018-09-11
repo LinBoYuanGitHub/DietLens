@@ -16,6 +16,12 @@ protocol InternetDelegate: class {
     func onLosingInternetConnection()
 }
 
+/**
+ purpose:
+ extend BaseViewController to have same UINavigation bar style
+ implement InternetDelegate to handle internet changing status
+ **/
+
 class BaseViewController: UIViewController {
     let loadingView = UIView()
     let loadingIndicatonLength: CGFloat = 40 //indicator length
