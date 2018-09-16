@@ -103,10 +103,14 @@ struct NutrtionData {
 }
 
 struct QiniuConfig {
-    static let scope = "dietlog"
-    static let accessKey = "ExTDSVzfUQiu0wwJXBzXLg_PxNQxbb3tkC4UpyB6"
-    static let secretKey = "8u_GKcaQWMD3L-94OdG8P_o9b8SGqAIjYFoX953A"
+//    static let scope = "dietlog"
+//    static let accessKey = "ExTDSVzfUQiu0wwJXBzXLg_PxNQxbb3tkC4UpyB6"
+//    static let secretKey = "8u_GKcaQWMD3L-94OdG8P_o9b8SGqAIjYFoX953A"
     static let rootDomain = "p7bqh4trt.sabkt.gdipper.com"
+    //south east service
+    static let scope = "diet-img"
+    static let accessKey = "hr3zme-bt6vJBpunS4FH5Tbt9mWE3QGmTftNBjNK"
+    static let secretKey = "-uVeMoW24RqTwQvCyWlpUdrVi7WNEAeI1eptbx1W"
 //     static let scope = "dietlens" //private scope
 //    static let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com" //private domain
 }
@@ -152,6 +156,17 @@ struct PreferenceKey {
     static let userNameKey = "username"
     static let passwordKey = "password"
     static let saveToAlbumFlag = "saveToAlbumFlag"
+
+    struct ProfileCache {
+        static let profileId = "profileId"
+        static let profileNickName = "profileNickName"
+        static let profileEmail = "profileEmail"
+        static let profileGender = "profileGender"
+        static let profileAcivityLevel = "profileActivityLevel"
+        static let profileBirthday = "profileBirthday"
+        static let profileHeight = "prifileHeight"
+        static let profileWeight = "profileWeight"
+    }
 }
 
 struct Dimen {

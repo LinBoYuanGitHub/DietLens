@@ -11,8 +11,9 @@ import UIKit
 import XLPagerTabStrip
 import NVActivityIndicatorView
 import CoreLocation
+import Reachability
 
-class TextInputViewController: UIViewController {
+class TextInputViewController: BaseViewController {
 
     @IBOutlet weak var textSearchField: DesignableUITextField!
     @IBOutlet weak var textSearchFilterView: UICollectionView!
@@ -23,7 +24,7 @@ class TextInputViewController: UIViewController {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var textFieldTrailing: NSLayoutConstraint!
     @IBOutlet weak var textFieldTop: NSLayoutConstraint!
-    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var searchLoadingView: UIView!
     @IBOutlet weak var emptyResultView: UIView!
     @IBOutlet weak var animationViewLeading: NSLayoutConstraint!
 
@@ -108,6 +109,7 @@ class TextInputViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         //regist notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
@@ -179,12 +181,12 @@ class TextInputViewController: UIViewController {
         isSearching = true
         let searchText = textSearchField.text
         //show loading indicator & create current search result
-        self.loadingView.alpha = 1
+        self.searchLoadingView.alpha = 1
         self.searchResultList.removeAll()
         self.textSearchTable.reloadData()
         //request for new data
         APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
-            self.loadingView.alpha = 0
+            self.searchLoadingView.alpha = 0
             DispatchQueue.main.async {
                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
             }
@@ -207,6 +209,15 @@ class TextInputViewController: UIViewController {
     }
 
     func requestForDietInformation(foodEntity: TextSearchSuggestionEntity) {
+        if Reachability()!.connection == .none {
+            let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+            if let noInternetAlert =  storyboard.instantiateViewController(withIdentifier: "ConfirmationDialogVC") as? ConfirmDialogViewController {
+                noInternetAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                noInternetAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                present(noInternetAlert, animated: true, completion: nil)
+            }
+            return
+        }
         if foodEntity.id == 0 {
             return
         }

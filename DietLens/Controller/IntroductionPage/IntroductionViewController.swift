@@ -15,6 +15,7 @@ class IntroductionViewController: UIViewController {
 
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrMain: UIScrollView!
+    @IBOutlet weak var confirmBtn: UIButton!
     var currentIndex: Int = 0
 
     override func viewDidLoad() {
@@ -37,15 +38,15 @@ class IntroductionViewController: UIViewController {
         for index in 0..<pageImages.count {
             let image = UIImageView(frame: CGRect(x: self.view.frame.size.width * CGFloat(index), y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
             image.image = pageImages[index]
-            image.contentMode = UIViewContentMode.scaleAspectFit
+            image.contentMode = UIViewContentMode.top
             self.scrMain.addSubview(image)
         }
     }
 
     @objc func handleTap() {
-        if currentIndex == pageImages.count - 1 {
-            redirectToWelcomePage()
-        }
+//        if currentIndex == pageImages.count - 1 {
+//            redirectToWelcomePage()
+//        }
     }
 
     @objc func pageChanged() {
@@ -62,6 +63,10 @@ class IntroductionViewController: UIViewController {
         }
     }
 
+    @IBAction func onConfirmBtnPressed(_ sender: Any) {
+        redirectToWelcomePage()
+    }
+
     @IBAction func onSkipBtnPressed(_ sender: Any) {
         redirectToWelcomePage()
     }
@@ -75,9 +80,16 @@ extension IntroductionViewController: UIScrollViewDelegate {
         let pageNumber = floor((scrollView.contentOffset.x - viewWidth / 50) / viewWidth) + 1
         pageControl.currentPage = Int(pageNumber)
         currentIndex = Int(pageNumber)
-        if currentIndex > pageImages.count - 1 && scrollView.contentOffset.x > CGFloat(StringConstants.ThresholdValue.introductionOffsetThreshold) {//reach third page & offsetX distance is over a certain value
-            redirectToWelcomePage()
+        // hide/show confirm btn
+        if currentIndex >= pageImages.count - 1 {
+            confirmBtn.isHidden = false
+        } else {
+            confirmBtn.isHidden = true
         }
+//        if currentIndex > pageImages.count - 1 && scrollView.contentOffset.x > CGFloat(StringConstants.ThresholdValue.introductionOffsetThreshold) {//reach third page & offsetX distance is over a certain value
+//            redirectToWelcomePage()
+//        }
+
     }
 
 }

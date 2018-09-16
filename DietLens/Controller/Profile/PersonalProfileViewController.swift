@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reachability
 
 class PersonalProfileViewController: UIViewController {
 
@@ -35,7 +36,6 @@ class PersonalProfileViewController: UIViewController {
         hideKeyboardWhenTappedAround()
         initProfileEntity()
         setUpPicker()
-        //test
         getProfile()
     }
 
@@ -47,13 +47,19 @@ class PersonalProfileViewController: UIViewController {
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
             //set userProfile
             if userProfile == nil {
+                let cachedProfile =  ProfileDataManager.instance.getCachedProfile()
+                self.loadProfileCache(userProfile: cachedProfile)
                 return
             }
-            self.profile = userProfile!
-            self.profileTableView.reloadData()
-            let birthDate = DateUtil.normalStringToDate(dateStr: (userProfile?.birthday)!)
-            self.birthDayPickerView.setDate(birthDate, animated: false)
+            self.loadProfileCache(userProfile: userProfile!)
         }
+    }
+
+    func loadProfileCache(userProfile: UserProfile) {
+        self.profile = userProfile
+        self.profileTableView.reloadData()
+        let birthDate = DateUtil.normalStringToDate(dateStr: (userProfile.birthday))
+        self.birthDayPickerView.setDate(birthDate, animated: false)
     }
 
     func initProfileEntity() {
@@ -154,6 +160,11 @@ class PersonalProfileViewController: UIViewController {
     }
 
     @IBAction func save(_ sender: Any) {
+        //Internet judgement
+        if Reachability()!.connection == .none {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "No Internet connection found")
+            return
+        }
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
@@ -168,6 +179,8 @@ class PersonalProfileViewController: UIViewController {
             self.saveBtn.isEnabled = true
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if isSuccess {
+                //save only when web interface upload succeed
+                ProfileDataManager.instance.cacheUserProfile(profile: self.profile)
                 NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
                 NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
                     //refresh the profile sharedPreference

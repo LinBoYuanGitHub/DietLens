@@ -60,7 +60,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
         calorieFluidView = BAFluidView(frame: CGRect(x: 0, y: 0, width: calorieContainer.frame.width, height: calorieContainer.frame.height), startElevation: 0)
-        calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.6)
+        calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.9)
         calorieFluidView.strokeColor = UIColor.white
         calorieFluidView.keepStationary()
         calorieFluidView.maxAmplitude = 8
@@ -139,6 +139,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         case 2:
             //to step counter page
             jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
+//            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
         case 3:
             //to healthCenter page
             jumpToDestPage(identifyId: "healthCenterVC", mType: HealthCenterMainViewController.self)
@@ -409,7 +410,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     progress = Int(kvSet!.1/targetSet!.1*100)
                 }
             }
-            cell.setupCell(nutritionName: name, progressPercentage: progress)
+            if indexPath.row == 0 {
+                let progressBarColor = UIColor(red: 255/255, green: 183/255, blue: 32/255, alpha: 1)
+                cell.setupCell(nutritionName: name, progressPercentage: progress, progressBarColor: progressBarColor )
+            } else if indexPath.row == 1 {
+                let progressBarColor = UIColor(red: 251/255, green: 137/255, blue: 69/255, alpha: 1)
+                cell.setupCell(nutritionName: name, progressPercentage: progress, progressBarColor: progressBarColor )
+            } else {
+                let progressBarColor = UIColor(red: 248/255, green: 105/255, blue: 82/255, alpha: 1)
+                cell.setupCell(nutritionName: name, progressPercentage: progress, progressBarColor: progressBarColor )
+            }
             return cell
         }
         return UICollectionViewCell()

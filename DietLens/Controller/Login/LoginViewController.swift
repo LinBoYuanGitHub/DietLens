@@ -168,7 +168,10 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func forgetPwPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "GoToForgetPwEmail", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ForgetPwdVC")
+        self.present(controller, animated: true, completion: nil)
+//        self.performSegue(withIdentifier: "GoToForgetPwEmail", sender: self)
     }
 
     // MARK: - Navigation

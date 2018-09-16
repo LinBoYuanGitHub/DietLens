@@ -568,7 +568,7 @@ class APIService {
 
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
     public func qiniuImageDownload(imageKey: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "https://img.dietlens.com/"+imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
+        let downloadURL = "https://image.dietlens.com/"+imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
         let downloadImageView = UIImageView()
         let url = URL(string: downloadURL)!
         downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
@@ -577,7 +577,7 @@ class APIService {
     }
 
     public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "https://img.dietlens.com/"+imageKey
+        let downloadURL = "https://image.dietlens.com/"+imageKey
         let downloadImageView = UIImageView()
         let url = URL(string: downloadURL)!
         downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
@@ -1698,7 +1698,7 @@ class APIService {
         let preferences = UserDefaults.standard
         let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
 //        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
-        let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]
+        let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]å
         return header
     }
 

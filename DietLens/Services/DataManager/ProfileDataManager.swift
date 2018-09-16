@@ -33,4 +33,29 @@ class ProfileDataManager {
         userProfile.weight = jsonObj["weight"].doubleValue
         return userProfile
     }
+
+    func cacheUserProfile(profile: UserProfile) {
+        let preference = UserDefaults.standard
+        preference.set(profile.id, forKey: PreferenceKey.ProfileCache.profileId)
+        preference.set(profile.email, forKey: PreferenceKey.ProfileCache.profileEmail)
+        preference.set(profile.gender, forKey: PreferenceKey.ProfileCache.profileGender)
+        preference.set(profile.name, forKey: PreferenceKey.ProfileCache.profileNickName)
+        preference.set(profile.birthday, forKey: PreferenceKey.ProfileCache.profileBirthday)
+         preference.set(profile.height, forKey: PreferenceKey.ProfileCache.profileHeight)
+         preference.set(profile.weight, forKey: PreferenceKey.ProfileCache.profileWeight)
+         preference.set(profile.activityLevel, forKey: PreferenceKey.ProfileCache.profileAcivityLevel)
+    }
+
+    func getCachedProfile() -> UserProfile {
+        let preference = UserDefaults.standard
+        var profile = UserProfile()
+        profile.id = preference.string(forKey: PreferenceKey.ProfileCache.profileId)!
+        profile.name = preference.string(forKey: PreferenceKey.ProfileCache.profileNickName)!
+        profile.birthday = preference.string(forKey: PreferenceKey.ProfileCache.profileBirthday)!
+        profile.email = preference.string(forKey: PreferenceKey.ProfileCache.profileEmail)!
+        profile.height = preference.double(forKey: PreferenceKey.ProfileCache.profileHeight)
+        profile.weight = preference.double(forKey: PreferenceKey.ProfileCache.profileWeight)
+        profile.gender = preference.integer(forKey: PreferenceKey.ProfileCache.profileGender)
+        return profile
+    }
 }

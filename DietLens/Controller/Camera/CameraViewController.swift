@@ -6,7 +6,7 @@ import RealmSwift
 import JPSVolumeButtonHandler
 import Reachability
 
-class CameraViewController: UIViewController, UINavigationControllerDelegate {
+class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var capturePhotoButton: LoadingButton!
 
@@ -115,6 +115,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
 //        volumeHandler?.start(true)
         sessionManager.onViewWillAppear()
     }

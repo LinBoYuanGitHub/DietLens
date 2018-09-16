@@ -14,11 +14,15 @@ class FeedBackViewController: UIViewController {
     @IBOutlet weak var sendBtn: UIButton!
 
     override func viewDidLoad() {//sendFeedBack
-        feedBackTextView.text = "Input your suggestion here…"
-        feedBackTextView.textColor = UIColor.lightGray
         feedBackTextView.becomeFirstResponder()
 //        feedBackTextView.selectedTextRange = feedBackTextView.textRange(from: feedBackTextView.beginningOfDocument, to: feedBackTextView.beginningOfDocument)
         feedBackTextView.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
+        feedBackTextView.text = "Input your suggestion here…"
+        feedBackTextView.textColor = UIColor.lightGray
     }
 
     @IBAction func sendFeedBack(_ sender: Any) {
@@ -55,7 +59,7 @@ class FeedBackViewController: UIViewController {
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if feedBackTextView.textColor == UIColor.lightGray {
+        if feedBackTextView.textColor == UIColor.lightGray && feedBackTextView.text != "Input your suggestion here…" {
             feedBackTextView.text = nil
             feedBackTextView.textColor = UIColor.black
         }

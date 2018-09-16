@@ -112,8 +112,9 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-         let index = (scrollView.contentOffset.x + scrollView.contentInset.left)
-         rulerViewDelegate?.didSelectItem(rulerView: self, with: Int(index/itemWidth))
+        let index = (scrollView.contentOffset.x + scrollView.contentInset.left)
+        currentIndex = Int(index/itemWidth)
+        rulerViewDelegate?.didSelectItem(rulerView: self, with: currentIndex)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
