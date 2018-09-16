@@ -14,7 +14,7 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var navigationBarItem: UINavigationItem!
     @IBAction func unwindToSettingPage(segue: UIStoryboardSegue) {}
     @IBOutlet weak var albumSwitch: UISwitch!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let preference = UserDefaults.standard

@@ -67,6 +67,9 @@
 		3F5608F520F335480007B3AF /* HealthCenterTableValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */; };
 		3F5608F720F3357D0007B3AF /* HealthCenterEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */; };
 		3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */; };
+		3F5691E6214CF53F00D9929A /* ConfirmDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */; };
+		3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E8214E893000D9929A /* DoublyLinkedList.swift */; };
+		3F5691EB214E8B6D00D9929A /* CacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EA214E8B6D00D9929A /* CacheLRU.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6B872820A1BCD8001063A0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; };
 		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
@@ -81,6 +84,7 @@
 		3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F73A7522109C1360031B01E /* IntroductionViewController.swift */; };
 		3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DEE20EB6195003A31DE /* RulerView.swift */; };
 		3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */; };
+		3F7D77E42148F0EF000B8C6B /* StepChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */; };
 		3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */; };
 		3F7DACA120121515009E4DB6 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DACA020121515009E4DB6 /* Ingredient.swift */; };
 		3F7DACA520133968009E4DB6 /* ExpandedUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DACA420133968009E4DB6 /* ExpandedUITextField.swift */; };
@@ -307,6 +311,9 @@
 		3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableValueCell.swift; sourceTree = "<group>"; };
 		3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterEmojiCell.swift; sourceTree = "<group>"; };
 		3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterBarCell.swift; sourceTree = "<group>"; };
+		3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewController.swift; sourceTree = "<group>"; };
+		3F5691E8214E893000D9929A /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
+		3F5691EA214E8B6D00D9929A /* CacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheLRU.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -319,6 +326,7 @@
 		3F73A7522109C1360031B01E /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		3F764DEE20EB6195003A31DE /* RulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerCollectionCell.swift; sourceTree = "<group>"; };
+		3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepChartViewController.swift; sourceTree = "<group>"; };
 		3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
 		3F7DACA020121515009E4DB6 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		3F7DACA420133968009E4DB6 /* ExpandedUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedUITextField.swift; sourceTree = "<group>"; };
@@ -649,6 +657,15 @@
 			path = DialogCell;
 			sourceTree = "<group>";
 		};
+		3F5691E7214E890E00D9929A /* LRUCache */ = {
+			isa = PBXGroup;
+			children = (
+				3F5691E8214E893000D9929A /* DoublyLinkedList.swift */,
+				3F5691EA214E8B6D00D9929A /* CacheLRU.swift */,
+			);
+			path = LRUCache;
+			sourceTree = "<group>";
+		};
 		3F6B872C20A1DE49001063A0 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +736,7 @@
 				3F2D163020EE175400348160 /* RulerLayout.xib */,
 				3F5608F020F30C010007B3AF /* EmojiInputView.swift */,
 				3F5608F220F30DF90007B3AF /* EmojiLayout.xib */,
+				3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -819,6 +837,7 @@
 				3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */,
 				3F436636206CC44B0089C63A /* ReportStatisticController.swift */,
 				3F6DBCEE20AC17CB006BD8F6 /* SideMenuContainerViewController.swift */,
+				3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -936,6 +955,7 @@
 		58F2DF281F9F437F00FF3A95 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3F5691E7214E890E00D9929A /* LRUCache */,
 				3F43664220774CEF0089C63A /* DBOperation */,
 				3F43664120774CC60089C63A /* DataManager */,
 				58F2DF291F9F439100FF3A95 /* DataService.swift */,
@@ -1241,6 +1261,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/BAFluidView/BAFluidView.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -1279,6 +1300,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BAFluidView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -1440,6 +1462,7 @@
 				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				3F4366482079FDEC0089C63A /* SearchResultCell.swift in Sources */,
 				3F6DBCEF20AC17CB006BD8F6 /* SideMenuContainerViewController.swift in Sources */,
+				3F5691E6214CF53F00D9929A /* ConfirmDialogViewController.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
 				3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */,
@@ -1526,6 +1549,7 @@
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */,
+				3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */,
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
 				3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */,
@@ -1549,6 +1573,7 @@
 				3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */,
 				3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */,
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
+				3F7D77E42148F0EF000B8C6B /* StepChartViewController.swift in Sources */,
 				3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */,
 				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
@@ -1574,6 +1599,7 @@
 				3FF3B97C20EB6EED00E428C1 /* RulerLayout.swift in Sources */,
 				3F438D4D20A0956F00F4DAD9 /* homePageCPFCell.swift in Sources */,
 				3FB6E68720E383E600462591 /* ProfileEntity.swift in Sources */,
+				3F5691EB214E8B6D00D9929A /* CacheLRU.swift in Sources */,
 				3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */,
 				3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */,
 				3F5608F120F30C010007B3AF /* EmojiInputView.swift in Sources */,

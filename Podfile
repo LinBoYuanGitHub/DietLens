@@ -47,6 +47,7 @@ target 'DietLens' do
   pod 'Instructions', '~> 1.2.0'
   #swift reachability
   pod 'ReachabilitySwift'
+  pod 'Charts'
   
 
   target 'DietLensTests' do

@@ -21,7 +21,7 @@
         <!--Forget Password Email View Controller-->
         <scene sceneID="u49-Yr-uSD">
             <objects>
-                <viewController id="jBb-4T-Gsx" customClass="ForgetPasswordEmailViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForgetPwdVC" id="jBb-4T-Gsx" customClass="ForgetPasswordEmailViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VW0-aO-rBf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,8 +52,8 @@
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Addr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKv-Hg-eyW">
-                                <rect key="frame" x="32" y="277" width="70" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKv-Hg-eyW">
+                                <rect key="frame" x="32" y="277" width="91.5" height="20"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
                                 <color key="textColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -901,7 +901,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i9U-UY-nmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5490" y="1867.605633802817"/>
+            <point key="canvasLocation" x="6428" y="1867.0164917541231"/>
         </scene>
         <!--Data Source-->
         <scene sceneID="9Hd-bl-PYV">
@@ -1134,7 +1134,7 @@ Click add to record food~</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YNG-tR-ytq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5892" y="1172.5637181409297"/>
+            <point key="canvasLocation" x="6831.1999999999998" y="1172.5637181409297"/>
         </scene>
         <!--Food Diary History View Controller-->
         <scene sceneID="D7g-Pf-fBm">
@@ -1472,7 +1472,7 @@ Click add to record food~</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nru-iJ-F3u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6732" y="1171.6641679160421"/>
+            <point key="canvasLocation" x="7671.1999999999998" y="1171.6641679160421"/>
         </scene>
         <!--DietLens-->
         <scene sceneID="zmL-5V-XVQ">
@@ -1581,8 +1581,8 @@ Click add to record food~</string>
                                                         <constraint firstAttribute="width" constant="15" id="NeC-OM-reC"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMAIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TwB-iB-0Sc">
-                                                    <rect key="frame" x="321.5" y="288" width="37.5" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMAINING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TwB-iB-0Sc">
+                                                    <rect key="frame" x="304.5" y="288" width="54.5" height="14"/>
                                                     <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1974,11 +1974,11 @@ Click add to record food~</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-MD-aDy">
-                                <rect key="frame" x="295" y="720" width="65" height="65"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-MD-aDy" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
+                                <rect key="frame" x="278" y="690" width="72" height="72"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="9Iq-0N-QkB"/>
-                                    <constraint firstAttribute="width" constant="65" id="zYG-W8-NsK"/>
+                                    <constraint firstAttribute="height" constant="72" id="9Iq-0N-QkB"/>
+                                    <constraint firstAttribute="width" constant="72" id="zYG-W8-NsK"/>
                                 </constraints>
                                 <state key="normal" image="AddFood"/>
                                 <connections>
@@ -1993,8 +1993,8 @@ Click add to record food~</string>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="bottom" secondItem="Rdz-ba-FZ3" secondAttribute="bottom" id="Cxo-30-QQP"/>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="trailing" secondItem="RY2-Cv-ipG" secondAttribute="trailing" id="GQ6-W3-hVP"/>
                             <constraint firstItem="Xoi-Ut-71S" firstAttribute="centerX" secondItem="RY2-Cv-ipG" secondAttribute="centerX" id="Hpt-rn-VEk"/>
-                            <constraint firstItem="RY2-Cv-ipG" firstAttribute="bottom" secondItem="lKc-MD-aDy" secondAttribute="bottom" constant="15" id="YWg-ey-8pO"/>
-                            <constraint firstItem="RY2-Cv-ipG" firstAttribute="trailing" secondItem="lKc-MD-aDy" secondAttribute="trailing" constant="15" id="jR1-pi-gZH"/>
+                            <constraint firstItem="RY2-Cv-ipG" firstAttribute="bottom" secondItem="lKc-MD-aDy" secondAttribute="bottom" multiplier="1.05" id="YWg-ey-8pO"/>
+                            <constraint firstItem="RY2-Cv-ipG" firstAttribute="trailing" secondItem="lKc-MD-aDy" secondAttribute="trailing" constant="25" id="jR1-pi-gZH"/>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="leading" secondItem="RY2-Cv-ipG" secondAttribute="leading" id="q2u-ah-6xK"/>
                             <constraint firstItem="Xoi-Ut-71S" firstAttribute="width" secondItem="Rdz-ba-FZ3" secondAttribute="width" id="tsr-zu-uoS"/>
                         </constraints>
@@ -2643,7 +2643,7 @@ Click add to record food~</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BbS-Rk-IyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3776.8000000000002" y="1258.920539730135"/>
+            <point key="canvasLocation" x="4716" y="1258.920539730135"/>
         </scene>
         <!--Daily Nutrition Info View Controller-->
         <scene sceneID="VUn-73-gek">
@@ -2905,7 +2905,7 @@ Complete your profile for a more accurate recommendation.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clP-60-0CD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4551.1999999999998" y="1005.2473763118442"/>
+            <point key="canvasLocation" x="5490.3999999999996" y="1005.2473763118442"/>
         </scene>
         <!--Steps-->
         <scene sceneID="U2p-dw-36v">
@@ -2931,7 +2931,7 @@ Complete your profile for a more accurate recommendation.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0i-TR-kcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1892" y="1172.5637181409297"/>
+            <point key="canvasLocation" x="2831.1999999999998" y="1172.5637181409297"/>
         </scene>
         <!--Report Chart View Controller-->
         <scene sceneID="mnq-ym-bMW">
@@ -3078,7 +3078,7 @@ Complete your profile for a more accurate recommendation.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="00e-Ja-3JA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2909.5999999999999" y="1171.6641679160421"/>
+            <point key="canvasLocation" x="3848.8000000000002" y="1171.6641679160421"/>
         </scene>
         <!--Step Counter-->
         <scene sceneID="kEC-vF-BJf">
@@ -3218,7 +3218,7 @@ Complete your profile for a more accurate recommendation.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C83-ku-ue7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3551.25" y="1927.8169014084508"/>
+            <point key="canvasLocation" x="4490.3999999999996" y="1927.2863568215894"/>
         </scene>
         <!--Settings-->
         <scene sceneID="EHQ-zd-W03">
@@ -3972,7 +3972,7 @@ e.g. athlete with an almost unstoppable training schedule with multiple training
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gff-bQ-QLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6358.125" y="1867.605633802817"/>
+            <point key="canvasLocation" x="7296.8000000000002" y="1867.0164917541231"/>
         </scene>
         <!--Calendar Dialog View Controller-->
         <scene sceneID="p7Z-ak-PBY">
@@ -4015,7 +4015,7 @@ e.g. athlete with an almost unstoppable training schedule with multiple training
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbr-A1-YIj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8484" y="1867"/>
+            <point key="canvasLocation" x="9423.2000000000007" y="1866.1169415292354"/>
         </scene>
         <!--Side Menu Controller-->
         <scene sceneID="BLG-zk-Aum">
@@ -4963,19 +4963,8 @@ What is it?</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-ue-A5H">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="B0U-e2-tSI">
-                                <rect key="frame" x="167.5" y="598" width="40" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="yCI-WV-cvh"/>
-                                </constraints>
-                                <color key="pageIndicatorTintColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.95294117649999999" green="0.27450980390000002" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOf-1A-eHq">
-                                <rect key="frame" x="329" y="30" width="36" height="35"/>
+                                <rect key="frame" x="329" y="25" width="36" height="35"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                 <state key="normal" title="SKIP">
                                     <color key="titleColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4984,28 +4973,57 @@ What is it?</string>
                                     <action selector="onSkipBtnPressed:" destination="HQv-y3-JZD" eventType="touchUpInside" id="xCp-4c-Xsp"/>
                                 </connections>
                             </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="B0U-e2-tSI">
+                                <rect key="frame" x="167.5" y="24" width="40" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="yCI-WV-cvh"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.95294117649999999" green="0.27450980390000002" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-ue-A5H">
+                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
+                            </scrollView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BW9-mH-gKz">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.24705882352941178" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Zhk-6i-udF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="17"/>
+                                <state key="normal" title="GOT IT!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onConfirmBtnPressed:" destination="HQv-y3-JZD" eventType="touchUpInside" id="V2P-PK-Pw9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fOf-1A-eHq" firstAttribute="top" secondItem="DUc-1x-Qnf" secondAttribute="top" constant="10" id="1Yr-AA-H1T"/>
+                            <constraint firstItem="fOf-1A-eHq" firstAttribute="top" secondItem="DUc-1x-Qnf" secondAttribute="top" constant="5" id="1Yr-AA-H1T"/>
+                            <constraint firstItem="B0U-e2-tSI" firstAttribute="centerY" secondItem="fOf-1A-eHq" secondAttribute="centerY" id="ACs-Dd-vzT"/>
+                            <constraint firstItem="BW9-mH-gKz" firstAttribute="leading" secondItem="DUc-1x-Qnf" secondAttribute="leading" id="C6b-jk-s03"/>
                             <constraint firstItem="Ifq-ue-A5H" firstAttribute="width" secondItem="hvO-kA-icI" secondAttribute="width" id="MoO-Dy-6JI"/>
                             <constraint firstItem="B0U-e2-tSI" firstAttribute="centerX" secondItem="DUc-1x-Qnf" secondAttribute="centerX" id="NI3-q4-k1J"/>
+                            <constraint firstItem="DUc-1x-Qnf" firstAttribute="bottom" secondItem="BW9-mH-gKz" secondAttribute="bottom" id="OD3-N3-T2e"/>
                             <constraint firstItem="DUc-1x-Qnf" firstAttribute="trailing" secondItem="fOf-1A-eHq" secondAttribute="trailing" constant="10" id="Oq1-ba-flL"/>
                             <constraint firstItem="Ifq-ue-A5H" firstAttribute="bottom" secondItem="DUc-1x-Qnf" secondAttribute="bottom" id="Xai-es-9kd"/>
-                            <constraint firstItem="DUc-1x-Qnf" firstAttribute="bottom" secondItem="B0U-e2-tSI" secondAttribute="bottom" multiplier="1.05" id="a3c-AQ-E37"/>
                             <constraint firstItem="Ifq-ue-A5H" firstAttribute="centerX" secondItem="hvO-kA-icI" secondAttribute="centerX" id="dFc-Ui-Z7r"/>
-                            <constraint firstItem="Ifq-ue-A5H" firstAttribute="top" secondItem="DUc-1x-Qnf" secondAttribute="top" id="ibJ-vJ-2xR"/>
+                            <constraint firstItem="Ifq-ue-A5H" firstAttribute="top" secondItem="B0U-e2-tSI" secondAttribute="bottom" id="f75-4N-N4V"/>
+                            <constraint firstItem="DUc-1x-Qnf" firstAttribute="trailing" secondItem="BW9-mH-gKz" secondAttribute="trailing" id="sRp-fi-fLN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DUc-1x-Qnf"/>
                     </view>
                     <connections>
+                        <outlet property="confirmBtn" destination="BW9-mH-gKz" id="8bV-VT-q21"/>
                         <outlet property="pageControl" destination="B0U-e2-tSI" id="jNd-KR-HXU"/>
                         <outlet property="scrMain" destination="Ifq-ue-A5H" id="SCV-cy-VNL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JQJ-By-mIl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1961" y="-78"/>
+            <point key="canvasLocation" x="-1962.4000000000001" y="-78.710644677661179"/>
         </scene>
         <!--Forget Password Main View Controller-->
         <scene sceneID="sIq-LD-vrT">
@@ -5683,17 +5701,17 @@ What is it?</string>
                                 </prototypes>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRQ-eV-RXG" userLabel="EmptyViewContainer">
-                                <rect key="frame" x="60" y="276.5" width="256.5" height="114"/>
+                                <rect key="frame" x="59.5" y="276.5" width="256.5" height="114"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HealthCenterEmptyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="uc2-NH-n37">
-                                        <rect key="frame" x="102.5" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="103" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="H4a-jO-ppy"/>
                                             <constraint firstAttribute="width" constant="50" id="o25-TJ-R4i"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no records here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqz-Ro-CCE">
-                                        <rect key="frame" x="18" y="53" width="220" height="25.5"/>
+                                        <rect key="frame" x="18.5" y="53" width="220" height="25.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="C30-SN-025"/>
                                         </constraints>
@@ -5928,7 +5946,7 @@ What is it?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vER-F5-0cW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="901"/>
+            <point key="canvasLocation" x="1868" y="900.89955022488766"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="rhd-AO-jIj">
@@ -6181,6 +6199,73 @@ What is it?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HD9-vk-B8Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2025" y="867"/>
+        </scene>
+        <!--Step Counter-->
+        <scene sceneID="Nwp-iy-GRF">
+            <objects>
+                <viewController storyboardIdentifier="StepChartVC" id="p31-Pz-F7s" customClass="StepChartViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8JJ-9r-4WS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ka1-YX-Azi">
+                                <rect key="frame" x="16" y="104" width="343" height="29"/>
+                                <segments>
+                                    <segment title="D"/>
+                                    <segment title="W"/>
+                                    <segment title="M"/>
+                                    <segment title="Y"/>
+                                </segments>
+                                <color key="tintColor" red="0.95294117649999999" green="0.27450980390000002" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="onTabItemChanged:" destination="p31-Pz-F7s" eventType="valueChanged" id="mQy-mR-SZr"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKy-D9-8w7" userLabel="StatView">
+                                <rect key="frame" x="0.0" y="172" width="375" height="475"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBb-Fi-jW0" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="475"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="NBb-Fi-jW0" secondAttribute="bottom" id="NO2-gt-nkx"/>
+                                    <constraint firstItem="NBb-Fi-jW0" firstAttribute="top" secondItem="uKy-D9-8w7" secondAttribute="top" id="ZVY-1v-Ej9"/>
+                                    <constraint firstItem="NBb-Fi-jW0" firstAttribute="leading" secondItem="uKy-D9-8w7" secondAttribute="leading" id="cb7-DZ-m8R"/>
+                                    <constraint firstAttribute="trailing" secondItem="NBb-Fi-jW0" secondAttribute="trailing" id="qFS-Hx-Rob"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ka1-YX-Azi" firstAttribute="leading" secondItem="GLA-kT-Wz7" secondAttribute="leading" constant="16" id="38N-db-Mfq"/>
+                            <constraint firstItem="Ka1-YX-Azi" firstAttribute="top" secondItem="GLA-kT-Wz7" secondAttribute="top" constant="40" id="AqA-gx-KKU"/>
+                            <constraint firstItem="GLA-kT-Wz7" firstAttribute="trailing" secondItem="uKy-D9-8w7" secondAttribute="trailing" id="DRD-7B-oWB"/>
+                            <constraint firstItem="uKy-D9-8w7" firstAttribute="leading" secondItem="GLA-kT-Wz7" secondAttribute="leading" id="HGR-YL-Er1"/>
+                            <constraint firstItem="uKy-D9-8w7" firstAttribute="top" secondItem="Ka1-YX-Azi" secondAttribute="bottom" constant="40" id="MaE-7t-Xoe"/>
+                            <constraint firstItem="GLA-kT-Wz7" firstAttribute="bottom" secondItem="uKy-D9-8w7" secondAttribute="bottom" constant="20" id="Tee-LE-zpT"/>
+                            <constraint firstItem="GLA-kT-Wz7" firstAttribute="trailing" secondItem="Ka1-YX-Azi" secondAttribute="trailing" constant="16" id="gBw-7e-qdb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GLA-kT-Wz7"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Step Counter" id="Z9i-hk-o4O">
+                        <barButtonItem key="leftBarButtonItem" image="SideMenu" id="1Lv-sp-Eml" userLabel="Menu">
+                            <color key="tintColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="openLeftView:" destination="p31-Pz-F7s" id="dIU-OF-tqs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="chartView" destination="NBb-Fi-jW0" id="4lb-17-i5s"/>
+                        <outlet property="tabLayout" destination="Ka1-YX-Azi" id="ILn-Pz-yxl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uE1-3G-Abe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7.2000000000000002" y="1274.2128935532235"/>
         </scene>
         <!--Registration Second Step View Controller-->
         <scene sceneID="ODC-QH-FSi">
@@ -7072,7 +7157,7 @@ Your recommended daily calorie intake is:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WrT-QK-NxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4741.875" y="1867.605633802817"/>
+            <point key="canvasLocation" x="5680.8000000000002" y="1867.0164917541231"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="egw-rf-dA1">
@@ -7090,7 +7175,7 @@ Your recommended daily calorie intake is:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRy-OR-1A9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2839" y="1928"/>
+            <point key="canvasLocation" x="3776.8000000000002" y="1927.2863568215894"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tez-me-QRK">
@@ -7125,7 +7210,7 @@ Your recommended daily calorie intake is:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cu1-XJ-zAS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7437.6000000000004" y="1878.7106446776613"/>
+            <point key="canvasLocation" x="8376.7999999999993" y="1878.7106446776613"/>
         </scene>
         <!--Food Diary-->
         <scene sceneID="pde-QD-oMU">
@@ -7464,7 +7549,7 @@ Your recommended daily calorie intake is:</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAS-et-cC3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9316" y="1118.5907046476761"/>
+            <point key="canvasLocation" x="10255.200000000001" y="1118.5907046476761"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FOB-wG-XnG">
@@ -7482,7 +7567,7 @@ Your recommended daily calorie intake is:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOd-Fk-pve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8376.7999999999993" y="1118.5907046476761"/>
+            <point key="canvasLocation" x="9316" y="1118.5907046476761"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="WDM-iM-bOR">
@@ -7605,13 +7690,108 @@ Your recommended daily calorie intake is:</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dg2-wj-B7M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="113" y="901"/>
+            <point key="canvasLocation" x="1052" y="900.89955022488766"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hjH-8z-bfA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UBx-Z0-Tf4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k5u-wU-gVL">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="p31-Pz-F7s" kind="relationship" relationship="rootViewController" id="vAi-tx-UA8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k4r-D6-YcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-946.39999999999998" y="1274.2128935532235"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Mu1-7O-SKQ">
+            <objects>
+                <viewController id="g1l-wd-Sj2" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iq0-AO-2vD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YSk-bu-KS9">
+                                <rect key="frame" x="16" y="40" width="308.5" height="2.5"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="progressTintColor" red="0.95686274510000002" green="0.1960784314" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieE-uZ-hpX">
+                                <rect key="frame" x="341" y="29" width="24.5" height="22.5"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
+                                <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your activity level?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0y4-kX-UbR">
+                                <rect key="frame" x="82" y="76" width="211" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JDB-QR-NZ0">
+                                <rect key="frame" x="16" y="108" width="343" height="539"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="2qb-Xa-0eY">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2qb-Xa-0eY" id="No8-O6-LXv">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="79.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SEDENTARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59X-BQ-5Kg">
+                                                    <rect key="frame" x="15" y="11" width="96" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Occupations that do not require much physical effort , almost no exercise" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4h-yE-W33">
+                                                    <rect key="frame" x="15" y="29" width="313" height="51"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2N4-Mg-UZw" firstAttribute="bottom" secondItem="JDB-QR-NZ0" secondAttribute="bottom" constant="20" id="4Uo-Ga-gkF"/>
+                            <constraint firstItem="0y4-kX-UbR" firstAttribute="centerX" secondItem="2N4-Mg-UZw" secondAttribute="centerX" id="8Jz-Sl-WX6"/>
+                            <constraint firstItem="YSk-bu-KS9" firstAttribute="top" secondItem="2N4-Mg-UZw" secondAttribute="top" constant="20" id="9Rz-T3-pyS"/>
+                            <constraint firstItem="JDB-QR-NZ0" firstAttribute="top" secondItem="0y4-kX-UbR" secondAttribute="bottom" constant="8" id="BXB-iH-19y"/>
+                            <constraint firstItem="ieE-uZ-hpX" firstAttribute="leading" secondItem="YSk-bu-KS9" secondAttribute="trailing" constant="17" id="E34-6Q-oUb"/>
+                            <constraint firstItem="JDB-QR-NZ0" firstAttribute="leading" secondItem="2N4-Mg-UZw" secondAttribute="leading" constant="16" id="G8I-gt-iwn"/>
+                            <constraint firstItem="0y4-kX-UbR" firstAttribute="top" secondItem="YSk-bu-KS9" secondAttribute="bottom" constant="34.5" id="Kpj-hC-0Lg"/>
+                            <constraint firstItem="2N4-Mg-UZw" firstAttribute="trailing" secondItem="JDB-QR-NZ0" secondAttribute="trailing" constant="16" id="Phu-w0-7gu"/>
+                            <constraint firstItem="2N4-Mg-UZw" firstAttribute="trailing" secondItem="ieE-uZ-hpX" secondAttribute="trailing" constant="9" id="geW-Hb-sKc"/>
+                            <constraint firstItem="ieE-uZ-hpX" firstAttribute="centerY" secondItem="YSk-bu-KS9" secondAttribute="centerY" id="nDP-Ld-bet"/>
+                            <constraint firstItem="YSk-bu-KS9" firstAttribute="leading" secondItem="2N4-Mg-UZw" secondAttribute="leading" constant="16" id="urr-Ex-r4D"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2N4-Mg-UZw"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJ2-Ns-Gr6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="302" y="-2529"/>
         </scene>
     </scenes>
     <resources>
         <image name=" " width="16" height="16"/>
         <image name="AboutAppIcon" width="111" height="111"/>
-        <image name="AddFood" width="68" height="68"/>
+        <image name="AddFood" width="115" height="118"/>
         <image name="Back Arrow" width="10" height="17"/>
         <image name="Facebook" width="50" height="50"/>
         <image name="HealthCenterEmptyIcon" width="105" height="107"/>
@@ -7829,6 +8009,6 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <segue reference="E0y-CB-0Z7"/>
         <segue reference="L1g-pL-wT5"/>
         <segue reference="Tel-Bb-wis"/>
-        <segue reference="8Rw-F9-HXm"/>
+        <segue reference="NAD-8N-HRw"/>
     </inferredMetricsTieBreakers>
 </document>
