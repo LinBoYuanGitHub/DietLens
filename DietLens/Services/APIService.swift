@@ -1698,7 +1698,7 @@ class APIService {
         let preferences = UserDefaults.standard
         let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
 //        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
-        let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]å
+        let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]
         return header
     }
 
