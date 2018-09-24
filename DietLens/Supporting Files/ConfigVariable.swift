@@ -12,7 +12,7 @@ struct ConfigVariable {
     static let BreakFastStartTime = 6
     static let BreakFastEndTime = 10
     static let LunchStartTime = 10
-    static let LunchEndTime = 14
-    static let DinnerStartTime = 18
-    static let DinnerEndTime = 22
+    static let LunchEndTime = 17
+    static let DinnerStartTime = 17
+    static let DinnerEndTime = 24
 }
