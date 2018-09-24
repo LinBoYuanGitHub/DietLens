@@ -15,9 +15,11 @@ class PersonalProfileViewController: UIViewController {
     //dialog & picker
     var birthDayPickerView: UIDatePicker!
     var genderPickerView: UIPickerView!
+    var ethnicityPickerView: UIPickerView!
     //profile entity list
     var profileSectionList = [ProfileSection]()
     let genderList = ["Male", "Female", "Others"]
+    let ethnicityList = ["Chinese", "Malays", "Indians", "Others"]
     //profile
     var profile = UserProfile()
     let weightInputView = RulerInputView()
@@ -76,10 +78,12 @@ class PersonalProfileViewController: UIViewController {
         secondSectionHeader.sectionHeaderText = "Your Basic Information"
         let genderEntity =  ProfileEntity(profileName: "Gender", profileValue: "", profileType: 1)
         let birthDayEntity = ProfileEntity(profileName: "Date of Birth", profileValue: "", profileType: 1)
+        let ethnicityEntity = ProfileEntity(profileName: "Ethnicity", profileValue: "", profileType: 1)
         let weightEntity =  ProfileEntity(profileName: "Weight", profileValue: "", profileType: 1)
         let heightEntity =  ProfileEntity(profileName: "Height", profileValue: "", profileType: 1)
         secondSectionHeader.profileList.append(genderEntity)
         secondSectionHeader.profileList.append(birthDayEntity)
+        secondSectionHeader.profileList.append(ethnicityEntity)
         secondSectionHeader.profileList.append(weightEntity)
         secondSectionHeader.profileList.append(heightEntity)
         //third section
@@ -119,11 +123,18 @@ class PersonalProfileViewController: UIViewController {
         birthDayPickerView.datePickerMode = .date
         birthDayPickerView.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         setDateLimitation()
+        //gender
         genderPickerView = UIPickerView()
         genderPickerView.showsSelectionIndicator = true
         genderPickerView.accessibilityViewIsModal = true
         genderPickerView.dataSource = self
         genderPickerView.delegate = self
+        //ethnicity
+        ethnicityPickerView = UIPickerView()
+        ethnicityPickerView.dataSource = self
+        ethnicityPickerView.delegate = self
+        ethnicityPickerView.showsSelectionIndicator = true
+        ethnicityPickerView.accessibilityViewIsModal = true
     }
 
     func setDateLimitation() {
@@ -230,24 +241,39 @@ extension PersonalProfileViewController: UIPickerViewDelegate, UIPickerViewDataS
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return genderList.count
+        if pickerView == genderPickerView {
+            return genderList.count
+        } else if pickerView == ethnicityPickerView {
+            return ethnicityList.count
+        }
+        return 0
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return genderList[row]
+        if pickerView == genderPickerView {
+            return genderList[row]
+        } else if pickerView == ethnicityPickerView {
+            return ethnicityList[row]
+        }
+        return ""
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //gender fill in value
-        let indxPath = IndexPath(row: 0, section: 1)
-        if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
-            dateCell.inptText.text = genderList[row]
-            if genderList[row] == "Male" {
-                profile.gender = 1
-            } else {
-                profile.gender = 0
+        if pickerView == genderPickerView {
+            let indxPath = IndexPath(row: 0, section: 1)
+            if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
+                dateCell.inptText.text = genderList[row]
+                profile.gender  = row + 1
+            }
+        } else if pickerView == ethnicityPickerView {
+            let indxPath = IndexPath(row: 2, section: 1)
+            if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
+                dateCell.inptText.text = ethnicityList[row]
+                profile.ethnicity = row + 1
             }
         }
+
     }
 
 }
@@ -290,7 +316,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Gender")
                     cell.inptText.delegate = self
                     cell.inptText.placeholder = "Select Gender"
-                    if profile.gender == 0 {
+                    if profile.gender == 2 {
                         cell.inptText.text = "Female"
                         genderPickerView.selectRow(1, inComponent: 0, animated: false)
                     } else if profile.gender == 1 {
@@ -307,7 +333,17 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.inputView = birthDayPickerView
                     cell.inptText.text = profile.birthday
                 } else if indexPath.row == 2 && indexPath.section == 1 {
-                    let weightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
+                    cell.inptText.inputView = ethnicityPickerView
+                    cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Ethnicity")
+                    cell.inptText.delegate = self
+                    cell.inptText.placeholder = "Select Ethnicity"
+                    if profile.ethnicity < 1 {
+                        profile.ethnicity = 1
+                    }
+                    cell.inptText.text = ethnicityList[profile.ethnicity - 1]
+                    ethnicityPickerView.selectRow(profile.ethnicity - 1, inComponent: 0, animated: false)
+                } else if indexPath.row == 3 && indexPath.section == 1 {
+                    let weightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 1, max: HealthDeviceSetting.maxWeight, min: HealthDeviceSetting.minWeight)
                     weightInputView.unit = "kg"
                     weightInputView.rulerView.setCurrentItem(position: Int(profile.weight), animated: false)
                     weightInputView.textLabel.text = "\(Int(profile.weight))kg"
@@ -318,8 +354,8 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.inputView = weightInputView
                     cell.inptText.placeholder = "input weight"
                     setAttributeText(textStr: "\(Int(profile.weight))kg", textField: cell.inptText)
-                } else if indexPath.row == 3 && indexPath.section == 1 {
-                     let heightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
+                } else if indexPath.row == 4 && indexPath.section == 1 {
+                    let heightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 1, max: HealthDeviceSetting.maxHeight, min: HealthDeviceSetting.minHeight)
                     heightInputView.unit = "cm"
                     heightInputView.rulerView.setCurrentItem(position: Int(profile.height), animated: false)
                     heightInputView.textLabel.text = "\(Int(profile.height))cm"
@@ -362,7 +398,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                 if let cell = tableView.cellForRow(at: indexPath) as? ProfileArrowCell {
                     //Navigate to dest
                     if let dest = storyboard?.instantiateViewController(withIdentifier: "activityLevelVC") as? ProfileActivityLvlViewController {
-                         self.navigationController?.pushViewController(dest, animated: true)
+                        self.navigationController?.pushViewController(dest, animated: true)
                         dest.activitySelectDelegate = self
                         dest.indexValue = profile.activityLevel
                     }
@@ -429,14 +465,14 @@ extension PersonalProfileViewController: RulerInputDelegate {
 
         if weightRulerTag == tag {
             //weight
-            let weightIndex = IndexPath(row: 2, section: 1)
+            let weightIndex = IndexPath(row: 3, section: 1)
             if let weightCell = profileTableView.cellForRow(at: weightIndex) as? ProfileTextFieldCell {
                 setAttributeText(textStr: "\(value)kg", textField: weightCell.inptText)
                 profile.weight = value
             }
         } else {
             //height
-            let heightIndex = IndexPath(row: 3, section: 1)
+            let heightIndex = IndexPath(row: 4, section: 1)
             if let heightCell = profileTableView.cellForRow(at: heightIndex) as? ProfileTextFieldCell {
                 setAttributeText(textStr: "\(value)cm", textField: heightCell.inptText)
                 profile.height = value
@@ -446,6 +482,7 @@ extension PersonalProfileViewController: RulerInputDelegate {
 }
 
 extension PersonalProfileViewController {
+
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false

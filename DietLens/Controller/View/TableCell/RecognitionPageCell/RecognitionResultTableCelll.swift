@@ -23,9 +23,9 @@ class RecognitionResultTableCell: UITableViewCell {
     func setUpCell(foodName: String, imageUrl: String, calorieText: String, unitText: String) {
         foodNameLabel.text = foodName
         calorieLabel.text = calorieText
-        unitLabel.text = "100g"
+        unitLabel.text = unitText
         thumbnailImage.image = #imageLiteral(resourceName: "loading_img")
-        thumbnailImage.kf.setImage(with: URL(string: imageUrl), placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (_, _, _, _) in}
+        thumbnailImage.kf.setImage(with: URL(string: imageUrl + "?imageView2/0/w/100"), placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (_, _, _, _) in}
     }
 
 }

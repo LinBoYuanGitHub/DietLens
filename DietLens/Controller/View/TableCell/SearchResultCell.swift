@@ -13,6 +13,7 @@ class SearchResultCell: UITableViewCell {
     @IBOutlet weak var foodSampleImage: UIImageView!
     @IBOutlet weak var foodName: UILabel!
     @IBOutlet weak var foodCalorie: UILabel!
+    @IBOutlet weak var foodPortion: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +26,7 @@ class SearchResultCell: UITableViewCell {
             foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
         }
         foodName.text = textResultEntity.name
-        foodCalorie.text = "130.0 kcal"
+        foodCalorie.text = String(textResultEntity.calorie)
+        foodPortion.text = "1 " + textResultEntity.unit + " (" + String(textResultEntity.weight) + "g" + ")"
     }
 }

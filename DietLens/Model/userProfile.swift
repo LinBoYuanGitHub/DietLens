@@ -21,4 +21,5 @@ struct UserProfile {
     var height: Double = 0.0
     var weight: Double = 0.0
     var activityLevel: Int = 1
+    var ethnicity = 0
 }

@@ -9,23 +9,23 @@
 import Foundation
 
 final class CacheLRU<Key: Hashable, Value> {
-    
-    private struct CachePayload {
+
+    struct CachePayload {
         let key: Key
         let value: Value
     }
-    
-    private let capacity: Int
-    private let list = DoublyLinkedList<CachePayload>()
-    private var nodesDict = [Key: DoublyLinkedListNode<CachePayload>]()
-    
+
+    let capacity: Int
+    let list = DoublyLinkedList<CachePayload>()
+    var nodesDict = [Key: DoublyLinkedListNode<CachePayload>]()
+
     init(capacity: Int) {
         self.capacity = max(0, capacity)
     }
-    
+
     func setValue(_ value: Value, for key: Key) {
         let payload = CachePayload(key: key, value: value)
-        
+
         if let node = nodesDict[key] {
             node.payload = payload
             list.moveToHead(node)
@@ -33,7 +33,7 @@ final class CacheLRU<Key: Hashable, Value> {
             let node = list.addHead(payload)
             nodesDict[key] = node
         }
-        
+
         if list.count > capacity {
             let nodeRemoved = list.removeLast()
             if let key = nodeRemoved?.payload.key {
@@ -41,12 +41,13 @@ final class CacheLRU<Key: Hashable, Value> {
             }
         }
     }
-    
+
     func getValue(for key: Key) -> Value? {
         guard let node = nodesDict[key] else { return nil }
-        
+
         list.moveToHead(node)
-        
+
         return node.payload.value
     }
+
 }

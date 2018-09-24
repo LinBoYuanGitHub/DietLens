@@ -13,7 +13,7 @@ class SearchResultLocationCell: UITableViewCell {
     @IBOutlet weak var foodSampleImage: UIImageView!
     @IBOutlet weak var foodName: UILabel!
     @IBOutlet weak var foodCalorie: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var portionLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +26,7 @@ class SearchResultLocationCell: UITableViewCell {
             foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
         }
         foodName.text = textResultEntity.name
-        locationLabel.text = textResultEntity.location + " " + textResultEntity.stall
+//        portionLabel.text = textResultEntity.unit + " (" + textResultEntity.weight + ")"
     }
+
 }

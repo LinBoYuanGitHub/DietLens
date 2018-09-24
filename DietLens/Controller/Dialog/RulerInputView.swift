@@ -22,26 +22,41 @@ class RulerInputView: UIView {
     var rulerTag = 0
     var decimalDivisor = 1 //by default use 1
 
+    var min = 0
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initializeSubviews()
+        initializeSubviews(max: 10000, min: 0)
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initializeSubviews()
+        initializeSubviews(max: 10000, min: 0)
     }
 
     init(frame: CGRect, divisor: Int) {
         super.init(frame: frame)
         self.decimalDivisor = divisor
-        initializeSubviews()
+        initializeSubviews(max: 10000, min: 0)
     }
 
-    func initializeSubviews() {
+    init(frame: CGRect, divisor: Int, max: Int) {
+        super.init(frame: frame)
+        self.decimalDivisor = divisor
+        initializeSubviews(max: max, min: 0)
+    }
+
+    init(frame: CGRect, divisor: Int, max: Int, min: Int) {
+        super.init(frame: frame)
+        self.decimalDivisor = divisor
+        self.min = min
+        initializeSubviews(max: max, min: min)
+    }
+
+    func initializeSubviews(max: Int, min: Int) {
         let xibFileName = "RulerLayout" // xib extension not included
         if let view =  Bundle.main.loadNibNamed(xibFileName, owner: self, options: nil)?[0] as? UIView {
-            rulerView = RulerView(origin: CGPoint(x: 0, y: 0))
+            rulerView = RulerView(origin: CGPoint(x: 0, y: 0), max: max, min: min)
             rulerView.rulerViewDelegate = self
             rulerView.divisor = decimalDivisor
             rulerViewContainer.addSubview(rulerView)

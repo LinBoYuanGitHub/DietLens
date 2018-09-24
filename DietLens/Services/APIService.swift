@@ -237,11 +237,11 @@ class APIService {
         }
     }
 
-    public func register(nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void, failedCompletion: @escaping(_ failedMsg: String) -> Void) {
+    public func register(email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void, failedCompletion: @escaping(_ failedMsg: String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.registry)!,
             method: .post,
-            parameters: ["name": nickName, "email": email, "password": password],
+            parameters: ["email": email, "password": password],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -404,16 +404,17 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(searchResults)
-                let jsonArr = jsonObj["data"]
+                let foodSearchList = TextSearchDataManager.instance.assembleTextSerchResultList(jsonObj: jsonObj)
+//                let jsonArr = jsonObj["data"]
                 let nextLink = jsonObj["next"].stringValue
-                var foodSearchList = [TextSearchSuggestionEntity]()
-                for index in 0..<jsonArr.count {
-                    let dict = jsonArr[index].dictionaryValue
-                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-                    entity.location = dict["location"]!.stringValue
-                    entity.stall = dict["stall"]!.stringValue
-                    foodSearchList.append(entity)
-                }
+//                var foodSearchList = [TextSearchSuggestionEntity]()
+//                for index in 0..<jsonArr.count {
+//                    let dict = jsonArr[index].dictionaryValue
+//                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+//                    entity.location = dict["location"]!.stringValue
+//                    entity.stall = dict["stall"]!.stringValue
+//                    foodSearchList.append(entity)
+//                }
                 nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
@@ -422,6 +423,38 @@ class APIService {
     public func getFoodSearchResult(filterType: Int, keywords: String, latitude: Double, longitude: Double, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
         let url = ServerConfig.foodFullTextSearchURL + "?category=" + String(filterType)
         self.getFoodSearchResult(requestUrl: url, keywords: keywords, latitude: latitude, longitude: longitude, completion: completion, nextPageCompletion: nextPageCompletion)
+    }
+
+    public func getFoodSearchPopularity(mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.textSearchPopularURL+"?meal="+mealtime)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get search result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                    }
+                    completion(nil)
+                    return
+                }
+                guard let searchResults = response.result.value else {
+                    print("Get searchResult failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonObj = JSON(searchResults)
+                let foodSearchList = TextSearchDataManager.instance.assemblePopularTextSerchResultList(jsonObj: jsonObj)
+//                for index in 0..<jsonArr.count {
+//                    let dict = jsonArr[index].dictionaryValue
+//                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+//                    foodSearchList.append(entity)
+//                }
+                completion(foodSearchList)
+        }
     }
 
     public func getIngredientSearchResult(keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
@@ -568,7 +601,7 @@ class APIService {
 
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
     public func qiniuImageDownload(imageKey: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "https://image.dietlens.com/"+imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
+        let downloadURL = ServerConfig.qiniuDietLensImageDomain + imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
         let downloadImageView = UIImageView()
         let url = URL(string: downloadURL)!
         downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
@@ -577,7 +610,7 @@ class APIService {
     }
 
     public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "https://image.dietlens.com/"+imageKey
+        let downloadURL = ServerConfig.qiniuDietLensImageDomain + imageKey
         let downloadImageView = UIImageView()
         let url = URL(string: downloadURL)!
         downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
@@ -1058,18 +1091,10 @@ class APIService {
     }
 
     public func updateProfile(userId: String, profile: UserProfile, completion: @escaping (Bool) -> Void) {
-        var genderText = ""
-        if profile.gender == 0 {
-            genderText = "2"
-        } else if profile.gender == 1 {
-            genderText = "1"
-        } else {
-            genderText = "0"
-        }
         Alamofire.request(
             URL(string: ServerConfig.userURL + "/" + userId + "/")!,
             method: .put,
-            parameters: ["name": profile.name, "activity_level": String(profile.activityLevel), "gender": genderText, "height": profile.height, "weight": profile.weight, "birthday": profile.birthday],
+            parameters: ["name": profile.name, "activity_level": String(profile.activityLevel), "gender": String(profile.gender), "height": profile.height, "weight": profile.weight, "birthday": profile.birthday, "ethnicity": profile.ethnicity],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
@@ -1101,18 +1126,10 @@ class APIService {
         let key = "userId"
         let userId = preferences.string(forKey: key)
         //gender
-        var genderText = ""
-        if gender == 0 {
-            genderText = "2"
-        } else if gender == 1 {
-            genderText = "1"
-        } else {
-            genderText = "0"
-        }
         Alamofire.request(
             URL(string: ServerConfig.userURL + "/" + userId! + "/")!,
             method: .put,
-            parameters: ["name": name, "gender": genderText, "height": height, "weight": weight, "birthday": birthday],
+            parameters: ["name": name, "gender": String(gender), "height": height, "weight": weight, "birthday": birthday],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()

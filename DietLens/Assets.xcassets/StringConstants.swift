@@ -36,9 +36,9 @@ struct StringConstants {
     }
 
     struct ExerciseLvlText {
-        static let exerciseLvlArr = ["none", "Light exercise", "Moderate exercise", "Heavy exercise", "Vigorous exercise"]
+        static let exerciseLvlArr = ["SEDENTARY", "LIGHTLY ACTIVE", "ACTIVE", "VERY ACTIVE", "EXTERMELY ACTIVE"]
         static let exerciseFrequencyArr = ["none", "Once per week", "Twice per week", "Once per day", "Twice per day"]
-        static let exerciseDescriptionArr = ["none", "Intensive exercise for at least 20 minutes 1 to 3 times per week e.g. cycling, jogging, basketball, swimming, skating, etc. If you do not exercise regularly, but you maintain a busy life style that requires you to walk frequently for long periods, you meet the requirements of this level", "Intensive exercise for at least 30 to 60 minutes 3 to 4 times per week", "Intensive exercise for 60 minutes or greater 5 to 7 days per week.  Labor-intensive occupations also qualify for this level e.g. construction work (brick laying, carpentry, general labor etc). Also farming, landscape worker or similar occupations", "Exceedingly active and/or very demanding activities e.g. athlete with an almost unstoppable training schedule with multiple training sessions throughout the day or people with very demanding jobs such as shoveling coal or working long hours on an assembly line."]
+        static let exerciseDescriptionArr = ["Occupations that do not require much physical effort, almost no exercise", "Desk job with requirements to move occasionlly, little to no exericise", "Non_strenuous occaupations with frequent exercise", "Strenuous work of frequent leisure exercise for serveral hours a day", "Physically demanding occupations such as competitive athletes"]
 
     }
 

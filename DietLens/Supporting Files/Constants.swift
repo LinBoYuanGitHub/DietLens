@@ -83,6 +83,9 @@ struct ServerConfig {
     static let notificationAnswer = labDeskTopURL + "/answers/"
 
     static let healthCenterLogURL = labDeskTopURL + "/healthlogs/latest/"
+    static let qiniuDietLensImageDomain = "https://img.dietlens.com/"
+    static let textSearchPopularURL = labDeskTopURL + "/popular-food/"
+//    static let qiniuDietLensImageDomain = "https://image.dietlens.com/"
 }
 
 struct RedirectAddress {
@@ -166,6 +169,7 @@ struct PreferenceKey {
         static let profileBirthday = "profileBirthday"
         static let profileHeight = "prifileHeight"
         static let profileWeight = "profileWeight"
+        static let profileEthnicity = "profileEthnicity"
     }
 }
 
@@ -193,9 +197,26 @@ struct NotificationType {
     static let Rating7StarType = "5"
 }
 
+struct EthnicityType {
+    static let NONE = 0
+    static let CHINESE = 1
+    static let MALAYS = 2
+    static let INDIANS = 3
+    static let OTHERS = 4
+}
+
 struct BirthDayLimitation {
     static let minAge = 10
     static let maxAge = 100
+}
+
+struct HealthDeviceSetting {
+    static let minHeight = 50
+    static let maxHeight = 300
+    static let minWeight = 5
+    static let maxWeight = 300
+    static let minBloodGlucose = 1
+    static let maxBloodGlucose = 100
 }
 
 struct FirstTimeFlag {

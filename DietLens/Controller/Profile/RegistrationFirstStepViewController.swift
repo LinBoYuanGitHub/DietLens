@@ -12,7 +12,6 @@ import Reachability
 
 class RegistrationFirstStepViewController: UIViewController {
     //step one field
-    @IBOutlet weak var TFuserName: SkyFloatingLabelTextField!
     @IBOutlet weak var TFemail: SkyFloatingLabelTextField!
     @IBOutlet weak var TFpassword: SkyFloatingLabelTextField!
     @IBOutlet weak var TFconfirmPassword: SkyFloatingLabelTextField!
@@ -21,7 +20,6 @@ class RegistrationFirstStepViewController: UIViewController {
     @IBOutlet weak var skipBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     //text reminder
-    @IBOutlet weak var emailCheckerLabel: UILabel!
     @IBOutlet weak var errMsgLabel: UILabel!
     @IBOutlet weak var redTick: UIImageView!
     //user profile
@@ -29,7 +27,7 @@ class RegistrationFirstStepViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        TFuserName.delegate = self
+//        TFuserName.delegate = self
         TFemail.delegate = self
         TFpassword.delegate = self
         TFconfirmPassword.delegate = self
@@ -39,9 +37,9 @@ class RegistrationFirstStepViewController: UIViewController {
 
     func setUpSkyFloatingLabel() {
         //username
-        TFuserName.placeholder = "Nickname"
-        TFuserName.font = UIFont(name: "PingFang SC-Light", size: 16)
-        TFuserName.title = "Nickname"
+//        TFuserName.placeholder = "Nickname"
+//        TFuserName.font = UIFont(name: "PingFang SC-Light", size: 16)
+//        TFuserName.title = "Nickname"
         //email
         TFemail.placeholder = "Email"
         TFemail.font = UIFont(name: "PingFang SC-Light", size: 16)
@@ -74,7 +72,6 @@ class RegistrationFirstStepViewController: UIViewController {
     }
 
     @objc func onBackPressed() {
-//        self.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -110,12 +107,13 @@ class RegistrationFirstStepViewController: UIViewController {
     }
 
     func signUpFunction() {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
+            dest.profile = self.profile
+            self.navigationController?.pushViewController(dest, animated: true)
+            return
+        }
         if Reachability()!.connection == .none {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
-            return
-        } else if (TFuserName.text?.isEmpty)! {
-            TFuserName.errorMessage = "Please enter a nickname"
-            //            showErrMsg(errMsg: "Please enter a nickname")
             return
         } else if (TFemail.text?.isEmpty)! {
             TFemail.errorMessage = "Please enter your email address"
@@ -131,17 +129,17 @@ class RegistrationFirstStepViewController: UIViewController {
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
-            APIService.instance.register(nickName: TFuserName.text!, email: TFemail.text!, password: TFpassword.text!, completion: { (isSucceed) in
+            APIService.instance.register(email: TFemail.text!, password: TFpassword.text!, completion: { (isSucceed) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSucceed {
                         // save for basic authentication
                         let preferences = UserDefaults.standard
                         preferences.setValue(self.TFpassword.text!, forKey: PreferenceKey.passwordKey)
                         //set up profile
-                        self.profile.name = self.TFuserName.text!
+//                        self.profile.name = self.TFuserName.text!
                         self.profile.email = self.TFemail.text!
-                        //to registration VC2 page
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationVC2") as? RegistrationSecondStepViewController {
+                        //to registration profile page
+                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
                             dest.profile = self.profile
                             self.navigationController?.pushViewController(dest, animated: true)
                         }
@@ -163,7 +161,6 @@ class RegistrationFirstStepViewController: UIViewController {
             }, failedCompletion: { (failedMsg) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     self.showErrMsg(errMsg: failedMsg)
-                    //                    AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
                 }
             })
         }
@@ -192,15 +189,12 @@ class RegistrationFirstStepViewController: UIViewController {
 
 extension RegistrationFirstStepViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == TFuserName {
-            TFemail.becomeFirstResponder()
-            keyboardWillShow()
-        } else if textField == TFemail {
+        if textField == TFemail {
             TFpassword.becomeFirstResponder()
-            keyboardWillShow()
+//            keyboardWillShow()
         } else if textField == TFpassword {
             TFconfirmPassword.becomeFirstResponder()
-            keyboardWillShow()
+//            keyboardWillShow()
         } else {
             textField.resignFirstResponder()
         }
@@ -208,8 +202,7 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        keyboardWillShow()
-        TFuserName.errorMessage = ""
+//        keyboardWillShow()
         TFemail.errorMessage = ""
         TFpassword.errorMessage = ""
         TFconfirmPassword.errorMessage = ""
@@ -220,7 +213,22 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
         if textField == TFemail {
             checkEmail(email: TFemail.text!)
         }
-        keyboardWillHide()
+//        keyboardWillHide()
+        return true
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString str: String) -> Bool {
+        if let text = textField.text {
+            //Email validator
+            if textField == TFemail {
+                let validationString = textField.text! + str
+                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
+                    TFemail.errorMessage = "Invalid email"
+                } else {
+                    TFemail.errorMessage = ""
+                }
+            }
+        }
         return true
     }
 

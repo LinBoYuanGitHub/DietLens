@@ -210,7 +210,11 @@ class FoodInfoViewController: UIViewController {
             singleOptionAlert.optionList.removeAll()
             singleOptionAlert.selectedPosition = dietItem.selectedPos
             for portion in dietItem.portionInfo {
-                singleOptionAlert.optionList.append(portion.sizeUnit)
+                var option = portion.sizeUnit
+                if portion.sizeUnit != "100g" {
+                    option = portion.sizeUnit + " (" + String(Int(portion.weightValue)) + "g) "
+                }
+                singleOptionAlert.optionList.append(option)
             }
             singleOptionAlert.providesPresentationContextTransitionStyle = true
             singleOptionAlert.definesPresentationContext = true

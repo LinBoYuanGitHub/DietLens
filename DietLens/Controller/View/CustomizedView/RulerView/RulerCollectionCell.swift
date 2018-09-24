@@ -12,6 +12,7 @@ class RulerCollectionCell: UICollectionViewCell {
 
     var textLabel: UILabel?
     var divisor: Int = 1 //set default divisor as 1
+    var min: Int = 0
 
     private lazy var line: CALayer = {
         let line = CALayer()
@@ -23,7 +24,7 @@ class RulerCollectionCell: UICollectionViewCell {
 
     private lazy var scaleLabel: UILabel = {
         let textLabel = UILabel()
-        textLabel.frame = CGRect(x: (self.frame.width - 1) / 2, y: 50, width: 30, height: 20)
+        textLabel.frame = CGRect(x: (self.frame.width - 1) / 2, y: 50, width: 40, height: 20)
         textLabel.textAlignment = .center
         textLabel.font =  UIFont.systemFont(ofSize: 14)
         let textColor = UIColor(red: CGFloat(227/255.0), green: CGFloat(228/255.0), blue: CGFloat(229/255.0), alpha: 1.0)
@@ -75,9 +76,9 @@ class RulerCollectionCell: UICollectionViewCell {
             if index % 5 == 0 {
                 //add scale
                 if divisor == 1 {
-                    scaleLabel.text = "\(index/divisor)"
+                    scaleLabel.text = "\((index)/divisor + min)"
                 } else {
-                    scaleLabel.text = "\(Double(index)/Double(divisor))"
+                    scaleLabel.text = "\(Double(index)/Double(divisor) + Double(min))"
                 }
                 scaleLabel.center.x = line.frame.origin.x
                 self.contentView.addSubview(scaleLabel)

@@ -21,6 +21,7 @@ class TextInputViewController: BaseViewController {
     @IBOutlet weak var animationView: UIView!  //for the selected barItem underline effort
     @IBOutlet weak var emptyView: UIView! // empty view for let user to refresh again
     @IBOutlet weak var refreshBtn: UIButton!
+    @IBOutlet weak var emptyViewLabel: UILabel!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var textFieldTrailing: NSLayoutConstraint!
     @IBOutlet weak var textFieldTop: NSLayoutConstraint!
@@ -33,7 +34,7 @@ class TextInputViewController: BaseViewController {
 
     //tab item for filter the result
 //    var filterItem = ["All", "Ingredient", "Side dish"]
-    var filterItem = ["All", "NUS Canteen"]
+    var filterItem = ["Popular", "Recent", "My Favorite"]
     //autoComplete & textSearchResult List
     var autoCompleteTextList = [String]()
     var searchResultList = [TextSearchSuggestionEntity]()
@@ -57,10 +58,14 @@ class TextInputViewController: BaseViewController {
 
     var isLoading = false
 
+    @IBOutlet weak var tableTopConstants: NSLayoutConstraint!
+
     //location service
     let locationManager = CLLocationManager()
     var latitude = 0.0
     var longitude = 0.0
+
+    var currentSelectionPos = 0
 
     //enum for textSearch status
     enum TextInputStatus {
@@ -72,8 +77,6 @@ class TextInputViewController: BaseViewController {
         super.viewDidLoad()
         //set status bar appearance
         setNeedsStatusBarAppearanceUpdate()
-        textSearchFilterView.isHidden = true
-        animationView.isHidden = true
         textSearchField.delegate = self
         textSearchField.keyboardType = .asciiCapable
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.textSearchField.frame.height))
@@ -101,11 +104,14 @@ class TextInputViewController: BaseViewController {
             print("Location services are not enabled")
         }
         self.emptyResultView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        //load popular list
+        getPopurlarFoodLists()
     }
 
     @objc func handleTap() {
-        let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
-        self.present(dest, animated: true, completion: nil)
+        //jump to feedback page
+//        let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
+//        self.present(dest, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -115,11 +121,11 @@ class TextInputViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
         //set animation view position
-        self.animationViewLeading.constant = 50
+        self.animationViewLeading.constant = 16
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        textSearchField.becomeFirstResponder()
+//        textSearchField.becomeFirstResponder()
     }
 
     @IBAction func refreshSearch(_ sender: Any) {
@@ -163,23 +169,76 @@ class TextInputViewController: BaseViewController {
     //GoodToHave: local storage to display recent search top2 item
     func loadRecentTextSearchResult() {
         //        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
+//        let cache = OrderedDictionary<String,TextSearchSuggestionEntity>()
+//        while (cache.makeIterator().next() != nil){
+//
+//        }
         textSearchTable.reloadData()
     }
 
+    func getPopurlarFoodLists() {
+        if isSetMealByTimeRequired {
+            self.mealType = getCorrectMealType()
+        }
+        APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased()) { (textResults) in
+            if textResults == nil {
+                return
+            }
+            self.emptyResultView.isHidden = true
+            self.searchResultList = textResults!
+            self.textSearchTable.reloadData()
+        }
+    }
+
+    func getCorrectMealType() -> String {
+        let hour: Int = Calendar.current.component(.hour, from: Date())
+        if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
+            return StringConstants.MealString.breakfast
+        } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
+            return StringConstants.MealString.lunch
+        } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
+            return StringConstants.MealString.dinner
+        } else {
+            return StringConstants.MealString.snack
+        }
+    }
+
     @IBAction func textFieldChanged(_ sender: UITextField) {
+        //textFilter hide/show control
+        if (sender.text?.isEmpty)! {
+            tableTopConstants.constant = 50
+            textSearchFilterView.isHidden = false
+            animationView.isHidden = false
+            onFilterSelect(currentSelection: currentSelectionPos)
+        } else {
+            tableTopConstants.constant = 0
+            textSearchFilterView.isHidden = true
+            animationView.isHidden = true
+        }
         //load suggestion from net, set time
-//        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
-//            lastSearchTime = Date()
-//            performTextSearch()
-//        }
+        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
+            lastSearchTime = Date()
+            performTextSearch()
+        }
+
     }
 
     func performTextSearch() {
+        if Reachability()?.connection == .none {
+            self.emptyView.isHidden = false
+            return
+        } else {
+            self.emptyView.isHidden = true
+        }
         if isSearching {
-            APIService.instance.cancelAllRequest()
+            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
+//            APIService.instance.cancelAllRequest()
         }
         isSearching = true
         let searchText = textSearchField.text
+        if (searchText?.isEmpty)! {
+            return
+        }
         //show loading indicator & create current search result
         self.searchLoadingView.alpha = 1
         self.searchResultList.removeAll()
@@ -191,8 +250,8 @@ class TextInputViewController: BaseViewController {
                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
             }
             if textResults == nil {
-                self.emptyView.isHidden = false
-                self.textSearchTable.reloadData()
+//                self.emptyView.isHidden = false
+//                self.textSearchTable.reloadData()
                 return
             }
             if textResults?.count == 0 {
@@ -260,6 +319,25 @@ class TextInputViewController: BaseViewController {
         }
     }
 
+    func onFilterSelect(currentSelection: Int) {
+        if currentSelection == 0 {
+            self.textSearchTable.isHidden = false
+            self.getPopurlarFoodLists()
+        } else if currentSelection == 1 {
+            self.textSearchTable.isHidden = true
+            self.emptyViewLabel.text = "We are working on this feature for release in the future."
+            self.refreshBtn.isHidden = true
+            self.emptyView.isHidden = false
+            //load recent search result
+        } else if currentSelection == 2 {
+            //show favorite WIP view
+            self.textSearchTable.isHidden = true
+            self.emptyViewLabel.text = "We are working on this feature for release in the future."
+            self.refreshBtn.isHidden = true
+            self.emptyView.isHidden = false
+        }
+    }
+
 }
 
 //block to handle textSearchResult&autoComplete dataSource
@@ -275,19 +353,24 @@ extension TextInputViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let result  = searchResultList[indexPath.row]
-        if result.location.isEmpty && result.location.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
-                return UITableViewCell()
-            }
-            cell.setUpCell(textResultEntity: result)
-            return cell
-        } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "foodSearchLocationCell")  as? SearchResultLocationCell else {
-                return UITableViewCell()
-            }
-            cell.setUpCell(textResultEntity: result)
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
+            return UITableViewCell()
         }
+        cell.setUpCell(textResultEntity: result)
+        return cell
+//        if result.location.isEmpty && result.location.isEmpty {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
+//                return UITableViewCell()
+//            }
+//            cell.setUpCell(textResultEntity: result)
+//            return cell
+//        } else {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "foodSearchLocationCell")  as? SearchResultLocationCell else {
+//                return UITableViewCell()
+//            }
+//            cell.setUpCell(textResultEntity: result)
+//            return cell
+//        }
     }
 
 }
@@ -307,13 +390,13 @@ extension TextInputViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == self.textSearchTable {
-            return 52
+            return 70
         }
         return 0
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let  height = scrollView.frame.size.height
+        let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
@@ -322,9 +405,6 @@ extension TextInputViewController: UITableViewDelegate {
                 return
             }
             //show loading indicator
-//            let xAxis  = self.view.center.x
-//            let yAxis = self.view.center.y
-//            let frame = CGRect(x: xAxis, y: yAxis, width: 50, height: 50)
             textSearchTable.tableFooterView?.isHidden = false
             self.isLoading = true
             APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
@@ -344,6 +424,10 @@ extension TextInputViewController: UITableViewDelegate {
                 }
             }
         }
+    }
+
+    func saveToLRUCache(text: String) {
+
     }
 }
 
@@ -366,12 +450,12 @@ extension TextInputViewController: IndicatorInfoProvider {
 
 extension TextInputViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //All,NUS Canteen
-        return 2
+        //Recent,Frequent,Favorite
+        return filterItem.count
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.size.width/2, height: 50)
+        return CGSize(width: (self.view.frame.size.width-32)/CGFloat(filterItem.count), height: 50)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -389,12 +473,10 @@ extension TextInputViewController: UICollectionViewDataSource, UICollectionViewD
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.animationViewLeading.constant = destX! - CGFloat(40)
-//            self.animationView.center.x = destX!
         }) { (_) in
-//            self.textSearchTable.reloadData()
-            if self.textSearchField.text != ""{ //search when no empty
-                self.performTextSearch()
-            }
+            self.emptyView.isHidden = true
+            self.currentSelectionPos = indexPath.row
+            self.onFilterSelect(currentSelection: self.currentSelectionPos)
         }
     }
 

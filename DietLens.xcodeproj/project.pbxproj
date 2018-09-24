@@ -18,6 +18,8 @@
 		3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */; };
 		3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AC23D2088D1E7008F5BF2 /* FoodCalendarViewController.swift */; };
 		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
+		3F250A732154DEF2009A5F5E /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F250A722154DEF2009A5F5E /* OrderedDictionary.swift */; };
+		3F250A75215616DA009A5F5E /* TextSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */; };
 		3F25C4752043EC7700DFA459 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C4742043EC7700DFA459 /* StringConstants.swift */; };
 		3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C47620440F1500DFA459 /* ConfigVariable.swift */; };
 		3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */; };
@@ -48,6 +50,8 @@
 		3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */; };
 		3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACB1FEB661800A3685A /* ReportEntity.swift */; };
 		3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACD1FEBB04600A3685A /* CardView.swift */; };
+		3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */; };
+		3F46C460215224510066636F /* RegistrationProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F46C45F215224510066636F /* RegistrationProfileCell.swift */; };
 		3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */; };
 		3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D32137E950005F3260 /* NoInternetDialog.swift */; };
 		3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */; };
@@ -70,11 +74,13 @@
 		3F5691E6214CF53F00D9929A /* ConfirmDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */; };
 		3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E8214E893000D9929A /* DoublyLinkedList.swift */; };
 		3F5691EB214E8B6D00D9929A /* CacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EA214E8B6D00D9929A /* CacheLRU.swift */; };
+		3F5691ED214EA4AD00D9929A /* SharedPreferenceCacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EC214EA4AD00D9929A /* SharedPreferenceCacheLRU.swift */; };
+		3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */; };
+		3F5691F22150D51A00D9929A /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5691F12150D51900D9929A /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6B872820A1BCD8001063A0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; };
 		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
 		3F6B872A20A1BD4E001063A0 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3F6B872B20A1BD51001063A0 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F6B872E20A1DEC1001063A0 /* SideMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B872D20A1DEC0001063A0 /* SideMainViewController.swift */; };
 		3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */; };
 		3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */; };
@@ -242,7 +248,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3F6B872B20A1BD51001063A0 /* RealmSwift.framework in Embed Frameworks */,
+				3F5691F22150D51A00D9929A /* RealmSwift.framework in Embed Frameworks */,
 				3F6B872A20A1BD4E001063A0 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -262,6 +268,8 @@
 		3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCollectionCell.swift; sourceTree = "<group>"; };
 		3F1AC23D2088D1E7008F5BF2 /* FoodCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCalendarViewController.swift; sourceTree = "<group>"; };
 		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3F250A722154DEF2009A5F5E /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
+		3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchDataManager.swift; sourceTree = "<group>"; };
 		3F25C4742043EC7700DFA459 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringConstants.swift; path = DietLens/Assets.xcassets/StringConstants.swift; sourceTree = SOURCE_ROOT; };
 		3F25C47620440F1500DFA459 /* ConfigVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigVariable.swift; sourceTree = "<group>"; };
 		3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActivityLvlViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +300,8 @@
 		3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
 		3F43DACB1FEB661800A3685A /* ReportEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEntity.swift; sourceTree = "<group>"; };
 		3F43DACD1FEBB04600A3685A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProfileViewController.swift; sourceTree = "<group>"; };
+		3F46C45F215224510066636F /* RegistrationProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProfileCell.swift; sourceTree = "<group>"; };
 		3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogController.swift; sourceTree = "<group>"; };
 		3F4812D32137E950005F3260 /* NoInternetDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetDialog.swift; sourceTree = "<group>"; };
 		3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToAlbumDialog.swift; sourceTree = "<group>"; };
@@ -314,6 +324,9 @@
 		3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewController.swift; sourceTree = "<group>"; };
 		3F5691E8214E893000D9929A /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
 		3F5691EA214E8B6D00D9929A /* CacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheLRU.swift; sourceTree = "<group>"; };
+		3F5691EC214EA4AD00D9929A /* SharedPreferenceCacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPreferenceCacheLRU.swift; sourceTree = "<group>"; };
+		3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActvitityLevelCell.swift; sourceTree = "<group>"; };
+		3F5691F12150D51900D9929A /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -588,6 +601,7 @@
 				3F14CC47201C79FF0032CC77 /* ProfileDataManager.swift */,
 				3F4906EC201E119900D1F388 /* NotificationDataManager.swift */,
 				3F2D163420F2899900348160 /* HealthCenterDataManager.swift */,
+				3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -662,6 +676,8 @@
 			children = (
 				3F5691E8214E893000D9929A /* DoublyLinkedList.swift */,
 				3F5691EA214E8B6D00D9929A /* CacheLRU.swift */,
+				3F5691EC214EA4AD00D9929A /* SharedPreferenceCacheLRU.swift */,
+				3F250A722154DEF2009A5F5E /* OrderedDictionary.swift */,
 			);
 			path = LRUCache;
 			sourceTree = "<group>";
@@ -706,6 +722,8 @@
 				3F88189B20EA569E00FE6C11 /* ProfileTextFieldCell.swift */,
 				3F88189D20EA56EA00FE6C11 /* ProfileAvatarCell.swift */,
 				3F88189F20EA574900FE6C11 /* ProfileArrowCell.swift */,
+				3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */,
+				3F46C45F215224510066636F /* RegistrationProfileCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -751,6 +769,7 @@
 				3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */,
 				3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */,
 				3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */,
+				3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -877,6 +896,7 @@
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
+				3F5691F12150D51900D9929A /* RealmSwift.framework */,
 				5877CF861F9D82BF0022B51E /* DietLens */,
 				5877CF9E1F9D82BF0022B51E /* DietLensTests */,
 				5877CFA91F9D82BF0022B51E /* DietLensUITests */,
@@ -1439,6 +1459,7 @@
 				3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */,
 				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
 				3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */,
+				3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				3FB6E67E20DCF19000462591 /* FoodDiaryCollectionViewCell.swift in Sources */,
 				3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */,
@@ -1490,6 +1511,7 @@
 				3F436644207758640089C63A /* DailyNutritionTableCell.swift in Sources */,
 				3F43665B207EFA850089C63A /* FoodCategoryCollectionCell.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
+				3F46C460215224510066636F /* RegistrationProfileCell.swift in Sources */,
 				3F436659207EFA6A0089C63A /* RecognitionResultTableCelll.swift in Sources */,
 				3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
@@ -1513,6 +1535,7 @@
 				3FB7910B2106D1D4000D6A94 /* TextValidtor.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				3F14CC44201854D40032CC77 /* HistoryFoodDiaryCell.swift in Sources */,
+				3F250A75215616DA009A5F5E /* TextSearchDataManager.swift in Sources */,
 				3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */,
 				3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */,
 				3F88189C20EA569E00FE6C11 /* ProfileTextFieldCell.swift in Sources */,
@@ -1528,6 +1551,7 @@
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
 				3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */,
 				3FB6E68D20E3D00F00462591 /* ProfileSection.swift in Sources */,
+				3F5691ED214EA4AD00D9929A /* SharedPreferenceCacheLRU.swift in Sources */,
 				3F7DACA520133968009E4DB6 /* ExpandedUITextField.swift in Sources */,
 				3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */,
 				3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
@@ -1550,6 +1574,7 @@
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */,
 				3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */,
+				3F250A732154DEF2009A5F5E /* OrderedDictionary.swift in Sources */,
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
 				3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */,
@@ -1589,6 +1614,7 @@
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */,
 				3F43663D207721EB0089C63A /* DailyNutritionInfoViewController.swift in Sources */,
 				3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */,
 				5804F4D51FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift in Sources */,

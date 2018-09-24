@@ -32,10 +32,13 @@ class RegistrationSecondStepViewController: UIViewController {
     }
 
     func setDateLimitation() {
-        var dayComp = DateComponents()
-        dayComp.year = -200
-        let minDate = Calendar.current.date(byAdding: dayComp, to: Date())
-        datePicker.maximumDate = Date()
+        var minComp = DateComponents()
+        minComp.year = -BirthDayLimitation.maxAge
+        var maxComp = DateComponents()
+        maxComp.year = -BirthDayLimitation.minAge
+        let minDate = Calendar.current.date(byAdding: minComp, to: Date())
+        let maxDate = Calendar.current.date(byAdding: maxComp, to: Date())
+        datePicker.maximumDate = maxDate
         datePicker.minimumDate = minDate
     }
 

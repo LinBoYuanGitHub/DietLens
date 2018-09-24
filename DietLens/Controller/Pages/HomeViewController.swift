@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import BAFluidView
 import Instructions
+import Photos
 
 class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
@@ -70,6 +71,26 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //set instruction label dataSource
         self.coachMarksController.dataSource = self
         self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
+        //check permission and set value for album access
+        checkPhotoLibraryPermission()
+    }
+
+    func checkPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            let preference = UserDefaults.standard
+            preference.set(true, forKey: PreferenceKey.saveToAlbumFlag)
+        //handle authorized status
+        case .denied, .restricted :
+            let preference = UserDefaults.standard
+            preference.set(false, forKey: PreferenceKey.saveToAlbumFlag)
+        //handle denied status
+        case .notDetermined:
+            // ask for permissions
+            let preference = UserDefaults.standard
+            preference.set(false, forKey: PreferenceKey.saveToAlbumFlag)
+        }
     }
 
     //assemble the article & event list and display
@@ -103,13 +124,17 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     func loadCalorieData(todayIntakenCal: Int) {
         let preferences = UserDefaults.standard
         let totalCal = Int(preferences.double(forKey: PreferenceKey.calorieTarget))
+        totalCalorie.text = String(totalCal)
+        intakenCalorie.text = String(todayIntakenCal)
+        remainCalorie.text = String(totalCal-todayIntakenCal)
         if totalCal != 0 {
-            totalCalorie.text = String(totalCal)
-            intakenCalorie.text = String(todayIntakenCal)
-            remainCalorie.text = String(totalCal-todayIntakenCal)
             let percentageValue = Int(todayIntakenCal*100/totalCal)
             percentageCalorie.text = String(percentageValue) + "%"
             calorieFluidView.fill(to: Float(percentageValue)/100 as NSNumber)
+            calorieFluidView.startAnimation()
+        } else {
+            percentageCalorie.text = "0%"
+            calorieFluidView.fill(to: 0 as NSNumber)
             calorieFluidView.startAnimation()
         }
     }

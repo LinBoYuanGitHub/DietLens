@@ -25,6 +25,8 @@ class HealthCenterAddItemViewController: UIViewController {
     var rulerInputView: RulerInputView!
     var emojiInputView: EmojiInputView!
 
+    var lastIndexPathRow = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addItemTableView.delegate = self
@@ -80,6 +82,13 @@ class HealthCenterAddItemViewController: UIViewController {
         addRightNavigationButton()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        let rulerIndex = IndexPath(row: 0, section: 0)
+        if let valueCell = addItemTableView.cellForRow(at: rulerIndex) as? HealthCenterTableValueCell {
+            valueCell.healthCenterTextField.becomeFirstResponder()
+        }
+    }
+
     @objc func onBackPressed() {
         view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
@@ -89,6 +98,7 @@ class HealthCenterAddItemViewController: UIViewController {
         let rightNavButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(addHealthItem))
         rightNavButton.tintColor = UIColor(red: 94/255, green: 94/255, blue: 94/255, alpha: 1)
         self.navigationItem.rightBarButtonItem = rightNavButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     func setUpPickerToolBar(text: String) -> UIToolbar {
@@ -118,21 +128,25 @@ class HealthCenterAddItemViewController: UIViewController {
                 let returnValue = Float(inputView.rulerView.getCurrentIndex())/Float(inputView.rulerView.divisor)
                 cell.healthCenterTextField.text = String(returnValue) + unit
                 itemValue = Double(returnValue)
-                return
             }
             if let inputView =  cell.healthCenterTextField.inputView as? EmojiInputView {
                 let index = Int(inputView.emojiSlider.value)
                 cell.healthCenterTextField.text = HealthCenterConstants.moodList[index]
                 itemValue = Double(index)
-                return
+            }
+            //judge the filling value
+            if !(cell.healthCenterTextField.text?.isEmpty)! {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
             }
         }
+
     }
 
     @objc func addHealthItem() {
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         AlertMessageHelper.showLoadingDialog(targetController: self)
-        APIService.instance.uploadHealthCenterData(category: recordName, value: itemValue, date: dateStr, time: timeStr) { (isSuccess) in
+        let recordValue = Double(round(1000*itemValue)/1000) //round value
+        APIService.instance.uploadHealthCenterData(category: recordName, value: recordValue, date: dateStr, time: timeStr) { (isSuccess) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
             self.navigationItem.rightBarButtonItem?.isEnabled = true
             if isSuccess {
@@ -158,8 +172,9 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
         switch indexPath.row {
         case 0:
             //value
-            cell.healthCenterLabel.text = recordName
-            if recordType == "2"{//emoji ruler
+            let capitalName = recordName.capitalizingFirstLetter()
+            cell.healthCenterLabel.text = capitalName
+            if recordType == "2"{ //emoji ruler
                 let emojiInputView = EmojiInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
                 cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Mood")
                 emojiInputView.delegate = self
@@ -167,8 +182,8 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
                 //set first one as default mood
                 cell.healthCenterTextField.delegate = self
                 cell.healthCenterTextField.text = HealthCenterConstants.moodList[0]
-            } else if recordType == "1" {//weight ruler
-                let glucoseInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 10)
+            } else if recordType == "1" { //weight ruler
+                let glucoseInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 10, max: HealthDeviceSetting.maxBloodGlucose, min: HealthDeviceSetting.minBloodGlucose)
                 self.unit = "mmol/L"
                 glucoseInputView.decimalDivisor = 10
                 glucoseInputView.rulerView.setCurrentItem(position: HealthCenterConstants.GLUCOSEDEFAULT, animated: false)
@@ -179,7 +194,7 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
                 cell.healthCenterTextField.delegate = self
                 cell.healthCenterTextField.inputView = glucoseInputView
             } else { // glucose ruler
-                let weightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 1)
+                let weightInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 1, max: HealthDeviceSetting.maxWeight, min: HealthDeviceSetting.minWeight)
                  weightInputView.rulerView.setCurrentItem(position: HealthCenterConstants.WEIGHTDEFAULT, animated: false)
                 self.unit = "kg"
                 weightInputView.unit = "kg"
@@ -222,9 +237,15 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let lastIndexPath = IndexPath(row: lastIndexPathRow, section: 0)
+        if let cell = tableView.cellForRow(at: lastIndexPath) as? HealthCenterTableValueCell {
+            cell.healthCenterTextField.textColor = UIColor(red: CGFloat(67.0/255.0), green: CGFloat(67.0/255.0), blue: CGFloat(67.0/255.0), alpha: 1.0)
+        }
         if let cell = tableView.cellForRow(at: indexPath) as? HealthCenterTableValueCell {
             cell.healthCenterTextField.becomeFirstResponder()
+            cell.healthCenterTextField.textColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         }
+        lastIndexPathRow = indexPath.row
     }
 
 }
@@ -242,11 +263,16 @@ extension HealthCenterAddItemViewController: UITextFieldDelegate {
 extension HealthCenterAddItemViewController: RulerInputDelegate {
 
     func onRulerDidSelectItem(tag: Int, value: Double) {
-            let rulerIndex = IndexPath(row: 0, section: 0)
-            if let valueCell = addItemTableView.cellForRow(at: rulerIndex) as? HealthCenterTableValueCell {
-                valueCell.healthCenterTextField.text = String(value) + unit
-                itemValue = Double(value)
+        let rulerIndex = IndexPath(row: 0, section: 0)
+        if let valueCell = addItemTableView.cellForRow(at: rulerIndex) as? HealthCenterTableValueCell {
+            valueCell.healthCenterTextField.text = String(value) + unit
+            itemValue = Double(value)
+            //judge the filling value
+            if !(valueCell.healthCenterTextField.text?.isEmpty)! {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
             }
+        }
+
     }
 }
 
@@ -257,6 +283,10 @@ extension HealthCenterAddItemViewController: EmojiInputDelegate {
         if let cell = addItemTableView.cellForRow(at: indexPath) as? HealthCenterTableValueCell {
             cell.healthCenterTextField.text = HealthCenterConstants.moodList[index]
             itemValue = Double(index)
+            //judge the filling value
+            if !(cell.healthCenterTextField.text?.isEmpty)! {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+            }
         }
 
     }
@@ -272,5 +302,15 @@ extension HealthCenterAddItemViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).uppercased() + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
     }
 }

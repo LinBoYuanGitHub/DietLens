@@ -24,7 +24,7 @@ class RecognitonLocationResultCell: UITableViewCell {
         unitLabel.text = "100g"
         locationLabel.text = locationText
         thumbnailImage.image = #imageLiteral(resourceName: "loading_img")
-        thumbnailImage.kf.setImage(with: URL(string: imageUrl), placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (_, _, _, _) in}
+        thumbnailImage.kf.setImage(with: URL(string: imageUrl + "?imageView2/0/w/200"), placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (_, _, _, _) in}
     }
 
 }

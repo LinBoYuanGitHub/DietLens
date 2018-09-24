@@ -179,19 +179,23 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 //            self.loadingScreen.alpha = 1
 //        }, completion: nil)
         //resize&compress image process
+//        let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         chosenImageView.image!.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        let imgData = UIImageJPEGRepresentation(newImage!, 0.6)!
+        let imgData = UIImageJPEGRepresentation(newImage!, 1.0)!
 //        let preferences = UserDefaults.standard
 //        let key = "userId"
 //        let userId = preferences.string(forKey: key)
         //upload image to server
+       let startTime = Date()
         APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
             if imageKey != nil {
+                print(Date().timeIntervalSince(startTime))
+                print(imgData.count)
                 self.postImageKeyToServer(imageKey: imageKey!, isUsingSample: false)
             } else {//error happen during upload image to Qiniu
                 self.hideReview()
@@ -355,7 +359,6 @@ extension CameraViewController: CameraViewControllerDelegate {
             guard let wSelf = self else {
                 return
             }
-
             wSelf.cameraUnavailableLabel.isHidden = isAvailable
         }
     }
@@ -445,7 +448,8 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         }
         imagePicker.dismiss(animated: true, completion: nil)
         DispatchQueue.main.async {
-            self.showReview(image: image)
+            let croppedImage = self.cropCameraImage(image, previewLayer: self.previewView.videoPreviewLayer)!
+            self.showReview(image: croppedImage)
             self.approveImage()
         }
 //        let imgData = UIImagePNGRepresentation(image)!
