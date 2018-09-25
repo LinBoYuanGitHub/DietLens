@@ -66,6 +66,7 @@ class TextInputViewController: BaseViewController {
     var longitude = 0.0
 
     var currentSelectionPos = 0
+    let searchCacheLRU = TextSuggestionCacheLRU(capacity: 6)
 
     //enum for textSearch status
     enum TextInputStatus {
@@ -280,12 +281,16 @@ class TextInputViewController: BaseViewController {
         if foodEntity.id == 0 {
             return
         }
+        //request Food info
         AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.getFoodDetail(foodId: foodEntity.id) { (dietItem) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                 if dietItem == nil {
                     return
                 }
+                //save select Item to lruCache
+                self.searchCacheLRU.setValue(foodEntity, for: foodEntity.id)
+                //dietItem operation
                 var dietEntity = dietItem!
                 if dietItem?.portionInfo.count != 0 {
                     dietEntity.displayUnit = (dietItem?.portionInfo[0].sizeUnit)!
@@ -324,11 +329,10 @@ class TextInputViewController: BaseViewController {
             self.textSearchTable.isHidden = false
             self.getPopurlarFoodLists()
         } else if currentSelection == 1 {
-            self.textSearchTable.isHidden = true
-            self.emptyViewLabel.text = "We are working on this feature for release in the future."
-            self.refreshBtn.isHidden = true
-            self.emptyView.isHidden = false
             //load recent search result
+            self.textSearchTable.isHidden = false
+            self.searchResultList = self.searchCacheLRU.getAllValue()
+            self.textSearchTable.reloadData()
         } else if currentSelection == 2 {
             //show favorite WIP view
             self.textSearchTable.isHidden = true

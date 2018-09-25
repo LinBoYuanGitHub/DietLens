@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct TextSearchSuggestionEntity {
+struct TextSearchSuggestionEntity: Codable {
+
     public var id: Int = 0
     public var name: String = ""
     public var useExpImage: Bool = false
