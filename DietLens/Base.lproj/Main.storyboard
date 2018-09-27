@@ -912,7 +912,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyX-aS-zcl" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="16" y="35" width="25" height="20"/>
+                                <rect key="frame" x="15" y="35" width="25" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="HXA-Kb-Ise"/>
                                     <constraint firstAttribute="height" constant="20" id="k7i-FJ-GUp"/>
