@@ -53,7 +53,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.delegate = self
         cpfCollectionView.delegate = self
         cpfCollectionView.dataSource = self
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         //change statusbarcolor
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
@@ -163,8 +162,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             jumpToDestPage(identifyId: "FoodDiaryHistoryVC", mType: FoodDiaryHistoryViewController.self)
         case 2:
             //to step counter page
-            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
-//            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
+//            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
+            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
         case 3:
             //to healthCenter page
             jumpToDestPage(identifyId: "healthCenterVC", mType: HealthCenterMainViewController.self)
@@ -254,6 +253,9 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         //backbtn
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
+        //disable homepage&LGMenu swipe back gesture
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.sideMenuController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         if shouldRefreshMainPageNutrition {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
