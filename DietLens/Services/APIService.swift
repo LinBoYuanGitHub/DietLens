@@ -56,14 +56,14 @@ class APIService {
                           parameters: ["email": userEmail],
                           encoding: JSONEncoding.default,
                           headers: [:])
-        .validate()
+            .validate()
             .responseJSON {(response) -> Void in
-            guard response.result.isSuccess else {
-                print ("Failed to request verification email")
-                completion (false)
-                return
-            }
-            completion(true)
+                guard response.result.isSuccess else {
+                    print ("Failed to request verification email")
+                    completion (false)
+                    return
+                }
+                completion(true)
         }
     }
 
@@ -117,10 +117,11 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("facebook uid validation failed")
+//                    if response.response?.statusCode == 401 {
+//                        self.popOutToLoginPage()
+//                        return
+//                    }
                     completion(false, false)
-                    if response.response?.statusCode == 401 {
-                        //redirect to login page
-                    }
                     return
                 }
                 guard (response.response?.allHeaderFields) != nil else {
@@ -228,8 +229,8 @@ class APIService {
                     completion(false)
                     return
                 }
-//                let userId = value["id"].stringValue
-//                let nickname = value["nickname"].stringValue
+                //                let userId = value["id"].stringValue
+                //                let nickname = value["nickname"].stringValue
                 //                let rooms = rows.flatMap({ (roomDict) -> RemoteRoom? in
                 //                    return RemoteRoom(jsonData: roomDict)
                 //                })
@@ -279,27 +280,31 @@ class APIService {
     }
 
     public func getArticleList(completion: @escaping ([Article]?) -> Void, nextLinkCompletion: @escaping (String) -> Void) {
-            Alamofire.request(
-                URL(string: ServerConfig.articleURL+"/?type=0")!,
-                method: .get,
-                headers: getTokenHeader())
-                .validate()
-                .responseJSON { (response) -> Void in
-                    guard response.result.isSuccess else {
-                        print("Get articles failed due to : \(String(describing: response.result.error))")
-                        completion(nil)
+        Alamofire.request(
+            URL(string: ServerConfig.articleURL+"/?type=0")!,
+            method: .get,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get articles failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
                         return
                     }
-                    guard let articles = response.result.value else {
-                        print("Get articles failed due to : Server Data Type Error")
-                        completion(nil)
-                        return
-                    }
-                    let jsonArr = JSON(articles)
-                    let nextLink = JSON(articles)["next"].stringValue
-                    let articleList: [Article] = ArticleDataManager.instance.assembleArticles(jsonArr: jsonArr)
-                    nextLinkCompletion(nextLink)
-                    completion(articleList)
+                    completion(nil)
+                    return
+                }
+                guard let articles = response.result.value else {
+                    print("Get articles failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonArr = JSON(articles)
+                let nextLink = JSON(articles)["next"].stringValue
+                let articleList: [Article] = ArticleDataManager.instance.assembleArticles(jsonArr: jsonArr)
+                nextLinkCompletion(nextLink)
+                completion(articleList)
         }
     }
 
@@ -312,6 +317,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Get articles failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -337,6 +346,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Get events failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -362,6 +375,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("get autoComplete result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -393,7 +410,8 @@ class APIService {
                 guard response.result.isSuccess else {
                     print("Get search result failed due to : \(String(describing: response.result.error))")
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     completion(nil)
                     return
@@ -405,16 +423,16 @@ class APIService {
                 }
                 let jsonObj = JSON(searchResults)
                 let foodSearchList = TextSearchDataManager.instance.assembleTextSerchResultList(jsonObj: jsonObj)
-//                let jsonArr = jsonObj["data"]
+                //                let jsonArr = jsonObj["data"]
                 let nextLink = jsonObj["next"].stringValue
-//                var foodSearchList = [TextSearchSuggestionEntity]()
-//                for index in 0..<jsonArr.count {
-//                    let dict = jsonArr[index].dictionaryValue
-//                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-//                    entity.location = dict["location"]!.stringValue
-//                    entity.stall = dict["stall"]!.stringValue
-//                    foodSearchList.append(entity)
-//                }
+                //                var foodSearchList = [TextSearchSuggestionEntity]()
+                //                for index in 0..<jsonArr.count {
+                //                    let dict = jsonArr[index].dictionaryValue
+                //                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+                //                    entity.location = dict["location"]!.stringValue
+                //                    entity.stall = dict["stall"]!.stringValue
+                //                    foodSearchList.append(entity)
+                //                }
                 nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
@@ -436,7 +454,8 @@ class APIService {
                 guard response.result.isSuccess else {
                     print("Get search result failed due to : \(String(describing: response.result.error))")
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     completion(nil)
                     return
@@ -448,11 +467,11 @@ class APIService {
                 }
                 let jsonObj = JSON(searchResults)
                 let foodSearchList = TextSearchDataManager.instance.assemblePopularTextSerchResultList(jsonObj: jsonObj)
-//                for index in 0..<jsonArr.count {
-//                    let dict = jsonArr[index].dictionaryValue
-//                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-//                    foodSearchList.append(entity)
-//                }
+                //                for index in 0..<jsonArr.count {
+                //                    let dict = jsonArr[index].dictionaryValue
+                //                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+                //                    foodSearchList.append(entity)
+                //                }
                 completion(foodSearchList)
         }
     }
@@ -497,8 +516,12 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                print("Get food detail failed due to : \(String(describing: response.result.error))")
-                completion(nil)
+                    print("Get food detail failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    completion(nil)
                     return
                 }
                 guard let detail = response.result.value else {
@@ -570,20 +593,20 @@ class APIService {
      * use qinniu server as to store the image
      * param: imageData
      * return: imageKey
-    */
+     */
     public func qiniuImageUpload(imgData: Data, completion: @escaping (String?) -> Void, progressCompletion: @escaping (Int) -> Void) {
-//        let uploadUrl = "http://upload.qiniu.com/"
+        //        let uploadUrl = "http://upload.qiniu.com/"
         QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
         if let uploadToken = QiniuToken.shared().uploadToken() {
-//            let file = QiniuFile(imgData as NSData)
+            //            let file = QiniuFile(imgData as NSData)
             let uploader = QiniuUploader()
             let file = QiniuFile(fileData: imgData)
             uploader.files.append(file)
             uploader.startUpload(uploadToken, uploadOneFileSucceededHandler: { (index, keyValuePair) in
                 print("upload succeeded : \(index) - \(keyValuePair)")
                 if let key = keyValuePair["key"] as? String {
-//                    let url = "\(QiniuConfig.rootDomain)/\(QiniuConfig.accessKey)&token=\(key)"
-//                    print(url)
+                    //                    let url = "\(QiniuConfig.rootDomain)/\(QiniuConfig.accessKey)&token=\(key)"
+                    //                    print(url)
                     completion(key)
                 }
             }, uploadOneFileFailedHandler: { (index, error) in
@@ -634,6 +657,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Get recognition result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -648,7 +675,7 @@ class APIService {
                     //not json data, return null
                     completion(nil)
                 } else {
-                   //assemble FoodInfo to return recognition result
+                    //assemble FoodInfo to return recognition result
                     completion(displayCategory)
                 }
         }
@@ -665,7 +692,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get food detail failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -698,7 +726,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete single foodItem failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -724,7 +753,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -750,7 +780,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -783,7 +814,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("update foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -810,7 +842,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("create foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -836,7 +869,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get daily foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -872,7 +906,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get monthly available date failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -885,7 +920,7 @@ class APIService {
                 }
                 let jsonObject = JSON(result)
                 let dateObject = jsonObject["data"]["date"]
-                 for index in 0..<dateObject.count {
+                for index in 0..<dateObject.count {
                     //convert date string to date
                     let dateStr = dateObject[index].stringValue
                     let date = DateUtil.normalStringToDate(dateStr: dateStr)
@@ -913,15 +948,15 @@ class APIService {
             case .success(let upload, _, _):
                 upload.uploadProgress(closure: { (progress) in
                     #if DEBUG
-                        print("Upload Progress: \(progress.fractionCompleted)")
-                        progressCompletion(Int(progress.fractionCompleted*100))
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                    progressCompletion(Int(progress.fractionCompleted*100))
                     #endif
                 })
                 upload.responseJSON { response in
                     let resultObj = JSON(response.value)
                     let resultList = MockedUpFoodData.instance.assembleFoodInfoData(data: resultObj["data"])
-//                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
-//                    let imageId = resultObj["data"]["id"].intValue
+                    //                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
+                    //                    let imageId = resultObj["data"]["id"].intValue
                     completion(resultList)
                 }
             case .failure(let encodingError):
@@ -958,7 +993,7 @@ class APIService {
                     let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
                     let imageId = resultObj["data"]["id"].intValue
                     completion(imageId, resultList)
-//                    print(response.result.value)
+                    //                    print(response.result.value)
                 }
             case .failure(let encodingError):
                 print(encodingError)
@@ -985,14 +1020,15 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("save device token failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 completion(true)
-            }
+        }
     }
 
     public func logOut(completion: @escaping (Bool) -> Void) {
@@ -1005,9 +1041,6 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-//                    if response.response?.statusCode == 401 {
-//                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-//                    }
                     print("lgout failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
@@ -1042,7 +1075,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("send feedback failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1072,6 +1106,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("get profile failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -1101,7 +1139,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("update profile failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1136,7 +1175,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("update profile failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1165,7 +1205,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -1195,7 +1236,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -1211,7 +1253,7 @@ class APIService {
                 let notications = NotificationDataManager.instance.assembleUserNotification(jsonArr: jsonArr)
                 completion(notications)
                 if nextLink != nil {
-                     nextCompletion(nextLink)
+                    nextCompletion(nextLink)
                 }
         }
     }
@@ -1226,7 +1268,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -1259,7 +1302,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1289,7 +1333,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 204 else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete notifcation failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1314,7 +1359,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 204 else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1340,7 +1386,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 201 else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("response notifcation answer failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1371,7 +1418,7 @@ class APIService {
                     completion(false)
                     return
                 }
-//                let jsonObject = JSON(result)
+                //                let jsonObject = JSON(result)
                 completion(true)
         }
     }
@@ -1472,6 +1519,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 201 else {
                     print("Save hourly step data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1490,6 +1541,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1511,10 +1566,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -1538,10 +1594,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -1569,6 +1626,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1592,6 +1653,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1611,10 +1676,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("get Dietary Guide Failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(guideDict)
                     return
                 }
@@ -1646,10 +1712,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(responseDict)
                     return
                 }
@@ -1664,14 +1731,6 @@ class APIService {
                 responseDict["fat"] = jsonObject["fat"].doubleValue
                 responseDict["carbohydrate"] = jsonObject["carbohydrate"].doubleValue
                 completion(responseDict)
-        }
-    }
-
-    func handleAuthenticationException(statusCode: Int, sourceViewController: UIViewController) {
-        if statusCode == 401 {
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController {
-                sourceViewController.present(dest, animated: true, completion: nil)
-            }
         }
     }
 
@@ -1711,29 +1770,61 @@ class APIService {
 
     //for all the new token
     func getTokenHeader() -> [String: String] {
-//        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
+        //        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
         let preferences = UserDefaults.standard
         let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
-//        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
+        //        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
         let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]
         return header
     }
 
     func getUserAgentString() -> String {
-        let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-//        let appIdentifier = Bundle.main.bundleIdentifier!
-        let systemIOSVersion = UIDevice.current.systemVersion
-        let modelName = UIDevice.modelName
-//        let reqeustToolVersion = ""
-        return appName + "/" + appVersion + " (iOS; " + "build:" + buildVersion + "; system version " + systemIOSVersion + ")" + modelName
+        if let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as? String,
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+             //        let appIdentifier = Bundle.main.bundleIdentifier!
+            let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            let systemIOSVersion = UIDevice.current.systemVersion
+            let modelName = UIDevice.modelName
+            return appName + "/" + appVersion + " (iOS; " + "build:" + buildVersion + "; system version " + systemIOSVersion + ")" + modelName
+        }
+        return ""
     }
 
     //special header for webhook
     func getHardCodeBasicAuthenticationHeader() -> [String: String] {
         let header = ["Authorization": "Basic YThkMjM2MzYxZmRkZjJmZTlmZmYxNjE2ZTAzNzU1NDI6ODYwMzBiZWVkMjEyNGY0YmRjZmU3MGU3YzE4YTA1YmI="]
         return header
+    }
+
+    func popOutToLoginPage() {
+        let preferences = UserDefaults.standard
+        let token = preferences.string(forKey: PreferenceKey.tokenKey)
+        if token == nil {
+            return
+        }
+        if var rootVC = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = rootVC.presentedViewController {
+                rootVC = presentedViewController
+            }
+            DispatchQueue.main.async {
+                AlertMessageHelper.showMessage(targetController: rootVC, title: "Message", message: "You already login the same account in another device. Please check.", confirmText: "OK") {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let welcomeNVC = storyboard.instantiateViewController(withIdentifier: "WelcomeNVC")
+                    AlertMessageHelper.alertController?.dismiss(animated: true, completion: nil)
+                    rootVC.present(welcomeNVC, animated: true, completion: nil)
+                    self.clearPersonalData()
+                }
+            }
+        }
+    }
+
+    func clearPersonalData() {
+        let preferences = UserDefaults.standard
+        let nicknameKey = "nickname"
+        preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.facebookId)
+        preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
+        preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
     }
 
 }
