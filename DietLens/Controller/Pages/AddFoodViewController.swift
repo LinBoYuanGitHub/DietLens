@@ -38,8 +38,14 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         self.containerView.isScrollEnabled = false
         self.navigationController?.navigationBar.isHidden = true
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
-        if let cameraVC =  self.viewControllers.first as? CameraViewController {
-            cameraVC.viewWillAppear(false)
+        if currentIndex == 0 {
+            if let cameraVC =  self.viewControllers.first as? CameraViewController {
+                cameraVC.viewWillAppear(false)
+            }
+        } else {
+            if let textInputVC = self.viewControllers[1] as? TextInputViewController {
+                textInputVC.viewWillAppear(false)
+            }
         }
     }
 

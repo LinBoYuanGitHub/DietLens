@@ -164,4 +164,7 @@ class StepChartViewController: BaseViewController {
 
 extension StepChartViewController: ChartViewDelegate {
 
+    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
+
+    }
 }

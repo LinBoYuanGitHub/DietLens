@@ -107,11 +107,6 @@ class RegistrationFirstStepViewController: UIViewController {
     }
 
     func signUpFunction() {
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
-            dest.profile = self.profile
-            self.navigationController?.pushViewController(dest, animated: true)
-            return
-        }
         if Reachability()!.connection == .none {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
             return

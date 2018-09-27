@@ -182,6 +182,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 //        let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+//        var convertedRect = previewView.videoPreviewLayer.metadataOutputRectConverted(fromLayerRect: rect)
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         chosenImageView.image!.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -397,7 +398,13 @@ extension CameraViewController: CameraViewControllerDelegate {
         let height: CGFloat = aPoint.y * originalWidth - bPoint.y * originalWidth
 
         let cropRect = CGRect(x: posX, y: posY, width: width, height: height)
-
+//        let metaRect = previewLayer.metadataOutputRectConverted(fromLayerRect: previewView.bounds)
+//        let finalcropRect: CGRect =
+//        CGRect( x: metaRect.origin.x * original.size.width,
+//        y: metaRect.origin.y * original.size.height,
+//        width: metaRect.size.width * original.size.width,
+//        height: metaRect.size.height * original.size.height)
+//        print(metaRect)
         if let imageRef = original.cgImage?.cropping(to: cropRect) {
             image = UIImage(cgImage: imageRef, scale: original.scale, orientation: original.imageOrientation)
         }

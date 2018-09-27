@@ -105,6 +105,8 @@ class TextInputViewController: BaseViewController {
             print("Location services are not enabled")
         }
         self.emptyResultView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        //set animation view position
+        self.animationViewLeading.constant = 16
         //load popular list
         getPopurlarFoodLists()
     }
@@ -121,8 +123,10 @@ class TextInputViewController: BaseViewController {
         //regist notification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
-        //set animation view position
-        self.animationViewLeading.constant = 16
+        //only refresh cache data
+        if (textSearchField.text?.isEmpty)! && currentSelectionPos != 0 {
+            onFilterSelect(currentSelection: currentSelectionPos)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -130,7 +134,12 @@ class TextInputViewController: BaseViewController {
     }
 
     @IBAction func refreshSearch(_ sender: Any) {
-        performTextSearch()
+        if (textSearchField.text?.isEmpty)! {
+            onFilterSelect(currentSelection: currentSelectionPos)
+        } else {
+            performTextSearch()
+        }
+
     }
 
     func showCancelBtn() {
@@ -183,9 +192,13 @@ class TextInputViewController: BaseViewController {
         }
         APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased()) { (textResults) in
             if textResults == nil {
+                self.emptyView.isHidden = false
+                self.textSearchTable.isHidden = true
                 return
             }
             self.emptyResultView.isHidden = true
+            self.emptyView.isHidden = true
+            self.textSearchTable.isHidden = false
             self.searchResultList = textResults!
             self.textSearchTable.reloadData()
         }
@@ -206,6 +219,7 @@ class TextInputViewController: BaseViewController {
 
     @IBAction func textFieldChanged(_ sender: UITextField) {
         //textFilter hide/show control
+        self.textSearchTable.isHidden = false
         if (sender.text?.isEmpty)! {
             tableTopConstants.constant = 50
             textSearchFilterView.isHidden = false
@@ -225,7 +239,7 @@ class TextInputViewController: BaseViewController {
     }
 
     func performTextSearch() {
-        if Reachability()?.connection == .none {
+        if Reachability()?.connection == .none && currentSelectionPos != 2 {
             self.emptyView.isHidden = false
             return
         } else {
@@ -326,13 +340,13 @@ class TextInputViewController: BaseViewController {
 
     func onFilterSelect(currentSelection: Int) {
         if currentSelection == 0 {
-            self.textSearchTable.isHidden = false
             self.getPopurlarFoodLists()
         } else if currentSelection == 1 {
             //load recent search result
             self.textSearchTable.isHidden = false
             self.searchResultList = self.searchCacheLRU.getAllValue()
             self.textSearchTable.reloadData()
+            APIService.instance.cancelAllRequest()
         } else if currentSelection == 2 {
             //show favorite WIP view
             self.textSearchTable.isHidden = true
@@ -400,6 +414,11 @@ extension TextInputViewController: UITableViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //dismiss keyboard when scroller in accelerate status
+        if !scrollView.isDecelerating {
+             view.endEditing(true)
+        }
+        //scroll part of code
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
@@ -430,9 +449,6 @@ extension TextInputViewController: UITableViewDelegate {
         }
     }
 
-    func saveToLRUCache(text: String) {
-
-    }
 }
 
 extension TextInputViewController: UITextFieldDelegate {
