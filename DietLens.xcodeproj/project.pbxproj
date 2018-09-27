@@ -18,7 +18,6 @@
 		3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */; };
 		3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AC23D2088D1E7008F5BF2 /* FoodCalendarViewController.swift */; };
 		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
-		3F250A732154DEF2009A5F5E /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F250A722154DEF2009A5F5E /* OrderedDictionary.swift */; };
 		3F250A75215616DA009A5F5E /* TextSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */; };
 		3F25C4752043EC7700DFA459 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C4742043EC7700DFA459 /* StringConstants.swift */; };
 		3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C47620440F1500DFA459 /* ConfigVariable.swift */; };
@@ -268,7 +267,6 @@
 		3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCollectionCell.swift; sourceTree = "<group>"; };
 		3F1AC23D2088D1E7008F5BF2 /* FoodCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCalendarViewController.swift; sourceTree = "<group>"; };
 		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		3F250A722154DEF2009A5F5E /* OrderedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchDataManager.swift; sourceTree = "<group>"; };
 		3F25C4742043EC7700DFA459 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringConstants.swift; path = DietLens/Assets.xcassets/StringConstants.swift; sourceTree = SOURCE_ROOT; };
 		3F25C47620440F1500DFA459 /* ConfigVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigVariable.swift; sourceTree = "<group>"; };
@@ -677,7 +675,6 @@
 				3F5691E8214E893000D9929A /* DoublyLinkedList.swift */,
 				3F5691EA214E8B6D00D9929A /* CacheLRU.swift */,
 				3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */,
-				3F250A722154DEF2009A5F5E /* OrderedDictionary.swift */,
 			);
 			path = LRUCache;
 			sourceTree = "<group>";
@@ -1574,7 +1571,6 @@
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */,
 				3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */,
-				3F250A732154DEF2009A5F5E /* OrderedDictionary.swift in Sources */,
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
 				3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */,
