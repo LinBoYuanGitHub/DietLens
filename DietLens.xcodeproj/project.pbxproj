@@ -18,6 +18,7 @@
 		3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */; };
 		3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AC23D2088D1E7008F5BF2 /* FoodCalendarViewController.swift */; };
 		3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B628D1FC66D56006A38FE /* WebViewController.swift */; };
+		3F250A75215616DA009A5F5E /* TextSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */; };
 		3F25C4752043EC7700DFA459 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C4742043EC7700DFA459 /* StringConstants.swift */; };
 		3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C47620440F1500DFA459 /* ConfigVariable.swift */; };
 		3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */; };
@@ -48,6 +49,13 @@
 		3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */; };
 		3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACB1FEB661800A3685A /* ReportEntity.swift */; };
 		3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACD1FEBB04600A3685A /* CardView.swift */; };
+		3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */; };
+		3F46C460215224510066636F /* RegistrationProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F46C45F215224510066636F /* RegistrationProfileCell.swift */; };
+		3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */; };
+		3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D32137E950005F3260 /* NoInternetDialog.swift */; };
+		3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */; };
+		3F4812D8213D3BA0005F3260 /* ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */; };
+		3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D921424517005F3260 /* WelcomeViewController.swift */; };
 		3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */; };
 		3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EC201E119900D1F388 /* NotificationDataManager.swift */; };
 		3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4906EE2020387D00D1F388 /* EventCell.swift */; };
@@ -62,11 +70,16 @@
 		3F5608F520F335480007B3AF /* HealthCenterTableValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */; };
 		3F5608F720F3357D0007B3AF /* HealthCenterEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */; };
 		3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */; };
+		3F5691E6214CF53F00D9929A /* ConfirmDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */; };
+		3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E8214E893000D9929A /* DoublyLinkedList.swift */; };
+		3F5691EB214E8B6D00D9929A /* CacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EA214E8B6D00D9929A /* CacheLRU.swift */; };
+		3F5691ED214EA4AD00D9929A /* TextSuggestionCacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */; };
+		3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */; };
+		3F5691F22150D51A00D9929A /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F5691F12150D51900D9929A /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
 		3F6B872820A1BCD8001063A0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; };
 		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
 		3F6B872A20A1BD4E001063A0 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872620A1BCD8001063A0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3F6B872B20A1BD51001063A0 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F6B872E20A1DEC1001063A0 /* SideMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B872D20A1DEC0001063A0 /* SideMainViewController.swift */; };
 		3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */; };
 		3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */; };
@@ -76,6 +89,7 @@
 		3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F73A7522109C1360031B01E /* IntroductionViewController.swift */; };
 		3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DEE20EB6195003A31DE /* RulerView.swift */; };
 		3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */; };
+		3F7D77E42148F0EF000B8C6B /* StepChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */; };
 		3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */; };
 		3F7DACA120121515009E4DB6 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DACA020121515009E4DB6 /* Ingredient.swift */; };
 		3F7DACA520133968009E4DB6 /* ExpandedUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DACA420133968009E4DB6 /* ExpandedUITextField.swift */; };
@@ -116,7 +130,7 @@
 		3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7910C2107061F000D6A94 /* LoadingButton.swift */; };
 		3FBA55BB20F883C600258808 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BA20F883C600258808 /* BaseViewController.swift */; };
 		3FBA55BD20FDB40000258808 /* CustomPhotoAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */; };
-		3FBA55BF20FEE6D900258808 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBA55BE20FEE6D800258808 /* Reachability.swift */; };
+		3FC13058213690AC000605E3 /* HttpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13057213690AC000605E3 /* HttpExtension.swift */; };
 		3FCBEC0E20E632750092948C /* HealthCenterAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */; };
 		3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */; };
 		3FCBEC1220E632CB0092948C /* HealthCenterMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */; };
@@ -137,6 +151,7 @@
 		3FEC34542057D1380060099A /* diaryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC34532057D1380060099A /* diaryHeader.xib */; };
 		3FEC3456205A76190060099A /* FoodDiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC3455205A76190060099A /* FoodDiaryModel.swift */; };
 		3FF3B97C20EB6EED00E428C1 /* RulerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3B97B20EB6EED00E428C1 /* RulerLayout.swift */; };
+		3FF8950A212AC04500495B0C /* BottomLabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF89509212AC04500495B0C /* BottomLabelButton.swift */; };
 		3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56841FADAF90002DCE15 /* FoodDiary.swift */; };
 		3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */; };
 		3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */; };
@@ -232,7 +247,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3F6B872B20A1BD51001063A0 /* RealmSwift.framework in Embed Frameworks */,
+				3F5691F22150D51A00D9929A /* RealmSwift.framework in Embed Frameworks */,
 				3F6B872A20A1BD4E001063A0 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -252,6 +267,7 @@
 		3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCollectionCell.swift; sourceTree = "<group>"; };
 		3F1AC23D2088D1E7008F5BF2 /* FoodCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCalendarViewController.swift; sourceTree = "<group>"; };
 		3F1B628D1FC66D56006A38FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchDataManager.swift; sourceTree = "<group>"; };
 		3F25C4742043EC7700DFA459 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringConstants.swift; path = DietLens/Assets.xcassets/StringConstants.swift; sourceTree = SOURCE_ROOT; };
 		3F25C47620440F1500DFA459 /* ConfigVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigVariable.swift; sourceTree = "<group>"; };
 		3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActivityLvlViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +298,13 @@
 		3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
 		3F43DACB1FEB661800A3685A /* ReportEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEntity.swift; sourceTree = "<group>"; };
 		3F43DACD1FEBB04600A3685A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProfileViewController.swift; sourceTree = "<group>"; };
+		3F46C45F215224510066636F /* RegistrationProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProfileCell.swift; sourceTree = "<group>"; };
+		3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogController.swift; sourceTree = "<group>"; };
+		3F4812D32137E950005F3260 /* NoInternetDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetDialog.swift; sourceTree = "<group>"; };
+		3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToAlbumDialog.swift; sourceTree = "<group>"; };
+		3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialog.swift; sourceTree = "<group>"; };
+		3F4812D921424517005F3260 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedGardientView.swift; sourceTree = "<group>"; };
 		3F4906EC201E119900D1F388 /* NotificationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataManager.swift; sourceTree = "<group>"; };
 		3F4906EE2020387D00D1F388 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
@@ -296,6 +319,12 @@
 		3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableValueCell.swift; sourceTree = "<group>"; };
 		3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterEmojiCell.swift; sourceTree = "<group>"; };
 		3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterBarCell.swift; sourceTree = "<group>"; };
+		3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewController.swift; sourceTree = "<group>"; };
+		3F5691E8214E893000D9929A /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
+		3F5691EA214E8B6D00D9929A /* CacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheLRU.swift; sourceTree = "<group>"; };
+		3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionCacheLRU.swift; sourceTree = "<group>"; };
+		3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActvitityLevelCell.swift; sourceTree = "<group>"; };
+		3F5691F12150D51900D9929A /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
@@ -308,6 +337,7 @@
 		3F73A7522109C1360031B01E /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		3F764DEE20EB6195003A31DE /* RulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerCollectionCell.swift; sourceTree = "<group>"; };
+		3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepChartViewController.swift; sourceTree = "<group>"; };
 		3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
 		3F7DACA020121515009E4DB6 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		3F7DACA420133968009E4DB6 /* ExpandedUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedUITextField.swift; sourceTree = "<group>"; };
@@ -348,7 +378,7 @@
 		3FB7910C2107061F000D6A94 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		3FBA55BA20F883C600258808 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoAlbum.swift; sourceTree = "<group>"; };
-		3FBA55BE20FEE6D800258808 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		3FC13057213690AC000605E3 /* HttpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpExtension.swift; sourceTree = "<group>"; };
 		3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterAddItemViewController.swift; sourceTree = "<group>"; };
 		3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableViewController.swift; sourceTree = "<group>"; };
 		3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterMainViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +400,7 @@
 		3FEC34532057D1380060099A /* diaryHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = diaryHeader.xib; sourceTree = "<group>"; };
 		3FEC3455205A76190060099A /* FoodDiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryModel.swift; sourceTree = "<group>"; };
 		3FF3B97B20EB6EED00E428C1 /* RulerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerLayout.swift; sourceTree = "<group>"; };
+		3FF89509212AC04500495B0C /* BottomLabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLabelButton.swift; sourceTree = "<group>"; };
 		3FFB56841FADAF90002DCE15 /* FoodDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiary.swift; sourceTree = "<group>"; };
 		3FFB56861FB02AFA002DCE15 /* FoodDiaryDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDBOperation.swift; sourceTree = "<group>"; };
 		3FFB56911FB2F68B002DCE15 /* FoodDiaryDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryDataManager.swift; sourceTree = "<group>"; };
@@ -540,6 +571,7 @@
 				3FB791082106155C000D6A94 /* LoadingFooterView.swift */,
 				3FB7910C2107061F000D6A94 /* LoadingButton.swift */,
 				3F13694621086FF8007D9772 /* ActionDisabledTextField.swift */,
+				3FF89509212AC04500495B0C /* BottomLabelButton.swift */,
 			);
 			path = CustomizedView;
 			sourceTree = "<group>";
@@ -550,6 +582,10 @@
 				3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */,
 				3F50DCE920AEA44E005209B8 /* Modal.swift */,
 				3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */,
+				3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */,
+				3F4812D32137E950005F3260 /* NoInternetDialog.swift */,
+				3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */,
+				3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */,
 			);
 			path = ViewHelper;
 			sourceTree = "<group>";
@@ -563,6 +599,7 @@
 				3F14CC47201C79FF0032CC77 /* ProfileDataManager.swift */,
 				3F4906EC201E119900D1F388 /* NotificationDataManager.swift */,
 				3F2D163420F2899900348160 /* HealthCenterDataManager.swift */,
+				3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -632,6 +669,16 @@
 			path = DialogCell;
 			sourceTree = "<group>";
 		};
+		3F5691E7214E890E00D9929A /* LRUCache */ = {
+			isa = PBXGroup;
+			children = (
+				3F5691E8214E893000D9929A /* DoublyLinkedList.swift */,
+				3F5691EA214E8B6D00D9929A /* CacheLRU.swift */,
+				3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */,
+			);
+			path = LRUCache;
+			sourceTree = "<group>";
+		};
 		3F6B872C20A1DE49001063A0 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,6 +719,8 @@
 				3F88189B20EA569E00FE6C11 /* ProfileTextFieldCell.swift */,
 				3F88189D20EA56EA00FE6C11 /* ProfileAvatarCell.swift */,
 				3F88189F20EA574900FE6C11 /* ProfileArrowCell.swift */,
+				3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */,
+				3F46C45F215224510066636F /* RegistrationProfileCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -702,6 +751,7 @@
 				3F2D163020EE175400348160 /* RulerLayout.xib */,
 				3F5608F020F30C010007B3AF /* EmojiInputView.swift */,
 				3F5608F220F30DF90007B3AF /* EmojiLayout.xib */,
+				3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -716,6 +766,7 @@
 				3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */,
 				3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */,
 				3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */,
+				3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -802,6 +853,7 @@
 				3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */,
 				3F436636206CC44B0089C63A /* ReportStatisticController.swift */,
 				3F6DBCEE20AC17CB006BD8F6 /* SideMenuContainerViewController.swift */,
+				3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -833,6 +885,7 @@
 				586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */,
 				586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */,
 				3F88189820E9D80F00FE6C11 /* LoginViewController.swift */,
+				3F4812D921424517005F3260 /* WelcomeViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -840,6 +893,7 @@
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
+				3F5691F12150D51900D9929A /* RealmSwift.framework */,
 				5877CF861F9D82BF0022B51E /* DietLens */,
 				5877CF9E1F9D82BF0022B51E /* DietLensTests */,
 				5877CFA91F9D82BF0022B51E /* DietLensUITests */,
@@ -918,6 +972,7 @@
 		58F2DF281F9F437F00FF3A95 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3F5691E7214E890E00D9929A /* LRUCache */,
 				3F43664220774CEF0089C63A /* DBOperation */,
 				3F43664120774CC60089C63A /* DataManager */,
 				58F2DF291F9F439100FF3A95 /* DataService.swift */,
@@ -925,8 +980,8 @@
 				3F575C322047F0D9009C096C /* DateUtil.swift */,
 				3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */,
 				3FBA55BC20FDB3FF00258808 /* CustomPhotoAlbum.swift */,
-				3FBA55BE20FEE6D800258808 /* Reachability.swift */,
 				3FB7910A2106D1D4000D6A94 /* TextValidtor.swift */,
+				3FC13057213690AC000605E3 /* HttpExtension.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1071,6 +1126,7 @@
 				3FFB568E1FB02F7C002DCE15 /* Embed Frameworks */,
 				BF8441171FA435B200D5018F /* Run Script */,
 				3F50DCE820AD72A5005209B8 /* ShellScript */,
+				79845078383FC68BDDEAFC91 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1223,6 +1279,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/BAFluidView/BAFluidView.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -1230,9 +1287,12 @@
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HFSwipeView/HFSwipeView.framework",
 				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
+				"${BUILT_PRODUCTS_DIR}/JPSVolumeButtonHandler/JPSVolumeButtonHandler.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/LGSideMenuController/LGSideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
@@ -1241,6 +1301,7 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/QiniuUpload/QiniuUpload.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ScrollableGraphView/ScrollableGraphView.framework",
@@ -1259,6 +1320,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BAFluidView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -1266,9 +1328,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HFSwipeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPSVolumeButtonHandler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LGSideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
@@ -1277,6 +1342,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QiniuUpload.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ScrollableGraphView.framework",
@@ -1323,6 +1389,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79845078383FC68BDDEAFC91 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */ = {
@@ -1395,9 +1479,9 @@
 				3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */,
 				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
 				3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */,
+				3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				3FB6E67E20DCF19000462591 /* FoodDiaryCollectionViewCell.swift in Sources */,
-				3FBA55BF20FEE6D900258808 /* Reachability.swift in Sources */,
 				3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */,
 				3FB6E69020E4D55F00462591 /* RegistrationFirstStepViewController.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
@@ -1415,9 +1499,11 @@
 				3FCBEC0E20E632750092948C /* HealthCenterAddItemViewController.swift in Sources */,
 				3F438D4A209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift in Sources */,
 				586124A02043E29A00E727B2 /* ForgetPasswordEmailViewController.swift in Sources */,
+				3F4812D8213D3BA0005F3260 /* ConfirmationDialog.swift in Sources */,
 				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				3F4366482079FDEC0089C63A /* SearchResultCell.swift in Sources */,
 				3F6DBCEF20AC17CB006BD8F6 /* SideMenuContainerViewController.swift in Sources */,
+				3F5691E6214CF53F00D9929A /* ConfirmDialogViewController.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
 				3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */,
@@ -1445,6 +1531,7 @@
 				3F436644207758640089C63A /* DailyNutritionTableCell.swift in Sources */,
 				3F43665B207EFA850089C63A /* FoodCategoryCollectionCell.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
+				3F46C460215224510066636F /* RegistrationProfileCell.swift in Sources */,
 				3F436659207EFA6A0089C63A /* RecognitionResultTableCelll.swift in Sources */,
 				3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
@@ -1468,6 +1555,7 @@
 				3FB7910B2106D1D4000D6A94 /* TextValidtor.swift in Sources */,
 				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				3F14CC44201854D40032CC77 /* HistoryFoodDiaryCell.swift in Sources */,
+				3F250A75215616DA009A5F5E /* TextSearchDataManager.swift in Sources */,
 				3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */,
 				3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */,
 				3F88189C20EA569E00FE6C11 /* ProfileTextFieldCell.swift in Sources */,
@@ -1483,6 +1571,7 @@
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
 				3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */,
 				3FB6E68D20E3D00F00462591 /* ProfileSection.swift in Sources */,
+				3F5691ED214EA4AD00D9929A /* TextSuggestionCacheLRU.swift in Sources */,
 				3F7DACA520133968009E4DB6 /* ExpandedUITextField.swift in Sources */,
 				3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */,
 				3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
@@ -1497,12 +1586,17 @@
 				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,
 				3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */,
 				3F7DAC9F20104181009E4DB6 /* AddIngredientViewController.swift in Sources */,
+				3FF8950A212AC04500495B0C /* BottomLabelButton.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
+				3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */,
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
+				3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */,
+				3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */,
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
+				3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */,
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,
@@ -1523,11 +1617,13 @@
 				3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */,
 				3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */,
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
+				3F7D77E42148F0EF000B8C6B /* StepChartViewController.swift in Sources */,
 				3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */,
 				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
 				3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */,
 				3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */,
+				3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */,
 				3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */,
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
 				3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */,
@@ -1537,6 +1633,7 @@
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */,
 				3F43663D207721EB0089C63A /* DailyNutritionInfoViewController.swift in Sources */,
 				3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */,
 				5804F4D51FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift in Sources */,
@@ -1547,6 +1644,7 @@
 				3FF3B97C20EB6EED00E428C1 /* RulerLayout.swift in Sources */,
 				3F438D4D20A0956F00F4DAD9 /* homePageCPFCell.swift in Sources */,
 				3FB6E68720E383E600462591 /* ProfileEntity.swift in Sources */,
+				3F5691EB214E8B6D00D9929A /* CacheLRU.swift in Sources */,
 				3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */,
 				3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */,
 				3F5608F120F30C010007B3AF /* EmojiInputView.swift in Sources */,
@@ -1554,6 +1652,7 @@
 				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
 				3F9BFE5C1FF0D4E40011845B /* StepCounterViewController.swift in Sources */,
 				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
+				3FC13058213690AC000605E3 /* HttpExtension.swift in Sources */,
 				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 				3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */,
 				3F14CC48201C79FF0032CC77 /* ProfileDataManager.swift in Sources */,

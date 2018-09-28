@@ -15,6 +15,7 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailAddr.delegate = self
+        emailAddr.keyboardType = .emailAddress
         hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }

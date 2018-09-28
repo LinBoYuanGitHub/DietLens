@@ -11,6 +11,9 @@ import FacebookLogin
 import FacebookCore
 import SkyFloatingLabelTextField
 import FBSDKLoginKit
+import Reachability
+import GoogleSignIn
+import LGSideMenuController
 
 struct FBProfileRequest: GraphRequestProtocol {
     typealias Response = GraphResponse
@@ -27,9 +30,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var TFEmail: SkyFloatingLabelTextField!
     @IBOutlet weak var TFPassword: SkyFloatingLabelTextField!
     @IBOutlet weak var facebookLoginBtn: UIButton!
+    @IBOutlet weak var googleLoginBtn: UIButton!
 
     @IBAction func onLoginBtnClicked(_ sender: Any) {
-        if !Reachability.isConnectedToNetwork() {
+
+        if Reachability()!.connection == .none {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.noInternetErrorMsg)
             return
         }
@@ -81,6 +86,21 @@ class LoginViewController: UIViewController {
         setUpSkyFloatingLable()
         // Do any additional setup after loading the view.
         hideKeyboardWhenTappedAround()
+//        facebookLoginBtn.delegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = .gray
+        self.navigationItem.title = "Sign In"
+    }
+
+    @objc func onBackPressed() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     func setUpSkyFloatingLable() {
@@ -95,8 +115,9 @@ class LoginViewController: UIViewController {
         TFPassword.delegate = self
     }
 
-    @IBAction func loginButtonClicked(_ sender: Any) {
-        let loginManager = LoginManager()
+    @IBAction func processFacebookLogin(_ sender: Any) {
+        let loginManager = LoginManager(loginBehavior: .systemAccount, defaultAudience: .everyone)
+        loginManager.loginBehavior = .native
         loginManager.logIn(readPermissions: [.publicProfile], viewController: self) { (loginResult) in
             switch loginResult {
             case .failed(let error):
@@ -146,13 +167,20 @@ class LoginViewController: UIViewController {
         }
     }
 
+    @IBAction func processGoogleLogin(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     @IBAction func forgetPwPressed(_ sender: Any) {
-        self.performSegue(withIdentifier: "GoToForgetPwEmail", sender: self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "ForgetPwdVC")
+        self.present(controller, animated: true, completion: nil)
+//        self.performSegue(withIdentifier: "GoToForgetPwEmail", sender: self)
     }
 
     // MARK: - Navigation
@@ -193,6 +221,110 @@ extension LoginViewController: UITextFieldDelegate {
             }
         }
         return true
+    }
+
+}
+
+extension LoginViewController: FBSDKLoginButtonDelegate {
+
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            print(error)
+            return
+        } else if result.isCancelled {
+            print("cancelled")
+        } else {
+            let request = FBProfileRequest()
+            request.start({ (_, requestResult) in
+                switch requestResult {
+                case .success(let response):
+                    let facebookUserId = response.dictionaryValue!["id"]
+                    let facebookUserName = response.dictionaryValue!["name"]
+                    //validate FacebookId
+                    AlertMessageHelper.showLoadingDialog(targetController: self)
+                    guard let fbUserId = facebookUserId as? String else { return }
+                    APIService.instance.facebookIdValidationRequest(accessToken: result.token.tokenString, uuid: fbUserId, completion: { (isSuccess, isNewUser) in
+                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                        if isSuccess {
+                            //record userId & userName
+                            let preferences = UserDefaults.standard
+                            preferences.setValue(facebookUserId, forKey: "facebookId")
+                            preferences.setValue(facebookUserName, forKey: "nickname")
+                            if isNewUser {
+                                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
+                                    var profile = UserProfile()
+                                    if let name = facebookUserName as? String {
+                                        profile.name = name
+                                    }
+                                    if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                                        destVC.profile = profile
+                                        self.present(dest, animated: true, completion: nil)
+                                    }
+                                }
+                            } else {
+                                self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                            }
+                        }
+                    })
+                    print("Graph Request Succeeded: \(response)")
+                case .failed(let error):
+                    print("Graph Request Failed: \(error)")
+                }
+            })
+        }
+    }
+
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+
+    }
+
+}
+
+extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
+
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        APIService.instance.googleIdValidationRequest(accessToken: user.authentication.idToken, uuid: user.userID, completion: { (isSuccess, isNewUser) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            if isSuccess {
+                //record userId & userName
+                let preferences = UserDefaults.standard
+                preferences.setValue(user.userID, forKey: PreferenceKey.googleUserId)
+                preferences.setValue(user.profile.name, forKey: PreferenceKey.nickNameKey)
+                //tmp use
+                if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                    preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
+                }
+                //tmp use
+                if isNewUser {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
+                        var profile = UserProfile()
+                        if let name = user.profile.name {
+                            profile.name = name
+                        }
+                        if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                            preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
+                        }
+                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                            destVC.profile = profile
+                            self.present(dest, animated: true, completion: nil)
+                        }
+                    }
+                } else {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController {
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+            }
+        })
+    }
+
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

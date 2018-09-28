@@ -47,11 +47,11 @@ class RegistrationThirdStepViewController: UIViewController {
             button.setTitleColor(UIColor.black, for: .normal)
         }
         //weight ruler
-        let weightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
+        let weightRuler = RulerView(origin: CGPoint(x: 0, y: 0), max: HealthDeviceSetting.maxWeight, min: HealthDeviceSetting.minWeight)
         weightRuler.tag = self.weightTag
         weightRuler.rulerViewDelegate = self
         //height ruler
-        let heightRuler = RulerView(origin: CGPoint(x: 0, y: 0))
+        let heightRuler = RulerView(origin: CGPoint(x: 0, y: 0), max: HealthDeviceSetting.maxHeight, min: HealthDeviceSetting.minHeight)
         heightRuler.tag = self.heightTag
         heightRuler.rulerViewDelegate = self
         //setUp w/h Value
@@ -60,7 +60,7 @@ class RegistrationThirdStepViewController: UIViewController {
         //set current Item
         weightRuler.setCurrentItem(position: 50, animated: false)
         heightRuler.setCurrentItem(position: 165, animated: false)
-        //add sub view
+        //add subView
         weightRulerView.addSubview(weightRuler)
         heightRulerView.addSubview(heightRuler)
     }

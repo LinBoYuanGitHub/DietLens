@@ -3,8 +3,10 @@ import AVFoundation
 import Photos
 import XLPagerTabStrip
 import RealmSwift
+import JPSVolumeButtonHandler
+import Reachability
 
-class CameraViewController: UIViewController, UINavigationControllerDelegate {
+class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var capturePhotoButton: LoadingButton!
 
@@ -12,11 +14,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet private weak var cameraUnavailableLabel: UILabel!
 
-    @IBOutlet private weak var photoButton: UIButton!
-
     // MARK: Scanning barcodes
-    @IBOutlet weak var barcodeButton: UIButton!
-    @IBOutlet weak var selectionView: UIView!
     @IBOutlet weak var chosenImageView: UIImageView!
 
     private let sessionManager = CameraSessionManager()
@@ -34,6 +32,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var loadingScreen: UIView!
 
     @IBOutlet weak var uploadPercentageLabel: UILabel!
+
+    @IBOutlet weak var galleryBtn: ExpandedUIButton!
 
     private var recordType: String = RecordType.RecordByImage
 
@@ -60,6 +60,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
     var latitude = 0.0
     var longitude = 0.0
 
+//    var volumeHandler: JPSVolumeButtonHandler?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         hideReview()
@@ -69,6 +71,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
 
+//        self.volumeHandler = JPSVolumeButtonHandler(up: {self.sessionManager.capturePhoto()}, downBlock: {self.sessionManager.capturePhoto()})
         let previewLayer = previewView.videoPreviewLayer
         previewLayer.videoGravity = .resizeAspectFill
 
@@ -83,8 +86,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         sessionManager.onViewWillAppear()
         sampleImagCollectionView.delegate = self
         sampleImagCollectionView.dataSource = self
-        barcodeButton.setTitleColor(UIColor.lightGray, for: .disabled)
         sampleImagCollectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        //gallery button
+        galleryBtn.centerVertically()
         //set up location manager
         if CLLocationManager.locationServicesEnabled() {
             enableLocationServices()
@@ -111,12 +115,15 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+//        volumeHandler?.start(true)
         sessionManager.onViewWillAppear()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         // Order matters here
         sessionManager.onViewWillDisappear()
+//        volumeHandler?.stop()
         super.viewWillDisappear(animated)
     }
 
@@ -138,48 +145,58 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate {
         super.dismiss(animated: true)
     }
 
-    @IBAction func capturePhoto(_ sender: UIButton) {
-        capturePhotoButton.isEnabled = false
+    func takePhoto() {
         sessionManager.capturePhoto()
     }
 
-    @IBAction func switchToPhoto(_ sender: UIButton) {
-//        capturePhotoButton.isEnabled = true
-//        capturePhotoButton.tintColor = UIColor.red
-//        sessionManager.set(captureMode: .photo)
+    @IBAction func capturePhoto (_ sender: UIButton) {
+        sessionManager.capturePhoto()
+        capturePhotoButton.isEnabled = false
     }
 
-    @IBAction func switchToBarcode(_ sender: UIButton) {
-        sessionManager.set(captureMode: .barcode)
-        barcodeButton.tintColor = UIColor.red
-    }
+//    @IBAction func switchToBarcode(_ sender: UIButton) {
+//        sessionManager.set(captureMode: .barcode)
+//    }
 
     @IBAction func switchToGallery(_ sender: UIButton) {
         present(imagePicker, animated: false, completion: nil)
     }
 
     func approveImage() {
-        if !Reachability.isConnectedToNetwork() {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.noInternetErrorMsg)
+        if Reachability()!.connection == .none {
+            let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+            if let confirmationAlert =  storyboard.instantiateViewController(withIdentifier: "confirmationVC") as? ConfirmationDialog {
+                confirmationAlert.delegate = self
+                confirmationAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                confirmationAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                confirmationAlert.contentText = "Do you want to save image to photo album and recognize it later?"
+                confirmationAlert.reminderText = "No Internet connection found"
+                present(confirmationAlert, animated: true, completion: nil)
+            }
             return
         }
 //        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
 //            self.loadingScreen.alpha = 1
 //        }, completion: nil)
         //resize&compress image process
+//        let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+//        var convertedRect = previewView.videoPreviewLayer.metadataOutputRectConverted(fromLayerRect: rect)
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         chosenImageView.image!.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        let imgData = UIImageJPEGRepresentation(newImage!, 0.6)!
+        let imgData = UIImageJPEGRepresentation(newImage!, 1.0)!
 //        let preferences = UserDefaults.standard
 //        let key = "userId"
 //        let userId = preferences.string(forKey: key)
         //upload image to server
+       let startTime = Date()
         APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
             if imageKey != nil {
+                print(Date().timeIntervalSince(startTime))
+                print(imgData.count)
                 self.postImageKeyToServer(imageKey: imageKey!, isUsingSample: false)
             } else {//error happen during upload image to Qiniu
                 self.hideReview()
@@ -343,14 +360,16 @@ extension CameraViewController: CameraViewControllerDelegate {
             guard let wSelf = self else {
                 return
             }
-
             wSelf.cameraUnavailableLabel.isHidden = isAvailable
         }
     }
 
     func onDidFinishCapturePhoto(image: UIImage) {
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
-        CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
+        let saveToAblumFlag = UserDefaults.standard.bool(forKey: PreferenceKey.saveToAlbumFlag)
+        if saveToAblumFlag && !(Reachability()!.connection == .none) { //with network & save to album flag
+            CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
+        }
         showReview(image: croppedImage)
         approveImage()
     }
@@ -379,7 +398,13 @@ extension CameraViewController: CameraViewControllerDelegate {
         let height: CGFloat = aPoint.y * originalWidth - bPoint.y * originalWidth
 
         let cropRect = CGRect(x: posX, y: posY, width: width, height: height)
-
+//        let metaRect = previewLayer.metadataOutputRectConverted(fromLayerRect: previewView.bounds)
+//        let finalcropRect: CGRect =
+//        CGRect( x: metaRect.origin.x * original.size.width,
+//        y: metaRect.origin.y * original.size.height,
+//        width: metaRect.size.width * original.size.width,
+//        height: metaRect.size.height * original.size.height)
+//        print(metaRect)
         if let imageRef = original.cgImage?.cropping(to: cropRect) {
             image = UIImage(cgImage: imageRef, scale: original.scale, orientation: original.imageOrientation)
         }
@@ -430,6 +455,7 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         }
         imagePicker.dismiss(animated: true, completion: nil)
         DispatchQueue.main.async {
+//            let croppedImage = self.cropCameraImage(image, previewLayer: self.previewView.videoPreviewLayer)!
             self.showReview(image: image)
             self.approveImage()
         }
@@ -458,14 +484,12 @@ extension CameraViewController {
         capturePhotoButton.showLoading()
         capturePhotoButton.isEnabled = false
         capturePhotoButton.setImage(nil, for: .normal)
-        selectionView.isHidden = true
 //        reviewImagePalette.isHidden = false
     }
 
     private func hideReview() {
         chosenImageView.isHidden = true
         capturePhotoButton.isHidden = false
-        selectionView.isHidden = false
         capturePhotoButton.hideLoading()
         capturePhotoButton.isEnabled = true
         capturePhotoButton.setImage(#imageLiteral(resourceName: "capture"), for: .normal)
@@ -528,4 +552,20 @@ extension CameraViewController: CLLocationManagerDelegate {
         self.longitude = (locations.last?.coordinate.longitude)!
         locationManager.stopUpdatingLocation()
     }
+}
+
+extension CameraViewController: ConfirmationDelegate {
+
+    func onPositiveBtnPressed() {
+        let croppedImage = cropCameraImage(chosenImageView.image!, previewLayer: previewView.videoPreviewLayer)!
+        CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
+        dismiss(animated: true, completion: nil)
+        self.hideReview()
+    }
+
+    func onNegativeBtnPressed() {
+        dismiss(animated: true, completion: nil)
+        self.hideReview()
+    }
+
 }

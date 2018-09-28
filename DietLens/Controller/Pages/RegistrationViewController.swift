@@ -55,7 +55,7 @@ class RegistrationViewController: UIViewController {
             return
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
-            APIService.instance.register(nickName: TFNickName.text!, email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
+            APIService.instance.register(email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSucceed {
                         // save for basic authentication

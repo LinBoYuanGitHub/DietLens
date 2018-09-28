@@ -81,7 +81,7 @@ class FoodDiaryViewController: UIViewController {
         })
         //show markView
         let preference = UserDefaults.standard
-        let showCoachMarkFlag = preference.bool(forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
+        let showCoachMarkFlag = !preference.bool(forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
         if isMixVeg && showCoachMarkFlag {
             self.coachMarksController.start(on: self)
             preference.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)

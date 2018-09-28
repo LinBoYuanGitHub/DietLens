@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import BAFluidView
 import Instructions
+import Photos
 
 class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
@@ -52,7 +53,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.delegate = self
         cpfCollectionView.delegate = self
         cpfCollectionView.dataSource = self
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         //change statusbarcolor
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
@@ -60,7 +60,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
         calorieFluidView = BAFluidView(frame: CGRect(x: 0, y: 0, width: calorieContainer.frame.width, height: calorieContainer.frame.height), startElevation: 0)
-        calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.6)
+        calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.9)
         calorieFluidView.strokeColor = UIColor.white
         calorieFluidView.keepStationary()
         calorieFluidView.maxAmplitude = 8
@@ -70,6 +70,26 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //set instruction label dataSource
         self.coachMarksController.dataSource = self
         self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
+        //check permission and set value for album access
+        checkPhotoLibraryPermission()
+    }
+
+    func checkPhotoLibraryPermission() {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            let preference = UserDefaults.standard
+            preference.set(true, forKey: PreferenceKey.saveToAlbumFlag)
+        //handle authorized status
+        case .denied, .restricted :
+            let preference = UserDefaults.standard
+            preference.set(false, forKey: PreferenceKey.saveToAlbumFlag)
+        //handle denied status
+        case .notDetermined:
+            // ask for permissions
+            let preference = UserDefaults.standard
+            preference.set(false, forKey: PreferenceKey.saveToAlbumFlag)
+        }
     }
 
     //assemble the article & event list and display
@@ -103,13 +123,17 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     func loadCalorieData(todayIntakenCal: Int) {
         let preferences = UserDefaults.standard
         let totalCal = Int(preferences.double(forKey: PreferenceKey.calorieTarget))
+        totalCalorie.text = String(totalCal)
+        intakenCalorie.text = String(todayIntakenCal)
+        remainCalorie.text = String(totalCal-todayIntakenCal)
         if totalCal != 0 {
-            totalCalorie.text = String(totalCal)
-            intakenCalorie.text = String(todayIntakenCal)
-            remainCalorie.text = String(totalCal-todayIntakenCal)
             let percentageValue = Int(todayIntakenCal*100/totalCal)
             percentageCalorie.text = String(percentageValue) + "%"
             calorieFluidView.fill(to: Float(percentageValue)/100 as NSNumber)
+            calorieFluidView.startAnimation()
+        } else {
+            percentageCalorie.text = "0%"
+            calorieFluidView.fill(to: 0 as NSNumber)
             calorieFluidView.startAnimation()
         }
     }
@@ -138,7 +162,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             jumpToDestPage(identifyId: "FoodDiaryHistoryVC", mType: FoodDiaryHistoryViewController.self)
         case 2:
             //to step counter page
-            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
+//            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
+            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
         case 3:
             //to healthCenter page
             jumpToDestPage(identifyId: "healthCenterVC", mType: HealthCenterMainViewController.self)
@@ -228,6 +253,9 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         //backbtn
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
+        //disable homepage&LGMenu swipe back gesture
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.sideMenuController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         if shouldRefreshMainPageNutrition {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
@@ -409,7 +437,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     progress = Int(kvSet!.1/targetSet!.1*100)
                 }
             }
-            cell.setupCell(nutritionName: name, progressPercentage: progress)
+            if indexPath.row == 0 {
+                let progressBarColor = UIColor(red: 255/255, green: 183/255, blue: 32/255, alpha: 1)
+                cell.setupCell(nutritionName: name, progressPercentage: progress, progressBarColor: progressBarColor )
+            } else if indexPath.row == 1 {
+                let progressBarColor = UIColor(red: 251/255, green: 137/255, blue: 69/255, alpha: 1)
+                cell.setupCell(nutritionName: name, progressPercentage: progress, progressBarColor: progressBarColor )
+            } else {
+                let progressBarColor = UIColor(red: 248/255, green: 105/255, blue: 82/255, alpha: 1)
+                cell.setupCell(nutritionName: name, progressPercentage: progress, progressBarColor: progressBarColor )
+            }
             return cell
         }
         return UICollectionViewCell()

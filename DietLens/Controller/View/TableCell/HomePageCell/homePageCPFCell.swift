@@ -18,9 +18,10 @@ class HomePageCPFCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    func setupCell(nutritionName: String, progressPercentage: Int) {
+    func setupCell(nutritionName: String, progressPercentage: Int, progressBarColor: UIColor) {
         nutritionLabel.text = nutritionName
         percentage.text = String(progressPercentage) + "%"
         progressBar.setProgress(Float(progressPercentage)/100, animated: true)
+        progressBar.progressTintColor = progressBarColor
     }
 }

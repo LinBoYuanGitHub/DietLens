@@ -8,13 +8,22 @@
 
 import UIKit
 import HealthKit
+import Reachability
 
-class SplashScreenViewController: UIViewController {
+class SplashScreenViewController: BaseViewController {
 
     var healthStore: HKHealthStore?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        internetDelegate = self
+        //internet jduegement
+        if Reachability()!.connection == .none {
+            return
+        }
+    }
+
+    func pageJumpLogic() {
         let preferences = UserDefaults.standard
         let introFlag = preferences.bool(forKey: FirstTimeFlag.isFirstTimeLogin)
         if introFlag {
@@ -23,7 +32,9 @@ class SplashScreenViewController: UIViewController {
             if token == nil {
                 //redirect to login page
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "toLoginPage", sender: self)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let controller = storyboard.instantiateViewController(withIdentifier: "WelcomeNVC")
+                    self.present(controller, animated: true, completion: nil)
                 }
             } else {
                 //redirect to home page
@@ -32,7 +43,7 @@ class SplashScreenViewController: UIViewController {
             }
         } else {
             if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as? IntroductionViewController {
-                 DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.present(dest, animated: true, completion: nil)
                 }
                 preferences.setValue(true, forKey: FirstTimeFlag.isFirstTimeLogin)
@@ -49,7 +60,6 @@ class SplashScreenViewController: UIViewController {
                     }
                 }
             } else {
-                //TODO: handle article list nil
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "toMainPage", sender: self)
                 }
@@ -180,6 +190,19 @@ class SplashScreenViewController: UIViewController {
         if let dest = segue.destination as? HomeViewController {
 
         }
+    }
+
+}
+
+extension SplashScreenViewController: InternetDelegate {
+
+    func onInternetConnected() {
+        super.dismissNoInternetDialog()
+        pageJumpLogic()
+    }
+
+    func onLosingInternetConnection() {
+        super.showNoInternetDialog()
     }
 
 }

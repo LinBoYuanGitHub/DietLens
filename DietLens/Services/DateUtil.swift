@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 class DateUtil {
 
     public static func standardStringToDate(dateStr: String) -> Date {

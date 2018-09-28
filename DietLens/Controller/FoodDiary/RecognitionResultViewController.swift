@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Reachability
 
-class RecognitionResultViewController: UIViewController {
+class RecognitionResultViewController: BaseViewController {
 
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var foodCategory: UICollectionView!
@@ -51,7 +52,8 @@ class RecognitionResultViewController: UIViewController {
         foodCategory.dataSource = self
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
 
@@ -91,6 +93,15 @@ class RecognitionResultViewController: UIViewController {
 //    }
 
     func requestForDietInformation(foodId: Int) {
+        if Reachability()!.connection == .none {
+            let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+            if let noInternetAlert =  storyboard.instantiateViewController(withIdentifier: "ConfirmationDialogVC") as? ConfirmDialogViewController {
+                noInternetAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                noInternetAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                present(noInternetAlert, animated: true, completion: nil)
+            }
+            return
+        }
         if foodId == 0 {
             return
         }
@@ -133,7 +144,6 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let entity = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
         if entity.location.isEmpty && entity.stall.isEmpty {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recognitonResultCell") as? RecognitionResultTableCell

@@ -8,13 +8,19 @@
 
 import Foundation
 
-struct TextSearchSuggestionEntity {
+struct TextSearchSuggestionEntity: Codable {
+
     public var id: Int = 0
     public var name: String = ""
     public var useExpImage: Bool = false
     public var expImagePath = ""
+    public var calorie: Int = 0
+    public var weight: Int = 0
+    public var unit = ""
     public var location = ""
     public var stall = ""
+
+    init() {}
 
     init(id: Int, name: String) {
         self.id = id

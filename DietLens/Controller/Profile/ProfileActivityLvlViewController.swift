@@ -12,56 +12,22 @@ protocol activitySelectDelegate {
     func onActivitySelect(index: Int)
 }
 
-class ProfileActivityLvlViewController: UIViewController {
+class ProfileActivityLvlViewController: BaseViewController {
 
-    @IBOutlet weak var activityLvlSlider: UISlider!
-    @IBOutlet weak var activityLVlTextView: UITextView!
-    @IBOutlet weak var exerciseFrequencyLabel: UILabel!
-    @IBOutlet weak var exerciseTitleLabel: UILabel!
+    @IBOutlet weak var exerciseTable: UITableView!
 
     var activitySelectDelegate: activitySelectDelegate?
     var indexValue: Int  = 0
 
+    //registration flow param
+    var profile: UserProfile?
+    var isInRegistrationFlow = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpSliderBar()
-        activityLvlSlider.setValue(Float(indexValue), animated: false)
-        setUpActivtyLevel(indexValue: indexValue)
-        activityLvlSlider.value = 2.5 //set the initial value to heavy exercise
-    }
-
-    func setUpSliderBar() {
-        let clearImage = UIImage().stretchableImage(withLeftCapWidth: 14, topCapHeight: 0)
-        activityLvlSlider.setMinimumTrackImage(clearImage, for: .normal)
-        activityLvlSlider.setMaximumTrackImage(clearImage, for: .normal)
-        //set slider bar tap event
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onSliderTapped(_:)))
-        activityLvlSlider.addGestureRecognizer(tapGestureRecognizer)
-    }
-
-    @IBAction func onSliderValueChanged(_ sender: UISlider) {
-        indexValue = Int(sender.value)
-        if indexValue > 3 {
-            indexValue = 3
-        }
-        activityLvlSlider.setValue(Float(Int(indexValue)) + 0.5, animated: true)
-       setUpActivtyLevel(indexValue: indexValue)
-    }
-
-    func setUpActivtyLevel(indexValue: Int) {
-        exerciseTitleLabel.text =  StringConstants.ExerciseLvlText.exerciseLvlArr[indexValue]
-        exerciseFrequencyLabel.text = StringConstants.ExerciseLvlText.exerciseFrequencyArr[indexValue]
-        activityLVlTextView.text =  StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexValue]
-    }
-
-    @objc func onSliderTapped(_ gestureRecognizer: UIGestureRecognizer) {
-        let pointTapped: CGPoint = gestureRecognizer.location(in: self.view)
-        let positionOfSlider: CGPoint = activityLvlSlider.frame.origin
-        let widthOfSlider: CGFloat = activityLvlSlider.frame.size.width
-        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(activityLvlSlider.maximumValue) / widthOfSlider)
-        activityLvlSlider.setValue(Float(Int(newValue)) + 0.5, animated: true)
-        indexValue = Int(newValue)
-        setUpActivtyLevel(indexValue: indexValue)
+        exerciseTable.delegate = self
+        exerciseTable.dataSource = self
+        exerciseTable.tableFooterView = UIView()
     }
 
     @objc func onBackPressed() {
@@ -69,25 +35,85 @@ class ProfileActivityLvlViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .default
-        //navigation controller
-        self.navigationController?.navigationBar.isHidden = false
-        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as?  [NSAttributedStringKey: Any] {
-            self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
-        }
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        super.viewWillAppear(animated)
         //back btn
         self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
+        if isInRegistrationFlow {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(toFinishRegistrationPage))
+            self.navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 67.0/255.0, green: 67.0/255.0, blue: 67.0/255.0, alpha: 1.0)
+        }
+        //reload to remove selectorOverlay
+        exerciseTable.reloadData()
     }
 
-    @IBAction func save(_ sender: UIBarButtonItem) {
-        if activitySelectDelegate != nil {
-            activitySelectDelegate?.onActivitySelect(index: indexValue)
+    @objc func toFinishRegistrationPage() {
+        //save profile
+        let preferences = UserDefaults.standard
+        let key = "userId"
+        let userId = preferences.string(forKey: key)
+        if profile != nil {
+            APIService.instance.updateProfile(userId: userId!, profile: profile!) { (isSuccess) in
+                if isSuccess {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+                        self.navigationController?.pushViewController(dest, animated: true)
+                    }
+                }
+            }
+        } else {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
         }
-        self.navigationController?.popViewController(animated: true)
+    }
+
+}
+
+extension ProfileActivityLvlViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return StringConstants.ExerciseLvlText.exerciseLvlArr.count
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(80)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //reuse id: activityLevelCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "activityLevelCell") as? ActvitityLevelCell else {
+            return UITableViewCell()
+        }
+        cell.setUpCell(titleText: StringConstants.ExerciseLvlText.exerciseLvlArr[indexPath.row], descText: StringConstants.ExerciseLvlText.exerciseDescriptionArr[indexPath.row])
+        setUpCellBorder(view: cell.borderView)
+        if indexPath.row == indexValue {
+            cell.activityLevelLabel.textColor = .white
+            cell.activityLevelDesc.textColor = .white
+            cell.borderView.backgroundColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
+        } else {
+            cell.activityLevelLabel.textColor = .black
+            cell.activityLevelDesc.textColor = .black
+            cell.borderView.backgroundColor = .white
+        }
+        return cell
+    }
+
+    func setUpCellBorder(view: UIView) {
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = 1
+        view.layer.borderWidth = 1
+        let borderColor: UIColor = UIColor(red: 228.0/255.0, green: 228.0/255.0, blue: 228.0/255.0, alpha: 1.0)
+        view.layer.borderColor = borderColor.cgColor
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexValue = indexPath.row
+        tableView.reloadData()
+        if isInRegistrationFlow {
+            profile?.activityLevel = indexValue
+        } else {
+            if activitySelectDelegate != nil {
+                activitySelectDelegate?.onActivitySelect(index: indexValue)
+            }
+        }
     }
 
 }

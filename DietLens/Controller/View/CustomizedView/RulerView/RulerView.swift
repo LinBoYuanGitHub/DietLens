@@ -36,6 +36,9 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     weak var rulerViewDelegate: RulerViewDelegate?
     var divisor: Int = 1
     var currentIndex: Int = 0
+    //min & max
+    var min = 0
+    var max = 10000
 
     private lazy var collectionView: UICollectionView = {
         let layout = RulerLayout()
@@ -74,9 +77,10 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
         return bottomLine
     }()
 
-    convenience init(origin: CGPoint) {
+    convenience init(origin: CGPoint, max: Int, min: Int) {
         self.init(frame: CGRect(origin: origin, size: CGSize(width: UIScreen.main.bounds.width, height: reulerViewHeight)))
-
+        self.max = max
+        self.min = min
         backgroundColor = UIColor.white
         addSubview(collectionView)
         collectionView.register(RulerCollectionCell.self, forCellWithReuseIdentifier: "rulerCell")
@@ -90,8 +94,11 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     }
 
     func setCurrentItem(position: Int, animated: Bool) {
-        currentIndex = position
-        let indexPath = IndexPath(row: position, section: 0)
+        currentIndex = position - min * divisor
+        if currentIndex < 0 {
+            currentIndex = 0
+        }
+        let indexPath = IndexPath(row: currentIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: [], animated: animated)
     }
 
@@ -100,20 +107,24 @@ class RulerView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemCount + 1
+        return max*divisor - min*divisor + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "rulerCell", for: indexPath)
+        (cell as? RulerCollectionCell)?.min = self.min
         (cell as? RulerCollectionCell)?.divisor = divisor
         (cell as? RulerCollectionCell)?.index = indexPath.row
         return cell
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-         let index = (scrollView.contentOffset.x + scrollView.contentInset.left)
-         rulerViewDelegate?.didSelectItem(rulerView: self, with: Int(index/itemWidth))
+        let index = (scrollView.contentOffset.x + scrollView.contentInset.left)
+        currentIndex = Int(index/itemWidth) + min*divisor
+        if currentIndex < min*divisor || currentIndex > max*divisor {
+            return
+        }
+        rulerViewDelegate?.didSelectItem(rulerView: self, with: currentIndex)
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

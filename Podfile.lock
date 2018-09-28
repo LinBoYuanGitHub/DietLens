@@ -9,6 +9,9 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - Charts (3.1.1):
+    - Charts/Core (= 3.1.1)
+  - Charts/Core (3.1.1)
   - Cosmos (15.0.0)
   - Crashlytics (3.10.5):
     - Fabric (~> 1.7.9)
@@ -49,15 +52,35 @@ PODS:
     - GoogleToolboxForMac/Logger (~> 2.1)
     - Protobuf (~> 3.1)
   - FSCalendar (2.7.9)
+  - GoogleSignIn (4.1.2):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - GoogleToolboxForMac/Defines (2.1.4)
   - GoogleToolboxForMac/Logger (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4)":
+    - GoogleToolboxForMac/DebugUtils (= 2.1.4)
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
+  - GTMOAuth2 (1.1.6):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.15):
+    - GTMSessionFetcher/Full (= 1.1.15)
+  - GTMSessionFetcher/Core (1.1.15)
+  - GTMSessionFetcher/Full (1.1.15):
+    - GTMSessionFetcher/Core (= 1.1.15)
   - HFSwipeView (1.2.1):
     - PureLayout
     - TinyLog
   - Instructions (1.2.0)
+  - JPSVolumeButtonHandler (1.0.5)
   - Kingfisher (4.8.0)
   - LGSideMenuController (2.1.1)
   - nanopb (0.3.8):
@@ -73,6 +96,7 @@ PODS:
   - Protobuf (3.6.0)
   - PureLayout (3.0.2)
   - QiniuUpload (3.0.0)
+  - ReachabilitySwift (4.1.0)
   - Realm (3.7.4):
     - Realm/Headers (= 3.7.4)
   - Realm/Headers (3.7.4)
@@ -93,6 +117,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireImage (~> 3.3)
   - BAFluidView
+  - Charts
   - Cosmos (~> 15.0)
   - Crashlytics
   - CryptoSwift
@@ -102,14 +127,17 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - FSCalendar
+  - GoogleSignIn
   - HFSwipeView
   - Instructions (~> 1.2.0)
+  - JPSVolumeButtonHandler
   - Kingfisher (~> 4.0)
   - LGSideMenuController
   - NVActivityIndicatorView
   - ParallaxHeader (~> 2.0.0)
   - PBRevealViewController/Swift
   - QiniuUpload
+  - ReachabilitySwift
   - RealmSwift
   - ScrollableGraphView
   - SkyFloatingLabelTextField
@@ -125,6 +153,7 @@ SPEC REPOS:
     - AlamofireImage
     - BAFluidView
     - Bolts
+    - Charts
     - Cosmos
     - Crashlytics
     - CryptoSwift
@@ -139,9 +168,13 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseMessaging
     - FSCalendar
+    - GoogleSignIn
     - GoogleToolboxForMac
+    - GTMOAuth2
+    - GTMSessionFetcher
     - HFSwipeView
     - Instructions
+    - JPSVolumeButtonHandler
     - Kingfisher
     - LGSideMenuController
     - nanopb
@@ -151,6 +184,7 @@ SPEC REPOS:
     - Protobuf
     - PureLayout
     - QiniuUpload
+    - ReachabilitySwift
     - Realm
     - RealmSwift
     - ScrollableGraphView
@@ -168,6 +202,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   BAFluidView: 5d84ef109831b97740f75b6d785e51f13fa08398
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
@@ -182,9 +217,13 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   FirebaseMessaging: f43eb0c0e1da096e659de6f713038e74862a62cd
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
+  GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
+  GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   HFSwipeView: cbcd1f01a530ae472f8e645b9b38f479f8d39ae8
   Instructions: 763c2452bd78e05d8f969a21c1cbc3c07deef33a
+  JPSVolumeButtonHandler: 53110330c9168ed325def93eabff39f0fe3e8082
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   LGSideMenuController: ae40c80983ab8b8801c7cef0a6804d43aaa72d45
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -194,6 +233,7 @@ SPEC CHECKSUMS:
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   QiniuUpload: b1b3dda4883b9bacf9e2efc9e28978cdd6a26c70
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: a469bb59e33f9926102ccaea4349822c53b9117e
   RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
   ScrollableGraphView: 6386dbae8d92e8ec9fda9f386f2ba6e2c90c59a3
@@ -206,6 +246,6 @@ SPEC CHECKSUMS:
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 4cdd9d4dfb9ab0b6dd410083d33cf69b1d83adf0
+PODFILE CHECKSUM: 284b2998c033d6ae0dd26f944cfc9d28efe7036e
 
 COCOAPODS: 1.5.0

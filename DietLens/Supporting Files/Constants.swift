@@ -29,8 +29,8 @@ struct ServerConfig {
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
 //    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
-//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
-    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
+    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
+//    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
 //    static let labDeskTopURL = "http://54.169.160.107:8000/dl/v1" //mocklet test environment
 
     static let userURL = labDeskTopURL + "/users"
@@ -40,6 +40,7 @@ struct ServerConfig {
     static let registry = labDeskTopURL + "/users/register/"
     static let checkEmailURL = labDeskTopURL + "/users/email-check/"
     static let facebookIdValidationURL = labDeskTopURL + "/social-acc/facebook/"
+    static let googleIdValidationURL = labDeskTopURL + "/social-acc/google/"
 
     static let getUUidURL = baseURL + "/anonymous/"
     static let thirdPartyLoginURL = baseURL + "/3rdlogin"
@@ -83,6 +84,14 @@ struct ServerConfig {
     static let notificationAnswer = labDeskTopURL + "/answers/"
 
     static let healthCenterLogURL = labDeskTopURL + "/healthlogs/latest/"
+    static let qiniuDietLensImageDomain = "https://img.dietlens.com/"
+    static let textSearchPopularURL = labDeskTopURL + "/popular-food/"
+//    static let qiniuDietLensImageDomain = "https://image.dietlens.com/"
+}
+
+struct RedirectAddress {
+    static let AppStoreURL = "https://itunes.apple.com/us/app/dietlens/id1415528218"
+    static let DietLensURL = "https://www.dietlens.com"
 }
 
 struct SharedPreferenceKey {
@@ -98,10 +107,14 @@ struct NutrtionData {
 }
 
 struct QiniuConfig {
-    static let scope = "dietlog"
-    static let accessKey = "ExTDSVzfUQiu0wwJXBzXLg_PxNQxbb3tkC4UpyB6"
-    static let secretKey = "8u_GKcaQWMD3L-94OdG8P_o9b8SGqAIjYFoX953A"
+//    static let scope = "dietlog"
+//    static let accessKey = "ExTDSVzfUQiu0wwJXBzXLg_PxNQxbb3tkC4UpyB6"
+//    static let secretKey = "8u_GKcaQWMD3L-94OdG8P_o9b8SGqAIjYFoX953A"
     static let rootDomain = "p7bqh4trt.sabkt.gdipper.com"
+    //south east service
+    static let scope = "diet-img"
+    static let accessKey = "hr3zme-bt6vJBpunS4FH5Tbt9mWE3QGmTftNBjNK"
+    static let secretKey = "-uVeMoW24RqTwQvCyWlpUdrVi7WNEAeI1eptbx1W"
 //     static let scope = "dietlens" //private scope
 //    static let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com" //private domain
 }
@@ -140,12 +153,27 @@ struct PreferenceKey {
     static let fatTarget = "fatTarget"
     static let tokenKey = "TOKEN"
     static let facebookId = "facebookId"
+    static let googleUserId = "googleId"
+    static let googleImageUrl = "googleImageUrl"
     static let userIdkey = "userId"
     static let fcmTokenKey = "FCMTOKEN"
     static let stepUploadLatestTime = "stepUploadKey"
     static let nickNameKey = "nickname"
     static let userNameKey = "username"
     static let passwordKey = "password"
+    static let saveToAlbumFlag = "saveToAlbumFlag"
+
+    struct ProfileCache {
+        static let profileId = "profileId"
+        static let profileNickName = "profileNickName"
+        static let profileEmail = "profileEmail"
+        static let profileGender = "profileGender"
+        static let profileAcivityLevel = "profileActivityLevel"
+        static let profileBirthday = "profileBirthday"
+        static let profileHeight = "prifileHeight"
+        static let profileWeight = "profileWeight"
+        static let profileEthnicity = "profileEthnicity"
+    }
 }
 
 struct Dimen {
@@ -170,6 +198,28 @@ struct NotificationType {
     static let TextFieldType = "3"
     static let Rating4StarType = "4"
     static let Rating7StarType = "5"
+}
+
+struct EthnicityType {
+    static let NONE = 0
+    static let CHINESE = 1
+    static let MALAYS = 2
+    static let INDIANS = 3
+    static let OTHERS = 4
+}
+
+struct BirthDayLimitation {
+    static let minAge = 10
+    static let maxAge = 100
+}
+
+struct HealthDeviceSetting {
+    static let minHeight = 50
+    static let maxHeight = 300
+    static let minWeight = 5
+    static let maxWeight = 300
+    static let minBloodGlucose = 1
+    static let maxBloodGlucose = 100
 }
 
 struct FirstTimeFlag {

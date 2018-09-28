@@ -9,11 +9,14 @@
 import UIKit
 
 protocol SingleOptionAlerViewDelegate: class {
+
     func onSaveBtnClicked(selectedPosition: Int)
+
     func onCancel()
 }
 
 class SingleOptionViewController: UIViewController {
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var singleSelectionTable: UITableView!

@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import QiniuUpload
 import Kingfisher
+import GoogleSignIn
 
 class APIService {
 
@@ -56,14 +57,14 @@ class APIService {
                           parameters: ["email": userEmail],
                           encoding: JSONEncoding.default,
                           headers: [:])
-        .validate()
+            .validate()
             .responseJSON {(response) -> Void in
-            guard response.result.isSuccess else {
-                print ("Failed to request verification email")
-                completion (false)
-                return
-            }
-            completion(true)
+                guard response.result.isSuccess else {
+                    print ("Failed to request verification email")
+                    completion (false)
+                    return
+                }
+                completion(true)
         }
     }
 
@@ -117,6 +118,41 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("facebook uid validation failed")
+//                    if response.response?.statusCode == 401 {
+//                        self.popOutToLoginPage()
+//                        return
+//                    }
+                    completion(false, false)
+                    return
+                }
+                guard (response.response?.allHeaderFields) != nil else {
+                    print("Get Token failed")
+                    return
+                }
+                //get token
+                let preferences = UserDefaults.standard
+                let token = response.response!.allHeaderFields["token"]
+                preferences.setValue(token, forKey: PreferenceKey.tokenKey)
+                //get userId
+                let userId = JSON(response.result.value)["data"]["id"].stringValue
+                preferences.setValue(userId, forKey: PreferenceKey.userIdkey)
+                //get isNewUser flag
+                let isNewUser = JSON(response.result.value)["data"]["is_new_user"].boolValue
+                completion(true, isNewUser)
+        }
+    }
+
+    public func googleIdValidationRequest(accessToken: String, uuid: String, completion:@escaping (_ isSuccess: Bool, _ isNewUser: Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.googleIdValidationURL)!,
+            method: .post,
+            parameters: ["access_token": accessToken, "uid": uuid],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("google uid validation failed")
                     completion(false, false)
                     return
                 }
@@ -225,8 +261,8 @@ class APIService {
                     completion(false)
                     return
                 }
-//                let userId = value["id"].stringValue
-//                let nickname = value["nickname"].stringValue
+                //                let userId = value["id"].stringValue
+                //                let nickname = value["nickname"].stringValue
                 //                let rooms = rows.flatMap({ (roomDict) -> RemoteRoom? in
                 //                    return RemoteRoom(jsonData: roomDict)
                 //                })
@@ -234,11 +270,11 @@ class APIService {
         }
     }
 
-    public func register(nickName: String, email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void, failedCompletion: @escaping(_ failedMsg: String) -> Void) {
+    public func register(email: String, password: String, completion: @escaping (_ isSuccess: Bool) -> Void, failedCompletion: @escaping(_ failedMsg: String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.registry)!,
             method: .post,
-            parameters: ["name": nickName, "email": email, "password": password],
+            parameters: ["email": email, "password": password],
             encoding: JSONEncoding.default,
             headers: [:])
             .validate()
@@ -276,27 +312,31 @@ class APIService {
     }
 
     public func getArticleList(completion: @escaping ([Article]?) -> Void, nextLinkCompletion: @escaping (String) -> Void) {
-            Alamofire.request(
-                URL(string: ServerConfig.articleURL+"/?type=0")!,
-                method: .get,
-                headers: getTokenHeader())
-                .validate()
-                .responseJSON { (response) -> Void in
-                    guard response.result.isSuccess else {
-                        print("Get articles failed due to : \(String(describing: response.result.error))")
-                        completion(nil)
+        Alamofire.request(
+            URL(string: ServerConfig.articleURL+"/?type=0")!,
+            method: .get,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get articles failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
                         return
                     }
-                    guard let articles = response.result.value else {
-                        print("Get articles failed due to : Server Data Type Error")
-                        completion(nil)
-                        return
-                    }
-                    let jsonArr = JSON(articles)
-                    let nextLink = JSON(articles)["next"].stringValue
-                    let articleList: [Article] = ArticleDataManager.instance.assembleArticles(jsonArr: jsonArr)
-                    nextLinkCompletion(nextLink)
-                    completion(articleList)
+                    completion(nil)
+                    return
+                }
+                guard let articles = response.result.value else {
+                    print("Get articles failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonArr = JSON(articles)
+                let nextLink = JSON(articles)["next"].stringValue
+                let articleList: [Article] = ArticleDataManager.instance.assembleArticles(jsonArr: jsonArr)
+                nextLinkCompletion(nextLink)
+                completion(articleList)
         }
     }
 
@@ -309,6 +349,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Get articles failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -334,6 +378,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Get events failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -359,6 +407,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("get autoComplete result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -390,7 +442,8 @@ class APIService {
                 guard response.result.isSuccess else {
                     print("Get search result failed due to : \(String(describing: response.result.error))")
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     completion(nil)
                     return
@@ -401,16 +454,17 @@ class APIService {
                     return
                 }
                 let jsonObj = JSON(searchResults)
-                let jsonArr = jsonObj["data"]
+                let foodSearchList = TextSearchDataManager.instance.assembleTextSerchResultList(jsonObj: jsonObj)
+                //                let jsonArr = jsonObj["data"]
                 let nextLink = jsonObj["next"].stringValue
-                var foodSearchList = [TextSearchSuggestionEntity]()
-                for index in 0..<jsonArr.count {
-                    let dict = jsonArr[index].dictionaryValue
-                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-                    entity.location = dict["location"]!.stringValue
-                    entity.stall = dict["stall"]!.stringValue
-                    foodSearchList.append(entity)
-                }
+                //                var foodSearchList = [TextSearchSuggestionEntity]()
+                //                for index in 0..<jsonArr.count {
+                //                    let dict = jsonArr[index].dictionaryValue
+                //                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+                //                    entity.location = dict["location"]!.stringValue
+                //                    entity.stall = dict["stall"]!.stringValue
+                //                    foodSearchList.append(entity)
+                //                }
                 nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
@@ -419,6 +473,39 @@ class APIService {
     public func getFoodSearchResult(filterType: Int, keywords: String, latitude: Double, longitude: Double, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
         let url = ServerConfig.foodFullTextSearchURL + "?category=" + String(filterType)
         self.getFoodSearchResult(requestUrl: url, keywords: keywords, latitude: latitude, longitude: longitude, completion: completion, nextPageCompletion: nextPageCompletion)
+    }
+
+    public func getFoodSearchPopularity(mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.textSearchPopularURL+"?meal="+mealtime)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get search result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    completion(nil)
+                    return
+                }
+                guard let searchResults = response.result.value else {
+                    print("Get searchResult failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonObj = JSON(searchResults)
+                let foodSearchList = TextSearchDataManager.instance.assemblePopularTextSerchResultList(jsonObj: jsonObj)
+                //                for index in 0..<jsonArr.count {
+                //                    let dict = jsonArr[index].dictionaryValue
+                //                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
+                //                    foodSearchList.append(entity)
+                //                }
+                completion(foodSearchList)
+        }
     }
 
     public func getIngredientSearchResult(keywords: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
@@ -461,8 +548,12 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                print("Get food detail failed due to : \(String(describing: response.result.error))")
-                completion(nil)
+                    print("Get food detail failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    completion(nil)
                     return
                 }
                 guard let detail = response.result.value else {
@@ -534,20 +625,20 @@ class APIService {
      * use qinniu server as to store the image
      * param: imageData
      * return: imageKey
-    */
+     */
     public func qiniuImageUpload(imgData: Data, completion: @escaping (String?) -> Void, progressCompletion: @escaping (Int) -> Void) {
-//        let uploadUrl = "http://upload.qiniu.com/"
+        //        let uploadUrl = "http://upload.qiniu.com/"
         QiniuToken.register(withScope: QiniuConfig.scope, secretKey: QiniuConfig.secretKey, accesskey: QiniuConfig.accessKey)
         if let uploadToken = QiniuToken.shared().uploadToken() {
-//            let file = QiniuFile(imgData as NSData)
+            //            let file = QiniuFile(imgData as NSData)
             let uploader = QiniuUploader()
             let file = QiniuFile(fileData: imgData)
             uploader.files.append(file)
             uploader.startUpload(uploadToken, uploadOneFileSucceededHandler: { (index, keyValuePair) in
                 print("upload succeeded : \(index) - \(keyValuePair)")
                 if let key = keyValuePair["key"] as? String {
-//                    let url = "\(QiniuConfig.rootDomain)/\(QiniuConfig.accessKey)&token=\(key)"
-//                    print(url)
+                    //                    let url = "\(QiniuConfig.rootDomain)/\(QiniuConfig.accessKey)&token=\(key)"
+                    //                    print(url)
                     completion(key)
                 }
             }, uploadOneFileFailedHandler: { (index, error) in
@@ -565,7 +656,7 @@ class APIService {
 
     //http://<domain>/<key>?e=<deadline>&token=<downloadToken>
     public func qiniuImageDownload(imageKey: String, width: Int, height: Int, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "https://img.dietlens.com/"+imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
+        let downloadURL = ServerConfig.qiniuDietLensImageDomain + imageKey+"?imageView2/5/w/"+String(width)+"/h/"+String(height)
         let downloadImageView = UIImageView()
         let url = URL(string: downloadURL)!
         downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
@@ -574,7 +665,7 @@ class APIService {
     }
 
     public func qiniuImageDownload(imageKey: String, completion: @escaping (UIImage?) -> Void) {
-        let downloadURL = "https://img.dietlens.com/"+imageKey
+        let downloadURL = ServerConfig.qiniuDietLensImageDomain + imageKey
         let downloadImageView = UIImageView()
         let url = URL(string: downloadURL)!
         downloadImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
@@ -598,6 +689,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Get recognition result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -612,7 +707,7 @@ class APIService {
                     //not json data, return null
                     completion(nil)
                 } else {
-                   //assemble FoodInfo to return recognition result
+                    //assemble FoodInfo to return recognition result
                     completion(displayCategory)
                 }
         }
@@ -629,7 +724,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get food detail failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -662,7 +758,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete single foodItem failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -688,7 +785,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -714,7 +812,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -747,7 +846,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("update foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -774,7 +874,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("create foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -800,7 +901,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get daily foodDiary failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -836,7 +938,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get monthly available date failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -849,7 +952,7 @@ class APIService {
                 }
                 let jsonObject = JSON(result)
                 let dateObject = jsonObject["data"]["date"]
-                 for index in 0..<dateObject.count {
+                for index in 0..<dateObject.count {
                     //convert date string to date
                     let dateStr = dateObject[index].stringValue
                     let date = DateUtil.normalStringToDate(dateStr: dateStr)
@@ -877,15 +980,15 @@ class APIService {
             case .success(let upload, _, _):
                 upload.uploadProgress(closure: { (progress) in
                     #if DEBUG
-                        print("Upload Progress: \(progress.fractionCompleted)")
-                        progressCompletion(Int(progress.fractionCompleted*100))
+                    print("Upload Progress: \(progress.fractionCompleted)")
+                    progressCompletion(Int(progress.fractionCompleted*100))
                     #endif
                 })
                 upload.responseJSON { response in
                     let resultObj = JSON(response.value)
                     let resultList = MockedUpFoodData.instance.assembleFoodInfoData(data: resultObj["data"])
-//                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
-//                    let imageId = resultObj["data"]["id"].intValue
+                    //                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
+                    //                    let imageId = resultObj["data"]["id"].intValue
                     completion(resultList)
                 }
             case .failure(let encodingError):
@@ -922,7 +1025,7 @@ class APIService {
                     let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
                     let imageId = resultObj["data"]["id"].intValue
                     completion(imageId, resultList)
-//                    print(response.result.value)
+                    //                    print(response.result.value)
                 }
             case .failure(let encodingError):
                 print(encodingError)
@@ -949,14 +1052,15 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("save device token failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
                 }
                 completion(true)
-            }
+        }
     }
 
     public func logOut(completion: @escaping (Bool) -> Void) {
@@ -969,9 +1073,6 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-//                    if response.response?.statusCode == 401 {
-//                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-//                    }
                     print("lgout failed due to : \(String(describing: response.result.error))")
                     completion(false)
                     return
@@ -1006,7 +1107,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("send feedback failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1036,6 +1138,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("get profile failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -1055,25 +1161,18 @@ class APIService {
     }
 
     public func updateProfile(userId: String, profile: UserProfile, completion: @escaping (Bool) -> Void) {
-        var genderText = ""
-        if profile.gender == 0 {
-            genderText = "2"
-        } else if profile.gender == 1 {
-            genderText = "1"
-        } else {
-            genderText = "0"
-        }
         Alamofire.request(
             URL(string: ServerConfig.userURL + "/" + userId + "/")!,
             method: .put,
-            parameters: ["name": profile.name, "activity_level": String(profile.activityLevel), "gender": genderText, "height": profile.height, "weight": profile.weight, "birthday": profile.birthday],
+            parameters: ["name": profile.name, "activity_level": String(profile.activityLevel), "gender": String(profile.gender), "height": profile.height, "weight": profile.weight, "birthday": profile.birthday, "ethnicity": profile.ethnicity],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("update profile failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1098,25 +1197,18 @@ class APIService {
         let key = "userId"
         let userId = preferences.string(forKey: key)
         //gender
-        var genderText = ""
-        if gender == 0 {
-            genderText = "2"
-        } else if gender == 1 {
-            genderText = "1"
-        } else {
-            genderText = "0"
-        }
         Alamofire.request(
             URL(string: ServerConfig.userURL + "/" + userId! + "/")!,
             method: .put,
-            parameters: ["name": name, "gender": genderText, "height": height, "weight": weight, "birthday": birthday],
+            parameters: ["name": name, "gender": String(gender), "height": height, "weight": weight, "birthday": birthday],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("update profile failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1145,7 +1237,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -1175,7 +1268,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -1191,7 +1285,7 @@ class APIService {
                 let notications = NotificationDataManager.instance.assembleUserNotification(jsonArr: jsonArr)
                 completion(notications)
                 if nextLink != nil {
-                     nextCompletion(nextLink)
+                    nextCompletion(nextLink)
                 }
         }
     }
@@ -1206,7 +1300,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(nil)
@@ -1239,7 +1334,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1269,7 +1365,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 204 else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("delete notifcation failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1294,7 +1391,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 204 else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("get notifcation failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1320,7 +1418,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 201 else {
                     if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
+                        self.popOutToLoginPage()
+                        return
                     }
                     print("response notifcation answer failed due to : \(String(describing: response.result.error))")
                     completion(false)
@@ -1351,7 +1450,7 @@ class APIService {
                     completion(false)
                     return
                 }
-//                let jsonObject = JSON(result)
+                //                let jsonObject = JSON(result)
                 completion(true)
         }
     }
@@ -1452,6 +1551,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.response?.statusCode == 201 else {
                     print("Save hourly step data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1470,6 +1573,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1491,10 +1598,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -1518,10 +1626,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -1549,6 +1658,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1572,6 +1685,10 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(false)
                     return
                 }
@@ -1591,10 +1708,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("get Dietary Guide Failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(guideDict)
                     return
                 }
@@ -1626,10 +1744,11 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    if response.response?.statusCode == 401 {
-                        NotificationCenter.default.post(name: .signOutErrFlag, object: nil)
-                    }
                     print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
                     completion(responseDict)
                     return
                 }
@@ -1644,14 +1763,6 @@ class APIService {
                 responseDict["fat"] = jsonObject["fat"].doubleValue
                 responseDict["carbohydrate"] = jsonObject["carbohydrate"].doubleValue
                 completion(responseDict)
-        }
-    }
-
-    func handleAuthenticationException(statusCode: Int, sourceViewController: UIViewController) {
-        if statusCode == 401 {
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController {
-                sourceViewController.present(dest, animated: true, completion: nil)
-            }
         }
     }
 
@@ -1691,18 +1802,63 @@ class APIService {
 
     //for all the new token
     func getTokenHeader() -> [String: String] {
-//        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
+        //        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
         let preferences = UserDefaults.standard
         let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
-//        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
-        let header = ["Authorization": "Token "+token]
+        //        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
+        let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]
         return header
+    }
+
+    func getUserAgentString() -> String {
+        if let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as? String,
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+             //        let appIdentifier = Bundle.main.bundleIdentifier!
+            let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            let systemIOSVersion = UIDevice.current.systemVersion
+            let modelName = UIDevice.modelName
+            return appName + "/" + appVersion + " (iOS; " + "build:" + buildVersion + "; system version " + systemIOSVersion + ")" + modelName
+        }
+        return ""
     }
 
     //special header for webhook
     func getHardCodeBasicAuthenticationHeader() -> [String: String] {
         let header = ["Authorization": "Basic YThkMjM2MzYxZmRkZjJmZTlmZmYxNjE2ZTAzNzU1NDI6ODYwMzBiZWVkMjEyNGY0YmRjZmU3MGU3YzE4YTA1YmI="]
         return header
+    }
+
+    func popOutToLoginPage() {
+        let preferences = UserDefaults.standard
+        let token = preferences.string(forKey: PreferenceKey.tokenKey)
+        if token == nil {
+            return
+        }
+        if var rootVC = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = rootVC.presentedViewController {
+                rootVC = presentedViewController
+            }
+            DispatchQueue.main.async {
+                AlertMessageHelper.showMessage(targetController: rootVC, title: "Message", message: "You already login the same account in another device. Please check.", confirmText: "OK") {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let welcomeNVC = storyboard.instantiateViewController(withIdentifier: "WelcomeNVC")
+                    AlertMessageHelper.alertController?.dismiss(animated: true, completion: nil)
+                    rootVC.present(welcomeNVC, animated: true, completion: nil)
+                    self.clearPersonalData()
+                }
+            }
+        }
+    }
+
+    func clearPersonalData() {
+        let preferences = UserDefaults.standard
+        let nicknameKey = "nickname"
+        preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.facebookId)
+        preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
+        preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        //google login
+        GIDSignIn.sharedInstance().signOut()
     }
 
 }
