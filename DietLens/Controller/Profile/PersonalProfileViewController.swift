@@ -434,12 +434,17 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
 
     func loadAvatar(profileAvatar: UIImageView) {
         let preferences = UserDefaults.standard
-        let facebookId = preferences.value(forKey: "facebookId")
+        let facebookId = preferences.value(forKey: PreferenceKey.facebookId)
+        let googleImageUrl = preferences.string(forKey: PreferenceKey.googleImageUrl)
         if facebookId != nil {
             let profileAvatarURL = URL(string: "https://graph.facebook.com/\(facebookId ?? "")/picture?type=normal")
             profileAvatar.layer.cornerRadius = profileAvatar.frame.size.width/2
             profileAvatar.clipsToBounds = true
             profileAvatar.kf.setImage(with: profileAvatarURL)
+        } else if googleImageUrl != nil {
+            profileAvatar.layer.cornerRadius = profileAvatar.frame.size.width/2
+            profileAvatar.clipsToBounds = true
+            profileAvatar.kf.setImage(with: URL(string: googleImageUrl!))
         }
     }
 

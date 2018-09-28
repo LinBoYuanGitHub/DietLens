@@ -42,6 +42,8 @@ target 'DietLens' do
   #facebookLogin
   pod 'FacebookCore'
   pod 'FacebookLogin'
+  # Google Sign In
+  pod 'GoogleSignIn'
   #sky floating label
   pod 'SkyFloatingLabelTextField'
   pod 'Instructions', '~> 1.2.0'

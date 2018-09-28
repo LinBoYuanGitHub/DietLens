@@ -455,8 +455,8 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         }
         imagePicker.dismiss(animated: true, completion: nil)
         DispatchQueue.main.async {
-            let croppedImage = self.cropCameraImage(image, previewLayer: self.previewView.videoPreviewLayer)!
-            self.showReview(image: croppedImage)
+//            let croppedImage = self.cropCameraImage(image, previewLayer: self.previewView.videoPreviewLayer)!
+            self.showReview(image: image)
             self.approveImage()
         }
 //        let imgData = UIImagePNGRepresentation(image)!

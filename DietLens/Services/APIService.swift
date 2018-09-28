@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import QiniuUpload
 import Kingfisher
+import GoogleSignIn
 
 class APIService {
 
@@ -121,6 +122,37 @@ class APIService {
 //                        self.popOutToLoginPage()
 //                        return
 //                    }
+                    completion(false, false)
+                    return
+                }
+                guard (response.response?.allHeaderFields) != nil else {
+                    print("Get Token failed")
+                    return
+                }
+                //get token
+                let preferences = UserDefaults.standard
+                let token = response.response!.allHeaderFields["token"]
+                preferences.setValue(token, forKey: PreferenceKey.tokenKey)
+                //get userId
+                let userId = JSON(response.result.value)["data"]["id"].stringValue
+                preferences.setValue(userId, forKey: PreferenceKey.userIdkey)
+                //get isNewUser flag
+                let isNewUser = JSON(response.result.value)["data"]["is_new_user"].boolValue
+                completion(true, isNewUser)
+        }
+    }
+
+    public func googleIdValidationRequest(accessToken: String, uuid: String, completion:@escaping (_ isSuccess: Bool, _ isNewUser: Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.googleIdValidationURL)!,
+            method: .post,
+            parameters: ["access_token": accessToken, "uid": uuid],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("google uid validation failed")
                     completion(false, false)
                     return
                 }
@@ -1825,6 +1857,8 @@ class APIService {
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        //google login
+        GIDSignIn.sharedInstance().signOut()
     }
 
 }

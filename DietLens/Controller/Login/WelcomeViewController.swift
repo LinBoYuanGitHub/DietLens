@@ -10,15 +10,18 @@ import UIKit
 import FacebookLogin
 import FacebookCore
 import LGSideMenuController
+import GoogleSignIn
 
 class WelcomeViewController: BaseViewController {
 
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var facebookLoginBtn: UIButton!
+    @IBOutlet weak var googleLoginBtn: UIButton!
 
     override func viewDidLoad() {
-
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,8 +72,8 @@ class WelcomeViewController: BaseViewController {
                             if isSuccess {
                                 //record userId & userName
                                 let preferences = UserDefaults.standard
-                                preferences.setValue(facebookUserId, forKey: "facebookId")
-                                preferences.setValue(facebookUserName, forKey: "nickname")
+                                preferences.setValue(facebookUserId, forKey: PreferenceKey.facebookId)
+                                preferences.setValue(facebookUserName, forKey: PreferenceKey.nickNameKey)
                                 if isNewUser {
                                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                         var profile = UserProfile()
@@ -98,6 +101,60 @@ class WelcomeViewController: BaseViewController {
                 })
             }
         }
+    }
+
+    @IBAction func processGoogleLogin(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+
+}
+
+extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
+
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+
+        APIService.instance.googleIdValidationRequest(accessToken: user.authentication.idToken, uuid: user.userID, completion: { (isSuccess, isNewUser) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            if isSuccess {
+                //record userId & userName
+                let preferences = UserDefaults.standard
+                preferences.setValue(user.userID, forKey: PreferenceKey.googleUserId)
+                preferences.setValue(user.profile.name, forKey: PreferenceKey.nickNameKey)
+                //tmp use
+                if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                    preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
+                }
+                //tmp use
+                if isNewUser {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
+                        var profile = UserProfile()
+                        if let name = user.profile.name {
+                            profile.name = name
+                        }
+                        if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                            preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
+                        }
+                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                            destVC.profile = profile
+                            self.present(dest, animated: true, completion: nil)
+                        }
+                    }
+                } else {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController {
+                        self.navigationController?.pushViewController(controller, animated: true)
+                    }
+                }
+            }
+        })
+    }
+
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

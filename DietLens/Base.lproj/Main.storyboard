@@ -278,7 +278,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="97.5" y="87" width="180" height="60"/>
+                                <rect key="frame" x="98" y="87" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -912,7 +912,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyX-aS-zcl" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="15" y="35" width="25" height="20"/>
+                                <rect key="frame" x="16" y="35" width="25" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="HXA-Kb-Ise"/>
                                     <constraint firstAttribute="height" constant="20" id="k7i-FJ-GUp"/>
@@ -5898,7 +5898,7 @@ What is it?</string>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-vY-QAq">
-                                <rect key="frame" x="98" y="272" width="180" height="60"/>
+                                <rect key="frame" x="97.5" y="272" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="e67-ec-HLh"/>
                                     <constraint firstAttribute="height" constant="60" id="gEh-ob-aqP"/>
@@ -5966,10 +5966,23 @@ What is it?</string>
                                     <action selector="processFacebookLogin:" destination="hae-ME-uS1" eventType="touchUpInside" id="QKw-oa-ui8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpm-9O-8Uf" userLabel="GoogleLoginBtn">
+                                <rect key="frame" x="44.5" y="653" width="288" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="NsO-MA-xYk"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="googleLongIcon">
+                                    <color key="titleColor" red="0.0" green="0.44705882349999998" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="processGoogleLogin:" destination="hae-ME-uS1" eventType="touchUpInside" id="rHT-AQ-bQm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="M4x-BF-X0Q" firstAttribute="centerX" secondItem="pfU-lH-1u2" secondAttribute="centerX" id="2YE-vE-Y8e"/>
+                            <constraint firstItem="dpm-9O-8Uf" firstAttribute="width" secondItem="M4x-BF-X0Q" secondAttribute="width" id="3Fn-g7-pyf"/>
                             <constraint firstItem="e8H-p8-8nn" firstAttribute="centerY" secondItem="pfU-lH-1u2" secondAttribute="centerY" id="59L-Qe-gL0"/>
                             <constraint firstItem="AoW-5x-j5c" firstAttribute="centerX" secondItem="Epb-x5-xwb" secondAttribute="centerX" id="96e-Y1-pIU"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="leading" secondItem="pfU-lH-1u2" secondAttribute="trailing" constant="15" id="9Qn-U3-hU8"/>
@@ -5986,17 +5999,20 @@ What is it?</string>
                             <constraint firstItem="pQj-8K-9sU" firstAttribute="width" secondItem="OMD-Ft-T9E" secondAttribute="width" id="awH-60-xTg"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="trailing" secondItem="jch-ho-g4r" secondAttribute="trailingMargin" id="bkt-rs-emc"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="centerY" secondItem="pfU-lH-1u2" secondAttribute="centerY" id="dbc-Cj-lUN"/>
+                            <constraint firstItem="dpm-9O-8Uf" firstAttribute="top" secondItem="M4x-BF-X0Q" secondAttribute="bottom" constant="20" id="fgK-jE-5Fz"/>
                             <constraint firstItem="pfU-lH-1u2" firstAttribute="leading" secondItem="e8H-p8-8nn" secondAttribute="trailing" constant="8" id="hog-W1-6W3"/>
                             <constraint firstItem="xrX-vY-QAq" firstAttribute="top" secondItem="AoW-5x-j5c" secondAttribute="bottom" constant="8" id="kvm-cf-Ojb"/>
                             <constraint firstItem="pQj-8K-9sU" firstAttribute="centerX" secondItem="Epb-x5-xwb" secondAttribute="centerX" id="lsm-4w-mcL"/>
                             <constraint firstItem="AoW-5x-j5c" firstAttribute="top" secondItem="Epb-x5-xwb" secondAttribute="top" constant="120" id="neS-qU-8T9"/>
                             <constraint firstItem="HTH-xK-FyZ" firstAttribute="top" secondItem="xrX-vY-QAq" secondAttribute="bottom" constant="5" id="trv-d2-8Sb"/>
+                            <constraint firstItem="dpm-9O-8Uf" firstAttribute="centerX" secondItem="M4x-BF-X0Q" secondAttribute="centerX" id="wvn-jH-vHn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Epb-x5-xwb"/>
                     </view>
                     <navigationItem key="navigationItem" id="EPz-RH-WoM"/>
                     <connections>
                         <outlet property="facebookLoginBtn" destination="M4x-BF-X0Q" id="Mxr-iZ-zEI"/>
+                        <outlet property="googleLoginBtn" destination="dpm-9O-8Uf" id="Cdf-Cf-REG"/>
                         <outlet property="signInBtn" destination="pQj-8K-9sU" id="3Sp-8p-K3w"/>
                         <outlet property="signUpBtn" destination="OMD-Ft-T9E" id="Flg-jg-cnc"/>
                     </connections>
@@ -6020,7 +6036,7 @@ What is it?</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaH-iz-JNq">
-                                                <rect key="frame" x="98" y="60" width="180" height="60"/>
+                                                <rect key="frame" x="97.5" y="60" width="180" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="YaU-Xe-SRL"/>
                                                     <constraint firstAttribute="height" constant="60" id="dhG-HU-Rea"/>
@@ -6153,7 +6169,19 @@ What is it?</string>
                                                     <color key="titleColor" red="0.0" green="0.44705882352941173" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="loginButtonClicked:" destination="jSE-bY-V2s" eventType="touchUpInside" id="U54-uf-4Wg"/>
+                                                    <action selector="processFacebookLogin:" destination="jSE-bY-V2s" eventType="touchUpInside" id="U54-uf-4Wg"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xC6-eG-T9f" userLabel="GoogleLoginBtn">
+                                                <rect key="frame" x="43" y="511" width="288" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="GdH-1d-wh0"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="googleLongIcon">
+                                                    <color key="titleColor" red="0.0" green="0.44705882349999998" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="processGoogleLogin:" destination="jSE-bY-V2s" eventType="touchUpInside" id="gpe-Rr-ZS4"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -6163,6 +6191,8 @@ What is it?</string>
                                             <constraint firstItem="0ut-Ih-eDb" firstAttribute="bottom" secondItem="u8r-Ba-XyE" secondAttribute="top" constant="-30" id="1Z2-26-HiZ"/>
                                             <constraint firstItem="zwA-at-ryw" firstAttribute="top" secondItem="GvK-dA-ddy" secondAttribute="bottom" constant="20" id="2Zu-FX-VKm"/>
                                             <constraint firstItem="1au-BD-PcM" firstAttribute="trailing" secondItem="OBk-af-7ec" secondAttribute="trailing" id="2cF-Ay-swe"/>
+                                            <constraint firstItem="xC6-eG-T9f" firstAttribute="top" secondItem="C6V-Mr-DgR" secondAttribute="bottom" constant="20" id="7J4-u4-XLG"/>
+                                            <constraint firstItem="xC6-eG-T9f" firstAttribute="width" secondItem="C6V-Mr-DgR" secondAttribute="width" id="7fv-AA-42b"/>
                                             <constraint firstItem="OBk-af-7ec" firstAttribute="top" secondItem="zwA-at-ryw" secondAttribute="bottom" constant="10" id="89d-Sj-93I"/>
                                             <constraint firstItem="1au-BD-PcM" firstAttribute="leading" secondItem="u8r-Ba-XyE" secondAttribute="trailing" constant="32" id="8Qy-Be-jtR"/>
                                             <constraint firstAttribute="trailing" secondItem="OBk-af-7ec" secondAttribute="trailing" constant="16" id="FHw-1h-ef1"/>
@@ -6181,6 +6211,7 @@ What is it?</string>
                                             <constraint firstAttribute="height" constant="647" id="ijM-5V-B8g"/>
                                             <constraint firstItem="GvK-dA-ddy" firstAttribute="top" secondItem="zaH-iz-JNq" secondAttribute="bottom" constant="5" id="ooy-Cb-v67"/>
                                             <constraint firstItem="C6V-Mr-DgR" firstAttribute="top" secondItem="u8r-Ba-XyE" secondAttribute="bottom" constant="20" id="qcm-Gl-eBk"/>
+                                            <constraint firstItem="xC6-eG-T9f" firstAttribute="centerX" secondItem="C6V-Mr-DgR" secondAttribute="centerX" id="tFN-EC-2qH"/>
                                             <constraint firstItem="0ut-Ih-eDb" firstAttribute="centerX" secondItem="FyT-bd-nxB" secondAttribute="centerX" id="wvo-VL-BN8"/>
                                             <constraint firstItem="C6V-Mr-DgR" firstAttribute="centerX" secondItem="FyT-bd-nxB" secondAttribute="centerX" id="xDD-JM-FdK"/>
                                         </constraints>
@@ -6249,6 +6280,7 @@ What is it?</string>
                         <outlet property="TFEmail" destination="pfj-mJ-Mqb" id="l6B-mg-PlH"/>
                         <outlet property="TFPassword" destination="xJC-UI-7V5" id="B6V-VD-9WZ"/>
                         <outlet property="facebookLoginBtn" destination="C6V-Mr-DgR" id="Qsn-Hl-ckw"/>
+                        <outlet property="googleLoginBtn" destination="xC6-eG-T9f" id="VxP-NS-i0G"/>
                         <segue destination="jBb-4T-Gsx" kind="show" identifier="GoToForgetPwEmail" id="JTD-PB-gWM"/>
                         <segue destination="BQq-Ed-EJS" kind="presentation" identifier="loginToMainPage" id="Tel-Bb-wis"/>
                     </connections>
@@ -7943,6 +7975,7 @@ Your recommended daily calorie intake is:</string>
         <image name="facebookLongIcon" width="288" height="40"/>
         <image name="foodDiaryRedPlus" width="28" height="28"/>
         <image name="genderIcon" width="14" height="14"/>
+        <image name="googleLongIcon" width="288" height="40"/>
         <image name="grayRightArrow" width="5" height="8"/>
         <image name="healthCenterIcon" width="20" height="19"/>
         <image name="healthCenter_badMood" width="54" height="54"/>

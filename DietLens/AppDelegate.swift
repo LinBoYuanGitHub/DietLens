@@ -43,6 +43,7 @@ import HealthKit
 import FBSDKCoreKit
 import Photos
 import FacebookLogin
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -55,7 +56,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        //facebook login init
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        //google login init
+        GIDSignIn.sharedInstance().clientID = "630060012887-35rcjh6fgh3ehe39me2va3epmg7sg5dd.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().delegate = self
+        //fabric crashlytic
         Fabric.with([Crashlytics.self])
         CustomPhotoAlbum.init()
         Messaging.messaging().delegate = self as MessagingDelegate
@@ -160,9 +166,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
         let appId = FBSDKSettings.appID
         if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host ==  "authorize" { // facebook
-                return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+            return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         } else {
-             return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+            return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+//            return GIDSignIn.sharedInstance().handle(url as URL?,
+//                                                     sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+//                                                     annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         }
     }
 
@@ -400,6 +409,23 @@ extension AppDelegate: MessagingDelegate {
         print("Received data message: \(remoteMessage.appData)")
     }
     // [END ios_10_data_message]
+}
+
+extension AppDelegate: GIDSignInDelegate {
+
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("\(error.localizedDescription)")
+        } else {
+            let userId = user.userID
+        }
+
+    }
+
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        //perform disconnect code
+    }
+
 }
 
 extension UIApplication {

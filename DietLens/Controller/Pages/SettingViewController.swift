@@ -9,6 +9,7 @@
 import UIKit
 import PBRevealViewController
 import FacebookLogin
+import GoogleSignIn
 
 class SettingViewController: UIViewController {
     @IBOutlet weak var navigationBarItem: UINavigationItem!
@@ -75,8 +76,11 @@ class SettingViewController: UIViewController {
         let nicknameKey = "nickname"
         preferences.setValue(nil, forKey: nicknameKey)
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
+        preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        //google login
+        GIDSignIn.sharedInstance().signOut()
         //facebook login
 //        LoginManager().logOut()
     }
