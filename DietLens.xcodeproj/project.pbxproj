@@ -70,6 +70,7 @@
 		3F5608F520F335480007B3AF /* HealthCenterTableValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */; };
 		3F5608F720F3357D0007B3AF /* HealthCenterEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */; };
 		3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */; };
+		3F5677A8215E1E4900A4E282 /* profileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5677A7215E1E4900A4E282 /* profileSection.swift */; };
 		3F5691E6214CF53F00D9929A /* ConfirmDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */; };
 		3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691E8214E893000D9929A /* DoublyLinkedList.swift */; };
 		3F5691EB214E8B6D00D9929A /* CacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EA214E8B6D00D9929A /* CacheLRU.swift */; };
@@ -120,7 +121,6 @@
 		3FB6E68720E383E600462591 /* ProfileEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E68620E383E600462591 /* ProfileEntity.swift */; };
 		3FB6E68920E38ABE00462591 /* ProfileViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E68820E38ABE00462591 /* ProfileViewHeader.swift */; };
 		3FB6E68B20E38B8E00462591 /* profileViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6E68A20E38B8E00462591 /* profileViewHeader.xib */; };
-		3FB6E68D20E3D00F00462591 /* ProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E68C20E3D00F00462591 /* ProfileSection.swift */; };
 		3FB6E69020E4D55F00462591 /* RegistrationFirstStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E68F20E4D55F00462591 /* RegistrationFirstStepViewController.swift */; };
 		3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */; };
 		3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */; };
@@ -319,6 +319,7 @@
 		3F5608F420F335480007B3AF /* HealthCenterTableValueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterTableValueCell.swift; sourceTree = "<group>"; };
 		3F5608F620F3357D0007B3AF /* HealthCenterEmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterEmojiCell.swift; sourceTree = "<group>"; };
 		3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterBarCell.swift; sourceTree = "<group>"; };
+		3F5677A7215E1E4900A4E282 /* profileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileSection.swift; sourceTree = "<group>"; };
 		3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewController.swift; sourceTree = "<group>"; };
 		3F5691E8214E893000D9929A /* DoublyLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublyLinkedList.swift; sourceTree = "<group>"; };
 		3F5691EA214E8B6D00D9929A /* CacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheLRU.swift; sourceTree = "<group>"; };
@@ -368,7 +369,6 @@
 		3FB6E68620E383E600462591 /* ProfileEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEntity.swift; sourceTree = "<group>"; };
 		3FB6E68820E38ABE00462591 /* ProfileViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewHeader.swift; sourceTree = "<group>"; };
 		3FB6E68A20E38B8E00462591 /* profileViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileViewHeader.xib; sourceTree = "<group>"; };
-		3FB6E68C20E3D00F00462591 /* ProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSection.swift; sourceTree = "<group>"; };
 		3FB6E68F20E4D55F00462591 /* RegistrationFirstStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFirstStepViewController.swift; sourceTree = "<group>"; };
 		3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSecondStepViewController.swift; sourceTree = "<group>"; };
 		3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationThirdStepViewController.swift; sourceTree = "<group>"; };
@@ -775,7 +775,7 @@
 			isa = PBXGroup;
 			children = (
 				3FB6E68620E383E600462591 /* ProfileEntity.swift */,
-				3FB6E68C20E3D00F00462591 /* ProfileSection.swift */,
+				3F5677A7215E1E4900A4E282 /* profileSection.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1570,7 +1570,6 @@
 				3FB6E69620E4D58B00462591 /* RegistrationForthStepViewController.swift in Sources */,
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
 				3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */,
-				3FB6E68D20E3D00F00462591 /* ProfileSection.swift in Sources */,
 				3F5691ED214EA4AD00D9929A /* TextSuggestionCacheLRU.swift in Sources */,
 				3F7DACA520133968009E4DB6 /* ExpandedUITextField.swift in Sources */,
 				3FFB56851FADAF90002DCE15 /* FoodDiary.swift in Sources */,
@@ -1612,6 +1611,7 @@
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
 				3F516DC42122C1830028B0AF /* RecognitionResultLocatonCell.swift in Sources */,
 				58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */,
+				3F5677A8215E1E4900A4E282 /* profileSection.swift in Sources */,
 				3F5608EF20F309590007B3AF /* HealthCenterItem.swift in Sources */,
 				3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */,
 				3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */,

@@ -17,7 +17,7 @@ class RegistrationProfileViewController: BaseViewController {
     var ethnicityPickerView: UIPickerView!
     var weightPickerView: UIPickerView!
     var heightPickerView: UIPickerView!
-    var genderList = ["Male", "Female", "Others"]
+    var genderList = ["Male", "Female"]
     var ethnicityList = ["Chinese", "Malays", "Indians", "Others"]
     var weightList = [Int]()
     var heightList = [Int]()

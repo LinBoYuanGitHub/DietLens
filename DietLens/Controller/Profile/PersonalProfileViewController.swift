@@ -18,7 +18,7 @@ class PersonalProfileViewController: UIViewController {
     var ethnicityPickerView: UIPickerView!
     //profile entity list
     var profileSectionList = [ProfileSection]()
-    let genderList = ["Male", "Female", "Others"]
+    let genderList = ["Male", "Female"]
     let ethnicityList = ["Chinese", "Malays", "Indians", "Others"]
     //profile
     var profile = UserProfile()

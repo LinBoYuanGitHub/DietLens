@@ -3552,7 +3552,7 @@ Complete your profile for a more accurate recommendation.
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXy-W6-8yf">
-                                <rect key="frame" x="16" y="285" width="288" height="131"/>
+                                <rect key="frame" x="16" y="285" width="343" height="318"/>
                                 <string key="text">DietLens is a lifestyle mobile application that enables users to track and log the nutritional values of their food intake coupled with exercise patterns using HealthKit to assist them in achieving better overall well-being. Supported by a various deep learning technology and extensive food database, this mobile app provides accurate nutrient values of actual food consumed based on serving sizes.
 
 Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI assistant to improve your overall-well-being by promoting healthy eating habits, advocating active lifestyle, and influencing positive behavioural changes.</string>
@@ -6173,7 +6173,7 @@ What is it?</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xC6-eG-T9f" userLabel="GoogleLoginBtn">
-                                                <rect key="frame" x="43" y="511" width="288" height="40"/>
+                                                <rect key="frame" x="43" y="503" width="288" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="GdH-1d-wh0"/>
                                                 </constraints>
@@ -7248,6 +7248,35 @@ Your recommended daily calorie intake is:</string>
             </objects>
             <point key="canvasLocation" x="5680.8000000000002" y="1867.0164917541231"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="2Ed-e6-j2e">
+            <objects>
+                <viewController id="old-7c-M2a" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SMm-oK-pdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gwk-rC-2pe">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="Home" image="home" id="qnA-iD-kDy"/>
+                                    <tabBarItem title="FoodDiary" image="whiteFoodDiaryIcon" id="asZ-HJ-g6i"/>
+                                    <tabBarItem title="" id="rtO-8y-i59"/>
+                                    <tabBarItem title="HealthLog" image="healthCenterIcon" id="Nrt-Oy-oIA"/>
+                                    <tabBarItem title="More" image="Settings" id="87p-46-Emy"/>
+                                </items>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="GTt-S8-d2T"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cyg-I3-JJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2831" y="1879"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="egw-rf-dA1">
             <objects>
@@ -7748,7 +7777,7 @@ Your recommended daily calorie intake is:</string>
         <!--Navigation Controller-->
         <scene sceneID="kOD-Zr-Fb3">
             <objects>
-                <navigationController storyboardIdentifier="navProfileVC" automaticallyAdjustsScrollViewInsets="NO" id="HaR-42-4TM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HaR-42-4TM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oha-PN-kHw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -7933,7 +7962,7 @@ Your recommended daily calorie intake is:</string>
         <!--Navigation Controller-->
         <scene sceneID="UeM-GO-hbZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JJb-9B-Oyg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navProfileVC" automaticallyAdjustsScrollViewInsets="NO" id="JJb-9B-Oyg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="x1Q-a2-LkG">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -7960,6 +7989,7 @@ Your recommended daily calorie intake is:</string>
         <image name="Profile" width="81" height="81"/>
         <image name="RedBackGroundImage" width="283" height="44"/>
         <image name="SeperatorView" width="2" height="29"/>
+        <image name="Settings" width="24" height="24"/>
         <image name="SideMenu" width="18" height="13"/>
         <image name="WhiteBackGroundImage" width="288" height="40"/>
         <image name="articleTitleBackground" width="343" height="26"/>
@@ -7980,6 +8010,7 @@ Your recommended daily calorie intake is:</string>
         <image name="healthCenterIcon" width="20" height="19"/>
         <image name="healthCenter_badMood" width="54" height="54"/>
         <image name="heightIcon" width="8" height="14"/>
+        <image name="home" width="22" height="22"/>
         <image name="imageView:Rfe-pZ-PZM:image" width="6" height="6">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
@@ -8165,6 +8196,7 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <image name="wechat" width="50" height="50"/>
         <image name="weightIcon" width="12" height="12"/>
         <image name="whiteBackArrow" width="8" height="13"/>
+        <image name="whiteFoodDiaryIcon" width="18" height="21"/>
         <image name="whiteSettingIcon" width="20" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>

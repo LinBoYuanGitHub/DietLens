@@ -79,6 +79,8 @@ class SettingViewController: UIViewController {
         preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
+        preferences.setValue(nil, forKey: PreferenceKey.googleImageUrl)
         //google login
         GIDSignIn.sharedInstance().signOut()
         //facebook login
