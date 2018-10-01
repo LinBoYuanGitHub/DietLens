@@ -45,7 +45,7 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     @IBAction func closeBtnPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func cfmEmailPressed(_ sender: Any) {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
             // call backend server

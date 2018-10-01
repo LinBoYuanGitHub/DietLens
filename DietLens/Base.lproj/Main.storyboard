@@ -3278,7 +3278,7 @@ Complete your profile for a more accurate recommendation.
                                                         <color key="textColor" red="0.2319577109" green="0.2320933503" blue="0.2404021281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jqy-W4-B2c">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jqy-W4-B2c">
                                                         <rect key="frame" x="294" y="0.0" width="51" height="31"/>
                                                         <color key="onTintColor" red="0.99613112209999999" green="0.34797501559999999" blue="0.35370385650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <connections>
@@ -5803,8 +5803,8 @@ What is it?</string>
                                 <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“Tell us more! Let us tailor recommendations to help you stay healthy.”" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-hi-Cyj" userLabel="prompt">
-                                <rect key="frame" x="16" y="102" width="343" height="39.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“Tell us more! Let us tailor recommendations to help you stay healthy.”" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-hi-Cyj" userLabel="prompt">
+                                <rect key="frame" x="32" y="102" width="311" height="39.5"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
                                 <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -5826,7 +5826,7 @@ What is it?</string>
                                                     <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ztg-8S-E1V">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ztg-8S-E1V">
                                                     <rect key="frame" x="16" y="18.5" width="74" height="23"/>
                                                     <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -5850,7 +5850,7 @@ What is it?</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="suz-vk-dqQ" firstAttribute="trailing" secondItem="3H5-hi-Cyj" secondAttribute="trailing" constant="16" id="03c-97-NB0"/>
+                            <constraint firstItem="suz-vk-dqQ" firstAttribute="trailing" secondItem="3H5-hi-Cyj" secondAttribute="trailing" constant="32" id="03c-97-NB0"/>
                             <constraint firstItem="DZc-up-3BO" firstAttribute="leading" secondItem="suz-vk-dqQ" secondAttribute="leading" constant="25" id="0LT-oJ-RyV"/>
                             <constraint firstItem="suz-vk-dqQ" firstAttribute="trailing" secondItem="0i7-Ef-15L" secondAttribute="trailing" constant="16" id="2OK-VS-Saz"/>
                             <constraint firstItem="suz-vk-dqQ" firstAttribute="bottom" secondItem="0i7-Ef-15L" secondAttribute="bottom" constant="20" id="32R-yh-uVe"/>
@@ -5859,7 +5859,7 @@ What is it?</string>
                             <constraint firstItem="ak9-aN-L6H" firstAttribute="leading" secondItem="suz-vk-dqQ" secondAttribute="leading" constant="341" id="N3k-IU-Cjw"/>
                             <constraint firstItem="ak9-aN-L6H" firstAttribute="centerY" secondItem="DZc-up-3BO" secondAttribute="centerY" id="Rux-C6-ZKS"/>
                             <constraint firstItem="ak9-aN-L6H" firstAttribute="leading" secondItem="DZc-up-3BO" secondAttribute="trailing" constant="9" id="TFh-41-Dwb"/>
-                            <constraint firstItem="3H5-hi-Cyj" firstAttribute="leading" secondItem="suz-vk-dqQ" secondAttribute="leading" constant="16" id="YvI-Xk-6tB"/>
+                            <constraint firstItem="3H5-hi-Cyj" firstAttribute="leading" secondItem="suz-vk-dqQ" secondAttribute="leading" constant="32" id="YvI-Xk-6tB"/>
                             <constraint firstItem="3H5-hi-Cyj" firstAttribute="top" secondItem="ak9-aN-L6H" secondAttribute="bottom" constant="7" id="kwg-0E-Bgt"/>
                             <constraint firstItem="suz-vk-dqQ" firstAttribute="trailing" secondItem="ak9-aN-L6H" secondAttribute="trailing" constant="6" id="pBW-7m-95e"/>
                             <constraint firstItem="0i7-Ef-15L" firstAttribute="leading" secondItem="suz-vk-dqQ" secondAttribute="leading" constant="16" id="tpY-DD-jh4"/>
@@ -5915,6 +5915,9 @@ What is it?</string>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMD-Ft-T9E">
                                 <rect key="frame" x="43.5" y="416" width="288" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Szk-hm-tDj"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                 <state key="normal" title="SIGN UP" backgroundImage="RedBackGroundImage">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5925,6 +5928,9 @@ What is it?</string>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQj-8K-9sU">
                                 <rect key="frame" x="44" y="481" width="288" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0Gk-CW-X7j"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                 <state key="normal" title="SIGN IN" backgroundImage="WhiteBackGroundImage">
                                     <color key="titleColor" red="0.95686274509803915" green="0.19607843137254902" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -6120,11 +6126,11 @@ What is it?</string>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ut-Ih-eDb">
                                                 <rect key="frame" x="44" y="326" width="288" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="54q-Pn-5Aj"/>
+                                                    <constraint firstAttribute="height" constant="40" id="54q-Pn-5Aj"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="20"/>
-                                                <state key="normal" title="Sign In" backgroundImage="RedBackGroundImage">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                <state key="normal" title="Sign In" backgroundImage="WhiteBackGroundImage">
+                                                    <color key="titleColor" red="0.95294117649999999" green="0.27450980390000002" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">

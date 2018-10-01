@@ -65,9 +65,15 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideReview()
-        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(CameraViewController.pinchCameraView(_:)))
+        pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchCameraView(_:)))
+        previewView.addGestureRecognizer(pinchGestureRecognizer)
+        let tapGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(onCameraViewTappped(_:)))
+        previewView.addGestureRecognizer(tapGestureRecognizer)
         sessionManager.previewView = previewView
-        sessionManager.previewView.addGestureRecognizer(pinchGestureRecognizer)
+        previewContainer.addGestureRecognizer(pinchGestureRecognizer)
+        previewContainer.addGestureRecognizer(tapGestureRecognizer)
+//        sessionManager.previewView.addGestureRecognizer(pinchGestureRecognizer)
+//        sessionManager.previewView.addGestureRecognizer(tapGestureRecognizer)
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
 
@@ -100,6 +106,19 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
         //TODO camera zoom in & out according to pinch
         sessionManager.pinch(pinch: sender)
+    }
+
+    /** cameraView focus part*/
+
+    @objc func onCameraViewTappped(_ gestureRecognizer: UITapGestureRecognizer) {
+        let location  = gestureRecognizer.location(in: sessionManager.previewView)
+        addfocusIndicatorView(at: location)
+        let captureDeviceLocation = previewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: location)
+        sessionManager.focus(at: captureDeviceLocation)
+    }
+
+    func addfocusIndicatorView(at point: CGPoint) {
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -265,6 +284,16 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     @IBAction func rejectImage(_ sender: UIButton) {
         hideReview()
+    }
+}
+
+extension CameraViewController: UIGestureRecognizerDelegate {
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let touchedView = touch.view, let gestureView = gestureRecognizer.view, touchedView.isDescendant(of: gestureView), touchedView !== gestureView {
+            return false
+        }
+        return true
     }
 }
 

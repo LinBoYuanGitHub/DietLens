@@ -171,6 +171,22 @@ class CameraSessionManager {
         return true
     }
 
+    func focus(at point: CGPoint) {
+        guard videoInput.device.isFocusPointOfInterestSupported, videoInput.device.isExposurePointOfInterestSupported else {
+            return
+        }
+        do {
+            try videoInput.device.lockForConfiguration()
+            videoInput.device.focusPointOfInterest = point
+            videoInput.device.focusMode = .autoFocus
+            videoInput.device.exposurePointOfInterest = point
+            videoInput.device.exposureMode = .continuousAutoExposure
+            videoInput.device.unlockForConfiguration()
+        } catch {
+            print(error)
+        }
+    }
+
     func pinch(pinch: UIPinchGestureRecognizer) {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
             let videoInput = try? AVCaptureDeviceInput(device: device) else {
