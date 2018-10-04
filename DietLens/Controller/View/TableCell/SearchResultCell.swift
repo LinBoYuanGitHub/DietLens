@@ -21,7 +21,8 @@ class SearchResultCell: UITableViewCell {
 
     func setUpCell(textResultEntity: TextSearchSuggestionEntity) {
         if textResultEntity.useExpImage {
-            foodSampleImage.kf.setImage(with: URL(string: textResultEntity.expImagePath)!, placeholder: #imageLiteral(resourceName: "food_sample_image"), options: nil, progressBlock: nil, completionHandler: nil)
+            foodSampleImage.image = #imageLiteral(resourceName: "loading_img")
+            foodSampleImage.kf.setImage(with: URL(string: textResultEntity.expImagePath)!, placeholder: #imageLiteral(resourceName: "loading_img"), options: nil, progressBlock: nil, completionHandler: nil)
         } else {
             foodSampleImage.image = #imageLiteral(resourceName: "dietlens_sample_background")
         }

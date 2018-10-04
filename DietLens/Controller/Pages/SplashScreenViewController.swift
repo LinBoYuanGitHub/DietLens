@@ -55,14 +55,14 @@ class SplashScreenViewController: BaseViewController {
         APIService.instance.getArticleList(completion: { (articleList) in
             if articleList != nil {
                 APIService.instance.getEventList { (_) in
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         self.performSegue(withIdentifier: "toMainPage", sender: self)
-                    }
+                    })
                 }
             } else {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     self.performSegue(withIdentifier: "toMainPage", sender: self)
-                }
+                })
             }
         }) { (_) in
         }

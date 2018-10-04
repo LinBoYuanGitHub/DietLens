@@ -281,7 +281,7 @@ class FoodDiaryViewController: UIViewController {
     //update foodDiary
     func updateFoodInfoItem(dietItem: DietItem) {
         for (index, entity) in foodDiaryEntity.dietItems.enumerated() {
-            if entity.id == dietItem.id {
+            if entity.foodId == dietItem.foodId {
                 foodDiaryEntity.dietItems[index] = dietItem
             }
         }

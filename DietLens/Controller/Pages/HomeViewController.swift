@@ -162,8 +162,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             jumpToDestPage(identifyId: "FoodDiaryHistoryVC", mType: FoodDiaryHistoryViewController.self)
         case 2:
             //to step counter page
-//            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
-            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
+            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
+//            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
         case 3:
             //to healthCenter page
             jumpToDestPage(identifyId: "healthCenterVC", mType: HealthCenterMainViewController.self)
