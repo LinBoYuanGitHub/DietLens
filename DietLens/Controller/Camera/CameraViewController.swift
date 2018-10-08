@@ -41,6 +41,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
     var imageId: Int = 0
 
     var pinchGestureRecognizer = UIPinchGestureRecognizer()
+    var tapGestureRecognizer = UITapGestureRecognizer()
 
     //passing parameter
     var displayList = [DisplayFoodCategory]()
@@ -62,16 +63,22 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     //    var volumeHandler: JPSVolumeButtonHandler?
 
+    var focusIndicator: UIImageView?
+    var timer: Timer?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         hideReview()
         pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchCameraView(_:)))
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCameraViewTappped(_:)))
         previewView.addGestureRecognizer(pinchGestureRecognizer)
-        let tapGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(onCameraViewTappped(_:)))
         previewView.addGestureRecognizer(tapGestureRecognizer)
         sessionManager.previewView = previewView
         previewContainer.addGestureRecognizer(pinchGestureRecognizer)
         previewContainer.addGestureRecognizer(tapGestureRecognizer)
+        //view gesture recognizer
+//        self.view.addGestureRecognizer(tapGestureRecognizer)
+//        self.view.addGestureRecognizer(pinchGestureRecognizer)
 //        sessionManager.previewView.addGestureRecognizer(pinchGestureRecognizer)
 //        sessionManager.previewView.addGestureRecognizer(tapGestureRecognizer)
         sessionManager.viewControllerDelegate = self
@@ -118,14 +125,27 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
     }
 
     func addfocusIndicatorView(at point: CGPoint) {
+        if focusIndicator == nil {
+            focusIndicator = UIImageView(image: UIImage(imageLiteralResourceName: "cameraFocusIndicator"))
+            focusIndicator!.frame.size = CGSize(width: 60, height: 60)
+            self.previewView.addSubview(focusIndicator!)
+        }
+        focusIndicator!.center = point
+        //schedule timer
+        if timer != nil {
+             timer?.invalidate()
+        }
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(removeCameraIndicator), userInfo: nil, repeats: false)
+    }
 
+    @objc func removeCameraIndicator() {
+        focusIndicator?.removeFromSuperview()
+        focusIndicator = nil
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewView.videoPreviewLayer.frame.size = previewContainer.frame.size
-        //        sessionManager.onViewWillAppear()
-        //        previewContainer.bringSubview(toFront: focusViewImg)
     }
 
     //    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
