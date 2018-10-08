@@ -250,7 +250,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         if let attributeGroup = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as? [NSAttributedStringKey: Any] {
             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
         }
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(249.0/255.0), green: CGFloat(60.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         //backbtn
         self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
         //disable homepage&LGMenu swipe back gesture

@@ -35,7 +35,7 @@ class RegistrationProfileViewController: BaseViewController {
         hideKeyboardWhenTappedAround()
         //set initial timing
         birthDayPickerView.date = DateUtil.normalStringToDate(dateStr: "1990-01-01")
-        profile.birthday = "1990-01-01"
+        profile.birthday = "01-01-1990"
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,8 +99,10 @@ class RegistrationProfileViewController: BaseViewController {
             //set data into component
             let indxPath = IndexPath(row: 2, section: 0)
             if let dateCell = profileTableView.cellForRow(at: indxPath) as? RegistrationProfileCell {
-                let birthdayString = "\(year)-\(month)-\(day)"
-                profile.birthday = birthdayString
+                let dayString = day > 9 ? "\(day)" : "0\(day)"
+                let monthString = month > 9 ? "\(month)" : "0\(month)"
+                let birthdayString = "\(dayString)-\(monthString)-\(year)"
+                profile.birthday = "\(year)-\(month)-\(day)"
                 dateCell.registrationTextField.text = birthdayString
             }
         }
