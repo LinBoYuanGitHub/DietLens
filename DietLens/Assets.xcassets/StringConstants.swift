@@ -42,6 +42,18 @@ struct StringConstants {
 
     }
 
+    struct GenderText {
+        static let MALE = "Male"
+        static let FEMALE = "Female"
+    }
+
+    struct EnthnicityText {
+        static let CHINESE = "Chinese"
+        static let MALAYS = "Malays"
+        static let INDIANS = "Indians"
+        static let OTHER = "Other"
+    }
+
     struct ThresholdValue {
         static let introductionOffsetThreshold = 900
     }

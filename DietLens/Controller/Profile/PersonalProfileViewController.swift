@@ -18,8 +18,8 @@ class PersonalProfileViewController: UIViewController {
     var ethnicityPickerView: UIPickerView!
     //profile entity list
     var profileSectionList = [ProfileSection]()
-    let genderList = ["Male", "Female"]
-    let ethnicityList = ["Chinese", "Malays", "Indians", "Others"]
+    let genderList = [StringConstants.GenderText.MALE, StringConstants.GenderText.FEMALE]
+    let ethnicityList = [StringConstants.EnthnicityText.CHINESE, StringConstants.EnthnicityText.MALAYS, StringConstants.EnthnicityText.INDIANS, StringConstants.EnthnicityText.OTHER]
     //profile
     var profile = UserProfile()
     let weightInputView = RulerInputView()

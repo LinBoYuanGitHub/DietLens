@@ -17,8 +17,8 @@ class RegistrationProfileViewController: BaseViewController {
     var ethnicityPickerView: UIPickerView!
     var weightPickerView: UIPickerView!
     var heightPickerView: UIPickerView!
-    var genderList = ["Male", "Female"]
-    var ethnicityList = ["Chinese", "Malays", "Indians", "Others"]
+    var genderList = [StringConstants.GenderText.MALE, StringConstants.GenderText.FEMALE]
+    var ethnicityList = [StringConstants.EnthnicityText.CHINESE, StringConstants.EnthnicityText.MALAYS, StringConstants.EnthnicityText.INDIANS, StringConstants.EnthnicityText.OTHER]
     var weightList = [Int]()
     var heightList = [Int]()
     //profile
@@ -135,9 +135,11 @@ class RegistrationProfileViewController: BaseViewController {
 
     @objc func onCloseBtnPressed() {
         //redirect to main page, need to have filling profile reminder
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-        self.present(viewController, animated: true, completion: nil)
+        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Default setting is set for you.\n Go to profile to get an \n accurate recommendation.", confirmText: "Okay") {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
 
 }
@@ -269,7 +271,7 @@ extension RegistrationProfileViewController: UITableViewDelegate, UITableViewDat
             cell.registrationTextField.text = genderList[0]
             cell.registrationTextField.inputView = genderPickerView
         case 2:
-            cell.setUpCell(fieldName: "Date of birth")
+            cell.setUpCell(fieldName: "Date of Birth")
             cell.registrationTextField.text = profile.birthday
             cell.registrationTextField.inputView = birthDayPickerView
         case 3:
