@@ -1973,7 +1973,7 @@ Click add to record food~</string>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-MD-aDy" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="278" y="690" width="72" height="72"/>
+                                <rect key="frame" x="278" y="668.5" width="72" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="9Iq-0N-QkB"/>
                                     <constraint firstAttribute="width" constant="72" id="zYG-W8-NsK"/>
@@ -1991,7 +1991,7 @@ Click add to record food~</string>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="bottom" secondItem="Rdz-ba-FZ3" secondAttribute="bottom" id="Cxo-30-QQP"/>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="trailing" secondItem="RY2-Cv-ipG" secondAttribute="trailing" id="GQ6-W3-hVP"/>
                             <constraint firstItem="Xoi-Ut-71S" firstAttribute="centerX" secondItem="RY2-Cv-ipG" secondAttribute="centerX" id="Hpt-rn-VEk"/>
-                            <constraint firstItem="RY2-Cv-ipG" firstAttribute="bottom" secondItem="lKc-MD-aDy" secondAttribute="bottom" multiplier="1.05" id="YWg-ey-8pO"/>
+                            <constraint firstItem="RY2-Cv-ipG" firstAttribute="bottom" secondItem="lKc-MD-aDy" secondAttribute="bottom" multiplier="1.08" id="YWg-ey-8pO"/>
                             <constraint firstItem="RY2-Cv-ipG" firstAttribute="trailing" secondItem="lKc-MD-aDy" secondAttribute="trailing" constant="25" id="jR1-pi-gZH"/>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="leading" secondItem="RY2-Cv-ipG" secondAttribute="leading" id="q2u-ah-6xK"/>
                             <constraint firstItem="Xoi-Ut-71S" firstAttribute="width" secondItem="Rdz-ba-FZ3" secondAttribute="width" id="tsr-zu-uoS"/>
