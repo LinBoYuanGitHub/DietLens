@@ -17,7 +17,7 @@ class ProfileActivityLvlViewController: BaseViewController {
     @IBOutlet weak var exerciseTable: UITableView!
 
     var activitySelectDelegate: activitySelectDelegate?
-    var indexValue: Int  = 0
+    var indexValue: Int  = 1
 
     //registration flow param
     var profile: UserProfile?
@@ -28,6 +28,8 @@ class ProfileActivityLvlViewController: BaseViewController {
         exerciseTable.delegate = self
         exerciseTable.dataSource = self
         exerciseTable.tableFooterView = UIView()
+        //set the initial index value into profile
+        profile?.activityLevel = indexValue
     }
 
     @objc func onBackPressed() {

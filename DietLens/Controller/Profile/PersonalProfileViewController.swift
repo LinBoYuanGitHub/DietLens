@@ -18,8 +18,8 @@ class PersonalProfileViewController: UIViewController {
     var ethnicityPickerView: UIPickerView!
     //profile entity list
     var profileSectionList = [ProfileSection]()
-    let genderList = ["Male", "Female", "Others"]
-    let ethnicityList = ["Chinese", "Malays", "Indians", "Others"]
+    let genderList = [StringConstants.GenderText.MALE, StringConstants.GenderText.FEMALE]
+    let ethnicityList = [StringConstants.EnthnicityText.CHINESE, StringConstants.EnthnicityText.MALAYS, StringConstants.EnthnicityText.INDIANS, StringConstants.EnthnicityText.OTHER]
     //profile
     var profile = UserProfile()
     let weightInputView = RulerInputView()
@@ -209,8 +209,11 @@ class PersonalProfileViewController: UIViewController {
             //set data into component
             let indxPath = IndexPath(row: 1, section: 1)
             if let dateCell = profileTableView.cellForRow(at: indxPath) as? ProfileTextFieldCell {
-                let birthdayString = "\(year)-\(month)-\(day)"
-                profile.birthday = birthdayString
+                let dayString = day > 9 ? "\(day)" : "0\(day)"
+                let monthString = month > 9 ? "\(month)" : "0\(month)"
+                let birthdayString = "\(dayString)-\(monthString)-\(year)"
+//                profile.birthday = birthdayString
+                profile.birthday = "\(year)-\(month)-\(day)"
                 dateCell.inptText.text = birthdayString
             }
         }
@@ -331,7 +334,7 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Date of Birth")
                     cell.inptText.delegate = self
                     cell.inptText.inputView = birthDayPickerView
-                    cell.inptText.text = profile.birthday
+                    cell.inptText.text = DateUtil.formatSinDateToString(date: birthDayPickerView.date)
                 } else if indexPath.row == 2 && indexPath.section == 1 {
                     cell.inptText.inputView = ethnicityPickerView
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Ethnicity")

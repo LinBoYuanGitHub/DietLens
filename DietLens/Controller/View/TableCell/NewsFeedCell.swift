@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
 
 class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var newsArticleRow: UICollectionView!
@@ -52,9 +51,11 @@ class NewsFeedCell: UITableViewCell, UICollectionViewDataSource, UICollectionVie
             cell.newsImage.image = #imageLiteral(resourceName: "loading_img")
             if listOfArticles[indexPath.row].articleImageURL != ""{
                 let imageView = UIImageView()
-                imageView.af_setImage(withURL: URL(string: listOfArticles[indexPath.row].articleImageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
-                    cell.newsImage.image = imageView.image
-                })
+                imageView.kf.setImage(with: URL(string: listOfArticles[indexPath.row].articleImageURL), placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
+                    if image != nil {
+                         cell.newsImage.image = imageView.image
+                    }
+                }
             }
             return cell
         } else {

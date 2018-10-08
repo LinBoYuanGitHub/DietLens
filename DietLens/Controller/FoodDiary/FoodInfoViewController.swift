@@ -430,7 +430,7 @@ class FoodInfoViewController: UIViewController {
                                     for viewController in (self.navigationController?.viewControllers)! {
                                         if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            navigator.popToViewController(foodDiaryHistoryVC, animated: true)
+                                            navigator.popToViewController(foodDiaryHistoryVC, animated: false)
                                                 foodDiaryHistoryVC.shouldRefreshDiary = true
                                             }
                                         }

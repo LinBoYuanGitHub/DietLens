@@ -81,15 +81,15 @@ class RegistrationFirstStepViewController: UIViewController {
 
     func checkEmail(email: String) {
         //return if email is empty
-        if email.isEmpty {
+        if email.isEmpty || !TextValidtor.isValidEmail(testStr: email) {
+            self.redTick.isHidden = true
+            self.TFemail.errorMessage = "INVALID EMAIL"
             return
         }
         APIService.instance.emailValidationRequest(userEmail: email, completion: { (isSuccess) in
             self.redTick.isHidden = !isSuccess
 //            self.emailCheckerLabel.isHidden = isSuccess
         }) { (errMessage) in
-//            self.emailCheckerLabel.alpha = 1
-//            self.emailCheckerLabel.text = errMessage
             self.TFemail.errorMessage = errMessage
             self.redTick.isHidden = true
         }
@@ -122,7 +122,11 @@ class RegistrationFirstStepViewController: UIViewController {
             TFconfirmPassword.errorMessage = "Verify password failed"
             //            showErrMsg(errMsg: "Verify password failed")
             return
+        } else if !TextValidtor.isValidEmail(testStr: TFemail.text!) {
+            TFemail.errorMessage = "INVALID EMAIL"
+            return
         } else {
+            //email format validator
             AlertMessageHelper.showLoadingDialog(targetController: self)
             APIService.instance.register(email: TFemail.text!, password: TFpassword.text!, completion: { (isSucceed) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
@@ -198,9 +202,12 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 //        keyboardWillShow()
-        TFemail.errorMessage = ""
-        TFpassword.errorMessage = ""
-        TFconfirmPassword.errorMessage = ""
+        if textField == TFemail {
+            TFemail.errorMessage = ""
+        } else {
+            TFpassword.errorMessage = ""
+            TFconfirmPassword.errorMessage = ""
+        }
         return true
     }
 
@@ -213,17 +220,17 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString str: String) -> Bool {
-        if let text = textField.text {
-            //Email validator
-            if textField == TFemail {
-                let validationString = textField.text! + str
-                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
-                    TFemail.errorMessage = "Invalid email"
-                } else {
-                    TFemail.errorMessage = ""
-                }
-            }
-        }
+//        if let text = textField.text {
+//            //Email validator
+//            if textField == TFemail {
+//                let validationString = textField.text! + str
+//                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
+//                    TFemail.errorMessage = "Invalid email"
+//                } else {
+//                    TFemail.errorMessage = ""
+//                }
+//            }
+//        }
         return true
     }
 

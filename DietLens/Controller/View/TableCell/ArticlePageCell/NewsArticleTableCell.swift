@@ -35,10 +35,13 @@ class NewsArticleTableCell: UITableViewCell {
         let imageView = UIImageView()
         //self.articleImage.image = #imageLiteral(resourceName: "loading_img") //set placeholder
         if imageURL != "" {
-            imageView.af_setImage(withURL: URL(string: imageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,
-                                  imageTransition: .crossDissolve(0.5), completion: { _ in
-                                    self.articleImage.image = imageView.image
-            })
+            imageView.kf.setImage(with: URL(string: imageURL)!, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
+                 self.articleImage.image = imageView.image
+            }
+//            imageView.af_setImage(withURL: URL(string: imageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil,
+//                                  imageTransition: .crossDissolve(0.5), completion: { _ in
+//                                    self.articleImage.image = imageView.image
+//            })
         } else {
             imageView.image = #imageLiteral(resourceName: "loading_img")
         }

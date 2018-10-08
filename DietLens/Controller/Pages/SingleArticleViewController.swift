@@ -9,7 +9,6 @@
 import UIKit
 import ParallaxHeader
 import SnapKit
-import AlamofireImage
 import WebKit
 
 class SingleArticleViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, WKNavigationDelegate {
@@ -96,7 +95,8 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
         let imageView = UIImageView()
         //imageView.image = image
         if articleData?.articleImageURL != nil && articleData?.articleImageURL != "" {
-            imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: nil)
+            imageView.kf.setImage(with: URL(string: (articleData?.articleImageURL)!)!, placeholder: #imageLiteral(resourceName: "runner"), options: [], progressBlock: nil, completionHandler: nil)
+//            imageView.af_setImage(withURL: URL(string: (articleData?.articleImageURL)!)!, placeholderImage: #imageLiteral(resourceName: "runner"), filter: nil, imageTransition: .crossDissolve(0.5), completion: nil)
         } else {
             imageView.image = #imageLiteral(resourceName: "runner")
         }

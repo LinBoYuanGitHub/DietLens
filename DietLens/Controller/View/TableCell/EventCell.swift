@@ -28,12 +28,14 @@ class EventCell: UITableViewCell {
     func setuUpCell(article: Article) {
         if article.articleImageURL != "" && !article.articleImageURL.isEmpty {
             let imageView = UIImageView()
-            imageView.af_setImage(withURL: URL(string: article.articleImageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
+            imageView.kf.setImage(with: URL(string: article.articleImageURL)!, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
                 self.eventImageView.image = imageView.image
-            })
+            }
+//            imageView.af_setImage(withURL: URL(string: article.articleImageURL)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
+//                self.eventImageView.image = imageView.image
+//            })
             eventNewsTitle.text = article.articleTitle
 //            SourceLabel.text = article.source
-            //TODO set the date text
         }
     }
 
