@@ -80,7 +80,7 @@ class WelcomeViewController: BaseViewController {
                                         if let name = facebookUserName as? String {
                                             profile.name = name
                                         }
-                                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                                        if let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
                                             destVC.profile = profile
                                             self.present(dest, animated: true, completion: nil)
                                         }
@@ -112,7 +112,10 @@ class WelcomeViewController: BaseViewController {
 extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-
+        if error != nil {
+            return
+        }
+//        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.googleIdValidationRequest(accessToken: user.authentication.idToken, uuid: user.userID, completion: { (isSuccess, isNewUser) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if isSuccess {
@@ -134,7 +137,7 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                         if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
                             preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
                         }
-                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                        if let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
                             destVC.profile = profile
                             self.present(dest, animated: true, completion: nil)
                         }

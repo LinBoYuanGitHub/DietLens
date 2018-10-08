@@ -20,6 +20,6 @@ struct UserProfile {
     var maritalStatus: String = ""
     var height: Double = 0.0
     var weight: Double = 0.0
-    var activityLevel: Int = 1
+    var activityLevel: Int = 0
     var ethnicity = 0
 }

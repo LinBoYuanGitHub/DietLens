@@ -74,9 +74,18 @@ class DateUtil {
         return resultStr
     }
 
+    public static func formatSinDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
     public static func formatGMTDateToStringWithDash(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MMM-yyyy"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         let resultStr = dateFormatter.string(from: date)
         return resultStr
     }

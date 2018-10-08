@@ -20,9 +20,12 @@ class FoodNameCell: UITableViewCell {
         sampleImage.image = #imageLiteral(resourceName: "loading_img")
         if sampleImagePath != "" {
             let imageView = UIImageView()
-            imageView.af_setImage(withURL: URL(string: sampleImagePath)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
-                    self.sampleImage.image = imageView.image
-            })
+            imageView.kf.setImage(with: URL(string: sampleImagePath)!, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
+                self.sampleImage.image = imageView.image
+            }
+//            imageView.af_setImage(withURL: URL(string: sampleImagePath)!, placeholderImage: #imageLiteral(resourceName: "loading_img"), filter: nil, imageTransition: .crossDissolve(0.5), completion: { _ in
+//                    self.sampleImage.image = imageView.image
+//            })
         } else {
             sampleImage.image = #imageLiteral(resourceName: "food_sample_image")
         }

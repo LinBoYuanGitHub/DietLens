@@ -103,6 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
+        preferences.setValue(nil, forKey: PreferenceKey.googleImageUrl)
         //facebook login
         LoginManager().logOut()
     }

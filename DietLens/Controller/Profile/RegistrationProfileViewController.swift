@@ -17,8 +17,8 @@ class RegistrationProfileViewController: BaseViewController {
     var ethnicityPickerView: UIPickerView!
     var weightPickerView: UIPickerView!
     var heightPickerView: UIPickerView!
-    var genderList = ["Male", "Female", "Others"]
-    var ethnicityList = ["Chinese", "Malays", "Indians", "Others"]
+    var genderList = [StringConstants.GenderText.MALE, StringConstants.GenderText.FEMALE]
+    var ethnicityList = [StringConstants.EnthnicityText.CHINESE, StringConstants.EnthnicityText.MALAYS, StringConstants.EnthnicityText.INDIANS, StringConstants.EnthnicityText.OTHER]
     var weightList = [Int]()
     var heightList = [Int]()
     //profile
@@ -35,7 +35,7 @@ class RegistrationProfileViewController: BaseViewController {
         hideKeyboardWhenTappedAround()
         //set initial timing
         birthDayPickerView.date = DateUtil.normalStringToDate(dateStr: "1990-01-01")
-        profile.birthday = "1990-01-01"
+        profile.birthday = "01-01-1990"
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,8 +99,10 @@ class RegistrationProfileViewController: BaseViewController {
             //set data into component
             let indxPath = IndexPath(row: 2, section: 0)
             if let dateCell = profileTableView.cellForRow(at: indxPath) as? RegistrationProfileCell {
-                let birthdayString = "\(year)-\(month)-\(day)"
-                profile.birthday = birthdayString
+                let dayString = day > 9 ? "\(day)" : "0\(day)"
+                let monthString = month > 9 ? "\(month)" : "0\(month)"
+                let birthdayString = "\(dayString)-\(monthString)-\(year)"
+                profile.birthday = "\(year)-\(month)-\(day)"
                 dateCell.registrationTextField.text = birthdayString
             }
         }
@@ -135,9 +137,11 @@ class RegistrationProfileViewController: BaseViewController {
 
     @objc func onCloseBtnPressed() {
         //redirect to main page, need to have filling profile reminder
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-        self.present(viewController, animated: true, completion: nil)
+        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Default setting is set for you.\n Go to profile to get an \n accurate recommendation.", confirmText: "Okay") {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+            self.present(viewController, animated: true, completion: nil)
+        }
     }
 
 }
@@ -269,7 +273,7 @@ extension RegistrationProfileViewController: UITableViewDelegate, UITableViewDat
             cell.registrationTextField.text = genderList[0]
             cell.registrationTextField.inputView = genderPickerView
         case 2:
-            cell.setUpCell(fieldName: "Date of birth")
+            cell.setUpCell(fieldName: "Date of Birth")
             cell.registrationTextField.text = profile.birthday
             cell.registrationTextField.inputView = birthDayPickerView
         case 3:

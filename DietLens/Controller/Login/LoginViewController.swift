@@ -44,6 +44,9 @@ class LoginViewController: UIViewController {
         } else if (TFPassword.text?.isEmpty)! {
             TFPassword.errorMessage = "Please enter your password"
             return
+        } else if !TextValidtor.isValidEmail(testStr: TFEmail.text!) {
+            TFEmail.errorMessage = "INVALID EMAIL"
+            return
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
         //login request
@@ -148,7 +151,7 @@ class LoginViewController: UIViewController {
                                         if let name = facebookUserName as? String {
                                             profile.name = name
                                         }
-                                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                                        if let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
                                             destVC.profile = profile
                                             self.present(dest, animated: true, completion: nil)
                                         }
@@ -209,16 +212,35 @@ extension LoginViewController: UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString str: String) -> Bool {
-        if let text = textField.text {
-            //Email validator
-            if textField == TFEmail {
-                let validationString = textField.text! + str
-                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
-                    TFEmail.errorMessage = "Invalid email"
-                } else {
-                    TFEmail.errorMessage = ""
-                }
-            }
+//        if let text = textField.text {
+//            //Email validator
+//            if textField == TFEmail {
+//                let validationString = textField.text! + str
+//                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
+//                    TFEmail.errorMessage = "Invalid email"
+//                } else {
+//                    TFEmail.errorMessage = ""
+//                }
+//            }
+//        }
+        return true
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        //        keyboardWillShow()
+        if textField == TFEmail {
+            TFEmail.errorMessage = ""
+        } else {
+            TFPassword.errorMessage = ""
+        }
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == TFEmail && !TextValidtor.isValidEmail(testStr: TFEmail.text!) {
+            TFEmail.errorMessage = "INVALID EMAIL"
+        } else {
+            TFEmail.errorMessage = ""
         }
         return true
     }
@@ -248,15 +270,16 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                         if isSuccess {
                             //record userId & userName
                             let preferences = UserDefaults.standard
-                            preferences.setValue(facebookUserId, forKey: "facebookId")
-                            preferences.setValue(facebookUserName, forKey: "nickname")
+
+                            preferences.setValue(facebookUserId, forKey: PreferenceKey.facebookId)
+                            preferences.setValue(facebookUserName, forKey: PreferenceKey.nickNameKey)
                             if isNewUser {
                                 if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                     var profile = UserProfile()
                                     if let name = facebookUserName as? String {
                                         profile.name = name
                                     }
-                                    if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                                    if let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
                                         destVC.profile = profile
                                         self.present(dest, animated: true, completion: nil)
                                     }
@@ -283,6 +306,10 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
 extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error != nil {
+            return
+        }
+//        AlertMessageHelper.showLoadingDialog(targetController: self)
         APIService.instance.googleIdValidationRequest(accessToken: user.authentication.idToken, uuid: user.userID, completion: { (isSuccess, isNewUser) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if isSuccess {
@@ -304,7 +331,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                         if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
                             preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
                         }
-                        if let destVC = dest.viewControllers.first as? RegistrationSecondStepViewController {
+                        if let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
                             destVC.profile = profile
                             self.present(dest, animated: true, completion: nil)
                         }

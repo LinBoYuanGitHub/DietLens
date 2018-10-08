@@ -1,7 +1,5 @@
 PODS:
   - Alamofire (4.7.3)
-  - AlamofireImage (3.3.1):
-    - Alamofire (~> 4.5)
   - BAFluidView (0.2.3)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
@@ -115,7 +113,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireImage (~> 3.3)
   - BAFluidView
   - Charts
   - Cosmos (~> 15.0)
@@ -150,7 +147,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
-    - AlamofireImage
     - BAFluidView
     - Bolts
     - Charts
@@ -199,7 +195,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   BAFluidView: 5d84ef109831b97740f75b6d785e51f13fa08398
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
@@ -246,6 +241,6 @@ SPEC CHECKSUMS:
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 284b2998c033d6ae0dd26f944cfc9d28efe7036e
+PODFILE CHECKSUM: 6a501f94c433cbdde63cad5d124f186d96084531
 
 COCOAPODS: 1.5.0

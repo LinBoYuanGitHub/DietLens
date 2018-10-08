@@ -1857,6 +1857,8 @@ class APIService {
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
+        preferences.setValue(nil, forKey: PreferenceKey.googleImageUrl)
         //google login
         GIDSignIn.sharedInstance().signOut()
     }
