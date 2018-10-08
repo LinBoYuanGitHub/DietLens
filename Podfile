@@ -19,7 +19,7 @@ target 'DietLens' do
 #  pod 'MXParallaxHeader'
   pod 'SnapKit', '~> 4.0'
   pod 'XLPagerTabStrip', '~> 8.0'
-  pod 'AlamofireImage', '~> 3.3'
+#  pod 'AlamofireImage', '~> 3.3'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'ScrollableGraphView'

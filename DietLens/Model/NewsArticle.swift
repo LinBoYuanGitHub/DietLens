@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Alamofire
-import AlamofireImage
+//import AlamofireImage
 
 struct NewsArticle {
     public var newsImage: UIImage
@@ -37,23 +37,13 @@ struct NewsArticle {
         self.newsTitle = article.articleTitle
         self.newsImage = #imageLiteral(resourceName: "kid")
         //downloadImage(articleImageURL: article.articleImageURL)
-        downloadImage(articleImageURL: "https://httpbin.org/image/jpeg")
+//        let imageView = UIImageView()
+//        imageView.kf.setImage(with: URL(string: article.articleImageURL), placeholder: #imageLiteral(resourceName: "kid"), options: [], progressBlock: nil) { (image, error, cacheType, url) in
+//            if image != nil{
+//                self.newsImage = image!
+//            }
+//        }
+//        downloadImage(articleImageURL: "https://httpbin.org/image/jpeg")
     }
 
-    mutating func downloadImage(articleImageURL: String) {
-        var result = self
-        Alamofire.request(articleImageURL).responseImage { response in
-            debugPrint(response)
-
-            print(response.request)
-            print(response.response)
-            debugPrint(response.result)
-
-            if let image = response.result.value {
-                //print("image downloaded: \(image)")
-                result.newsImage = image
-            }
-        }
-        self = result
-    }
 }

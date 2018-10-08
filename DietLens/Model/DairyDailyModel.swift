@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import Alamofire
-import AlamofireImage
 import RealmSwift
 
 public enum Meal: Int {
