@@ -44,6 +44,9 @@ class LoginViewController: UIViewController {
         } else if (TFPassword.text?.isEmpty)! {
             TFPassword.errorMessage = "Please enter your password"
             return
+        } else if !TextValidtor.isValidEmail(testStr: TFEmail.text!) {
+            TFEmail.errorMessage = "INVALID EMAIL"
+            return
         }
         AlertMessageHelper.showLoadingDialog(targetController: self)
         //login request
@@ -209,16 +212,35 @@ extension LoginViewController: UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString str: String) -> Bool {
-        if let text = textField.text {
-            //Email validator
-            if textField == TFEmail {
-                let validationString = textField.text! + str
-                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
-                    TFEmail.errorMessage = "Invalid email"
-                } else {
-                    TFEmail.errorMessage = ""
-                }
-            }
+//        if let text = textField.text {
+//            //Email validator
+//            if textField == TFEmail {
+//                let validationString = textField.text! + str
+//                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
+//                    TFEmail.errorMessage = "Invalid email"
+//                } else {
+//                    TFEmail.errorMessage = ""
+//                }
+//            }
+//        }
+        return true
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        //        keyboardWillShow()
+        if textField == TFEmail {
+            TFEmail.errorMessage = ""
+        } else {
+            TFPassword.errorMessage = ""
+        }
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == TFEmail && !TextValidtor.isValidEmail(testStr: TFEmail.text!) {
+            TFEmail.errorMessage = "INVALID EMAIL"
+        } else {
+            TFEmail.errorMessage = ""
         }
         return true
     }

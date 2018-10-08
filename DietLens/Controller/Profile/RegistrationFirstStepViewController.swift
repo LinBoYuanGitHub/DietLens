@@ -82,6 +82,8 @@ class RegistrationFirstStepViewController: UIViewController {
     func checkEmail(email: String) {
         //return if email is empty
         if email.isEmpty || !TextValidtor.isValidEmail(testStr: email) {
+            self.redTick.isHidden = true
+            self.TFemail.errorMessage = "INVALID EMAIL"
             return
         }
         APIService.instance.emailValidationRequest(userEmail: email, completion: { (isSuccess) in
@@ -121,7 +123,7 @@ class RegistrationFirstStepViewController: UIViewController {
             //            showErrMsg(errMsg: "Verify password failed")
             return
         } else if !TextValidtor.isValidEmail(testStr: TFemail.text!) {
-            TFemail.errorMessage = "Invalid email"
+            TFemail.errorMessage = "INVALID EMAIL"
             return
         } else {
             //email format validator
@@ -202,7 +204,7 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
 //        keyboardWillShow()
         if textField == TFemail {
             TFemail.errorMessage = ""
-        }else {
+        } else {
             TFpassword.errorMessage = ""
             TFconfirmPassword.errorMessage = ""
         }
