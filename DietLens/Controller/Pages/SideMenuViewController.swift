@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import PBRevealViewController
 import LGSideMenuController
 
 class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITableViewDataSource {

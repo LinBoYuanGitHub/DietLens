@@ -12,7 +12,7 @@ target 'DietLens' do
   pod 'SwiftyJSON'
   pod 'Socket.IO-Client-Swift'
   pod 'SwiftLint'
-  pod 'PBRevealViewController/Swift'
+#  pod 'PBRevealViewController/Swift'
   pod 'RealmSwift'
   pod 'FSCalendar'
   pod 'ParallaxHeader', '~> 2.0.0'

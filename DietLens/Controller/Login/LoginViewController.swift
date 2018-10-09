@@ -13,7 +13,6 @@ import SkyFloatingLabelTextField
 import FBSDKLoginKit
 import Reachability
 import GoogleSignIn
-import LGSideMenuController
 
 struct FBProfileRequest: GraphRequestProtocol {
     typealias Response = GraphResponse
@@ -68,7 +67,10 @@ class LoginViewController: UIViewController {
                         })
                     }
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                            self.navigationController?.pushViewController(controller, animated: true)
+                        }
                     }
                 } else {
                     AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
@@ -157,7 +159,9 @@ class LoginViewController: UIViewController {
                                         }
                                     }
                                 } else {
-                                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                                        self.present(controller, animated: true, completion: nil)
+                                    }
                                 }
                             }
                         })
@@ -183,7 +187,6 @@ class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "ForgetPwdVC")
         self.present(controller, animated: true, completion: nil)
-//        self.performSegue(withIdentifier: "GoToForgetPwEmail", sender: self)
     }
 
     // MARK: - Navigation
@@ -285,7 +288,9 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                     }
                                 }
                             } else {
-                                self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                                    self.present(controller, animated: true, completion: nil)
+                                }
                             }
                         }
                     })
@@ -338,7 +343,7 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                     }
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController {
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
                         self.navigationController?.pushViewController(controller, animated: true)
                     }
                 }

@@ -56,12 +56,18 @@ class SplashScreenViewController: BaseViewController {
             if articleList != nil {
                 APIService.instance.getEventList { (_) in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                        self.performSegue(withIdentifier: "toMainPage", sender: self)
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                            self.present(controller, animated: true, completion: nil)
+                        }
                     })
                 }
             } else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                    self.performSegue(withIdentifier: "toMainPage", sender: self)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                        self.present(controller, animated: true, completion: nil)
+                    }
                 })
             }
         }) { (_) in
@@ -181,15 +187,6 @@ class SplashScreenViewController: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? HomeViewController {
-
-        }
     }
 
 }

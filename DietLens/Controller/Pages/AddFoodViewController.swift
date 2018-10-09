@@ -79,6 +79,6 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         transition.type = kCATransitionReveal
         transition.subtype = kCATransitionFromBottom
         self.view.window?.layer.add(transition, forKey: kCATransition)
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
 }

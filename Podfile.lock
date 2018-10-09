@@ -90,7 +90,6 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.3.0)
   - NVActivityIndicatorView/Presenter (4.3.0)
   - ParallaxHeader (2.0.0)
-  - PBRevealViewController/Swift (1.2.9)
   - Protobuf (3.6.0)
   - PureLayout (3.0.2)
   - QiniuUpload (3.0.0)
@@ -132,7 +131,6 @@ DEPENDENCIES:
   - LGSideMenuController
   - NVActivityIndicatorView
   - ParallaxHeader (~> 2.0.0)
-  - PBRevealViewController/Swift
   - QiniuUpload
   - ReachabilitySwift
   - RealmSwift
@@ -176,7 +174,6 @@ SPEC REPOS:
     - nanopb
     - NVActivityIndicatorView
     - ParallaxHeader
-    - PBRevealViewController
     - Protobuf
     - PureLayout
     - QiniuUpload
@@ -224,7 +221,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
   ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
-  PBRevealViewController: 1ca9d511f1b0be4f6f5ca46046f86251be9cad9a
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   QiniuUpload: b1b3dda4883b9bacf9e2efc9e28978cdd6a26c70
@@ -241,6 +237,6 @@ SPEC CHECKSUMS:
   TinyLog: 073a9abfd44a944886d5d07aa49cbba5ef192335
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 6a501f94c433cbdde63cad5d124f186d96084531
+PODFILE CHECKSUM: ce174d7d6e6f08d88db962402f45c661183e3c96
 
 COCOAPODS: 1.5.0

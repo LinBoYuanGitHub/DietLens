@@ -359,7 +359,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 //jump to notification detail page with notificationID
                 print("Notification ID: \(notificationId)")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController else {
+                guard let viewController = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController else {
                     return
                 }
                 window?.rootViewController = viewController

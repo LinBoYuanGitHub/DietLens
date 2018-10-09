@@ -43,9 +43,9 @@ class RegistrationFinishViewController: UIViewController {
         let preference = UserDefaults.standard
 //        preference.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialo)
         preference.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-        self.present(viewController, animated: true, completion: nil)
+        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+           self.present(controller, animated: true, completion: nil)
+        }
     }
 
 }
