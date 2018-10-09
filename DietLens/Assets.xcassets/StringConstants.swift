@@ -58,4 +58,8 @@ struct StringConstants {
         static let introductionOffsetThreshold = 900
     }
 
+    struct DefaultValue {
+        static let BIRTHDAYDEFAULT = "01-07-1990"
+    }
+
 }
