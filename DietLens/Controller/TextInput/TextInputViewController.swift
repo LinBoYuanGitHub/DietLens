@@ -206,11 +206,11 @@ class TextInputViewController: BaseViewController {
 
     func getCorrectMealType() -> String {
         let hour: Int = Calendar.current.component(.hour, from: Date())
-        if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
+        if hour < ConfigVariable.BreakFastEndTime && hour >= ConfigVariable.BreakFastStartTime {
             return StringConstants.MealString.breakfast
-        } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
+        } else if hour < ConfigVariable.LunchEndTime && hour >= ConfigVariable.LunchStartTime {
             return StringConstants.MealString.lunch
-        } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
+        } else if hour < ConfigVariable.DinnerEndTime && hour >= ConfigVariable.DinnerStartTime {
             return StringConstants.MealString.dinner
         } else {
             return StringConstants.MealString.snack

@@ -10,8 +10,8 @@ import Foundation
 
 struct ConfigVariable {
     static let BreakFastStartTime = 6
-    static let BreakFastEndTime = 10
-    static let LunchStartTime = 10
+    static let BreakFastEndTime = 11
+    static let LunchStartTime = 11
     static let LunchEndTime = 17
     static let DinnerStartTime = 17
     static let DinnerEndTime = 24
