@@ -91,15 +91,15 @@ class FoodDiaryViewController: UIViewController {
     func setCorrectMealType() {
         if isSetMealByTimeRequired {
             let hour: Int = Calendar.current.component(.hour, from: Date())
-            if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
+            if hour < ConfigVariable.BreakFastEndTime && hour >= ConfigVariable.BreakFastStartTime {
                 self.foodDiaryEntity.mealType = StringConstants.MealString.breakfast
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
-            } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
+            } else if hour < ConfigVariable.LunchEndTime && hour >= ConfigVariable.LunchStartTime {
                 self.foodDiaryEntity.mealType = StringConstants.MealString.lunch
                 currentMealIndex = 1
                 mealCollectionView.reloadData()
-            } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
+            } else if hour < ConfigVariable.DinnerEndTime && hour >= ConfigVariable.DinnerStartTime {
                 self.foodDiaryEntity.mealType = StringConstants.MealString.dinner
                 currentMealIndex = 2
                 mealCollectionView.reloadData()
