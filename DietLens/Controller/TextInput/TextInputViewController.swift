@@ -190,7 +190,7 @@ class TextInputViewController: BaseViewController {
         if isSetMealByTimeRequired {
             self.mealType = getCorrectMealType()
         }
-        APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased()) { (textResults) in
+        APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased(), completion: { (textResults) in
             if textResults == nil {
                 self.emptyView.isHidden = false
                 self.textSearchTable.isHidden = true
@@ -201,6 +201,8 @@ class TextInputViewController: BaseViewController {
             self.textSearchTable.isHidden = false
             self.searchResultList = textResults!
             self.textSearchTable.reloadData()
+        }) { (nextPageLink) in
+            self.nextPageLink = nextPageLink!
         }
     }
 
@@ -430,20 +432,39 @@ extension TextInputViewController: UITableViewDelegate {
             //show loading indicator
             textSearchTable.tableFooterView?.isHidden = false
             self.isLoading = true
-            APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
-                self.textSearchTable.tableFooterView?.isHidden = true
-                self.isLoading = false
-                if resultList == nil {
-                    return
+            if currentSelectionPos == 0 { //popularLists
+                APIService.instance.getFoodSearchPopularity(requestUrl: self.nextPageLink, mealtime: mealType.lowercased(), completion: { (resultList) in
+                    self.textSearchTable.tableFooterView?.isHidden = true
+                    self.isLoading = false
+                    if resultList == nil {
+                        return
+                    }
+                    self.searchResultList.append(contentsOf: resultList!)
+                    self.textSearchTable.reloadData()
+                }) { (nextPageLink) in
+                    if nextPageLink == nil {
+                        // last page
+                        self.nextPageLink = ""
+                    } else {
+                        self.nextPageLink = nextPageLink!
+                    }
                 }
-                self.searchResultList.append(contentsOf: resultList!)
-                self.textSearchTable.reloadData()
-            }) { (nextPageLink) in
-                if nextPageLink == nil {
-                    // last page
-                    self.nextPageLink = ""
-                } else {
-                    self.nextPageLink = nextPageLink!
+            } else {
+                APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
+                    self.textSearchTable.tableFooterView?.isHidden = true
+                    self.isLoading = false
+                    if resultList == nil {
+                        return
+                    }
+                    self.searchResultList.append(contentsOf: resultList!)
+                    self.textSearchTable.reloadData()
+                }) { (nextPageLink) in
+                    if nextPageLink == nil {
+                        // last page
+                        self.nextPageLink = ""
+                    } else {
+                        self.nextPageLink = nextPageLink!
+                    }
                 }
             }
         }

@@ -457,14 +457,6 @@ class APIService {
                 let foodSearchList = TextSearchDataManager.instance.assembleTextSerchResultList(jsonObj: jsonObj)
                 //                let jsonArr = jsonObj["data"]
                 let nextLink = jsonObj["next"].stringValue
-                //                var foodSearchList = [TextSearchSuggestionEntity]()
-                //                for index in 0..<jsonArr.count {
-                //                    let dict = jsonArr[index].dictionaryValue
-                //                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-                //                    entity.location = dict["location"]!.stringValue
-                //                    entity.stall = dict["stall"]!.stringValue
-                //                    foodSearchList.append(entity)
-                //                }
                 nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
@@ -475,9 +467,14 @@ class APIService {
         self.getFoodSearchResult(requestUrl: url, keywords: keywords, latitude: latitude, longitude: longitude, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
-    public func getFoodSearchPopularity(mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
+    public func getFoodSearchPopularity(mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
+        let url =  ServerConfig.textSearchPopularURL+"?meal="+mealtime
+        self.getFoodSearchPopularity(requestUrl: url, mealtime: mealtime, completion: completion, nextPageCompletion: nextPageCompletion)
+    }
+
+    public func getFoodSearchPopularity(requestUrl: String, mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.textSearchPopularURL+"?meal="+mealtime)!,
+            URL(string: requestUrl)!,
             method: .get,
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
@@ -499,11 +496,8 @@ class APIService {
                 }
                 let jsonObj = JSON(searchResults)
                 let foodSearchList = TextSearchDataManager.instance.assemblePopularTextSerchResultList(jsonObj: jsonObj)
-                //                for index in 0..<jsonArr.count {
-                //                    let dict = jsonArr[index].dictionaryValue
-                //                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-                //                    foodSearchList.append(entity)
-                //                }
+                let nextLink = jsonObj["next"].stringValue
+                nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
     }
