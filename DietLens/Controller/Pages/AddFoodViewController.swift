@@ -37,7 +37,6 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         self.containerView.isScrollEnabled = false
         self.navigationController?.navigationBar.isHidden = true
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
         if currentIndex == 0 {
             if let cameraVC =  self.viewControllers.first as? CameraViewController {
                 cameraVC.viewWillAppear(false)

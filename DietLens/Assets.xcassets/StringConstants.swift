@@ -17,6 +17,7 @@ struct StringConstants {
         static let updateBtnText = "Update"
         static let addBtnText = "Done"
         static let saveBtnText = "Save"
+        static let stepCounterText = "StepCounter"
     }
     struct MealString {
         static let breakfast = "Breakfast"

@@ -212,10 +212,11 @@ extension HKHealthStore {
 
             guard let statsCollection = results else {
                 // Perform proper error handling here
-                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
+//                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
                 if completionHandler != nil {
                     completionHandler!([], error)
                 }
+                return
             }
             let endDate = Date()
             guard let startDate = calendar.date(byAdding: .day, value: -7, to: Date())

@@ -17,6 +17,8 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     let titles = ["Dietlens", "FoodDiary", "", "Health Log", "More"]
 
     var currentIndex = 0
+    //refresh trigger flag
+    var shouldSwitchToFoodDiary = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +54,29 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        self.navigationItem.hidesBackButton = true
+//        self.navigationItem.hidesBackButton = true
+        //trigger to switch to foodDiary
+        if shouldSwitchToFoodDiary {
+            switchToFoodHistoryPage()
+            shouldSwitchToFoodDiary = false
+        }
+    }
+
+    //func for switch to FoodDiary page
+    func switchToFoodHistoryPage() {
+        currentIndex = 1
+        for view in container.subviews {
+            view.removeFromSuperview()
+        }
+        if let foodHistoryVC = tabViewControlers[currentIndex] as? FoodDiaryHistoryViewController {
+            foodHistoryVC.shouldRefreshDiary = true
+        }
+        homeTabBar.selectedItem = homeTabBar.items?[currentIndex]
+        tabViewControlers[currentIndex].view.frame = container.frame
+        container.addSubview(tabViewControlers[currentIndex].view)
+        tabViewControlers[currentIndex].didMove(toParentViewController: self)
+        tabViewControlers[currentIndex].navigationController?.navigationBar.topItem?.title = titles[currentIndex]
+
     }
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

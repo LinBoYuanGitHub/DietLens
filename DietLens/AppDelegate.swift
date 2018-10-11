@@ -38,7 +38,6 @@ import Firebase
 import RealmSwift
 import Fabric
 import Crashlytics
-import LGSideMenuController
 import HealthKit
 import FBSDKCoreKit
 import Photos
@@ -365,7 +364,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 window?.rootViewController = viewController
                 if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationDetailVC") as?  NotificationDetailViewController {
                     dest.notificationId = notificationId
-                    window?.rootViewController?.sideMenuController?.rootViewController?.present(dest, animated: true, completion: nil)
+                    window?.rootViewController?.present(dest, animated: true, completion: nil)
                 }
                 //to notification detail
 //                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as?  NotificationsViewController {

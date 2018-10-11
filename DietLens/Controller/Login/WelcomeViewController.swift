@@ -9,7 +9,6 @@
 import UIKit
 import FacebookLogin
 import FacebookCore
-import LGSideMenuController
 import GoogleSignIn
 
 class WelcomeViewController: BaseViewController {
@@ -86,7 +85,6 @@ class WelcomeViewController: BaseViewController {
                                         }
                                     }
                                 } else {
-//                                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
                                          self.navigationController?.pushViewController(controller, animated: true)

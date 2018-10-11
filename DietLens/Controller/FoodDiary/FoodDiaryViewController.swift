@@ -144,7 +144,6 @@ class FoodDiaryViewController: UIViewController {
         }
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -173,13 +172,22 @@ class FoodDiaryViewController: UIViewController {
         if isUpdate {
             APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryEntity, completion: { (isSuccess) in
                 if isSuccess {
-                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
-                        for viewController in (self.navigationController?.viewControllers)! {
-                            if let foodHistoryVC = viewController as? FoodDiaryHistoryViewController {
-                                foodHistoryVC.shouldRefreshDiary = true
-                            }
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
+                        if let navigator = self.navigationController {
+                            //pop to home tabPage
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                dest.shouldSwitchToFoodDiary = true
+                                navigator.popToRootViewController(animated: true)
+//                                navigator.popToViewController(dest, animated: true)
+
+                            })
                         }
-                        self.navigationController?.popViewController(animated: true) //pop back to food calendar
+//                        for viewController in (self.navigationController?.viewControllers)! {
+//                            if let foodHistoryVC = viewController as? FoodDiaryHistoryViewController {
+//                                foodHistoryVC.shouldRefreshDiary = true
+//                            }
+//                        }
+//                        self.navigationController?.popViewController(animated: true) //pop back to food calendar
                     }
 
                 } else {
@@ -191,30 +199,39 @@ class FoodDiaryViewController: UIViewController {
             APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
-                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
+                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
+//                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                             if let navigator = self.navigationController {
-                                //pop all the view except HomePage
-                                if navigator.viewControllers.contains(where: {
-                                    return $0 is FoodDiaryHistoryViewController
-                                }) {
-                                    //add foodItem into foodDiaryVC
-                                    for viewController in (self.navigationController?.viewControllers)! {
-                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
-                                            DispatchQueue.main.async {
-                                                navigator.popToViewController(foodDiaryHistoryVC, animated: true)
-                                                foodDiaryHistoryVC.shouldRefreshDiary = true
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    DispatchQueue.main.async {
-                                        navigator.popToRootViewController(animated: false)
-                                        navigator.pushViewController(dest, animated: true)
-                                        dest.shouldRefreshDiary = true
-                                    }
-                                }
+                                //pop to home tabPage
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                    dest.shouldSwitchToFoodDiary = true
+                                    navigator.popToRootViewController(animated: true)
+//                                    navigator.popToViewController(dest, animated: true)
+
+                                })
                             }
+//                            if let navigator = self.navigationController {
+//                                //pop all the view except HomePage
+//                                if navigator.viewControllers.contains(where: {
+//                                    return $0 is FoodDiaryHistoryViewController
+//                                }) {
+//                                    //add foodItem into foodDiaryVC
+//                                    for viewController in (self.navigationController?.viewControllers)! {
+//                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
+//                                            DispatchQueue.main.async {
+//                                                navigator.popToViewController(foodDiaryHistoryVC, animated: true)
+//                                                foodDiaryHistoryVC.shouldRefreshDiary = true
+//                                            }
+//                                        }
+//                                    }
+//                                } else {
+//                                    DispatchQueue.main.async {
+//                                        navigator.popToRootViewController(animated: false)
+//                                        navigator.pushViewController(dest, animated: true)
+//                                        dest.shouldRefreshDiary = true
+//                                    }
+//                                }
+//                            }
                         }
                     }
                 }

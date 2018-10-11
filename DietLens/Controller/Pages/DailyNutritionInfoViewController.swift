@@ -29,7 +29,6 @@ class DailyNutritionInfoViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
         self.navigationController?.navigationBar.isHidden = true
     }
 

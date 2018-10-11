@@ -67,6 +67,14 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
             refreshFoodDiaryData()
         }
         self.foodDiaryMealTable.reloadData()
+        addRightNavigationButton()
+    }
+
+    func addRightNavigationButton() {
+        let rightNavButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(switchToEditStatus))
+        rightNavButton.tintColor = UIColor(red: 67/255, green: 67/255, blue: 67/255, alpha: 1)
+        self.navigationItem.rightBarButtonItem = rightNavButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
 
     func refreshFoodDiaryData() {
@@ -120,7 +128,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         }
     }
 
-    @IBAction func switchToEditStatus(_ sender: Any) {
+    @objc func switchToEditStatus() {
         currentEditStatus = FoodDiaryStatus.edit
         foodDiaryMealTable.reloadData()
         self.navigationController?.navigationBar.topItem?.title = "Edit"

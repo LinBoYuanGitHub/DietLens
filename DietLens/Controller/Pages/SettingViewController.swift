@@ -36,6 +36,9 @@ class SettingViewController: UIViewController {
         }
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //set rightBarButtonItem disapear
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
     @IBAction func showAboutPage(_ sender: Any) {

@@ -57,7 +57,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
         //for sideMenu toggle leftView
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
         calorieFluidView = BAFluidView(frame: CGRect(x: 0, y: 0, width: calorieContainer.frame.width, height: calorieContainer.frame.height), startElevation: 0)
         calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.9)
@@ -72,6 +71,20 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
         //check permission and set value for album access
         checkPhotoLibraryPermission()
+    }
+
+    func addRightNavigationButton() {
+        let rightNavButton = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Notification"), style: .plain, target: self, action: #selector(toNotificationPage))
+        rightNavButton.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        self.navigationController?.navigationItem.rightBarButtonItem = rightNavButton
+        self.navigationController?.navigationItem.rightBarButtonItem?.isEnabled = true
+
+    }
+
+    @objc func toNotificationPage() {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationVC") as? NotificationsViewController {
+            self.present(dest, animated: true, completion: nil)
+        }
     }
 
     func checkPhotoLibraryPermission() {
@@ -173,7 +186,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         default:
             break
         }
-        self.sideMenuController?.hideLeftView(animated: true, completionHandler: nil)
     }
 
     func jumpToDestPage<T: UIViewController>(identifyId: String, mType: T.Type) {
@@ -251,15 +263,13 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
         }
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(249.0/255.0), green: CGFloat(60.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
-        //backbtn
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
         //disable homepage&LGMenu swipe back gesture
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        self.sideMenuController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         if shouldRefreshMainPageNutrition {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
         }
+        addRightNavigationButton()
     }
 
     // calculate Nutrition Data & put into homePage

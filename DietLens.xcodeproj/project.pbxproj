@@ -27,7 +27,6 @@
 		3F2D163320EE8A6000348160 /* RegistrationFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */; };
 		3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163420F2899900348160 /* HealthCenterDataManager.swift */; };
 		3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */; };
-		3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436636206CC44B0089C63A /* ReportStatisticController.swift */; };
 		3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436638206F7ACF0089C63A /* NewsEventCell.swift */; };
 		3F43663B207612B00089C63A /* CollectionTextFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43663A207612AF0089C63A /* CollectionTextFilterCell.swift */; };
 		3F43663D207721EB0089C63A /* DailyNutritionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */; };
@@ -83,7 +82,6 @@
 		3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */; };
 		3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */; };
 		3F6CF82A1FD8FABC00D7556E /* PlainTextTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */; };
-		3F6DBCEF20AC17CB006BD8F6 /* SideMenuContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6DBCEE20AC17CB006BD8F6 /* SideMenuContainerViewController.swift */; };
 		3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F73A7522109C1360031B01E /* IntroductionViewController.swift */; };
 		3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DEE20EB6195003A31DE /* RulerView.swift */; };
 		3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */; };
@@ -257,7 +255,6 @@
 		3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFinishViewController.swift; sourceTree = "<group>"; };
 		3F2D163420F2899900348160 /* HealthCenterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterDataManager.swift; sourceTree = "<group>"; };
 		3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCountingEntity.swift; sourceTree = "<group>"; };
-		3F436636206CC44B0089C63A /* ReportStatisticController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatisticController.swift; sourceTree = "<group>"; };
 		3F436638206F7ACF0089C63A /* NewsEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEventCell.swift; sourceTree = "<group>"; };
 		3F43663A207612AF0089C63A /* CollectionTextFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTextFilterCell.swift; sourceTree = "<group>"; };
 		3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNutritionInfoViewController.swift; sourceTree = "<group>"; };
@@ -315,7 +312,6 @@
 		3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientSearchController.swift; sourceTree = "<group>"; };
 		3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientDelegate.swift; sourceTree = "<group>"; };
 		3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextTableAdapter.swift; sourceTree = "<group>"; };
-		3F6DBCEE20AC17CB006BD8F6 /* SideMenuContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuContainerViewController.swift; sourceTree = "<group>"; };
 		3F73A7522109C1360031B01E /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		3F764DEE20EB6195003A31DE /* RulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerCollectionCell.swift; sourceTree = "<group>"; };
@@ -828,8 +824,6 @@
 				3FD08620200DEE4B0052D54B /* DeviceRecordDetailViewController.swift */,
 				3FD08628200F38500052D54B /* FeedBackViewController.swift */,
 				3F7DAC9E20104181009E4DB6 /* AddIngredientViewController.swift */,
-				3F436636206CC44B0089C63A /* ReportStatisticController.swift */,
-				3F6DBCEE20AC17CB006BD8F6 /* SideMenuContainerViewController.swift */,
 				3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */,
 			);
 			path = Pages;
@@ -1266,15 +1260,12 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/HFSwipeView/HFSwipeView.framework",
 				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
 				"${BUILT_PRODUCTS_DIR}/JPSVolumeButtonHandler/JPSVolumeButtonHandler.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/LGSideMenuController/LGSideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/QiniuUpload/QiniuUpload.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -1285,7 +1276,6 @@
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/TinyLog/TinyLog.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -1305,15 +1295,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HFSwipeView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPSVolumeButtonHandler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LGSideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QiniuUpload.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -1324,7 +1311,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyLog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -1475,7 +1461,6 @@
 				3F4812D8213D3BA0005F3260 /* ConfirmationDialog.swift in Sources */,
 				BFC0D9A31FAD71A7003F8241 /* BarcodeScannerProcessor.swift in Sources */,
 				3F4366482079FDEC0089C63A /* SearchResultCell.swift in Sources */,
-				3F6DBCEF20AC17CB006BD8F6 /* SideMenuContainerViewController.swift in Sources */,
 				3F5691E6214CF53F00D9929A /* ConfirmDialogViewController.swift in Sources */,
 				58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */,
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
@@ -1617,7 +1602,6 @@
 				3F438D4D20A0956F00F4DAD9 /* homePageCPFCell.swift in Sources */,
 				3FB6E68720E383E600462591 /* ProfileEntity.swift in Sources */,
 				3F5691EB214E8B6D00D9929A /* CacheLRU.swift in Sources */,
-				3F436637206CC44C0089C63A /* ReportStatisticController.swift in Sources */,
 				3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */,
 				3F5608F120F30C010007B3AF /* EmojiInputView.swift in Sources */,
 				5841A5071FCE5939006201C5 /* Notification.swift in Sources */,

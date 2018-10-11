@@ -419,30 +419,17 @@ class FoodInfoViewController: UIViewController {
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
                         //request for saving FoodDiary
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
-                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
-                            if let navigator = self.navigationController {
-                                //pop all the view except HomePage
-                                if navigator.viewControllers.contains(where: {
-                                    return $0 is FoodCalendarViewController
-                                }) {
-                                    //add foodItem into foodDiaryVC
-                                    for viewController in (self.navigationController?.viewControllers)! {
-                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            navigator.popToViewController(foodDiaryHistoryVC, animated: false)
-                                                foodDiaryHistoryVC.shouldRefreshDiary = true
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                        navigator.popToRootViewController(animated: false)
-                                        navigator.pushViewController(dest, animated: true)
-                                        dest.shouldRefreshDiary = true
-                                    })
+                        //                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
+                        if let navigator = self.navigationController {
+                            //pop to home tabPage
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                if let dest =  navigator.viewControllers.first as? HomeTabViewController {
+                                    dest.shouldSwitchToFoodDiary = true
                                 }
-                            }
+                                navigator.popToRootViewController(animated: true)
+                                //                                    navigator.popToViewController(dest, animated: true)
+
+                            })
                         }
                     }
                 }
