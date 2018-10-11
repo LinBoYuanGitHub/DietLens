@@ -44,6 +44,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         tabViewControlers[currentIndex].didMove(toParentViewController: self)
         tabViewControlers[currentIndex].navigationController?.navigationBar.topItem?.title = titles[currentIndex]
         homeTabBar.selectedItem = homeTabBar.items?.first
+        setNotificationRightNavigationButton()
     }
 
     func initChildVC(targetController: UIViewController) {
@@ -62,6 +63,32 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         }
     }
 
+    func setNotificationRightNavigationButton() {
+        let rightNavButton = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Notification"), style: .plain, target: self, action: #selector(toNotificationPage))
+        rightNavButton.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        self.navigationItem.rightBarButtonItem = rightNavButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+
+    func setFoodDiaryRightNavigationButton() {
+        let rightNavButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(switchToEditStatus))
+        rightNavButton.tintColor = UIColor(red: 67/255, green: 67/255, blue: 67/255, alpha: 1)
+        self.navigationItem.rightBarButtonItem = rightNavButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+
+    @objc func switchToEditStatus() {
+        if let targetVC = tabViewControlers[1] as? FoodDiaryHistoryViewController {
+            targetVC.switchToEditStatus()
+        }
+    }
+
+    @objc func toNotificationPage() {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as? NotificationsViewController {
+            self.present(dest, animated: true, completion: nil)
+        }
+    }
+
     //func for switch to FoodDiary page
     func switchToFoodHistoryPage() {
         currentIndex = 1
@@ -76,17 +103,24 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         container.addSubview(tabViewControlers[currentIndex].view)
         tabViewControlers[currentIndex].didMove(toParentViewController: self)
         tabViewControlers[currentIndex].navigationController?.navigationBar.topItem?.title = titles[currentIndex]
-
     }
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag == 2 {
-            //set previousItem selected item
+        //change the top right navigation bar
+        if item.tag == 0 {
+            setNotificationRightNavigationButton()
+        } else if item.tag == 1 {
+            setFoodDiaryRightNavigationButton()
+        } else if item.tag == 2 {
+             //set previousItem selected item
             homeTabBar.selectedItem = homeTabBar.items?[currentIndex]
             //camera View btn
             presentCamera()
             return
+        } else {
+             self.navigationItem.rightBarButtonItem = nil
         }
+        //other page switch
         currentIndex = item.tag
         for view in container.subviews {
             view.removeFromSuperview()

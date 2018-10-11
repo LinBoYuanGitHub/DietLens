@@ -131,9 +131,9 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @objc func switchToEditStatus() {
         currentEditStatus = FoodDiaryStatus.edit
         foodDiaryMealTable.reloadData()
-        self.navigationController?.navigationBar.topItem?.title = "Edit"
-        editBtn.isEnabled = false
-        editBtn.title = nil
+        self.parent?.navigationController?.navigationBar.topItem?.title = "Edit"
+        self.parent?.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.parent?.navigationItem.rightBarButtonItem?.title = nil
         distanceToBottom.constant = 54
         dialogContainer.isHidden = false
     }
@@ -141,9 +141,9 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @IBAction func switchToNormalStatus(_ sender: Any) {
         currentEditStatus = FoodDiaryStatus.normal
         foodDiaryMealTable.reloadData()
-        self.navigationController?.navigationBar.topItem?.title = "Food Diary"
-        editBtn.isEnabled = true
-        editBtn.title = "Edit"
+        self.parent?.navigationController?.navigationBar.topItem?.title = "Food Diary"
+        self.parent?.navigationItem.rightBarButtonItem?.isEnabled = true
+        self.parent?.navigationItem.rightBarButtonItem?.title = "Edit"
         distanceToBottom.constant = 0
         dialogContainer.isHidden = true
         //remove all the trash items

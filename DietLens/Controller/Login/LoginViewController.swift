@@ -68,8 +68,10 @@ class LoginViewController: UIViewController {
                     }
                     DispatchQueue.main.async {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-                            self.navigationController?.pushViewController(controller, animated: true)
+                        if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC")
+                            as? UINavigationController {
+//                            self.navigationController?.pushViewController(controller, animated: true)
+                            self.present(controller, animated: true, completion: nil)
                         }
                     }
                 } else {
@@ -344,7 +346,8 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-                        self.navigationController?.pushViewController(controller, animated: true)
+//                        self.navigationController?.pushViewController(controller, animated: true)
+                        self.present(controller, animated: true, completion: nil)
                     }
                 }
             }
