@@ -87,7 +87,8 @@ class WelcomeViewController: BaseViewController {
                                 } else {
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-                                         self.navigationController?.pushViewController(controller, animated: true)
+//                                         self.navigationController?.pushViewController(controller, animated: true)
+                                        self.present(controller, animated: true, completion: nil)
                                     }
                                 }
                             }
@@ -143,7 +144,8 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-                        self.navigationController?.pushViewController(controller, animated: true)
+//                        self.navigationController?.pushViewController(controller, animated: true)
+                        self.present(controller, animated: true, completion: nil)
                     }
                 }
             }

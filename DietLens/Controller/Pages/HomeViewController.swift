@@ -71,20 +71,15 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
         //check permission and set value for album access
         checkPhotoLibraryPermission()
-    }
 
-    func addRightNavigationButton() {
-        let rightNavButton = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Notification"), style: .plain, target: self, action: #selector(toNotificationPage))
-        rightNavButton.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
-        self.navigationController?.navigationItem.rightBarButtonItem = rightNavButton
-        self.navigationController?.navigationItem.rightBarButtonItem?.isEnabled = true
-
-    }
-
-    @objc func toNotificationPage() {
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationVC") as? NotificationsViewController {
-            self.present(dest, animated: true, completion: nil)
-        }
+        //testing
+//        APIService.instance.sendSMSRequest(phoneNumber: "+6592987015") { (isSuccess) in
+//            if isSuccess {
+//                APIService.instance.verifySMSRequest(phoneNumber: "+6592987015", smsToken: "", completion: { (isSuccess) in
+//                    print(isSuccess)
+//                })
+//            }
+//        }
     }
 
     func checkPhotoLibraryPermission() {
@@ -269,7 +264,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
         }
-        addRightNavigationButton()
     }
 
     // calculate Nutrition Data & put into homePage

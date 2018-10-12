@@ -1760,6 +1760,40 @@ class APIService {
         }
     }
 
+    func sendSMSRequest(phoneNumber: String, completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.phoneSendSMSURL)!,
+            method: .post,
+            parameters: ["phone": phoneNumber],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                completion(response.result.isSuccess)
+        }
+    }
+
+    func verifySMSRequest(phoneNumber: String, smsToken: String, completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.verifySMSURL)!,
+            method: .post,
+            parameters: ["phone": phoneNumber, "sms_token": smsToken],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                completion(response.result.isSuccess)
+        }
+    }
+
     //cancel task
     func cancelRequest(requestURL: String) {
         Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
@@ -1783,6 +1817,7 @@ class APIService {
             downloadData.forEach { $0.cancel() }
         }
     }
+
     //basic authentication header
     func getBasicAuthenticationHeader() -> [String: String] {
         let preferences = UserDefaults.standard
