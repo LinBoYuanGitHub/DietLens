@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,7 +37,7 @@
                     </connections>
                 </slider>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="healthCenter_badMood" translatesAutoresizingMaskIntoConstraints="NO" id="OdV-xd-OaV">
-                    <rect key="frame" x="50" y="99" width="50" height="50"/>
+                    <rect key="frame" x="287.5" y="99" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="gty-9K-kJL"/>
                         <constraint firstAttribute="height" constant="50" id="tkI-r2-jdb"/>
@@ -54,12 +54,12 @@
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LxA-l3-M99" secondAttribute="trailing" id="1f7-4G-lyr"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KzY-4f-IL1" secondAttribute="trailing" constant="15" id="3OW-HO-m2P"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="OdV-xd-OaV" secondAttribute="trailing" constant="37.5" id="44y-vP-nvU"/>
                 <constraint firstItem="LxA-l3-M99" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="5f9-Zl-iGi"/>
                 <constraint firstItem="aj1-U7-fKk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="Ds6-ZN-J5t"/>
                 <constraint firstItem="LxA-l3-M99" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="GCc-OK-DUf"/>
                 <constraint firstItem="aj1-U7-fKk" firstAttribute="top" secondItem="OdV-xd-OaV" secondAttribute="bottom" constant="18" id="Kj6-k2-g18"/>
                 <constraint firstItem="OdV-xd-OaV" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="79" id="Le7-zx-2VA"/>
-                <constraint firstItem="OdV-xd-OaV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="50" id="Vxs-Ey-jf6"/>
                 <constraint firstItem="KzY-4f-IL1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="a29-pn-5Sv"/>
                 <constraint firstItem="aj1-U7-fKk" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-50" id="cuF-7e-RRx"/>
             </constraints>

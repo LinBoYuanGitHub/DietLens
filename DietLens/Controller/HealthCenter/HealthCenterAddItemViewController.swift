@@ -178,10 +178,14 @@ extension HealthCenterAddItemViewController: UITableViewDelegate, UITableViewDat
                 let emojiInputView = EmojiInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220))
                 cell.healthCenterTextField.inputAccessoryView = setUpPickerToolBar(text: "Mood")
                 emojiInputView.delegate = self
+                //set initial value
+                emojiInputView.emojiSlider.value = 4
+                emojiInputView.emojiLabel.text = HealthCenterConstants.moodList[4]
+                emojiInputView.onEmojiValueChange(emojiInputView.emojiSlider)
                 cell.healthCenterTextField.inputView = emojiInputView
                 //set first one as default mood
                 cell.healthCenterTextField.delegate = self
-                cell.healthCenterTextField.text = HealthCenterConstants.moodList[0]
+                cell.healthCenterTextField.text = HealthCenterConstants.moodList[4]
             } else if recordType == "1" { //weight ruler
                 let glucoseInputView = RulerInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 220), divisor: 10, max: HealthDeviceSetting.maxBloodGlucose, min: HealthDeviceSetting.minBloodGlucose)
                 self.unit = "mmol/L"

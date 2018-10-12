@@ -33,7 +33,7 @@ class EmojiInputView: UIView {
         let xibFileName = "EmojiLayout" // xib extension not included
         if let view =  Bundle.main.loadNibNamed(xibFileName, owner: self, options: nil)?[0] as? UIView {
             self.addSubview(view)
-            emojiImageView.center.x = self.frame.width/10
+            emojiImageView.center.x = self.frame.width*9/10
             view.frame = self.bounds
         }
     }
