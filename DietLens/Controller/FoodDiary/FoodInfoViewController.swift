@@ -46,7 +46,7 @@ class FoodInfoViewController: UIViewController {
     var foodDiaryEntity = FoodDiaryEntity()
     var dietItem = DietItem()
     var isSetMealByTimeRequired: Bool = false
-    var recordType = RecordType.RecordByImage
+    var recordType = RecognitionInteger.recognition
 //    var isAddIntoFoodList = false
 //    var isAccumulatedDiary: Bool = false
     var imageKey: String?

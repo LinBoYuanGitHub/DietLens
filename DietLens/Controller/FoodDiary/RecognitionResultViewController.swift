@@ -26,6 +26,7 @@ class RecognitionResultViewController: BaseViewController {
     var recordDate: Date = Date()
     var isSetMealByTimeRequired = false
     var mealType: String?
+    var recordType: String?
 
     //dataSource
     var foodCategoryList = [DisplayFoodCategory]()
@@ -116,7 +117,7 @@ class RecognitionResultViewController: BaseViewController {
                     self.redirectToFoodDiaryPage()
                     return
                 }
-                entity.recordType = RecognitionInteger.recognition
+                entity.recordType = self.recordType ?? RecognitionInteger.recognition
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                     dest.userFoodImage = self.cameraImage
                     dest.dietItem = entity

@@ -108,14 +108,6 @@ struct QiniuConfig {
 //    static let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com" //private domain
 }
 
-struct RecordType {
-    static let RecordByImage = "recognition"
-    static let RecordByBarcode = "barcode"
-    static let RecordByText = "text"
-    static let RecordByAdditionText = "additionaltext"
-    static let RecordByCustomized = "customized"
-}
-
 struct RecognitionInteger {
     static let recognition = "0"
     static let text = "1"

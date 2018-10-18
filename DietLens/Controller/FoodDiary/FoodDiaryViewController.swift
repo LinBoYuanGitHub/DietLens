@@ -174,12 +174,11 @@ class FoodDiaryViewController: UIViewController {
                 if isSuccess {
                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
                         if let navigator = self.navigationController {
+                            dest.shouldSwitchToFoodDiary = true
                             //pop to home tabPage
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                dest.shouldSwitchToFoodDiary = true
                                 navigator.popToRootViewController(animated: true)
 //                                navigator.popToViewController(dest, animated: true)
-
                             })
                         }
 //                        for viewController in (self.navigationController?.viewControllers)! {
