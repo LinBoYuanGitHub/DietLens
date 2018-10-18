@@ -5,6 +5,7 @@ import XLPagerTabStrip
 import RealmSwift
 import JPSVolumeButtonHandler
 import Reachability
+import AssetsLibrary
 
 class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
@@ -35,7 +36,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var galleryBtn: ExpandedUIButton!
 
-    private var recordType: String = RecordType.RecordByImage
+    private var recordType: String = RecognitionInteger.recognition
 
     //    @IBOutlet weak var focusViewImg: UIImageView!
     var imageId: Int = 0
@@ -217,7 +218,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         //        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
         //            self.loadingScreen.alpha = 1
         //        }, completion: nil)
-        //resize&compress image process
+        //          resize&compress image process
         //        let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -235,9 +236,8 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         let startTime = Date()
         APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
             if imageKey != nil {
-                print(Date().timeIntervalSince(startTime))
-                print(imgData.count)
-                self.postImageKeyToServer(imageKey: imageKey!, isUsingSample: false)
+                let uploadTime = Date().timeIntervalSince(startTime)
+                self.postImageKeyToServer(imageKey: imageKey!, isUsingSample: false, uploadTime: uploadTime)
             } else {//error happen during upload image to Qiniu
                 self.hideReview()
                 self.capturePhotoButton.isEnabled = true
@@ -250,9 +250,9 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         }
     }
 
-    func postImageKeyToServer(imageKey: String, isUsingSample: Bool) {
+    func postImageKeyToServer(imageKey: String, isUsingSample: Bool, uploadTime: TimeInterval) {
         self.uploadPercentageLabel.text = "Retrieving recognition results..."
-        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: latitude, longitude: longitude, completion: { (resultList) in
+        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: latitude, longitude: longitude, uploadSpeed: uploadTime, completion: { (resultList) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true
             //            self.loadingScreen.alpha = 0
@@ -261,7 +261,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
             } else {
                 self.displayList.removeAll()
                 self.displayList = resultList!
-                self.recordType = RecordType.RecordByImage
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "recognitionVC") as? RecognitionResultViewController {
                     if isUsingSample {
                         dest.cameraImage = self.imageArray[self.currentImageIndex]
@@ -274,6 +273,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
                     dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
                     dest.recordDate = self.addFoodDate
                     dest.mealType = self.mealType
+                    dest.recordType = self.recordType
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }
@@ -415,6 +415,8 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDidFinishCapturePhoto(image: UIImage) {
+        //set record type to capture
+        self.recordType = RecognitionInteger.recognition
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
         let saveToAblumFlag = UserDefaults.standard.bool(forKey: PreferenceKey.saveToAlbumFlag)
         if saveToAblumFlag && !(Reachability()!.connection == .none) { //with network & save to album flag
@@ -503,6 +505,15 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             imagePicker.dismiss(animated: true, completion: nil)
             return
         }
+        if let url = info[UIImagePickerControllerReferenceURL] as? URL {
+            //get image meta data from gallery
+            let fetchResult = PHAsset.fetchAssets(withALAssetURLs: [url], options: nil)
+            let fetchAsset = fetchResult.firstObject
+            print("albumLocation lat:\(fetchAsset?.location?.coordinate.latitude)")
+            print("albumLocation lng:\(fetchAsset?.location?.coordinate.longitude)")
+        }
+
+        self.recordType = RecognitionInteger.gallery
         imagePicker.dismiss(animated: true, completion: nil)
         DispatchQueue.main.async {
             let croppedImage = self.cropCameraImage(image, previewLayer: self.previewView.videoPreviewLayer)!
@@ -513,6 +524,10 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
         //            // upload result and callback
         //        }
+
+    }
+
+    func getGalleryImageInfo() {
 
     }
 }
@@ -548,10 +563,10 @@ extension CameraViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest  = segue.destination as? RecognitionResultViewController {
-            if recordType == RecordType.RecordByImage {
+            if recordType == RecognitionInteger.recognition {
                 dest.cameraImage = chosenImageView.image!
                 dest.foodCategoryList = displayList
-            } else if recordType == RecordType.RecordByBarcode {
+            } else if recordType == RecognitionInteger.barcode {
                 dest.cameraImage = #imageLiteral(resourceName: "barcode_sample_icon")
             }
         }
@@ -582,7 +597,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         //        }, completion: nil)
         //post recognition imageKey
         currentImageIndex = indexPath.row
-        self.postImageKeyToServer(imageKey: imageKeyArray[currentImageIndex], isUsingSample: true)
+        self.postImageKeyToServer(imageKey: imageKeyArray[currentImageIndex], isUsingSample: true, uploadTime: 0)
         showReview(image: imageArray[indexPath.row])
     }
 

@@ -92,7 +92,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case 0:
             //to create food page
             //FIXME WIP
-            break
+            AlertMessageHelper.showMessage(targetController: self, title: "work in progress", message: "")
         case 1:
             //to feedback page
             let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
