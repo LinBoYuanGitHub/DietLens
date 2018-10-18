@@ -11,9 +11,7 @@ import UIKit
 import FacebookLogin
 import GoogleSignIn
 
-class SettingViewController: UIViewController {
-    @IBOutlet weak var navigationBarItem: UINavigationItem!
-    @IBAction func unwindToSettingPage(segue: UIStoryboardSegue) {}
+class SettingViewController: BaseViewController {
     @IBOutlet weak var albumSwitch: UISwitch!
 
     override func viewDidLoad() {
@@ -29,16 +27,14 @@ class SettingViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = false
-        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
-        if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any] {
-            self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
-        }
-        self.navigationController?.navigationBar.backgroundColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        super.viewWillAppear(animated)
         //set rightBarButtonItem disapear
         self.navigationItem.rightBarButtonItem = nil
         self.navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+
+    @IBAction func onBackPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func showAboutPage(_ sender: Any) {

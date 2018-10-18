@@ -47,6 +47,9 @@ class HealthCenterMainViewController: UIViewController {
                 var stepCounterItem = HealthCenterItem()
                 stepCounterItem.itemName = "Step Counter"
                 stepCounterItem.category = StringConstants.UIString.stepCounterText
+                stepCounterItem.type = "3"
+                self.healthCenterItemList.insert(stepCounterItem, at: 0)
+                //reload table view
                 self.healthCenterTable.reloadData()
             }
         }

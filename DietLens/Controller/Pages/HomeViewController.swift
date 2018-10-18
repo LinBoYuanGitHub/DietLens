@@ -43,9 +43,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     var shouldRefreshMainPageNutrition = true
 
-    //add coachMarks
-    let coachMarksController = CoachMarksController()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         //delegate for new table view
@@ -66,9 +63,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         calorieFluidView.minAmplitude = 4
         calorieFluidView.fillDuration = 1
         calorieContainer.addSubview(calorieFluidView)
-        //set instruction label dataSource
-        self.coachMarksController.dataSource = self
-        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(jumpToNutritionPage))
+        calorieFluidView.addGestureRecognizer(tapRecognizer)
         //check permission and set value for album access
         checkPhotoLibraryPermission()
 
@@ -80,6 +76,15 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 //                })
 //            }
 //        }
+    }
+
+    @objc func jumpToNutritionPage() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
+            controller.selectedDate = Date()
+            self.navigationController?.pushViewController(controller, animated: true)
+            //            present(controller, animated: true, completion: nil)
+        }
     }
 
     func checkPhotoLibraryPermission() {
@@ -221,18 +226,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         newsFeedTable.reloadData()
-        let preferences = UserDefaults.standard
-//        let shouldPopUpFlag = !preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-//        if shouldPopUpFlag {
-//            popUpDialog()
-//            preferences.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-//        }
-        //show markView for tap
-        let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
-        if shouldShowCoachMark {
-            self.coachMarksController.start(on: self)
-            preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
-        }
     }
 
     //popUp dialog

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "d759d478e6b7b62f9c758afe1c7f3c8b.png",
+      "filename" : "icons8-salad-bowl-30.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "d759d478e6b7b62f9c758afe1c7f3c8b@2x.png",
+      "filename" : "icons8-salad-bowl-30@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "d759d478e6b7b62f9c758afe1c7f3c8b@3x.png",
+      "filename" : "icons8-salad-bowl-30@3x.png",
       "scale" : "3x"
     }
   ],

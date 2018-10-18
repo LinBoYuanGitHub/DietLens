@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Instructions
 
 class HomeTabViewController: UIViewController, UITabBarDelegate {
 
@@ -20,6 +21,9 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     //refresh trigger flag
     var shouldSwitchToFoodDiary = false
 
+    //add coachMarks
+    let coachMarksController = CoachMarksController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         homeTabBar.delegate = self
@@ -31,12 +35,13 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         //intial child viewController
         let homeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DietLens")
         let foodDiaryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC")
-        let setpCounterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC")
+//        let setpCounterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC")
         let healthCenterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "healthCenterVC")
-        let moreVC =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsPage")
+        let moreVC =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MoreVC")
         initChildVC(targetController: homeVC)
         initChildVC(targetController: foodDiaryVC)
-        initChildVC(targetController: setpCounterVC)
+//        initChildVC(targetController: setpCounterVC)
+        tabViewControlers.append(UIViewController())
         initChildVC(targetController: healthCenterVC)
         initChildVC(targetController: moreVC)
         //add homeview as first SubView
@@ -45,6 +50,20 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         tabViewControlers[currentIndex].navigationController?.navigationBar.topItem?.title = titles[currentIndex]
         homeTabBar.selectedItem = homeTabBar.items?.first
         setNotificationRightNavigationButton()
+        //init coachMark
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //show markView for tap
+        let preferences = UserDefaults.standard
+        let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+        if shouldShowCoachMark {
+            self.coachMarksController.start(on: self)
+            preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
+        }
     }
 
     func initChildVC(targetController: UIViewController) {
@@ -57,7 +76,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         self.navigationController?.navigationBar.isHidden = true
 //        self.navigationItem.hidesBackButton = true
         //trigger to switch to foodDiary
-        if shouldSwitchToFoodDiary {
+        if shouldSwitchToFoodDiary || currentIndex == 1 {
             switchToFoodHistoryPage()
             shouldSwitchToFoodDiary = false
         }
@@ -77,6 +96,13 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         self.navigationItem.rightBarButtonItem?.isEnabled = true
     }
 
+    func setSettingRightNavigationButton() {
+          let rightNavButton = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "SettingIcon_black"), style: .plain, target: self, action: #selector(toSettingPage))
+        rightNavButton.tintColor = UIColor(red: 67/255, green: 67/255, blue: 67/255, alpha: 1)
+        self.navigationItem.rightBarButtonItem = rightNavButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+
     @objc func switchToEditStatus() {
         if let targetVC = tabViewControlers[1] as? FoodDiaryHistoryViewController {
             targetVC.switchToEditStatus()
@@ -86,6 +112,12 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     @objc func toNotificationPage() {
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as? NotificationsViewController {
             self.present(dest, animated: true, completion: nil)
+        }
+    }
+
+    @objc func toSettingPage() {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsPage") as? SettingViewController {
+            self.navigationController?.pushViewController(dest, animated: true)
         }
     }
 
@@ -117,10 +149,12 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
             //camera View btn
             presentCamera()
             return
+        } else if item.tag == 4 {
+            setSettingRightNavigationButton()
         } else {
              self.navigationItem.rightBarButtonItem = nil
         }
-        //other page switch
+        //page switch
         currentIndex = item.tag
         for view in container.subviews {
             view.removeFromSuperview()
@@ -146,4 +180,26 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
             }
         }
     }
+}
+
+extension HomeTabViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        coachViews.bodyView.nextLabel.text = "Got it"
+        coachViews.bodyView.hintLabel.text = " Tap to start "
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        let interactionViews = homeTabBar.subviews.filter({$0.isUserInteractionEnabled})
+        let targetViews = interactionViews.sorted(by: {$0.frame.minX < $1.frame.minX})
+        return coachMarksController.helper.makeCoachMark(for: targetViews[2])
+
+    }
+
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+
 }

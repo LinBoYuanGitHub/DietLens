@@ -195,10 +195,12 @@ extension HKHealthStore {
 //        anchorComponents.day! -= offset
         anchorComponents.hour = 0
         guard let anchorDate = calendar.date(from: anchorComponents) else {
-            fatalError("*** unable to create a valid date from the given components ***")
+            return
+//            fatalError("*** unable to create a valid date from the given components ***")
         }
         guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
-            fatalError("*** Unable to create a step count type ***")
+            return
+//            fatalError("*** Unable to create a step count type ***")
         }
         // Create the query
         let query = HKStatisticsCollectionQuery(quantityType: quantityType,
@@ -218,7 +220,13 @@ extension HKHealthStore {
                 }
                 return
             }
-            let endDate = Date()
+            guard let endDate = calendar.date(byAdding: .day, value: -1, to: Date())
+                else {
+                    fatalError("*** Unable to calculate the start date ***")
+                    if completionHandler != nil {
+                        completionHandler!([], error)
+                    }
+            }
             guard let startDate = calendar.date(byAdding: .day, value: -7, to: Date())
                 else {
                     fatalError("*** Unable to calculate the start date ***")
@@ -234,7 +242,7 @@ extension HKHealthStore {
             let endOfWeek = calendar.date(byAdding: comps2, to: startOfWeek!)
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
-            statsCollection.enumerateStatistics(from: startOfWeek!, to: endOfWeek!) { [unowned self] statistics, _ in
+            statsCollection.enumerateStatistics(from: startDate, to: endDate) { [unowned self] statistics, _ in
 
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate

@@ -115,7 +115,8 @@ class PersonalProfileViewController: UIViewController {
 
     @IBAction func closePage() {
         view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
     func setUpPicker() {
@@ -195,7 +196,8 @@ class PersonalProfileViewController: UIViewController {
                 NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
                 NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
                     //refresh the profile sharedPreference
-                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popViewController(animated: true)
                     } else {
                         //error alert
                         AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
