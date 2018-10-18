@@ -463,7 +463,7 @@ class APIService {
     }
 
     public func getFoodSearchResult(filterType: Int, keywords: String, latitude: Double, longitude: Double, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
-        let url = ServerConfig.foodFullTextSearchURL + "?category=" + String(filterType)
+        let url = ServerConfig.foodFullTextSearchURL //+ "?category=" + String(filterType)
         self.getFoodSearchResult(requestUrl: url, keywords: keywords, latitude: latitude, longitude: longitude, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
@@ -672,11 +672,11 @@ class APIService {
      * param: imageKey,latitude,longitude
      * return: List of DisplayFoodCategory
      */
-    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
+    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.uploadImageKeyURL)!,
             method: .post,
-            parameters: ["key": imageKey, "latitude": latitude, "longitude": longitude],
+            parameters: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
