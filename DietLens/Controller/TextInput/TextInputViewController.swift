@@ -257,12 +257,12 @@ class TextInputViewController: BaseViewController {
             return
         }
         //show loading indicator & create current search result
-        self.searchLoadingView.alpha = 1
-        self.searchResultList.removeAll()
-        self.textSearchTable.reloadData()
+//        self.searchLoadingView.alpha = 1
+//        self.searchResultList.removeAll()
+//        self.textSearchTable.reloadData()
         //request for new data
         APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
-            self.searchLoadingView.alpha = 0
+//            self.searchLoadingView.alpha = 0
             DispatchQueue.main.async {
                 self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
             }
@@ -432,7 +432,7 @@ extension TextInputViewController: UITableViewDelegate {
             //show loading indicator
             textSearchTable.tableFooterView?.isHidden = false
             self.isLoading = true
-            if currentSelectionPos == 0 { //popularLists
+            if (textSearchField.text?.isEmpty)! && currentSelectionPos == 0 { //popularLists
                 APIService.instance.getFoodSearchPopularity(requestUrl: self.nextPageLink, mealtime: mealType.lowercased(), completion: { (resultList) in
                     self.textSearchTable.tableFooterView?.isHidden = true
                     self.isLoading = false
