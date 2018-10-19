@@ -32,11 +32,16 @@ class StepChartViewController: BaseViewController {
         setUpLeftAxis()
         setUpRightAxis()
         setUpChartLegend()
+        setUpMarkerView()
         requestAuthFromHealthKit()//get auth at then beginning
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+
+    @IBAction func onBackPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     func requestAuthFromHealthKit() {
@@ -57,6 +62,21 @@ class StepChartViewController: BaseViewController {
                 self.loadDailyStepChart()//load daily step data chart if succeed
             }
         }
+    }
+
+    func setUpMarkerView() {
+        let marker = YStepMarkerView(color: UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0),
+                                   font: .systemFont(ofSize: 12),
+                                   textColor: .white,
+                                   insets: UIEdgeInsets(top: 8, left: 8, bottom: 20, right: 8))
+//        let marker = XYMarkerView(color: UIColor(white: 180/250, alpha: 1),
+//                                  font: .systemFont(ofSize: 12),
+//                                  textColor: .black,
+//                                  insets: UIEdgeInsets(top: 8, left: 8, bottom: 20, right: 8),
+//                                  xAxisValueFormatter: chartView.xAxis.valueFormatter!)
+        marker.chartView = chartView
+        marker.minimumSize = CGSize(width: 80, height: 40)
+        chartView.marker = marker
     }
 
     func getStepDataCallBack(steps: [StepEntity], error: Error?) {
