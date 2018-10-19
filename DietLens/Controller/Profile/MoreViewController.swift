@@ -99,8 +99,8 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.present(dest, animated: true, completion: nil)
         case 2:
             //share function
-            let shareURL = URL(string: "https://www.google.com")
-            let shareText = "welcome to dietlens"
+            let shareURL = URL(string: "https://download.dietlens.com")
+            let shareText = "Welcome to dietlens"
             let shareActController = UIActivityViewController(activityItems: [shareURL, shareText], applicationActivities: nil)
             self.present(shareActController, animated: true, completion: nil)
         default:

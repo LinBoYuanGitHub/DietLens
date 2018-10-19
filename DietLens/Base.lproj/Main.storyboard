@@ -6410,10 +6410,10 @@ What is it?</string>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Step Counter" id="Z9i-hk-o4O">
-                        <barButtonItem key="leftBarButtonItem" image="SideMenu" id="1Lv-sp-Eml" userLabel="Menu">
+                        <barButtonItem key="leftBarButtonItem" image="Back Arrow" id="1Lv-sp-Eml" userLabel="Back">
                             <color key="tintColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="openLeftView:" destination="p31-Pz-F7s" id="dIU-OF-tqs"/>
+                                <action selector="onBackPressed:" destination="p31-Pz-F7s" id="eju-WJ-NWz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

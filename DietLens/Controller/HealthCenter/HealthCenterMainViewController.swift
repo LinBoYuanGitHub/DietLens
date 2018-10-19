@@ -81,6 +81,9 @@ extension HealthCenterMainViewController: UITableViewDelegate, UITableViewDataSo
         //jump to healthCenterTableViewVC
         let entity = healthCenterItemList[indexPath.row]
         if entity.category == StringConstants.UIString.stepCounterText {
+//            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepChartVC") as? StepChartViewController, let cell = tableView.cellForRow(at: indexPath) as? HealthCenterMainCell {
+//                 self.navigationController?.pushViewController(dest, animated: true)
+//            }
             if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC")
                 as? StepCounterViewController, let cell = tableView.cellForRow(at: indexPath) as? HealthCenterMainCell {
                 self.navigationController?.pushViewController(dest, animated: true)

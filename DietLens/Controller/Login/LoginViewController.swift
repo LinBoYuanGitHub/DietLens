@@ -275,7 +275,6 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                         if isSuccess {
                             //record userId & userName
                             let preferences = UserDefaults.standard
-
                             preferences.setValue(facebookUserId, forKey: PreferenceKey.facebookId)
                             preferences.setValue(facebookUserName, forKey: PreferenceKey.nickNameKey)
                             if isNewUser {
