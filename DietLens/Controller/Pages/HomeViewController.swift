@@ -67,15 +67,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         calorieFluidView.addGestureRecognizer(tapRecognizer)
         //check permission and set value for album access
         checkPhotoLibraryPermission()
-
-        //testing
-//        APIService.instance.sendSMSRequest(phoneNumber: "+6592987015") { (isSuccess) in
-//            if isSuccess {
-//                APIService.instance.verifySMSRequest(phoneNumber: "+6592987015", smsToken: "", completion: { (isSuccess) in
-//                    print(isSuccess)
-//                })
-//            }
-//        }
     }
 
     @objc func jumpToNutritionPage() {

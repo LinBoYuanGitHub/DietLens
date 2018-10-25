@@ -57,11 +57,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
                          "sample/5_Chicken_Chop.png", "sample/1_Satay.png"]
     var currentImageIndex = 0
 
-    //location service
-    let locationManager = CLLocationManager()
-    var latitude = 0.0
-    var longitude = 0.0
-
     //    var volumeHandler: JPSVolumeButtonHandler?
 
     var focusIndicator: UIImageView?
@@ -105,7 +100,9 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         galleryBtn.centerVertically()
         //set up location manager
         if CLLocationManager.locationServicesEnabled() {
-            enableLocationServices()
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.enableLocationServices()
+            }
         } else {
             print("Location services are not enabled")
         }
@@ -215,11 +212,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
             }
             return
         }
-        //        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
-        //            self.loadingScreen.alpha = 1
-        //        }, completion: nil)
-        //          resize&compress image process
-        //        let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
+
         let size = CGSize(width: previewView.frame.width, height: previewView.frame.height)
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         //        var convertedRect = previewView.videoPreviewLayer.metadataOutputRectConverted(fromLayerRect: rect)
@@ -252,7 +245,10 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     func postImageKeyToServer(imageKey: String, isUsingSample: Bool, uploadTime: TimeInterval) {
         self.uploadPercentageLabel.text = "Retrieving recognition results..."
-        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: latitude, longitude: longitude, uploadSpeed: uploadTime, completion: { (resultList) in
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: appDelegate.latitude, longitude: appDelegate.longitude, uploadSpeed: uploadTime, completion: { (resultList) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true
             //            self.loadingScreen.alpha = 0
@@ -281,25 +277,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
             }
             self.hideReview()
         })
-    }
-
-    func enableLocationServices() {
-        locationManager.delegate = self
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            // Request when-in-use authorization initially
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-        case .restricted, .denied:
-            break
-        case .authorizedWhenInUse:
-            // Enable basic location features
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        case .authorizedAlways:
-            break
-        }
     }
 
     @IBAction func rejectImage(_ sender: UIButton) {
@@ -509,8 +486,11 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             //get image meta data from gallery
             let fetchResult = PHAsset.fetchAssets(withALAssetURLs: [url], options: nil)
             let fetchAsset = fetchResult.firstObject
-            print("albumLocation lat:\(fetchAsset?.location?.coordinate.latitude)")
-            print("albumLocation lng:\(fetchAsset?.location?.coordinate.longitude)")
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appDelegate.latitude = fetchAsset?.location?.coordinate.latitude ?? 0.0
+            appDelegate.longitude = fetchAsset?.location?.coordinate.longitude ?? 0.0
         }
 
         self.recordType = RecognitionInteger.gallery
@@ -605,18 +585,6 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: CGFloat(40), height: CGFloat(40))
     }
 
-}
-
-extension CameraViewController: CLLocationManagerDelegate {
-
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.latitude = (locations.last?.coordinate.latitude)!
-        self.longitude = (locations.last?.coordinate.longitude)!
-        locationManager.stopUpdatingLocation()
-    }
 }
 
 extension CameraViewController: ConfirmationDelegate {

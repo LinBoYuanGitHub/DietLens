@@ -51,6 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.message_id"
 
     var isInSignOutProcess: Bool = false
+    //location manager
+    let locationManager = CLLocationManager()
+    var latitude = 0.0
+    var longitude = 0.0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -192,9 +196,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        //upload user step to backend
         FBSDKAppEvents.activateApp()
+        //upload user step to backend
         uploadStepDataWhenNecessary()
+        //get location
+        enableLocationServices()
+    }
+
+    func enableLocationServices() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        case .restricted, .denied:
+            break
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        case .authorizedAlways:
+            break
+        }
     }
 
     //judege whether should upload step data to backend
@@ -427,6 +452,20 @@ extension AppDelegate: GIDSignInDelegate {
         //perform disconnect code
     }
 
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.latitude = (locations.last?.coordinate.latitude)!
+        self.longitude = (locations.last?.coordinate.longitude)!
+        print("latitude:\(latitude)")
+        print("longitude:\(longitude)")
+        locationManager.stopUpdatingLocation()
+    }
 }
 
 extension UIApplication {
