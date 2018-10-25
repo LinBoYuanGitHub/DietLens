@@ -747,7 +747,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-3C-4QB" userLabel="NutrtionViewContainer" customClass="RedGardientView" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
+                                <rect key="frame" x="0.0" y="109.5" width="375" height="126"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-n6-aD7">
                                         <rect key="frame" x="0.0" y="38.5" width="375" height="80"/>
@@ -7639,21 +7639,22 @@ Your recommended daily calorie intake is:</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-Bq-FnS" userLabel="calendarClickableItem">
-                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
+                                <rect key="frame" x="130" y="64" width="115" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="o9y-BN-yU6"/>
+                                    <constraint firstAttribute="width" constant="115" id="la8-pK-Bet"/>
+                                    <constraint firstAttribute="height" constant="35" id="o9y-BN-yU6"/>
                                 </constraints>
                                 <connections>
                                     <action selector="showCalendar:" destination="MIX-fr-hCj" eventType="touchUpInside" id="3MZ-dQ-Sry"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-cS-lC7" userLabel="calendarButton">
-                                <rect key="frame" x="118.5" y="68" width="15" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-cS-lC7" userLabel="calendarButton">
+                                <rect key="frame" x="130" y="70.5" width="15" height="22"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="calendarIcon"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7. April 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aec-V0-YNw">
-                                <rect key="frame" x="141.5" y="67.5" width="92" height="23"/>
+                                <rect key="frame" x="152.5" y="70" width="92.5" height="23"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                 <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -7723,7 +7724,7 @@ Your recommended daily calorie intake is:</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Wqf-Od-T1O">
-                                <rect key="frame" x="-1" y="230.5" width="377" height="436"/>
+                                <rect key="frame" x="-1" y="233" width="377" height="433.5"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -7922,20 +7923,19 @@ Your recommended daily calorie intake is:</string>
                             <constraint firstItem="AH3-5G-M9L" firstAttribute="leading" secondItem="ms6-ks-lNc" secondAttribute="leading" id="3W5-cf-Mej"/>
                             <constraint firstItem="Aec-V0-YNw" firstAttribute="centerY" secondItem="A3I-Bq-FnS" secondAttribute="centerY" id="4mm-3B-VQH"/>
                             <constraint firstAttribute="trailing" secondItem="hc8-JX-xwm" secondAttribute="trailing" id="C73-yY-ZQa"/>
-                            <constraint firstAttribute="trailing" secondItem="A3I-Bq-FnS" secondAttribute="trailing" id="CRO-7q-ATq"/>
                             <constraint firstItem="Wqf-Od-T1O" firstAttribute="top" secondItem="AH3-5G-M9L" secondAttribute="bottom" id="CwG-fX-pSd"/>
-                            <constraint firstItem="A3I-Bq-FnS" firstAttribute="leading" secondItem="ms6-ks-lNc" secondAttribute="leading" id="FuJ-r6-Vae"/>
                             <constraint firstItem="6bO-xB-3xy" firstAttribute="top" secondItem="Wqf-Od-T1O" secondAttribute="bottom" constant="0.5" id="H0g-sV-4mX"/>
+                            <constraint firstItem="Aec-V0-YNw" firstAttribute="trailing" secondItem="A3I-Bq-FnS" secondAttribute="trailing" id="JYZ-2E-03M"/>
                             <constraint firstItem="AH3-5G-M9L" firstAttribute="top" secondItem="Aec-V0-YNw" secondAttribute="bottom" constant="14" id="MBc-bc-odg"/>
                             <constraint firstAttribute="leading" secondItem="Wqf-Od-T1O" secondAttribute="leading" constant="1" id="OGQ-kM-d9C"/>
                             <constraint firstItem="6bO-xB-3xy" firstAttribute="top" secondItem="hc8-JX-xwm" secondAttribute="bottom" id="PPd-TG-Nnv"/>
                             <constraint firstItem="8N3-cS-lC7" firstAttribute="centerY" secondItem="Aec-V0-YNw" secondAttribute="centerY" id="SQ4-cE-qF9"/>
                             <constraint firstItem="Wqf-Od-T1O" firstAttribute="trailing" secondItem="ms6-ks-lNc" secondAttribute="trailing" constant="1" id="bwh-BS-Cek"/>
                             <constraint firstItem="hc8-JX-xwm" firstAttribute="leading" secondItem="ms6-ks-lNc" secondAttribute="leading" id="eQg-w6-JNy"/>
-                            <constraint firstItem="Aec-V0-YNw" firstAttribute="centerX" secondItem="A3I-Bq-FnS" secondAttribute="centerX" id="gCd-eW-zff"/>
+                            <constraint firstItem="8N3-cS-lC7" firstAttribute="leading" secondItem="A3I-Bq-FnS" secondAttribute="leading" id="gm3-ad-jYs"/>
+                            <constraint firstItem="A3I-Bq-FnS" firstAttribute="centerX" secondItem="ms6-ks-lNc" secondAttribute="centerX" id="kzi-Nn-pvR"/>
                             <constraint firstItem="8N3-cS-lC7" firstAttribute="centerY" secondItem="A3I-Bq-FnS" secondAttribute="centerY" id="r3S-ax-0m6"/>
                             <constraint firstAttribute="trailing" secondItem="AH3-5G-M9L" secondAttribute="trailing" id="ubs-cf-jIg"/>
-                            <constraint firstItem="Aec-V0-YNw" firstAttribute="leading" secondItem="8N3-cS-lC7" secondAttribute="trailing" constant="8" id="xtf-Kj-skb"/>
                             <constraint firstItem="A3I-Bq-FnS" firstAttribute="top" secondItem="DDK-dl-Tyx" secondAttribute="bottom" id="zt3-Ba-nem"/>
                         </constraints>
                     </view>

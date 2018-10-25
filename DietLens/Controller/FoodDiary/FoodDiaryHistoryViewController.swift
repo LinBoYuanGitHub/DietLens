@@ -268,7 +268,13 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
 
     func didSelectFoodDiaryItem(foodDiary: FoodDiaryEntity) {
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-                let imageKey = foodDiary.imageId
+                var imageKey = foodDiary.imageId
+                //pass correct imageId
+                if foodDiary.imageId == "" {
+                    imageKey = foodDiary.placeHolderImage
+                } else {
+                    imageKey = foodDiary.imageId
+                }
                 //download image from Qiniu
                 AlertMessageHelper.showLoadingDialog(targetController: self)
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
@@ -276,7 +282,7 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
                         dest.isSetMealByTimeRequired = false
                         dest.foodDiaryEntity = foodDiary
                         dest.isUpdate = true
-                        dest.imageKey = foodDiary.imageId
+                        dest.imageKey = imageKey
                         if image != nil {
                             dest.userFoodImage = image
                         } else {
