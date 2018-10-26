@@ -29,8 +29,8 @@ class TextSuggestionCacheLRU {
         } else {
             //judege whether excess the capacity
             if list.count + 1 > capacity {
-                list.removeLast()
-                dict.removeValue(forKey: key)
+                let id = list.removeLast()
+                dict.removeValue(forKey: id)
             }
             list.insert(key, at: 0)
             dict[key] = value
