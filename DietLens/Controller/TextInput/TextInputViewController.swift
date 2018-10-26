@@ -121,8 +121,8 @@ class TextInputViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         //regist notification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
         //only refresh cache data
         if (textSearchField.text?.isEmpty)! && currentSelectionPos != 0 {
             onFilterSelect(currentSelection: currentSelectionPos)
@@ -158,23 +158,23 @@ class TextInputViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
-    @objc func keyboardWasShown (notification: NSNotification) {
-        let info: NSDictionary = notification.userInfo! as NSDictionary
-        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
-        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        var contentInsets: UIEdgeInsets
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-        } else {
-            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-        }
-        textSearchTable.contentInset = contentInsets
-        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
-    }
-
-    @objc func keyboardWillBeHidden () {
-        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-    }
+//    @objc func keyboardWasShown (notification: NSNotification) {
+//        let info: NSDictionary = notification.userInfo! as NSDictionary
+//        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
+//        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+//        var contentInsets: UIEdgeInsets
+//        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+//            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+//        } else {
+//            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+//        }
+//        textSearchTable.contentInset = contentInsets
+//        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
+//    }
+//
+//    @objc func keyboardWillBeHidden () {
+//        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+//    }
 
     //GoodToHave: local storage to display recent search top2 item
     func loadRecentTextSearchResult() {
@@ -263,18 +263,18 @@ class TextInputViewController: BaseViewController {
         //request for new data
         APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
 //            self.searchLoadingView.alpha = 0
-            DispatchQueue.main.async {
-                self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
-            }
             if textResults == nil {
-//                self.emptyView.isHidden = false
-//                self.textSearchTable.reloadData()
                 return
             }
             if textResults?.count == 0 {
                 self.emptyResultView.isHidden = false
             } else {
                 self.emptyResultView.isHidden = true
+                DispatchQueue.main.async {
+                    self.textSearchTable.reloadData()
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self.textSearchTable.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                }
             }
             self.emptyView.isHidden = true
             self.searchResultList = textResults!
@@ -417,15 +417,15 @@ extension TextInputViewController: UITableViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //dismiss keyboard when scroller in accelerate status
-        if !scrollView.isDecelerating {
-             view.endEditing(true)
+        if scrollView.isDecelerating {
+            view.endEditing(true)
         }
         //scroll part of code
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
-            if nextPageLink == "" || isLoading {
+            if nextPageLink == "" || isLoading || currentSelectionPos == 1 { //loading & no nextPage & at recentPage
                 //last page
                 return
             }
