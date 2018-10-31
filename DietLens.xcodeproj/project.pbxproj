@@ -13,6 +13,8 @@
 		3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F14CC45201C78B70032CC77 /* UserProfile.swift */; };
 		3F14CC48201C79FF0032CC77 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F14CC47201C79FF0032CC77 /* ProfileDataManager.swift */; };
 		3F17943D1FDF84EC0047F9C1 /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17943C1FDF84EC0047F9C1 /* NotificationName.swift */; };
+		3F191F2C2182B28F0026A4EF /* EmailLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F191F2B2182B28F0026A4EF /* EmailLoginViewController.swift */; };
+		3F191F2E2182B2DA0026A4EF /* SMSLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F191F2D2182B2DA0026A4EF /* SMSLoginViewController.swift */; };
 		3F1AC22C20870FC2008F5BF2 /* MealTypeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1AC22B20870FC2008F5BF2 /* MealTypeCollectionCell.xib */; };
 		3F1AC22E20872654008F5BF2 /* NutritionCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1AC22D20872654008F5BF2 /* NutritionCollectionCell.xib */; };
 		3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */; };
@@ -247,6 +249,8 @@
 		3F14CC45201C78B70032CC77 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		3F14CC47201C79FF0032CC77 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
 		3F17943C1FDF84EC0047F9C1 /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
+		3F191F2B2182B28F0026A4EF /* EmailLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginViewController.swift; sourceTree = "<group>"; };
+		3F191F2D2182B2DA0026A4EF /* SMSLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSLoginViewController.swift; sourceTree = "<group>"; };
 		3F1AC22B20870FC2008F5BF2 /* MealTypeCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MealTypeCollectionCell.xib; sourceTree = "<group>"; };
 		3F1AC22D20872654008F5BF2 /* NutritionCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NutritionCollectionCell.xib; sourceTree = "<group>"; };
 		3F1AC22F2087377B008F5BF2 /* NutritionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionCollectionCell.swift; sourceTree = "<group>"; };
@@ -882,6 +886,8 @@
 				586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */,
 				3F88189820E9D80F00FE6C11 /* LoginViewController.swift */,
 				3F4812D921424517005F3260 /* WelcomeViewController.swift */,
+				3F191F2B2182B28F0026A4EF /* EmailLoginViewController.swift */,
+				3F191F2D2182B2DA0026A4EF /* SMSLoginViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1604,6 +1610,7 @@
 				3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */,
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
 				3F7D77E42148F0EF000B8C6B /* StepChartViewController.swift in Sources */,
+				3F191F2E2182B2DA0026A4EF /* SMSLoginViewController.swift in Sources */,
 				3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */,
 				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
@@ -1618,6 +1625,7 @@
 				3FCBEC1520E639240092948C /* HealthCenterRecord.swift in Sources */,
 				3F43664D207C9AE00089C63A /* RecognitionResultViewController.swift in Sources */,
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
+				3F191F2C2182B28F0026A4EF /* EmailLoginViewController.swift in Sources */,
 				3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
 				3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */,

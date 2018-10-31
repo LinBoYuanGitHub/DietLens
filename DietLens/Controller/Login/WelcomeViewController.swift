@@ -21,12 +21,11 @@ class WelcomeViewController: BaseViewController {
     override func viewDidLoad() {
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
-        CountDownTimer.instance.delegate = self
-        getVerifiedSMS()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
     }
 
@@ -108,29 +107,6 @@ class WelcomeViewController: BaseViewController {
         GIDSignIn.sharedInstance().signIn()
     }
 
-    func getVerifiedSMS() {
-        //testing
-        if  CountDownTimer.instance.getCoolDownFlag() {
-            APIService.instance.verifySMSRequest(phoneNumber: "+6592987015", smsToken: "747905", completion: { (isSuccess) in
-                CountDownTimer.instance.start()
-                print(isSuccess)
-            })
-        } else {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Cool down")
-        }
-    }
-
-    func verifySMSLogin() {
-        APIService.instance.verifySMSRequest(phoneNumber: "", smsToken: "") { (isSuccess) in
-             if isSuccess {
-
-             } else {
-                //give failure message +656592987015
-
-            }
-        }
-    }
-
 }
 
 extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
@@ -183,14 +159,6 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
 
     func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
         self.dismiss(animated: true, completion: nil)
-    }
-
-}
-
-extension WelcomeViewController: CountDownDelegate {
-
-    func onCountDownUpdate(displaySeconds: TimeInterval) {
-        print(displaySeconds)
     }
 
 }
