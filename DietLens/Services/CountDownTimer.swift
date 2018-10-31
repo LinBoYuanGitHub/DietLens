@@ -34,13 +34,13 @@ class CountDownTimer {
             displaySeconds -= diffTime
         } else {
             //time reach
-            displaySeconds = 0
+            displaySeconds = 60
             isCoolDown  = true
         }
     }
 
     public func start() {
-        timer = Timer.scheduledTimer(timeInterval: displaySeconds, target: self, selector: #selector(updateTime), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         isCoolDown = false
     }
 
@@ -51,18 +51,23 @@ class CountDownTimer {
     @objc func updateTime() {
         displaySeconds -= 1 // countDown function
         lastRecordTime = TimeInterval()
-        if displaySeconds <= 0 {
-            isCoolDown = true
-        }
         //refresh timer UI recall
         if delegate != nil {
+            print("displaySeconds:\(displaySeconds)")
             delegate?.onCountDownUpdate(displaySeconds: displaySeconds)
+        }
+        if displaySeconds < 0 {
+            self.stop()
+            displaySeconds = 60
         }
     }
 
     //receive failure info so fire timer
-    public func fireTimer() {
-        timer.fire()
+    public func stop() {
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
         isCoolDown = true
     }
 

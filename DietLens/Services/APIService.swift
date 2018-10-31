@@ -1777,7 +1777,7 @@ class APIService {
         }
     }
 
-    func verifySMSRequest(phoneNumber: String, smsToken: String, completion: @escaping (Bool) -> Void) {
+    func verifySMSRequest(phoneNumber: String, smsToken: String, completion: @escaping (Bool) -> Void, failureCompletion: @escaping (String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.verifySMSURL)!,
             method: .post,
@@ -1787,9 +1787,24 @@ class APIService {
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    if let errorJsonString = String(data: response.data!, encoding: String.Encoding.utf8) {
+                        let errJSON = errorJsonString.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
+                         failureCompletion(errJSON["message"].stringValue)
+                    }
+                    print("Verify SMS Code failed due to : \(String(describing: response.result.error))")
                     return
                 }
+                guard (response.response?.allHeaderFields) != nil else {
+                    completion(false)
+                    print("Get Token failed")
+                    return
+                }
+                let preferences = UserDefaults.standard
+                let token = response.response!.allHeaderFields["token"]
+                let jsonObj = JSON(response.result.value)
+                preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: PreferenceKey.userIdkey)
+                preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: PreferenceKey.nickNameKey)
+                preferences.setValue(token, forKey: PreferenceKey.tokenKey)
                 completion(response.result.isSuccess)
         }
     }
