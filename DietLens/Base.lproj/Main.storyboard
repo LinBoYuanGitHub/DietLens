@@ -26,8 +26,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forget Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yB7-eM-al4">
-                                <rect key="frame" x="32" y="124" width="189" height="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yB7-eM-al4">
+                                <rect key="frame" x="32" y="124" width="190" height="34"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="24"/>
                                 <color key="textColor" red="0.21133291794478526" green="0.21133291794478526" blue="0.21133291794478526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6036,14 +6036,14 @@ What is it?</string>
                                     <action selector="processGoogleLogin:" destination="hae-ME-uS1" eventType="touchUpInside" id="rHT-AQ-bQm"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your health assistant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSF-LP-13f">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your health assistant" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSF-LP-13f">
                                 <rect key="frame" x="120" y="173" width="135" height="20"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Dietlens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xd-NZ-Hre">
-                                <rect key="frame" x="109" y="116.5" width="156" height="76.5"/>
+                                <rect key="frame" x="109.5" y="116.5" width="156" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SignPainterHouseScript" family="SignPainter HouseScript" pointSize="64"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6051,16 +6051,13 @@ What is it?</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="7xd-NZ-Hre" firstAttribute="leading" secondItem="jch-ho-g4r" secondAttribute="leading" constant="109" id="13b-ah-wPQ"/>
                             <constraint firstItem="M4x-BF-X0Q" firstAttribute="centerX" secondItem="pfU-lH-1u2" secondAttribute="centerX" id="2YE-vE-Y8e"/>
                             <constraint firstItem="dpm-9O-8Uf" firstAttribute="width" secondItem="M4x-BF-X0Q" secondAttribute="width" id="3Fn-g7-pyf"/>
                             <constraint firstItem="e8H-p8-8nn" firstAttribute="centerY" secondItem="pfU-lH-1u2" secondAttribute="centerY" id="59L-Qe-gL0"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="leading" secondItem="pfU-lH-1u2" secondAttribute="trailing" constant="15" id="9Qn-U3-hU8"/>
-                            <constraint firstAttribute="trailing" secondItem="7xd-NZ-Hre" secondAttribute="trailing" constant="110" id="BAM-9S-sfs"/>
                             <constraint firstItem="OMD-Ft-T9E" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="DFZ-IU-jih"/>
                             <constraint firstItem="KSF-LP-13f" firstAttribute="bottom" secondItem="VOn-Dx-xO7" secondAttribute="bottom" constant="-24" id="DN1-8N-SIU"/>
                             <constraint firstItem="pfU-lH-1u2" firstAttribute="top" secondItem="pQj-8K-9sU" secondAttribute="bottom" constant="28" id="FCv-OR-DmT"/>
-                            <constraint firstAttribute="trailing" secondItem="KSF-LP-13f" secondAttribute="trailing" constant="120" id="Pfe-eJ-dzM"/>
                             <constraint firstItem="M4x-BF-X0Q" firstAttribute="width" secondItem="OMD-Ft-T9E" secondAttribute="width" id="Ph0-az-bIs"/>
                             <constraint firstItem="e8H-p8-8nn" firstAttribute="leading" secondItem="jch-ho-g4r" secondAttribute="leading" constant="16" id="R1d-ly-OU5"/>
                             <constraint firstItem="pfU-lH-1u2" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="RpC-L0-AOa"/>
@@ -6069,9 +6066,11 @@ What is it?</string>
                             <constraint firstItem="M4x-BF-X0Q" firstAttribute="top" secondItem="IM0-Xc-giT" secondAttribute="bottom" constant="35" id="Zwj-ZB-EeD"/>
                             <constraint firstItem="pQj-8K-9sU" firstAttribute="width" secondItem="OMD-Ft-T9E" secondAttribute="width" id="awH-60-xTg"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="trailing" secondItem="jch-ho-g4r" secondAttribute="trailingMargin" id="bkt-rs-emc"/>
+                            <constraint firstItem="KSF-LP-13f" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="byb-Mp-fJt"/>
                             <constraint firstItem="VOn-Dx-xO7" firstAttribute="leading" secondItem="jch-ho-g4r" secondAttribute="leading" id="c0Y-p9-vvc"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="centerY" secondItem="pfU-lH-1u2" secondAttribute="centerY" id="dbc-Cj-lUN"/>
                             <constraint firstItem="VOn-Dx-xO7" firstAttribute="top" secondItem="jch-ho-g4r" secondAttribute="top" id="e3P-uE-wvL"/>
+                            <constraint firstItem="7xd-NZ-Hre" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="enp-xY-eVl"/>
                             <constraint firstItem="dpm-9O-8Uf" firstAttribute="top" secondItem="M4x-BF-X0Q" secondAttribute="bottom" constant="20" id="fgK-jE-5Fz"/>
                             <constraint firstItem="pfU-lH-1u2" firstAttribute="leading" secondItem="e8H-p8-8nn" secondAttribute="trailing" constant="8" id="hog-W1-6W3"/>
                             <constraint firstItem="OMD-Ft-T9E" firstAttribute="leading" secondItem="jch-ho-g4r" secondAttribute="leadingMargin" constant="28" id="kWi-zx-vxu"/>
@@ -6079,7 +6078,6 @@ What is it?</string>
                             <constraint firstItem="UdK-na-kHq" firstAttribute="top" secondItem="dpm-9O-8Uf" secondAttribute="bottom" constant="12" id="pAK-88-CtC"/>
                             <constraint firstAttribute="trailing" secondItem="VOn-Dx-xO7" secondAttribute="trailing" id="rXD-dS-lVB"/>
                             <constraint firstItem="dpm-9O-8Uf" firstAttribute="centerX" secondItem="M4x-BF-X0Q" secondAttribute="centerX" id="wvn-jH-vHn"/>
-                            <constraint firstItem="KSF-LP-13f" firstAttribute="leading" secondItem="jch-ho-g4r" secondAttribute="leading" constant="120" id="xEY-PJ-PnB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EPz-RH-WoM"/>
@@ -6129,13 +6127,13 @@ What is it?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="zwA-at-ryw" userLabel="LoginField Stack">
-                                                <rect key="frame" x="45" y="169" width="285" height="112"/>
+                                                <rect key="frame" x="45" y="169" width="285" height="68"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="uBD-4u-S2W">
-                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="47.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="26"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pfj-mJ-Mqb" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="285" height="47.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="285" height="26"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="email"/>
@@ -6157,10 +6155,10 @@ What is it?</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="aCt-F4-dKN">
-                                                        <rect key="frame" x="0.0" y="72.5" width="285" height="39.5"/>
+                                                        <rect key="frame" x="0.0" y="51" width="285" height="17"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="at least 8 characters with letters" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xJC-UI-7V5" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                                <rect key="frame" x="0.0" y="0.0" width="285" height="39.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="285" height="17"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
@@ -6184,9 +6182,9 @@ What is it?</string>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBk-af-7ec">
-                                                <rect key="frame" x="260" y="291" width="99" height="29"/>
+                                                <rect key="frame" x="259" y="247" width="100" height="29"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
-                                                <state key="normal" title="Forget password?">
+                                                <state key="normal" title="Forgot password?">
                                                     <color key="titleColor" red="0.6347548905" green="0.63618539819999997" blue="0.65801475249999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -6195,7 +6193,7 @@ What is it?</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ut-Ih-eDb">
-                                                <rect key="frame" x="43.5" y="370" width="288" height="40"/>
+                                                <rect key="frame" x="43.5" y="326" width="288" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="54q-Pn-5Aj"/>
                                                 </constraints>
@@ -6217,27 +6215,27 @@ What is it?</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8r-Ba-XyE">
-                                                <rect key="frame" x="182" y="440" width="11.5" height="17"/>
+                                                <rect key="frame" x="182" y="396" width="11.5" height="17"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
                                                 <color key="textColor" red="0.61176470588235299" green="0.61176470588235299" blue="0.61176470588235299" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44d-ZP-k5b" userLabel="LeftSeperatorLine">
-                                                <rect key="frame" x="16" y="448" width="146" height="1"/>
+                                                <rect key="frame" x="16" y="404" width="146" height="1"/>
                                                 <color key="backgroundColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="JYN-6O-7Bo"/>
                                                 </constraints>
                                             </view>
                                             <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1au-BD-PcM" userLabel="RightSeperatorLine">
-                                                <rect key="frame" x="225.5" y="448" width="133.5" height="1"/>
+                                                <rect key="frame" x="225.5" y="404" width="133.5" height="1"/>
                                                 <color key="backgroundColor" red="0.61568627450980395" green="0.61568627450980395" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="QBX-N5-D7q"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6V-Mr-DgR" userLabel="FaceBookLoginBtn">
-                                                <rect key="frame" x="43.5" y="477" width="288" height="40"/>
+                                                <rect key="frame" x="43.5" y="433" width="288" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="KWu-QL-T6y"/>
                                                 </constraints>
@@ -6250,7 +6248,7 @@ What is it?</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xC6-eG-T9f" userLabel="GoogleLoginBtn">
-                                                <rect key="frame" x="43.5" y="537" width="288" height="40"/>
+                                                <rect key="frame" x="43.5" y="493" width="288" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="GdH-1d-wh0"/>
                                                 </constraints>
@@ -6442,7 +6440,7 @@ What is it?</string>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-Ec-cD5">
                                 <rect key="frame" x="247" y="100" width="80" height="31"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
                                 <state key="normal" title="Send" backgroundImage="redBorderImage">
                                     <color key="titleColor" red="0.94901960780000005" green="0.2470588235" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -6635,9 +6633,9 @@ What is it?</string>
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKF-lj-ncS" userLabel="Sign up now">
-                                <rect key="frame" x="271" y="505" width="68" height="29"/>
+                                <rect key="frame" x="239" y="505" width="100" height="29"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
-                                <state key="normal" title="Sign up now">
+                                <state key="normal" title="Forget Password?">
                                     <color key="titleColor" red="0.91764705882352937" green="0.44313725490196076" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -6756,7 +6754,7 @@ What is it?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ka1-YX-Azi">
-                                <rect key="frame" x="16" y="104" width="343" height="29"/>
+                                <rect key="frame" x="16" y="84" width="343" height="29"/>
                                 <segments>
                                     <segment title="D"/>
                                     <segment title="W"/>
@@ -6768,11 +6766,54 @@ What is it?</string>
                                     <action selector="onTabItemChanged:" destination="p31-Pz-F7s" eventType="valueChanged" id="mQy-mR-SZr"/>
                                 </connections>
                             </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiT-zX-H6z" userLabel="DateView">
+                                <rect key="frame" x="16" y="117" width="343" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQR-yp-AaC" userLabel="DateLabel">
+                                        <rect key="frame" x="152.5" y="4.5" width="38.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUf-mT-xYe" userLabel="LeftArrow" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="5" y="2.5" width="9" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="9" id="BLu-To-ACK"/>
+                                            <constraint firstAttribute="height" constant="25" id="kqx-Na-KUr"/>
+                                        </constraints>
+                                        <state key="normal" image="calendar_left_arrow_red"/>
+                                        <connections>
+                                            <action selector="onLeftArrowPressed:" destination="p31-Pz-F7s" eventType="touchUpInside" id="MdY-Rq-Xpz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roy-u9-dyI" userLabel="RightArrow" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="330" y="2.5" width="8" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="8" id="dm5-ln-XB0"/>
+                                            <constraint firstAttribute="height" constant="25" id="uYY-jD-igb"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="calendar_right_arrow_red"/>
+                                        <connections>
+                                            <action selector="onRightArrowPressed:" destination="p31-Pz-F7s" eventType="touchUpInside" id="gh8-e2-gDd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="rQR-yp-AaC" firstAttribute="centerX" secondItem="fiT-zX-H6z" secondAttribute="centerX" id="12B-XX-MKf"/>
+                                    <constraint firstItem="MUf-mT-xYe" firstAttribute="centerY" secondItem="fiT-zX-H6z" secondAttribute="centerY" id="BLC-Ma-aWe"/>
+                                    <constraint firstItem="MUf-mT-xYe" firstAttribute="leading" secondItem="fiT-zX-H6z" secondAttribute="leading" constant="5" id="J3Z-Sl-SMP"/>
+                                    <constraint firstItem="rQR-yp-AaC" firstAttribute="centerY" secondItem="fiT-zX-H6z" secondAttribute="centerY" id="fCO-H1-QoW"/>
+                                    <constraint firstAttribute="trailing" secondItem="roy-u9-dyI" secondAttribute="trailing" constant="5" id="iPV-f7-V1f"/>
+                                    <constraint firstItem="roy-u9-dyI" firstAttribute="centerY" secondItem="fiT-zX-H6z" secondAttribute="centerY" id="kHF-ct-VRM"/>
+                                    <constraint firstAttribute="height" constant="30" id="oDK-ZN-F6X"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKy-D9-8w7" userLabel="StatView">
-                                <rect key="frame" x="0.0" y="172" width="375" height="475"/>
+                                <rect key="frame" x="0.0" y="152" width="375" height="495"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBb-Fi-jW0" customClass="BarChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="475"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -6788,12 +6829,15 @@ What is it?</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ka1-YX-Azi" firstAttribute="leading" secondItem="8JJ-9r-4WS" secondAttribute="leading" constant="16" id="38N-db-Mfq"/>
-                            <constraint firstItem="Ka1-YX-Azi" firstAttribute="top" secondItem="qdt-Yl-LoR" secondAttribute="bottom" constant="40" id="AqA-gx-KKU"/>
+                            <constraint firstItem="fiT-zX-H6z" firstAttribute="trailing" secondItem="Ka1-YX-Azi" secondAttribute="trailing" id="7za-kk-5kf"/>
+                            <constraint firstItem="Ka1-YX-Azi" firstAttribute="top" secondItem="qdt-Yl-LoR" secondAttribute="bottom" constant="20" id="AqA-gx-KKU"/>
                             <constraint firstAttribute="trailing" secondItem="uKy-D9-8w7" secondAttribute="trailing" id="DRD-7B-oWB"/>
                             <constraint firstItem="uKy-D9-8w7" firstAttribute="leading" secondItem="8JJ-9r-4WS" secondAttribute="leading" id="HGR-YL-Er1"/>
-                            <constraint firstItem="uKy-D9-8w7" firstAttribute="top" secondItem="Ka1-YX-Azi" secondAttribute="bottom" constant="40" id="MaE-7t-Xoe"/>
                             <constraint firstItem="x0U-G0-62j" firstAttribute="top" secondItem="uKy-D9-8w7" secondAttribute="bottom" constant="20" id="Tee-LE-zpT"/>
+                            <constraint firstItem="fiT-zX-H6z" firstAttribute="leading" secondItem="Ka1-YX-Azi" secondAttribute="leading" id="TuW-uh-UeP"/>
+                            <constraint firstItem="uKy-D9-8w7" firstAttribute="top" secondItem="rQR-yp-AaC" secondAttribute="bottom" constant="9.5" id="dDa-ac-qq7"/>
                             <constraint firstAttribute="trailing" secondItem="Ka1-YX-Azi" secondAttribute="trailing" constant="16" id="gBw-7e-qdb"/>
+                            <constraint firstItem="fiT-zX-H6z" firstAttribute="top" secondItem="Ka1-YX-Azi" secondAttribute="bottom" constant="5" id="zGx-iT-EkT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Step Counter" id="Z9i-hk-o4O">
@@ -6806,6 +6850,9 @@ What is it?</string>
                     </navigationItem>
                     <connections>
                         <outlet property="chartView" destination="NBb-Fi-jW0" id="4lb-17-i5s"/>
+                        <outlet property="dateLabel" destination="rQR-yp-AaC" id="TXZ-bR-XOx"/>
+                        <outlet property="leftArrow" destination="MUf-mT-xYe" id="Uvg-8c-r3p"/>
+                        <outlet property="rightArrow" destination="roy-u9-dyI" id="jCY-8w-zKp"/>
                         <outlet property="tabLayout" destination="Ka1-YX-Azi" id="ILn-Pz-yxl"/>
                     </connections>
                 </viewController>
@@ -7685,8 +7732,9 @@ Your recommended daily calorie intake is:</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FeK-4S-CCV">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.97647058823529409" green="0.23529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.97647058823529409" green="0.23529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.1176470588" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.97647058819999999" green="0.1176470588" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.97647058823529409" green="0.11764705882352941" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="SignPainterHouseScript" family="SignPainter HouseScript" pointSize="28"/>
                             <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -8609,6 +8657,7 @@ Your recommended daily calorie intake is:</string>
                     <navigationItem key="navigationItem" title="Activity Level" id="Tk5-p8-uf3"/>
                     <connections>
                         <outlet property="exerciseTable" destination="JDB-QR-NZ0" id="HAW-9g-qel"/>
+                        <outlet property="progressBar" destination="YSk-bu-KS9" id="Zmn-nf-vAG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJ2-Ns-Gr6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8693,6 +8742,8 @@ Your recommended daily calorie intake is:</string>
         <image name="birthdayIcon" width="60" height="60"/>
         <image name="calendar" width="40" height="40"/>
         <image name="calendarIcon" width="15" height="17"/>
+        <image name="calendar_left_arrow_red" width="8" height="13"/>
+        <image name="calendar_right_arrow_red" width="8" height="13"/>
         <image name="checkmark" width="32" height="32"/>
         <image name="cross" width="20" height="20"/>
         <image name="edit_gray_tick_icon" width="22" height="22"/>

@@ -24,7 +24,7 @@ open class YStepMarkerView: MarkerImage {
     fileprivate var _drawAttributes = [NSAttributedString.Key: AnyObject]()
 
     let labelHeight = 70 //at the top of the chartView
-    let lineHeight = 460
+    let lineHeight = 490
 
     public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets) {
         self.color = color
@@ -134,7 +134,7 @@ open class YStepMarkerView: MarkerImage {
             //darw rect
             context.addRect(CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.size.width, height: rect.size.height/2))
             //draw line
-            context.addRect(CGRect(x: rect.origin.x + rect.size.width/2, y: rect.origin.y + rect.size.height/2, width: 1, height: 460))
+            context.addRect(CGRect(x: rect.origin.x + rect.size.width/2, y: rect.origin.y + rect.size.height/2, width: 1, height: CGFloat(lineHeight)))
             context.fillPath()
         }
 

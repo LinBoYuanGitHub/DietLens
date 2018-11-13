@@ -18,7 +18,21 @@ class StepChartViewController: BaseViewController {
     var visibleCountNum = 24 //one week
     @IBOutlet var emptyView: UIView!
 
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var leftArrow: UIButton!
+    @IBOutlet weak var rightArrow: UIButton!
+
     var stepDataList = [StepEntity]()
+    var dateMode = DateMode.day // 0 day,1 week, 2 month, 3 year
+
+    var currentDate = Date()
+
+    enum DateMode {
+        case day
+        case week
+        case month
+        case year
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +40,12 @@ class StepChartViewController: BaseViewController {
         chartView.drawBarShadowEnabled = false
         chartView.drawValueAboveBarEnabled = false
         chartView.maxVisibleCount = visibleCountNum
+        chartView.highlightFullBarEnabled = false
         chartView.setScaleEnabled(false)
         chartView.tintColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
-        setUpXAxis()
+        chartView.chartDescription?.text = ""
+        setUpXAxis(labelCount: 24, granularity: 3)//hour
+        dateLabel.text = DateUtil.formatGMTDateToString(date: currentDate)
         setUpLeftAxis()
         setUpRightAxis()
         setUpChartLegend()
@@ -94,29 +111,37 @@ class StepChartViewController: BaseViewController {
             let entity = BarChartDataEntry(x: Double(index+1), y: val)
             yValues.append(entity)
         }
-        let dataSet = BarChartDataSet(values: yValues, label: "Step Data")
+        let dataSet = BarChartDataSet(values: yValues, label: "Steps")
         let dietlensRed = [UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)]
+        dataSet.highlightColor = UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         dataSet.colors = dietlensRed
         let data = BarChartData(dataSet: dataSet)
+        data.setDrawValues(false)
         //try to refresh the chartView
         chartView.data = data
         chartView.animate(xAxisDuration: 0.1)
     }
 
-    func setUpXAxis() {
+    func setUpXAxis(labelCount: Int, granularity: Int) {
         let xAxis = chartView.xAxis
+        xAxis.drawGridLinesEnabled = true
+        xAxis.gridLineWidth = 0.5
+        xAxis.gridLineDashLengths = [4, 2]
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 10)
         xAxis.labelTextColor = .gray
-        xAxis.granularity = 1
-        xAxis.labelCount = 7
+        xAxis.granularity = Double(granularity)
+        xAxis.valueFormatter = self
+        xAxis.labelCount = labelCount
+        xAxis.axisMaximum = Double(labelCount + granularity)
+        xAxis.granularityEnabled = true
     }
 
     func setUpLeftAxis() {
         let leftAxis = chartView.leftAxis
         leftAxis.labelFont = .systemFont(ofSize: 10)
         leftAxis.labelTextColor = .gray
-        leftAxis.labelCount = 8
+        leftAxis.labelCount = 5
 //        leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: leftAxisFormatter)
         leftAxis.labelPosition = .outsideChart
         leftAxis.spaceTop = 0.15
@@ -127,7 +152,7 @@ class StepChartViewController: BaseViewController {
         let rightAxis = chartView.rightAxis
         rightAxis.enabled = true
         rightAxis.labelFont = .systemFont(ofSize: 10)
-        rightAxis.labelCount = 8
+        rightAxis.labelCount = 0
         rightAxis.labelTextColor = .gray
         rightAxis.spaceTop = 0.15
         rightAxis.axisMinimum = 0
@@ -154,6 +179,8 @@ class StepChartViewController: BaseViewController {
             loadWeeklyStepChart()
         case 2:
             loadMonthlyStepChart()
+        case 3:
+            loadYearlyStepChart()
         default:
             break
         }
@@ -161,22 +188,66 @@ class StepChartViewController: BaseViewController {
 
     func loadDailyStepChart() {
         visibleCountNum = 24
-        HKHealthStore().getHourlyStepsCountList { (steps, error) in
+        dateMode = DateMode.day
+        dateLabel.text = DateUtil.formatGMTDateToString(date: currentDate)
+        setUpXAxis(labelCount: visibleCountNum, granularity: 3)
+        HKHealthStore().getHourlyStepsCountList(inputDate: currentDate) { (steps, error) in
             self.getStepDataCallBack(steps: steps, error: error)
         }
     }
 
     func loadWeeklyStepChart() {
         visibleCountNum = 7
-        HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: Date()) { (steps, error) in
+        dateMode = DateMode.week
+        setUpXAxis(labelCount: visibleCountNum, granularity: 1)
+        dateLabel.text = DateUtil.formatGMTDateToString(date: currentDate.beginOfWeek!) + "-" +  DateUtil.formatGMTDateToString(date: currentDate.endOfWeek!)
+        HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: currentDate) { (steps, error) in
             self.getStepDataCallBack(steps: steps, error: error)
         }
     }
 
     func loadMonthlyStepChart() {
-        visibleCountNum = 30
-        HKHealthStore().getMonthlyStepsCountList(anyDayOfWeek: Date()) { (steps, error) in
+        visibleCountNum = 31
+        dateMode = DateMode.month
+        dateLabel.text = DateUtil.formatMonthWithYearToString(date: currentDate)
+        setUpXAxis(labelCount: visibleCountNum, granularity: 5)
+        HKHealthStore().getMonthlyStepsCountList(anyDayOfMonth: currentDate) { (steps, error) in
             self.getStepDataCallBack(steps: steps, error: error)
+        }
+    }
+
+    func loadYearlyStepChart() {
+        visibleCountNum = 12
+        dateMode = DateMode.year
+        dateLabel.text = DateUtil.formatYearToString(date: currentDate)
+        setUpXAxis(labelCount: visibleCountNum, granularity: 1)
+        HKHealthStore().getYearlyStepsCounterList(anyDayOfYear: currentDate) { (steps, error) in
+            self.getStepDataCallBack(steps: steps, error: error)
+        }
+    }
+
+    @IBAction func onLeftArrowPressed(_ sender: Any) {
+        dateTimeSwitch(addingValue: -1)
+    }
+
+    @IBAction func onRightArrowPressed(_ sender: Any) {
+        dateTimeSwitch(addingValue: 1)
+    }
+
+    func dateTimeSwitch(addingValue: Int) {
+        switch dateMode {
+        case .day:
+            currentDate = Calendar.current.date(byAdding: Calendar.Component.day, value: addingValue, to: currentDate)!
+            loadDailyStepChart()
+        case .week:
+            currentDate = Calendar.current.date(byAdding: Calendar.Component.weekOfMonth, value: addingValue, to: currentDate)!
+            loadWeeklyStepChart()
+        case .month:
+            currentDate = Calendar.current.date(byAdding: Calendar.Component.month, value: addingValue, to: currentDate)!
+            loadMonthlyStepChart()
+        case .year:
+            currentDate = Calendar.current.date(byAdding: Calendar.Component.year, value: addingValue, to: currentDate)!
+            loadYearlyStepChart()
         }
     }
 
@@ -186,5 +257,37 @@ extension StepChartViewController: ChartViewDelegate {
 
     func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
 
+    }
+}
+
+extension StepChartViewController: IAxisValueFormatter {
+
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        switch dateMode {
+        case DateMode.day:
+            if Int(value) > 24 {
+                return ""
+            } else {
+                return String(Int(value))
+            }
+        case DateMode.week:
+            if Int(value - 1) >= StringConstants.DateString.weekString.count {
+                return ""
+            } else {
+                return StringConstants.DateString.weekString[Int(value - 1)]
+            }
+        case DateMode.month:
+            if Int(value) > 31 {
+                return ""
+            } else {
+                return String(Int(value))
+            }
+        case DateMode.year:
+            if Int(value - 1) >= StringConstants.DateString.monthString.count {
+                return ""
+            } else {
+                return StringConstants.DateString.monthString[Int(value - 1)]
+            }
+        }
     }
 }

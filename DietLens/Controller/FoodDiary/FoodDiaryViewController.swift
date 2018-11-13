@@ -357,29 +357,30 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //request for portion data
-        AlertMessageHelper.showLoadingDialog(targetController: self)
-        let foodId = foodDiaryEntity.dietItems[indexPath.row].foodId
-        APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                if dietItem == nil {
-                    return
-                }
-                //TODO replace nutrition & portion value with new request value
-                let displayUnit =  self.foodDiaryEntity.dietItems[indexPath.row].displayUnit
-                let quantity = self.foodDiaryEntity.dietItems[indexPath.row].quantity
-                let id = self.foodDiaryEntity.dietItems[indexPath.row].id
-                self.foodDiaryEntity.dietItems[indexPath.row] = dietItem!
-                self.foodDiaryEntity.dietItems[indexPath.row].id = id
-                self.foodDiaryEntity.dietItems[indexPath.row].displayUnit = displayUnit
-                self.foodDiaryEntity.dietItems[indexPath.row].quantity = quantity
-                for (index, portion) in dietItem!.portionInfo.enumerated() where portion.sizeUnit == displayUnit {
-                        self.foodDiaryEntity.dietItems[indexPath.row].selectedPos = index
-                }
-                DispatchQueue.main.async {
-                    self.jumpToFoodInfoPage(dietEntity: self.foodDiaryEntity.dietItems[indexPath.row])
-                }
-            }
-        }
+        jumpToFoodInfoPage(dietEntity: self.foodDiaryEntity.dietItems[indexPath.row])
+//        AlertMessageHelper.showLoadingDialog(targetController: self)
+//        let foodId = foodDiaryEntity.dietItems[indexPath.row].foodId
+//        APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
+//            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+//                if dietItem == nil {
+//                    return
+//                }
+//                //TODO replace nutrition & portion value with new request value
+//                let displayUnit =  self.foodDiaryEntity.dietItems[indexPath.row].displayUnit
+//                let quantity = self.foodDiaryEntity.dietItems[indexPath.row].quantity
+//                let id = self.foodDiaryEntity.dietItems[indexPath.row].id
+//                self.foodDiaryEntity.dietItems[indexPath.row] = dietItem!
+//                self.foodDiaryEntity.dietItems[indexPath.row].id = id
+//                self.foodDiaryEntity.dietItems[indexPath.row].displayUnit = displayUnit
+//                self.foodDiaryEntity.dietItems[indexPath.row].quantity = quantity
+//                for (index, portion) in dietItem!.portionInfo.enumerated() where portion.sizeUnit == displayUnit {
+//                        self.foodDiaryEntity.dietItems[indexPath.row].selectedPos = index
+//                }
+//                DispatchQueue.main.async {
+//                    self.jumpToFoodInfoPage(dietEntity: self.foodDiaryEntity.dietItems[indexPath.row])
+//                }
+//            }
+//        }
     }
 
     func jumpToFoodInfoPage(dietEntity: DietItem) {
@@ -387,6 +388,7 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
             dest.selectedPortionPos = dietEntity.selectedPos
             dest.dietItem = dietEntity
+            dest.imageKey = imageKey
             dest.shouldShowMealBar = false
             dest.isUpdate = true
             if let navigator = self.navigationController {

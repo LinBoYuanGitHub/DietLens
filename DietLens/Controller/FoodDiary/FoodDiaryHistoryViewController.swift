@@ -275,24 +275,16 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
                 } else {
                     imageKey = foodDiary.imageId
                 }
-                //download image from Qiniu
-                AlertMessageHelper.showLoadingDialog(targetController: self)
-                APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                        dest.isSetMealByTimeRequired = false
-                        dest.foodDiaryEntity = foodDiary
-                        dest.isUpdate = true
-                        dest.imageKey = imageKey
-                        if image != nil {
-                            dest.userFoodImage = image
-                        } else {
-                            dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
-                        }
-                        if let navigator = self.navigationController {
-                            navigator.pushViewController(dest, animated: true)
-                        }
-                    }
-                })
+                dest.isSetMealByTimeRequired = false
+                dest.foodDiaryEntity = foodDiary
+                dest.isUpdate = true
+                dest.imageKey = imageKey
+                if imageKey == "" {
+                    dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                }
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(dest, animated: true)
+                }
             }
     }
 

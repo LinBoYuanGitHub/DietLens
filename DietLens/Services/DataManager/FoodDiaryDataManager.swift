@@ -39,6 +39,7 @@ class FoodDiaryDataManager {
             foodItem.id = job["id"].stringValue
             foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
+            foodItem.sampleImageUrl = job["example_img"].stringValue
             //prevent quantity equals zero
             if job["quantity"].doubleValue == 0 {
                 foodItem.quantity = 1

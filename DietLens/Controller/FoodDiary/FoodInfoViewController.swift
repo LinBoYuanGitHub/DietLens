@@ -6,6 +6,8 @@
 //  Copyright © 2018 NExT++. All rights reserved.
 
 import UIKit
+import FirebaseAnalytics
+
 class FoodInfoViewController: UIViewController {
 
     @IBOutlet weak var foodSampleImage: UIImageView!
@@ -39,6 +41,7 @@ class FoodInfoViewController: UIViewController {
     var selectedPortionPos: Int = 0
     var quantityIntegerArray = [0]
     var decimalArray = [0, 0.25, 0.5, 0.75]
+    var decimalArrayString = [".0", ".25", ".50", ".75"]
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
     //parameter for passing value
@@ -181,7 +184,7 @@ class FoodInfoViewController: UIViewController {
     func setUpImage() {
         loadImageFromWeb(imageUrl: dietItem.sampleImageUrl)
         if imageKey != nil {
-             foodDiaryEntity.imageId = imageKey!
+            foodDiaryEntity.imageId = imageKey!
         }
     }
 
@@ -434,6 +437,11 @@ class FoodInfoViewController: UIViewController {
                     }
                 }
             })
+            //#google analytic log part
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.RecogItemSave, parameters: [
+                "recordType": recordType,
+                "mealtime": foodDiaryEntity.mealType
+            ])
         }
     }
 
@@ -516,7 +524,7 @@ extension FoodInfoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         if component == 0 {
             return String(quantityIntegerArray[row])
         } else {
-            return String(decimalArray[row])
+            return String(decimalArrayString[row])
         }
     }
 

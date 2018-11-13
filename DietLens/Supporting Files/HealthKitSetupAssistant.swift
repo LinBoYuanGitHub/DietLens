@@ -129,11 +129,15 @@ extension HKHealthStore {
     }
 
     func getHourlyStepsCountList(completion completionHandler: (([StepEntity], Error?) -> Void)?) {
+        getHourlyStepsCountList(inputDate: Date(), completion: completionHandler)
+    }
+
+    func getHourlyStepsCountList(inputDate: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
 
         let calendar = Calendar.current
         var interval = DateComponents()
         interval.hour = 1
-        var anchorComponents = calendar.dateComponents([.hour, .day, .month, .year], from: Date())
+        var anchorComponents = calendar.dateComponents([.hour, .day, .month, .year], from: inputDate)
         anchorComponents.hour = 0
         guard let anchorDate = calendar.date(from: anchorComponents) else {
             fatalError("*** unable to create a valid date from the given components ***")
@@ -158,7 +162,7 @@ extension HKHealthStore {
                 }
                 return
             }
-            let endDate = Date()
+            let endDate = inputDate
             guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate)
                 else {
                     fatalError("*** Unable to calculate the start date ***")
@@ -220,29 +224,9 @@ extension HKHealthStore {
                 }
                 return
             }
-            guard let endDate = calendar.date(byAdding: .day, value: -1, to: Date())
-                else {
-                    fatalError("*** Unable to calculate the start date ***")
-                    if completionHandler != nil {
-                        completionHandler!([], error)
-                    }
-            }
-            guard let startDate = calendar.date(byAdding: .day, value: -7, to: Date())
-                else {
-                    fatalError("*** Unable to calculate the start date ***")
-                    if completionHandler != nil {
-                        completionHandler!([], error)
-                    }
-            }
-            let components = calendar.dateComponents([.weekday, .month, .year], from: Date())
-            let startOfWeek = calendar.date(from: components)
-            var comps2 = DateComponents()
-            comps2.weekOfMonth = 1
-            comps2.day = -1
-            let endOfWeek = calendar.date(byAdding: comps2, to: startOfWeek!)
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
-            statsCollection.enumerateStatistics(from: startDate, to: endDate) { [unowned self] statistics, _ in
+            statsCollection.enumerateStatistics(from: date.beginOfWeek!, to: date.endOfWeek!) { [unowned self] statistics, _ in
 
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate
@@ -260,7 +244,7 @@ extension HKHealthStore {
     /**
     get monthly data strat from the first day of current month to today
     **/
-    func getMonthlyStepsCountList(anyDayOfWeek date: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
+    func getMonthlyStepsCountList(anyDayOfMonth date: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
         let calendar = Calendar.current
         var interval = DateComponents()
         interval.day = 1
@@ -291,7 +275,7 @@ extension HKHealthStore {
                     completionHandler!([], error)
                 }
             }
-            let components = calendar.dateComponents([.month, .year ], from: Date())
+            let components = calendar.dateComponents([.month, .year ], from: date)
             let startOfMonth = calendar.date(from: components)
             var comps2 = DateComponents()
             comps2.month = 1
@@ -300,6 +284,57 @@ extension HKHealthStore {
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
             statsCollection.enumerateStatistics(from: startOfMonth!, to: endOfMonth!) { [unowned self] statistics, _ in
+
+                if let quantity = statistics.sumQuantity() {
+                    let date = statistics.startDate
+                    let value = quantity.doubleValue(for: HKUnit.count())
+                    let stepEntity = StepEntity(date: date, stepValue: value)
+                    // Call a custom method to plot each data point.
+                    stepList.append(stepEntity)
+                }
+            }
+            completionHandler!(stepList, error)
+        }
+        self.execute(query)
+    }
+
+    func getYearlyStepsCounterList(anyDayOfYear date: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
+        let calendar = Calendar.current
+        var interval = DateComponents()
+        interval.month = 1
+        var anchorComponents = calendar.dateComponents([.month, .year], from: Date())
+        anchorComponents.hour = 0
+        guard let anchorDate = calendar.date(from: anchorComponents) else {
+            fatalError("*** unable to create a valid date from the given components ***")
+        }
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
+            fatalError("*** Unable to create a step count type ***")
+        }
+        // Create the query
+        let query = HKStatisticsCollectionQuery(quantityType: quantityType,
+                                                quantitySamplePredicate: nil,
+                                                options: .cumulativeSum,
+                                                anchorDate: anchorDate,
+                                                intervalComponents: interval)
+        // Set the results handler
+        query.initialResultsHandler = {
+            query, results, error in
+
+            guard let statsCollection = results else {
+                // Perform proper error handling here
+                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
+                if completionHandler != nil {
+                    completionHandler!([], error)
+                }
+            }
+            let components = calendar.dateComponents([.year], from: date)
+            let startOfYear = calendar.date(from: components)
+            var comps2 = DateComponents()
+            comps2.year = 1
+            let endOfYear = calendar.date(byAdding: comps2, to: startOfYear!)
+            var stepList = [StepEntity]()
+            // Plot the weekly step counts over the past 3 months
+            statsCollection.enumerateStatistics(from: startOfYear!, to: endOfYear!) { [unowned self] statistics, _ in
 
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate

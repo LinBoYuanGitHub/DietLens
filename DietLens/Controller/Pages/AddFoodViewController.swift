@@ -55,8 +55,9 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarBackgroundColor = .clear
         settings.style.buttonBarItemBackgroundColor = .clear
         settings.style.selectedBarBackgroundColor = .white
-        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 14)!
+        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 16)!
         settings.style.selectedBarHeight = 2.0
+        settings.style.buttonBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .white
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
@@ -70,6 +71,12 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
         containerView.scrollsToTop = false
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        //set height for bar
+        buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
+        buttonBarView.selectedBar.frame.size.height = 2.0
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {

@@ -74,6 +74,17 @@ class WelcomeViewController: BaseViewController {
                                 let preferences = UserDefaults.standard
                                 preferences.setValue(facebookUserId, forKey: PreferenceKey.facebookId)
                                 preferences.setValue(facebookUserName, forKey: PreferenceKey.nickNameKey)
+                                //save token to backend
+                                let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                                let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                                if userId != nil && fcmToken != nil {
+                                    APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                                        if flag {
+                                            print("send device token succeed")
+                                        }
+                                    })
+                                }
+                                //is New User flow
                                 if isNewUser {
                                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                         var profile = UserProfile()
@@ -126,6 +137,16 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 //tmp use
                 if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
                     preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
+                }
+                //save token to backend
+                let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                if userId != nil && fcmToken != nil {
+                    APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                        if flag {
+                            print("send device token succeed")
+                        }
+                    })
                 }
                 //tmp use
                 if isNewUser {

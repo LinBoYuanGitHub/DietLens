@@ -25,7 +25,22 @@ class SMSLoginViewController: UIViewController {
         mobileNumTextField.clearButtonMode = .whileEditing
         CountDownTimer.instance.delegate = self
         areaPhoneCode.isUserInteractionEnabled = false
-        verifiedCodeSendingBtn.isEnabled = CountDownTimer.instance.getCoolDownFlag()
+        verifiedCodeSendingBtn.isEnabled = false
+        mobileNumTextField.addTarget(self, action: #selector(onTextChanged), for: .editingChanged)
+        verifiedCodeSendingBtn.setBackgroundImage(UIImage(imageLiteralResourceName: "verification_gray_button"), for: .disabled)
+        verifiedCodeSendingBtn.setTitle("Send", for: .disabled)
+        verifiedCodeSendingBtn.setTitleColor(UIColor(displayP3Red: 223.0/255.0, green: 223.0/255.0, blue: 223.0/255.0, alpha: 1), for: .disabled)
+        verifiedCodeSendingBtn.setTitleColor(UIColor(displayP3Red: 213.0/255.0, green: 42.0/255.0, blue: 36.0/255.0, alpha: 1), for: .normal)
+    }
+
+    @objc func onTextChanged() {
+        if CountDownTimer.instance.getCoolDownFlag() {
+            if mobileNumTextField.text?.count == 8 {
+                verifiedCodeSendingBtn.isEnabled = true
+            } else {
+                verifiedCodeSendingBtn.isEnabled = false
+            }
+        }
     }
 
     @IBAction func sendSMSCode(_ sender: Any) {
@@ -36,12 +51,16 @@ class SMSLoginViewController: UIViewController {
             return
         }
         verifiedCodeSendingBtn.isEnabled = false
+        mobileNumTextField.isEnabled = false
+        mobileNumTextField.textColor = .gray
         APIService.instance.sendSMSRequest(phoneNumber: "+65"+phoneNum) { (isSuccess) in
             //start count
             if isSuccess {
                 CountDownTimer.instance.start()
             } else {
                 self.verifiedCodeSendingBtn.isEnabled = true
+                self.mobileNumTextField.isEnabled = true
+                self.mobileNumTextField.textColor = UIColor(displayP3Red: 67.0/255.0, green: 67.0/255.0, blue: 67.0/255.0, alpha: 1)
             }
         }
     }
@@ -100,10 +119,13 @@ extension SMSLoginViewController: CountDownDelegate {
     func onCountDownUpdate(displaySeconds: TimeInterval) {
         if displaySeconds <= 0 {
             verifiedCodeSendingBtn.setTitle("Send", for: .normal)
+            verifiedCodeSendingBtn.setTitle("Send", for: .disabled)
             verifiedCodeSendingBtn.isEnabled = true
+            mobileNumTextField.isEnabled = true
+            mobileNumTextField.textColor = UIColor(displayP3Red: 67.0/255.0, green: 67.0/255.0, blue: 67.0/255.0, alpha: 1)
         } else {
             UIView.performWithoutAnimation {
-                verifiedCodeSendingBtn.setTitle(String(Int(displaySeconds)) + "s", for: .normal)
+                verifiedCodeSendingBtn.setTitle(String(Int(displaySeconds)) + "s", for: .disabled)
                 verifiedCodeSendingBtn.layoutIfNeeded()
             }
         }

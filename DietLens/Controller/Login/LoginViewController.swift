@@ -107,6 +107,17 @@ class LoginViewController: ButtonBarPagerTabStripViewController {
                                 let preferences = UserDefaults.standard
                                 preferences.setValue(facebookUserId, forKey: "facebookId")
                                 preferences.setValue(facebookUserName, forKey: "nickname")
+                                //save token to backend
+                                let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                                let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                                if userId != nil && fcmToken != nil {
+                                    APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                                        if flag {
+                                            print("send device token succeed")
+                                        }
+                                    })
+                                }
+                                //is new user flow
                                 if isNewUser {
                                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                         var profile = UserProfile()
@@ -192,6 +203,17 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                             let preferences = UserDefaults.standard
                             preferences.setValue(facebookUserId, forKey: PreferenceKey.facebookId)
                             preferences.setValue(facebookUserName, forKey: PreferenceKey.nickNameKey)
+                            //save token to backend
+                            let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                            let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                            if userId != nil && fcmToken != nil {
+                                APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                                    if flag {
+                                        print("send device token succeed")
+                                    }
+                                })
+                            }
+                            //is new user flow
                             if isNewUser {
                                 if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                     var profile = UserProfile()

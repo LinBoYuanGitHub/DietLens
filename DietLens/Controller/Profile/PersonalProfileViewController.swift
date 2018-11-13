@@ -70,9 +70,11 @@ class PersonalProfileViewController: UIViewController {
         let avatar = ProfileEntity(profileName: "Avatar", profileValue: "", profileType: 0)
         let userName = ProfileEntity(profileName: "Nickname", profileValue: "", profileType: 1)
         let email = ProfileEntity(profileName: "Email", profileValue: "", profileType: 1)
+        let phone = ProfileEntity(profileName: "Phone", profileValue: "", profileType: 1)
         sectionHeader.profileList.append(avatar)
         sectionHeader.profileList.append(userName)
         sectionHeader.profileList.append(email)
+        sectionHeader.profileList.append(phone)
         //second section
         let secondSectionHeader = ProfileSection()
         secondSectionHeader.sectionHeaderText = "Your Basic Information"
@@ -314,6 +316,11 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                 } else if indexPath.row == 2 && indexPath.section == 0 {
                     cell.inptText.placeholder = ""
                     cell.inptText.text = profile.email
+                    cell.inptText.textColor = UIColor(red: 148/255, green: 148/255, blue: 148/255, alpha: 1)
+                    cell.inptText.isEnabled = false
+                } else if indexPath.row == 3 && indexPath.section == 0 {
+                    cell.inptText.placeholder = ""
+                    cell.inptText.text = profile.phone
                     cell.inptText.textColor = UIColor(red: 148/255, green: 148/255, blue: 148/255, alpha: 1)
                     cell.inptText.isEnabled = false
                 } else if indexPath.row == 0 && indexPath.section == 1 {

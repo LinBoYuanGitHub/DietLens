@@ -8,6 +8,7 @@
 
 import UIKit
 import Instructions
+import FirebaseAnalytics
 
 class HomeTabViewController: UIViewController, UITabBarDelegate {
 
@@ -179,6 +180,8 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
                 navigator.pushViewController(dest, animated: false)
             }
         }
+        //#google analytic log part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.OpenCameraView, parameters: nil)
     }
 }
 

@@ -6,6 +6,7 @@ import RealmSwift
 import JPSVolumeButtonHandler
 import Reachability
 import AssetsLibrary
+import FirebaseAnalytics
 
 class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
@@ -189,6 +190,10 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
     @IBAction func capturePhoto (_ sender: UIButton) {
         sessionManager.capturePhoto()
         capturePhotoButton.isEnabled = false
+        //#google analytic log part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.CaptureButtonPressed, parameters: [
+            "mealTime": mealType
+        ])
     }
 
     //    @IBAction func switchToBarcode(_ sender: UIButton) {

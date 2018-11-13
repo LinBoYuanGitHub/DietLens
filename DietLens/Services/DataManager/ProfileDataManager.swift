@@ -19,6 +19,7 @@ class ProfileDataManager {
         userProfile.name = jsonObj["name"].stringValue
         userProfile.email = jsonObj["user"].stringValue
         userProfile.gender = Int(jsonObj["gender"].stringValue)!
+        userProfile.phone = jsonObj["phone"].stringValue
 //        if jsonObj["gender"].stringValue == "1"{
 //            userProfile.gender = 1
 //        } else {

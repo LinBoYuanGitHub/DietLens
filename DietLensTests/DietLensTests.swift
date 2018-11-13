@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import FoodDiaryDataManager
+@testable import DietLens
 
 class DietLensTests: XCTestCase {
 
