@@ -50,7 +50,9 @@ class PersonalProfileViewController: UIViewController {
             //set userProfile
             if userProfile == nil {
                 let cachedProfile =  ProfileDataManager.instance.getCachedProfile()
-                self.loadProfileCache(userProfile: cachedProfile)
+                if let profile = cachedProfile {
+                    self.loadProfileCache(userProfile: profile)
+                }
                 return
             }
             self.loadProfileCache(userProfile: userProfile!)
