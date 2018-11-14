@@ -24,7 +24,12 @@ class TextSuggestionCacheLRU {
             return eachKey == key
         }) {
             //move key to first
-            list.remove(at: list.index(of: key)!)
+            guard let index = list.index(of: key) else {
+                //handle the previous wrong cache issue
+                dict.removeValue(forKey: key)
+                return
+            }
+            list.remove(at: index)
             list.insert(key, at: 0)
         } else {
             //judege whether excess the capacity
