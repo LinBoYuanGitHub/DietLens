@@ -23,16 +23,11 @@ class StepChartViewController: BaseViewController {
     @IBOutlet weak var rightArrow: UIButton!
 
     var stepDataList = [StepEntity]()
-    var dateMode = DateMode.day // 0 day,1 week, 2 month, 3 year
+    var dateMode = StringConstants.DateMode.day // 0 day,1 week, 2 month, 3 year
+
+    var marker: YStepMarkerView!
 
     var currentDate = Date()
-
-    enum DateMode {
-        case day
-        case week
-        case month
-        case year
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +46,7 @@ class StepChartViewController: BaseViewController {
         setUpChartLegend()
         setUpMarkerView()
         requestAuthFromHealthKit()//get auth at then beginning
+        rightArrow.isEnabled = false //disable rightArrow
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,8 +78,8 @@ class StepChartViewController: BaseViewController {
     }
 
     func setUpMarkerView() {
-        let marker = YStepMarkerView(color: UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0),
-                                   font: .systemFont(ofSize: 12),
+        marker = YStepMarkerView(color: UIColor(red: CGFloat(240.0/255.0), green: CGFloat(90.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0),
+                                   font: .systemFont(ofSize: 14),
                                    textColor: .white,
                                    insets: UIEdgeInsets(top: 8, left: 8, bottom: 20, right: 8))
 //        let marker = XYMarkerView(color: UIColor(white: 180/250, alpha: 1),
@@ -92,7 +88,7 @@ class StepChartViewController: BaseViewController {
 //                                  insets: UIEdgeInsets(top: 8, left: 8, bottom: 20, right: 8),
 //                                  xAxisValueFormatter: chartView.xAxis.valueFormatter!)
         marker.chartView = chartView
-        marker.minimumSize = CGSize(width: 80, height: 40)
+        marker.minimumSize = CGSize(width: 80, height: 50)
         chartView.marker = marker
     }
 
@@ -184,11 +180,12 @@ class StepChartViewController: BaseViewController {
         default:
             break
         }
+        marker.dateMode = dateMode
     }
 
     func loadDailyStepChart() {
         visibleCountNum = 24
-        dateMode = DateMode.day
+        dateMode = StringConstants.DateMode.day
         dateLabel.text = DateUtil.formatGMTDateToString(date: currentDate)
         setUpXAxis(labelCount: visibleCountNum, granularity: 3)
         HKHealthStore().getHourlyStepsCountList(inputDate: currentDate) { (steps, error) in
@@ -198,7 +195,7 @@ class StepChartViewController: BaseViewController {
 
     func loadWeeklyStepChart() {
         visibleCountNum = 7
-        dateMode = DateMode.week
+        dateMode = StringConstants.DateMode.week
         setUpXAxis(labelCount: visibleCountNum, granularity: 1)
         dateLabel.text = DateUtil.formatGMTDateToString(date: currentDate.beginOfWeek!) + "-" +  DateUtil.formatGMTDateToString(date: currentDate.endOfWeek!)
         HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: currentDate) { (steps, error) in
@@ -208,7 +205,7 @@ class StepChartViewController: BaseViewController {
 
     func loadMonthlyStepChart() {
         visibleCountNum = 31
-        dateMode = DateMode.month
+        dateMode = StringConstants.DateMode.month
         dateLabel.text = DateUtil.formatMonthWithYearToString(date: currentDate)
         setUpXAxis(labelCount: visibleCountNum, granularity: 5)
         HKHealthStore().getMonthlyStepsCountList(anyDayOfMonth: currentDate) { (steps, error) in
@@ -218,7 +215,7 @@ class StepChartViewController: BaseViewController {
 
     func loadYearlyStepChart() {
         visibleCountNum = 12
-        dateMode = DateMode.year
+        dateMode = StringConstants.DateMode.year
         dateLabel.text = DateUtil.formatYearToString(date: currentDate)
         setUpXAxis(labelCount: visibleCountNum, granularity: 1)
         HKHealthStore().getYearlyStepsCounterList(anyDayOfYear: currentDate) { (steps, error) in
@@ -249,6 +246,7 @@ class StepChartViewController: BaseViewController {
             currentDate = Calendar.current.date(byAdding: Calendar.Component.year, value: addingValue, to: currentDate)!
             loadYearlyStepChart()
         }
+        rightArrow.isEnabled = currentDate < Date()
     }
 
 }
@@ -264,25 +262,25 @@ extension StepChartViewController: IAxisValueFormatter {
 
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         switch dateMode {
-        case DateMode.day:
+        case .day:
             if Int(value) > 24 {
                 return ""
             } else {
                 return String(Int(value))
             }
-        case DateMode.week:
+        case .week:
             if Int(value - 1) >= StringConstants.DateString.weekString.count {
                 return ""
             } else {
                 return StringConstants.DateString.weekString[Int(value - 1)]
             }
-        case DateMode.month:
+        case .month:
             if Int(value) > 31 {
                 return ""
             } else {
                 return String(Int(value))
             }
-        case DateMode.year:
+        case .year:
             if Int(value - 1) >= StringConstants.DateString.monthString.count {
                 return ""
             } else {
