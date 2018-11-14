@@ -26,6 +26,8 @@ open class YStepMarkerView: MarkerImage {
     let labelHeight = 70 //at the top of the chartView
     let lineHeight = 490
 
+    var dateMode = StringConstants.DateMode.day
+
     public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets) {
         self.color = color
         self.font = font
@@ -152,7 +154,17 @@ open class YStepMarkerView: MarkerImage {
     }
 
     open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
-        setLabel(String(Int(entry.y)))
+        switch dateMode {
+            case .day:
+                setLabel(String(Int(entry.x)-1) + ":00 | " + String(Int(entry.y)))
+            case .week:
+                setLabel(StringConstants.DateString.weekString[(Int(entry.x)-1)] + " | " + String(Int(entry.y)))
+            case .month:
+                setLabel(String(Int(entry.x)) + " | " + String(Int(entry.y)))
+            case .year:
+                setLabel(StringConstants.DateString.monthString[(Int(entry.x)-1)] + " | " + String(Int(entry.y)))
+        }
+
     }
 
     open func setLabel(_ newLabel: String) {

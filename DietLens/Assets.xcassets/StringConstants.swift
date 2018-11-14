@@ -95,4 +95,11 @@ struct StringConstants {
         static let monthString = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     }
 
+    enum DateMode {
+        case day
+        case week
+        case month
+        case year
+    }
+
 }
