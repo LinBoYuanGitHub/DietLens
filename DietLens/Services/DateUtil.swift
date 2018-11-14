@@ -119,6 +119,13 @@ class DateUtil {
         return resultStr
     }
 
+    public static func formatFoodDiaryDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
 }
 
 extension Date {
