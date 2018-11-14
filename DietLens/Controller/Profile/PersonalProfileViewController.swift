@@ -93,10 +93,16 @@ class PersonalProfileViewController: UIViewController {
         thirdSectionHeader.sectionHeaderText = "Your Activity Level"
         let activityLevelEntity =  ProfileEntity(profileName: "Moderate exercise", profileValue: "", profileType: 2)
         thirdSectionHeader.profileList.append(activityLevelEntity)
+        //forth section
+        let forthSectionHeader = ProfileSection()
+        forthSectionHeader.sectionHeaderText = "Goals"
+        let calorieGoalEntity =  ProfileEntity(profileName: "", profileValue: "", profileType: 2)
+        forthSectionHeader.profileList.append(calorieGoalEntity)
         //append all the header together
         profileSectionList.append(sectionHeader)
         profileSectionList.append(secondSectionHeader)
         profileSectionList.append(thirdSectionHeader)
+        profileSectionList.append(forthSectionHeader)
     }
 
     func registerNib() {
@@ -383,8 +389,13 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
             }
         case 2:
             if let cell = tableView.dequeueReusableCell(withIdentifier: "profileArrowCell", for: indexPath) as? ProfileArrowCell {
-                let activityName =  StringConstants.ExerciseLvlText.exerciseLvlArr[profile.activityLevel]
-                cell.setUpCell(text: activityName)
+                if indexPath.row == 0 && indexPath.section == 2 {
+                    let activityName =  StringConstants.ExerciseLvlText.exerciseLvlArr[profile.activityLevel]
+                    cell.setUpCell(text: activityName)
+                } else if indexPath.row == 0 && indexPath.section == 3 {
+                    let activityName =  "Calorie Goal"
+                    cell.setUpCell(text: activityName)
+                }
                 return cell
             }
         default:
@@ -409,10 +420,14 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                 //jump to dest
                 if let cell = tableView.cellForRow(at: indexPath) as? ProfileArrowCell {
                     //Navigate to dest
-                    if let dest = storyboard?.instantiateViewController(withIdentifier: "activityLevelVC") as? ProfileActivityLvlViewController {
-                        self.navigationController?.pushViewController(dest, animated: true)
-                        dest.activitySelectDelegate = self
-                        dest.indexValue = profile.activityLevel
+                    if indexPath.row == 0 && indexPath.section == 2 {
+                        if let dest = storyboard?.instantiateViewController(withIdentifier: "activityLevelVC") as? ProfileActivityLvlViewController {
+                            self.navigationController?.pushViewController(dest, animated: true)
+                            dest.activitySelectDelegate = self
+                            dest.indexValue = profile.activityLevel
+                        }
+                    } else if indexPath.row == 0 && indexPath.section == 3 {
+                        //to set calorie goal page
                     }
                 }
             default:

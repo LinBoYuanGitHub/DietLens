@@ -6772,7 +6772,7 @@ What is it?</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQR-yp-AaC" userLabel="DateLabel">
                                         <rect key="frame" x="152.5" y="4.5" width="38.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.95294117647058818" green="0.27450980392156865" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUf-mT-xYe" userLabel="LeftArrow" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
@@ -8696,6 +8696,7 @@ Your recommended daily calorie intake is:</string>
                     <connections>
                         <outlet property="exerciseTable" destination="JDB-QR-NZ0" id="HAW-9g-qel"/>
                         <outlet property="progressBar" destination="YSk-bu-KS9" id="Zmn-nf-vAG"/>
+                        <outlet property="progressText" destination="ieE-uZ-hpX" id="G25-1q-pOc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJ2-Ns-Gr6" userLabel="First Responder" sceneMemberID="firstResponder"/>
