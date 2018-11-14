@@ -270,10 +270,12 @@ class TextInputViewController: BaseViewController {
                 self.emptyResultView.isHidden = false
             } else {
                 self.emptyResultView.isHidden = true
-                DispatchQueue.main.async {
-                    self.textSearchTable.reloadData()
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    self.textSearchTable.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                if self.searchResultList.count != 0 {
+                    DispatchQueue.main.async {
+                        self.textSearchTable.reloadData()
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        self.textSearchTable.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                    }
                 }
             }
             self.emptyView.isHidden = true
