@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ole-YA-gKG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ole-YA-gKG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -6635,7 +6635,7 @@ What is it?</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FKF-lj-ncS" userLabel="Sign up now">
                                 <rect key="frame" x="239" y="505" width="100" height="29"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
-                                <state key="normal" title="Forget Password?">
+                                <state key="normal" title="Forgot Password?">
                                     <color key="titleColor" red="0.91764705882352937" green="0.44313725490196076" blue="0.058823529411764705" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -6690,19 +6690,12 @@ What is it?</string>
                                     <action selector="onBackPressed" destination="3N3-Sd-CCR" eventType="touchUpInside" id="t3f-hU-pJ9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rw3-wF-io2">
-                                <rect key="frame" x="158.5" y="25" width="58" height="22"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6yt-K3-M3I" firstAttribute="centerX" secondItem="KrM-b2-vkj" secondAttribute="centerX" id="58S-gj-OB8"/>
                             <constraint firstItem="6yt-K3-M3I" firstAttribute="width" secondItem="KrM-b2-vkj" secondAttribute="width" id="5Wi-FV-8nl"/>
                             <constraint firstItem="fWA-5M-88a" firstAttribute="trailing" secondItem="1bW-f6-fmV" secondAttribute="trailing" constant="-70" id="7U3-Qd-7lp"/>
-                            <constraint firstItem="rw3-wF-io2" firstAttribute="top" secondItem="7Q6-Va-fqf" secondAttribute="bottom" constant="5" id="AdZ-ew-nYz"/>
                             <constraint firstItem="O1P-4o-36R" firstAttribute="top" secondItem="ZiV-NF-pD7" secondAttribute="top" id="BPP-WY-ggj"/>
                             <constraint firstItem="lm5-dc-sBM" firstAttribute="trailing" secondItem="1bW-f6-fmV" secondAttribute="trailing" constant="-20" id="CRV-Ey-DOj"/>
                             <constraint firstItem="k7D-re-NN8" firstAttribute="top" secondItem="7Q6-Va-fqf" secondAttribute="bottom" constant="10" id="EdF-RM-URB"/>
@@ -6715,7 +6708,6 @@ What is it?</string>
                             <constraint firstItem="lm5-dc-sBM" firstAttribute="leading" secondItem="1bW-f6-fmV" secondAttribute="leading" constant="20" id="Qq2-cM-mPG"/>
                             <constraint firstItem="1bW-f6-fmV" firstAttribute="bottom" secondItem="FKF-lj-ncS" secondAttribute="top" constant="-1" id="RlQ-KL-j6R"/>
                             <constraint firstItem="lm5-dc-sBM" firstAttribute="top" secondItem="Uyv-6e-yFc" secondAttribute="bottom" constant="15" id="VUi-2x-EB8"/>
-                            <constraint firstItem="k7D-re-NN8" firstAttribute="centerY" secondItem="rw3-wF-io2" secondAttribute="centerY" id="XzC-Xb-acj"/>
                             <constraint firstItem="1bW-f6-fmV" firstAttribute="top" secondItem="O1P-4o-36R" secondAttribute="bottom" constant="10" id="Yyu-N1-fYy"/>
                             <constraint firstItem="O1P-4o-36R" firstAttribute="leading" secondItem="ZiV-NF-pD7" secondAttribute="leading" id="ZRB-C8-kcc"/>
                             <constraint firstItem="KrM-b2-vkj" firstAttribute="top" secondItem="1bW-f6-fmV" secondAttribute="bottom" constant="45" id="bPZ-XN-ZWN"/>
@@ -6726,7 +6718,6 @@ What is it?</string>
                             <constraint firstItem="KrM-b2-vkj" firstAttribute="leading" secondItem="ZiV-NF-pD7" secondAttribute="leading" constant="46" id="k1C-aD-aom"/>
                             <constraint firstItem="Uyv-6e-yFc" firstAttribute="top" secondItem="fWA-5M-88a" secondAttribute="bottom" constant="8" id="mc9-fT-KD0"/>
                             <constraint firstItem="1bW-f6-fmV" firstAttribute="top" secondItem="fWA-5M-88a" secondAttribute="top" constant="-20" id="xFI-pT-rS2"/>
-                            <constraint firstItem="rw3-wF-io2" firstAttribute="centerX" secondItem="ZiV-NF-pD7" secondAttribute="centerX" id="xXC-tg-y9M"/>
                             <constraint firstItem="Uyv-6e-yFc" firstAttribute="leading" secondItem="1bW-f6-fmV" secondAttribute="leading" constant="10" id="y93-gO-z0F"/>
                         </constraints>
                     </view>
@@ -7536,13 +7527,13 @@ What is it?</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Successfully！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBc-wF-NaQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Successfully！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBc-wF-NaQ">
                                 <rect key="frame" x="32" y="56" width="162" height="34"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z74-51-kgj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z74-51-kgj" userLabel="success desc">
                                 <rect key="frame" x="32" y="117" width="323" height="39.5"/>
                                 <string key="text">Thank you for letting us know more about you.
 Your recommended daily calorie intake is:</string>
@@ -7551,21 +7542,70 @@ Your recommended daily calorie intake is:</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Recommended Calories Per Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u15-gP-mRT">
-                                <rect key="frame" x="32" y="192.5" width="316" height="26"/>
+                                <rect key="frame" x="32" y="183.5" width="316" height="26"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2163kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdg-EZ-RjB">
-                                <rect key="frame" x="32" y="222.5" width="97" height="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="2163kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdg-EZ-RjB">
+                                <rect key="frame" x="32" y="214.5" width="97" height="34"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="24"/>
                                 <color key="textColor" red="0.95686274509803915" green="0.19607843137254902" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbm-xQ-BVh">
-                                <rect key="frame" x="32" y="312.5" width="152" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Adjust calories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fno-KP-BOz">
+                                <rect key="frame" x="32" y="268.5" width="124" height="26"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
+                                <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="The range is between 1000 to 4000 kcal. Please choose according to your needs." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WL-Vm-b2U" userLabel="calorie adjust desc">
+                                <rect key="frame" x="32" y="296.5" width="323" height="45"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
+                                <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4A-TC-6ah">
+                                <rect key="frame" x="32" y="355.5" width="323" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rTw-SP-ga9">
+                                        <rect key="frame" x="50" y="16.5" width="120" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="vbh-dG-O8a"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LHJ-0u-F4S" userLabel="underline">
+                                        <rect key="frame" x="50" y="33.5" width="120" height="1"/>
+                                        <color key="backgroundColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Cks-Lf-Reg"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2Y-fp-PXz">
+                                        <rect key="frame" x="175" y="12.5" width="33" height="25.5"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="18"/>
+                                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="152" id="BfK-oT-mPA"/>
+                                    <constraint firstItem="w2Y-fp-PXz" firstAttribute="centerY" secondItem="n4A-TC-6ah" secondAttribute="centerY" id="2UW-ag-Pgb"/>
+                                    <constraint firstItem="rTw-SP-ga9" firstAttribute="centerY" secondItem="n4A-TC-6ah" secondAttribute="centerY" id="KHc-E1-vJu"/>
+                                    <constraint firstItem="LHJ-0u-F4S" firstAttribute="top" secondItem="rTw-SP-ga9" secondAttribute="bottom" id="Q4E-MQ-jjK"/>
+                                    <constraint firstItem="LHJ-0u-F4S" firstAttribute="leading" secondItem="rTw-SP-ga9" secondAttribute="leading" id="Qmw-rb-Nak"/>
+                                    <constraint firstAttribute="height" constant="50" id="WmC-cq-tAp"/>
+                                    <constraint firstItem="rTw-SP-ga9" firstAttribute="leading" secondItem="n4A-TC-6ah" secondAttribute="leading" constant="50" id="k5I-Gg-ess"/>
+                                    <constraint firstItem="LHJ-0u-F4S" firstAttribute="width" secondItem="rTw-SP-ga9" secondAttribute="width" id="r1U-cp-Z5D"/>
+                                    <constraint firstItem="w2Y-fp-PXz" firstAttribute="leading" secondItem="rTw-SP-ga9" secondAttribute="trailing" constant="5" id="rgG-fd-Qsw"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbm-xQ-BVh">
+                                <rect key="frame" x="32" y="430.5" width="283" height="40"/>
+                                <constraints>
                                     <constraint firstAttribute="height" constant="40" id="OJ1-AJ-eiS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="18"/>
@@ -7579,28 +7619,140 @@ Your recommended daily calorie intake is:</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Z74-51-kgj" firstAttribute="leading" secondItem="XQu-zQ-MVq" secondAttribute="leading" constant="32" id="JHS-mG-eJg"/>
-                            <constraint firstItem="bdg-EZ-RjB" firstAttribute="top" secondItem="u15-gP-mRT" secondAttribute="bottom" constant="4" id="N0w-X4-Rzm"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KBc-wF-NaQ" secondAttribute="trailing" constant="20" symbolic="YES" id="19c-Ag-kQb"/>
+                            <constraint firstItem="1WL-Vm-b2U" firstAttribute="top" secondItem="Fno-KP-BOz" secondAttribute="bottom" constant="2" id="71L-xb-EyO"/>
+                            <constraint firstItem="1WL-Vm-b2U" firstAttribute="trailing" secondItem="Z74-51-kgj" secondAttribute="trailing" id="96d-YM-KAI"/>
+                            <constraint firstItem="bdg-EZ-RjB" firstAttribute="leading" secondItem="KBc-wF-NaQ" secondAttribute="leading" id="9mJ-rJ-iKb"/>
+                            <constraint firstItem="1WL-Vm-b2U" firstAttribute="leading" secondItem="Z74-51-kgj" secondAttribute="leading" id="C0q-XO-wAc"/>
+                            <constraint firstItem="Fno-KP-BOz" firstAttribute="leading" secondItem="KBc-wF-NaQ" secondAttribute="leading" id="HC4-q3-2Lw"/>
+                            <constraint firstItem="n4A-TC-6ah" firstAttribute="trailing" secondItem="Z74-51-kgj" secondAttribute="trailing" id="IVG-6A-ehd"/>
+                            <constraint firstItem="n4A-TC-6ah" firstAttribute="top" secondItem="1WL-Vm-b2U" secondAttribute="bottom" constant="14" id="JmL-ct-qbF"/>
+                            <constraint firstItem="Jbm-xQ-BVh" firstAttribute="top" secondItem="n4A-TC-6ah" secondAttribute="bottom" constant="25" id="N6E-Je-wIo"/>
                             <constraint firstAttribute="trailing" secondItem="u15-gP-mRT" secondAttribute="trailing" constant="27" id="TXz-s0-3DQ"/>
                             <constraint firstItem="Z74-51-kgj" firstAttribute="top" secondItem="KBc-wF-NaQ" secondAttribute="bottom" constant="27" id="ULS-5d-M53"/>
                             <constraint firstAttribute="trailing" secondItem="Z74-51-kgj" secondAttribute="trailing" constant="20" id="UPD-u6-HJK"/>
-                            <constraint firstItem="bdg-EZ-RjB" firstAttribute="leading" secondItem="XQu-zQ-MVq" secondAttribute="leading" constant="32" id="aKP-BX-FNn"/>
-                            <constraint firstItem="Jbm-xQ-BVh" firstAttribute="leading" secondItem="XQu-zQ-MVq" secondAttribute="leading" constant="32" id="dNW-GH-VhH"/>
+                            <constraint firstItem="Fno-KP-BOz" firstAttribute="top" secondItem="bdg-EZ-RjB" secondAttribute="bottom" constant="20" id="ZuV-T7-Ket"/>
+                            <constraint firstItem="bdg-EZ-RjB" firstAttribute="top" secondItem="u15-gP-mRT" secondAttribute="bottom" constant="5" id="a9n-iG-AjN"/>
                             <constraint firstItem="KBc-wF-NaQ" firstAttribute="leading" secondItem="XQu-zQ-MVq" secondAttribute="leading" constant="32" id="f92-4T-dUz"/>
-                            <constraint firstItem="u15-gP-mRT" firstAttribute="top" secondItem="Z74-51-kgj" secondAttribute="bottom" constant="36" id="gAz-Wl-EwD"/>
-                            <constraint firstItem="Jbm-xQ-BVh" firstAttribute="top" secondItem="bdg-EZ-RjB" secondAttribute="bottom" constant="56" id="j2T-lR-jCl"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bdg-EZ-RjB" secondAttribute="trailing" constant="20" symbolic="YES" id="fFT-ZE-Bge"/>
+                            <constraint firstItem="u15-gP-mRT" firstAttribute="leading" secondItem="KBc-wF-NaQ" secondAttribute="leading" id="fjx-Vk-IzL"/>
+                            <constraint firstItem="u15-gP-mRT" firstAttribute="top" secondItem="Z74-51-kgj" secondAttribute="bottom" constant="27" id="gAz-Wl-EwD"/>
+                            <constraint firstItem="Z74-51-kgj" firstAttribute="leading" secondItem="KBc-wF-NaQ" secondAttribute="leading" id="hUi-MF-JWL"/>
+                            <constraint firstItem="n4A-TC-6ah" firstAttribute="leading" secondItem="KBc-wF-NaQ" secondAttribute="leading" id="iPq-Zl-R3a"/>
                             <constraint firstItem="KBc-wF-NaQ" firstAttribute="top" secondItem="AP1-Iz-xPd" secondAttribute="bottom" constant="36" id="oAT-2d-gkK"/>
-                            <constraint firstItem="u15-gP-mRT" firstAttribute="leading" secondItem="XQu-zQ-MVq" secondAttribute="leading" constant="32" id="sdp-60-xet"/>
+                            <constraint firstItem="Jbm-xQ-BVh" firstAttribute="leading" secondItem="KBc-wF-NaQ" secondAttribute="leading" id="sFC-og-VBQ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calorieGoalTextField" destination="rTw-SP-ga9" id="GOv-GI-YEp"/>
                         <outlet property="calorieText" destination="bdg-EZ-RjB" id="03S-PZ-GHe"/>
                         <outlet property="registrationButton" destination="Jbm-xQ-BVh" id="qeJ-qF-mtk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G1C-z2-zZc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2625" y="-1627.5"/>
+            <point key="canvasLocation" x="2624.8000000000002" y="-1627.7361319340332"/>
+        </scene>
+        <!--Profile Calorie Goal View Controller-->
+        <scene sceneID="84m-a9-cPa">
+            <objects>
+                <viewController storyboardIdentifier="calorieGoalVC" id="Z7q-7g-ozR" customClass="ProfileCalorieGoalViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2bB-7V-a5Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="sBN-eu-vn3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wBe-o9-Xxt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Recommended Calories Per Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHg-Nq-AJ7">
+                                <rect key="frame" x="32" y="78" width="311" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1200kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR7-2R-84r">
+                                <rect key="frame" x="32" y="110" width="97" height="34"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="24"/>
+                                <color key="textColor" red="0.95686274509803915" green="0.19607843137254902" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adjust calories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9l-qt-NLe">
+                                <rect key="frame" x="32" y="207" width="124" height="26"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The range is between 1000 to 4000 kcal. Please choose according to your needs." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1H9-95-Djc">
+                                <rect key="frame" x="32" y="235" width="311" height="45"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
+                                <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yb-Dj-pyo">
+                                <rect key="frame" x="32" y="294" width="311" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dZG-Qr-ZgR">
+                                        <rect key="frame" x="50" y="8" width="120" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="THU-tY-y4N"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WU-p7-RiP">
+                                        <rect key="frame" x="176" y="12" width="33" height="26"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="18"/>
+                                        <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Kr-Ud-ocE" userLabel="underline">
+                                        <rect key="frame" x="50" y="42" width="120" height="1"/>
+                                        <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="O4t-ZL-vnX"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="dZG-Qr-ZgR" firstAttribute="leading" secondItem="7yb-Dj-pyo" secondAttribute="leading" constant="50" id="0eu-M8-73I"/>
+                                    <constraint firstItem="2WU-p7-RiP" firstAttribute="leading" secondItem="dZG-Qr-ZgR" secondAttribute="trailing" constant="6" id="1dZ-tJ-OtA"/>
+                                    <constraint firstItem="8Kr-Ud-ocE" firstAttribute="top" secondItem="dZG-Qr-ZgR" secondAttribute="bottom" id="2SH-RU-Bgc"/>
+                                    <constraint firstItem="8Kr-Ud-ocE" firstAttribute="leading" secondItem="dZG-Qr-ZgR" secondAttribute="leading" id="5mZ-S0-Vgr"/>
+                                    <constraint firstItem="2WU-p7-RiP" firstAttribute="centerY" secondItem="7yb-Dj-pyo" secondAttribute="centerY" id="Ehh-dR-bRw"/>
+                                    <constraint firstItem="8Kr-Ud-ocE" firstAttribute="width" secondItem="dZG-Qr-ZgR" secondAttribute="width" id="Kyb-vw-BXe"/>
+                                    <constraint firstItem="dZG-Qr-ZgR" firstAttribute="centerY" secondItem="7yb-Dj-pyo" secondAttribute="centerY" id="W6E-zT-wWp"/>
+                                    <constraint firstAttribute="height" constant="50" id="n1q-Cq-WZP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1H9-95-Djc" firstAttribute="leading" secondItem="lHg-Nq-AJ7" secondAttribute="leading" id="3oM-jG-TaC"/>
+                            <constraint firstItem="f9l-qt-NLe" firstAttribute="leading" secondItem="lHg-Nq-AJ7" secondAttribute="leading" id="3y1-8N-dmf"/>
+                            <constraint firstItem="1H9-95-Djc" firstAttribute="trailing" secondItem="lHg-Nq-AJ7" secondAttribute="trailing" id="9AU-ke-m8Q"/>
+                            <constraint firstItem="7yb-Dj-pyo" firstAttribute="top" secondItem="1H9-95-Djc" secondAttribute="bottom" constant="14" id="I9q-jm-9V7"/>
+                            <constraint firstItem="7yb-Dj-pyo" firstAttribute="leading" secondItem="1H9-95-Djc" secondAttribute="leading" id="N3a-4u-lRB"/>
+                            <constraint firstItem="7yb-Dj-pyo" firstAttribute="centerX" secondItem="wBe-o9-Xxt" secondAttribute="centerX" id="QYU-ae-lmt"/>
+                            <constraint firstItem="lHg-Nq-AJ7" firstAttribute="leading" secondItem="wBe-o9-Xxt" secondAttribute="leading" constant="32" id="SiV-X1-3iP"/>
+                            <constraint firstAttribute="trailing" secondItem="lHg-Nq-AJ7" secondAttribute="trailing" constant="32" id="YKa-Oq-LLP"/>
+                            <constraint firstItem="f9l-qt-NLe" firstAttribute="top" secondItem="cR7-2R-84r" secondAttribute="bottom" constant="63" id="gEZ-Ox-aXD"/>
+                            <constraint firstItem="1H9-95-Djc" firstAttribute="top" secondItem="f9l-qt-NLe" secondAttribute="bottom" constant="2" id="jSB-bH-cqq"/>
+                            <constraint firstItem="cR7-2R-84r" firstAttribute="leading" secondItem="wBe-o9-Xxt" secondAttribute="leading" constant="32" id="mlU-GX-MGd"/>
+                            <constraint firstItem="lHg-Nq-AJ7" firstAttribute="top" secondItem="2bB-7V-a5Z" secondAttribute="bottom" constant="58" id="pDu-Jm-8gT"/>
+                            <constraint firstItem="cR7-2R-84r" firstAttribute="top" secondItem="lHg-Nq-AJ7" secondAttribute="bottom" constant="8" id="vSE-ps-Wb7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="calorieGoalField" destination="dZG-Qr-ZgR" id="49O-NH-nxK"/>
+                        <outlet property="recommendCalorieGoal" destination="cR7-2R-84r" id="p9D-zo-4Tp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oWe-d3-XAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3392.8000000000002" y="-1625.0374812593705"/>
         </scene>
         <!--Forget Password Verify View Controller-->
         <scene sceneID="Mh1-zv-IOU">
@@ -8128,7 +8280,7 @@ Your recommended daily calorie intake is:</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH3-5G-M9L" userLabel="NutrtionViewContainer" customClass="RedGardientView" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
+                                <rect key="frame" x="0.0" y="107" width="375" height="126"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-fT-7ys">
                                         <rect key="frame" x="0.0" y="38" width="375" height="80"/>
@@ -8616,7 +8768,7 @@ Your recommended daily calorie intake is:</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How active are you?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0y4-kX-UbR">
-                                            <rect key="frame" x="61.5" y="36.5" width="189.5" height="28"/>
+                                            <rect key="frame" x="77" y="36.5" width="189.5" height="28"/>
                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="20"/>
                                             <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -8626,11 +8778,11 @@ Your recommended daily calorie intake is:</string>
                                     <constraints>
                                         <constraint firstItem="0y4-kX-UbR" firstAttribute="top" secondItem="YSk-bu-KS9" secondAttribute="bottom" constant="25" id="A3u-4s-yxW"/>
                                         <constraint firstItem="YSk-bu-KS9" firstAttribute="top" secondItem="akN-XF-anb" secondAttribute="top" constant="10" id="FV0-Mj-yTz"/>
+                                        <constraint firstItem="0y4-kX-UbR" firstAttribute="centerX" secondItem="akN-XF-anb" secondAttribute="centerX" id="FwI-9P-2N3"/>
                                         <constraint firstItem="ieE-uZ-hpX" firstAttribute="leading" secondItem="YSk-bu-KS9" secondAttribute="trailing" constant="3" id="KFj-sf-YdD"/>
                                         <constraint firstAttribute="trailing" secondItem="ieE-uZ-hpX" secondAttribute="trailing" constant="16" id="Rsg-vo-OYF"/>
                                         <constraint firstItem="ieE-uZ-hpX" firstAttribute="centerY" secondItem="YSk-bu-KS9" secondAttribute="centerY" id="Te3-YK-d3L"/>
                                         <constraint firstItem="YSk-bu-KS9" firstAttribute="leading" secondItem="akN-XF-anb" secondAttribute="leading" constant="16" id="lIx-7M-hYP"/>
-                                        <constraint firstItem="0y4-kX-UbR" firstAttribute="centerX" secondItem="YSk-bu-KS9" secondAttribute="centerX" id="zS0-bs-wCM"/>
                                     </constraints>
                                 </view>
                                 <prototypes>

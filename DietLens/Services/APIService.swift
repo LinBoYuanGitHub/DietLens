@@ -1760,6 +1760,59 @@ class APIService {
         }
     }
 
+    //diet-goal
+    func getDietGoal(completion: @escaping ([String: Double]) -> Void) {
+        var guideDict = [String: Double]()
+        Alamofire.request(
+            URL(string: ServerConfig.dietGoalURL)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get Dietary Guide Failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    completion(guideDict)
+                    return
+                }
+                guard let value = response.result.value else {
+                    print("get Dietary Goal Failed due to : Server Data Type Error")
+                    completion(guideDict)
+                    return
+                }
+                let json = JSON(value)
+                guideDict["energy"] = json["data"]["energy"].doubleValue
+                guideDict["protein"] = json["data"]["protein"].doubleValue
+                guideDict["fat"] = json["data"]["fat"].doubleValue
+                guideDict["carbohydrate"] = json["data"]["carbohydrate"].doubleValue
+                completion(guideDict)
+        }
+    }
+
+    func setCalorieGoal(calorieGoal: Double, completion: @escaping (Bool) -> Void) {
+        let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
+        Alamofire.request(
+            URL(string: ServerConfig.dietGoalURL + userId + "/")!,
+            method: .put,
+            parameters: ["energy": calorieGoal],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Set calorie goal failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                completion(response.result.isSuccess)
+        }
+    }
+
+    //SMS Login
+
     func sendSMSRequest(phoneNumber: String, completion: @escaping (Bool) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.phoneSendSMSURL)!,

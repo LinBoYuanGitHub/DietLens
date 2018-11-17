@@ -11,10 +11,12 @@ class RegistrationFinishViewController: UIViewController {
 
     @IBOutlet weak var calorieText: UILabel!
     @IBOutlet weak var registrationButton: UIButton!
+    @IBOutlet weak var calorieGoalTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getGoalCalorie()
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +48,29 @@ class RegistrationFinishViewController: UIViewController {
         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
            self.present(controller, animated: true, completion: nil)
         }
+        //update the calorie value
+        guard let calorieText = calorieGoalTextField.text else {
+            return
+        }
+        guard let calorieValue = Double(calorieText) else {
+            return
+        }
+        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in
+            //handle the successful case
+        }
     }
 
+}
+
+extension RegistrationFinishViewController {
+
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

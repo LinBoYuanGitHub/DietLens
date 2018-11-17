@@ -12,6 +12,7 @@ struct UserProfile {
     var id: String = ""
     var name: String = ""
     var email: String = ""
+    var phone: String = ""
     var gender: Int = 2
     var birthday: String = ""
     var age: Int = 0
@@ -22,4 +23,9 @@ struct UserProfile {
     var weight: Double = 0.0
     var activityLevel: Int = 0
     var ethnicity = 0
+    var dietGoal = DietGoal()
+}
+
+struct DietGoal {
+    var calorie: Double = 0
 }

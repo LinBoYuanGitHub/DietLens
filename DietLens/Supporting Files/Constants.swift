@@ -76,6 +76,7 @@ struct ServerConfig {
 //    static let qiniuDietLensImageDomain = "https://image.dietlens.com/"
     static let phoneSendSMSURL = labDeskTopURL + "/social-acc/sms/"
     static let verifySMSURL = labDeskTopURL + "/social-acc/phone/"
+    static let dietGoalURL = labDeskTopURL + "/diet-goal/"
 }
 
 struct RedirectAddress {
