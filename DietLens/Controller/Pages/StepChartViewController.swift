@@ -31,8 +31,9 @@ class StepChartViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let timeZoneStr = TimeZone.current.abbreviation()
+//        let timeZoneStr = TimeZone.current.abbreviation()
         let formatComponent = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+//        formatComponent.timeZone = TimeZone(abbreviation: "UTC")
         currentDate = Calendar.current.date(from: formatComponent)!
         chartView.delegate = self
         chartView.drawBarShadowEnabled = false

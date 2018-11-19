@@ -69,6 +69,7 @@ class DateUtil {
 
     public static func formatGMTDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "dd MMM yyyy"
         let resultStr = dateFormatter.string(from: date)
         return resultStr
