@@ -31,6 +31,9 @@ class StepChartViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let timeZoneStr = TimeZone.current.abbreviation()
+        let formatComponent = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        currentDate = Calendar.current.date(from: formatComponent)!
         chartView.delegate = self
         chartView.drawBarShadowEnabled = false
         chartView.drawValueAboveBarEnabled = false
@@ -104,7 +107,28 @@ class StepChartViewController: BaseViewController {
         var yValues = [BarChartDataEntry]()
         for index in 0..<steps.count {
             let val = steps[index].stepValue
-            let entity = BarChartDataEntry(x: Double(index+1), y: val)
+            var xAxisVal = 0.0
+            guard let xDate = steps[index].date else {
+                return
+            }
+            switch dateMode {
+            case .day:
+                xAxisVal = Double(index)
+            case .week:
+                var weekday = Calendar.current.component(.weekday, from: xDate)
+                //TODO hard approach to fix the timeZone issue, need to be gentle
+                if weekday == 1 {
+                    weekday = 8
+                }
+                xAxisVal = Double(weekday-1)
+            case .month:
+                let monthDay = Calendar.current.component(.day, from: xDate)
+                xAxisVal = Double(monthDay)
+            case .year:
+                let month = Calendar.current.component(.month, from: xDate)
+                xAxisVal = Double(month)
+            }
+            let entity = BarChartDataEntry(x: xAxisVal, y: val)
             yValues.append(entity)
         }
         let dataSet = BarChartDataSet(values: yValues, label: "Steps")
@@ -235,18 +259,21 @@ class StepChartViewController: BaseViewController {
         switch dateMode {
         case .day:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.day, value: addingValue, to: currentDate)!
+            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.day, value: addingValue, to: currentDate)!
             loadDailyStepChart()
         case .week:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.weekOfMonth, value: addingValue, to: currentDate)!
+            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.weekOfYear, value: addingValue, to: currentDate)!
             loadWeeklyStepChart()
         case .month:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.month, value: addingValue, to: currentDate)!
+            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.month, value: addingValue, to: currentDate)!
             loadMonthlyStepChart()
         case .year:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.year, value: addingValue, to: currentDate)!
+            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.year, value: addingValue, to: currentDate)!
             loadYearlyStepChart()
         }
-        rightArrow.isEnabled = currentDate < Date()
     }
 
 }

@@ -37,9 +37,9 @@ struct StringConstants {
     }
 
     struct ExerciseLvlText {
-        static let exerciseLvlArr = ["SEDENTARY", "LIGHTLY ACTIVE", "ACTIVE", "VERY ACTIVE", "EXTERMELY ACTIVE"]
+        static let exerciseLvlArr = ["Sedentary", "Lightly Active", "Active", "Very Active", "Extremely Active"]
         static let exerciseFrequencyArr = ["none", "Once per week", "Twice per week", "Once per day", "Twice per day"]
-        static let exerciseDescriptionArr = ["Occupations that do not require much physical effort, almost no exercise", "Desk job with requirements to move occasionlly, little to no exericise", "Non-strenuous occaupations with frequent exercise", "Strenuous work of frequent leisure exercise for serveral hours a day", "Physically demanding occupations such as competitive athletes"]
+        static let exerciseDescriptionArr = ["Occupations that require little physical effort, i.e. almost never exercise.", "Occupations that feature occasional movement, i.e. rarely exercise.", "Non-strenuous occupations with frequent movement, i.e. occasionally exercise.", "Strenuous work featuring exercise for several hours a day, i.e. frequent exercise.", "Physically demanding occupations, i.e. very frequent exercise."]
 
     }
 

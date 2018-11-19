@@ -24,7 +24,7 @@ open class YStepMarkerView: MarkerImage {
     fileprivate var _drawAttributes = [NSAttributedString.Key: AnyObject]()
 
     let labelHeight = 70 //at the top of the chartView
-    let lineHeight = 490
+    var lineHeight = CGFloat(490)
 
     var dateMode = StringConstants.DateMode.day
 
@@ -58,7 +58,7 @@ open class YStepMarkerView: MarkerImage {
         origin.x -= width / 2
         origin.y -= height
 
-        if origin.x + offset.x < 0.0 {
+        if origin.x + offset.x < -1.0 {
             offset.x = -origin.x + padding
         } else if let chart = chartView,
             origin.x + width + offset.x > chart.bounds.size.width {
@@ -85,6 +85,7 @@ open class YStepMarkerView: MarkerImage {
                 x: point.x + offset.x,
                 y: CGFloat(labelHeight)),
             size: size)
+        lineHeight = point.y - rect.origin.y/2
         rect.origin.x -= size.width / 2.0
         rect.origin.y -= size.height
 
@@ -156,7 +157,7 @@ open class YStepMarkerView: MarkerImage {
     open override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         switch dateMode {
             case .day:
-                setLabel(String(Int(entry.x)-1) + ":00 | " + String(Int(entry.y)))
+                setLabel(String(Int(entry.x)) + ":00 | " + String(Int(entry.y)))
             case .week:
                 setLabel(StringConstants.DateString.weekString[(Int(entry.x)-1)] + " | " + String(Int(entry.y)))
             case .month:

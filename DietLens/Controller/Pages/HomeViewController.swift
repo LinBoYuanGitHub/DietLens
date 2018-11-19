@@ -115,7 +115,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     //load personal target whenever go to main page
     @objc func loadNutritionTarget() {
-        APIService.instance.getDietaryGuideInfo { (guideDict) in
+        APIService.instance.getDietGoal { (guideDict) in
             let preferences = UserDefaults.standard
             preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
             preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
@@ -123,6 +123,14 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
             self.requestNutritionDict(requestDate: Date())
         }
+//        APIService.instance.getDietaryGuideInfo { (guideDict) in
+//            let preferences = UserDefaults.standard
+//            preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
+//            preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
+//            preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
+//            preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
+//            self.requestNutritionDict(requestDate: Date())
+//        }
     }
 
     func loadCalorieData(todayIntakenCal: Int) {

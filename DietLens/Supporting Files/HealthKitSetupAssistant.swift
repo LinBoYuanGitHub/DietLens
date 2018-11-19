@@ -133,7 +133,6 @@ extension HKHealthStore {
     }
 
     func getHourlyStepsCountList(inputDate: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
-
         let calendar = Calendar.current
         var interval = DateComponents()
         interval.hour = 1
@@ -162,8 +161,10 @@ extension HKHealthStore {
                 }
                 return
             }
-            let endDate = inputDate
-            guard let startDate = calendar.date(byAdding: .day, value: -1, to: endDate)
+            let components = calendar.dateComponents([.hour, .day, .month, .year], from: inputDate)
+//            components.timeZone = TimeZone(secondsFromGMT: 0)
+            let startDate = calendar.date(from: components)
+            guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate!)
                 else {
                     fatalError("*** Unable to calculate the start date ***")
                     if completionHandler != nil {
@@ -172,7 +173,7 @@ extension HKHealthStore {
             }
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
-            statsCollection.enumerateStatistics(from: startDate, to: endDate) { [unowned self] statistics, _ in
+            statsCollection.enumerateStatistics(from: startDate!, to: endDate) { [unowned self] statistics, _ in
 
                 let date = statistics.startDate
                 if let quantity = statistics.sumQuantity() {
@@ -299,7 +300,7 @@ extension HKHealthStore {
     }
 
     func getYearlyStepsCounterList(anyDayOfYear date: Date, completion completionHandler: (([StepEntity], Error?) -> Void)?) {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
         var interval = DateComponents()
         interval.month = 1
         var anchorComponents = calendar.dateComponents([.month, .year], from: Date())
@@ -331,6 +332,7 @@ extension HKHealthStore {
             let startOfYear = calendar.date(from: components)
             var comps2 = DateComponents()
             comps2.year = 1
+            comps2.month = -1
             let endOfYear = calendar.date(byAdding: comps2, to: startOfYear!)
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months

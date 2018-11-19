@@ -191,9 +191,9 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         sessionManager.capturePhoto()
         capturePhotoButton.isEnabled = false
         //#google analytic log part
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.CaptureButtonPressed, parameters: [
-            "mealTime": mealType
-        ])
+//        Analytics.logEvent(StringConstants.FireBaseAnalytic.CaptureButtonPressed, parameters: [
+//            "mealTime": mealType
+//        ])
     }
 
     //    @IBAction func switchToBarcode(_ sender: UIButton) {
@@ -235,6 +235,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         APIService.instance.qiniuImageUpload(imgData: imgData, completion: {(imageKey) in
             if imageKey != nil {
                 let uploadTime = Date().timeIntervalSince(startTime)
+                print(uploadTime)
                 self.postImageKeyToServer(imageKey: imageKey!, isUsingSample: false, uploadTime: uploadTime)
             } else {//error happen during upload image to Qiniu
                 self.hideReview()
