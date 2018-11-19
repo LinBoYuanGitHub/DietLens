@@ -61,6 +61,7 @@ class ProfileCalorieGoalViewController: BaseViewController {
             APIService.instance.setCalorieGoal(calorieGoal: Double(goal)) { (isSuccess) in
                 if isSuccess {
                     self.calorieGoalSetDelegate?.onCalorieGoalSet(goalValue: goal)
+                    NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
                 }
             }
         }

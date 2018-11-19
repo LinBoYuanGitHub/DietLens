@@ -438,10 +438,10 @@ class FoodInfoViewController: UIViewController {
                 }
             })
             //#google analytic log part
-            Analytics.logEvent(StringConstants.FireBaseAnalytic.RecogItemSave, parameters: [
-                "recordType": recordType,
-                "mealtime": foodDiaryEntity.mealType
-            ])
+//            Analytics.logEvent(StringConstants.FireBaseAnalytic.RecogItemSave, parameters: [
+//                "recordType": recordType,
+//                "mealtime": foodDiaryEntity.mealType
+//            ])
         }
     }
 
