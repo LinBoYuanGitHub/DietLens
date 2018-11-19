@@ -59,6 +59,12 @@ class HealthCenterMainCell: UITableViewCell {
                  valueLabel.text = HealthCenterConstants.moodList[index]
             }
             container.backgroundColor = UIColor(red: 255/255, green: 183/255, blue: 33/255, alpha: 1)
+        case "3":
+            itemName.text = "StepCounter"
+            dateLabel.text = ""
+            icon.image = #imageLiteral(resourceName: "healthCenter_stepCounterIcon")
+            valueLabel.text = ""
+            container.backgroundColor = UIColor(red: 243/255, green: 70/255, blue: 90/255, alpha: 1)
         default:
             break
         }

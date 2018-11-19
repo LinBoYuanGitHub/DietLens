@@ -26,6 +26,7 @@ class FoodDiaryDataManager {
         var foodDiaryEntity = FoodDiaryEntity()
         foodDiaryEntity.foodDiaryId = jsonObject["id"].stringValue
         foodDiaryEntity.imageId = jsonObject["image"].stringValue
+        foodDiaryEntity.placeHolderImage = jsonObject["placeholder_img"].stringValue
         foodDiaryEntity.mealTime = jsonObject["meal_time"].stringValue
         foodDiaryEntity.mealType = jsonObject["meal_type"].stringValue
         if(jsonObject["latitude"].stringValue != "" && jsonObject["longitude"].stringValue != "") {
@@ -38,6 +39,7 @@ class FoodDiaryDataManager {
             foodItem.id = job["id"].stringValue
             foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
+            foodItem.sampleImageUrl = job["example_img"].stringValue
             //prevent quantity equals zero
             if job["quantity"].doubleValue == 0 {
                 foodItem.quantity = 1

@@ -11,6 +11,7 @@ import Foundation
 struct FoodDiaryEntity {
     public var foodDiaryId: String = ""
     public var imageId: String = ""
+    public var placeHolderImage: String = ""
     public var mealTime: String = ""
     public var mealType: String = ""
     public var latitude = 0.0

@@ -6,6 +6,8 @@
 //  Copyright © 2018 NExT++. All rights reserved.
 
 import UIKit
+import FirebaseAnalytics
+
 class FoodInfoViewController: UIViewController {
 
     @IBOutlet weak var foodSampleImage: UIImageView!
@@ -39,6 +41,7 @@ class FoodInfoViewController: UIViewController {
     var selectedPortionPos: Int = 0
     var quantityIntegerArray = [0]
     var decimalArray = [0, 0.25, 0.5, 0.75]
+    var decimalArrayString = [".0", ".25", ".50", ".75"]
     var mealStringArray = [StringConstants.MealString.breakfast, StringConstants.MealString.lunch, StringConstants.MealString.dinner, StringConstants.MealString.snack]
     var currentMealIndex = 0
     //parameter for passing value
@@ -46,7 +49,7 @@ class FoodInfoViewController: UIViewController {
     var foodDiaryEntity = FoodDiaryEntity()
     var dietItem = DietItem()
     var isSetMealByTimeRequired: Bool = false
-    var recordType = RecordType.RecordByImage
+    var recordType = RecognitionInteger.recognition
 //    var isAddIntoFoodList = false
 //    var isAccumulatedDiary: Bool = false
     var imageKey: String?
@@ -181,7 +184,7 @@ class FoodInfoViewController: UIViewController {
     func setUpImage() {
         loadImageFromWeb(imageUrl: dietItem.sampleImageUrl)
         if imageKey != nil {
-             foodDiaryEntity.imageId = imageKey!
+            foodDiaryEntity.imageId = imageKey!
         }
     }
 
@@ -258,15 +261,15 @@ class FoodInfoViewController: UIViewController {
     func setCorrectMealType() {
         if isSetMealByTimeRequired {
             let hour: Int = Calendar.current.component(.hour, from: Date())
-            if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
+            if hour < ConfigVariable.BreakFastEndTime && hour >= ConfigVariable.BreakFastStartTime {
                 self.foodDiaryEntity.mealType = StringConstants.MealString.breakfast
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
-            } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
+            } else if hour < ConfigVariable.LunchEndTime && hour >= ConfigVariable.LunchStartTime {
                 self.foodDiaryEntity.mealType = StringConstants.MealString.lunch
                 currentMealIndex = 1
                 mealCollectionView.reloadData()
-            } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
+            } else if hour < ConfigVariable.DinnerEndTime && hour >= ConfigVariable.DinnerStartTime {
                 self.foodDiaryEntity.mealType = StringConstants.MealString.dinner
                 currentMealIndex = 2
                 mealCollectionView.reloadData()
@@ -419,34 +422,26 @@ class FoodInfoViewController: UIViewController {
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
                         //request for saving FoodDiary
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC") as? FoodDiaryHistoryViewController {
-                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
-                            if let navigator = self.navigationController {
-                                //pop all the view except HomePage
-                                if navigator.viewControllers.contains(where: {
-                                    return $0 is FoodCalendarViewController
-                                }) {
-                                    //add foodItem into foodDiaryVC
-                                    for viewController in (self.navigationController?.viewControllers)! {
-                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            navigator.popToViewController(foodDiaryHistoryVC, animated: false)
-                                                foodDiaryHistoryVC.shouldRefreshDiary = true
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                        navigator.popToRootViewController(animated: false)
-                                        navigator.pushViewController(dest, animated: true)
-                                        dest.shouldRefreshDiary = true
-                                    })
+                        //                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
+                        if let navigator = self.navigationController {
+                            //pop to home tabPage
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                if let dest =  navigator.viewControllers.first as? HomeTabViewController {
+                                    dest.shouldSwitchToFoodDiary = true
                                 }
-                            }
+                                navigator.popToRootViewController(animated: true)
+                                //                                    navigator.popToViewController(dest, animated: true)
+
+                            })
                         }
                     }
                 }
             })
+            //#google analytic log part
+//            Analytics.logEvent(StringConstants.FireBaseAnalytic.RecogItemSave, parameters: [
+//                "recordType": recordType,
+//                "mealtime": foodDiaryEntity.mealType
+//            ])
         }
     }
 
@@ -529,7 +524,7 @@ extension FoodInfoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         if component == 0 {
             return String(quantityIntegerArray[row])
         } else {
-            return String(decimalArray[row])
+            return String(decimalArrayString[row])
         }
     }
 

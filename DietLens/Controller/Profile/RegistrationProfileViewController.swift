@@ -34,8 +34,8 @@ class RegistrationProfileViewController: BaseViewController {
         setUpPicker()
         hideKeyboardWhenTappedAround()
         //set initial timing
-        birthDayPickerView.date = DateUtil.normalStringToDate(dateStr: "1990-01-01")
-        profile.birthday = "01-01-1990"
+        birthDayPickerView.date = DateUtil.normalStringToDate(dateStr: "1990-07-01")
+        profile.birthday = "1990-07-01"
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -274,7 +274,7 @@ extension RegistrationProfileViewController: UITableViewDelegate, UITableViewDat
             cell.registrationTextField.inputView = genderPickerView
         case 2:
             cell.setUpCell(fieldName: "Date of Birth")
-            cell.registrationTextField.text = profile.birthday
+            cell.registrationTextField.text = StringConstants.DefaultValue.BIRTHDAYDEFAULT //set the default value in the beginning
             cell.registrationTextField.inputView = birthDayPickerView
         case 3:
             cell.setUpCell(fieldName: "Ethnicity")

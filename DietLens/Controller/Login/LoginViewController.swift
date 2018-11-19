@@ -13,7 +13,7 @@ import SkyFloatingLabelTextField
 import FBSDKLoginKit
 import Reachability
 import GoogleSignIn
-import LGSideMenuController
+import XLPagerTabStrip
 
 struct FBProfileRequest: GraphRequestProtocol {
     typealias Response = GraphResponse
@@ -25,97 +25,59 @@ struct FBProfileRequest: GraphRequestProtocol {
     var apiVersion: GraphAPIVersion = 2.7
 }
 
-class LoginViewController: UIViewController {
+class LoginViewController: ButtonBarPagerTabStripViewController {
 
-    @IBOutlet weak var TFEmail: SkyFloatingLabelTextField!
-    @IBOutlet weak var TFPassword: SkyFloatingLabelTextField!
     @IBOutlet weak var facebookLoginBtn: UIButton!
     @IBOutlet weak var googleLoginBtn: UIButton!
 
-    @IBAction func onLoginBtnClicked(_ sender: Any) {
-
-        if Reachability()!.connection == .none {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.noInternetErrorMsg)
-            return
-        }
-        if (TFEmail.text?.isEmpty)! {
-            TFEmail.errorMessage = "Please enter your email address"
-            return
-        } else if (TFPassword.text?.isEmpty)! {
-            TFPassword.errorMessage = "Please enter your password"
-            return
-        } else if !TextValidtor.isValidEmail(testStr: TFEmail.text!) {
-            TFEmail.errorMessage = "INVALID EMAIL"
-            return
-        }
-        AlertMessageHelper.showLoadingDialog(targetController: self)
-        //login request
-        APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!, completion: { (isSuccess) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                if isSuccess {
-                    // save for basic authentication
-                    let preferences = UserDefaults.standard
-                    let pwdKey = PreferenceKey.passwordKey
-                    preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
-                    //upload the device token to server
-                    let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
-                    let userId = preferences.string(forKey: PreferenceKey.userIdkey)
-                    if userId != nil && fcmToken != nil {
-                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
-                            if flag {
-                                print("send device token succeed")
-                            }
-                        })
-                    }
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
-                    }
-                } else {
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
-                    print("Login failed")
-                }
-            }
-        }) { (errMsg) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: errMsg)
-        }
+    override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        guard let emailLoginVC = storyboard?.instantiateViewController(withIdentifier: "emailLoginVC")
+            as? EmailLoginViewController, let smsLoginVC =
+            storyboard?.instantiateViewController(withIdentifier: "smsLoginVC") as? SMSLoginViewController
+            else { return [] }
+        //passing value to child VC
+        return [emailLoginVC, smsLoginVC]
     }
 
     override func viewDidLoad() {
+        // change selected bar color
+        settings.style.buttonBarBackgroundColor = .clear
+        settings.style.buttonBarItemBackgroundColor = .clear
+        settings.style.selectedBarBackgroundColor = UIColor(displayP3Red: 223/255, green: 65/255, blue: 47/255, alpha: 1.0)
+        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 12)!
+        settings.style.selectedBarHeight = 2.0
+        settings.style.buttonBarMinimumLineSpacing = 0
+        settings.style.buttonBarItemTitleColor = UIColor(displayP3Red: 223/255, green: 65/255, blue: 47/255, alpha: 1.0)
+        settings.style.buttonBarItemsShouldFillAvailableWidth = true
+        settings.style.buttonBarLeftContentInset = 0
+        settings.style.buttonBarRightContentInset = 0
+
+        changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
+            guard changeCurrentIndex == true else { return }
+        }
         super.viewDidLoad()
-        TFEmail.delegate = self
-        TFPassword.delegate = self
-        TFEmail.keyboardType = .emailAddress
-        setUpSkyFloatingLable()
+        containerView.bounces = false
+        containerView.alwaysBounceHorizontal = false
+        containerView.scrollsToTop = false
+        containerView.isScrollEnabled = false
         // Do any additional setup after loading the view.
         hideKeyboardWhenTappedAround()
-//        facebookLoginBtn.delegate = self
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = false
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.navigationController?.navigationBar.isHidden = true
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = .gray
         self.navigationItem.title = "Sign In"
     }
 
-    @objc func onBackPressed() {
+    @IBAction func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
-    }
-
-    func setUpSkyFloatingLable() {
-        TFEmail.placeholder = "Email"
-        TFEmail.font = UIFont(name: "PingFang SC-Light", size: 16)
-        TFEmail.title = "Email"
-        TFPassword.placeholder = "Password"
-        TFPassword.font = UIFont(name: "PingFang SC-Light", size: 16)
-        TFPassword.title = "at least 8 characters with letters"
-        //delegate
-        TFEmail.delegate = self
-        TFPassword.delegate = self
     }
 
     @IBAction func processFacebookLogin(_ sender: Any) {
@@ -145,6 +107,17 @@ class LoginViewController: UIViewController {
                                 let preferences = UserDefaults.standard
                                 preferences.setValue(facebookUserId, forKey: "facebookId")
                                 preferences.setValue(facebookUserName, forKey: "nickname")
+                                //save token to backend
+                                let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                                let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                                if userId != nil && fcmToken != nil {
+                                    APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                                        if flag {
+                                            print("send device token succeed")
+                                        }
+                                    })
+                                }
+                                //is new user flow
                                 if isNewUser {
                                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                         var profile = UserProfile()
@@ -157,7 +130,9 @@ class LoginViewController: UIViewController {
                                         }
                                     }
                                 } else {
-                                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                                        self.present(controller, animated: true, completion: nil)
+                                    }
                                 }
                             }
                         })
@@ -183,67 +158,23 @@ class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "ForgetPwdVC")
         self.present(controller, animated: true, completion: nil)
-//        self.performSegue(withIdentifier: "GoToForgetPwEmail", sender: self)
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let emailTyped = TFEmail.text, !emailTyped.isEmpty {
-            if segue.identifier == "GoToForgetPwEmail"{
-                if let emailConfirm = segue.destination as? ForgetPasswordEmailViewController {
-                    emailConfirm.emailFromLogin = emailTyped
-                }
-            }
-        }
-
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
-}
-
-extension LoginViewController: UITextFieldDelegate {
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString str: String) -> Bool {
-//        if let text = textField.text {
-//            //Email validator
-//            if textField == TFEmail {
-//                let validationString = textField.text! + str
-//                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
-//                    TFEmail.errorMessage = "Invalid email"
-//                } else {
-//                    TFEmail.errorMessage = ""
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let emailTyped = TFEmail.text, !emailTyped.isEmpty {
+//            if segue.identifier == "GoToForgetPwEmail"{
+//                if let emailConfirm = segue.destination as? ForgetPasswordEmailViewController {
+//                    emailConfirm.emailFromLogin = emailTyped
 //                }
 //            }
 //        }
-        return true
-    }
-
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        //        keyboardWillShow()
-        if textField == TFEmail {
-            TFEmail.errorMessage = ""
-        } else {
-            TFPassword.errorMessage = ""
-        }
-        return true
-    }
-
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField == TFEmail && !TextValidtor.isValidEmail(testStr: TFEmail.text!) {
-            TFEmail.errorMessage = "INVALID EMAIL"
-        } else {
-            TFEmail.errorMessage = ""
-        }
-        return true
-    }
+//
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//    }
 
 }
 
@@ -270,9 +201,19 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                         if isSuccess {
                             //record userId & userName
                             let preferences = UserDefaults.standard
-
                             preferences.setValue(facebookUserId, forKey: PreferenceKey.facebookId)
                             preferences.setValue(facebookUserName, forKey: PreferenceKey.nickNameKey)
+                            //save token to backend
+                            let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                            let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                            if userId != nil && fcmToken != nil {
+                                APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                                    if flag {
+                                        print("send device token succeed")
+                                    }
+                                })
+                            }
+                            //is new user flow
                             if isNewUser {
                                 if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                     var profile = UserProfile()
@@ -285,7 +226,9 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                     }
                                 }
                             } else {
-                                self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
+                                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                                    self.present(controller, animated: true, completion: nil)
+                                }
                             }
                         }
                     })
@@ -338,8 +281,9 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                     }
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController {
-                        self.navigationController?.pushViewController(controller, animated: true)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+//                        self.navigationController?.pushViewController(controller, animated: true)
+                        self.present(controller, animated: true, completion: nil)
                     }
                 }
             }

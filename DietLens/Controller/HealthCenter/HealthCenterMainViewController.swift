@@ -31,12 +31,25 @@ class HealthCenterMainViewController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         getLatestHealthCenterItemValue()
+        //set rightBarButtonItem disapear
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 
+    /**
+     * Append Step Counter tab as the first persistent Item
+     */
     func getLatestHealthCenterItemValue() {
         APIService.instance.getLatestHealthLog { (healthCenterItems) in
             if healthCenterItems != nil {
                 self.healthCenterItemList = healthCenterItems!
+                //add stepCounter item
+                var stepCounterItem = HealthCenterItem()
+                stepCounterItem.itemName = "Step Counter"
+                stepCounterItem.category = StringConstants.UIString.stepCounterText
+                stepCounterItem.type = "3"
+                self.healthCenterItemList.insert(stepCounterItem, at: 0)
+                //reload table view
                 self.healthCenterTable.reloadData()
             }
         }
@@ -66,14 +79,24 @@ extension HealthCenterMainViewController: UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //jump to healthCenterTableViewVC
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HealthCenterTableVC")
-            as? HealthCenterTableViewController, let cell = tableView.cellForRow(at: indexPath) as? HealthCenterMainCell {
-            tableView.deselectRow(at: indexPath, animated: true)
-            let entity = healthCenterItemList[indexPath.row]
-            dest.recordType  = entity.type
-            dest.recordName = entity.itemName
-            dest.titleName = cell.itemName!.text!
-            self.navigationController?.pushViewController(dest, animated: true)
+        let entity = healthCenterItemList[indexPath.row]
+        if entity.category == StringConstants.UIString.stepCounterText {
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepChartVC") as? StepChartViewController, let cell = tableView.cellForRow(at: indexPath) as? HealthCenterMainCell {
+                 self.navigationController?.pushViewController(dest, animated: true)
+            }
+//            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC")
+//                as? StepCounterViewController, let cell = tableView.cellForRow(at: indexPath) as? HealthCenterMainCell {
+//                self.navigationController?.pushViewController(dest, animated: true)
+//            }
+        } else {
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HealthCenterTableVC")
+                as? HealthCenterTableViewController, let cell = tableView.cellForRow(at: indexPath) as? HealthCenterMainCell {
+                tableView.deselectRow(at: indexPath, animated: true)
+                dest.recordType  = entity.type
+                dest.recordName = entity.itemName
+                dest.titleName = cell.itemName!.text!
+                self.navigationController?.pushViewController(dest, animated: true)
+            }
         }
     }
 

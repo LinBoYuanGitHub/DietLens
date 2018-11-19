@@ -11,10 +11,12 @@ class RegistrationFinishViewController: UIViewController {
 
     @IBOutlet weak var calorieText: UILabel!
     @IBOutlet weak var registrationButton: UIButton!
+    @IBOutlet weak var calorieGoalTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         getGoalCalorie()
+        self.hideKeyboardWhenTappedAround()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,12 +42,39 @@ class RegistrationFinishViewController: UIViewController {
 
     @IBAction func onRegistrationBtnClicked(_ sender: Any) {
         //set registration profile filling flag to true
+        //update the calorie value
+        guard let calorieText = calorieGoalTextField.text else {
+            return
+        }
+        guard let calorieValue = Double(calorieText) else {
+            return
+        }
+        if Int(calorieValue) < DietGoalTreshold.minCalorieGoalValue && Int(calorieValue) > DietGoalTreshold.maxCalorieGoalValue {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Calorie goal must be between 1000 and 4000")
+            return
+        }
         let preference = UserDefaults.standard
-//        preference.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialo)
         preference.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-        self.present(viewController, animated: true, completion: nil)
+        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+           self.present(controller, animated: true, completion: nil)
+        }
+
+        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in
+            //handle the successful case
+        }
     }
 
+}
+
+extension RegistrationFinishViewController {
+
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

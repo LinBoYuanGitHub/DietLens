@@ -20,7 +20,11 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @IBOutlet weak var calendarBtn: UIButton!
     @IBOutlet weak var nutritionCollectionView: UICollectionView!
     @IBOutlet weak var foodDiaryMealTable: UITableView!
-    @IBOutlet weak var editBtn: UIBarButtonItem!
+//    @IBOutlet weak var editBtn: UIBarButtonItem!
+    //left right arrow
+    @IBOutlet weak var leftArrowButton: ExpandedUIButton!
+    @IBOutlet weak var rightArrowButton: ExpandedUIButton!
+    @IBOutlet weak var editBtn: ExpandedUIButton!
 
     //bottom dialog view
     @IBOutlet weak var bottomDialog: UIView!
@@ -45,7 +49,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_GB")
-        formatter.setLocalizedDateFormatFromTemplate("MMMMd")
+        formatter.setLocalizedDateFormatFromTemplate("EEE, dd MMM")
         return formatter
     }()
 
@@ -56,12 +60,16 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         nutritionCollectionView.delegate = self
         nutritionCollectionView.dataSource = self
         dateLabel.text = formatter.string(from: selectedDate)
+        rightArrowButton.setImage(UIImage(imageLiteralResourceName: "calendar_right_arrow_gray"), for: .disabled)
+        //judge whether is same date
+        rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
         registerNib()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadDailyNutritionView()
+        self.navigationController?.navigationBar.isHidden = true
         //load available date & load calendar data
         if shouldRefreshDiary {
             refreshFoodDiaryData()
@@ -120,24 +128,30 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         }
     }
 
-    @IBAction func switchToEditStatus(_ sender: Any) {
+    @IBAction func onEditButtonPressed(_ sender: Any) {
+        switchToEditStatus()
+    }
+
+    @objc func switchToEditStatus() {
         currentEditStatus = FoodDiaryStatus.edit
         foodDiaryMealTable.reloadData()
-        self.navigationController?.navigationBar.topItem?.title = "Edit"
-        editBtn.isEnabled = false
-        editBtn.title = nil
+        self.parent?.navigationController?.navigationBar.topItem?.title = "Edit"
+        self.parent?.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.parent?.navigationItem.rightBarButtonItem?.title = nil
         distanceToBottom.constant = 54
         dialogContainer.isHidden = false
+        editBtn.isHidden = true
     }
 
     @IBAction func switchToNormalStatus(_ sender: Any) {
         currentEditStatus = FoodDiaryStatus.normal
         foodDiaryMealTable.reloadData()
-        self.navigationController?.navigationBar.topItem?.title = "Food Diary"
-        editBtn.isEnabled = true
-        editBtn.title = "Edit"
+        self.parent?.navigationController?.navigationBar.topItem?.title = "Food Diary"
+        self.parent?.navigationItem.rightBarButtonItem?.isEnabled = true
+        self.parent?.navigationItem.rightBarButtonItem?.title = "Edit"
         distanceToBottom.constant = 0
         dialogContainer.isHidden = true
+        editBtn.isHidden = false
         //remove all the trash items
         trashItemIds.removeAll()
     }
@@ -153,14 +167,38 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         }
     }
 
+    @IBAction func onLeftArrowPressed(_ sender: Any) {
+        //adjust selectedDate
+        var component = DateComponents()
+        component.day = -1
+        selectedDate = Calendar.current.date(byAdding: component, to: selectedDate)!
+        //judge whether is same date
+        rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
+        //request data & UI Change
+        self.dateLabel.text = self.formatter.string(from: selectedDate)
+        self.loadDailyNutritionView()
+        getFoodDairyByDate(date: selectedDate)
+    }
+
+    @IBAction func onRightArrowPressed(_ sender: Any) {
+        //adjust selectedDate
+        var component = DateComponents()
+        component.day = 1
+        selectedDate = Calendar.current.date(byAdding: component, to: selectedDate)!
+        //judge whether is same date
+        rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
+        //request data & UI Change
+        self.dateLabel.text = self.formatter.string(from: selectedDate)
+        self.loadDailyNutritionView()
+        getFoodDairyByDate(date: selectedDate)
+    }
+
     //************************************************************************************
     // private data calculation method
     //************************************************************************************
 
     func getFoodDairyByDate(date: Date) {
         let dateStr = DateUtil.normalDateToString(date: date)
-//        AlertMessageHelper.showLoadingDialog(targetController: self)
-//        self.showLoadingDialog()
         APIService.instance.getFoodDiaryByDate(selectedDate: dateStr) { (foodDiaryList) in
 //            AlertMessageHelper.dismissLoadingDialog(targetController: self)
 //            self.hideLoadingDialog()
@@ -268,25 +306,23 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
 
     func didSelectFoodDiaryItem(foodDiary: FoodDiaryEntity) {
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-                let imageKey = foodDiary.imageId
-                //download image from Qiniu
-                AlertMessageHelper.showLoadingDialog(targetController: self)
-                APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                        dest.isSetMealByTimeRequired = false
-                        dest.foodDiaryEntity = foodDiary
-                        dest.isUpdate = true
-                        dest.imageKey = foodDiary.imageId
-                        if image != nil {
-                            dest.userFoodImage = image
-                        } else {
-                            dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
-                        }
-                        if let navigator = self.navigationController {
-                            navigator.pushViewController(dest, animated: true)
-                        }
-                    }
-                })
+                var imageKey = foodDiary.imageId
+                //pass correct imageId
+                if foodDiary.imageId == "" {
+                    imageKey = foodDiary.placeHolderImage
+                } else {
+                    imageKey = foodDiary.imageId
+                }
+                dest.isSetMealByTimeRequired = false
+                dest.foodDiaryEntity = foodDiary
+                dest.isUpdate = true
+                dest.imageKey = imageKey
+                if imageKey == "" {
+                    dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                }
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(dest, animated: true)
+                }
             }
     }
 
@@ -400,10 +436,16 @@ extension FoodDiaryHistoryViewController: UICollectionViewDelegate, UICollection
 extension FoodDiaryHistoryViewController: CalendarAlertDelegate {
 
     func onCalendarDateSelected(selectedDate: Date) {
+        if selectedDate > Date() {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         let later = DispatchTime.now() + 0.3
         DispatchQueue.main.asyncAfter(deadline: later) {
             //operation dismiss the dialog
             self.selectedDate = selectedDate
+            //judge whether is same date
+            self.rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
             self.dateLabel.text = self.formatter.string(from: selectedDate)
             self.getFoodDairyByDate(date: selectedDate)
             self.loadDailyNutritionView()

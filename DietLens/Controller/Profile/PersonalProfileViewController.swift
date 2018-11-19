@@ -22,6 +22,7 @@ class PersonalProfileViewController: UIViewController {
     let ethnicityList = [StringConstants.EnthnicityText.CHINESE, StringConstants.EnthnicityText.MALAYS, StringConstants.EnthnicityText.INDIANS, StringConstants.EnthnicityText.OTHER]
     //profile
     var profile = UserProfile()
+    var calorieGoal  = 0.0
     let weightInputView = RulerInputView()
     let heightInputView = RulerInputView()
     //tag
@@ -50,15 +51,31 @@ class PersonalProfileViewController: UIViewController {
             //set userProfile
             if userProfile == nil {
                 let cachedProfile =  ProfileDataManager.instance.getCachedProfile()
-                self.loadProfileCache(userProfile: cachedProfile)
+                if let profile = cachedProfile {
+                    self.loadProfileCache(userProfile: profile)
+                }
                 return
             }
             self.loadProfileCache(userProfile: userProfile!)
+        }
+        APIService.instance.getDietGoal { (dietGoalDict) in
+            guard let calorieGoal = dietGoalDict["energy"] else {
+                return
+            }
+            self.profile.dietGoal.calorie = calorieGoal
+            self.calorieGoal = calorieGoal
+            let indexPath = IndexPath(row: 0, section: 3)//calorie goal row
+            if let cell = self.profileTableView.cellForRow(at: indexPath) as? ProfileArrowCell {
+                DispatchQueue.main.async {
+                     cell.textComponent.text = "Calorie Goal: " + String(Int(calorieGoal)) + " kcal"
+                }
+            }
         }
     }
 
     func loadProfileCache(userProfile: UserProfile) {
         self.profile = userProfile
+        self.profile.dietGoal.calorie = calorieGoal
         self.profileTableView.reloadData()
         let birthDate = DateUtil.normalStringToDate(dateStr: (userProfile.birthday))
         self.birthDayPickerView.setDate(birthDate, animated: false)
@@ -70,9 +87,11 @@ class PersonalProfileViewController: UIViewController {
         let avatar = ProfileEntity(profileName: "Avatar", profileValue: "", profileType: 0)
         let userName = ProfileEntity(profileName: "Nickname", profileValue: "", profileType: 1)
         let email = ProfileEntity(profileName: "Email", profileValue: "", profileType: 1)
+        let phone = ProfileEntity(profileName: "Phone", profileValue: "", profileType: 1)
         sectionHeader.profileList.append(avatar)
         sectionHeader.profileList.append(userName)
         sectionHeader.profileList.append(email)
+        sectionHeader.profileList.append(phone)
         //second section
         let secondSectionHeader = ProfileSection()
         secondSectionHeader.sectionHeaderText = "Your Basic Information"
@@ -91,10 +110,16 @@ class PersonalProfileViewController: UIViewController {
         thirdSectionHeader.sectionHeaderText = "Your Activity Level"
         let activityLevelEntity =  ProfileEntity(profileName: "Moderate exercise", profileValue: "", profileType: 2)
         thirdSectionHeader.profileList.append(activityLevelEntity)
+        //forth section
+        let forthSectionHeader = ProfileSection()
+        forthSectionHeader.sectionHeaderText = "Goals"
+        let calorieGoalEntity =  ProfileEntity(profileName: "", profileValue: "", profileType: 2)
+        forthSectionHeader.profileList.append(calorieGoalEntity)
         //append all the header together
         profileSectionList.append(sectionHeader)
         profileSectionList.append(secondSectionHeader)
         profileSectionList.append(thirdSectionHeader)
+        profileSectionList.append(forthSectionHeader)
     }
 
     func registerNib() {
@@ -115,7 +140,8 @@ class PersonalProfileViewController: UIViewController {
 
     @IBAction func closePage() {
         view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
     func setUpPicker() {
@@ -195,7 +221,8 @@ class PersonalProfileViewController: UIViewController {
                 NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
                 NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
                     //refresh the profile sharedPreference
-                    self.dismiss(animated: true, completion: nil)
+//                    self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popViewController(animated: true)
                     } else {
                         //error alert
                         AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
@@ -314,6 +341,13 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     cell.inptText.text = profile.email
                     cell.inptText.textColor = UIColor(red: 148/255, green: 148/255, blue: 148/255, alpha: 1)
                     cell.inptText.isEnabled = false
+                } else if indexPath.row == 3 && indexPath.section == 0 {
+                    cell.inptText.placeholder = ""
+                    cell.inptText.textColor = UIColor(red: 148/255, green: 148/255, blue: 148/255, alpha: 1)
+                    cell.inptText.isEnabled = false
+                    //hide the previous 4 phone number digit when matching the phone format
+                    let phoneText: String = profile.phone.count >= 11 ? profile.phone.prefix(3) + "****" + profile.phone.dropFirst(7) : profile.phone
+                    cell.inptText.text = phoneText
                 } else if indexPath.row == 0 && indexPath.section == 1 {
                     cell.inptText.inputView = genderPickerView
                     cell.inptText.inputAccessoryView = setUpPickerToolBar(text: "Gender")
@@ -374,8 +408,13 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
             }
         case 2:
             if let cell = tableView.dequeueReusableCell(withIdentifier: "profileArrowCell", for: indexPath) as? ProfileArrowCell {
-                let activityName =  StringConstants.ExerciseLvlText.exerciseLvlArr[profile.activityLevel]
-                cell.setUpCell(text: activityName)
+                if indexPath.row == 0 && indexPath.section == 2 {
+                    let activityName =  StringConstants.ExerciseLvlText.exerciseLvlArr[profile.activityLevel]
+                    cell.setUpCell(text: activityName)
+                } else if indexPath.row == 0 && indexPath.section == 3 {
+                    let activityName =  "Calorie Goal: " + String(Int(profile.dietGoal.calorie)) + " kcal"
+                    cell.setUpCell(text: activityName)
+                }
                 return cell
             }
         default:
@@ -388,26 +427,35 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
         tableView.deselectRow(at: indexPath, animated: true)
         let profileEntity = profileSectionList[indexPath.section].profileList[indexPath.row]
         switch profileEntity.profileType {
-            case 0:
-                //avatar
-                break
-            case 1:
-                //textField
-                if let cell = tableView.cellForRow(at: indexPath) as? ProfileTextFieldCell {
-                    cell.inptText.becomeFirstResponder()
-                }
-            case 2:
-                //jump to dest
-                if let cell = tableView.cellForRow(at: indexPath) as? ProfileArrowCell {
-                    //Navigate to dest
+        case 0:
+            //avatar
+            break
+        case 1:
+            //textField
+            if let cell = tableView.cellForRow(at: indexPath) as? ProfileTextFieldCell {
+                cell.inptText.becomeFirstResponder()
+            }
+        case 2:
+            //jump to dest
+            if let cell = tableView.cellForRow(at: indexPath) as? ProfileArrowCell {
+                //Navigate to dest
+                if indexPath.row == 0 && indexPath.section == 2 {
                     if let dest = storyboard?.instantiateViewController(withIdentifier: "activityLevelVC") as? ProfileActivityLvlViewController {
                         self.navigationController?.pushViewController(dest, animated: true)
                         dest.activitySelectDelegate = self
                         dest.indexValue = profile.activityLevel
                     }
+                } else if indexPath.row == 0 && indexPath.section == 3 {
+                    //to set calorie goal page
+                    if let dest = storyboard?.instantiateViewController(withIdentifier: "calorieGoalVC") as? ProfileCalorieGoalViewController {
+                        self.navigationController?.pushViewController(dest, animated: true)
+                        dest.calorieGoalSetDelegate = self
+                        dest.calorieGoal = Int(profile.dietGoal.calorie)
+                    }
                 }
-            default:
-                break
+            }
+        default:
+            break
         }
     }
 
@@ -465,6 +513,17 @@ extension PersonalProfileViewController: activitySelectDelegate {
         }
     }
 
+}
+
+extension PersonalProfileViewController: CalorieGoalSetDelegate {
+
+    func onCalorieGoalSet(goalValue: Int) {
+        let indexPath = IndexPath(row: 0, section: 3)//calorie goal row
+        if let cell = self.profileTableView.cellForRow(at: indexPath) as? ProfileArrowCell {
+            cell.textComponent.text = "Calorie Goal: " + String(goalValue) + " kcal"
+            profile.dietGoal.calorie = Double(goalValue)
+        }
+    }
 }
 
 extension PersonalProfileViewController: RulerInputDelegate {

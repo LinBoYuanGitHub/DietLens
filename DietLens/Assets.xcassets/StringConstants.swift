@@ -17,6 +17,7 @@ struct StringConstants {
         static let updateBtnText = "Update"
         static let addBtnText = "Done"
         static let saveBtnText = "Save"
+        static let stepCounterText = "StepCounter"
     }
     struct MealString {
         static let breakfast = "Breakfast"
@@ -36,10 +37,18 @@ struct StringConstants {
     }
 
     struct ExerciseLvlText {
-        static let exerciseLvlArr = ["SEDENTARY", "LIGHTLY ACTIVE", "ACTIVE", "VERY ACTIVE", "EXTERMELY ACTIVE"]
+        static let exerciseLvlArr = ["Sedentary", "Lightly Active", "Active", "Very Active", "Extremely Active"]
         static let exerciseFrequencyArr = ["none", "Once per week", "Twice per week", "Once per day", "Twice per day"]
-        static let exerciseDescriptionArr = ["Occupations that do not require much physical effort, almost no exercise", "Desk job with requirements to move occasionlly, little to no exericise", "Non_strenuous occaupations with frequent exercise", "Strenuous work of frequent leisure exercise for serveral hours a day", "Physically demanding occupations such as competitive athletes"]
+        static let exerciseDescriptionArr = ["Occupations that require little physical effort, i.e. almost never exercise.", "Occupations that feature occasional movement, i.e. rarely exercise.", "Non-strenuous occupations with frequent movement, i.e. occasionally exercise.", "Strenuous work featuring exercise for several hours a day, i.e. frequent exercise.", "Physically demanding occupations, i.e. very frequent exercise."]
 
+    }
+
+    struct FireBaseAnalytic {
+        static let CaptureButtonPressed = "on_click_capture"
+        static let OpenCameraView = "on_click_camera"
+        static let RecogCategorySelect = "on_click_cat"
+        static let RecogItemSelect = "on_click_item"
+        static let RecogItemSave = "on_click_save"
     }
 
     struct GenderText {
@@ -56,6 +65,41 @@ struct StringConstants {
 
     struct ThresholdValue {
         static let introductionOffsetThreshold = 900
+    }
+
+    struct DefaultValue {
+        static let BIRTHDAYDEFAULT = "01-07-1990"
+    }
+
+    struct ScreenName {
+        static let HomePageView = "HomePage"
+        static let NotificationPageView = "NotificationPage"
+        static let HomeNutritionInfoView = "HomeNutritionInfo"
+        static let LatestArticlesView = "LatestArticles"
+        static let LatestEventsView = "LatestEvents"
+        static let FoodDiaryPageView = "FoodDiaryPage"
+        static let HealthLogPageView = "HealthLogPage"
+        static let HealthLogStepCounterView = "HealthLogStepCounter"
+        static let HealthLogWeightView = "HealthLogWeight"
+        static let HealthLogBloodGlucoseView = "HealthLogBloodGlucose"
+        static let HealthLogMoodView = "HealthLogMood"
+        static let MorePageView = "MorePage"
+        static let MoreFeedbackView = "MoreFeedback"
+        static let MoreEditProfile = "MoreEditProfile"
+        static let CameraPageView = "AddFoodByImage"
+        static let TextSearchPageView = "AddFoodByTextPopular"
+    }
+
+    struct DateString {
+        static let weekString =  ["Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"]
+        static let monthString = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    }
+
+    enum DateMode {
+        case day
+        case week
+        case month
+        case year
     }
 
 }

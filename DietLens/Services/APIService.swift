@@ -457,27 +457,24 @@ class APIService {
                 let foodSearchList = TextSearchDataManager.instance.assembleTextSerchResultList(jsonObj: jsonObj)
                 //                let jsonArr = jsonObj["data"]
                 let nextLink = jsonObj["next"].stringValue
-                //                var foodSearchList = [TextSearchSuggestionEntity]()
-                //                for index in 0..<jsonArr.count {
-                //                    let dict = jsonArr[index].dictionaryValue
-                //                    var entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-                //                    entity.location = dict["location"]!.stringValue
-                //                    entity.stall = dict["stall"]!.stringValue
-                //                    foodSearchList.append(entity)
-                //                }
                 nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
     }
 
     public func getFoodSearchResult(filterType: Int, keywords: String, latitude: Double, longitude: Double, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
-        let url = ServerConfig.foodFullTextSearchURL + "?category=" + String(filterType)
+        let url = ServerConfig.foodFullTextSearchURL //+ "?category=" + String(filterType)
         self.getFoodSearchResult(requestUrl: url, keywords: keywords, latitude: latitude, longitude: longitude, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
-    public func getFoodSearchPopularity(mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void) {
+    public func getFoodSearchPopularity(mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
+        let url =  ServerConfig.textSearchPopularURL+"?meal="+mealtime
+        self.getFoodSearchPopularity(requestUrl: url, mealtime: mealtime, completion: completion, nextPageCompletion: nextPageCompletion)
+    }
+
+    public func getFoodSearchPopularity(requestUrl: String, mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.textSearchPopularURL+"?meal="+mealtime)!,
+            URL(string: requestUrl)!,
             method: .get,
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
@@ -499,11 +496,8 @@ class APIService {
                 }
                 let jsonObj = JSON(searchResults)
                 let foodSearchList = TextSearchDataManager.instance.assemblePopularTextSerchResultList(jsonObj: jsonObj)
-                //                for index in 0..<jsonArr.count {
-                //                    let dict = jsonArr[index].dictionaryValue
-                //                    let entity = TextSearchSuggestionEntity(id: (dict["id"]?.intValue)!, name: (dict["name"]?.stringValue)!, useExpImage: (dict["is_exp_img"]?.bool)!, expImagePath: (dict["example_img"]?.stringValue)! )
-                //                    foodSearchList.append(entity)
-                //                }
+                let nextLink = jsonObj["next"].stringValue
+                nextPageCompletion(nextLink)
                 completion(foodSearchList)
         }
     }
@@ -678,11 +672,11 @@ class APIService {
      * param: imageKey,latitude,longitude
      * return: List of DisplayFoodCategory
      */
-    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
+    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.uploadImageKeyURL)!,
             method: .post,
-            parameters: ["key": imageKey, "latitude": latitude, "longitude": longitude],
+            parameters: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
@@ -1766,6 +1760,108 @@ class APIService {
         }
     }
 
+    //diet-goal
+    func getDietGoal(completion: @escaping ([String: Double]) -> Void) {
+        var guideDict = [String: Double]()
+        Alamofire.request(
+            URL(string: ServerConfig.dietGoalURL)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get Dietary Guide Failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    completion(guideDict)
+                    return
+                }
+                guard let value = response.result.value else {
+                    print("get Dietary Goal Failed due to : Server Data Type Error")
+                    completion(guideDict)
+                    return
+                }
+                let json = JSON(value)
+                guideDict["energy"] = json["data"]["energy"].doubleValue
+                guideDict["protein"] = json["data"]["protein"].doubleValue
+                guideDict["fat"] = json["data"]["fat"].doubleValue
+                guideDict["carbohydrate"] = json["data"]["carbohydrate"].doubleValue
+                completion(guideDict)
+        }
+    }
+
+    func setCalorieGoal(calorieGoal: Double, completion: @escaping (Bool) -> Void) {
+        let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
+        Alamofire.request(
+            URL(string: ServerConfig.dietGoalURL + userId + "/")!,
+            method: .put,
+            parameters: ["energy": calorieGoal],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Set calorie goal failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                completion(response.result.isSuccess)
+        }
+    }
+
+    //SMS Login
+
+    func sendSMSRequest(phoneNumber: String, completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.phoneSendSMSURL)!,
+            method: .post,
+            parameters: ["phone": phoneNumber],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                completion(response.result.isSuccess)
+        }
+    }
+
+    func verifySMSRequest(phoneNumber: String, smsToken: String, completion: @escaping (Bool) -> Void, failureCompletion: @escaping (String) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.verifySMSURL)!,
+            method: .post,
+            parameters: ["phone": phoneNumber, "sms_token": smsToken],
+            encoding: JSONEncoding.default,
+            headers: [:])
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    if let errorJsonString = String(data: response.data!, encoding: String.Encoding.utf8) {
+                        let errJSON = errorJsonString.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
+                         failureCompletion(errJSON["message"].stringValue)
+                    }
+                    print("Verify SMS Code failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                guard (response.response?.allHeaderFields) != nil else {
+                    completion(false)
+                    print("Get Token failed")
+                    return
+                }
+                let preferences = UserDefaults.standard
+                let token = response.response!.allHeaderFields["token"]
+                let jsonObj = JSON(response.result.value)
+                preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: PreferenceKey.userIdkey)
+                preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: PreferenceKey.nickNameKey)
+                preferences.setValue(token, forKey: PreferenceKey.tokenKey)
+                completion(response.result.isSuccess)
+        }
+    }
+
     //cancel task
     func cancelRequest(requestURL: String) {
         Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
@@ -1789,6 +1885,7 @@ class APIService {
             downloadData.forEach { $0.cancel() }
         }
     }
+
     //basic authentication header
     func getBasicAuthenticationHeader() -> [String: String] {
         let preferences = UserDefaults.standard

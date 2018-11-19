@@ -43,7 +43,6 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.navigationController?.navigationBar.tintColor = UIColor.clear
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
     }
 
     override func viewDidAppear(_ animated: Bool) {

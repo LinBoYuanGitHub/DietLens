@@ -9,7 +9,6 @@
 import UIKit
 import FacebookLogin
 import FacebookCore
-import LGSideMenuController
 import GoogleSignIn
 
 class WelcomeViewController: BaseViewController {
@@ -26,6 +25,7 @@ class WelcomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
     }
 
@@ -74,6 +74,17 @@ class WelcomeViewController: BaseViewController {
                                 let preferences = UserDefaults.standard
                                 preferences.setValue(facebookUserId, forKey: PreferenceKey.facebookId)
                                 preferences.setValue(facebookUserName, forKey: PreferenceKey.nickNameKey)
+                                //save token to backend
+                                let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                                let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                                if userId != nil && fcmToken != nil {
+                                    APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                                        if flag {
+                                            print("send device token succeed")
+                                        }
+                                    })
+                                }
+                                //is New User flow
                                 if isNewUser {
                                     if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navProfileVC") as? UINavigationController {
                                         var profile = UserProfile()
@@ -86,10 +97,10 @@ class WelcomeViewController: BaseViewController {
                                         }
                                     }
                                 } else {
-//                                    self.performSegue(withIdentifier: "loginToMainPage", sender: nil)
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                    if let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController {
-                                        self.navigationController?.pushViewController(controller, animated: true)
+                                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+//                                         self.navigationController?.pushViewController(controller, animated: true)
+                                        self.present(controller, animated: true, completion: nil)
                                     }
                                 }
                             }
@@ -115,7 +126,7 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
         if error != nil {
             return
         }
-//        AlertMessageHelper.showLoadingDialog(targetController: self)
+
         APIService.instance.googleIdValidationRequest(accessToken: user.authentication.idToken, uuid: user.userID, completion: { (isSuccess, isNewUser) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
             if isSuccess {
@@ -126,6 +137,16 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 //tmp use
                 if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
                     preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
+                }
+                //save token to backend
+                let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                if userId != nil && fcmToken != nil {
+                    APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                        if flag {
+                            print("send device token succeed")
+                        }
+                    })
                 }
                 //tmp use
                 if isNewUser {
@@ -144,8 +165,9 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                     }
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let controller = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController {
-                        self.navigationController?.pushViewController(controller, animated: true)
+                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+//                        self.navigationController?.pushViewController(controller, animated: true)
+                        self.present(controller, animated: true, completion: nil)
                     }
                 }
             }

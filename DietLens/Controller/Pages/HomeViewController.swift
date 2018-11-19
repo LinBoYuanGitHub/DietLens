@@ -11,6 +11,7 @@ import RealmSwift
 import BAFluidView
 import Instructions
 import Photos
+import FirebaseAnalytics
 
 class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
@@ -43,9 +44,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     var shouldRefreshMainPageNutrition = true
 
-    //add coachMarks
-    let coachMarksController = CoachMarksController()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         //delegate for new table view
@@ -57,7 +55,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         newsFeedTable.tableHeaderView = headerView
         loadArticle()
         //for sideMenu toggle leftView
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onSideMenuClick(_:)), name: .onSideMenuClick, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeRefreshFlag), name: .shouldRefreshMainPageNutrition, object: nil)
         calorieFluidView = BAFluidView(frame: CGRect(x: 0, y: 0, width: calorieContainer.frame.width, height: calorieContainer.frame.height), startElevation: 0)
         calorieFluidView.fillColor = UIColor(red: 255/255, green: 240/255, blue: 240/255, alpha: 0.9)
@@ -67,11 +64,19 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         calorieFluidView.minAmplitude = 4
         calorieFluidView.fillDuration = 1
         calorieContainer.addSubview(calorieFluidView)
-        //set instruction label dataSource
-        self.coachMarksController.dataSource = self
-        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(jumpToNutritionPage))
+        calorieFluidView.addGestureRecognizer(tapRecognizer)
         //check permission and set value for album access
         checkPhotoLibraryPermission()
+    }
+
+    @objc func jumpToNutritionPage() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
+            controller.selectedDate = Date()
+            self.navigationController?.pushViewController(controller, animated: true)
+            //            present(controller, animated: true, completion: nil)
+        }
     }
 
     func checkPhotoLibraryPermission() {
@@ -110,7 +115,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     //load personal target whenever go to main page
     @objc func loadNutritionTarget() {
-        APIService.instance.getDietaryGuideInfo { (guideDict) in
+        APIService.instance.getDietGoal { (guideDict) in
             let preferences = UserDefaults.standard
             preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
             preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
@@ -118,6 +123,14 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
             self.requestNutritionDict(requestDate: Date())
         }
+//        APIService.instance.getDietaryGuideInfo { (guideDict) in
+//            let preferences = UserDefaults.standard
+//            preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
+//            preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
+//            preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
+//            preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
+//            self.requestNutritionDict(requestDate: Date())
+//        }
     }
 
     func loadCalorieData(todayIntakenCal: Int) {
@@ -173,7 +186,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         default:
             break
         }
-        self.sideMenuController?.hideLeftView(animated: true, completionHandler: nil)
     }
 
     func jumpToDestPage<T: UIViewController>(identifyId: String, mType: T.Type) {
@@ -214,18 +226,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         newsFeedTable.reloadData()
-        let preferences = UserDefaults.standard
-//        let shouldPopUpFlag = !preferences.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-//        if shouldPopUpFlag {
-//            popUpDialog()
-//            preferences.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-//        }
-        //show markView for tap
-        let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
-        if shouldShowCoachMark {
-            self.coachMarksController.start(on: self)
-            preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
-        }
     }
 
     //popUp dialog
@@ -250,12 +250,10 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         if let attributeGroup = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as? [NSAttributedStringKey: Any] {
             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
         }
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat(249.0/255.0), green: CGFloat(60.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
-        //backbtn
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = true
+        self.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: CGFloat(242.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(93.0/255.0), alpha: 1.0)
+//        self.navigationController?.navigationBar.backgroundColor = UIColor(displayP3Red: CGFloat(249.0/255.0), green: CGFloat(60.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
         //disable homepage&LGMenu swipe back gesture
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        self.sideMenuController?.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         if shouldRefreshMainPageNutrition {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
@@ -264,21 +262,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
 
     // calculate Nutrition Data & put into homePage
     func getDailyAccumulateCPF() {
-    }
-
-    @IBAction func presentCamera(_ sender: UIButton) {
-        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
-            if let navigator = self.navigationController {
-                //clear controller to Bottom & add foodCalendar Controller
-                let transition = CATransition()
-                transition.duration = 0.3
-                transition.type = kCATransitionMoveIn
-                transition.subtype = kCATransitionFromTop
-                self.view.window?.layer.add(transition, forKey: kCATransition)
-//                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-                navigator.pushViewController(dest, animated: true)
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {

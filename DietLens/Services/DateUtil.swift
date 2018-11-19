@@ -69,6 +69,7 @@ class DateUtil {
 
     public static func formatGMTDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "dd MMM yyyy"
         let resultStr = dateFormatter.string(from: date)
         return resultStr
@@ -97,6 +98,20 @@ class DateUtil {
         return resultStr
     }
 
+    public static func formatYearToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+    public static func formatMonthWithYearToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM yyyy"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
     public static func formatNotificationDateToString(date: Date) -> String {
         //- May 22, 2018
         let dateFormatter = DateFormatter()
@@ -105,4 +120,25 @@ class DateUtil {
         return resultStr
     }
 
+    public static func formatFoodDiaryDateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM"
+        let resultStr = dateFormatter.string(from: date)
+        return resultStr
+    }
+
+}
+
+extension Date {
+    var beginOfWeek: Date? {
+//        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        return Calendar.current.date(byAdding: .day, value: 1, to: sunday)
+    }
+
+    var endOfWeek: Date? {
+//        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        return Calendar.current.date(byAdding: .day, value: 7, to: sunday)
+    }
 }

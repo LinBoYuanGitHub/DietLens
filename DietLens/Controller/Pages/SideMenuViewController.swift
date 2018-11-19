@@ -7,10 +7,8 @@
 //
 
 import UIKit
-//import PBRevealViewController
-import LGSideMenuController
 
-class SideMenuViewController: LGSideMenuController, UITableViewDelegate, UITableViewDataSource {
+class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var sideMenuTable: UITableView!
     @IBOutlet weak var profileAvatar: RoundedImage!

@@ -37,7 +37,6 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         UIApplication.shared.statusBarStyle = .lightContent
         self.containerView.isScrollEnabled = false
         self.navigationController?.navigationBar.isHidden = true
-        self.sideMenuController?.isLeftViewSwipeGestureEnabled = false
         if currentIndex == 0 {
             if let cameraVC =  self.viewControllers.first as? CameraViewController {
                 cameraVC.viewWillAppear(false)
@@ -56,8 +55,9 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarBackgroundColor = .clear
         settings.style.buttonBarItemBackgroundColor = .clear
         settings.style.selectedBarBackgroundColor = .white
-        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 14)!
+        settings.style.buttonBarItemFont = UIFont(name: "PingFang SC", size: 16)!
         settings.style.selectedBarHeight = 2.0
+        settings.style.buttonBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .white
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
@@ -73,12 +73,18 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         containerView.scrollsToTop = false
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        //set height for bar
+        buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
+        buttonBarView.selectedBar.frame.size.height = 2.0
+    }
+
     @IBAction func cancelAddFood(_ sender: UIButton) {
         let transition = CATransition()
         transition.duration = 0.3
         transition.type = kCATransitionReveal
         transition.subtype = kCATransitionFromBottom
         self.view.window?.layer.add(transition, forKey: kCATransition)
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
 }

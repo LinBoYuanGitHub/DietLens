@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import WebKit
-import PBRevealViewController
+//import PBRevealViewController
 import SnapKit
 
 class WebViewController: UIViewController, WKNavigationDelegate {
@@ -46,8 +46,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [
             NSAttributedStringKey.font: UIFont(name: "SignPainterHouseScript", size: 32)!, NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.6347548905, green: 0.6361853982, blue: 0.6580147525, alpha: 1)]
 
-        leftBarButton.target = self.revealViewController()
-        leftBarButton.action = #selector(PBRevealViewController.revealLeftView)
+//        leftBarButton.target = self.revealViewController()
+//        leftBarButton.action = #selector(PBRevealViewController.revealLeftView)
         rightBarButton.target = self
         rightBarButton.action = #selector(clearButtonPressed(sender:))
     }

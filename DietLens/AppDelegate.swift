@@ -38,7 +38,6 @@ import Firebase
 import RealmSwift
 import Fabric
 import Crashlytics
-import LGSideMenuController
 import HealthKit
 import FBSDKCoreKit
 import Photos
@@ -52,6 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.message_id"
 
     var isInSignOutProcess: Bool = false
+    //location manager
+    let locationManager = CLLocationManager()
+    var latitude = 0.0
+    var longitude = 0.0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -193,9 +196,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        //upload user step to backend
         FBSDKAppEvents.activateApp()
+        //upload user step to backend
         uploadStepDataWhenNecessary()
+        //get location
+        enableLocationServices()
+    }
+
+    func enableLocationServices() {
+        locationManager.delegate = self
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        case .restricted, .denied:
+            break
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        case .authorizedAlways:
+            break
+        }
     }
 
     //judege whether should upload step data to backend
@@ -359,13 +383,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 //jump to notification detail page with notificationID
                 print("Notification ID: \(notificationId)")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC") as? LGSideMenuController else {
+                guard let viewController = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController else {
                     return
                 }
                 window?.rootViewController = viewController
                 if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationDetailVC") as?  NotificationDetailViewController {
                     dest.notificationId = notificationId
-                    window?.rootViewController?.sideMenuController?.rootViewController?.present(dest, animated: true, completion: nil)
+                    window?.rootViewController?.present(dest, animated: true, completion: nil)
                 }
                 //to notification detail
 //                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as?  NotificationsViewController {
@@ -428,6 +452,20 @@ extension AppDelegate: GIDSignInDelegate {
         //perform disconnect code
     }
 
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.latitude = (locations.last?.coordinate.latitude)!
+        self.longitude = (locations.last?.coordinate.longitude)!
+        print("latitude:\(latitude)")
+        print("longitude:\(longitude)")
+        locationManager.stopUpdatingLocation()
+    }
 }
 
 extension UIApplication {

@@ -47,7 +47,13 @@ class FoodDiaryCollectionViewCell: UICollectionViewCell {
     func setUpCell(foodDiary: FoodDiaryEntity) {
         imageView.image = #imageLiteral(resourceName: "loading_img")
         if foodDiary.imageId.isEmpty {
-            imageView.image = #imageLiteral(resourceName: "dietlens_sample_background")
+            if !foodDiary.placeHolderImage.isEmpty {
+                APIService.instance.qiniuImageDownload(imageKey: foodDiary.placeHolderImage, width: Dimen.foodCalendarImageWidth, height: Dimen.foodCalendarImageHeight) { (image) in
+                    self.imageView.image = image
+                }
+            } else {
+                imageView.image = #imageLiteral(resourceName: "dietlens_sample_background")
+            }
         } else {
             APIService.instance.qiniuImageDownload(imageKey: foodDiary.imageId, width: Dimen.foodCalendarImageWidth, height: Dimen.foodCalendarImageHeight) { (image) in
                 self.imageView.image = image

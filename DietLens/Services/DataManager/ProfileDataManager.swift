@@ -19,6 +19,7 @@ class ProfileDataManager {
         userProfile.name = jsonObj["name"].stringValue
         userProfile.email = jsonObj["user"].stringValue
         userProfile.gender = Int(jsonObj["gender"].stringValue)!
+        userProfile.phone = jsonObj["phone"].stringValue
 //        if jsonObj["gender"].stringValue == "1"{
 //            userProfile.gender = 1
 //        } else {
@@ -49,13 +50,25 @@ class ProfileDataManager {
         preference.set(profile.ethnicity, forKey: PreferenceKey.ProfileCache.profileEthnicity)
     }
 
-    func getCachedProfile() -> UserProfile {
+    func getCachedProfile() -> UserProfile? {
         let preference = UserDefaults.standard
         var profile = UserProfile()
-        profile.id = preference.string(forKey: PreferenceKey.ProfileCache.profileId)!
-        profile.name = preference.string(forKey: PreferenceKey.ProfileCache.profileNickName)!
-        profile.birthday = preference.string(forKey: PreferenceKey.ProfileCache.profileBirthday)!
-        profile.email = preference.string(forKey: PreferenceKey.ProfileCache.profileEmail)!
+        guard let id = preference.string(forKey: PreferenceKey.ProfileCache.profileId) else {
+            return nil
+        }
+        guard let nickname = preference.string(forKey: PreferenceKey.ProfileCache.profileNickName) else {
+            return nil
+        }
+        guard let birthday = preference.string(forKey: PreferenceKey.ProfileCache.profileBirthday) else {
+            return nil
+        }
+        guard let email = preference.string(forKey: PreferenceKey.ProfileCache.profileEmail) else {
+            return nil
+        }
+        profile.id = id
+        profile.name = nickname
+        profile.birthday = birthday
+        profile.email = email
         profile.height = preference.double(forKey: PreferenceKey.ProfileCache.profileHeight)
         profile.weight = preference.double(forKey: PreferenceKey.ProfileCache.profileWeight)
         profile.gender = preference.integer(forKey: PreferenceKey.ProfileCache.profileGender)

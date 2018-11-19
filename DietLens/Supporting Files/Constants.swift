@@ -10,19 +10,6 @@ import Foundation
 
 struct ServerConfig {
 
-//    static let baseURL = "http://137.132.179.21:8000"
-//    static let userLoginURL = baseURL + "/login/"
-//    static let getUUidURL = baseURL + "/uuid/"
-//    static let registry = baseURL + "/registry/"
-//    static let thirdPartyLoginURL = baseURL + "/3rdlogin/"
-//
-//    static let articleURL = baseURL + "/article/"
-//    static let imageUploadURL = baseURL + "/process/"
-//    static let saveFoodDiaryURL = baseURL + "/photolist/"
-//    static let foodSearchListURL = baseURL + "/text/"
-//    static let foodSearchDetailURL = baseURL + "/textinfo/"
-//    static let barcodeSearchURL = baseURL + "/barcode/"
-
     //testing environment
 
 //    static let baseURL = "http://dl.dietlens.com:8000/dl/v1"
@@ -87,6 +74,9 @@ struct ServerConfig {
     static let qiniuDietLensImageDomain = "https://img.dietlens.com/"
     static let textSearchPopularURL = labDeskTopURL + "/popular-food/"
 //    static let qiniuDietLensImageDomain = "https://image.dietlens.com/"
+    static let phoneSendSMSURL = labDeskTopURL + "/social-acc/sms/"
+    static let verifySMSURL = labDeskTopURL + "/social-acc/phone/"
+    static let dietGoalURL = labDeskTopURL + "/diet-goal/"
 }
 
 struct RedirectAddress {
@@ -117,14 +107,6 @@ struct QiniuConfig {
     static let secretKey = "-uVeMoW24RqTwQvCyWlpUdrVi7WNEAeI1eptbx1W"
 //     static let scope = "dietlens" //private scope
 //    static let rootDomain = "http://p7bnhf5so.sabkt.gdipper.com" //private domain
-}
-
-struct RecordType {
-    static let RecordByImage = "recognition"
-    static let RecordByBarcode = "barcode"
-    static let RecordByText = "text"
-    static let RecordByAdditionText = "additionaltext"
-    static let RecordByCustomized = "customized"
 }
 
 struct RecognitionInteger {
@@ -220,6 +202,11 @@ struct HealthDeviceSetting {
     static let maxWeight = 300
     static let minBloodGlucose = 1
     static let maxBloodGlucose = 100
+}
+
+struct DietGoalTreshold {
+    static let minCalorieGoalValue = 1000
+    static let maxCalorieGoalValue = 4000
 }
 
 struct FirstTimeFlag {

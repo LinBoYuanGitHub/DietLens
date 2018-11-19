@@ -15,6 +15,8 @@ protocol activitySelectDelegate {
 class ProfileActivityLvlViewController: BaseViewController {
 
     @IBOutlet weak var exerciseTable: UITableView!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var progressText: UILabel!
 
     var activitySelectDelegate: activitySelectDelegate?
     var indexValue: Int  = 1
@@ -30,6 +32,8 @@ class ProfileActivityLvlViewController: BaseViewController {
         exerciseTable.tableFooterView = UIView()
         //set the initial index value into profile
         profile?.activityLevel = indexValue
+        progressBar.isHidden = !isInRegistrationFlow
+        progressText.isHidden = !isInRegistrationFlow
     }
 
     @objc func onBackPressed() {

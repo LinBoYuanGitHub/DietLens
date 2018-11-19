@@ -30,7 +30,7 @@ class StepCounterViewController: BaseViewController {
     }
 
     @objc func willEnterForeground() {
-        requestAuthFromHealthKit()
+        requestStepData()
     }
 
 //    @IBAction func onBackPressed(_ sender: Any) {
@@ -64,6 +64,10 @@ class StepCounterViewController: BaseViewController {
             max = stepEntity.stepValue
         }
         return max
+    }
+
+    @IBAction func onBackPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     func requestStepData() {

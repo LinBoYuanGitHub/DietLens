@@ -121,8 +121,8 @@ class TextInputViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         //regist notification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
         //only refresh cache data
         if (textSearchField.text?.isEmpty)! && currentSelectionPos != 0 {
             onFilterSelect(currentSelection: currentSelectionPos)
@@ -158,23 +158,23 @@ class TextInputViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
-    @objc func keyboardWasShown (notification: NSNotification) {
-        let info: NSDictionary = notification.userInfo! as NSDictionary
-        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
-        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        var contentInsets: UIEdgeInsets
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-        } else {
-            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-        }
-        textSearchTable.contentInset = contentInsets
-        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
-    }
-
-    @objc func keyboardWillBeHidden () {
-        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-    }
+//    @objc func keyboardWasShown (notification: NSNotification) {
+//        let info: NSDictionary = notification.userInfo! as NSDictionary
+//        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
+//        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+//        var contentInsets: UIEdgeInsets
+//        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+//            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+//        } else {
+//            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+//        }
+//        textSearchTable.contentInset = contentInsets
+//        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
+//    }
+//
+//    @objc func keyboardWillBeHidden () {
+//        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+//    }
 
     //GoodToHave: local storage to display recent search top2 item
     func loadRecentTextSearchResult() {
@@ -190,7 +190,7 @@ class TextInputViewController: BaseViewController {
         if isSetMealByTimeRequired {
             self.mealType = getCorrectMealType()
         }
-        APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased()) { (textResults) in
+        APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased(), completion: { (textResults) in
             if textResults == nil {
                 self.emptyView.isHidden = false
                 self.textSearchTable.isHidden = true
@@ -201,16 +201,18 @@ class TextInputViewController: BaseViewController {
             self.textSearchTable.isHidden = false
             self.searchResultList = textResults!
             self.textSearchTable.reloadData()
+        }) { (nextPageLink) in
+            self.nextPageLink = nextPageLink!
         }
     }
 
     func getCorrectMealType() -> String {
         let hour: Int = Calendar.current.component(.hour, from: Date())
-        if hour < ConfigVariable.BreakFastEndTime && hour > ConfigVariable.BreakFastStartTime {
+        if hour < ConfigVariable.BreakFastEndTime && hour >= ConfigVariable.BreakFastStartTime {
             return StringConstants.MealString.breakfast
-        } else if hour < ConfigVariable.LunchEndTime && hour > ConfigVariable.LunchStartTime {
+        } else if hour < ConfigVariable.LunchEndTime && hour >= ConfigVariable.LunchStartTime {
             return StringConstants.MealString.lunch
-        } else if hour < ConfigVariable.DinnerEndTime && hour > ConfigVariable.DinnerStartTime {
+        } else if hour < ConfigVariable.DinnerEndTime && hour >= ConfigVariable.DinnerStartTime {
             return StringConstants.MealString.dinner
         } else {
             return StringConstants.MealString.snack
@@ -255,24 +257,26 @@ class TextInputViewController: BaseViewController {
             return
         }
         //show loading indicator & create current search result
-        self.searchLoadingView.alpha = 1
-        self.searchResultList.removeAll()
-        self.textSearchTable.reloadData()
+//        self.searchLoadingView.alpha = 1
+//        self.searchResultList.removeAll()
+//        self.textSearchTable.reloadData()
         //request for new data
         APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
-            self.searchLoadingView.alpha = 0
-            DispatchQueue.main.async {
-                self.textSearchTable.setContentOffset(.zero, animated: true)//scroll to top
-            }
+//            self.searchLoadingView.alpha = 0
             if textResults == nil {
-//                self.emptyView.isHidden = false
-//                self.textSearchTable.reloadData()
                 return
             }
             if textResults?.count == 0 {
                 self.emptyResultView.isHidden = false
             } else {
                 self.emptyResultView.isHidden = true
+                if self.searchResultList.count != 0 {
+                    DispatchQueue.main.async {
+                        self.textSearchTable.reloadData()
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        self.textSearchTable.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                    }
+                }
             }
             self.emptyView.isHidden = true
             self.searchResultList = textResults!
@@ -415,35 +419,54 @@ extension TextInputViewController: UITableViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //dismiss keyboard when scroller in accelerate status
-        if !scrollView.isDecelerating {
-             view.endEditing(true)
+        if scrollView.isDecelerating {
+            view.endEditing(true)
         }
         //scroll part of code
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
-            if nextPageLink == "" || isLoading {
+            if nextPageLink == "" || isLoading || currentSelectionPos == 1 { //loading & no nextPage & at recentPage
                 //last page
                 return
             }
             //show loading indicator
             textSearchTable.tableFooterView?.isHidden = false
             self.isLoading = true
-            APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
-                self.textSearchTable.tableFooterView?.isHidden = true
-                self.isLoading = false
-                if resultList == nil {
-                    return
+            if (textSearchField.text?.isEmpty)! && currentSelectionPos == 0 { //popularLists
+                APIService.instance.getFoodSearchPopularity(requestUrl: self.nextPageLink, mealtime: mealType.lowercased(), completion: { (resultList) in
+                    self.textSearchTable.tableFooterView?.isHidden = true
+                    self.isLoading = false
+                    if resultList == nil {
+                        return
+                    }
+                    self.searchResultList.append(contentsOf: resultList!)
+                    self.textSearchTable.reloadData()
+                }) { (nextPageLink) in
+                    if nextPageLink == nil {
+                        // last page
+                        self.nextPageLink = ""
+                    } else {
+                        self.nextPageLink = nextPageLink!
+                    }
                 }
-                self.searchResultList.append(contentsOf: resultList!)
-                self.textSearchTable.reloadData()
-            }) { (nextPageLink) in
-                if nextPageLink == nil {
-                    // last page
-                    self.nextPageLink = ""
-                } else {
-                    self.nextPageLink = nextPageLink!
+            } else {
+                APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
+                    self.textSearchTable.tableFooterView?.isHidden = true
+                    self.isLoading = false
+                    if resultList == nil {
+                        return
+                    }
+                    self.searchResultList.append(contentsOf: resultList!)
+                    self.textSearchTable.reloadData()
+                }) { (nextPageLink) in
+                    if nextPageLink == nil {
+                        // last page
+                        self.nextPageLink = ""
+                    } else {
+                        self.nextPageLink = nextPageLink!
+                    }
                 }
             }
         }
