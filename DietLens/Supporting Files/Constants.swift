@@ -204,6 +204,11 @@ struct HealthDeviceSetting {
     static let maxBloodGlucose = 100
 }
 
+struct DietGoalTreshold {
+    static let minCalorieGoalValue = 1000
+    static let maxCalorieGoalValue = 4000
+}
+
 struct FirstTimeFlag {
     static let isFirstTimeLogin = "isFirstTimeLogin" //show IntroductionPage
     static let isFirstTimeViewAddMore = "isFirstTimeAddMore" //show addMore coach mark

@@ -54,8 +54,8 @@ class ProfileCalorieGoalViewController: BaseViewController {
                 return
             }
             //update calorie goal API
-            if Double(goal) < 1000 && Double(goal) > 4000 {
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: "")
+            if Int(goal) < DietGoalTreshold.minCalorieGoalValue && Int(goal) > DietGoalTreshold.maxCalorieGoalValue {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Calorie goal must be between 1000 and 4000")
                 return
             }
             APIService.instance.setCalorieGoal(calorieGoal: Double(goal)) { (isSuccess) in

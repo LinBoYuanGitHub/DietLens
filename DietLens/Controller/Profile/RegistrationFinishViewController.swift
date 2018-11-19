@@ -42,12 +42,6 @@ class RegistrationFinishViewController: UIViewController {
 
     @IBAction func onRegistrationBtnClicked(_ sender: Any) {
         //set registration profile filling flag to true
-        let preference = UserDefaults.standard
-//        preference.set(true, forKey: FirstTimeFlag.shouldPopUpProfilingDialo)
-        preference.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-           self.present(controller, animated: true, completion: nil)
-        }
         //update the calorie value
         guard let calorieText = calorieGoalTextField.text else {
             return
@@ -55,6 +49,16 @@ class RegistrationFinishViewController: UIViewController {
         guard let calorieValue = Double(calorieText) else {
             return
         }
+        if Int(calorieValue) < DietGoalTreshold.minCalorieGoalValue && Int(calorieValue) > DietGoalTreshold.maxCalorieGoalValue {
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Calorie goal must be between 1000 and 4000")
+            return
+        }
+        let preference = UserDefaults.standard
+        preference.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
+        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+           self.present(controller, animated: true, completion: nil)
+        }
+
         APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in
             //handle the successful case
         }
