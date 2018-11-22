@@ -71,9 +71,9 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             guard let ref = self else { return }
             if ref.currentIndex == 0 { //cameraPage
-                Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickByTextTab, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: ref.mealType])
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickByTextTab, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: ref.mealType])
             } else if ref.currentIndex == 1 { //textPage
-                Analytics.logEvent(StringConstants.FireBaseAnalytic.TextClickByImageTab, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: ref.mealType])
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.TextClickByImageTab, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: ref.mealType])
             }
         }
         super.viewDidLoad()

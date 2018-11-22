@@ -80,7 +80,7 @@ class RecognitionResultViewController: BaseViewController {
                 navigator.pushViewController(dest, animated: true)
             }
             //#Google Analytic part
-            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType])
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType])
         }
     }
 
@@ -173,7 +173,7 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
         requestForDietInformation(foodId: selectedFoodInfo.id)
         //# Firebase Analytic log
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType, "rank": indexPath.row])
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -200,7 +200,7 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //#google analytic log part
         Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodItem, parameters: [
-            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
         ])
     }
 

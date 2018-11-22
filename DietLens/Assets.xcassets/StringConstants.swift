@@ -81,7 +81,7 @@ struct StringConstants {
         static let SearchMoreClickBack = "search_more_click_back"
         static let TextClickBack = "text_click_back"
 
-        struct parameter {
+        struct Parameter {
             static let MealTime = "meal_time"
             static let recordType = "record_type"
             static let os = "iOS"

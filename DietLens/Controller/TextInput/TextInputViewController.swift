@@ -441,7 +441,7 @@ extension TextInputViewController: UITableViewDelegate {
         let textSearchEntity = searchResultList[indexPath.row]
         requestForDietInformation(foodEntity: textSearchEntity)
         //# Firebase Analytic log
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType, "rank": indexPath.row])
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -510,7 +510,7 @@ extension TextInputViewController: UITableViewDelegate {
         }
         //#google analytic log part
         Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
-            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
         ])
     }
 

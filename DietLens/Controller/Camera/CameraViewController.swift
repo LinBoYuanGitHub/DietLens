@@ -194,7 +194,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         capturePhotoButton.isEnabled = false
         //#google analytic log part
         Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickCaptureButton, parameters: [
-            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
         ])
     }
 
@@ -510,7 +510,7 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         }
         //#google analytic log part
         Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickGalleryButton, parameters: [
-            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
         ])
         //        let imgData = UIImagePNGRepresentation(image)!
         //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
@@ -592,7 +592,7 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         self.postImageKeyToServer(imageKey: imageKeyArray[currentImageIndex], isUsingSample: true, uploadTime: 0)
         showReview(image: imageArray[indexPath.row])
         //# Firebase Analytic log
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectSampleItem, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType, "rank": indexPath.row])
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectSampleItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
