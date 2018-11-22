@@ -12,6 +12,7 @@ import XLPagerTabStrip
 import NVActivityIndicatorView
 import CoreLocation
 import Reachability
+import FirebaseAnalytics
 
 class TextInputViewController: BaseViewController {
 
@@ -108,6 +109,8 @@ class TextInputViewController: BaseViewController {
         self.animationViewLeading.constant = 16
         //load popular list
         getPopurlarFoodLists()
+        //analytic screen name
+        Analytics.setScreenName("TextPage", screenClass: "TextInputViewController")
     }
 
     @objc func handleTap() {
@@ -157,6 +160,8 @@ class TextInputViewController: BaseViewController {
 
     @IBAction func onCancelBtnPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        //#Google Analytic part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreClickBack, parameters: nil)
     }
 
 //    @objc func keyboardWasShown (notification: NSNotification) {
@@ -435,6 +440,8 @@ extension TextInputViewController: UITableViewDelegate {
         //loading to get food text search detail
         let textSearchEntity = searchResultList[indexPath.row]
         requestForDietInformation(foodEntity: textSearchEntity)
+        //# Firebase Analytic log
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType, "rank": indexPath.row])
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -501,6 +508,10 @@ extension TextInputViewController: UITableViewDelegate {
                 }
             }
         }
+        //#google analytic log part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
+            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+        ])
     }
 
 }

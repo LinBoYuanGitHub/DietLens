@@ -10,12 +10,15 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 import CoreLocation
+import FirebaseAnalytics
 
 class AddFoodViewController: ButtonBarPagerTabStripViewController {
 
     var addFoodDate = Date()
     var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true
+    var isFirstTimeSetTabIndex = true
+    var tabIndex = 0
 
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         guard let cameraViewController = storyboard?.instantiateViewController(withIdentifier: "cameraVC")
@@ -66,6 +69,12 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
 
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
+            guard let ref = self else { return }
+            if ref.currentIndex == 0 { //cameraPage
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickByTextTab, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: ref.mealType])
+            } else if ref.currentIndex == 1 { //textPage
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.TextClickByImageTab, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: ref.mealType])
+            }
         }
         super.viewDidLoad()
         containerView.bounces = false
@@ -88,5 +97,12 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         transition.subtype = kCATransitionFromBottom
         self.view.window?.layer.add(transition, forKey: kCATransition)
         self.navigationController?.popViewController(animated: false)
+        //Analytic part
+        if self.currentIndex == 0 {
+             Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickBack, parameters: nil)
+        } else if self.currentIndex == 1 {
+             Analytics.logEvent(StringConstants.FireBaseAnalytic.TextClickBack, parameters: nil)
+        }
+
     }
 }

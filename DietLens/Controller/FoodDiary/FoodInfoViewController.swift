@@ -101,6 +101,12 @@ class FoodInfoViewController: UIViewController {
         )
         setUpQuantityPickerIndex()
         setFavImageStyle()
+        //analytic screen name
+        if isUpdate {
+            Analytics.setScreenName("AddFoodItemPage", screenClass: "FoodInfoViewController")
+        } else {
+            Analytics.setScreenName("EditFoodItemPage", screenClass: "FoodInfoViewController")
+        }
     }
 
     func setFavImageStyle() {
@@ -501,10 +507,10 @@ class FoodInfoViewController: UIViewController {
                 }
             })
             //#google analytic log part
-//            Analytics.logEvent(StringConstants.FireBaseAnalytic.RecogItemSave, parameters: [
-//                "recordType": recordType,
-//                "mealtime": foodDiaryEntity.mealType
-//            ])
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodPageAddSaveButton, parameters: [
+                "recordType": recordType,
+                "mealtime": foodDiaryEntity.mealType
+            ])
         }
     }
 
@@ -524,6 +530,9 @@ class FoodInfoViewController: UIViewController {
             }
         }
 
+        self.navigationController?.popViewController(animated: true)
+        //#Google Analytic part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodItemClickBack, parameters: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

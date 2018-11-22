@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 enum FoodDiaryStatus {
     case edit
@@ -64,6 +65,8 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         //judge whether is same date
         rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
         registerNib()
+        //analytic screen name
+        Analytics.setScreenName("FoodDiaryPage", screenClass: "FoodDiaryHistoryViewController")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -290,6 +293,10 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
             if let navigator = self.navigationController {
                 navigator.pushViewController(dest, animated: true)
             }
+            //#google analytic log part
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodDiaryClickAddButton, parameters: [
+                "mealtime": dest.mealType
+            ])
         }
     }
 

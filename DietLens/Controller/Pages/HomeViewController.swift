@@ -68,6 +68,8 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         calorieFluidView.addGestureRecognizer(tapRecognizer)
         //check permission and set value for album access
         checkPhotoLibraryPermission()
+        //analytic screen name
+        Analytics.setScreenName("HomePage", screenClass: "HomeViewController")
     }
 
     @objc func jumpToNutritionPage() {

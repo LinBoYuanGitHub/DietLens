@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class MoreViewController: BaseViewController {
 
@@ -32,6 +33,8 @@ class MoreViewController: BaseViewController {
         refreshUserName()
         loadAvatar()
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshUserName), name: .shouldRefreshSideBarHeader, object: nil)
+        //analytic screen name
+        Analytics.setScreenName("MorePage", screenClass: "MoreViewController")
     }
 
     func loadAvatar() {

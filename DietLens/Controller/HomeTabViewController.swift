@@ -181,7 +181,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
             }
         }
         //#google analytic log part
-//        Analytics.logEvent(StringConstants.FireBaseAnalytic.OpenCameraView, parameters: nil)
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.HomeClickCameraButton, parameters: nil)
     }
 }
 

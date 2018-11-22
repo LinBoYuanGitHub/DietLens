@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import FirebaseAnalytics
 
 class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -30,9 +31,13 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         if articleType == ArticleType.ARTICLE {
             articleDataSource = ArticleDataManager.instance.articleList
             articleTitle.text = "Latest articles"
+            //analytic screen name
+            Analytics.setScreenName("LatestArticles", screenClass: "ArticleViewController")
         } else if articleType == ArticleType.EVENT {
             articleDataSource = ArticleDataManager.instance.eventList
             articleTitle.text = "Latest health events"
+            //analytic screen name
+            Analytics.setScreenName("LatestEvents", screenClass: "ArticleViewController")
         }
         // Do any additional setup after loading the view.
         articleTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 52))

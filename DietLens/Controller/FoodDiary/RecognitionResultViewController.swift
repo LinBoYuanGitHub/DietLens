@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import FirebaseAnalytics
 
 class RecognitionResultViewController: BaseViewController {
 
@@ -51,6 +52,8 @@ class RecognitionResultViewController: BaseViewController {
         //food category delegate
         foodCategory.delegate = self
         foodCategory.dataSource = self
+        //analytic screen name
+        Analytics.setScreenName("ImageResultPage", screenClass: "RecognitionResultViewController")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,11 +79,15 @@ class RecognitionResultViewController: BaseViewController {
                 //clear controller to Bottom & add foodCalendar Controller
                 navigator.pushViewController(dest, animated: true)
             }
+            //#Google Analytic part
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType])
         }
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
          self.navigationController?.popViewController(animated: true)
+        //#Google Analytic part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultBack, parameters: nil)
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -165,6 +172,8 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         //jump to selected foodItem add FoodPage
         selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
         requestForDietInformation(foodId: selectedFoodInfo.id)
+        //# Firebase Analytic log
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType, "rank": indexPath.row])
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -186,6 +195,13 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
                 navigator.pushViewController(dest, animated: true)
             }
         }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //#google analytic log part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodItem, parameters: [
+            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+        ])
     }
 
 }
@@ -216,9 +232,13 @@ extension RecognitionResultViewController: UICollectionViewDelegate, UICollectio
         foodOptionTable.reloadData()
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        animationView.center.x += previousOffset - scrollView.contentOffset.x
-        previousOffset = scrollView.contentOffset.x
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        animationView.center.x += previousOffset - scrollView.contentOffset.x
+//        previousOffset = scrollView.contentOffset.x
+//        //#google analytic log part
+//        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodCategory, parameters: [
+//            "mealTime": mealType
+//        ])
+//    }
 
 }

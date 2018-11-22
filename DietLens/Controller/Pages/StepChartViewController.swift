@@ -9,6 +9,7 @@
 import UIKit
 import Charts
 import HealthKit
+import FirebaseAnalytics
 
 class StepChartViewController: BaseViewController {
 
@@ -51,6 +52,8 @@ class StepChartViewController: BaseViewController {
         setUpMarkerView()
         requestAuthFromHealthKit()//get auth at then beginning
         rightArrow.isEnabled = false //disable rightArrow
+        //analytic screen name
+        Analytics.setScreenName("StepCounterPage", screenClass: "StepChartViewController")
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -107,6 +107,8 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         } else {
             print("Location services are not enabled")
         }
+        //analytic screen name
+        Analytics.setScreenName("ImagePage", screenClass: "CameraViewController")
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
@@ -191,9 +193,9 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         sessionManager.capturePhoto()
         capturePhotoButton.isEnabled = false
         //#google analytic log part
-//        Analytics.logEvent(StringConstants.FireBaseAnalytic.CaptureButtonPressed, parameters: [
-//            "mealTime": mealType
-//        ])
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickCaptureButton, parameters: [
+            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+        ])
     }
 
     //    @IBAction func switchToBarcode(_ sender: UIButton) {
@@ -506,6 +508,10 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             self.showReview(image: croppedImage)
             self.approveImage(image: image)
         }
+        //#google analytic log part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickGalleryButton, parameters: [
+            StringConstants.FireBaseAnalytic.parameter.MealTime: mealType
+        ])
         //        let imgData = UIImagePNGRepresentation(image)!
         //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
         //            // upload result and callback
@@ -585,6 +591,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         currentImageIndex = indexPath.row
         self.postImageKeyToServer(imageKey: imageKeyArray[currentImageIndex], isUsingSample: true, uploadTime: 0)
         showReview(image: imageArray[indexPath.row])
+        //# Firebase Analytic log
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectSampleItem, parameters: [StringConstants.FireBaseAnalytic.parameter.MealTime: mealType, "rank": indexPath.row])
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

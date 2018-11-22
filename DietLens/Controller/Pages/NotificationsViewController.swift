@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class NotificationsViewController: UIViewController {
 
@@ -29,6 +30,8 @@ class NotificationsViewController: UIViewController {
         // Do any additional setup after loading the view.
         notificationTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 52))
         notificationTable.tableFooterView?.isHidden = true
+        //analytic screen name
+        Analytics.setScreenName("NotificationPage", screenClass: "NotificationsViewController")
     }
 
     @objc func refresh(_ notification: NSNotification) {

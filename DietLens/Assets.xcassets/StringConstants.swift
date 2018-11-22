@@ -54,11 +54,38 @@ struct StringConstants {
     }
 
     struct FireBaseAnalytic {
-        static let CaptureButtonPressed = "on_click_capture"
-        static let OpenCameraView = "on_click_camera"
+        //click
+        static let HomeClickCameraButton = "home_click_camera_button"
+        static let FoodDiaryClickAddButton = "food_diary_click_add_button"
+        static let ImageClickCaptureButton = "image_click_capture_button"
+        static let ImageClickGalleryButton = "image_click_gallery_button"
+        static let ImageClickByTextTab = "image_click_by_text_tab"
+        static let TextClickByImageTab = "text_click_by_image_tab"
+        static let ImageResultClickSearchMoreButton = "image_result_click_search_more_button"
+        static let FoodPageAddSaveButton = "add_food_click_save_button"
         static let RecogCategorySelect = "on_click_cat"
         static let RecogItemSelect = "on_click_item"
-        static let RecogItemSave = "on_click_save"
+        //scroll
+        static let TextResultScrollFoodItem = "text_result_scroll_food_item"
+        static let ImageResultScrollFoodItem = "image_result_scroll_food_item"
+        static let ImageResultScrollFoodCategory = "image_result_scroll_food_category"
+        //select item
+        static let ImageResultSelectFoodItem = "image_result_select_food_item"
+        static let TextResultSelectFoodItem = "text_result_select_food_item"
+        static let ImageSelectSampleItem = "image_select_sample_item"
+        //back event
+        static let ImageClickBack = "image_click_back"
+        static let ImageResultBack = "image_result_click_back"
+        static let FoodItemClickBack = "food_item_click_back"
+        static let FoodListClickBack = "food_list_click_back"
+        static let SearchMoreClickBack = "search_more_click_back"
+        static let TextClickBack = "text_click_back"
+
+        struct parameter {
+            static let MealTime = "meal_time"
+            static let recordType = "record_type"
+            static let os = "iOS"
+        }
     }
 
     struct GenderText {

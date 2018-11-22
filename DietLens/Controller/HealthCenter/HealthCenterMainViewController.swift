@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class HealthCenterMainViewController: UIViewController {
 
@@ -20,6 +21,8 @@ class HealthCenterMainViewController: UIViewController {
         healthCenterTable.delegate = self
         healthCenterTable.dataSource = self
         healthCenterTable.tableFooterView = UIView()
+        //analytic screen name
+        Analytics.setScreenName("HealthLogPage", screenClass: "HealthCenterMainViewController")
     }
 
     override func viewWillAppear(_ animated: Bool) {

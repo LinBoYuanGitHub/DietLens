@@ -8,6 +8,7 @@
 
 import UIKit
 import Instructions
+import FirebaseAnalytics
 
 class FoodDiaryViewController: UIViewController {
 
@@ -56,6 +57,12 @@ class FoodDiaryViewController: UIViewController {
         //set instruction label dataSource
         self.coachMarksController.dataSource = self
         self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
+        //analytic screen name
+        if isUpdate {
+            Analytics.setScreenName("AddFoodListPage", screenClass: "FoodDiaryViewController")
+        } else {
+            Analytics.setScreenName("EditFoodListPage", screenClass: "FoodDiaryViewController")
+        }
     }
 
     func loadImage() {
@@ -164,6 +171,8 @@ class FoodDiaryViewController: UIViewController {
 
     @IBAction func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
+        //#Google Analytic part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodListClickBack, parameters: nil)
     }
 
     //save(from text Search) or update foodDiary
