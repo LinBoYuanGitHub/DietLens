@@ -32,6 +32,7 @@ struct DietItem {
     public var isMixFood = false
     public var portionInfo  = [PortionInfo]()
     public var nutritionInfo = NutritionInfo()
+    public var isFavoriteFood = false
 }
 
 struct NutritionInfo {

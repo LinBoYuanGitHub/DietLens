@@ -472,6 +472,11 @@ class APIService {
         self.getFoodSearchPopularity(requestUrl: url, mealtime: mealtime, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
+    public func getFavouriteFoodList(completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
+        let url = ServerConfig.favouriteFoodURL
+        self.getFoodSearchPopularity(requestUrl: url, mealtime: "", completion: completion, nextPageCompletion: nextPageCompletion)
+    }
+
     public func getFoodSearchPopularity(requestUrl: String, mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
         Alamofire.request(
             URL(string: requestUrl)!,

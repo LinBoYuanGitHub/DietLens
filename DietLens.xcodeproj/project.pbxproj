@@ -128,6 +128,7 @@
 		3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */; };
 		3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */; };
 		3FB6E69620E4D58B00462591 /* RegistrationForthStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */; };
+		3FB709E021A68DDE00C367B1 /* PersonalFavouriteFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB709DF21A68DDD00C367B1 /* PersonalFavouriteFoodViewController.swift */; };
 		3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB791082106155C000D6A94 /* LoadingFooterView.swift */; };
 		3FB7910B2106D1D4000D6A94 /* TextValidtor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7910A2106D1D4000D6A94 /* TextValidtor.swift */; };
 		3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7910C2107061F000D6A94 /* LoadingButton.swift */; };
@@ -367,6 +368,7 @@
 		3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSecondStepViewController.swift; sourceTree = "<group>"; };
 		3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationThirdStepViewController.swift; sourceTree = "<group>"; };
 		3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForthStepViewController.swift; sourceTree = "<group>"; };
+		3FB709DF21A68DDD00C367B1 /* PersonalFavouriteFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalFavouriteFoodViewController.swift; sourceTree = "<group>"; };
 		3FB791082106155C000D6A94 /* LoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingFooterView.swift; sourceTree = "<group>"; };
 		3FB7910A2106D1D4000D6A94 /* TextValidtor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextValidtor.swift; sourceTree = "<group>"; };
 		3FB7910C2107061F000D6A94 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 				3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */,
 				3FF5B7EB2176D942003B8509 /* MoreViewController.swift */,
 				3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */,
+				3FB709DF21A68DDD00C367B1 /* PersonalFavouriteFoodViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1589,6 +1592,7 @@
 				3F50DCEF20B2BA66005209B8 /* SingleSelectionCell.swift in Sources */,
 				3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */,
 				3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */,
+				3FB709E021A68DDE00C367B1 /* PersonalFavouriteFoodViewController.swift in Sources */,
 				3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */,

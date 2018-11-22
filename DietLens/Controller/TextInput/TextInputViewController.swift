@@ -206,6 +206,23 @@ class TextInputViewController: BaseViewController {
         }
     }
 
+    func getFavouriteFoods() {
+        APIService.instance.getFavouriteFoodList(completion: { (textResults) in
+            if textResults == nil {
+                self.emptyView.isHidden = false
+                self.textSearchTable.isHidden = true
+                return
+            }
+            self.emptyResultView.isHidden = true
+            self.emptyView.isHidden = true
+            self.textSearchTable.isHidden = false
+            self.searchResultList = textResults!
+            self.textSearchTable.reloadData()
+        }, nextPageCompletion: { (nextPageLink) in
+            self.nextPageLink = nextPageLink!
+        })
+    }
+
     func getCorrectMealType() -> String {
         let hour: Int = Calendar.current.component(.hour, from: Date())
         if hour < ConfigVariable.BreakFastEndTime && hour >= ConfigVariable.BreakFastStartTime {
@@ -353,10 +370,11 @@ class TextInputViewController: BaseViewController {
             APIService.instance.cancelAllRequest()
         } else if currentSelection == 2 {
             //show favorite WIP view
-            self.textSearchTable.isHidden = true
-            self.emptyViewLabel.text = "We are working on this feature for release in the future."
-            self.refreshBtn.isHidden = true
-            self.emptyView.isHidden = false
+            self.getFavouriteFoods()
+//            self.textSearchTable.isHidden = true
+//            self.emptyViewLabel.text = "We are working on this feature for release in the future."
+//            self.refreshBtn.isHidden = true
+//            self.emptyView.isHidden = false
         }
     }
 
