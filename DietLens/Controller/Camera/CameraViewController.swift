@@ -109,6 +109,11 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         }
         //analytic screen name
         Analytics.setScreenName("ImagePage", screenClass: "CameraViewController")
+        //analytic log the event for the total number that start to record food
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodRecrodStartFlag, parameters: nil)
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.isImageCaptureTriggered = true
+        }
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
@@ -253,9 +258,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     func postImageKeyToServer(imageKey: String, isUsingSample: Bool, uploadTime: TimeInterval) {
         self.uploadPercentageLabel.text = "Retrieving recognition results..."
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
         APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: appDelegate.latitude, longitude: appDelegate.longitude, uploadSpeed: uploadTime, completion: { (resultList) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true
@@ -281,6 +283,8 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }
+                    //#Google Analytics part
+                    Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageCaptureFlag, parameters: nil)
                 }
             }
             self.hideReview()

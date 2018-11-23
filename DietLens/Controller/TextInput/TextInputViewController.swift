@@ -94,6 +94,11 @@ class TextInputViewController: BaseViewController {
             showCancelBtn()
         } else {
             hideCancelBtn()
+            //trigger text search
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.TextViewFlag, parameters: nil)
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.isTextInputTriggered = true
+            }
         }
         //set loading footerView
         textSearchTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: textSearchTable.frame.size.width, height: 52))
@@ -442,6 +447,20 @@ extension TextInputViewController: UITableViewDelegate {
         requestForDietInformation(foodEntity: textSearchEntity)
         //# Firebase Analytic log
         Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        if shouldShowCancel{ //search more flow
+            if appDelegate.isSearchMoreTriggered {
+                appDelegate.isSearchMoreTriggered = false
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreSelectFlag, parameters: nil)
+            }
+        } else {
+            if appDelegate.isTextInputTriggered {
+                appDelegate.isTextInputTriggered = false
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.TextSelectFlag, parameters: nil)
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

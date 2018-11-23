@@ -55,6 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let locationManager = CLLocationManager()
     var latitude = 0.0
     var longitude = 0.0
+    //global trigger flag
+    var isImageCaptureTriggered = false
+    var isTextInputTriggered = false
+    var isSearchMoreTriggered = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

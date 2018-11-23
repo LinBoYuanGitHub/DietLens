@@ -492,7 +492,7 @@ class FoodInfoViewController: UIViewController {
             APIService.instance.createFooDiary(foodDiary: FoodDiaryDataManager.instance.foodDiaryEntity, completion: { (isSuccess) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
-                        //request for saving FoodDiary
+                        //TODO need to switch the date in the foodDiary page
                         //                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                         if let navigator = self.navigationController {
                             //pop to home tabPage
@@ -511,6 +511,12 @@ class FoodInfoViewController: UIViewController {
                 "recordType": recordType,
                 "mealtime": foodDiaryEntity.mealType
             ])
+            switch recordType{
+            case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
+            case RecognitionInteger.gallery: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
+            case RecognitionInteger.text: Analytics.logEvent(StringConstants.FireBaseAnalytic.TextAddFlag, parameters: nil)
+            default:break
+            }
         }
     }
 

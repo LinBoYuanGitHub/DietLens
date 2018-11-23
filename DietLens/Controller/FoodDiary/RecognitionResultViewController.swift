@@ -81,6 +81,11 @@ class RecognitionResultViewController: BaseViewController {
             }
             //#Google Analytic part
             Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType])
+            //trigger search more
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreFlag, parameters: nil)
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.isSearchMoreTriggered = true
+            }
         }
     }
 
@@ -174,6 +179,12 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         requestForDietInformation(foodId: selectedFoodInfo.id)
         //# Firebase Analytic log
         Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            if appDelegate.isImageCaptureTriggered {
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectFlag, parameters: nil)
+                appDelegate.isImageCaptureTriggered = false // set flag to false when selection trigger once
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

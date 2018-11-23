@@ -80,11 +80,25 @@ struct StringConstants {
         static let FoodListClickBack = "food_list_click_back"
         static let SearchMoreClickBack = "search_more_click_back"
         static let TextClickBack = "text_click_back"
+        //total flag event
+        static let FoodRecrodStartFlag = "food_search_flag"
+        //image flag event
+        static let ImageCaptureFlag = "image_capture_flag"
+        static let ImageSelectFlag = "image_select_flag"
+        static let imageAddFlag = "image_add_flag"
+        //text search flag event
+        static let TextViewFlag = "text_view_flag"
+        static let TextSelectFlag = "text_select_flag"
+        static let TextAddFlag = "text_add_flag"
+        //text search more event
+        static let SearchMoreFlag = "search_more_flag"
+        static let SearchMoreSelectFlag = "search_more_select_flag"
+        static let SearchMoreAddFlag = "search_more_add_flag"
 
         struct Parameter {
             static let MealTime = "meal_time"
             static let recordType = "record_type"
-            static let os = "iOS"
+            static let OS = "iOS"
         }
     }
 

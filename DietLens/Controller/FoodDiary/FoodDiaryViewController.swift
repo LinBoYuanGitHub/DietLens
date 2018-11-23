@@ -235,6 +235,8 @@ class FoodDiaryViewController: UIViewController {
                         }
                     }
                 }
+                //#google analytic log part
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreAddFlag, parameters: nil)
             })
         }
     }
