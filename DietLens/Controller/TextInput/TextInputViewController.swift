@@ -528,9 +528,9 @@ extension TextInputViewController: UITableViewDelegate {
             }
         }
         //#google analytic log part
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
-            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
-        ])
+//        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
+//            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
+//        ])
     }
 
 }

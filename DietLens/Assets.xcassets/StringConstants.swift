@@ -94,11 +94,15 @@ struct StringConstants {
         static let SearchMoreFlag = "search_more_flag"
         static let SearchMoreSelectFlag = "search_more_select_flag"
         static let SearchMoreAddFlag = "search_more_add_flag"
+        //app quit & resume
+        static let Quit = "app_quit"
+        static let Resume = "app_resume"
 
         struct Parameter {
             static let MealTime = "meal_time"
             static let recordType = "record_type"
-            static let OS = "iOS"
+            static let Rank = "rank"
+            static let OS = "platform"
         }
     }
 

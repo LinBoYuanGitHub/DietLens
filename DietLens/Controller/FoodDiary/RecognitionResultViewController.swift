@@ -210,9 +210,14 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //#google analytic log part
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodItem, parameters: [
-            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
-        ])
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//            if appDelegate.isImageCaptureTriggered {
+//                Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodItem, parameters: [
+//                    StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
+//                ])
+//            }
+//        }
+        
     }
 
 }
