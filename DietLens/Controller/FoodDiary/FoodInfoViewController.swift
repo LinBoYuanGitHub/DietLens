@@ -511,7 +511,7 @@ class FoodInfoViewController: UIViewController {
                 "recordType": recordType,
                 "mealtime": foodDiaryEntity.mealType
             ])
-            switch recordType{
+            switch recordType {
             case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
             case RecognitionInteger.gallery: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
             case RecognitionInteger.text: Analytics.logEvent(StringConstants.FireBaseAnalytic.TextAddFlag, parameters: nil)

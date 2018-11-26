@@ -258,6 +258,9 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     func postImageKeyToServer(imageKey: String, isUsingSample: Bool, uploadTime: TimeInterval) {
         self.uploadPercentageLabel.text = "Retrieving recognition results..."
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
         APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: appDelegate.latitude, longitude: appDelegate.longitude, uploadSpeed: uploadTime, completion: { (resultList) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true

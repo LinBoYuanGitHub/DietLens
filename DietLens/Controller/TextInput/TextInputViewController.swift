@@ -450,7 +450,7 @@ extension TextInputViewController: UITableViewDelegate {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        if shouldShowCancel{ //search more flow
+        if shouldShowCancel { //search more flow
             if appDelegate.isSearchMoreTriggered {
                 appDelegate.isSearchMoreTriggered = false
                 Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreSelectFlag, parameters: nil)
