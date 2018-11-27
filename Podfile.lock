@@ -135,7 +135,7 @@ DEPENDENCIES:
   - XLPagerTabStrip (~> 8.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - BAFluidView
     - Bolts
@@ -223,4 +223,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 85b42648f784e3884967e7931bad3714cea34031
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

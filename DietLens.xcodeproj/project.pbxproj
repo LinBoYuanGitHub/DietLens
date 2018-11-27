@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
+		3F008AF321ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F008AF221ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift */; };
+		3F008AF721ABE33500C1E529 /* FavouriteFoodCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F008AF621ABE33500C1E529 /* FavouriteFoodCollectionCell.xib */; };
 		3F13694721086FF8007D9772 /* ActionDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13694621086FF8007D9772 /* ActionDisabledTextField.swift */; };
 		3F14CC44201854D40032CC77 /* HistoryFoodDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F14CC43201854D40032CC77 /* HistoryFoodDiaryCell.swift */; };
 		3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F14CC45201C78B70032CC77 /* UserProfile.swift */; };
@@ -246,6 +248,8 @@
 
 /* Begin PBXFileReference section */
 		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F008AF221ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFavouriteFoodCell.swift; sourceTree = "<group>"; };
+		3F008AF621ABE33500C1E529 /* FavouriteFoodCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteFoodCollectionCell.xib; sourceTree = "<group>"; };
 		3F13694621086FF8007D9772 /* ActionDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDisabledTextField.swift; sourceTree = "<group>"; };
 		3F14CC43201854D40032CC77 /* HistoryFoodDiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFoodDiaryCell.swift; sourceTree = "<group>"; };
 		3F14CC45201C78B70032CC77 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
@@ -718,6 +722,8 @@
 				3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */,
 				3F46C45F215224510066636F /* RegistrationProfileCell.swift */,
 				3FA73DEA2177069100D145C6 /* MoreCollectionCell.swift */,
+				3F008AF221ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift */,
+				3F008AF621ABE33500C1E529 /* FavouriteFoodCollectionCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -929,6 +935,7 @@
 				587067AA1FE252B000660262 /* DietLens.entitlements */,
 				58F2DF281F9F437F00FF3A95 /* Services */,
 				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
+				58FCCFEC1F9D886900E4F421 /* View */,
 				58FCCFED1F9D886E00E4F421 /* Controller */,
 				58FCCFEB1F9D886400E4F421 /* Model */,
 				5877CF871F9D82BF0022B51E /* AppDelegate.swift */,
@@ -1047,7 +1054,6 @@
 				BF794BB01FA46D7100D30550 /* Camera */,
 				580443611FB0176700D59DFF /* Pages */,
 				3FBA55BA20F883C600258808 /* BaseViewController.swift */,
-				58FCCFEC1F9D886900E4F421 /* View */,
 				3FC7BD5C216B86B6003F43E2 /* HomeTabViewController.swift */,
 			);
 			path = Controller;
@@ -1256,6 +1262,7 @@
 				3F1AC22C20870FC2008F5BF2 /* MealTypeCollectionCell.xib in Resources */,
 				3F8A69E61FE267E8005B83B0 /* GoogleService-Info.plist in Resources */,
 				3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */,
+				3F008AF721ABE33500C1E529 /* FavouriteFoodCollectionCell.xib in Resources */,
 				3F9BFEA02000A0120011845B /* IngredientHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1613,6 +1620,7 @@
 				3F5677A8215E1E4900A4E282 /* profileSection.swift in Sources */,
 				3F5608EF20F309590007B3AF /* HealthCenterItem.swift in Sources */,
 				3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */,
+				3F008AF321ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift in Sources */,
 				3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */,
 				3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */,
 				3FA8C372219D0E6800E4261D /* ProfileCalorieGoalViewController.swift in Sources */,

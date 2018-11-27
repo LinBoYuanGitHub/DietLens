@@ -48,4 +48,15 @@ class TextSearchDataManager {
         return foodSearchList
     }
 
+    func assembleFavouriteFoodResultList(jsonObj: JSON) -> [TextSearchSuggestionEntity] {
+        var foodSearchList = [TextSearchSuggestionEntity]()
+        let jsonArr = jsonObj["results"]
+        for index in 0..<jsonArr.count {
+            let json = jsonArr[index]["food"]
+            let entity = assembleTextSearchResultData(jsonObj: json)
+            foodSearchList.append(entity)
+        }
+        return foodSearchList
+    }
+
 }

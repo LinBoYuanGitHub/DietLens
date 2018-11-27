@@ -131,6 +131,8 @@ class TextInputViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
 //        textSearchField.becomeFirstResponder()
+        //set event for favFood empty label jump
+        self.emptyView.addGestureRecognizer( UITapGestureRecognizer(target: self, action: #selector(redirectToFavoriteFoodPage)))
     }
 
     @IBAction func refreshSearch(_ sender: Any) {
@@ -212,6 +214,12 @@ class TextInputViewController: BaseViewController {
                 self.emptyView.isHidden = false
                 self.textSearchTable.isHidden = true
                 return
+            } else if textResults?.count == 0 {
+                self.textSearchTable.isHidden = true
+                self.emptyViewLabel.text = "click here to select your favorite food"
+                self.refreshBtn.isHidden = true
+                self.emptyView.isHidden = false
+                return
             }
             self.emptyResultView.isHidden = true
             self.emptyView.isHidden = true
@@ -221,6 +229,17 @@ class TextInputViewController: BaseViewController {
         }, nextPageCompletion: { (nextPageLink) in
             self.nextPageLink = nextPageLink!
         })
+    }
+
+    @objc func redirectToFavoriteFoodPage() {
+        if currentSelectionPos != 2 { //return when it's not at favorite food tab
+            return
+        }
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PersonalFavouriteFoodVC") as? PersonalFavouriteFoodViewController {
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: false)
+            }
+        }
     }
 
     func getCorrectMealType() -> String {
@@ -421,6 +440,12 @@ extension TextInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //loading to get food text search detail
         let textSearchEntity = searchResultList[indexPath.row]
+        if currentSelectionPos == 2 {
+            APIService.instance.removeFavouriteFood(removeFoodId: textSearchEntity.id) { (isSuccess) in
+                self.getFavouriteFoods()
+            }
+            return
+        }
         requestForDietInformation(foodEntity: textSearchEntity)
     }
 

@@ -8894,7 +8894,7 @@ Your recommended daily calorie intake is:</string>
         <!--Personal Favourite Food View Controller-->
         <scene sceneID="84Z-xL-AbP">
             <objects>
-                <viewController id="Mau-SJ-PlU" customClass="PersonalFavouriteFoodViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PersonalFavouriteFoodVC" id="Mau-SJ-PlU" customClass="PersonalFavouriteFoodViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qhB-M7-LUX"/>
                         <viewControllerLayoutGuide type="bottom" id="9gD-qm-No6"/>
@@ -8953,18 +8953,18 @@ Your recommended daily calorie intake is:</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Vc7-E8-rgs"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2Mh-ZS-P4j">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5lz-HX-ban">
+                                    <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nCu-TF-Oge">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nCu-TF-Oge" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="10" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
@@ -8989,18 +8989,18 @@ Your recommended daily calorie intake is:</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="kkv-j8-A1g"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PLy-h4-e4W">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PLy-h4-e4W">
+                                    <size key="itemSize" width="101" height="99"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cIe-xP-Cpp">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cIe-xP-Cpp" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="10.5" width="101" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="101" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
@@ -9025,18 +9025,18 @@ Your recommended daily calorie intake is:</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="a7q-MK-EK8"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bkT-BU-pNA">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bkT-BU-pNA">
+                                    <size key="itemSize" width="105" height="99"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="SD7-b0-QsO">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="SD7-b0-QsO" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="10.5" width="105" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
@@ -9130,23 +9130,23 @@ Your recommended daily calorie intake is:</string>
     <resources>
         <image name=" " width="16" height="16"/>
         <image name="AboutAppIcon" width="111" height="111"/>
-        <image name="AddFood" width="115" height="118"/>
+        <image name="AddFood" width="231" height="237"/>
         <image name="Back Arrow" width="10" height="17"/>
         <image name="BottomBar_Camera" width="43" height="43"/>
         <image name="BottomBar_FoodDiary" width="23" height="14"/>
         <image name="BottomBar_HealthLog" width="18" height="20"/>
         <image name="BottomBar_Home" width="23" height="20"/>
         <image name="Facebook" width="50" height="50"/>
-        <image name="HealthCenterEmptyIcon" width="105" height="107"/>
+        <image name="HealthCenterEmptyIcon" width="210" height="214"/>
         <image name="Notification" width="18" height="20"/>
-        <image name="Profile" width="81" height="81"/>
+        <image name="Profile" width="162" height="162"/>
         <image name="RedBackGroundImage" width="283" height="44"/>
         <image name="SeperatorView" width="2" height="29"/>
         <image name="ShadowBox" width="344" height="347"/>
         <image name="SideMenu" width="18" height="13"/>
         <image name="Steps" width="14" height="24"/>
         <image name="WhiteBackGroundImage" width="288" height="40"/>
-        <image name="articleTitleBackground" width="343" height="26"/>
+        <image name="articleTitleBackground" width="686" height="52"/>
         <image name="birthdayIcon" width="60" height="60"/>
         <image name="calendar" width="40" height="40"/>
         <image name="calendarIcon" width="15" height="17"/>
@@ -9157,7 +9157,7 @@ Your recommended daily calorie intake is:</string>
         <image name="cross" width="20" height="20"/>
         <image name="edit_gray_tick_icon" width="22" height="22"/>
         <image name="emptyDiary" width="159" height="159"/>
-        <image name="equalsIcon" width="15" height="10"/>
+        <image name="equalsIcon" width="30" height="20"/>
         <image name="exerciseProgressLayout" width="302" height="20"/>
         <image name="facebookLongIcon" width="283" height="44"/>
         <image name="foodDiaryRedPlus" width="28" height="28"/>
@@ -9330,25 +9330,25 @@ Cj4KUQpVCmAKaQpuCnYKeQp+Co0KkQqYCqAKrQqyCrQKtgq7CsMKxgrLCtMK1groCusK8AAAAAAAAAIB
 AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
 </mutableData>
         </image>
-        <image name="kid" width="167" height="68"/>
+        <image name="kid" width="167.5" height="68.5"/>
         <image name="laksa" width="355" height="270"/>
         <image name="launchScreenPic" width="375" height="667"/>
-        <image name="loading_img" width="510" height="406"/>
+        <image name="loading_img" width="1020" height="812"/>
         <image name="loginTopLayer" width="375" height="162"/>
         <image name="more_favorite_food_icon" width="18" height="21"/>
         <image name="option_selected" width="20" height="20"/>
-        <image name="option_unselected" width="20" height="20"/>
+        <image name="option_unselected" width="40" height="40"/>
         <image name="personIcon" width="55" height="60"/>
-        <image name="pineappleIcon" width="99" height="79"/>
+        <image name="pineappleIcon" width="198" height="158"/>
         <image name="profileBackground" width="302" height="208"/>
         <image name="redBorderImage" width="80" height="31"/>
-        <image name="redPlusIcon" width="12" height="11"/>
-        <image name="red_tick" width="66" height="66"/>
+        <image name="redPlusIcon" width="24" height="22"/>
+        <image name="red_tick" width="132" height="132"/>
         <image name="reportBackground" width="375" height="272"/>
         <image name="reportLine" width="52" height="2"/>
         <image name="rightArrow" width="7" height="17"/>
-        <image name="sampleCategoryEggs" width="320" height="240"/>
-        <image name="signUpCalendarIcon" width="33" height="31"/>
+        <image name="sampleCategoryEggs" width="640" height="480"/>
+        <image name="signUpCalendarIcon" width="66" height="63"/>
         <image name="smallBtnBackground" width="94" height="32"/>
         <image name="smallWhiteBtnBackground" width="100" height="40"/>
         <image name="twitter" width="50" height="50"/>

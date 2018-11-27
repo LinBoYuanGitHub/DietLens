@@ -27,7 +27,6 @@ class RegistrationFirstStepViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        TFuserName.delegate = self
         TFemail.delegate = self
         TFpassword.delegate = self
         TFconfirmPassword.delegate = self
