@@ -25,6 +25,7 @@ class FoodInfoViewController: UIViewController {
     @IBOutlet weak var proteinValueLable: UILabel!
     @IBOutlet weak var fatValueLabel: UILabel!
     @IBOutlet weak var carbohydrateValueLabel: UILabel!
+
     //container
     @IBOutlet weak var container: UIView!
     //pickerView
@@ -32,6 +33,7 @@ class FoodInfoViewController: UIViewController {
 
     @IBOutlet weak var mealIconView: UIImageView!
     @IBOutlet weak var mealViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var favButton: UIButton!
 
     let redUnderLine: UIView = UIView(frame: CGRect(x: 12, y: 32, width: 50, height: 2))
 
@@ -93,6 +95,14 @@ class FoodInfoViewController: UIViewController {
             object: nil
         )
         setUpQuantityPickerIndex()
+        setFavImageStyle()
+    }
+
+    func setFavImageStyle() {
+        //image setting
+        favButton.setImage(UIImage(imageLiteralResourceName: "favStar_select"), for: .selected)
+        favButton.setImage(UIImage(imageLiteralResourceName: "favStar_unselect"), for: .normal)
+        favButton.isSelected = dietItem.isFavoriteFood
     }
 
     func setUpQuantityPickerIndex() {
@@ -102,6 +112,26 @@ class FoodInfoViewController: UIViewController {
                 if element == (dietItem.quantity - floor(dietItem.quantity)) {
                     currentDecimalPos = index
                 }
+            }
+        }
+    }
+
+    @IBAction func toggleStar(_ sender: Any) {
+        favButton.isUserInteractionEnabled = false
+        AlertMessageHelper.showLoadingDialog(targetController: self)
+        if dietItem.isFavoriteFood {//judge from the favourite attribute
+            APIService.instance.removeFavouriteFood(removeFoodId: dietItem.foodId) { (isSuccess) in
+                AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                self.favButton.isUserInteractionEnabled = true
+                self.favButton.isSelected = false
+                self.dietItem.isFavoriteFood = false
+            }
+        } else {
+            APIService.instance.setFavouriteFoodList(foodList: [dietItem.foodId]) { (isSuccess) in
+                AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                self.favButton.isUserInteractionEnabled = true
+                self.favButton.isSelected = true
+                self.dietItem.isFavoriteFood = true
             }
         }
     }

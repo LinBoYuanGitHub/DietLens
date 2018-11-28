@@ -192,7 +192,7 @@ class TextInputViewController: BaseViewController {
             self.mealType = getCorrectMealType()
         }
         APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased(), completion: { (textResults) in
-            if textResults == nil {
+            if textResults == nil { // excpetion + cancelled
                 self.emptyView.isHidden = false
                 self.textSearchTable.isHidden = true
                 return
@@ -439,12 +439,6 @@ extension TextInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //loading to get food text search detail
         let textSearchEntity = searchResultList[indexPath.row]
-        if currentSelectionPos == 2 {
-            APIService.instance.removeFavouriteFood(removeFoodId: textSearchEntity.id) { (isSuccess) in
-                self.getFavouriteFoods()
-            }
-            return
-        }
         requestForDietInformation(foodEntity: textSearchEntity)
     }
 
