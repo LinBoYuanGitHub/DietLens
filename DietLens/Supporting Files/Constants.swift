@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ServerConfig {
 
@@ -223,4 +224,11 @@ struct FirstTimeFlag {
 struct MessageType {
     static let messageType = "0"
     static let questionnaireType = "1"
+}
+
+extension UIColor {
+    struct ThemeColor {
+        static let dietLensRed = UIColor(displayP3Red: CGFloat(242.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(93.0/255.0), alpha: 1.0)
+    }
+
 }

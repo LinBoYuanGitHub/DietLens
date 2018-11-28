@@ -1,4 +1,4 @@
-//
+///
 //  ProfileEntity.swift
 //  DietLens
 //

@@ -33,8 +33,7 @@ class TextInputViewController: BaseViewController {
 //    let activityIndicator:NVActivityIndicatorView?
 
     //tab item for filter the result
-//    var filterItem = ["All", "Ingredient", "Side dish"]
-    var filterItem = ["Popular", "Recent", "My Favorite"]
+    var filterItem = [StringConstants.UIString.FitlerPopular, StringConstants.UIString.FilterRecent, StringConstants.UIString.FilterFavorite]
     //autoComplete & textSearchResult List
     var autoCompleteTextList = [String]()
     var searchResultList = [TextSearchSuggestionEntity]()

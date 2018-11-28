@@ -235,11 +235,11 @@ class FoodInfoViewController: UIViewController {
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
         if isUpdate {
-            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.updateBtnText
+            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
-         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
@@ -366,18 +366,25 @@ class FoodInfoViewController: UIViewController {
         }
         NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
         if isUpdate {
-            if let navigator = self.navigationController {
-                for viewController in (navigator.viewControllers) {
-                    if let foodDiaryVC = viewController as? FoodDiaryViewController {
-                        foodDiaryVC.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                        foodDiaryVC.updateFoodInfoItem(dietItem: dietItem)
-                        foodDiaryVC.calculateAccumulateFoodValue()
-                    }
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    navigator.popViewController(animated: true)
-                }
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            optionMenu.view.tintColor = UIColor.ThemeColor.dietLensRed
+            var favTitle = ""
+            if dietItem.isFavoriteFood {
+                favTitle = StringConstants.UIString.removeFavActionItem
+            } else {
+                favTitle = StringConstants.UIString.addFavActionItem
             }
+            let favoriteAction = UIAlertAction(title: favTitle, style: .default) { (alert: UIAlertAction!) in
+                APIService.instance.setFavouriteFoodList(foodList: [self.dietItem.foodId], completion: { (isSuccess) in })
+            }
+            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (alert: UIAlertAction!) in
+                APIService.instance.deleteFoodItem(foodDiaryId: self.foodDiaryEntity.foodDiaryId, foodItemId: self.dietItem.id, completion: { (isSuccess) in })
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            optionMenu.addAction(favoriteAction)
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+            self.present(optionMenu, animated: true, completion: nil)
         } else if recordType == RecognitionInteger.additionText {
             //1.multiple times TextSearchItem 2.first time TextSearchItem
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
@@ -447,7 +454,21 @@ class FoodInfoViewController: UIViewController {
 
     @IBAction func onBackPressed(_ sender: Any) {
 //        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        //perform foodItem change when done
+        if let navigator = self.navigationController {
+            for viewController in (navigator.viewControllers) {
+                if let foodDiaryVC = viewController as? FoodDiaryViewController {
+                    foodDiaryVC.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                    foodDiaryVC.updateFoodInfoItem(dietItem: dietItem)
+                    foodDiaryVC.calculateAccumulateFoodValue()
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                navigator.popViewController(animated: true)
+            }
+        }
+
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
