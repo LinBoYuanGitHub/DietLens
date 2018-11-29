@@ -19,8 +19,8 @@ class RegistrationFavouriteFoodCell: UICollectionViewCell {
             }
         } else {
             favFoodImageView.image = #imageLiteral(resourceName: "loading_img")
+            favFoodImageView.image = UIImage(imageLiteralResourceName: "dietlens_sample_background")
         }
-
         favFoodTextName.text = entity.name
     }
 

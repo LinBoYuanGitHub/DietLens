@@ -1607,7 +1607,7 @@ Click add to record food~</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="equalsIcon" translatesAutoresizingMaskIntoConstraints="NO" id="uNm-ar-eRp">
-                                                    <rect key="frame" x="273" y="261" width="15" height="10"/>
+                                                    <rect key="frame" x="258" y="256" width="30" height="20"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -5858,12 +5858,12 @@ What is it?</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DZc-up-3BO">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.33000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="DZc-up-3BO">
                                 <rect key="frame" x="25" y="83" width="307" height="2.5"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="progressTintColor" red="0.95686274510000002" green="0.1960784314" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak9-aN-L6H">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak9-aN-L6H">
                                 <rect key="frame" x="341" y="72.5" width="28" height="23"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                 <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7132,58 +7132,58 @@ What is it?</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyc-bi-HEl">
-                                                <rect key="frame" x="22" y="117.5" width="56" height="23"/>
+                                                <rect key="frame" x="22" y="117.5" width="76" height="40"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                                 <state key="normal" title="Male" image="option_unselected">
                                                     <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ciR-ZY-Kut">
-                                                <rect key="frame" x="102" y="118" width="79" height="22"/>
+                                                <rect key="frame" x="122" y="126.5" width="79" height="22"/>
                                                 <state key="normal" title="Female" image="option_selected">
                                                     <color key="titleColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJQ-ok-fy7">
-                                                <rect key="frame" x="22" y="160.5" width="103.5" height="25.5"/>
+                                                <rect key="frame" x="22" y="177.5" width="103.5" height="25.5"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
                                                 <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQL-Zf-tdf">
-                                                <rect key="frame" x="317.5" y="160.5" width="41.5" height="25.5"/>
+                                                <rect key="frame" x="317.5" y="177.5" width="41.5" height="25.5"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="18"/>
                                                 <color key="textColor" red="0.95686274509803915" green="0.19607843137254902" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mGJ-h5-qX0" customClass="RulerView" customModule="DietLens" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="196" width="343" height="70"/>
+                                                <rect key="frame" x="16" y="213" width="343" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="KK7-Fd-vLk"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Height" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uen-nr-3kI">
-                                                <rect key="frame" x="22" y="286" width="100" height="25.5"/>
+                                                <rect key="frame" x="22" y="303" width="100" height="25.5"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
                                                 <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="165cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfY-j9-HRQ">
-                                                <rect key="frame" x="305.5" y="286" width="53.5" height="25.5"/>
+                                                <rect key="frame" x="305.5" y="303" width="53.5" height="25.5"/>
                                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="18"/>
                                                 <color key="textColor" red="0.95686274509803915" green="0.19607843137254902" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6p-7A-qqq" customClass="RulerView" customModule="DietLens" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="321.5" width="343" height="70"/>
+                                                <rect key="frame" x="16" y="338.5" width="343" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="soT-p7-mzl"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JrF-Bq-T0e">
-                                                <rect key="frame" x="22" y="401.5" width="100" height="40"/>
+                                                <rect key="frame" x="22" y="418.5" width="100" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="ash-sa-WHg"/>
                                                     <constraint firstAttribute="width" constant="100" id="ea2-kF-ycn"/>
@@ -7197,7 +7197,7 @@ What is it?</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cch-UA-rMP">
-                                                <rect key="frame" x="22" y="451.5" width="100" height="40"/>
+                                                <rect key="frame" x="22" y="468.5" width="100" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="8eZ-dO-obm"/>
                                                     <constraint firstAttribute="height" constant="40" id="uyP-A4-QFA"/>
@@ -8756,12 +8756,12 @@ Your recommended daily calorie intake is:</string>
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="76"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="YSk-bu-KS9">
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.66000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="YSk-bu-KS9">
                                             <rect key="frame" x="16" y="10" width="280.5" height="2.5"/>
                                             <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="progressTintColor" red="0.95686274510000002" green="0.1960784314" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </progressView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieE-uZ-hpX">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieE-uZ-hpX">
                                             <rect key="frame" x="299.5" y="-0.5" width="27.5" height="22.5"/>
                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                             <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -8941,19 +8941,13 @@ Your recommended daily calorie intake is:</string>
                                     <constraint firstAttribute="height" constant="1" id="fo9-MW-9kJ"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breakfast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaU-Po-6CF">
-                                <rect key="frame" x="16" y="81" width="63" height="20"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                                <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7AP-fV-USH" userLabel="BreakfastCollectionView">
-                                <rect key="frame" x="16" y="104" width="343" height="120"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7AP-fV-USH" userLabel="FavouriteFoodCollectionView">
+                                <rect key="frame" x="16" y="103" width="343" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="Vc7-E8-rgs"/>
+                                    <constraint firstAttribute="height" constant="400" id="Vc7-E8-rgs"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5lz-HX-ban">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5lz-HX-ban">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -8961,7 +8955,71 @@ Your recommended daily calorie intake is:</string>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nCu-TF-Oge" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bqL-Au-nhi" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="121.5" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Tmq-Te-MIe" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="243" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U9z-8x-5g1" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="110" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="k8t-io-TGO" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="121.5" y="110" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Ach-2m-fCQ" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="243" y="110" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="4Dk-aq-PXv" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="220" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="sH4-LJ-uFw" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="121.5" y="220" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YZT-sd-Lo4" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="243" y="220" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -8971,94 +9029,12 @@ Your recommended daily calorie intake is:</string>
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OAn-QI-poB" userLabel="SeperateLine">
-                                <rect key="frame" x="16" y="227" width="343" height="1"/>
+                                <rect key="frame" x="16" y="508" width="343" height="1"/>
                                 <color key="backgroundColor" red="0.89019607840000003" green="0.89411764709999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="624-tG-aKP"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Q4-9w-6r3">
-                                <rect key="frame" x="16" y="231" width="40" height="20"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                                <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wo0-nl-z2E" userLabel="LunchCollectionView">
-                                <rect key="frame" x="16" y="254" width="343" height="120"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="kkv-j8-A1g"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PLy-h4-e4W">
-                                    <size key="itemSize" width="101" height="99"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cIe-xP-Cpp" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10.5" width="101" height="99"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="101" height="99"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hug-0A-hxn" userLabel="SeperateLine">
-                                <rect key="frame" x="16" y="377" width="343" height="1"/>
-                                <color key="backgroundColor" red="0.89019607840000003" green="0.89411764709999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="ILd-5X-JWG"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FH6-sv-HSs">
-                                <rect key="frame" x="16" y="381" width="42" height="20"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
-                                <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VLZ-eq-ZPj" userLabel="DinnerCollectionView">
-                                <rect key="frame" x="16" y="404" width="343" height="120"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="a7q-MK-EK8"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bkT-BU-pNA">
-                                    <size key="itemSize" width="105" height="99"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="SD7-b0-QsO" customClass="RegistrationFavouriteFoodCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10.5" width="105" height="99"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="105" height="99"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xoz-En-2mx" userLabel="SeperateLine">
-                                <rect key="frame" x="16" y="529" width="343" height="1"/>
-                                <color key="backgroundColor" red="0.89019607840000003" green="0.89411764709999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="eO6-GT-zM9"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPf-U5-LHd">
-                                <rect key="frame" x="137.5" y="545" width="100" height="40"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
-                                <state key="normal" title="Skip" backgroundImage="smallWhiteBtnBackground">
-                                    <color key="titleColor" red="0.95294117647058818" green="0.27450980392156865" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSkipBtnPressed:" destination="Mau-SJ-PlU" eventType="touchUpInside" id="qKS-N2-hvA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -9067,41 +9043,21 @@ Your recommended daily calorie intake is:</string>
                             <constraint firstItem="OAn-QI-poB" firstAttribute="trailing" secondItem="2if-zv-kZX" secondAttribute="trailing" id="3ih-ng-8Iz"/>
                             <constraint firstAttribute="trailing" secondItem="2if-zv-kZX" secondAttribute="trailing" constant="16" id="5Qe-G5-VyS"/>
                             <constraint firstItem="aX1-ug-gom" firstAttribute="leading" secondItem="WBd-R0-haB" secondAttribute="leading" constant="16" id="6QY-Ra-ZWa"/>
-                            <constraint firstItem="5Q4-9w-6r3" firstAttribute="top" secondItem="OAn-QI-poB" secondAttribute="bottom" constant="3" id="70A-FM-gBQ"/>
-                            <constraint firstItem="VLZ-eq-ZPj" firstAttribute="top" secondItem="FH6-sv-HSs" secondAttribute="bottom" constant="3" id="7HA-zG-R3h"/>
-                            <constraint firstItem="bPf-U5-LHd" firstAttribute="centerX" secondItem="WBd-R0-haB" secondAttribute="centerX" id="7Sn-Wh-oCd"/>
+                            <constraint firstItem="7AP-fV-USH" firstAttribute="leading" secondItem="2if-zv-kZX" secondAttribute="leading" id="7cj-4Y-dDe"/>
                             <constraint firstItem="OAn-QI-poB" firstAttribute="leading" secondItem="2if-zv-kZX" secondAttribute="leading" id="8nM-7P-Uaj"/>
-                            <constraint firstItem="wo0-nl-z2E" firstAttribute="leading" secondItem="OAn-QI-poB" secondAttribute="leading" id="Adn-qP-pye"/>
-                            <constraint firstItem="hug-0A-hxn" firstAttribute="leading" secondItem="OAn-QI-poB" secondAttribute="leading" id="BWA-UC-gTN"/>
-                            <constraint firstItem="wo0-nl-z2E" firstAttribute="top" secondItem="5Q4-9w-6r3" secondAttribute="bottom" constant="3" id="For-vh-zn1"/>
-                            <constraint firstItem="hug-0A-hxn" firstAttribute="top" secondItem="wo0-nl-z2E" secondAttribute="bottom" constant="3" id="GoY-9I-xnp"/>
-                            <constraint firstItem="wo0-nl-z2E" firstAttribute="trailing" secondItem="OAn-QI-poB" secondAttribute="trailing" id="HSB-gB-s4w"/>
-                            <constraint firstItem="hug-0A-hxn" firstAttribute="trailing" secondItem="OAn-QI-poB" secondAttribute="trailing" id="HaG-eU-IOG"/>
+                            <constraint firstItem="7AP-fV-USH" firstAttribute="top" secondItem="2if-zv-kZX" secondAttribute="bottom" constant="25" id="BaD-4t-neI"/>
                             <constraint firstItem="2z8-9X-0QZ" firstAttribute="centerX" secondItem="WBd-R0-haB" secondAttribute="centerX" id="JV2-29-X7R"/>
-                            <constraint firstItem="7AP-fV-USH" firstAttribute="leading" secondItem="QaU-Po-6CF" secondAttribute="leading" id="MMC-AR-EV4"/>
-                            <constraint firstItem="bPf-U5-LHd" firstAttribute="top" secondItem="Xoz-En-2mx" secondAttribute="bottom" constant="15" id="Odb-ir-rID"/>
-                            <constraint firstItem="OAn-QI-poB" firstAttribute="top" secondItem="7AP-fV-USH" secondAttribute="bottom" constant="3" id="S29-ET-u47"/>
-                            <constraint firstItem="QaU-Po-6CF" firstAttribute="top" secondItem="2if-zv-kZX" secondAttribute="bottom" constant="3" id="TaH-Pz-Zfy"/>
-                            <constraint firstItem="QaU-Po-6CF" firstAttribute="leading" secondItem="WBd-R0-haB" secondAttribute="leading" constant="16" id="U5B-ro-GtG"/>
+                            <constraint firstItem="OAn-QI-poB" firstAttribute="top" secondItem="7AP-fV-USH" secondAttribute="bottom" constant="5" id="S29-ET-u47"/>
                             <constraint firstItem="2if-zv-kZX" firstAttribute="leading" secondItem="WBd-R0-haB" secondAttribute="leading" constant="16" id="VHp-hK-nGD"/>
                             <constraint firstItem="7AP-fV-USH" firstAttribute="trailing" secondItem="2if-zv-kZX" secondAttribute="trailing" id="Vrr-hg-23m"/>
-                            <constraint firstItem="FH6-sv-HSs" firstAttribute="top" secondItem="hug-0A-hxn" secondAttribute="bottom" constant="3" id="ZNA-Yo-ldP"/>
-                            <constraint firstItem="5Q4-9w-6r3" firstAttribute="leading" secondItem="OAn-QI-poB" secondAttribute="leading" id="Zb8-61-gew"/>
-                            <constraint firstItem="VLZ-eq-ZPj" firstAttribute="trailing" secondItem="hug-0A-hxn" secondAttribute="trailing" id="ZiC-fS-n5V"/>
-                            <constraint firstItem="Xoz-En-2mx" firstAttribute="top" secondItem="VLZ-eq-ZPj" secondAttribute="bottom" constant="5" id="fF0-v3-FpZ"/>
-                            <constraint firstItem="Xoz-En-2mx" firstAttribute="leading" secondItem="hug-0A-hxn" secondAttribute="leading" id="fVW-Xl-9pS"/>
                             <constraint firstItem="2if-zv-kZX" firstAttribute="top" secondItem="2z8-9X-0QZ" secondAttribute="bottom" constant="8" id="hfa-fK-XaF"/>
-                            <constraint firstItem="VLZ-eq-ZPj" firstAttribute="leading" secondItem="hug-0A-hxn" secondAttribute="leading" id="hq3-vO-MWg"/>
                             <constraint firstItem="2z8-9X-0QZ" firstAttribute="top" secondItem="aX1-ug-gom" secondAttribute="bottom" constant="-3" id="kx7-Cl-HxR"/>
-                            <constraint firstItem="7AP-fV-USH" firstAttribute="top" secondItem="QaU-Po-6CF" secondAttribute="bottom" constant="3" id="mB2-ou-PTw"/>
-                            <constraint firstItem="Xoz-En-2mx" firstAttribute="trailing" secondItem="hug-0A-hxn" secondAttribute="trailing" id="sgG-Sf-uJk"/>
-                            <constraint firstItem="FH6-sv-HSs" firstAttribute="leading" secondItem="hug-0A-hxn" secondAttribute="leading" id="yXR-9j-H2J"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="breakfastCollectionView" destination="7AP-fV-USH" id="3rG-IE-xdX"/>
-                        <outlet property="dinnerCollectionView" destination="VLZ-eq-ZPj" id="n0o-iD-xQU"/>
-                        <outlet property="lunchCollectionView" destination="wo0-nl-z2E" id="DfT-5u-oPE"/>
+                        <outlet property="popularCollectionView" destination="7AP-fV-USH" id="rNC-L8-7B8"/>
+                        <outlet property="progressLabel" destination="uQ1-wh-IQl" id="PYK-7Q-3G6"/>
+                        <outlet property="progressView" destination="TAI-6D-49e" id="sKt-r3-gYB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nzv-jg-X1y" userLabel="First Responder" sceneMemberID="firstResponder"/>

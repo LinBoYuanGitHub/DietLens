@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FoodDiaryEntity {
+class FoodDiaryEntity {
     public var foodDiaryId: String = ""
     public var imageId: String = ""
     public var placeHolderImage: String = ""
@@ -19,7 +19,7 @@ struct FoodDiaryEntity {
     public var dietItems = [DietItem]()
 }
 
-struct DietItem {
+class DietItem {
     public var id: String = ""
     public var foodId: Int = 0
     public var foodName: String = ""
@@ -35,7 +35,7 @@ struct DietItem {
     public var isFavoriteFood = false
 }
 
-struct NutritionInfo {
+class NutritionInfo {
     public var calorie = 0.0
     public var carbohydrate = 0.0
     public var protein = 0.0
@@ -50,7 +50,7 @@ struct NutritionInfo {
 
 }
 
-struct PortionInfo {
+class PortionInfo {
     public var sizeUnit = ""
     public var sizeValue = 1
     public var weightValue = 0.0

@@ -24,7 +24,7 @@ class FoodDiaryViewController: UIViewController {
     @IBOutlet weak var addMore: UIView!
 
     //dataSource
-    var foodDiaryEntity = FoodDiaryEntity()
+    var foodDiaryInstance = FoodDiaryDataManager.instance.foodDiaryEntity
     //passing parameter
     var userFoodImage: UIImage?
     var imageKey: String?
@@ -92,24 +92,24 @@ class FoodDiaryViewController: UIViewController {
         if isSetMealByTimeRequired {
             let hour: Int = Calendar.current.component(.hour, from: Date())
             if hour < ConfigVariable.BreakFastEndTime && hour >= ConfigVariable.BreakFastStartTime {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.breakfast
+                foodDiaryInstance.mealType = StringConstants.MealString.breakfast
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
             } else if hour < ConfigVariable.LunchEndTime && hour >= ConfigVariable.LunchStartTime {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.lunch
+                foodDiaryInstance.mealType = StringConstants.MealString.lunch
                 currentMealIndex = 1
                 mealCollectionView.reloadData()
             } else if hour < ConfigVariable.DinnerEndTime && hour >= ConfigVariable.DinnerStartTime {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.dinner
+                foodDiaryInstance.mealType = StringConstants.MealString.dinner
                 currentMealIndex = 2
                 mealCollectionView.reloadData()
             } else {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.snack
+                foodDiaryInstance.mealType = StringConstants.MealString.snack
                 currentMealIndex = 3
                 mealCollectionView.reloadData()
             }
         } else {
-            switch self.foodDiaryEntity.mealType {
+            switch foodDiaryInstance.mealType {
             case StringConstants.MealString.breakfast:
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
@@ -134,7 +134,7 @@ class FoodDiaryViewController: UIViewController {
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
         if isUpdate {
-            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.updateBtnText
+            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
@@ -170,67 +170,59 @@ class FoodDiaryViewController: UIViewController {
     @IBAction func onTopRightBtnPressed(_ sender: Any) {
         NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
         if isUpdate {
-            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryEntity, completion: { (isSuccess) in
-                if isSuccess {
-                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
-                        if let navigator = self.navigationController {
-                            dest.shouldSwitchToFoodDiary = true
-                            //pop to home tabPage
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                navigator.popToRootViewController(animated: true)
-//                                navigator.popToViewController(dest, animated: true)
-                            })
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            optionMenu.view.tintColor = UIColor.ThemeColor.dietLensRed
+            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (alert: UIAlertAction!) in
+                //delete foodDiary api flow
+                APIService.instance.deleteFoodDiary(foodDiaryId: self.foodDiaryInstance.foodDiaryId, completion: { (isSuccess) in
+                    //refresh the foodDiary page if it exist in the viewController stack
+                    if let navigator = self.navigationController {
+                        for vc in navigator.viewControllers {
+                            if let homeTabVC = vc as? HomeTabViewController {
+                                homeTabVC.shouldSwitchToFoodDiary = true
+                            }
                         }
-//                        for viewController in (self.navigationController?.viewControllers)! {
-//                            if let foodHistoryVC = viewController as? FoodDiaryHistoryViewController {
-//                                foodHistoryVC.shouldRefreshDiary = true
-//                            }
-//                        }
-//                        self.navigationController?.popViewController(animated: true) //pop back to food calendar
                     }
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
+            let updateAction = UIAlertAction(title: StringConstants.UIString.updateBtnText, style: .default) { (alert: UIAlertAction!) in
+                //update foodDiary api flow
+                APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: self.foodDiaryInstance, completion: { (isSuccess) in
+                    if isSuccess {
+                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
+                            if let navigator = self.navigationController {
+                                dest.shouldSwitchToFoodDiary = true
+                                //pop to home tabPage
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                    navigator.popToRootViewController(animated: true)
+                                })
+                            }
+                        }
 
-                } else {
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "update failed")
-                }
-            })
+                    } else {
+                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "update failed")
+                    }
+                })
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            optionMenu.addAction(updateAction)
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+            self.present(optionMenu, animated: true, completion: nil)
         } else {
             AlertMessageHelper.showLoadingDialog(targetController: self)
-            APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
+            APIService.instance.createFooDiary(foodDiary: foodDiaryInstance, completion: { (isSuccess) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
                         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
-//                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                             if let navigator = self.navigationController {
                                 //pop to home tabPage
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                                     dest.shouldSwitchToFoodDiary = true
                                     navigator.popToRootViewController(animated: true)
-//                                    navigator.popToViewController(dest, animated: true)
-
                                 })
                             }
-//                            if let navigator = self.navigationController {
-//                                //pop all the view except HomePage
-//                                if navigator.viewControllers.contains(where: {
-//                                    return $0 is FoodDiaryHistoryViewController
-//                                }) {
-//                                    //add foodItem into foodDiaryVC
-//                                    for viewController in (self.navigationController?.viewControllers)! {
-//                                        if let foodDiaryHistoryVC = viewController as? FoodDiaryHistoryViewController {
-//                                            DispatchQueue.main.async {
-//                                                navigator.popToViewController(foodDiaryHistoryVC, animated: true)
-//                                                foodDiaryHistoryVC.shouldRefreshDiary = true
-//                                            }
-//                                        }
-//                                    }
-//                                } else {
-//                                    DispatchQueue.main.async {
-//                                        navigator.popToRootViewController(animated: false)
-//                                        navigator.pushViewController(dest, animated: true)
-//                                        dest.shouldRefreshDiary = true
-//                                    }
-//                                }
-//                            }
                         }
                     }
                 }
@@ -240,7 +232,7 @@ class FoodDiaryViewController: UIViewController {
 
     func initFoodInfo() {
         if imageKey != nil {//set imageKey to foodDiaryEntity
-            foodDiaryEntity.imageId = self.imageKey!
+            foodDiaryInstance.imageId = self.imageKey!
         }
         calculateAccumulateFoodValue()
     }
@@ -251,7 +243,7 @@ class FoodDiaryViewController: UIViewController {
         var accumulatedProtein = 0.0
         var accumulatedFat = 0.0
         //get accumualted value
-        for dietItem in foodDiaryEntity.dietItems {
+        for dietItem in foodDiaryInstance.dietItems {
             var ratio = dietItem.quantity
             if dietItem.portionInfo.count != 0 {
                 ratio = dietItem.quantity*dietItem.portionInfo[dietItem.selectedPos].weightValue/100
@@ -287,22 +279,43 @@ class FoodDiaryViewController: UIViewController {
         fatValueLabel.attributedText = fatText
     }
 
-    //add foodDiary into item & upload
-    func addFoodIntoItem(dietItem: DietItem) {
-        foodDiaryEntity.dietItems.append(dietItem)
+    //********************************************************************************************************************
+    // food item CRUD part
+    //********************************************************************************************************************
+
+    //add foodDiary into item & update
+    func addFoodIntoItem() {
+        //asycn task for syncing server data
+        APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess) in }
+        let indexPath = IndexPath(row: foodDiaryInstance.dietItems.count-1, section: 0)
+        //refresh nutrition part
         self.calculateAccumulateFoodValue()
-        self.foodTableView.reloadData()
+        //insert row animation for add food
+        foodTableView.beginUpdates()
+        foodTableView.insertRows(at: [indexPath], with: .automatic)
+        foodTableView.endUpdates()
+
     }
 
     //update foodDiary
-    func updateFoodInfoItem(dietItem: DietItem) {
-        for (index, entity) in foodDiaryEntity.dietItems.enumerated() {
-            if entity.foodId == dietItem.foodId {
-                foodDiaryEntity.dietItems[index] = dietItem
-            }
-        }
+    func updateFoodInfoItem(row: Int) {
+        let indexPath = IndexPath(row: row, section: 0)
+        //refresh nutrition part
         self.calculateAccumulateFoodValue()
-        self.foodTableView.reloadData()
+        //update food table
+        foodTableView.reloadRows(at: [indexPath], with: .automatic)
+        APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess) in }
+    }
+
+    //delete foodDiary
+    func deleteFoodItem(row: Int) {
+        APIService.instance.deleteFoodItem(foodDiaryId: foodDiaryInstance.foodDiaryId, foodItemId: foodDiaryInstance.dietItems[row].id) { (isSuccess) in }
+        self.foodDiaryInstance.dietItems.remove(at: row)
+        let indexPath = IndexPath(row: row, section: 0)
+        //refresh nutrition part
+        self.calculateAccumulateFoodValue()
+        //update food table
+        foodTableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -322,7 +335,7 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //change the mealType block selection
         currentMealIndex = indexPath.row
-        foodDiaryEntity.mealType = mealStringArray[indexPath.row]
+        foodDiaryInstance.mealType = mealStringArray[indexPath.row]
         //switch collection selection
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
@@ -338,13 +351,13 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foodDiaryEntity.dietItems.count
+        return foodDiaryInstance.dietItems.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //name, portion calorie , deleteBtn
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FoodItemListCell") as? FoodItemListCell {
-            let entity = foodDiaryEntity.dietItems[indexPath.row]
+            let entity = foodDiaryInstance.dietItems[indexPath.row]
             cell.setUpCell(dietItem: entity)
             return cell
         }
@@ -357,40 +370,16 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //request for portion data
-        jumpToFoodInfoPage(dietEntity: self.foodDiaryEntity.dietItems[indexPath.row])
-//        AlertMessageHelper.showLoadingDialog(targetController: self)
-//        let foodId = foodDiaryEntity.dietItems[indexPath.row].foodId
-//        APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
-//            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-//                if dietItem == nil {
-//                    return
-//                }
-//                //TODO replace nutrition & portion value with new request value
-//                let displayUnit =  self.foodDiaryEntity.dietItems[indexPath.row].displayUnit
-//                let quantity = self.foodDiaryEntity.dietItems[indexPath.row].quantity
-//                let id = self.foodDiaryEntity.dietItems[indexPath.row].id
-//                self.foodDiaryEntity.dietItems[indexPath.row] = dietItem!
-//                self.foodDiaryEntity.dietItems[indexPath.row].id = id
-//                self.foodDiaryEntity.dietItems[indexPath.row].displayUnit = displayUnit
-//                self.foodDiaryEntity.dietItems[indexPath.row].quantity = quantity
-//                for (index, portion) in dietItem!.portionInfo.enumerated() where portion.sizeUnit == displayUnit {
-//                        self.foodDiaryEntity.dietItems[indexPath.row].selectedPos = index
-//                }
-//                DispatchQueue.main.async {
-//                    self.jumpToFoodInfoPage(dietEntity: self.foodDiaryEntity.dietItems[indexPath.row])
-//                }
-//            }
-//        }
+        jumpToFoodInfoPage(index: indexPath.row)
     }
 
-    func jumpToFoodInfoPage(dietEntity: DietItem) {
+    func jumpToFoodInfoPage(index: Int) {
         //jump to foodInfo page to modify foodInfo Item
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-            dest.selectedPortionPos = dietEntity.selectedPos
-            dest.dietItem = dietEntity
             dest.imageKey = imageKey
             dest.shouldShowMealBar = false
             dest.isUpdate = true
+            dest.indexFromUpdate = index
             if let navigator = self.navigationController {
                 //pop all the view except HomePage
                 navigator.pushViewController(dest, animated: true)
@@ -401,15 +390,7 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //API delete item
-            AlertMessageHelper.showLoadingDialog(targetController: self)
-            APIService.instance.deleteFoodItem(foodDiaryId: foodDiaryEntity.foodDiaryId, foodItemId: foodDiaryEntity.dietItems[indexPath.row].id, completion: { (_) in
-                NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    self.foodDiaryEntity.dietItems.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                    self.calculateAccumulateFoodValue()
-                }
-            })
+            deleteFoodItem(row: indexPath.row)
         }
     }
 

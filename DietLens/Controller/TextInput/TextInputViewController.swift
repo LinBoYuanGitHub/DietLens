@@ -344,7 +344,7 @@ class TextInputViewController: BaseViewController {
                 //save select Item to lruCache
                 self.searchCacheLRU.setValue(foodEntity, for: foodEntity.id)
                 //dietItem operation
-                var dietEntity = dietItem!
+                let dietEntity = dietItem!
                 if dietItem?.portionInfo.count != 0 {
                     dietEntity.displayUnit = (dietItem?.portionInfo[0].sizeUnit)!
                 }
@@ -358,17 +358,17 @@ class TextInputViewController: BaseViewController {
                     dest.imageUrl = imageUrl
                     dest.userFoodImage = self.cameraImage
                     dest.imageKey = self.imageKey
+                    dest.dietItem = dietEntity
                     if self.shouldShowCancel {
                         dest.recordType = RecognitionInteger.additionText
                         dest.shouldShowMealBar = false
                     } else {
                         dest.recordType = dietEntity.recordType
                     }
-                    dest.dietItem = dietEntity
                     //mealType & mealTime
                     dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                    dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
-                    dest.foodDiaryEntity.mealType = self.mealType
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }
@@ -416,19 +416,6 @@ extension TextInputViewController: UITableViewDataSource {
         }
         cell.setUpCell(textResultEntity: result)
         return cell
-//        if result.location.isEmpty && result.location.isEmpty {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
-//                return UITableViewCell()
-//            }
-//            cell.setUpCell(textResultEntity: result)
-//            return cell
-//        } else {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "foodSearchLocationCell")  as? SearchResultLocationCell else {
-//                return UITableViewCell()
-//            }
-//            cell.setUpCell(textResultEntity: result)
-//            return cell
-//        }
     }
 
 }

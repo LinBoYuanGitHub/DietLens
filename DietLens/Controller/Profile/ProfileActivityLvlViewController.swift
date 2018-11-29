@@ -46,7 +46,7 @@ class ProfileActivityLvlViewController: BaseViewController {
         self.navigationItem.leftBarButtonItem =  UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(red: 95/255, green: 95/255, blue: 95/255, alpha: 1.0)
         if isInRegistrationFlow {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(toFinishRegistrationPage))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: StringConstants.UIString.nextBtnText, style: .plain, target: self, action: #selector(toFinishRegistrationPage))
             self.navigationItem.rightBarButtonItem?.tintColor = UIColor(red: 67.0/255.0, green: 67.0/255.0, blue: 67.0/255.0, alpha: 1.0)
         }
         //reload to remove selectorOverlay
@@ -61,7 +61,8 @@ class ProfileActivityLvlViewController: BaseViewController {
         if profile != nil {
             APIService.instance.updateProfile(userId: userId!, profile: profile!) { (isSuccess) in
                 if isSuccess {
-                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PersonalFavouriteFoodVC") as? PersonalFavouriteFoodViewController {
+                        dest.isInRegistrationFlow = self.isInRegistrationFlow
                         self.navigationController?.pushViewController(dest, animated: true)
                     }
                 }

@@ -23,7 +23,7 @@ class FoodDiaryDataManager {
     }
 
     func assembleFoodDiaryEntity(jsonObject: JSON) -> FoodDiaryEntity {
-        var foodDiaryEntity = FoodDiaryEntity()
+        let foodDiaryEntity = FoodDiaryEntity()
         foodDiaryEntity.foodDiaryId = jsonObject["id"].stringValue
         foodDiaryEntity.imageId = jsonObject["image"].stringValue
         foodDiaryEntity.placeHolderImage = jsonObject["placeholder_img"].stringValue

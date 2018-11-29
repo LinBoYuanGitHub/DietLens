@@ -388,7 +388,7 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
                     AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                         dest.isSetMealByTimeRequired = false
-                        dest.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row]
+                        FoodDiaryDataManager.instance.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row] //* change the singleton foodDiaryEntity object
                         dest.isUpdate = true
                         dest.imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
                         if image != nil {

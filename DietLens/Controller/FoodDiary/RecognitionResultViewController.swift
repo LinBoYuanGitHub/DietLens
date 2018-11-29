@@ -120,13 +120,13 @@ class RecognitionResultViewController: BaseViewController {
                 entity.recordType = self.recordType ?? RecognitionInteger.recognition
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                     dest.userFoodImage = self.cameraImage
-                    dest.dietItem = entity
                     dest.recordType = entity.recordType
                     dest.imageKey = self.imageKey
+                    dest.dietItem = entity
                     //mealTime & mealType
-                    dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
                     dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                    dest.foodDiaryEntity.mealType = self.mealType!
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
                     if let navigator = self.navigationController {
                         //clear controller to Bottom & add foodCalendar Controller
                         navigator.pushViewController(dest, animated: true)
@@ -176,9 +176,9 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
             dest.isMixVeg = true
             dest.isUpdate = false
             //mealTime & mealType
-            dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
+            FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
             dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-            dest.foodDiaryEntity.mealType = self.mealType!
+            FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
                 navigator.pushViewController(dest, animated: true)

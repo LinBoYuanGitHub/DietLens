@@ -10,69 +10,49 @@ import UIKit
 
 class PersonalFavouriteFoodViewController: BaseViewController {
 
-    @IBOutlet weak var breakfastCollectionView: UICollectionView!
-    @IBOutlet weak var lunchCollectionView: UICollectionView!
-    @IBOutlet weak var dinnerCollectionView: UICollectionView!
+    @IBOutlet weak var popularCollectionView: UICollectionView!
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
 
     //data struct
     var favouriteFoodIdList = [Int]() //pass id to favourite
-    var breakfastFoodList = [TextSearchSuggestionEntity]()
-    var lunchFoodList = [TextSearchSuggestionEntity]()
-    var dinnerFoodList = [TextSearchSuggestionEntity]()
+    var popularFoodList = [TextSearchSuggestionEntity]()
 
     //registration flow param
     var isInRegistrationFlow = false
 
     override func viewDidLoad() {
-        breakfastCollectionView.dataSource = self
-        breakfastCollectionView.delegate = self
-        lunchCollectionView.dataSource = self
-        lunchCollectionView.delegate = self
-        dinnerCollectionView.dataSource = self
-        dinnerCollectionView.delegate = self
+        popularCollectionView.dataSource = self
+        popularCollectionView.delegate = self
         //request popular food data
-        getPopularFoodList(mealtime: StringConstants.MealString.breakfast.lowercased())
-        getPopularFoodList(mealtime: StringConstants.MealString.lunch.lowercased())
-        getPopularFoodList(mealtime: StringConstants.MealString.dinner.lowercased())
-        //add done button for the fav food submission
-        let rightNavButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onDonePressed))
-        self.navigationItem.rightBarButtonItem = rightNavButton
+        getPopularFoodList(mealtime: "")
         //regist nib
         registerNib()
+        progressLabel.isHidden = !isInRegistrationFlow
+        progressView.isHidden = !isInRegistrationFlow
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationItem.title = StringConstants.UIString.FilterFavorite
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = .gray
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onDonePressed))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(onDonePressed))
         self.navigationItem.rightBarButtonItem?.tintColor = .gray
     }
 
     func registerNib() {
         let collectionNib = UINib(nibName: "FavouriteFoodCollectionCell", bundle: nil)
-        breakfastCollectionView.register(collectionNib, forCellWithReuseIdentifier: "favouriteFoodCollectionCell")
-        lunchCollectionView.register(collectionNib, forCellWithReuseIdentifier: "favouriteFoodCollectionCell")
-        dinnerCollectionView.register(collectionNib, forCellWithReuseIdentifier: "favouriteFoodCollectionCell")
+        popularCollectionView.register(collectionNib, forCellWithReuseIdentifier: "favouriteFoodCollectionCell")
     }
 
     func getPopularFoodList(mealtime: String) {
         APIService.instance.getFoodSearchPopularity(mealtime: mealtime, completion: { (textResults) in
-           if textResults == nil {
+            guard let results =  textResults else {
                 return
             }
-            switch mealtime {
-            case StringConstants.MealString.breakfast.lowercased():
-                self.breakfastFoodList = textResults!
-                self.breakfastCollectionView.reloadData()
-            case StringConstants.MealString.lunch.lowercased():
-                self.lunchFoodList = textResults!
-                self.lunchCollectionView.reloadData()
-            case StringConstants.MealString.dinner.lowercased():
-                self.dinnerFoodList = textResults!
-                self.dinnerCollectionView.reloadData()
-            default:break
-            }
+            self.popularFoodList = results
+            self.popularCollectionView.reloadData()
         }, nextPageCompletion: { (nextLink) in
             //consider next page scenario
         })
@@ -83,53 +63,39 @@ class PersonalFavouriteFoodViewController: BaseViewController {
     }
 
     @objc func onDonePressed() {
-        if favouriteFoodIdList.count == 0 {
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "please choose at least one favourite food")
-            return
-        }
-        APIService.instance.setFavouriteFoodList(foodList: favouriteFoodIdList) { (isSuccess) in
-            if isSuccess {
-                //skip to the registration final view
-                if self.isInRegistrationFlow {
-                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
-                        self.navigationController?.pushViewController(dest, animated: true)
-                    }
-                } else {
-                    self.navigationController?.popViewController(animated: true)
+        if favouriteFoodIdList.count != 0 {
+            APIService.instance.setFavouriteFoodList(foodList: favouriteFoodIdList) { (isSuccess) in
+                if isSuccess {
+                    self.redirectToFinalRegistrationPage()
                 }
             }
+        } else {
+            redirectToFinalRegistrationPage()
         }
     }
 
-    @IBAction func onSkipBtnPressed(_ sender: Any) {
-        //skip to the registration final view
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
-            self.navigationController?.pushViewController(dest, animated: true)
+    func redirectToFinalRegistrationPage() {
+        if self.isInRegistrationFlow {
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+                self.navigationController?.pushViewController(dest, animated: true)
+            }
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
 }
 
-extension PersonalFavouriteFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PersonalFavouriteFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case breakfastCollectionView: return breakfastFoodList.count
-        case lunchCollectionView: return lunchFoodList.count
-        case dinnerCollectionView: return dinnerFoodList.count
-        default: return 0
-        }
+        return popularFoodList.count>9 ? 9:popularFoodList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //same cell style
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "favouriteFoodCollectionCell", for: indexPath) as? RegistrationFavouriteFoodCell {
-            switch collectionView {
-            case breakfastCollectionView:cell.setUpCell(entity: breakfastFoodList[indexPath.row])
-            case lunchCollectionView:cell.setUpCell(entity: lunchFoodList[indexPath.row])
-            case dinnerCollectionView:cell.setUpCell(entity: dinnerFoodList[indexPath.row])
-            default:break
-            }
+            cell.setUpCell(entity: popularFoodList[indexPath.row])
             return cell
         }
         return UICollectionViewCell()
@@ -137,24 +103,12 @@ extension PersonalFavouriteFoodViewController: UICollectionViewDataSource, UICol
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //mark the item that is selected
-        var targetList = [TextSearchSuggestionEntity]()
         guard let targetCell = collectionView.cellForItem(at: indexPath) as? RegistrationFavouriteFoodCell else {
             return
         }
-
-        switch collectionView {
-        case breakfastCollectionView:
-            targetList = breakfastFoodList
-        case lunchCollectionView:
-            targetList = lunchFoodList
-        case dinnerCollectionView:
-            targetList = dinnerFoodList
-        default:break
-        }
-
         //toggle the selection
-        let foodId = targetList[indexPath.row].id
-
+        let foodId = popularFoodList[indexPath.row].id
+        //toggle
         if let id = favouriteFoodIdList.firstIndex(of: foodId) {
             favouriteFoodIdList.remove(at: id)
             targetCell.toggleFavIcon(isFav: false)
@@ -162,6 +116,15 @@ extension PersonalFavouriteFoodViewController: UICollectionViewDataSource, UICol
             favouriteFoodIdList.append(foodId)
             targetCell.toggleFavIcon(isFav: true)
         }
+        if favouriteFoodIdList.count == 0 {
+            self.navigationItem.rightBarButtonItem?.title = "Skip"
+        } else {
+            self.navigationItem.rightBarButtonItem?.title = "Done"
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100, height: 120)
     }
 
 }

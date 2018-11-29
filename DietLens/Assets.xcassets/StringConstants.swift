@@ -18,6 +18,7 @@ struct StringConstants {
         static let addBtnText = "Done"
         static let saveBtnText = "Save"
         static let moreBtnText = "More"
+        static let nextBtnText = "Next"
         static let stepCounterText = "StepCounter"
         //menu action item
         static let addFavActionItem = "Favourite"
