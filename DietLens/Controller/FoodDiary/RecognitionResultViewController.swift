@@ -217,7 +217,7 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 //                ])
 //            }
 //        }
-        
+
     }
 
 }

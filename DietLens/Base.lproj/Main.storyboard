@@ -6397,7 +6397,7 @@ What is it?</string>
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="evZ-nF-Bi7" userLabel="PhoneNumberTextField">
-                                <rect key="frame" x="91" y="37.5" width="236" height="23"/>
+                                <rect key="frame" x="91" y="37.5" width="154" height="23"/>
                                 <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -6439,9 +6439,12 @@ What is it?</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-Ec-cD5">
-                                <rect key="frame" x="247" y="100" width="80" height="31"/>
+                                <rect key="frame" x="247" y="27.5" width="80" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="PeC-KP-j1c"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="16"/>
-                                <state key="normal" title="Send" backgroundImage="redBorderImage">
+                                <state key="normal" title="Get Code" backgroundImage="redBorderImage">
                                     <color key="titleColor" red="0.94901960780000005" green="0.2470588235" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -6452,7 +6455,7 @@ What is it?</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MgN-HP-Pts" firstAttribute="leading" secondItem="eQC-YH-Pmq" secondAttribute="leading" constant="48" id="1kx-2I-xFt"/>
-                            <constraint firstItem="mAt-U1-6ZY" firstAttribute="top" secondItem="Rcq-Ec-cD5" secondAttribute="bottom" constant="-15" id="3nf-xR-HxP"/>
+                            <constraint firstItem="evZ-nF-Bi7" firstAttribute="bottom" secondItem="Rcq-Ec-cD5" secondAttribute="bottom" constant="2" id="3nf-xR-HxP"/>
                             <constraint firstItem="evZ-nF-Bi7" firstAttribute="leading" secondItem="jAo-kQ-UoE" secondAttribute="trailing" constant="6" id="61Z-uP-YaV"/>
                             <constraint firstItem="y0x-we-0fd" firstAttribute="top" secondItem="mAt-U1-6ZY" secondAttribute="bottom" constant="36" id="8nb-On-1of"/>
                             <constraint firstItem="l4g-Nm-boP" firstAttribute="leading" secondItem="xkh-j9-PMc" secondAttribute="leading" id="8pL-y8-mYf"/>
@@ -6464,8 +6467,8 @@ What is it?</string>
                             <constraint firstAttribute="trailing" secondItem="Rcq-Ec-cD5" secondAttribute="trailing" constant="48" id="VsT-3r-XiT"/>
                             <constraint firstItem="evZ-nF-Bi7" firstAttribute="centerY" secondItem="l4g-Nm-boP" secondAttribute="centerY" id="cea-UY-Cor"/>
                             <constraint firstAttribute="trailing" secondItem="v2B-je-8dj" secondAttribute="trailing" constant="48" id="eZi-Yw-Lef"/>
+                            <constraint firstItem="evZ-nF-Bi7" firstAttribute="trailing" secondItem="Rcq-Ec-cD5" secondAttribute="leading" constant="-2" id="fnL-Pd-eun"/>
                             <constraint firstItem="MgN-HP-Pts" firstAttribute="top" secondItem="jAo-kQ-UoE" secondAttribute="bottom" constant="3.5" id="jUL-aX-58u"/>
-                            <constraint firstAttribute="trailing" secondItem="evZ-nF-Bi7" secondAttribute="trailing" constant="48" id="kdR-Hc-r7f"/>
                             <constraint firstAttribute="trailing" secondItem="y0x-we-0fd" secondAttribute="trailing" constant="52" id="nFn-Xn-xIp"/>
                             <constraint firstAttribute="trailing" secondItem="MgN-HP-Pts" secondAttribute="trailing" constant="48" id="nXI-Ib-Ndj"/>
                             <constraint firstItem="v2B-je-8dj" firstAttribute="bottom" secondItem="mAt-U1-6ZY" secondAttribute="bottom" constant="4" id="pGl-Ni-JfF"/>

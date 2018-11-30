@@ -509,7 +509,7 @@ class FoodInfoViewController: UIViewController {
             //#google analytic log part
             Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodPageAddSaveButton, parameters: [
                 "recordType": recordType,
-                "mealtime": foodDiaryEntity.mealType
+                "mealtime": FoodDiaryDataManager.instance.foodDiaryEntity.mealType
             ])
             switch recordType {
             case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
