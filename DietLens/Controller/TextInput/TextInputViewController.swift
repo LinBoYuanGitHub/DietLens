@@ -355,7 +355,14 @@ class TextInputViewController: BaseViewController {
                 }
                 //set as new foodDiary entity
                 if !self.shouldShowCancel {
-                     FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
+                    FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
+                }
+                //mealType & mealTime
+                if FoodDiaryDataManager.instance.foodDiaryEntity.mealType.isEmpty {
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType
+                }
+                if FoodDiaryDataManager.instance.foodDiaryEntity.mealTime.isEmpty {
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
                 }
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                     let imageUrl = foodEntity.expImagePath
@@ -369,10 +376,7 @@ class TextInputViewController: BaseViewController {
                     } else {
                         dest.recordType = dietEntity.recordType
                     }
-                    //mealType & mealTime
                     dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                    FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
-                    FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }

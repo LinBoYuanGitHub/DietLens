@@ -142,8 +142,10 @@ class FoodInfoViewController: UIViewController {
     Data setting Up part
 ********************************************************/
     func initFoodInfo() {
+        if shouldShowMealBar {
+            setCorrectMealType()
+        }
         setUpFoodValue()
-        setCorrectMealType()
         setUpMealBar()
     }
 
@@ -629,7 +631,9 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //change the mealType block selection
         currentMealIndex = indexPath.row
-        FoodDiaryDataManager.instance.foodDiaryEntity.mealType = mealStringArray[indexPath.row]
+        if !isUpdate {
+             FoodDiaryDataManager.instance.foodDiaryEntity.mealType = mealStringArray[indexPath.row]
+        }
         //switch collection selection
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {

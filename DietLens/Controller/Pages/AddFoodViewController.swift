@@ -71,6 +71,8 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         containerView.bounces = false
         containerView.alwaysBounceHorizontal = false
         containerView.scrollsToTop = false
+        //create a new foodDiary object
+        FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
     }
 
     override func viewDidAppear(_ animated: Bool) {
