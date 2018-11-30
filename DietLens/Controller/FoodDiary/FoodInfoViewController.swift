@@ -101,6 +101,12 @@ class FoodInfoViewController: UIViewController {
         )
         setUpQuantityPickerIndex()
         setFavImageStyle()
+        //analytic screen name
+        if isUpdate {
+            Analytics.setScreenName("AddFoodItemPage", screenClass: "FoodInfoViewController")
+        } else {
+            Analytics.setScreenName("EditFoodItemPage", screenClass: "FoodInfoViewController")
+        }
     }
 
     func setFavImageStyle() {
@@ -486,7 +492,7 @@ class FoodInfoViewController: UIViewController {
             APIService.instance.createFooDiary(foodDiary: FoodDiaryDataManager.instance.foodDiaryEntity, completion: { (isSuccess) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
-                        //request for saving FoodDiary
+                        //TODO need to switch the date in the foodDiary page
                         //                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
                         if let navigator = self.navigationController {
                             //pop to home tabPage
@@ -501,10 +507,16 @@ class FoodInfoViewController: UIViewController {
                 }
             })
             //#google analytic log part
-//            Analytics.logEvent(StringConstants.FireBaseAnalytic.RecogItemSave, parameters: [
-//                "recordType": recordType,
-//                "mealtime": foodDiaryEntity.mealType
-//            ])
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodPageAddSaveButton, parameters: [
+                "recordType": recordType,
+                "mealtime": foodDiaryEntity.mealType
+            ])
+            switch recordType {
+            case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
+            case RecognitionInteger.gallery: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
+            case RecognitionInteger.text: Analytics.logEvent(StringConstants.FireBaseAnalytic.TextAddFlag, parameters: nil)
+            default:break
+            }
         }
     }
 
@@ -524,6 +536,9 @@ class FoodInfoViewController: UIViewController {
             }
         }
 
+        self.navigationController?.popViewController(animated: true)
+        //#Google Analytic part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodItemClickBack, parameters: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

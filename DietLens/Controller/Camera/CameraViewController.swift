@@ -107,6 +107,13 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         } else {
             print("Location services are not enabled")
         }
+        //analytic screen name
+        Analytics.setScreenName("ImagePage", screenClass: "CameraViewController")
+        //analytic log the event for the total number that start to record food
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodRecrodStartFlag, parameters: nil)
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.isImageCaptureTriggered = true
+        }
     }
 
     @objc func pinchCameraView(_ sender: UIPinchGestureRecognizer) {
@@ -191,9 +198,9 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         sessionManager.capturePhoto()
         capturePhotoButton.isEnabled = false
         //#google analytic log part
-//        Analytics.logEvent(StringConstants.FireBaseAnalytic.CaptureButtonPressed, parameters: [
-//            "mealTime": mealType
-//        ])
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickCaptureButton, parameters: [
+            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
+        ])
     }
 
     //    @IBAction func switchToBarcode(_ sender: UIButton) {
@@ -279,6 +286,8 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }
+                    //#Google Analytics part
+                    Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageCaptureFlag, parameters: nil)
                 }
             }
             self.hideReview()
@@ -506,6 +515,10 @@ extension CameraViewController: UIImagePickerControllerDelegate {
             self.showReview(image: croppedImage)
             self.approveImage(image: image)
         }
+        //#google analytic log part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickGalleryButton, parameters: [
+            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
+        ])
         //        let imgData = UIImagePNGRepresentation(image)!
         //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
         //            // upload result and callback
@@ -585,6 +598,8 @@ extension CameraViewController: UICollectionViewDelegate, UICollectionViewDataSo
         currentImageIndex = indexPath.row
         self.postImageKeyToServer(imageKey: imageKeyArray[currentImageIndex], isUsingSample: true, uploadTime: 0)
         showReview(image: imageArray[indexPath.row])
+        //# Firebase Analytic log
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectSampleItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

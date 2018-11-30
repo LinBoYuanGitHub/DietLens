@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class DailyNutritionInfoViewController: BaseViewController {
 
@@ -25,6 +26,8 @@ class DailyNutritionInfoViewController: BaseViewController {
         nutritionTableView.delegate = self
         nutritionTableView.dataSource = self
         refresh()
+        //analytic screen name
+        Analytics.setScreenName("HomeNutritionInfoPage", screenClass: "DailyNutritionInfoViewController")
     }
 
     override func viewWillAppear(_ animated: Bool) {

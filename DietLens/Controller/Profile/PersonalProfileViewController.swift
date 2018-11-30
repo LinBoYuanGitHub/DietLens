@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import FirebaseAnalytics
 
 class PersonalProfileViewController: UIViewController {
 
@@ -40,6 +41,8 @@ class PersonalProfileViewController: UIViewController {
         initProfileEntity()
         setUpPicker()
         getProfile()
+        //analytic screen name
+        Analytics.setScreenName("ProfilePage", screenClass: "PersonalProfileViewController")
     }
 
     func getProfile() {

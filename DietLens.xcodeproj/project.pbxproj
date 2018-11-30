@@ -80,7 +80,6 @@
 		3F5691ED214EA4AD00D9929A /* TextSuggestionCacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */; };
 		3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
-		3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6B872720A1BCD8001063A0 /* RealmSwift.framework */; };
 		3F6B872E20A1DEC1001063A0 /* SideMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B872D20A1DEC0001063A0 /* SideMainViewController.swift */; };
 		3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */; };
 		3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */; };
@@ -319,10 +318,9 @@
 		3F5691EA214E8B6D00D9929A /* CacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheLRU.swift; sourceTree = "<group>"; };
 		3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionCacheLRU.swift; sourceTree = "<group>"; };
 		3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActvitityLevelCell.swift; sourceTree = "<group>"; };
-		3F5691F12150D51900D9929A /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		3F5691F12150D51900D9929A /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = ../RealmSwift.framework; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		3F6B872620A1BCD8001063A0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		3F6B872720A1BCD8001063A0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../../../../Downloads/realm-swift-3.5.0/ios/swift-4.1/RealmSwift.framework"; sourceTree = "<group>"; };
 		3F6B872D20A1DEC0001063A0 /* SideMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMainViewController.swift; sourceTree = "<group>"; };
 		3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageMapper.swift; sourceTree = "<group>"; };
 		3F6CF8251FD7CE3900D7556E /* IngredientSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientSearchController.swift; sourceTree = "<group>"; };
@@ -491,7 +489,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F6B872920A1BCD8001063A0 /* RealmSwift.framework in Frameworks */,
 				587067AC1FE252B000660262 /* HealthKit.framework in Frameworks */,
 				4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */,
 			);
@@ -907,7 +904,6 @@
 		5877CF7B1F9D82BF0022B51E = {
 			isa = PBXGroup;
 			children = (
-				3F5691F12150D51900D9929A /* RealmSwift.framework */,
 				5877CF861F9D82BF0022B51E /* DietLens */,
 				5877CF9E1F9D82BF0022B51E /* DietLensTests */,
 				5877CFA91F9D82BF0022B51E /* DietLensUITests */,
@@ -930,8 +926,8 @@
 		5877CF861F9D82BF0022B51E /* DietLens */ = {
 			isa = PBXGroup;
 			children = (
+				3F5691F12150D51900D9929A /* RealmSwift.framework */,
 				3F6B872620A1BCD8001063A0 /* Realm.framework */,
-				3F6B872720A1BCD8001063A0 /* RealmSwift.framework */,
 				587067AA1FE252B000660262 /* DietLens.entitlements */,
 				58F2DF281F9F437F00FF3A95 /* Services */,
 				58FCCFF01F9D8A4F00E4F421 /* Supporting Files */,
@@ -1140,7 +1136,7 @@
 				5877CF821F9D82BF0022B51E /* Resources */,
 				297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
 				BF8441171FA435B200D5018F /* Run Script */,
-				3F50DCE820AD72A5005209B8 /* ShellScript */,
+				3F50DCE820AD72A5005209B8 /* Run Script */,
 				79845078383FC68BDDEAFC91 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -1364,13 +1360,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3F50DCE820AD72A5005209B8 /* ShellScript */ = {
+		3F50DCE820AD72A5005209B8 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

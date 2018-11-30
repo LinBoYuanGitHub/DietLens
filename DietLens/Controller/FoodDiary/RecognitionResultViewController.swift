@@ -8,6 +8,7 @@
 
 import UIKit
 import Reachability
+import FirebaseAnalytics
 
 class RecognitionResultViewController: BaseViewController {
 
@@ -51,6 +52,8 @@ class RecognitionResultViewController: BaseViewController {
         //food category delegate
         foodCategory.delegate = self
         foodCategory.dataSource = self
+        //analytic screen name
+        Analytics.setScreenName("ImageResultPage", screenClass: "RecognitionResultViewController")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,11 +79,20 @@ class RecognitionResultViewController: BaseViewController {
                 //clear controller to Bottom & add foodCalendar Controller
                 navigator.pushViewController(dest, animated: true)
             }
+            //#Google Analytic part
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType])
+            //trigger search more
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreFlag, parameters: nil)
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.isSearchMoreTriggered = true
+            }
         }
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
          self.navigationController?.popViewController(animated: true)
+        //#Google Analytic part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultBack, parameters: nil)
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -165,6 +177,14 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         //jump to selected foodItem add FoodPage
         selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
         requestForDietInformation(foodId: selectedFoodInfo.id)
+        //# Firebase Analytic log
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            if appDelegate.isImageCaptureTriggered {
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectFlag, parameters: nil)
+                appDelegate.isImageCaptureTriggered = false // set flag to false when selection trigger once
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -186,6 +206,18 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
                 navigator.pushViewController(dest, animated: true)
             }
         }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //#google analytic log part
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//            if appDelegate.isImageCaptureTriggered {
+//                Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodItem, parameters: [
+//                    StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
+//                ])
+//            }
+//        }
+        
     }
 
 }
@@ -216,9 +248,13 @@ extension RecognitionResultViewController: UICollectionViewDelegate, UICollectio
         foodOptionTable.reloadData()
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        animationView.center.x += previousOffset - scrollView.contentOffset.x
-        previousOffset = scrollView.contentOffset.x
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        animationView.center.x += previousOffset - scrollView.contentOffset.x
+//        previousOffset = scrollView.contentOffset.x
+//        //#google analytic log part
+//        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodCategory, parameters: [
+//            "mealTime": mealType
+//        ])
+//    }
 
 }

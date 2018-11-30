@@ -12,6 +12,7 @@ import XLPagerTabStrip
 import NVActivityIndicatorView
 import CoreLocation
 import Reachability
+import FirebaseAnalytics
 
 class TextInputViewController: BaseViewController {
 
@@ -93,6 +94,11 @@ class TextInputViewController: BaseViewController {
             showCancelBtn()
         } else {
             hideCancelBtn()
+            //trigger text search
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.TextViewFlag, parameters: nil)
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.isTextInputTriggered = true
+            }
         }
         //set loading footerView
         textSearchTable.tableFooterView = LoadingFooterView(frame: CGRect(x: 0, y: 0, width: textSearchTable.frame.size.width, height: 52))
@@ -108,6 +114,8 @@ class TextInputViewController: BaseViewController {
         self.animationViewLeading.constant = 16
         //load popular list
         getPopurlarFoodLists()
+        //analytic screen name
+        Analytics.setScreenName("TextPage", screenClass: "TextInputViewController")
     }
 
     @objc func handleTap() {
@@ -157,6 +165,8 @@ class TextInputViewController: BaseViewController {
 
     @IBAction func onCancelBtnPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        //#Google Analytic part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreClickBack, parameters: nil)
     }
 
 //    @objc func keyboardWasShown (notification: NSNotification) {
@@ -435,6 +445,22 @@ extension TextInputViewController: UITableViewDelegate {
         //loading to get food text search detail
         let textSearchEntity = searchResultList[indexPath.row]
         requestForDietInformation(foodEntity: textSearchEntity)
+        //# Firebase Analytic log
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        if shouldShowCancel { //search more flow
+            if appDelegate.isSearchMoreTriggered {
+                appDelegate.isSearchMoreTriggered = false
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreSelectFlag, parameters: nil)
+            }
+        } else {
+            if appDelegate.isTextInputTriggered {
+                appDelegate.isTextInputTriggered = false
+                Analytics.logEvent(StringConstants.FireBaseAnalytic.TextSelectFlag, parameters: nil)
+            }
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -501,6 +527,10 @@ extension TextInputViewController: UITableViewDelegate {
                 }
             }
         }
+        //#google analytic log part
+//        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
+//            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
+//        ])
     }
 
 }
