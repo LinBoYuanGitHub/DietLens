@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ServerConfig {
 
@@ -16,8 +17,8 @@ struct ServerConfig {
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
 //    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
-//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
-    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
+    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
+//    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
 //    static let labDeskTopURL = "http://54.169.160.107:8000/dl/v1" //mocklet test environment
 
     static let userURL = labDeskTopURL + "/users"
@@ -73,6 +74,7 @@ struct ServerConfig {
     static let healthCenterLogURL = labDeskTopURL + "/healthlogs/latest/"
     static let qiniuDietLensImageDomain = "https://img.dietlens.com/"
     static let textSearchPopularURL = labDeskTopURL + "/popular-food/"
+    static let favouriteFoodURL = labDeskTopURL + "/favorite-food/"
 //    static let qiniuDietLensImageDomain = "https://image.dietlens.com/"
     static let phoneSendSMSURL = labDeskTopURL + "/social-acc/sms/"
     static let verifySMSURL = labDeskTopURL + "/social-acc/phone/"
@@ -222,4 +224,11 @@ struct FirstTimeFlag {
 struct MessageType {
     static let messageType = "0"
     static let questionnaireType = "1"
+}
+
+extension UIColor {
+    struct ThemeColor {
+        static let dietLensRed = UIColor(displayP3Red: CGFloat(242.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(93.0/255.0), alpha: 1.0)
+    }
+
 }

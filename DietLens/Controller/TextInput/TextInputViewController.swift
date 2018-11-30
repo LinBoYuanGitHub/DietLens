@@ -33,8 +33,7 @@ class TextInputViewController: BaseViewController {
 //    let activityIndicator:NVActivityIndicatorView?
 
     //tab item for filter the result
-//    var filterItem = ["All", "Ingredient", "Side dish"]
-    var filterItem = ["Popular", "Recent", "My Favorite"]
+    var filterItem = [StringConstants.UIString.FitlerPopular, StringConstants.UIString.FilterRecent, StringConstants.UIString.FilterFavorite]
     //autoComplete & textSearchResult List
     var autoCompleteTextList = [String]()
     var searchResultList = [TextSearchSuggestionEntity]()
@@ -131,6 +130,8 @@ class TextInputViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
 //        textSearchField.becomeFirstResponder()
+        //set event for favFood empty label jump
+        self.emptyView.addGestureRecognizer( UITapGestureRecognizer(target: self, action: #selector(redirectToFavoriteFoodPage)))
     }
 
     @IBAction func refreshSearch(_ sender: Any) {
@@ -191,7 +192,7 @@ class TextInputViewController: BaseViewController {
             self.mealType = getCorrectMealType()
         }
         APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased(), completion: { (textResults) in
-            if textResults == nil {
+            if textResults == nil { // excpetion + cancelled
                 self.emptyView.isHidden = false
                 self.textSearchTable.isHidden = true
                 return
@@ -203,6 +204,40 @@ class TextInputViewController: BaseViewController {
             self.textSearchTable.reloadData()
         }) { (nextPageLink) in
             self.nextPageLink = nextPageLink!
+        }
+    }
+
+    func getFavouriteFoods() {
+        APIService.instance.getFavouriteFoodList(completion: { (textResults) in
+            if textResults == nil {
+                self.emptyView.isHidden = false
+                self.textSearchTable.isHidden = true
+                return
+            } else if textResults?.count == 0 {
+                self.textSearchTable.isHidden = true
+                self.emptyViewLabel.text = "click here to select your favorite food"
+                self.refreshBtn.isHidden = true
+                self.emptyView.isHidden = false
+                return
+            }
+            self.emptyResultView.isHidden = true
+            self.emptyView.isHidden = true
+            self.textSearchTable.isHidden = false
+            self.searchResultList = textResults!
+            self.textSearchTable.reloadData()
+        }, nextPageCompletion: { (nextPageLink) in
+            self.nextPageLink = nextPageLink!
+        })
+    }
+
+    @objc func redirectToFavoriteFoodPage() {
+        if currentSelectionPos != 2 { //return when it's not at favorite food tab
+            return
+        }
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PersonalFavouriteFoodVC") as? PersonalFavouriteFoodViewController {
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: false)
+            }
         }
     }
 
@@ -309,7 +344,7 @@ class TextInputViewController: BaseViewController {
                 //save select Item to lruCache
                 self.searchCacheLRU.setValue(foodEntity, for: foodEntity.id)
                 //dietItem operation
-                var dietEntity = dietItem!
+                let dietEntity = dietItem!
                 if dietItem?.portionInfo.count != 0 {
                     dietEntity.displayUnit = (dietItem?.portionInfo[0].sizeUnit)!
                 }
@@ -318,22 +353,30 @@ class TextInputViewController: BaseViewController {
                 } else {
                     dietEntity.recordType = RecognitionInteger.text
                 }
+                //set as new foodDiary entity
+                if !self.shouldShowCancel {
+                    FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
+                }
+                //mealType & mealTime
+                if FoodDiaryDataManager.instance.foodDiaryEntity.mealType.isEmpty {
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType
+                }
+                if FoodDiaryDataManager.instance.foodDiaryEntity.mealTime.isEmpty {
+                    FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
+                }
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                     let imageUrl = foodEntity.expImagePath
                     dest.imageUrl = imageUrl
                     dest.userFoodImage = self.cameraImage
                     dest.imageKey = self.imageKey
+                    dest.dietItem = dietEntity
                     if self.shouldShowCancel {
                         dest.recordType = RecognitionInteger.additionText
                         dest.shouldShowMealBar = false
                     } else {
                         dest.recordType = dietEntity.recordType
                     }
-                    dest.dietItem = dietEntity
-                    //mealType & mealTime
                     dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                    dest.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
-                    dest.foodDiaryEntity.mealType = self.mealType
                     if let navigator = self.navigationController {
                         navigator.pushViewController(dest, animated: true)
                     }
@@ -353,10 +396,11 @@ class TextInputViewController: BaseViewController {
             APIService.instance.cancelAllRequest()
         } else if currentSelection == 2 {
             //show favorite WIP view
-            self.textSearchTable.isHidden = true
-            self.emptyViewLabel.text = "We are working on this feature for release in the future."
-            self.refreshBtn.isHidden = true
-            self.emptyView.isHidden = false
+            self.getFavouriteFoods()
+//            self.textSearchTable.isHidden = true
+//            self.emptyViewLabel.text = "We are working on this feature for release in the future."
+//            self.refreshBtn.isHidden = true
+//            self.emptyView.isHidden = false
         }
     }
 
@@ -380,19 +424,6 @@ extension TextInputViewController: UITableViewDataSource {
         }
         cell.setUpCell(textResultEntity: result)
         return cell
-//        if result.location.isEmpty && result.location.isEmpty {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
-//                return UITableViewCell()
-//            }
-//            cell.setUpCell(textResultEntity: result)
-//            return cell
-//        } else {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "foodSearchLocationCell")  as? SearchResultLocationCell else {
-//                return UITableViewCell()
-//            }
-//            cell.setUpCell(textResultEntity: result)
-//            return cell
-//        }
     }
 
 }

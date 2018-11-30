@@ -80,6 +80,7 @@ class FoodInfoDataManager {
         dietItem.nutritionInfo.protein = jsonObject["nutrition"]["protein"].doubleValue
         dietItem.nutritionInfo.fat = jsonObject["nutrition"]["fat"].doubleValue
         dietItem.category = jsonObject["subcat"].stringValue
+        dietItem.isFavoriteFood = jsonObject["is_favorite_food"].boolValue
         for json in jsonObject["food_portion"].arrayValue {
             var portion = PortionInfo()
             portion.rank = json["rank"].intValue

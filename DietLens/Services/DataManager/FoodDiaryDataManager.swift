@@ -23,7 +23,7 @@ class FoodDiaryDataManager {
     }
 
     func assembleFoodDiaryEntity(jsonObject: JSON) -> FoodDiaryEntity {
-        var foodDiaryEntity = FoodDiaryEntity()
+        let foodDiaryEntity = FoodDiaryEntity()
         foodDiaryEntity.foodDiaryId = jsonObject["id"].stringValue
         foodDiaryEntity.imageId = jsonObject["image"].stringValue
         foodDiaryEntity.placeHolderImage = jsonObject["placeholder_img"].stringValue
@@ -40,6 +40,7 @@ class FoodDiaryDataManager {
             foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.sampleImageUrl = job["example_img"].stringValue
+            foodItem.isFavoriteFood = job["is_favorite_food"].boolValue
             //prevent quantity equals zero
             if job["quantity"].doubleValue == 0 {
                 foodItem.quantity = 1

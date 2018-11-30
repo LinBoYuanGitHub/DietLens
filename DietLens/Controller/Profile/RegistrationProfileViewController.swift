@@ -138,8 +138,7 @@ class RegistrationProfileViewController: BaseViewController {
     @objc func onCloseBtnPressed() {
         //redirect to main page, need to have filling profile reminder
         AlertMessageHelper.showMessage(targetController: self, title: "", message: "Default setting is set for you.\n Go to profile to get an \n accurate recommendation.", confirmText: "Okay") {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC")
             self.present(viewController, animated: true, completion: nil)
         }
     }

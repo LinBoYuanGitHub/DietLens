@@ -472,6 +472,63 @@ class APIService {
         self.getFoodSearchPopularity(requestUrl: url, mealtime: mealtime, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
+    public func getFavouriteFoodList(completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
+        let url = ServerConfig.favouriteFoodURL
+        self.getFavouriteFoodList(requestUrl: url, completion: completion, nextPageCompletion: nextPageCompletion)
+    }
+
+    public func removeFavouriteFood(removeFoodId: Int, completion: @escaping(Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.favouriteFoodURL + "remover/")!,
+            method: .post,
+            parameters: ["food": removeFoodId],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get search result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
+
+    public func getFavouriteFoodList(requestUrl: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
+        Alamofire.request(
+            URL(string: requestUrl)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("Get search result failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    completion(nil)
+                    return
+                }
+                guard let searchResults = response.result.value else {
+                    print("Get searchResult failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonObj = JSON(searchResults)
+                let foodSearchList = TextSearchDataManager.instance.assembleFavouriteFoodResultList(jsonObj: jsonObj)
+                let nextLink = jsonObj["next"].stringValue
+                nextPageCompletion(nextLink)
+                completion(foodSearchList)
+        }
+    }
+
     public func getFoodSearchPopularity(requestUrl: String, mealtime: String, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
         Alamofire.request(
             URL(string: requestUrl)!,
@@ -499,6 +556,24 @@ class APIService {
                 let nextLink = jsonObj["next"].stringValue
                 nextPageCompletion(nextLink)
                 completion(foodSearchList)
+        }
+    }
+
+    public func setFavouriteFoodList(foodList: [Int], completion: @escaping (Bool) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.favouriteFoodURL)!,
+            method: .post,
+            parameters: ["food": foodList],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("post favourite food failed due to : \(String(describing: response.result.error))")
+                    completion(false)
+                    return
+                }
+                completion(true)
         }
     }
 
@@ -823,7 +898,7 @@ class APIService {
     }
 
     //update foodDiary
-    public func updateFoodDiary(isPartialUpdate: Bool, foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
+    public func updateFoodDiary(isPartialUpdate: Bool, foodDiary: FoodDiaryEntity, completion:@escaping(Bool, FoodDiaryEntity?) -> Void) {
         var param: [String: Any] = [:]
         if isPartialUpdate {
             param = FoodInfoDataManager.instance.partialParamfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
@@ -844,15 +919,17 @@ class APIService {
                         return
                     }
                     print("update foodDiary failed due to : \(String(describing: response.result.error))")
-                    completion(false)
+                    completion(false, nil)
                     return
                 }
-                guard let scanResult = response.result.value else {
+                guard let result = response.result.value else {
                     print("update foodDiary failed due to : Server Data Type Error")
-                    completion(false)
+                    completion(false, nil)
                     return
                 }
-                completion(true)
+                let jsonObject = JSON(result)
+                let entity = FoodDiaryDataManager.instance.assembleFoodDiaryEntity(jsonObject: jsonObject)
+                completion(true, entity)
         }
     }
     //create a new foodDiary -> save FoodItem & success

@@ -25,6 +25,7 @@ class FoodInfoViewController: UIViewController {
     @IBOutlet weak var proteinValueLable: UILabel!
     @IBOutlet weak var fatValueLabel: UILabel!
     @IBOutlet weak var carbohydrateValueLabel: UILabel!
+
     //container
     @IBOutlet weak var container: UIView!
     //pickerView
@@ -32,13 +33,16 @@ class FoodInfoViewController: UIViewController {
 
     @IBOutlet weak var mealIconView: UIImageView!
     @IBOutlet weak var mealViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var favButton: UIButton!
+
+    //editing data
+    var dietItem: DietItem!
 
     let redUnderLine: UIView = UIView(frame: CGRect(x: 12, y: 32, width: 50, height: 2))
 
     //data source
 //    var foodInfoModel = FoodInfomationModel()
     var quantity = 1.0
-    var selectedPortionPos: Int = 0
     var quantityIntegerArray = [0]
     var decimalArray = [0, 0.25, 0.5, 0.75]
     var decimalArrayString = [".0", ".25", ".50", ".75"]
@@ -46,8 +50,6 @@ class FoodInfoViewController: UIViewController {
     var currentMealIndex = 0
     //parameter for passing value
     var userFoodImage: UIImage? //previous viewController need to pass the display image
-    var foodDiaryEntity = FoodDiaryEntity()
-    var dietItem = DietItem()
     var isSetMealByTimeRequired: Bool = false
     var recordType = RecognitionInteger.recognition
 //    var isAddIntoFoodList = false
@@ -56,6 +58,7 @@ class FoodInfoViewController: UIViewController {
     var imageUrl: String?
 
     var isUpdate: Bool = false
+    var indexFromUpdate = 0
     var shouldShowMealBar = true
     var currentIntegerPos = 1
     var currentDecimalPos = 0
@@ -63,6 +66,10 @@ class FoodInfoViewController: UIViewController {
     @IBOutlet weak var animationLeading: NSLayoutConstraint!
 
     override func viewDidLoad() {
+        //set up currentEditDietItem data
+        if isUpdate {
+            dietItem = FoodDiaryDataManager.instance.foodDiaryEntity.dietItems[indexFromUpdate]
+        }
         //init foodInfo data -> setUp View
         prepareQuantityIntegerArray()
         initFoodInfo()
@@ -76,7 +83,7 @@ class FoodInfoViewController: UIViewController {
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
         //registration for resuable nib cellItem
-    mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
+        mealCollectionView.register(MealTypeCollectionCell.self, forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.register(UINib(nibName: "MealTypeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "mealTypeCell")
         mealCollectionView.isScrollEnabled = false
         //add notification for the keyboard
@@ -93,6 +100,14 @@ class FoodInfoViewController: UIViewController {
             object: nil
         )
         setUpQuantityPickerIndex()
+        setFavImageStyle()
+    }
+
+    func setFavImageStyle() {
+        //image setting
+        favButton.setImage(UIImage(imageLiteralResourceName: "favStar_select"), for: .selected)
+        favButton.setImage(UIImage(imageLiteralResourceName: "favStar_unselect"), for: .normal)
+        favButton.isSelected = dietItem.isFavoriteFood
     }
 
     func setUpQuantityPickerIndex() {
@@ -106,13 +121,31 @@ class FoodInfoViewController: UIViewController {
         }
     }
 
+    @IBAction func toggleStar(_ sender: Any) {
+        favButton.isUserInteractionEnabled = false
+        if dietItem.isFavoriteFood {//judge from the favourite attribute
+            APIService.instance.removeFavouriteFood(removeFoodId: dietItem.foodId) { (isSuccess) in
+                self.favButton.isUserInteractionEnabled = true
+                self.favButton.isSelected = false
+                self.dietItem.isFavoriteFood = false
+            }
+        } else {
+            APIService.instance.setFavouriteFoodList(foodList: [dietItem.foodId]) { (isSuccess) in
+                self.favButton.isUserInteractionEnabled = true
+                self.favButton.isSelected = true
+                self.dietItem.isFavoriteFood = true
+            }
+        }
+    }
+
 /********************************************************
     Data setting Up part
 ********************************************************/
     func initFoodInfo() {
-        foodDiaryEntity.dietItems.append(dietItem)
+        if shouldShowMealBar {
+            setCorrectMealType()
+        }
         setUpFoodValue()
-        setCorrectMealType()
         setUpMealBar()
     }
 
@@ -132,7 +165,7 @@ class FoodInfoViewController: UIViewController {
         foodName.text = dietItem.foodName
         var portionRate: Double = Double(dietItem.quantity) * 1.0
         if dietItem.portionInfo.count != 0 {
-            portionRate = Double(dietItem.quantity) * dietItem.portionInfo[selectedPortionPos].weightValue/100
+            portionRate = Double(dietItem.quantity) * dietItem.portionInfo[dietItem.selectedPos].weightValue/100
         }
         //calorieValue
         let calorieStr = String(Int(dietItem.nutritionInfo.calorie * portionRate))+StringConstants.UIString.calorieUnit
@@ -184,7 +217,7 @@ class FoodInfoViewController: UIViewController {
     func setUpImage() {
         loadImageFromWeb(imageUrl: dietItem.sampleImageUrl)
         if imageKey != nil {
-            foodDiaryEntity.imageId = imageKey!
+            FoodDiaryDataManager.instance.foodDiaryEntity.imageId = imageKey!
         }
     }
 
@@ -235,11 +268,11 @@ class FoodInfoViewController: UIViewController {
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
         if isUpdate {
-            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.updateBtnText
+            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
-         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
+        let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
@@ -262,24 +295,24 @@ class FoodInfoViewController: UIViewController {
         if isSetMealByTimeRequired {
             let hour: Int = Calendar.current.component(.hour, from: Date())
             if hour < ConfigVariable.BreakFastEndTime && hour >= ConfigVariable.BreakFastStartTime {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.breakfast
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = StringConstants.MealString.breakfast
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
             } else if hour < ConfigVariable.LunchEndTime && hour >= ConfigVariable.LunchStartTime {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.lunch
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = StringConstants.MealString.lunch
                 currentMealIndex = 1
                 mealCollectionView.reloadData()
             } else if hour < ConfigVariable.DinnerEndTime && hour >= ConfigVariable.DinnerStartTime {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.dinner
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = StringConstants.MealString.dinner
                 currentMealIndex = 2
                 mealCollectionView.reloadData()
             } else {
-                self.foodDiaryEntity.mealType = StringConstants.MealString.snack
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = StringConstants.MealString.snack
                 currentMealIndex = 3
                 mealCollectionView.reloadData()
             }
         } else {
-            switch self.foodDiaryEntity.mealType {
+            switch FoodDiaryDataManager.instance.foodDiaryEntity.mealType {
             case StringConstants.MealString.breakfast:
                 currentMealIndex = 0
                 mealCollectionView.reloadData()
@@ -366,46 +399,77 @@ class FoodInfoViewController: UIViewController {
         }
         NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
         if isUpdate {
-            if let navigator = self.navigationController {
-                for viewController in (navigator.viewControllers) {
-                    if let foodDiaryVC = viewController as? FoodDiaryViewController {
-                        foodDiaryVC.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                        foodDiaryVC.updateFoodInfoItem(dietItem: dietItem)
-                        foodDiaryVC.calculateAccumulateFoodValue()
+            FoodDiaryDataManager.instance.foodDiaryEntity.dietItems[indexFromUpdate] = dietItem
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            optionMenu.view.tintColor = UIColor.ThemeColor.dietLensRed
+            var favTitle = ""
+            if dietItem.isFavoriteFood {
+                favTitle = StringConstants.UIString.removeFavActionItem
+            } else {
+                favTitle = StringConstants.UIString.addFavActionItem
+            }
+            let favoriteAction = UIAlertAction(title: favTitle, style: .default) { (alert: UIAlertAction!) in
+                self.favButton.isUserInteractionEnabled = false
+                if self.dietItem.isFavoriteFood {
+                    APIService.instance.removeFavouriteFood(removeFoodId: self.dietItem.foodId, completion: { (isSuccess) in
+                        self.favButton.isUserInteractionEnabled = true
+                        self.dietItem.isFavoriteFood = false
+                        self.favButton.isSelected = false
+                    })
+                } else {
+                    APIService.instance.setFavouriteFoodList(foodList: [self.dietItem.foodId], completion: { (isSuccess) in
+                        self.favButton.isUserInteractionEnabled = true
+                        self.dietItem.isFavoriteFood = true
+                        self.favButton.isSelected = true
+                    })
+                }
+
+            }
+            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (alert: UIAlertAction!) in
+                self.navigationController?.popViewController(animated: true)
+                if let navigator = self.navigationController {
+                    for vc in navigator.viewControllers {
+                        if let foodDiaryVC = vc as? FoodDiaryViewController {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                                let indexPath = IndexPath(item: self.indexFromUpdate, section: 0)
+                                foodDiaryVC.deleteFoodItem(row: indexPath.row)
+                            })
+                        }
                     }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    navigator.popViewController(animated: true)
-                }
             }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            optionMenu.addAction(favoriteAction)
+            optionMenu.addAction(deleteAction)
+            optionMenu.addAction(cancelAction)
+            self.present(optionMenu, animated: true, completion: nil)
         } else if recordType == RecognitionInteger.additionText {
+            //data operation
+            FoodDiaryDataManager.instance.foodDiaryEntity.dietItems.append(dietItem)
             //1.multiple times TextSearchItem 2.first time TextSearchItem
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-                dest.isUpdate = false
-                dest.isSetMealByTimeRequired = false
-                if let navigator = self.navigationController {
-                    //pop otherView
-                    if navigator.viewControllers.contains(where: {
-                        return $0 is FoodDiaryViewController
-                    }) {
-                        //add foodItem into foodDiaryVC
-                        for viewController in (self.navigationController?.viewControllers)! {
-                            if let foodDiaryVC = viewController as? FoodDiaryViewController {
-                                foodDiaryVC.addFoodIntoItem(dietItem: dietItem)
-                                foodDiaryVC.calculateAccumulateFoodValue()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    navigator.popToViewController(foodDiaryVC, animated: true)
-                                }
+            if let navigator = self.navigationController {
+                //pop otherView
+                if navigator.viewControllers.contains(where: {
+                    return $0 is FoodDiaryViewController
+                }) {
+                    //add foodItem into foodDiaryVC
+                    for viewController in (self.navigationController?.viewControllers)! {
+                        if let foodDiaryVC = viewController as? FoodDiaryViewController {
+                            //perform updating foodDiary by adding foodItem
+                            foodDiaryVC.addFoodIntoItem()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                navigator.popToViewController(foodDiaryVC, animated: true)
                             }
                         }
-                        //pop searchView & foodInfoView back to
-//                        navigator.popViewController(animated: false)
-//                        navigator.popViewController(animated: true)
-                    } else {
-                        //firstTime
+                    }
+                } else {
+                    //firstTime
+                    if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+                        FoodDiaryDataManager.instance.foodDiaryEntity.imageId = imageKey!
+                        dest.isUpdate = false
+                        dest.isSetMealByTimeRequired = false
                         dest.imageKey = imageKey
                         dest.userFoodImage = userFoodImage
-                        dest.foodDiaryEntity = foodDiaryEntity
                         //pop searchView & foodInfoView
                         DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
                             navigator.popViewController(animated: false)
@@ -417,8 +481,9 @@ class FoodInfoViewController: UIViewController {
             }
         } else {
             //redirect to foodDiary page
+            FoodDiaryDataManager.instance.foodDiaryEntity.dietItems.append(dietItem)
             AlertMessageHelper.showLoadingDialog(targetController: self)
-            APIService.instance.createFooDiary(foodDiary: foodDiaryEntity, completion: { (isSuccess) in
+            APIService.instance.createFooDiary(foodDiary: FoodDiaryDataManager.instance.foodDiaryEntity, completion: { (isSuccess) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                     if isSuccess {
                         //request for saving FoodDiary
@@ -430,8 +495,6 @@ class FoodInfoViewController: UIViewController {
                                     dest.shouldSwitchToFoodDiary = true
                                 }
                                 navigator.popToRootViewController(animated: true)
-                                //                                    navigator.popToViewController(dest, animated: true)
-
                             })
                         }
                     }
@@ -447,13 +510,25 @@ class FoodInfoViewController: UIViewController {
 
     @IBAction func onBackPressed(_ sender: Any) {
 //        dismiss(animated: true, completion: nil)
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        //perform foodItem change when done
+        if let navigator = self.navigationController {
+            for viewController in (navigator.viewControllers) {
+                if let foodDiaryVC = viewController as? FoodDiaryViewController {
+                    foodDiaryVC.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                    foodDiaryVC.updateFoodInfoItem(row: indexFromUpdate)
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                navigator.popViewController(animated: true)
+            }
+        }
+
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //segue toAddTextFoodPage
         if let dest = segue.destination as? FoodDiaryViewController {
-//           dest.foodItemList.append(addedFood)
             dest.userFoodImage = userFoodImage
         }
     }
@@ -556,7 +631,9 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //change the mealType block selection
         currentMealIndex = indexPath.row
-        foodDiaryEntity.mealType = mealStringArray[indexPath.row]
+        if !isUpdate {
+             FoodDiaryDataManager.instance.foodDiaryEntity.mealType = mealStringArray[indexPath.row]
+        }
         //switch collection selection
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
@@ -596,7 +673,7 @@ extension FoodInfoViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == quantityValue && !(quantityValue.text?.isEmpty)! {
             dietItem.quantity = Double(quantityValue.text!)!
-            foodDiaryEntity.dietItems[0].quantity = Double(quantityValue.text!)!
+            dietItem.quantity = Double(quantityValue.text!)!
             setUpFoodValue()
         }
     }
@@ -607,8 +684,6 @@ extension FoodInfoViewController: SingleOptionAlerViewDelegate {
 
     func onSaveBtnClicked(selectedPosition: Int) {
         let portion = self.dietItem.portionInfo[selectedPosition]
-        self.selectedPortionPos = selectedPosition
-        self.foodDiaryEntity.dietItems[0].selectedPos = selectedPosition
         self.dietItem.selectedPos = selectedPosition
         self.dietItem.displayUnit = portion.sizeUnit
         self.unitValue.text = portion.sizeUnit

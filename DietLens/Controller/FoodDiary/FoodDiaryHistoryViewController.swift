@@ -305,6 +305,7 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     func didSelectFoodDiaryItem(foodDiary: FoodDiaryEntity) {
+            FoodDiaryDataManager.instance.foodDiaryEntity = foodDiary
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 var imageKey = foodDiary.imageId
                 //pass correct imageId
@@ -314,7 +315,6 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
                     imageKey = foodDiary.imageId
                 }
                 dest.isSetMealByTimeRequired = false
-                dest.foodDiaryEntity = foodDiary
                 dest.isUpdate = true
                 dest.imageKey = imageKey
                 if imageKey == "" {

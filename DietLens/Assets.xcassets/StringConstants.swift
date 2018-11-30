@@ -17,7 +17,17 @@ struct StringConstants {
         static let updateBtnText = "Update"
         static let addBtnText = "Done"
         static let saveBtnText = "Save"
+        static let moreBtnText = "More"
+        static let nextBtnText = "Next"
         static let stepCounterText = "StepCounter"
+        //menu action item
+        static let addFavActionItem = "Favourite"
+        static let removeFavActionItem = "Unfavourite"
+        static let deleteActionItem = "Delete"
+        //textSearch filter tab
+        static let FitlerPopular = "Popular"
+        static let FilterRecent = "Recent"
+        static let FilterFavorite = "Favourite"
     }
     struct MealString {
         static let breakfast = "Breakfast"
