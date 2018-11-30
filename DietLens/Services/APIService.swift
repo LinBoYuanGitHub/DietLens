@@ -898,7 +898,7 @@ class APIService {
     }
 
     //update foodDiary
-    public func updateFoodDiary(isPartialUpdate: Bool, foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
+    public func updateFoodDiary(isPartialUpdate: Bool, foodDiary: FoodDiaryEntity, completion:@escaping(Bool, FoodDiaryEntity?) -> Void) {
         var param: [String: Any] = [:]
         if isPartialUpdate {
             param = FoodInfoDataManager.instance.partialParamfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
@@ -919,15 +919,17 @@ class APIService {
                         return
                     }
                     print("update foodDiary failed due to : \(String(describing: response.result.error))")
-                    completion(false)
+                    completion(false, nil)
                     return
                 }
-                guard let scanResult = response.result.value else {
+                guard let result = response.result.value else {
                     print("update foodDiary failed due to : Server Data Type Error")
-                    completion(false)
+                    completion(false, nil)
                     return
                 }
-                completion(true)
+                let jsonObject = JSON(result)
+                let entity = FoodDiaryDataManager.instance.assembleFoodDiaryEntity(jsonObject: jsonObject)
+                completion(true, entity)
         }
     }
     //create a new foodDiary -> save FoodItem & success

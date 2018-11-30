@@ -188,7 +188,7 @@ class FoodDiaryViewController: UIViewController {
             }
             let updateAction = UIAlertAction(title: StringConstants.UIString.updateBtnText, style: .default) { (alert: UIAlertAction!) in
                 //update foodDiary api flow
-                APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess) in
+                APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess, foodDiaryEntity) in
                     if isSuccess {
                         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
                             if let navigator = self.navigationController {
@@ -287,11 +287,12 @@ class FoodDiaryViewController: UIViewController {
     func addFoodIntoItem() {
         //asycn task for syncing server data
         if !foodDiaryInstance.foodDiaryId.isEmpty {
-            //only add new foodItem
-            let foodDiaryEntity = foodDiaryInstance.copy()
-            foodDiaryEntity.dietItems.removeAll()
-            foodDiaryEntity.dietItems.append(foodDiaryInstance.dietItems.last!)
-            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryEntity) { (isSuccess) in }
+            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess, foodDiaryEntity)  in
+                if foodDiaryEntity != nil && isSuccess {
+                    //refresh foodDiaryEntity
+                    self.foodDiaryInstance = foodDiaryEntity!
+                }
+            }
         }
         let indexPath = IndexPath(row: foodDiaryInstance.dietItems.count-1, section: 0)
         //refresh nutrition part
@@ -311,7 +312,7 @@ class FoodDiaryViewController: UIViewController {
         //update food table
         foodTableView.reloadRows(at: [indexPath], with: .automatic)
         if !foodDiaryInstance.foodDiaryId.isEmpty && !foodDiaryInstance.dietItems[row].id.isEmpty {
-            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess) in }
+            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess, foodDiaryEntity) in }
         }
     }
 
@@ -352,7 +353,7 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
             self.self.animationViewLeading.constant = destX! + CGFloat(10)
         })
         //set request to switch time
-        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess) in })
+        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess, foodDiaryEntity) in })
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
