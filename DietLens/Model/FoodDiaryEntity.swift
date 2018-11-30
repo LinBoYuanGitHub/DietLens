@@ -17,6 +17,19 @@ class FoodDiaryEntity {
     public var latitude = 0.0
     public var longitude = 0.0
     public var dietItems = [DietItem]()
+
+    func copy() -> FoodDiaryEntity {
+        let copy = FoodDiaryEntity()
+        copy.foodDiaryId = foodDiaryId
+        copy.imageId = imageId
+        copy.placeHolderImage = placeHolderImage
+        copy.mealTime = mealTime
+        copy.mealType = mealType
+        copy.latitude = latitude
+        copy.longitude = longitude
+        copy.dietItems = dietItems
+        return copy
+    }
 }
 
 class DietItem {

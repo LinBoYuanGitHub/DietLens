@@ -462,8 +462,8 @@ class FoodInfoViewController: UIViewController {
                     }
                 } else {
                     //firstTime
-                    FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
                     if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+                        FoodDiaryDataManager.instance.foodDiaryEntity.imageId = imageKey!
                         dest.isUpdate = false
                         dest.isSetMealByTimeRequired = false
                         dest.imageKey = imageKey

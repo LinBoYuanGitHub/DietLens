@@ -353,6 +353,10 @@ class TextInputViewController: BaseViewController {
                 } else {
                     dietEntity.recordType = RecognitionInteger.text
                 }
+                //set as new foodDiary entity
+                if !self.shouldShowCancel {
+                     FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
+                }
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                     let imageUrl = foodEntity.expImagePath
                     dest.imageUrl = imageUrl

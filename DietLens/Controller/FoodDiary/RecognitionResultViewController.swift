@@ -118,6 +118,8 @@ class RecognitionResultViewController: BaseViewController {
                     return
                 }
                 entity.recordType = self.recordType ?? RecognitionInteger.recognition
+                 //set as new foodDiary entity
+                FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
                 if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
                     dest.userFoodImage = self.cameraImage
                     dest.recordType = entity.recordType
