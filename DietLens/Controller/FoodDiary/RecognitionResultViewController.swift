@@ -140,6 +140,7 @@ class RecognitionResultViewController: BaseViewController {
                     //mealTime & mealType
                     FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
                     dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                    dest.recordDate = self.recordDate
                     FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
                     if let navigator = self.navigationController {
                         //clear controller to Bottom & add foodCalendar Controller
@@ -197,6 +198,7 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
             dest.imageKey = self.imageKey
             dest.isMixVeg = true
             dest.isUpdate = false
+            dest.recordDate = recordDate
             //mealTime & mealType
             FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
             dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired

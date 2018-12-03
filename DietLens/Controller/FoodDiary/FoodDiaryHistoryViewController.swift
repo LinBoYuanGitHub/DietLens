@@ -60,7 +60,6 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         foodDiaryMealTable.dataSource = self
         nutritionCollectionView.delegate = self
         nutritionCollectionView.dataSource = self
-        dateLabel.text = formatter.string(from: selectedDate)
         rightArrowButton.setImage(UIImage(imageLiteralResourceName: "calendar_right_arrow_gray"), for: .disabled)
         //judge whether is same date
         rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
@@ -73,6 +72,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         super.viewWillAppear(animated)
         loadDailyNutritionView()
         self.navigationController?.navigationBar.isHidden = true
+        dateLabel.text = formatter.string(from: selectedDate)
         //load available date & load calendar data
         if shouldRefreshDiary {
             refreshFoodDiaryData()

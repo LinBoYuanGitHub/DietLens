@@ -115,6 +115,7 @@
 		3FA73DF22178789200D145C6 /* YStepMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF12178789200D145C6 /* YStepMarkerView.swift */; };
 		3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */; };
 		3FA8C372219D0E6800E4261D /* ProfileCalorieGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */; };
+		3FAD32D221B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */; };
 		3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */; };
 		3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */; };
 		3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */; };
@@ -356,6 +357,7 @@
 		3FA73DF12178789200D145C6 /* YStepMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YStepMarkerView.swift; sourceTree = "<group>"; };
 		3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownTimer.swift; sourceTree = "<group>"; };
 		3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCalorieGoalViewController.swift; sourceTree = "<group>"; };
+		3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCalorieGoalDialog.swift; sourceTree = "<group>"; };
 		3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
 		3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryRecordViewController.swift; sourceTree = "<group>"; };
 		3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDialogViewController.swift; sourceTree = "<group>"; };
@@ -762,6 +764,7 @@
 				3F5608F020F30C010007B3AF /* EmojiInputView.swift */,
 				3F5608F220F30DF90007B3AF /* EmojiLayout.xib */,
 				3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */,
+				3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1600,6 +1603,7 @@
 				3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */,
+				3FAD32D221B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift in Sources */,
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
 				3FCBEC1820E662440092948C /* HealthCenterMainCell.swift in Sources */,

@@ -9,7 +9,6 @@
 import UIKit
 class RegistrationFinishViewController: UIViewController {
 
-    @IBOutlet weak var calorieText: UILabel!
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var calorieGoalTextField: UITextField!
 
@@ -35,7 +34,7 @@ class RegistrationFinishViewController: UIViewController {
     func getGoalCalorie() {
         APIService.instance.getDietaryGuideInfo { (guideDict) in
             if let calorie = guideDict["energy"] {
-                self.calorieText.text = "\(Int(calorie))kcal"
+                self.calorieGoalTextField.text = "\(Int(calorie))kcal"
             }
         }
     }
@@ -58,12 +57,18 @@ class RegistrationFinishViewController: UIViewController {
         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
            self.present(controller, animated: true, completion: nil)
         }
-
-        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in
-            //handle the successful case
-        }
+        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in}
     }
 
+    @IBAction func onQuestionMarkClicked(_ sender: Any) {
+        //show calorie goal alret
+        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
+        if let recommendCalorieAlert =  storyboard.instantiateViewController(withIdentifier: "RecommendCalorieDialogVC") as? RecommendCalorieGoalDialog {
+            recommendCalorieAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            recommendCalorieAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            present(recommendCalorieAlert, animated: true, completion: nil)
+        }
+    }
 }
 
 extension RegistrationFinishViewController {
