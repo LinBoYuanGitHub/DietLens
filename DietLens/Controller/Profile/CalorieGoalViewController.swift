@@ -18,6 +18,7 @@ class CalorieGoalViewController: BaseViewController {
     @IBOutlet weak var calorieGoalTextField: UITextField!
     @IBOutlet weak var recommendTextLabel: UILabel!
     @IBOutlet weak var thanksLabel: UILabel!
+    @IBOutlet weak var backButton: UIBarButtonItem!
 
     var calorieGoalSetDelegate: CalorieGoalSetDelegate?
     var isInRegistrationFlow = false
@@ -37,7 +38,8 @@ class CalorieGoalViewController: BaseViewController {
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
         if isInRegistrationFlow {
-             self.navigationItem.hidesBackButton = true
+            self.navigationItem.setLeftBarButton(nil, animated: false)
+            self.navigationItem.hidesBackButton = true
         }
         self.navigationItem.title = "Adjust Calories"
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
