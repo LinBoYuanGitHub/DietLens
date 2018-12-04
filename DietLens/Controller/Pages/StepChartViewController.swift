@@ -209,45 +209,59 @@ class StepChartViewController: BaseViewController {
             break
         }
         marker.dateMode = dateMode
+        dateTimeSwitch(addingValue: 0)
     }
 
     func loadDailyStepChart() {
-        visibleCountNum = 24
         dateMode = StringConstants.DateMode.day
+        visibleCountNum = 24
         dateLabel.text = DateUtil.formatGMTDateToString(date: currentDate)
         setUpXAxis(labelCount: visibleCountNum, granularity: 3)
+        self.rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.day, value: 1, to: self.currentDate)!
         HKHealthStore().getHourlyStepsCountList(inputDate: currentDate) { (steps, error) in
-            self.getStepDataCallBack(steps: steps, error: error)
+            DispatchQueue.main.async {
+                self.getStepDataCallBack(steps: steps, error: error)
+            }
         }
     }
 
     func loadWeeklyStepChart() {
-        visibleCountNum = 7
         dateMode = StringConstants.DateMode.week
+        visibleCountNum = 7
         setUpXAxis(labelCount: visibleCountNum, granularity: 1)
         dateLabel.text = DateUtil.formatGMTDateToString(date: currentDate.beginOfWeek!) + "-" +  DateUtil.formatGMTDateToString(date: currentDate.endOfWeek!)
+        self.rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.weekOfYear, value: 1, to: self.currentDate)!
         HKHealthStore().getWeeklyStepsCountList(anyDayOfTheWeek: currentDate) { (steps, error) in
-            self.getStepDataCallBack(steps: steps, error: error)
+            DispatchQueue.main.async {
+                self.getStepDataCallBack(steps: steps, error: error)
+            }
         }
     }
 
     func loadMonthlyStepChart() {
+        dateMode = StringConstants.DateMode.month
         visibleCountNum = 31
         dateMode = StringConstants.DateMode.month
         dateLabel.text = DateUtil.formatMonthWithYearToString(date: currentDate)
         setUpXAxis(labelCount: visibleCountNum, granularity: 5)
+        self.rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.month, value: 1, to: self.currentDate)!
         HKHealthStore().getMonthlyStepsCountList(anyDayOfMonth: currentDate) { (steps, error) in
-            self.getStepDataCallBack(steps: steps, error: error)
+            DispatchQueue.main.async {
+                self.getStepDataCallBack(steps: steps, error: error)
+            }
         }
     }
 
     func loadYearlyStepChart() {
-        visibleCountNum = 12
         dateMode = StringConstants.DateMode.year
+        visibleCountNum = 12
         dateLabel.text = DateUtil.formatYearToString(date: currentDate)
         setUpXAxis(labelCount: visibleCountNum, granularity: 1)
+         self.rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.year, value: 1, to: self.currentDate)!
         HKHealthStore().getYearlyStepsCounterList(anyDayOfYear: currentDate) { (steps, error) in
-            self.getStepDataCallBack(steps: steps, error: error)
+            DispatchQueue.main.async {
+                self.getStepDataCallBack(steps: steps, error: error)
+            }
         }
     }
 
@@ -263,19 +277,15 @@ class StepChartViewController: BaseViewController {
         switch dateMode {
         case .day:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.day, value: addingValue, to: currentDate)!
-            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.day, value: addingValue, to: currentDate)!
             loadDailyStepChart()
         case .week:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.weekOfMonth, value: addingValue, to: currentDate)!
-            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.weekOfYear, value: addingValue, to: currentDate)!
             loadWeeklyStepChart()
         case .month:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.month, value: addingValue, to: currentDate)!
-            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.month, value: addingValue, to: currentDate)!
             loadMonthlyStepChart()
         case .year:
             currentDate = Calendar.current.date(byAdding: Calendar.Component.year, value: addingValue, to: currentDate)!
-            rightArrow.isEnabled = Date() > Calendar.current.date(byAdding: Calendar.Component.year, value: addingValue, to: currentDate)!
             loadYearlyStepChart()
         }
     }
