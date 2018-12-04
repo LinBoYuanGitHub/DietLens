@@ -28,6 +28,8 @@ struct StringConstants {
         static let FitlerPopular = "Popular"
         static let FilterRecent = "Recent"
         static let FilterFavorite = "Favourite"
+        //SMS verfication code sending
+        static let SMSCodeSendingText = "Get Code"
     }
     struct MealString {
         static let breakfast = "Breakfast"

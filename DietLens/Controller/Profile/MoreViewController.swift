@@ -55,8 +55,12 @@ class MoreViewController: BaseViewController {
 
     @objc func refreshUserName() {
         let preferences = UserDefaults.standard
-        let nickname =  preferences.string(forKey: PreferenceKey.nickNameKey)
-        if nickname != nil {
+        guard let nickname =  preferences.string(forKey: PreferenceKey.nickNameKey) else {
+            return
+        }
+        if nickname.isEmpty {
+            nickNameLabel.text = "Profile"
+        } else {
             nickNameLabel.text = nickname
         }
     }

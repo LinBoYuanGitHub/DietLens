@@ -450,10 +450,10 @@ extension PersonalProfileViewController: UITableViewDelegate, UITableViewDataSou
                     }
                 } else if indexPath.row == 0 && indexPath.section == 3 {
                     //to set calorie goal page
-                    if let dest = storyboard?.instantiateViewController(withIdentifier: "calorieGoalVC") as? ProfileCalorieGoalViewController {
+                    if let dest = storyboard?.instantiateViewController(withIdentifier: "calorieGoalVC") as? CalorieGoalViewController {
                         self.navigationController?.pushViewController(dest, animated: true)
                         dest.calorieGoalSetDelegate = self
-                        dest.calorieGoal = Int(profile.dietGoal.calorie)
+//                        dest.calorieGoal = Int(profile.dietGoal.calorie)
                     }
                 }
             }

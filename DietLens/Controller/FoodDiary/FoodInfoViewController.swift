@@ -62,6 +62,7 @@ class FoodInfoViewController: UIViewController {
     var shouldShowMealBar = true
     var currentIntegerPos = 1
     var currentDecimalPos = 0
+    var recordDate = Date()
     @IBOutlet weak var containerTopConstraints: NSLayoutConstraint!
     @IBOutlet weak var animationLeading: NSLayoutConstraint!
 
@@ -245,7 +246,8 @@ class FoodInfoViewController: UIViewController {
         showUnitSelectionDialog()
     }
 
-    //used only when isNotAccumulate
+    //used only when isNotAccumulatFood
+
     @objc func showUnitSelectionDialog() {
         if let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as? SingleOptionViewController {
             singleOptionAlert.delegate = self
@@ -273,8 +275,10 @@ class FoodInfoViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
+//        self.navigationItem.title = "Food"
         if isUpdate {
-            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
+//            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
+            self.navigationItem.rightBarButtonItem?.image = UIImage(imageLiteralResourceName: "more_dots")
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
@@ -429,7 +433,6 @@ class FoodInfoViewController: UIViewController {
                         self.favButton.isSelected = true
                     })
                 }
-
             }
             let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (alert: UIAlertAction!) in
                 self.navigationController?.popViewController(animated: true)
@@ -474,6 +477,7 @@ class FoodInfoViewController: UIViewController {
                         FoodDiaryDataManager.instance.foodDiaryEntity.imageId = imageKey!
                         dest.isUpdate = false
                         dest.isSetMealByTimeRequired = false
+                        dest.recordDate = recordDate
                         dest.imageKey = imageKey
                         dest.userFoodImage = userFoodImage
                         //pop searchView & foodInfoView
@@ -499,6 +503,7 @@ class FoodInfoViewController: UIViewController {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                                 if let dest =  navigator.viewControllers.first as? HomeTabViewController {
                                     dest.shouldSwitchToFoodDiary = true
+                                    dest.foodDiarySelectedDate = self.recordDate
                                 }
                                 navigator.popToRootViewController(animated: true)
                             })
@@ -509,7 +514,7 @@ class FoodInfoViewController: UIViewController {
             //#google analytic log part
             Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodPageAddSaveButton, parameters: [
                 "recordType": recordType,
-                "mealtime": foodDiaryEntity.mealType
+                "mealtime": FoodDiaryDataManager.instance.foodDiaryEntity.mealType
             ])
             switch recordType {
             case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
@@ -536,7 +541,7 @@ class FoodInfoViewController: UIViewController {
             }
         }
 
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
         //#Google Analytic part
         Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodItemClickBack, parameters: nil)
     }

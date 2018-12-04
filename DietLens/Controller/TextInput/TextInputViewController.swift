@@ -379,6 +379,7 @@ class TextInputViewController: BaseViewController {
                     dest.imageUrl = imageUrl
                     dest.userFoodImage = self.cameraImage
                     dest.imageKey = self.imageKey
+                    dest.recordDate = self.addFoodDate
                     dest.dietItem = dietEntity
                     if self.shouldShowCancel {
                         dest.recordType = RecognitionInteger.additionText

@@ -76,7 +76,8 @@ class PersonalFavouriteFoodViewController: BaseViewController {
 
     func redirectToFinalRegistrationPage() {
         if self.isInRegistrationFlow {
-            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+            if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "calorieGoalVC") as? CalorieGoalViewController {
+                dest.isInRegistrationFlow = true
                 self.navigationController?.pushViewController(dest, animated: true)
             }
         } else {

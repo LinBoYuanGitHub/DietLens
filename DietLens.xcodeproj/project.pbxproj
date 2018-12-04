@@ -28,7 +28,7 @@
 		3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */; };
 		3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162E20EE15D200348160 /* RulerInputView.swift */; };
 		3F2D163120EE175400348160 /* RulerLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2D163020EE175400348160 /* RulerLayout.xib */; };
-		3F2D163320EE8A6000348160 /* RegistrationFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */; };
+		3F2D163320EE8A6000348160 /* CalorieGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */; };
 		3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163420F2899900348160 /* HealthCenterDataManager.swift */; };
 		3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */; };
 		3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436638206F7ACF0089C63A /* NewsEventCell.swift */; };
@@ -115,6 +115,7 @@
 		3FA73DF22178789200D145C6 /* YStepMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF12178789200D145C6 /* YStepMarkerView.swift */; };
 		3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */; };
 		3FA8C372219D0E6800E4261D /* ProfileCalorieGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */; };
+		3FAD32D221B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */; };
 		3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */; };
 		3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */; };
 		3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */; };
@@ -267,7 +268,7 @@
 		3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActivityLvlViewController.swift; sourceTree = "<group>"; };
 		3F2D162E20EE15D200348160 /* RulerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerInputView.swift; sourceTree = "<group>"; };
 		3F2D163020EE175400348160 /* RulerLayout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulerLayout.xib; sourceTree = "<group>"; };
-		3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFinishViewController.swift; sourceTree = "<group>"; };
+		3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieGoalViewController.swift; sourceTree = "<group>"; };
 		3F2D163420F2899900348160 /* HealthCenterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterDataManager.swift; sourceTree = "<group>"; };
 		3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCountingEntity.swift; sourceTree = "<group>"; };
 		3F436638206F7ACF0089C63A /* NewsEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEventCell.swift; sourceTree = "<group>"; };
@@ -356,6 +357,7 @@
 		3FA73DF12178789200D145C6 /* YStepMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YStepMarkerView.swift; sourceTree = "<group>"; };
 		3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownTimer.swift; sourceTree = "<group>"; };
 		3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCalorieGoalViewController.swift; sourceTree = "<group>"; };
+		3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCalorieGoalDialog.swift; sourceTree = "<group>"; };
 		3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
 		3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryRecordViewController.swift; sourceTree = "<group>"; };
 		3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDialogViewController.swift; sourceTree = "<group>"; };
@@ -762,6 +764,7 @@
 				3F5608F020F30C010007B3AF /* EmojiInputView.swift */,
 				3F5608F220F30DF90007B3AF /* EmojiLayout.xib */,
 				3F5691E5214CF53F00D9929A /* ConfirmDialogViewController.swift */,
+				3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -775,7 +778,7 @@
 				3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */,
 				3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */,
 				3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */,
-				3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */,
+				3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */,
 				3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */,
 				3FF5B7EB2176D942003B8509 /* MoreViewController.swift */,
 				3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */,
@@ -1579,7 +1582,7 @@
 				3F88189920E9D80F00FE6C11 /* LoginViewController.swift in Sources */,
 				3FC7BD5D216B86B7003F43E2 /* HomeTabViewController.swift in Sources */,
 				3F516DC62122C7E50028B0AF /* SearchResultLocationCell.swift in Sources */,
-				3F2D163320EE8A6000348160 /* RegistrationFinishViewController.swift in Sources */,
+				3F2D163320EE8A6000348160 /* CalorieGoalViewController.swift in Sources */,
 				3FA73DEB2177069100D145C6 /* MoreCollectionCell.swift in Sources */,
 				587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */,
 				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,
@@ -1600,6 +1603,7 @@
 				3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */,
 				3F1B628E1FC66D56006A38FE /* WebViewController.swift in Sources */,
 				3F5608FB20F3DB640007B3AF /* HealthCenterBarCell.swift in Sources */,
+				3FAD32D221B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift in Sources */,
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
 				3FCBEC1820E662440092948C /* HealthCenterMainCell.swift in Sources */,
@@ -1839,6 +1843,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 4KRB5NW6LS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1867,6 +1872,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4KRB5NW6LS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

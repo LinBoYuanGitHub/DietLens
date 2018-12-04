@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol CalorieGoalSetDelegate {
-    func onCalorieGoalSet(goalValue: Int)
-}
-
 class ProfileCalorieGoalViewController: BaseViewController {
      var calorieGoalSetDelegate: CalorieGoalSetDelegate?
     //registration flow param

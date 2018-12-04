@@ -21,6 +21,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     var currentIndex = 0
     //refresh trigger flag
     var shouldSwitchToFoodDiary = false
+    var foodDiarySelectedDate = Date()
 
     //add coachMarks
     let coachMarksController = CoachMarksController()
@@ -130,6 +131,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         }
         if let foodHistoryVC = tabViewControlers[currentIndex] as? FoodDiaryHistoryViewController {
             foodHistoryVC.shouldRefreshDiary = true
+            foodHistoryVC.selectedDate = foodDiarySelectedDate
         }
         homeTabBar.selectedItem = homeTabBar.items?[currentIndex]
         tabViewControlers[currentIndex].view.frame = container.frame
@@ -176,7 +178,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
                 transition.type = kCATransitionMoveIn
                 transition.subtype = kCATransitionFromTop
                 self.view.window?.layer.add(transition, forKey: kCATransition)
-                //                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
                 navigator.pushViewController(dest, animated: false)
             }
         }

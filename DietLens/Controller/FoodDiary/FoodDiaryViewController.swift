@@ -39,6 +39,8 @@ class FoodDiaryViewController: UIViewController {
     //add coachMarks
     let coachMarksController = CoachMarksController()
 
+    var recordDate = Date()
+
     override func viewDidLoad() {
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
@@ -140,8 +142,10 @@ class FoodDiaryViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = "Meal"
         if isUpdate {
-            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
+//            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
+             self.navigationItem.rightBarButtonItem?.image = UIImage(imageLiteralResourceName: "more_dots")
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
@@ -159,7 +163,7 @@ class FoodDiaryViewController: UIViewController {
 
     @objc func onAddMoreClick() {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
-            dest.addFoodDate = Date()
+            dest.addFoodDate = self.recordDate
             dest.shouldShowCancel = true
 //            dest.cameraImage = cameraImage use sample Image
             if let navigator = self.navigationController {
@@ -189,6 +193,7 @@ class FoodDiaryViewController: UIViewController {
                         for vc in navigator.viewControllers {
                             if let homeTabVC = vc as? HomeTabViewController {
                                 homeTabVC.shouldSwitchToFoodDiary = true
+                                homeTabVC.foodDiarySelectedDate = self.recordDate
                             }
                         }
                     }
@@ -202,6 +207,7 @@ class FoodDiaryViewController: UIViewController {
                         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
                             if let navigator = self.navigationController {
                                 dest.shouldSwitchToFoodDiary = true
+                                dest.foodDiarySelectedDate = self.recordDate
                                 //pop to home tabPage
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                                     navigator.popToRootViewController(animated: true)
@@ -229,6 +235,7 @@ class FoodDiaryViewController: UIViewController {
                                 //pop to home tabPage
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                                     dest.shouldSwitchToFoodDiary = true
+                                    dest.foodDiarySelectedDate = self.recordDate
                                     navigator.popToRootViewController(animated: true)
                                 })
                             }
