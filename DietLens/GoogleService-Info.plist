@@ -7,21 +7,21 @@
         <key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
         <string>ca-app-pub-3940256099942544/4411468910</string>
         <key>CLIENT_ID</key>
-        <string>458404247391-fsiqqnf8qbvq4e1jii18r3g9rp67tunp.apps.googleusercontent.com</string>
+        <string>630060012887-35rcjh6fgh3ehe39me2va3epmg7sg5dd.apps.googleusercontent.com</string>
         <key>REVERSED_CLIENT_ID</key>
-        <string>com.googleusercontent.apps.458404247391-fsiqqnf8qbvq4e1jii18r3g9rp67tunp</string>
+        <string>com.googleusercontent.apps.630060012887-35rcjh6fgh3ehe39me2va3epmg7sg5dd</string>
         <key>API_KEY</key>
-        <string>AIzaSyDGE-hOisXTfX7FL5S_MKQwV7FX8tjJyGU</string>
+        <string>AIzaSyAuCZxAfjdgwNKXaxJUX3WUH88vi8gGuTw</string>
         <key>GCM_SENDER_ID</key>
-        <string>458404247391</string>
+        <string>630060012887</string>
         <key>PLIST_VERSION</key>
         <string>1</string>
         <key>BUNDLE_ID</key>
         <string>com.sg.next.wellness.DietLens</string>
         <key>PROJECT_ID</key>
-        <string>debug-dietlens</string>
+        <string>dietlens-2e13f</string>
         <key>STORAGE_BUCKET</key>
-        <string>debug-dietlens.appspot.com</string>
+        <string>dietlens-2e13f.appspot.com</string>
         <key>IS_ADS_ENABLED</key>
         <true></true>
         <key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
         <key>IS_SIGNIN_ENABLED</key>
         <true></true>
         <key>GOOGLE_APP_ID</key>
-        <string>1:458404247391:ios:0275791d7d8daf8f</string>
+        <string>1:630060012887:ios:0275791d7d8daf8f</string>
         <key>DATABASE_URL</key>
-        <string>https://debug-dietlens.firebaseio.com</string>
+        <string>https://dietlens-2e13f.firebaseio.com</string>
     </dict>
 </plist>
