@@ -7,14 +7,26 @@
 //
 
 import UIKit
-class RegistrationFinishViewController: UIViewController {
+
+protocol CalorieGoalSetDelegate {
+    func onCalorieGoalSet(goalValue: Int)
+}
+
+class CalorieGoalViewController: BaseViewController {
 
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var calorieGoalTextField: UITextField!
+    @IBOutlet weak var recommendTextLabel: UILabel!
+    @IBOutlet weak var thanksLabel: UILabel!
+
+    var calorieGoalSetDelegate: CalorieGoalSetDelegate?
+    var isInRegistrationFlow = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        calorieGoalTextField.keyboardType = .numberPad
         getGoalCalorie()
+        thanksLabel.isHidden = !isInRegistrationFlow
         self.hideKeyboardWhenTappedAround()
     }
 
@@ -22,19 +34,34 @@ class RegistrationFinishViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
-        //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any]
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.title = "Sign Up"
+        if isInRegistrationFlow {
+             self.navigationItem.hidesBackButton = true
+        }
+        self.navigationItem.title = "Adjust Calories"
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        if isInRegistrationFlow {
+            recommendTextLabel.text = "Your Recommended Calorie Goal:"
+        } else {
+            recommendTextLabel.text = "Your Calorie Goal is:"
+            recommendTextLabel.font = recommendTextLabel.font.withSize(CGFloat(24))
+        }
     }
 
     func getGoalCalorie() {
+        APIService.instance.getDietGoal { (dietDict) in
+            if let calorie = dietDict["energy"] {
+                self.calorieGoalTextField.text = "\(Int(calorie))"
+            }
+        }
+    }
+
+    func getRecommendCalorie() {
         APIService.instance.getDietaryGuideInfo { (guideDict) in
             if let calorie = guideDict["energy"] {
-                self.calorieGoalTextField.text = "\(Int(calorie))kcal"
+                self.calorieGoalTextField.text = "\(Int(calorie))"
             }
         }
     }
@@ -48,16 +75,23 @@ class RegistrationFinishViewController: UIViewController {
         guard let calorieValue = Double(calorieText) else {
             return
         }
-        if Int(calorieValue) < DietGoalTreshold.minCalorieGoalValue && Int(calorieValue) > DietGoalTreshold.maxCalorieGoalValue {
+        if Int(calorieValue) < DietGoalTreshold.minCalorieGoalValue || Int(calorieValue) > DietGoalTreshold.maxCalorieGoalValue {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "Calorie goal must be between 1000 and 4000")
             return
         }
         let preference = UserDefaults.standard
         preference.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-           self.present(controller, animated: true, completion: nil)
+        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in
+            if self.isInRegistrationFlow {
+                if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                    self.present(controller, animated: true, completion: nil)
+                }
+            } else {
+                self.calorieGoalSetDelegate?.onCalorieGoalSet(goalValue: Int(calorieValue))
+                NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
-        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in}
     }
 
     @IBAction func onQuestionMarkClicked(_ sender: Any) {
@@ -69,9 +103,13 @@ class RegistrationFinishViewController: UIViewController {
             present(recommendCalorieAlert, animated: true, completion: nil)
         }
     }
+
+    @IBAction func onBackPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
-extension RegistrationFinishViewController {
+extension CalorieGoalViewController {
 
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.dismissKeyboard))

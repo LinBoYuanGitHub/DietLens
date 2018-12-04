@@ -11,6 +11,7 @@ import UIKit
 class RecommendCalorieGoalDialog: UIViewController {
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var recommendText: UITextView!
+    @IBOutlet weak var borderBox: UITextField!
 
     override func viewWillAppear(_ animated: Bool) {
         setupView()
@@ -18,6 +19,9 @@ class RecommendCalorieGoalDialog: UIViewController {
 
     func setupView() {
         recommendText.isEditable = false
+        recommendText.contentMode = .center
+        borderBox.layer.borderColor = UIColor.ThemeColor.dietLensRed.cgColor
+        borderBox.layer.masksToBounds = true
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.63)
         getRecommendValue()
     }

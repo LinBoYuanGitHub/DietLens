@@ -28,7 +28,7 @@
 		3F2D162D20ECBE9300348160 /* ProfileActivityLvlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */; };
 		3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D162E20EE15D200348160 /* RulerInputView.swift */; };
 		3F2D163120EE175400348160 /* RulerLayout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2D163020EE175400348160 /* RulerLayout.xib */; };
-		3F2D163320EE8A6000348160 /* RegistrationFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */; };
+		3F2D163320EE8A6000348160 /* CalorieGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */; };
 		3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163420F2899900348160 /* HealthCenterDataManager.swift */; };
 		3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */; };
 		3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436638206F7ACF0089C63A /* NewsEventCell.swift */; };
@@ -268,7 +268,7 @@
 		3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileActivityLvlViewController.swift; sourceTree = "<group>"; };
 		3F2D162E20EE15D200348160 /* RulerInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerInputView.swift; sourceTree = "<group>"; };
 		3F2D163020EE175400348160 /* RulerLayout.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulerLayout.xib; sourceTree = "<group>"; };
-		3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFinishViewController.swift; sourceTree = "<group>"; };
+		3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalorieGoalViewController.swift; sourceTree = "<group>"; };
 		3F2D163420F2899900348160 /* HealthCenterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterDataManager.swift; sourceTree = "<group>"; };
 		3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCountingEntity.swift; sourceTree = "<group>"; };
 		3F436638206F7ACF0089C63A /* NewsEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEventCell.swift; sourceTree = "<group>"; };
@@ -778,7 +778,7 @@
 				3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */,
 				3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */,
 				3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */,
-				3F2D163220EE8A6000348160 /* RegistrationFinishViewController.swift */,
+				3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */,
 				3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */,
 				3FF5B7EB2176D942003B8509 /* MoreViewController.swift */,
 				3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */,
@@ -1582,7 +1582,7 @@
 				3F88189920E9D80F00FE6C11 /* LoginViewController.swift in Sources */,
 				3FC7BD5D216B86B7003F43E2 /* HomeTabViewController.swift in Sources */,
 				3F516DC62122C7E50028B0AF /* SearchResultLocationCell.swift in Sources */,
-				3F2D163320EE8A6000348160 /* RegistrationFinishViewController.swift in Sources */,
+				3F2D163320EE8A6000348160 /* CalorieGoalViewController.swift in Sources */,
 				3FA73DEB2177069100D145C6 /* MoreCollectionCell.swift in Sources */,
 				587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */,
 				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,

@@ -87,7 +87,7 @@ class RegistrationForthStepViewController: UIViewController {
         if profile != nil {
             APIService.instance.updateProfile(userId: userId!, profile: profile!) { (isSuccess) in
                 if isSuccess {
-                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? CalorieGoalViewController {
                         self.navigationController?.pushViewController(dest, animated: true)
                     }
                 }
@@ -99,7 +99,7 @@ class RegistrationForthStepViewController: UIViewController {
     }
 
     @IBAction func skip(_ sender: UIButton) {
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? RegistrationFinishViewController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationFinalVC") as? CalorieGoalViewController {
             self.navigationController?.pushViewController(dest, animated: true)
         }
     }
