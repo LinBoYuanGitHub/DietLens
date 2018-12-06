@@ -70,14 +70,20 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.parent?.navigationController?.navigationBar.isHidden = false
+        self.parent?.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         loadDailyNutritionView()
-        self.navigationController?.navigationBar.isHidden = true
         dateLabel.text = formatter.string(from: selectedDate)
         //load available date & load calendar data
         if shouldRefreshDiary {
             refreshFoodDiaryData()
         }
         self.foodDiaryMealTable.reloadData()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     func refreshFoodDiaryData() {
@@ -138,8 +144,6 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @objc func switchToEditStatus() {
         currentEditStatus = FoodDiaryStatus.edit
         foodDiaryMealTable.reloadData()
-        self.parent?.navigationController?.navigationBar.topItem?.title = "Edit"
-        self.parent?.navigationItem.rightBarButtonItem?.isEnabled = false
         self.parent?.navigationItem.rightBarButtonItem?.title = nil
         distanceToBottom.constant = 54
         dialogContainer.isHidden = false
@@ -149,9 +153,6 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @IBAction func switchToNormalStatus(_ sender: Any) {
         currentEditStatus = FoodDiaryStatus.normal
         foodDiaryMealTable.reloadData()
-        self.parent?.navigationController?.navigationBar.topItem?.title = "Food Diary"
-        self.parent?.navigationItem.rightBarButtonItem?.isEnabled = true
-        self.parent?.navigationItem.rightBarButtonItem?.title = "Edit"
         distanceToBottom.constant = 0
         dialogContainer.isHidden = true
         editBtn.isHidden = false

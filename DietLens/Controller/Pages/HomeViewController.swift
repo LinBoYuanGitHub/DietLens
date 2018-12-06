@@ -246,14 +246,14 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         //set status bar appearance
         UIApplication.shared.statusBarStyle = .lightContent
         //setUp title
-        self.navigationController?.navigationBar.isHidden = false
+        self.parent?.navigationController?.navigationBar.isHidden = false
+        self.parent?.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 242/255, green: 63/255, blue: 93/255, alpha: 1)
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         //SignPainterHouseScript 28.0
         if let attributeGroup = [NSAttributedStringKey.foregroundColor: UIColor.white, kCTFontAttributeName: UIFont(name: "SignPainterHouseScript", size: 28)!] as? [NSAttributedStringKey: Any] {
             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
         }
-        self.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: CGFloat(242.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(93.0/255.0), alpha: 1.0)
-//        self.navigationController?.navigationBar.backgroundColor = UIColor(displayP3Red: CGFloat(249.0/255.0), green: CGFloat(60.0/255.0), blue: CGFloat(90.0/255.0), alpha: 1.0)
+
         //disable homepage&LGMenu swipe back gesture
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         if shouldRefreshMainPageNutrition {

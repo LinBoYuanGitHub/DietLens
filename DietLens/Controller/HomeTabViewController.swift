@@ -75,7 +75,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
 //        self.navigationItem.hidesBackButton = true
         //trigger to switch to foodDiary
         if shouldSwitchToFoodDiary || currentIndex == 1 {
@@ -142,6 +141,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
 
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         //change the top right navigation bar
+        self.navigationController?.navigationBar.isHidden = true
         if item.tag == 0 {
             setNotificationRightNavigationButton()
         } else if item.tag == 1 {
@@ -170,6 +170,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
 
     func presentCamera() {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
+            dest.tabIndex = 0
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
                 let transition = CATransition()
