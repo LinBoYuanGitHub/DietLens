@@ -145,6 +145,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         if item.tag == 0 {
             setNotificationRightNavigationButton()
         } else if item.tag == 1 {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
             setFoodDiaryRightNavigationButton()
         } else if item.tag == 2 {
              //set previousItem selected item

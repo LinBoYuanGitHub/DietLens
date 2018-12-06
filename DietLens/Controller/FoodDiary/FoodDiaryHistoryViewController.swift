@@ -71,7 +71,6 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.parent?.navigationController?.navigationBar.isHidden = false
-        self.parent?.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         loadDailyNutritionView()
         dateLabel.text = formatter.string(from: selectedDate)
         //load available date & load calendar data
@@ -79,7 +78,6 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
             refreshFoodDiaryData()
         }
         self.foodDiaryMealTable.reloadData()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
