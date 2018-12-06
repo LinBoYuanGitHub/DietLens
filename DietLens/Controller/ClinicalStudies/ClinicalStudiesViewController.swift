@@ -51,7 +51,6 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "clinicalStudyCell") as? ClinicalStudyTableViewCell {
-            print("cell")
             let entity = studyList[indexPath.row]
             cell.setUpCell(recordType: entity.id, icon: "", study_Name: entity.itemName, studyStartOnDate: entity.date)
             //cell.setUpCell(recordType: "Food Recommendation", study_Name: "Food Recommendation for thyroid disordrs", studyStartOnDate: "5 Nov 2018")
