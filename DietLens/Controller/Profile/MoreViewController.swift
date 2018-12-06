@@ -86,6 +86,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             case 0:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_favorite_food_icon"), text: "Nutrition Database")
             case 1:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_feedback_icon"), text: "Feedback")
             case 2:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_share_icon"), text: "Share")
+            case 3:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_clinical studies_icon"), text: "Clinical studies")
             default:
                 break
             }
@@ -95,7 +96,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -125,6 +126,10 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let shareText = "Welcome to dietlens"
             let shareActController = UIActivityViewController(activityItems: [shareURL, shareText], applicationActivities: nil)
             self.present(shareActController, animated: true, completion: nil)
+            //clinical studies
+        case 3:
+            let clinicalstudies = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clinicalstudiesVC")
+            self.present(clinicalstudies, animated: true, completion: nil)
         default:
             break
         }

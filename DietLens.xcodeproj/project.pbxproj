@@ -227,6 +227,7 @@
 		BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */; };
 		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
 		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
+		ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -484,6 +485,7 @@
 		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
 		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudiesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1039,6 +1041,7 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				ECE039C821B7CE2800D18173 /* ClinicalStudies */,
 				3F73A7512109C0B00031B01E /* IntroductionPage */,
 				3FCBEC0C20E632090092948C /* HealthCenter */,
 				3FB6E67F20E3701300462591 /* Profile */,
@@ -1124,6 +1127,14 @@
 				C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECE039C821B7CE2800D18173 /* ClinicalStudies */ = {
+			isa = PBXGroup;
+			children = (
+				ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */,
+			);
+			path = ClinicalStudies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1638,6 +1649,7 @@
 				3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */,
 				3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */,
 				3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */,
+				ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */,
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
 				3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */,
 				3F7DACA120121515009E4DB6 /* Ingredient.swift in Sources */,
