@@ -228,7 +228,7 @@
 		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
 		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 		EC14599721B9079600A8D27F /* ClinicStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */; };
-		EC14599921B9091100A8D27F /* clinicalStudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599821B9091100A8D27F /* clinicalStudyTableViewCell.swift */; };
+		EC14599921B9091100A8D27F /* ClinicalStudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */; };
 		ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -487,7 +487,7 @@
 		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
 		EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicStudyEntity.swift; sourceTree = "<group>"; };
-		EC14599821B9091100A8D27F /* clinicalStudyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clinicalStudyTableViewCell.swift; sourceTree = "<group>"; };
+		EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyTableViewCell.swift; sourceTree = "<group>"; };
 		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudiesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1138,7 +1138,7 @@
 			children = (
 				ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */,
 				EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */,
-				EC14599821B9091100A8D27F /* clinicalStudyTableViewCell.swift */,
+				EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */,
 			);
 			path = ClinicalStudies;
 			sourceTree = "<group>";
@@ -1656,7 +1656,7 @@
 				3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */,
 				3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */,
 				3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */,
-				EC14599921B9091100A8D27F /* clinicalStudyTableViewCell.swift in Sources */,
+				EC14599921B9091100A8D27F /* ClinicalStudyTableViewCell.swift in Sources */,
 				ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */,
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
 				3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */,

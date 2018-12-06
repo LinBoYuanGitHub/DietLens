@@ -22,14 +22,15 @@ class ClinicalStudiesViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         studyTableView.tableFooterView = UIView()
-        // titemableview.separatorStyle = .none
-
-        //set naviagation bav back button style
-        //        self.navigationController?.navigationItem.backBarButtonItem?.image = UIImage(imageLiteralResourceName: "Back Arrow")
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
 
+        //test
+        for _ in 0..<2 {
+            let entity = ClinicStudyEntity.init(id: "", date: "5 Nov 2018", icon: "", itemName: "Food Recommendation for thyroid disordrs")
+            studyList.append(entity)
+        }
     }
 
     @objc func onBackPressed() {
@@ -40,44 +41,32 @@ class ClinicalStudiesViewController: BaseViewController {
 extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return studyList.count
+        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return studyList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        //        let cell : CumstomItemCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CumstomItemCell
-        //        //cell = CumstomItemCell.init(style: .default, reuseIdentifier: "cell")
-        //
-        //        cell.imageview.image = UIImage(named: "pain")
-        //        cell.namelabel.text = ScanResultViewController.name //这里存在问题应该以传值的方式 不应该用静态的变量存值
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "clinicalStudyCell") as? ClinicalStudyTableViewCell {
+            print("cell")
+            let entity = studyList[indexPath.row]
+            cell.setUpCell(recordType: entity.id, icon: "", study_Name: entity.itemName, studyStartOnDate: entity.date)
+            //cell.setUpCell(recordType: "Food Recommendation", study_Name: "Food Recommendation for thyroid disordrs", studyStartOnDate: "5 Nov 2018")
+            return cell
+        }
         return UITableViewCell()
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "clinicalStudyCell", for: indexPath) as? clinicalStudyTableViewCell else {
-            return UITableViewCell()
-        }
-        //cell.setuUpCell(article: nil)
-        return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 150
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("被选中的是：\(indexPath)")
-        //let foodrecommendationVC = FoodRecommendationViewController()
-
-        //navigationController?.pushViewController(foodrecommendationVC, animated: true)
-
-        //        let foodrecommendationVC = self.storyboard?.instantiateViewController(withIdentifier: String(describing: type(of: FoodRecommendationViewController())))
-        //            as! FoodRecommendationViewController
-        //        self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
-        //
-        //在此处可以传一些值吧但是目前不会
 
     }
 

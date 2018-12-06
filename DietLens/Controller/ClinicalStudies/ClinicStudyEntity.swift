@@ -11,7 +11,7 @@ import Foundation
 struct ClinicStudyEntity {
     var id = ""
     var date = ""
-    var time = ""
+    var icon = ""
     var itemName = ""
 
 }

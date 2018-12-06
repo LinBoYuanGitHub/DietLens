@@ -132,6 +132,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return
             }
             self.navigationController?.pushViewController(clinicalstudies, animated: true)
+
         default:
             break
         }
