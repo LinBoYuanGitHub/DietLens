@@ -8394,11 +8394,6 @@ What is it?</string>
                                     <constraint firstItem="pwO-N5-TvB" firstAttribute="centerY" secondItem="hc8-JX-xwm" secondAttribute="centerY" id="rcz-vD-cT3"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-cS-lC7" userLabel="calendarButton">
-                                <rect key="frame" x="234.5" y="36.5" width="12" height="22"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="calendar_down_arrow"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-Bq-FnS" userLabel="calendarClickableItem">
                                 <rect key="frame" x="103.5" y="30" width="168" height="35"/>
                                 <constraints>
@@ -8416,6 +8411,11 @@ What is it?</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-cS-lC7" userLabel="calendarButton">
+                                <rect key="frame" x="234.5" y="36.5" width="12" height="22"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="calendar_down_arrow"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDi-Wh-PIR" userLabel="LeftArrowButton" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
                                 <rect key="frame" x="85.5" y="41.5" width="8" height="12"/>
                                 <constraints>
