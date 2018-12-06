@@ -128,8 +128,10 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.present(shareActController, animated: true, completion: nil)
             //clinical studies
         case 3:
-            let clinicalstudies = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clinicalstudiesVC")
-            self.present(clinicalstudies, animated: true, completion: nil)
+            guard let clinicalstudies = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clinicalstudiesVC") as? ClinicalStudiesViewController else {
+                return
+            }
+            self.navigationController?.pushViewController(clinicalstudies, animated: true)
         default:
             break
         }

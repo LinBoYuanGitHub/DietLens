@@ -9,18 +9,18 @@
 import UIKit
 
 class PersonalFavouriteFoodViewController: BaseViewController {
-
+    
     @IBOutlet weak var popularCollectionView: UICollectionView!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
-
+    
     //data struct
     var favouriteFoodIdList = [Int]() //pass id to favourite
     var popularFoodList = [TextSearchSuggestionEntity]()
-
+    
     //registration flow param
     var isInRegistrationFlow = false
-
+    
     override func viewDidLoad() {
         popularCollectionView.dataSource = self
         popularCollectionView.delegate = self
@@ -33,7 +33,7 @@ class PersonalFavouriteFoodViewController: BaseViewController {
         progressLabel.isHidden = !isInRegistrationFlow
         progressView.isHidden = !isInRegistrationFlow
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationItem.title = StringConstants.UIString.FilterFavorite
@@ -42,12 +42,12 @@ class PersonalFavouriteFoodViewController: BaseViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(onDonePressed))
         self.navigationItem.rightBarButtonItem?.tintColor = .gray
     }
-
+    
     func registerNib() {
         let collectionNib = UINib(nibName: "FavouriteFoodCollectionCell", bundle: nil)
         popularCollectionView.register(collectionNib, forCellWithReuseIdentifier: "favouriteFoodCollectionCell")
     }
-
+    
     func getPopularFoodList(mealtime: String) {
         APIService.instance.getFoodSearchPopularity(mealtime: mealtime, completion: { (textResults) in
             guard let results =  textResults else {
@@ -59,11 +59,11 @@ class PersonalFavouriteFoodViewController: BaseViewController {
             //consider next page scenario
         })
     }
-
+    
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     @objc func onDonePressed() {
         if favouriteFoodIdList.count != 0 {
             APIService.instance.setFavouriteFoodList(foodList: favouriteFoodIdList) { (isSuccess) in
@@ -75,7 +75,7 @@ class PersonalFavouriteFoodViewController: BaseViewController {
             redirectToFinalRegistrationPage()
         }
     }
-
+    
     func redirectToFinalRegistrationPage() {
         if self.isInRegistrationFlow {
             if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "calorieGoalVC") as? CalorieGoalViewController {
@@ -86,15 +86,15 @@ class PersonalFavouriteFoodViewController: BaseViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-
+    
 }
 
 extension PersonalFavouriteFoodViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return popularFoodList.count>9 ? 9:popularFoodList.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //same cell style
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "favouriteFoodCollectionCell", for: indexPath) as? RegistrationFavouriteFoodCell {
@@ -103,7 +103,7 @@ extension PersonalFavouriteFoodViewController: UICollectionViewDataSource, UICol
         }
         return UICollectionViewCell()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //mark the item that is selected
         guard let targetCell = collectionView.cellForItem(at: indexPath) as? RegistrationFavouriteFoodCell else {
@@ -125,9 +125,9 @@ extension PersonalFavouriteFoodViewController: UICollectionViewDataSource, UICol
             self.navigationItem.rightBarButtonItem?.title = "Done"
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 120)
     }
-
+    
 }
