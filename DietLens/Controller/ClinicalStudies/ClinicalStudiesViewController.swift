@@ -50,6 +50,15 @@ class ClinicalStudiesViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func scanQR(_ sender: UIButton) {
+
+        guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QRScannerController") as? QRScannerController else {
+            return
+        }
+        self.navigationController?.pushViewController(scanQRVC, animated: true)
+
+    }
+
 }
 extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSource {
 

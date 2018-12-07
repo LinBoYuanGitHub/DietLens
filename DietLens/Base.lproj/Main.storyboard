@@ -6307,7 +6307,7 @@ What is it?</string>
                                         </constraints>
                                         <state key="normal" image="scan qr code"/>
                                         <connections>
-                                            <segue destination="gwr-x6-naB" kind="push" id="Yu4-L2-E5R"/>
+                                            <action selector="scanQR:" destination="dFh-HO-ze9" eventType="touchUpInside" id="Mnb-i1-cbQ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-1A-QOW">
@@ -8425,7 +8425,7 @@ What is it?</string>
         <!--Scan Result View Controller-->
         <scene sceneID="Erl-oZ-wop">
             <objects>
-                <viewController id="gwr-x6-naB" customClass="ScanResultViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScanResultViewController" id="gwr-x6-naB" customClass="ScanResultViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6wa-fY-yee"/>
                         <viewControllerLayoutGuide type="bottom" id="hQA-81-aP6"/>
@@ -8479,12 +8479,10 @@ What is it?</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGt-9t-bFP" userLabel="ContactView">
-                                                <rect key="frame" x="799" y="0.0" width="468" height="506"/>
+                                                <rect key="frame" x="758" y="0.0" width="375" height="506"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLq-pe-T0p">
-                                                        <rect key="frame" x="20" y="58" width="428" height="48"/>
-                                                        <string key="text">Food recomendtion for 
-thyroid disorders</string>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food recomendtion for thyroid disorders" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLq-pe-T0p">
+                                                        <rect key="frame" x="20" y="58" width="335" height="48"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" red="0.92549019610000005" green="0.1764705882" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -8506,25 +8504,25 @@ thyroid disorders</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Investigators or Resarch Sites near you" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ve-Jk-mWI">
-                                                        <rect key="frame" x="20" y="156" width="428" height="25.5"/>
+                                                        <rect key="frame" x="20" y="156" width="335" height="50.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.97254901960784312" green="0.58823529411764708" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alice Liu,PhD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8c-Ud-zcm">
-                                                        <rect key="frame" x="20" y="201.5" width="101" height="21"/>
+                                                        <rect key="frame" x="20" y="226.5" width="101" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Singapore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdg-vo-G1C">
-                                                        <rect key="frame" x="20" y="263.5" width="78" height="21"/>
+                                                        <rect key="frame" x="20" y="288.5" width="78" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.76078431369999999" green="0.76078431369999999" blue="0.76078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SGH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fue-dI-hYQ">
-                                                        <rect key="frame" x="20" y="232.5" width="35" height="21"/>
+                                                        <rect key="frame" x="20" y="257.5" width="35" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -8553,7 +8551,7 @@ thyroid disorders</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="506" translatesAutoresizingMaskIntoConstraints="NO" id="00p-Lv-HAJ" userLabel="EligibilityView">
-                                                <rect key="frame" x="383" y="0.0" width="416" height="506"/>
+                                                <rect key="frame" x="383" y="0.0" width="375" height="506"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated on " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCF-6p-B11">
                                                         <rect key="frame" x="20" y="20" width="116" height="18"/>
@@ -8571,22 +8569,20 @@ thyroid disorders</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKO-RB-upB">
-                                                        <rect key="frame" x="20" y="58" width="376" height="48"/>
-                                                        <string key="text">Food recomendtion for 
-thyroid disorders</string>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food recomendtion for thyroid disorders" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKO-RB-upB">
+                                                        <rect key="frame" x="20" y="58" width="335" height="48"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" red="0.92549019610000005" green="0.1764705882" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you eligible to participate in this study" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7e-QL-2YW">
-                                                        <rect key="frame" x="20" y="156" width="376" height="25.5"/>
+                                                        <rect key="frame" x="20" y="156" width="335" height="50.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" red="0.97254901960784312" green="0.58823529411764708" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f7b-xf-XDx">
-                                                        <rect key="frame" x="20" y="201.5" width="376" height="230"/>
+                                                        <rect key="frame" x="20" y="226.5" width="335" height="230"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="230" id="ZUG-xa-hQI"/>
@@ -8598,15 +8594,15 @@ thyroid disorders</string>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="Q7e-QL-2YW" firstAttribute="leading" secondItem="00p-Lv-HAJ" secondAttribute="leading" constant="20" id="A0T-m9-Z5J"/>
                                                     <constraint firstItem="3hp-MS-VTF" firstAttribute="top" secondItem="00p-Lv-HAJ" secondAttribute="top" constant="20" id="Cby-Wb-RcQ"/>
-                                                    <constraint firstAttribute="trailing" secondItem="f7b-xf-XDx" secondAttribute="trailing" constant="20" id="L8h-xx-7ou"/>
+                                                    <constraint firstItem="Q7e-QL-2YW" firstAttribute="leading" secondItem="00p-Lv-HAJ" secondAttribute="leading" constant="20" id="HKs-Bx-Uwz"/>
+                                                    <constraint firstItem="f7b-xf-XDx" firstAttribute="trailing" secondItem="00p-Lv-HAJ" secondAttribute="trailing" constant="-20" id="L8h-xx-7ou"/>
                                                     <constraint firstItem="3hp-MS-VTF" firstAttribute="height" secondItem="MCF-6p-B11" secondAttribute="height" id="QX4-FH-xBT"/>
                                                     <constraint firstItem="MCF-6p-B11" firstAttribute="top" secondItem="00p-Lv-HAJ" secondAttribute="top" constant="20" id="bkf-qZ-urY"/>
+                                                    <constraint firstItem="Q7e-QL-2YW" firstAttribute="trailing" secondItem="00p-Lv-HAJ" secondAttribute="trailing" constant="-20" id="e0V-kE-VdB"/>
                                                     <constraint firstItem="f7b-xf-XDx" firstAttribute="top" secondItem="Q7e-QL-2YW" secondAttribute="bottom" constant="20" id="gM2-aH-Hvs"/>
-                                                    <constraint firstAttribute="trailing" secondItem="BKO-RB-upB" secondAttribute="trailing" constant="20" id="irh-iX-0Dm"/>
+                                                    <constraint firstItem="BKO-RB-upB" firstAttribute="trailing" secondItem="00p-Lv-HAJ" secondAttribute="trailing" constant="-20" id="irh-iX-0Dm"/>
                                                     <constraint firstItem="BKO-RB-upB" firstAttribute="top" secondItem="MCF-6p-B11" secondAttribute="bottom" constant="20" id="kM8-cy-VlA"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Q7e-QL-2YW" secondAttribute="trailing" constant="20" id="oRj-d1-Bot"/>
                                                     <constraint firstItem="MCF-6p-B11" firstAttribute="leading" secondItem="00p-Lv-HAJ" secondAttribute="leading" constant="20" id="ojU-ic-959"/>
                                                     <constraint firstItem="Q7e-QL-2YW" firstAttribute="top" secondItem="BKO-RB-upB" secondAttribute="bottom" constant="50" id="sMs-Ln-UEp"/>
                                                     <constraint firstItem="BKO-RB-upB" firstAttribute="leading" secondItem="00p-Lv-HAJ" secondAttribute="leading" constant="20" id="vG2-R6-a5J"/>
@@ -8703,12 +8699,14 @@ thyroid disorders</string>
                                         <constraints>
                                             <constraint firstItem="HFB-vq-u34" firstAttribute="leading" secondItem="Iab-3N-jDK" secondAttribute="leading" id="5v8-WW-w8Z"/>
                                             <constraint firstItem="HFB-vq-u34" firstAttribute="bottom" secondItem="Iab-3N-jDK" secondAttribute="bottom" id="BdS-8u-wDa"/>
+                                            <constraint firstItem="00p-Lv-HAJ" firstAttribute="width" secondItem="HFB-vq-u34" secondAttribute="width" id="KeQ-0X-YS0"/>
                                             <constraint firstItem="00p-Lv-HAJ" firstAttribute="top" secondItem="Iab-3N-jDK" secondAttribute="top" id="MeK-zR-hf3"/>
                                             <constraint firstItem="00p-Lv-HAJ" firstAttribute="leading" secondItem="HFB-vq-u34" secondAttribute="trailing" constant="8" symbolic="YES" id="OJa-M0-HLK"/>
                                             <constraint firstItem="HFB-vq-u34" firstAttribute="centerX" secondItem="Iab-3N-jDK" secondAttribute="centerX" id="U0M-Yb-Wg8"/>
                                             <constraint firstItem="pGt-9t-bFP" firstAttribute="top" secondItem="Iab-3N-jDK" secondAttribute="top" id="hTt-2y-9Bp"/>
                                             <constraint firstItem="pGt-9t-bFP" firstAttribute="bottom" secondItem="Iab-3N-jDK" secondAttribute="bottom" id="oA1-zX-At4"/>
                                             <constraint firstItem="00p-Lv-HAJ" firstAttribute="bottom" secondItem="Iab-3N-jDK" secondAttribute="bottom" id="sJA-cU-dab"/>
+                                            <constraint firstItem="pGt-9t-bFP" firstAttribute="width" secondItem="HFB-vq-u34" secondAttribute="width" id="t0i-Md-7Ee"/>
                                             <constraint firstItem="HFB-vq-u34" firstAttribute="top" secondItem="Iab-3N-jDK" secondAttribute="top" id="vjC-4x-jbj"/>
                                             <constraint firstItem="pGt-9t-bFP" firstAttribute="leading" secondItem="00p-Lv-HAJ" secondAttribute="trailing" id="zyL-rd-FCf"/>
                                         </constraints>
@@ -8720,7 +8718,7 @@ thyroid disorders</string>
                                     <constraint firstItem="Iab-3N-jDK" firstAttribute="width" secondItem="564-Qo-CdG" secondAttribute="width" id="P2u-0K-x1v"/>
                                     <constraint firstItem="Iab-3N-jDK" firstAttribute="leading" secondItem="564-Qo-CdG" secondAttribute="leading" id="RFm-Dc-JNq"/>
                                     <constraint firstItem="Iab-3N-jDK" firstAttribute="top" secondItem="564-Qo-CdG" secondAttribute="top" id="ShK-ee-S3c"/>
-                                    <constraint firstAttribute="bottom" secondItem="Iab-3N-jDK" secondAttribute="bottom" id="hXE-s3-6zp"/>
+                                    <constraint firstItem="Iab-3N-jDK" firstAttribute="bottom" secondItem="564-Qo-CdG" secondAttribute="bottom" id="hXE-s3-6zp"/>
                                     <constraint firstItem="Iab-3N-jDK" firstAttribute="centerX" secondItem="564-Qo-CdG" secondAttribute="centerX" id="jsG-C4-spO"/>
                                 </constraints>
                             </scrollView>
@@ -8754,7 +8752,59 @@ thyroid disorders</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1q-ce-02V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2912.8000000000002" y="1244.527736131934"/>
+            <point key="canvasLocation" x="2441" y="1245"/>
+        </scene>
+        <!--Scanner Controller-->
+        <scene sceneID="JHf-eJ-yWJ">
+            <objects>
+                <viewController storyboardIdentifier="QRScannerController" id="qik-we-7hW" customClass="QRScannerController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XaR-0Y-iY9"/>
+                        <viewControllerLayoutGuide type="bottom" id="12e-El-2XP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iAZ-pm-CPi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYq-BH-SwO" userLabel="scanView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
+                                <color key="backgroundColor" red="0.87058823529411766" green="0.51764705882352935" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="KOA-A3-ZJl"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold your camera to a QR code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrA-OQ-jSu">
+                                <rect key="frame" x="40.5" y="383" width="294.5" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.6705882352941176" green="0.67450980392156867" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8V-8H-nUH">
+                                <rect key="frame" x="127" y="340" width="121" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="f8V-8H-nUH" firstAttribute="top" secondItem="pYq-BH-SwO" secondAttribute="bottom" constant="20" id="76F-nf-Fw9"/>
+                            <constraint firstAttribute="trailing" secondItem="pYq-BH-SwO" secondAttribute="trailing" id="BLp-tF-DgQ"/>
+                            <constraint firstItem="pYq-BH-SwO" firstAttribute="top" secondItem="iAZ-pm-CPi" secondAttribute="top" id="GHf-kn-KoE"/>
+                            <constraint firstItem="f8V-8H-nUH" firstAttribute="centerX" secondItem="iAZ-pm-CPi" secondAttribute="centerX" id="I7G-1u-rSf"/>
+                            <constraint firstItem="zrA-OQ-jSu" firstAttribute="top" secondItem="f8V-8H-nUH" secondAttribute="bottom" constant="20" id="I7j-BY-pjm"/>
+                            <constraint firstItem="pYq-BH-SwO" firstAttribute="leading" secondItem="iAZ-pm-CPi" secondAttribute="leading" id="QdD-5N-zdS"/>
+                            <constraint firstItem="zrA-OQ-jSu" firstAttribute="centerX" secondItem="pYq-BH-SwO" secondAttribute="centerX" id="Yew-dh-Xj3"/>
+                            <constraint firstItem="f8V-8H-nUH" firstAttribute="top" secondItem="pYq-BH-SwO" secondAttribute="bottom" constant="20" id="dEi-bG-olq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scanerView" destination="pYq-BH-SwO" id="L9Z-iq-d0D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lux-6p-478" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3125.5999999999999" y="1244.527736131934"/>
         </scene>
         <!--Consent View Controller-->
         <scene sceneID="f8w-NG-jxv">

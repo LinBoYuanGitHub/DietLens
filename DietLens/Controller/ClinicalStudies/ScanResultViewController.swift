@@ -50,9 +50,13 @@ class ScanResultViewController: BaseViewController {
 
         contentView.frame = CGRect(x: 0, y: 0, width: widthscreen * 3, height: scanResultScrollView.frame.size.height)
 
-        descriptionView.frame = CGRect(x: 0, y: 0, width: widthscreen, height: scanResultScrollView.frame.size.height)
-        eligibilityView.frame = CGRect(x: 0 + widthscreen, y: 0, width: widthscreen, height: scanResultScrollView.frame.size.height)
-        contactView.frame = CGRect(x: 0 + widthscreen * 2, y: 0, width: widthscreen, height: scanResultScrollView.frame.size.height)
+//        descriptionView.frame = CGRect(x: 0, y: 0, width: widthscreen, height: scanResultScrollView.frame.size.height)
+//        eligibilityView.frame = CGRect(x: 0 + widthscreen, y: 0, width: widthscreen, height: scanResultScrollView.frame.size.height)
+//        contactView.frame = CGRect(x: 0 + widthscreen * 2, y: 0, width: widthscreen, height: scanResultScrollView.frame.size.height)
+//
+        descriptionView.frame.size = CGSize(width: widthscreen, height: scanResultScrollView.frame.size.height)
+        eligibilityView.frame.size = CGSize(width: widthscreen, height: scanResultScrollView.frame.size.height)
+        contactView.frame.size = CGSize(width: widthscreen, height: scanResultScrollView.frame.size.height)
 
         setDefault()
     }
@@ -92,7 +96,7 @@ extension ScanResultViewController: UITabBarDelegate {
             scanResultScrollView.setContentOffset(offset, animated: true)
 
         case "Eligibility":
-            offset = CGPoint(x: scanResultScrollView.frame.size.width, y: 0)
+            offset = CGPoint(x: UIScreen.main.bounds.width, y: 0)
             lineoffset = CGPoint(x: tabBarLine.frame.width, y: 0)
             tabBarLine.frame = CGRect(x: lineoffset.x, y: lineoffset.y, width: UIScreen.main.bounds.width / 3, height: 2)
 
@@ -100,7 +104,7 @@ extension ScanResultViewController: UITabBarDelegate {
 
         case "Contact":
             lineoffset = CGPoint(x: tabBarLine.frame.width * 2, y: 0)
-            offset = CGPoint(x: scanResultScrollView.frame.size.width * 2, y: 0)
+            offset = CGPoint(x: UIScreen.main.bounds.width * 2, y: 0)
             tabBarLine.frame = CGRect(x: lineoffset.x, y: lineoffset.y, width: UIScreen.main.bounds.width / 3, height: 2)
             scanResultScrollView.setContentOffset(offset, animated: true)
 

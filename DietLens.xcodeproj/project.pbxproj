@@ -238,6 +238,7 @@
 		ECC10EDC21BA20DA007574CC /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */; };
 		ECC10EDE21BA4119007574CC /* FoodRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */; };
 		ECC10EE121BA4C1E007574CC /* ZMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EE021BA4C1E007574CC /* ZMProgressView.m */; };
+		ECC10EE721BA526F007574CC /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EE621BA526F007574CC /* QRScannerController.swift */; };
 		ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -508,6 +509,7 @@
 		ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRecommendationViewController.swift; sourceTree = "<group>"; };
 		ECC10EDF21BA4C1E007574CC /* ZMProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMProgressView.h; sourceTree = "<group>"; };
 		ECC10EE021BA4C1E007574CC /* ZMProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMProgressView.m; sourceTree = "<group>"; };
+		ECC10EE621BA526F007574CC /* QRScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
 		ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudiesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1176,6 +1178,7 @@
 				ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */,
 				ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */,
 				ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */,
+				ECC10EE621BA526F007574CC /* QRScannerController.swift */,
 			);
 			path = ClinicalStudies;
 			sourceTree = "<group>";
@@ -1544,6 +1547,7 @@
 				ECC10ED821BA1DB3007574CC /* VerificationCodeView.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				3FB6E67E20DCF19000462591 /* FoodDiaryCollectionViewCell.swift in Sources */,
+				ECC10EE721BA526F007574CC /* QRScannerController.swift in Sources */,
 				3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */,
 				3FB6E69020E4D55F00462591 /* RegistrationFirstStepViewController.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
