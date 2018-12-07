@@ -230,6 +230,12 @@
 		EC14599721B9079600A8D27F /* ClinicStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */; };
 		EC14599921B9091100A8D27F /* ClinicalStudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */; };
 		EC14599C21B91D6500A8D27F /* ScanResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599B21B91D6500A8D27F /* ScanResultViewController.swift */; };
+		ECC10ED421BA1705007574CC /* EConsentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED321BA1705007574CC /* EConsentViewController.swift */; };
+		ECC10ED821BA1DB3007574CC /* VerificationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */; };
+		ECC10EDA21BA1E43007574CC /* AsunBasicAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */; };
+		ECC10EDC21BA20DA007574CC /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */; };
+		ECC10EDE21BA4119007574CC /* FoodRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */; };
+		ECC10EE121BA4C1E007574CC /* ZMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EE021BA4C1E007574CC /* ZMProgressView.m */; };
 		ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -491,6 +497,13 @@
 		EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyTableViewCell.swift; sourceTree = "<group>"; };
 		EC14599B21B91D6500A8D27F /* ScanResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResultViewController.swift; sourceTree = "<group>"; };
 		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ECC10ED321BA1705007574CC /* EConsentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EConsentViewController.swift; sourceTree = "<group>"; };
+		ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeView.swift; sourceTree = "<group>"; };
+		ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsunBasicAttributes.swift; sourceTree = "<group>"; };
+		ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
+		ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRecommendationViewController.swift; sourceTree = "<group>"; };
+		ECC10EDF21BA4C1E007574CC /* ZMProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMProgressView.h; sourceTree = "<group>"; };
+		ECC10EE021BA4C1E007574CC /* ZMProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMProgressView.m; sourceTree = "<group>"; };
 		ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudiesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1048,7 +1061,6 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EC14599A21B91D4B00A8D27F /* ScanResult */,
 				ECE039C821B7CE2800D18173 /* ClinicalStudies */,
 				3F73A7512109C0B00031B01E /* IntroductionPage */,
 				3FCBEC0C20E632090092948C /* HealthCenter */,
@@ -1136,20 +1148,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EC14599A21B91D4B00A8D27F /* ScanResult */ = {
-			isa = PBXGroup;
-			children = (
-				EC14599B21B91D6500A8D27F /* ScanResultViewController.swift */,
-			);
-			path = ScanResult;
-			sourceTree = "<group>";
-		};
 		ECE039C821B7CE2800D18173 /* ClinicalStudies */ = {
 			isa = PBXGroup;
 			children = (
+				ECC10EDF21BA4C1E007574CC /* ZMProgressView.h */,
+				ECC10EE021BA4C1E007574CC /* ZMProgressView.m */,
+				ECC10ED321BA1705007574CC /* EConsentViewController.swift */,
+				EC14599B21B91D6500A8D27F /* ScanResultViewController.swift */,
 				ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */,
 				EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */,
 				EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */,
+				ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */,
+				ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */,
+				ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */,
+				ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */,
 			);
 			path = ClinicalStudies;
 			sourceTree = "<group>";
@@ -1515,6 +1527,7 @@
 				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
 				3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */,
 				3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */,
+				ECC10ED821BA1DB3007574CC /* VerificationCodeView.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				3FB6E67E20DCF19000462591 /* FoodDiaryCollectionViewCell.swift in Sources */,
 				3F1AC23E2088D1E7008F5BF2 /* FoodCalendarViewController.swift in Sources */,
@@ -1546,6 +1559,7 @@
 				3F8818A020EA574900FE6C11 /* ProfileArrowCell.swift in Sources */,
 				3FD08621200DEE4B0052D54B /* DeviceRecordDetailViewController.swift in Sources */,
 				3F8B21C820D2349C006E3628 /* NotificationSection.swift in Sources */,
+				ECC10EDA21BA1E43007574CC /* AsunBasicAttributes.swift in Sources */,
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				3F9215A420808C3F00F92ECF /* MealTypeCollectionCell.swift in Sources */,
@@ -1569,6 +1583,7 @@
 				3F436659207EFA6A0089C63A /* RecognitionResultTableCelll.swift in Sources */,
 				3F6CF8261FD7CE3900D7556E /* IngredientSearchController.swift in Sources */,
 				EC14599C21B91D6500A8D27F /* ScanResultViewController.swift in Sources */,
+				ECC10EE121BA4C1E007574CC /* ZMProgressView.m in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
 				3F575C332047F0D9009C096C /* DateUtil.swift in Sources */,
 				3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */,
@@ -1646,6 +1661,7 @@
 				3F43664F207CA6160089C63A /* FoodDiaryViewController.swift in Sources */,
 				3FD08625200EEC6B0052D54B /* HealthRecord.swift in Sources */,
 				3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */,
+				ECC10ED421BA1705007574CC /* EConsentViewController.swift in Sources */,
 				3F436656207E07650089C63A /* MockedUpFoodData.swift in Sources */,
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
 				3FA73DF02178740400D145C6 /* XYMarkerView.swift in Sources */,
@@ -1661,6 +1677,7 @@
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
 				3F7D77E42148F0EF000B8C6B /* StepChartViewController.swift in Sources */,
 				3F191F2E2182B2DA0026A4EF /* SMSLoginViewController.swift in Sources */,
+				ECC10EDC21BA20DA007574CC /* LearnMoreViewController.swift in Sources */,
 				3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */,
 				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
@@ -1686,6 +1703,7 @@
 				5804F4D51FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift in Sources */,
 				3F9215A62085A18F00F92ECF /* FoodItemListCell.swift in Sources */,
 				3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */,
+				ECC10EDE21BA4119007574CC /* FoodRecommendationViewController.swift in Sources */,
 				5892437B1FB532B3009DA2E2 /* ProfileViewController.swift in Sources */,
 				3F43DAC81FE79BC400A3685A /* GraphView.swift in Sources */,
 				3FF3B97C20EB6EED00E428C1 /* RulerLayout.swift in Sources */,

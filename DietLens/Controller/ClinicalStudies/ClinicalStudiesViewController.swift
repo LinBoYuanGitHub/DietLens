@@ -53,7 +53,6 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
         if let cell = tableView.dequeueReusableCell(withIdentifier: "clinicalStudyCell") as? ClinicalStudyTableViewCell {
             let entity = studyList[indexPath.row]
             cell.setUpCell(recordType: entity.id, icon: "", study_Name: entity.itemName, studyStartOnDate: entity.date)
-            //cell.setUpCell(recordType: "Food Recommendation", study_Name: "Food Recommendation for thyroid disordrs", studyStartOnDate: "5 Nov 2018")
             return cell
         }
         return UITableViewCell()
@@ -65,7 +64,13 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("被选中的是：\(indexPath)")
+        //print("被选中的是：\(indexPath)")
+        guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
+                    return
+                }
+        self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
+
+        //此处要写入一些传值
 
     }
 
