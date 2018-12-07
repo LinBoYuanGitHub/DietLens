@@ -1939,27 +1939,28 @@ class APIService {
         }
     }
     // clinical study
-    
-    func getClinicalStudyList(completion: @escaping (Bool) -> Void) {
+
+    func getClinicalStudyList(completion: @escaping ([ClinicalStudyEntity]) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.phoneSendSMSURL)!,
+            URL(string: ServerConfig.getStudyListURL)!,
             method: .get,
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("Get Daily Sum failed due to : \(String(describing: response.result.error))")
+                    print("get clinical study failed due to : \(String(describing: response.result.error))")
                     return
                 }
-                completion(response.result.isSuccess)
+                let clinicalStudyList = [ClinicalStudyEntity]()
+                completion(clinicalStudyList)
         }
     }
-    
-    func connectToStudyGroup(groupId:String, completion: @escaping (Bool) -> Void){
+
+    func connectToStudyGroup(groupId: String, completion: @escaping (Bool) -> Void) {
         let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
         Alamofire.request(
-            URL(string: ServerConfig.phoneSendSMSURL)!,
+            URL(string: ServerConfig.joinGroupConnectURL)!,
             method: .post,
             parameters: ["groupId": groupId, "userId": userId],
             encoding: JSONEncoding.default,
@@ -1973,9 +1974,6 @@ class APIService {
                 completion(response.result.isSuccess)
         }
     }
-    
-    func 
-    
 
     //cancel task
     func cancelRequest(requestURL: String) {

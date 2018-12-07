@@ -12,11 +12,30 @@ class ClinicalStudiesViewController: BaseViewController {
 
     @IBOutlet weak var studyTableView: UITableView!
 
-    var studyList = [ClinicStudyEntity]() // type changed to ClinicStudyEntity
+    var studyList = [ClinicalStudyEntity]() // type changed to ClinicStudyEntity
     override func viewDidLoad() {
         super.viewDidLoad()
         studyTableView.delegate = self
         studyTableView.dataSource = self
+//        getClinicalStudyList()
+        studyDataMockedUp()
+    }
+
+    func getClinicalStudyList() {
+        APIService.instance.getClinicalStudyList { (studyList) in
+            self.studyList = studyList
+            self.studyTableView.reloadData()
+        }
+    }
+
+    func studyDataMockedUp() {
+        let entity1 = ClinicalStudyEntity.init(studyId: "", studyName: "Food recommendation for thyroid disorders", startDate: Date(), status: .pending)
+        let entity2 = ClinicalStudyEntity.init(studyId: "", studyName: "Diabetes (Type 2)", startDate: Date(), status: .process)
+        let entity3 = ClinicalStudyEntity.init(studyId: "", studyName: "Knee pain (Osteoarthritis)", startDate: Date(), status: .expiry)
+        studyList.append(entity1)
+        studyList.append(entity2)
+        studyList.append(entity3)
+        self.studyTableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -25,12 +44,6 @@ class ClinicalStudiesViewController: BaseViewController {
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-
-        //test
-        for _ in 0..<2 {
-            let entity = ClinicStudyEntity.init(id: "", date: "5 Nov 2018", icon: "", itemName: "Food Recommendation for thyroid disordrs")
-            studyList.append(entity)
-        }
     }
 
     @objc func onBackPressed() {
@@ -52,7 +65,9 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "clinicalStudyCell") as? ClinicalStudyTableViewCell {
             let entity = studyList[indexPath.row]
-            cell.setUpCell(recordType: entity.id, icon: "", study_Name: entity.itemName, studyStartOnDate: entity.date)
+            cell.setUpCell(studyStatus: entity.status, name: entity.studyName, startDate: DateUtil.formatGMTDateToString(date: entity.startDate))
+            //cell.setUpCell(recordType: "Food Recommendation", study_Name: "Food Recommendation for thyroid disordrs", studyStartOnDate: "5 Nov 2018")
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
         return UITableViewCell()

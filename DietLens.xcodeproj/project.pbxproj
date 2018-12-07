@@ -116,6 +116,8 @@
 		3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */; };
 		3FA8C372219D0E6800E4261D /* ProfileCalorieGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */; };
 		3FAD32D221B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */; };
+		3FAD32D421BA1CAE00EAA6EC /* ClinicalStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D321BA1CAE00EAA6EC /* ClinicalStudyEntity.swift */; };
+		3FAD32D721BA20E300EAA6EC /* ClinicalStudyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D621BA20E300EAA6EC /* ClinicalStudyDataManager.swift */; };
 		3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */; };
 		3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */; };
 		3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */; };
@@ -368,6 +370,8 @@
 		3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownTimer.swift; sourceTree = "<group>"; };
 		3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCalorieGoalViewController.swift; sourceTree = "<group>"; };
 		3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCalorieGoalDialog.swift; sourceTree = "<group>"; };
+		3FAD32D321BA1CAE00EAA6EC /* ClinicalStudyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyEntity.swift; sourceTree = "<group>"; };
+		3FAD32D621BA20E300EAA6EC /* ClinicalStudyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyDataManager.swift; sourceTree = "<group>"; };
 		3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
 		3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryRecordViewController.swift; sourceTree = "<group>"; };
 		3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDialogViewController.swift; sourceTree = "<group>"; };
@@ -620,6 +624,7 @@
 				3F4906EC201E119900D1F388 /* NotificationDataManager.swift */,
 				3F2D163420F2899900348160 /* HealthCenterDataManager.swift */,
 				3F250A74215616DA009A5F5E /* TextSearchDataManager.swift */,
+				3FAD32D621BA20E300EAA6EC /* ClinicalStudyDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -766,6 +771,14 @@
 				3FA73DF12178789200D145C6 /* YStepMarkerView.swift */,
 			);
 			path = Chart;
+			sourceTree = "<group>";
+		};
+		3FAD32D521BA1CBE00EAA6EC /* ClinicalStudy */ = {
+			isa = PBXGroup;
+			children = (
+				3FAD32D321BA1CAE00EAA6EC /* ClinicalStudyEntity.swift */,
+			);
+			name = ClinicalStudy;
 			sourceTree = "<group>";
 		};
 		3FAED17A20C9264F0096B12F /* Notification */ = {
@@ -1026,6 +1039,7 @@
 		58FCCFEB1F9D886400E4F421 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3FAD32D521BA1CBE00EAA6EC /* ClinicalStudy */,
 				3FCBEC1320E638EA0092948C /* HealthCenter */,
 				3FB6E68220E3822800462591 /* Profile */,
 				3F436652207DFBF50089C63A /* FoodDiary */,
@@ -1681,6 +1695,7 @@
 				3F4906EF2020387D00D1F388 /* EventCell.swift in Sources */,
 				3FFB56961FB2F858002DCE15 /* FoodInfoDataManager.swift in Sources */,
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
+				3FAD32D721BA20E300EAA6EC /* ClinicalStudyDataManager.swift in Sources */,
 				3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */,
 				3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */,
 				3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */,
@@ -1720,6 +1735,7 @@
 				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
 				3FC13058213690AC000605E3 /* HttpExtension.swift in Sources */,
 				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
+				3FAD32D421BA1CAE00EAA6EC /* ClinicalStudyEntity.swift in Sources */,
 				3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */,
 				3F14CC48201C79FF0032CC77 /* ProfileDataManager.swift in Sources */,
 			);

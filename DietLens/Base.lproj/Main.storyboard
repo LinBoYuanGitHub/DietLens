@@ -6042,7 +6042,7 @@ What is it?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Dietlens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xd-NZ-Hre">
-                                <rect key="frame" x="72.5" y="118" width="230" height="75"/>
+                                <rect key="frame" x="109.5" y="116.5" width="156" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SignPainterHouseScript" family="SignPainter HouseScript" pointSize="64"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6300,33 +6300,33 @@ What is it?</string>
                                 <rect key="frame" x="0.0" y="80" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vv-rk-YgW">
-                                        <rect key="frame" x="162.5" y="10" width="50" height="50"/>
+                                        <rect key="frame" x="167.5" y="40" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="49y-S8-Wag"/>
-                                            <constraint firstAttribute="height" constant="50" id="ZRI-qM-otj"/>
+                                            <constraint firstAttribute="width" constant="40" id="49y-S8-Wag"/>
+                                            <constraint firstAttribute="height" constant="40" id="ZRI-qM-otj"/>
                                         </constraints>
                                         <state key="normal" image="scan qr code"/>
                                         <connections>
                                             <segue destination="gwr-x6-naB" kind="push" id="Yu4-L2-E5R"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-1A-QOW">
-                                        <rect key="frame" x="154.5" y="70" width="66" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-1A-QOW">
+                                        <rect key="frame" x="154.5" y="80" width="66" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="R23-PL-fnU"/>
                                             <constraint firstAttribute="width" constant="66" id="fpF-jY-Yll"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
                                         <color key="textColor" red="0.70196078431372544" green="0.70196078431372544" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="2Vv-rk-YgW" firstAttribute="bottom" secondItem="I1O-li-ud8" secondAttribute="centerY" constant="20" id="0sz-WV-DUW"/>
                                     <constraint firstItem="9gy-1A-QOW" firstAttribute="centerX" secondItem="I1O-li-ud8" secondAttribute="centerX" id="3zy-mY-Wr6"/>
                                     <constraint firstItem="2Vv-rk-YgW" firstAttribute="centerX" secondItem="I1O-li-ud8" secondAttribute="centerX" id="ZWY-vs-5jy"/>
-                                    <constraint firstItem="9gy-1A-QOW" firstAttribute="top" secondItem="2Vv-rk-YgW" secondAttribute="bottom" constant="10" id="bZ6-hD-Typ"/>
-                                    <constraint firstItem="2Vv-rk-YgW" firstAttribute="top" secondItem="I1O-li-ud8" secondAttribute="top" constant="10" id="iLx-iO-2Xb"/>
+                                    <constraint firstItem="9gy-1A-QOW" firstAttribute="top" secondItem="2Vv-rk-YgW" secondAttribute="bottom" id="dN3-Tc-1eC"/>
                                     <constraint firstAttribute="height" constant="120" id="zCD-qS-aqL"/>
                                 </constraints>
                             </view>
@@ -6379,9 +6379,16 @@ What is it?</string>
                                                                 <constraint firstAttribute="width" constant="1" id="Z6B-We-I2S"/>
                                                             </constraints>
                                                         </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-Wf-Iji">
+                                                            <rect key="frame" x="9" y="78" width="52" height="20"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.95294117647058818" green="0.43529411764705883" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="FOT-Wf-Iji" firstAttribute="top" secondItem="PGF-u4-qi8" secondAttribute="bottom" constant="8" id="4FX-BA-GxC"/>
                                                         <constraint firstItem="PGF-u4-qi8" firstAttribute="leading" secondItem="Y98-dN-7H7" secondAttribute="leading" constant="20" id="530-Xj-3Jc"/>
                                                         <constraint firstItem="EeI-eD-o7w" firstAttribute="leading" secondItem="VeF-9L-UUe" secondAttribute="leading" id="GDe-e4-Og1"/>
                                                         <constraint firstItem="HbI-5m-Qaa" firstAttribute="top" secondItem="Y98-dN-7H7" secondAttribute="top" constant="10" id="PEr-E2-Bzv"/>
@@ -6393,6 +6400,7 @@ What is it?</string>
                                                         <constraint firstItem="yfb-aU-wni" firstAttribute="bottom" secondItem="EeI-eD-o7w" secondAttribute="bottom" id="hmb-lQ-dDX"/>
                                                         <constraint firstItem="PGF-u4-qi8" firstAttribute="leading" secondItem="Y98-dN-7H7" secondAttribute="leading" constant="20" id="mm6-Sl-4SR"/>
                                                         <constraint firstAttribute="trailing" secondItem="VeF-9L-UUe" secondAttribute="trailing" constant="20" id="nrK-aD-xRl"/>
+                                                        <constraint firstItem="FOT-Wf-Iji" firstAttribute="centerX" secondItem="PGF-u4-qi8" secondAttribute="centerX" id="r9t-ly-Awm"/>
                                                         <constraint firstItem="PGF-u4-qi8" firstAttribute="centerY" secondItem="Y98-dN-7H7" secondAttribute="centerY" id="t7C-1B-itA"/>
                                                         <constraint firstAttribute="bottom" secondItem="HbI-5m-Qaa" secondAttribute="bottom" constant="10" id="u8s-do-FJy"/>
                                                         <constraint firstItem="VeF-9L-UUe" firstAttribute="leading" secondItem="PGF-u4-qi8" secondAttribute="trailing" constant="50" id="xVh-X8-9rk"/>
@@ -6416,6 +6424,7 @@ What is it?</string>
                                         <connections>
                                             <outlet property="containview" destination="Y98-dN-7H7" id="X7g-IV-3eC"/>
                                             <outlet property="icon" destination="PGF-u4-qi8" id="dGF-a2-oV2"/>
+                                            <outlet property="statusText" destination="FOT-Wf-Iji" id="XZ1-cS-rWO"/>
                                             <outlet property="studyName" destination="VeF-9L-UUe" id="MSJ-1K-BPP"/>
                                             <outlet property="studyStartDate" destination="yfb-aU-wni" id="a0q-LV-KYQ"/>
                                         </connections>
