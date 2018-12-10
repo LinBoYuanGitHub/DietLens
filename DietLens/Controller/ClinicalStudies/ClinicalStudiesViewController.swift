@@ -51,8 +51,8 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     @IBAction func scanQR(_ sender: UIButton) {
-
-        guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QRScannerController") as? QRScannerController else {
+       //test QRScannerController -> ScannedResultViewController  if test is done, it should be changed
+        guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScannedResultViewController") as? ScannedResultViewController else {
             return
         }
         self.navigationController?.pushViewController(scanQRVC, animated: true)

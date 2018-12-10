@@ -120,7 +120,8 @@ class QRScannerController: BaseViewController {
             return
         }
         //test
-        guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScanResultViewController") as? ScanResultViewController else {
+
+        guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScannedResultViewController") as? ScanResultViewController else {
             return
         }
         self.navigationController?.pushViewController(scanresultVC, animated: true)
