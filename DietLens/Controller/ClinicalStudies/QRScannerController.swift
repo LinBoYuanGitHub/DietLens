@@ -10,14 +10,13 @@ import AVFoundation
 
 class QRScannerController: BaseViewController {
 
-    // @IBOutlet var messageLabel:UILabel!
     @IBOutlet weak var scanerView: UIView!
 
     var captureSession = AVCaptureSession()
-    var scannedFlag = false
+    var scannedFlag = false //make sure only perform scanTask once in process
 
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var qrCodeFrameView: UIView?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer? //the UI layer to display the camera video
+    var qrCodeFrameView: UIView? //frame view for showing barcodeObject bounds
 
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
@@ -32,9 +31,6 @@ class QRScannerController: BaseViewController {
                                       AVMetadataObject.ObjectType.dataMatrix,
                                       AVMetadataObject.ObjectType.interleaved2of5,
                                       AVMetadataObject.ObjectType.qr]
-
-    //TODO: count testing
-    var scanCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +60,6 @@ class QRScannerController: BaseViewController {
             // Set delegate and use the default dispatch queue to execute the call back
             captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             captureMetadataOutput.metadataObjectTypes = supportedCodeTypes
-            //            captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
 
         } catch {
             // If any error occurs, simply print it out and don't continue any more.
@@ -74,16 +69,9 @@ class QRScannerController: BaseViewController {
 
         // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
         videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         videoPreviewLayer?.frame = scanerView.layer.bounds
+        videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         scanerView.layer.addSublayer(videoPreviewLayer!)
-
-        // Start video capture.
-//        captureSession.startRunning()
-
-        // Move the message label and top bar to the front
-        //view.bringSubview(toFront: messageLabel)
-        //view.bringSubview(toFront: topbar)
 
         // Initialize QR Code Frame to highlight the QR code
         qrCodeFrameView = UIView()
@@ -92,10 +80,16 @@ class QRScannerController: BaseViewController {
             qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
             qrCodeFrameView.layer.borderWidth = 2
             scanerView.addSubview(qrCodeFrameView)
-            //  view.bringSubview(toFront: qrCodeFrameView)
+            qrCodeFrameView.isHidden = true //show frameView only when scanning QR Code
         }
 
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        videoPreviewLayer?.frame = scanerView.bounds
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationItem.hidesBackButton = true
@@ -104,8 +98,13 @@ class QRScannerController: BaseViewController {
         self.navigationItem.title = "Scan QR code"
         //running or resume session
         captureSession.startRunning()
-
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        qrCodeFrameView?.isHidden = true
+        scannedFlag = false
+    }
+
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -119,39 +118,14 @@ class QRScannerController: BaseViewController {
     func launchApp(decodedURL: String) {
         if presentedViewController != nil {
             return
-
         }
         //test
-
         guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScanResultViewController") as? ScanResultViewController else {
             return
         }
         self.navigationController?.pushViewController(scanresultVC, animated: true)
         //delted part
         captureSession.stopRunning()
-//        present(scanresultVC, animated: true, completion: nil)
-//        scannedFlag = true
-
-//                if presentedViewController != nil {
-//                    return
-//                }
-//
-//                let alertPrompt = UIAlertController(title: "Open App", message: "You're going to open \(decodedURL)", preferredStyle: .actionSheet)
-//                let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { (action) -> Void in
-//
-//                    if let url = URL(string: decodedURL) {
-//                        if UIApplication.shared.canOpenURL(url) {
-//                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                        }
-//                    }
-//                })
-//
-//                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
-//
-//                alertPrompt.addAction(confirmAction)
-//                alertPrompt.addAction(cancelAction)
-//
-//                present(alertPrompt, animated: true, completion: nil)
     }
 
 }
@@ -159,7 +133,6 @@ class QRScannerController: BaseViewController {
 extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        scanCount += 1
         // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects.count == 0 {
             qrCodeFrameView?.frame = CGRect.zero
@@ -168,15 +141,19 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
         }
 
         // Get the metadata object.
-        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        guard let metadataObj = metadataObjects[0] as? AVMetadataMachineReadableCodeObject else {
+            return
+        }
         if supportedCodeTypes.contains(metadataObj.type) {
             // If the found metadata is equal to the QR code metadata (or barcode) then update the status label's text and set the bounds
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
-            qrCodeFrameView?.frame = barCodeObject!.bounds
-
-            if metadataObj.stringValue != nil {
-                launchApp(decodedURL: metadataObj.stringValue!)
-                //    messageLabel.text = metadataObj.stringValue
+            if metadataObj.stringValue != nil && scanerView.bounds.contains((barCodeObject?.bounds)!) && !scannedFlag {
+                qrCodeFrameView?.frame = barCodeObject!.bounds
+                qrCodeFrameView?.isHidden = false
+                scannedFlag = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { //delay for showing bounding box for user to confirm the scanned QR code
+                    self.launchApp(decodedURL: metadataObj.stringValue!)
+                }
             }
         }
     }
