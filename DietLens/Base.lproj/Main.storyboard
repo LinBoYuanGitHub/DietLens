@@ -6296,7 +6296,7 @@ What is it?</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1O-li-ud8">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1O-li-ud8" userLabel="scannerAreaView">
                                 <rect key="frame" x="0.0" y="80" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vv-rk-YgW">
@@ -6451,6 +6451,7 @@ What is it?</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="scannerAreaView" destination="I1O-li-ud8" id="Mcq-nB-3I0"/>
                         <outlet property="studyTableView" destination="u6p-ZZ-o4H" id="Hwo-eW-GwP"/>
                     </connections>
                 </viewController>

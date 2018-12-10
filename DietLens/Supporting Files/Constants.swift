@@ -232,6 +232,9 @@ struct MessageType {
 extension UIColor {
     struct ThemeColor {
         static let dietLensRed = UIColor(displayP3Red: CGFloat(242.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(93.0/255.0), alpha: 1.0)
+        static let dietLensAcceptedGreen = UIColor(displayP3Red: CGFloat(41/255.0), green: CGFloat(234/255.0), blue: CGFloat(220/255.0), alpha: 1.0)
+        static let dietLensPendingYellow = UIColor(displayP3Red: CGFloat(255/255.0), green: CGFloat(182/255.0), blue: CGFloat(45/255.0), alpha: 1.0)
+        static let dietLensCompletedRed = UIColor(displayP3Red: CGFloat(243/255.0), green: CGFloat(70/255.0), blue: CGFloat(90/255.0), alpha: 1.0)
     }
 
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {

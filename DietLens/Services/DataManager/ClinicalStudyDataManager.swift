@@ -21,7 +21,7 @@ class ClinicalStudyDataManager {
             let studyId = json["studyId"].stringValue
             let studyName = json["studyName"].stringValue
             let startDate =  DateUtil.normalStringToDate(dateStr: json["startDate"].stringValue)
-            let entity = ClinicalStudyEntity.init(studyId: studyId, studyName: studyName, startDate: startDate, status: .pending)
+            let entity = ClinicalStudyEntity.init(studyId: studyId, studyName: studyName, status: .pending, content: StudyContent())
             resultList.append(entity)
         }
         return resultList

@@ -11,8 +11,16 @@ import Foundation
 struct ClinicalStudyEntity {
     var studyId = ""
     var studyName = ""
-    var startDate = Date()
     var status = StudyStatus.pending
+    var content = StudyContent()
+}
+
+struct StudyContent {
+    var startDate = Date()
+    var endDate = Date()
+    var studyDesc = ""
+    var authorInfo = ""
+    var contactInfo = ""
 }
 
 enum StudyStatus {

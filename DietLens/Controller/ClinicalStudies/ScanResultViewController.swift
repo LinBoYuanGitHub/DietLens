@@ -40,7 +40,6 @@ class ScanResultViewController: BaseViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.title = "Scan Result"
 
-        //
         let widthscreen = UIScreen.main.bounds.width
         scanResultScrollView.contentSize = CGSize(width: widthscreen * 3, height: scanResultScrollView.frame.size.height)
         scanResultScrollView.isPagingEnabled = true
