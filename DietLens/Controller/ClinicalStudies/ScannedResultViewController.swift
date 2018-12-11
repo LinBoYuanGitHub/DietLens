@@ -25,7 +25,7 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
-
+        print("containerView:\(containerView)")
         super.viewDidLoad()
 
     }
@@ -44,27 +44,37 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
 
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+    }
+
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func onJoin() {
-//        guard let eConsentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EConsentViewController") as? EConsentViewController else {
-//            return
-//        }
-//        self.navigationController?.pushViewController(eConsentVC, animated: true)
+        guard let eConsentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EConsentViewController") as? EConsentViewController else {
+            return
+        }
+        self.navigationController?.pushViewController(eConsentVC, animated: true)
 
     }
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DescriptionViewController")as? DescriptionViewController
-        let child2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EligibilityViewController")as? EligibilityViewController
-        let child3 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ContactViewController")as? ContactViewController
-
-        guard isReload else {
-            return [child1!, child2!, child3!]
+        guard let child1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DescriptionViewController")as? DescriptionViewController else {
+            return []
+        }
+        guard let child2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EligibilityViewController")as? EligibilityViewController else {
+            return []
+        }
+        guard let child3 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ContactViewController")as? ContactViewController else {
+            return []
         }
 
-        var childViewControllers =  [child1!, child2!, child3!]
+        guard isReload else {
+            return [child1, child2, child3]
+        }
+
+        var childViewControllers =  [child1, child2, child3]
         for index in childViewControllers.indices {
             let nElements = childViewControllers.count - index
             let n = (Int(arc4random()) % nElements) + index
