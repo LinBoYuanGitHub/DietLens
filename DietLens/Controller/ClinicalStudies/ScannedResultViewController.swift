@@ -34,7 +34,10 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-        self.navigationItem.title = "Scan Result"
+        self.navigationItem.title = "Study"
+        self.navigationItem.rightBarButtonItem  = UIBarButtonItem(title: "Join", style: .plain, target: self, action: #selector(onJoin))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+
         //set height for bar
         buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
         buttonBarView.selectedBar.frame.size.height = 2.0
@@ -43,6 +46,9 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
 
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+    @objc func onJoin() {
+
     }
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
