@@ -11,17 +11,22 @@ import XLPagerTabStrip
 
 class ScannedResultViewController: ButtonBarPagerTabStripViewController {
     var isReload = false
+
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        buttonBarView.selectedBar.backgroundColor = UIColor.red
-        buttonBarView.backgroundColor = UIColor.white
-        buttonBarView.frame = CGRect(x: 0, y: 90, width: UIScreen.main.bounds.width, height: 45)
-        buttonBarView.selectedBar.tintColor = UIColor.red  //????why it doesnot work
-
-        settings.style.buttonBarItemBackgroundColor = UIColor.white
-        settings.style.buttonBarItemTitleColor = UIColor.black
+        // change selected bar color
+        settings.style.buttonBarBackgroundColor = .clear
+        settings.style.buttonBarItemBackgroundColor = .clear
+        settings.style.selectedBarBackgroundColor = .red
         settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14)
+        settings.style.selectedBarHeight = 2.0
+        settings.style.buttonBarHeight = 2.0
+        settings.style.buttonBarMinimumLineSpacing = 0
+        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarItemsShouldFillAvailableWidth = true
+        settings.style.buttonBarLeftContentInset = 0
+        settings.style.buttonBarRightContentInset = 0
+
+        super.viewDidLoad()
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -30,9 +35,12 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.title = "Scan Result"
+        //set height for bar
+        buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
+        buttonBarView.selectedBar.frame.size.height = 2.0
 
     }
-
+    
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -67,4 +75,7 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         }
         super.reloadPagerTabStripView()
     }
+}
+extension ButtonBarPagerTabStripViewController {
+    
 }

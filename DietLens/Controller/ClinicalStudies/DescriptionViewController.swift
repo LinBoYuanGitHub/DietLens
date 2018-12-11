@@ -24,7 +24,7 @@ class DescriptionViewController: UIViewController, IndicatorInfoProvider {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        self.navigationController?.navigationBar.isHidden = true
     }
 
     // MARK: - IndicatorInfoProvider
