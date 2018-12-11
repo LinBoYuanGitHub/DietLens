@@ -17,6 +17,13 @@ class DateUtil {
         return resultDate!
     }
 
+    public static func standardZStringToDate(dateStr: String) -> Date {
+        let RFC3339DateFormatter = DateFormatter()
+        RFC3339DateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZ"
+        let resultDate = RFC3339DateFormatter.date(from: String(dateStr))
+        return resultDate!
+    }
+
     public static func standardDateToString(date: Date) -> String {
         let RFC3339DateFormatter = DateFormatter()
         RFC3339DateFormatter.dateFormat = "yyyy-MM-dd"

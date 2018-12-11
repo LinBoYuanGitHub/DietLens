@@ -1943,7 +1943,7 @@ class APIService {
 
     func getClinicalStudyList(completion: @escaping ([ClinicalStudyEntity]) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.getStudyListURL)!,
+            URL(string: ServerConfig.studyListURL)!,
             method: .get,
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
@@ -1953,17 +1953,36 @@ class APIService {
                     print("get clinical study failed due to : \(String(describing: response.result.error))")
                     return
                 }
-                let clinicalStudyList = [ClinicalStudyEntity]()
+                let jsonArr = JSON(response.result.value)
+                let clinicalStudyList = ClinicalStudyDataManager.instance.assembleClinicalStudyDataEntity(jsonArr: jsonArr)
                 completion(clinicalStudyList)
+        }
+    }
+
+    func getClinicalStudyDetail(groupId: String, completion: @escaping (ClinicalStudyEntity?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.studyListURL + groupId + "/")!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get clinical study failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                let jsonObj = JSON(response.result.value)
+                let clinicalStudyEntity = ClinicalStudyDataManager.instance.assembleClinicalStudyDetailEntity(jsonObj: jsonObj)
+                completion(clinicalStudyEntity)
         }
     }
 
     func connectToStudyGroup(groupId: String, completion: @escaping (Bool) -> Void) {
         let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
         Alamofire.request(
-            URL(string: ServerConfig.joinGroupConnectURL)!,
+            URL(string: ServerConfig.studyListURL)!,
             method: .post,
-            parameters: ["groupId": groupId, "userId": userId],
+            parameters: ["study_group_id": groupId],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()

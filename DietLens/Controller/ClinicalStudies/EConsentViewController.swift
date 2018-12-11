@@ -36,7 +36,6 @@ class EConsentViewController: UIViewController {
 
         }
         //此处应该写一个删除验证码的时候 next的变化
-
         view.addSubview(code)
     }
     @objc func onBackPressed() {
@@ -54,8 +53,12 @@ class EConsentViewController: UIViewController {
         guard let clinicalstudies = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clinicalstudiesVC") as? ClinicalStudiesViewController else {
             return
         }
-        self.navigationController?.pushViewController(clinicalstudies, animated: true)
-
+//        self.navigationController?.pushViewController(clinicalstudies, animated: true)
+        for vc in (self.navigationController?.viewControllers)! {
+            if let clinicalVC  = vc as? ClinicalStudiesViewController {
+                self.navigationController?.popToViewController(clinicalVC, animated: true)
+            }
+        }
     }
 
 }

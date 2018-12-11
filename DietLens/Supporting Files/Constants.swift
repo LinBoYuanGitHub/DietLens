@@ -80,8 +80,7 @@ struct ServerConfig {
     static let verifySMSURL = labDeskTopURL + "/social-acc/phone/"
     static let dietGoalURL = labDeskTopURL + "/diet-goal/"
     //clinical qr code scan
-    static let getStudyListURL = ""
-    static let joinGroupConnectURL = ""
+    static let studyListURL = labDeskTopURL + "/clinic/"
 }
 
 struct RedirectAddress {

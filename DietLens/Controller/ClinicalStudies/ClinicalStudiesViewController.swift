@@ -11,6 +11,7 @@ import UIKit
 class ClinicalStudiesViewController: BaseViewController {
 
     @IBOutlet weak var studyTableView: UITableView!
+    @IBOutlet weak var scannerAreaView: UIView!
 
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var iconText: UILabel!
@@ -20,8 +21,16 @@ class ClinicalStudiesViewController: BaseViewController {
         super.viewDidLoad()
         studyTableView.delegate = self
         studyTableView.dataSource = self
-//        getClinicalStudyList()
-        studyDataMockedUp()
+        getClinicalStudyList()
+//        studyDataMockedUp()
+        scannerAreaView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onScanAreaTap)))
+    }
+
+    @objc func onScanAreaTap() {
+        guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QRScannerController") as? QRScannerController else {
+            return
+        }
+        self.navigationController?.pushViewController(scanQRVC, animated: true)
     }
 
     func getClinicalStudyList() {
@@ -32,9 +41,9 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     func studyDataMockedUp() {
-        let entity1 = ClinicalStudyEntity.init(studyId: "", studyName: "Food recommendation for thyroid disorders", startDate: Date(), status: .pending)
-        let entity2 = ClinicalStudyEntity.init(studyId: "", studyName: "Diabetes (Type 2)", startDate: Date(), status: .process)
-        let entity3 = ClinicalStudyEntity.init(studyId: "", studyName: "Knee pain (Osteoarthritis)", startDate: Date(), status: .expiry)
+        let entity1 = ClinicalStudyEntity.init(studyId: "", studyName: "Food recommendation for thyroid disorders", status: .pending)
+        let entity2 = ClinicalStudyEntity.init(studyId: "", studyName: "Diabetes (Type 2)", status: .process)
+        let entity3 = ClinicalStudyEntity.init(studyId: "", studyName: "Knee pain (Osteoarthritis)", status: .expiry)
         studyList.append(entity1)
         studyList.append(entity2)
         studyList.append(entity3)
@@ -77,7 +86,7 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "clinicalStudyCell") as? ClinicalStudyTableViewCell {
             let entity = studyList[indexPath.row]
-            cell.setUpCell(studyStatus: entity.status, name: entity.studyName, startDate: DateUtil.formatGMTDateToString(date: entity.startDate))
+            cell.setUpCell(studyStatus: entity.status, name: entity.studyName)
             //cell.setUpCell(recordType: "Food Recommendation", study_Name: "Food Recommendation for thyroid disordrs", studyStartOnDate: "5 Nov 2018")
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
@@ -92,13 +101,18 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("被选中的是：\(indexPath)")
-        guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
-                    return
-                }
-        self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
-
-        //此处要写入一些传值
-
+        AlertMessageHelper.showLoadingDialog(targetController: self)
+        let groupId = studyList[indexPath.row].studyId
+        APIService.instance.getClinicalStudyDetail(groupId: groupId) { (studyDetailEntity) in
+            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            if studyDetailEntity == nil {
+                return
+            }
+            guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
+                return
+            }
+            self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
+        }
     }
 
 }
