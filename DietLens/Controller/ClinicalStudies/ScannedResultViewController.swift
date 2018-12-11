@@ -40,7 +40,7 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         buttonBarView.selectedBar.frame.size.height = 2.0
 
     }
-    
+
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -77,5 +77,5 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
     }
 }
 extension ButtonBarPagerTabStripViewController {
-    
+
 }

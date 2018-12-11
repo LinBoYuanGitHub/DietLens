@@ -12,7 +12,10 @@ class ClinicalStudiesViewController: BaseViewController {
 
     @IBOutlet weak var studyTableView: UITableView!
 
-    var studyList = [ClinicalStudyEntity]() // type changed to ClinicStudyEntity
+    @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var iconText: UILabel!
+
+    var studyList = [ClinicStudyEntity]() // type changed to ClinicStudyEntity
     override func viewDidLoad() {
         super.viewDidLoad()
         studyTableView.delegate = self

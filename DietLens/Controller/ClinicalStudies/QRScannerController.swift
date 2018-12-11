@@ -96,6 +96,9 @@ class QRScannerController: BaseViewController {
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.title = "Scan QR code"
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Album", style: .plain, target: self, action: #selector(onAlbum))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         //running or resume session
         captureSession.startRunning()
     }
@@ -107,6 +110,10 @@ class QRScannerController: BaseViewController {
 
     @objc func onBackPressed() {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc func onAlbum() {
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
