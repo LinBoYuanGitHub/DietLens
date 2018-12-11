@@ -48,6 +48,10 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func onJoin() {
+//        guard let eConsentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EConsentViewController") as? EConsentViewController else {
+//            return
+//        }
+//        self.navigationController?.pushViewController(eConsentVC, animated: true)
 
     }
 
@@ -81,7 +85,4 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         }
         super.reloadPagerTabStripView()
     }
-}
-extension ButtonBarPagerTabStripViewController {
-
 }

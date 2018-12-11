@@ -8578,7 +8578,7 @@ Scan QR code to join a study.</string>
         <!--Consent View Controller-->
         <scene sceneID="f8w-NG-jxv">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bei-cE-VUY" customClass="EConsentViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EConsentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bei-cE-VUY" customClass="EConsentViewController" customModule="DietLens" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Coc-3n-8y0"/>
                         <viewControllerLayoutGuide type="bottom" id="z25-25-svF"/>
@@ -8903,7 +8903,7 @@ Scan QR code to join a study.</string>
                     </view>
                     <connections>
                         <outlet property="buttonBarView" destination="rg9-0K-1hT" id="f3v-FY-fEZ"/>
-                        <outlet property="containerView" destination="pGp-P0-IVS" id="6Vr-EF-fBK"/>
+                        <outlet property="containerView" destination="pGp-P0-IVS" id="Jqi-TR-BxK"/>
                         <outlet property="view" destination="wbo-Rz-q78" id="fib-8Y-oFo"/>
                     </connections>
                 </viewController>
