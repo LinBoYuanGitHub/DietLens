@@ -13,10 +13,10 @@ class ClinicalStudiesViewController: BaseViewController {
     @IBOutlet weak var studyTableView: UITableView!
     @IBOutlet weak var scannerAreaView: UIView!
 
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var iconText: UILabel!
+    @IBOutlet weak var emaptyIconView: UIImageView!
+    @IBOutlet weak var emptyIconText: UILabel!
 
-    var studyList = [ClinicStudyEntity]() // type changed to ClinicStudyEntity
+    var studyList = [ClinicalStudyEntity]() // type changed to ClinicStudyEntity
     override func viewDidLoad() {
         super.viewDidLoad()
         studyTableView.delegate = self
@@ -35,19 +35,13 @@ class ClinicalStudiesViewController: BaseViewController {
 
     func getClinicalStudyList() {
         APIService.instance.getClinicalStudyList { (studyList) in
+            if studyList.count != 0 {
+                self.emaptyIconView.isHidden = true
+                self.emptyIconText.isHidden = true
+            }
             self.studyList = studyList
             self.studyTableView.reloadData()
         }
-    }
-
-    func studyDataMockedUp() {
-        let entity1 = ClinicalStudyEntity.init(studyId: "", studyName: "Food recommendation for thyroid disorders", status: .pending)
-        let entity2 = ClinicalStudyEntity.init(studyId: "", studyName: "Diabetes (Type 2)", status: .process)
-        let entity3 = ClinicalStudyEntity.init(studyId: "", studyName: "Knee pain (Osteoarthritis)", status: .expiry)
-        studyList.append(entity1)
-        studyList.append(entity2)
-        studyList.append(entity3)
-        self.studyTableView.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -25,27 +25,29 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
-        print("containerView:\(containerView)")
+        print("viewdidload containerView:\(containerView)")
         super.viewDidLoad()
 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationItem.hidesBackButton = true
+        print("viewwillAppear containerView:\(containerView)")
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.title = "Study"
         self.navigationItem.rightBarButtonItem  = UIBarButtonItem(title: "Join", style: .plain, target: self, action: #selector(onJoin))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
 
-        //set height for bar
-        buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
-        buttonBarView.selectedBar.frame.size.height = 2.0
+//        //set height for bar
+//        buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
+//        buttonBarView.selectedBar.frame.size.height = 2.0
 
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        print("viewDidAppear containerView:\(containerView)")
     }
 
     @objc func onBackPressed() {
