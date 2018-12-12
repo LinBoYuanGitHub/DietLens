@@ -10,6 +10,8 @@ import UIKit
 import XLPagerTabStrip
 
 class ScannedResultViewController: ButtonBarPagerTabStripViewController {
+    var isReload = false
+    var studyEntity: ClinicalStudyEntity?
 
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = .white

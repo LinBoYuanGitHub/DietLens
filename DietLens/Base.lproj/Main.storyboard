@@ -8650,7 +8650,7 @@ Scan QR code to join a study.</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="next:" destination="Bei-cE-VUY" eventType="touchUpInside" id="1oQ-FV-3gk"/>
+                                    <action selector="join:" destination="Bei-cE-VUY" eventType="touchUpInside" id="1oQ-FV-3gk"/>
                                 </connections>
                             </button>
                         </subviews>

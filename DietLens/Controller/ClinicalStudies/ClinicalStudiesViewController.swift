@@ -21,7 +21,6 @@ class ClinicalStudiesViewController: BaseViewController {
         super.viewDidLoad()
         studyTableView.delegate = self
         studyTableView.dataSource = self
-        getClinicalStudyList()
 //        studyDataMockedUp()
         scannerAreaView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onScanAreaTap)))
     }
@@ -50,6 +49,7 @@ class ClinicalStudiesViewController: BaseViewController {
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        self.getClinicalStudyList()
     }
 
     @objc func onBackPressed() {
@@ -57,12 +57,10 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     @IBAction func scanQR(_ sender: UIButton) {
-       //test QRScannerController -> ScannedResultViewController / LearnMoreViewController             if test is done, it should be changed
-        guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScannedResultViewController") as? ScannedResultViewController else {
+        guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QRScannerController") as? QRScannerController else {
             return
         }
         self.navigationController?.pushViewController(scanQRVC, animated: true)
-
     }
 
 }

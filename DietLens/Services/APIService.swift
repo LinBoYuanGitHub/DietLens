@@ -1981,8 +1981,7 @@ class APIService {
         }
     }
 
-    func connectToStudyGroup(groupId: String, completion: @escaping (Bool) -> Void) {
-        let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
+    func connectToStudyGroup(groupId: String, completion: @escaping (Bool) -> Void, failedCompletion: @escaping (String) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.studyListURL)!,
             method: .post,
@@ -1993,6 +1992,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("connect to study group failed due to : \(String(describing: response.result.error))")
+                    let message = JSON(response.result.value)["message"].stringValue
+                    failedCompletion(message)
                     return
                 }
                 completion(response.result.isSuccess)

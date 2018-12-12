@@ -18,6 +18,10 @@ class QRScannerController: BaseViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer? //the UI layer to display the camera video
     var qrCodeFrameView: UIView? //frame view for showing barcodeObject bounds
 
+    var qrcodeImage = UIImageView()
+
+    private let imagePicker = UIImagePickerController() // for pick image from gallery
+
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
                                       AVMetadataObject.ObjectType.code39Mod43,
@@ -34,7 +38,6 @@ class QRScannerController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Get the back-facing camera for capturing videos
         var deviceDiscoverySession: AVCaptureDevice.DiscoverySession?
         if #available(iOS 10.2, *) {
@@ -45,6 +48,12 @@ class QRScannerController: BaseViewController {
             print("Failed to get the camera device")
             return
         }
+        //set up image picker
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = false
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        imagePicker.navigationBar.isTranslucent = false
 
         do {
             // Get an instance of the AVCaptureDeviceInput class using the previous device object.
@@ -75,14 +84,12 @@ class QRScannerController: BaseViewController {
 
         // Initialize QR Code Frame to highlight the QR code
         qrCodeFrameView = UIView()
-
         if let qrCodeFrameView = qrCodeFrameView {
             qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
             qrCodeFrameView.layer.borderWidth = 2
             scanerView.addSubview(qrCodeFrameView)
             qrCodeFrameView.isHidden = true //show frameView only when scanning QR Code
         }
-
     }
 
     override func viewDidLayoutSubviews() {
@@ -97,7 +104,7 @@ class QRScannerController: BaseViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.title = "Scan QR code"
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Album", style: .plain, target: self, action: #selector(onAlbum))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Album", style: .plain, target: self, action: #selector(onAlbumPressed))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         //running or resume session
         captureSession.startRunning()
@@ -105,6 +112,7 @@ class QRScannerController: BaseViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         qrCodeFrameView?.isHidden = true
+        qrcodeImage.removeFromSuperview()
         scannedFlag = false
         captureSession.stopRunning()
     }
@@ -113,8 +121,8 @@ class QRScannerController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
-    @objc func onAlbum() {
-
+    @objc func onAlbumPressed() {
+         present(imagePicker, animated: false, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -150,6 +158,7 @@ class QRScannerController: BaseViewController {
         guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScanResultViewController") as? ScanResultViewController else {
             return
         }
+        scanresultVC.studyEntity = study
         self.navigationController?.pushViewController(scanresultVC, animated: true)
         captureSession.stopRunning()
     }
@@ -173,35 +182,61 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             // If the found metadata is equal to the QR code metadata (or barcode) then update the status label's text and set the bounds
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             if metadataObj.stringValue != nil && scanerView.bounds.contains((barCodeObject?.bounds)!) && !scannedFlag {
-                qrCodeFrameView?.frame = barCodeObject!.bounds
-                qrCodeFrameView?.isHidden = false
-                scannedFlag = true
-                guard let scannedURL = metadataObj.stringValue else {
-                    return
-                }
-                //judge for white domain list part
-                var isWhiteDomainFlag = false
-                for whiteDomain in StringConstants.whiteDomainList {
-                    if scannedURL.starts(with: whiteDomain) {
-                        isWhiteDomainFlag = true
-                    }
-                }
-                //check the gid existing part
-                if !isWhiteDomainFlag || !scannedURL.contains("?gid=") {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { //delay for showing bounding box for user to confirm the scanned QR code
-                        self.launchApp(decodedURL: scannedURL)
-                    }
-                    return
-                }
-                let groupId = scannedURL.components(separatedBy: "?gid=")[1]
-                //perform study detail requet
-                APIService.instance.getClinicalStudyDetail(groupId: groupId, completion: { (entity) in
-                    if entity != nil {
-                        self.jumpToJoinGroupPage(study: entity!)
-                    }
-                })
+                performScannedOperation(scannedURL: metadataObj.stringValue!, bounds: barCodeObject!.bounds)
             }
         }
     }
 
+    func performScannedOperation(scannedURL: String, bounds: CGRect) {
+        qrCodeFrameView?.frame = bounds
+        qrCodeFrameView?.isHidden = false
+        scannedFlag = true
+        //judge for white domain list part
+        var isWhiteDomainFlag = false
+        for whiteDomain in StringConstants.whiteDomainList {
+            if scannedURL.starts(with: whiteDomain) {
+                isWhiteDomainFlag = true
+            }
+        }
+        //check the gid existing part
+        if !isWhiteDomainFlag || !scannedURL.contains("?gid=") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { //delay for showing bounding box for user to confirm the scanned QR code
+                self.launchApp(decodedURL: scannedURL)
+            }
+            return
+        }
+        let groupId = scannedURL.components(separatedBy: "?gid=")[1]
+        //perform study detail requet
+        APIService.instance.getClinicalStudyDetail(groupId: groupId, completion: { (entity) in
+            if entity != nil {
+                self.jumpToJoinGroupPage(study: entity!)
+            }
+        })
+    }
+
+}
+
+extension QRScannerController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        guard let qrcodeImg = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            print("Cannot get image from gallery")
+            imagePicker.dismiss(animated: true, completion: nil)
+            return
+        }
+        let detector: CIDetector=CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
+        let ciImage: CIImage=CIImage(image: qrcodeImg)!
+        qrcodeImage = UIImageView(frame: scanerView.bounds)
+        qrcodeImage.image = qrcodeImg
+        self.scanerView.addSubview(qrcodeImage)
+        var qrCodeLink=""
+        guard let features=detector.features(in: ciImage) as? [CIQRCodeFeature] else {
+            return
+        }
+        for feature in features {
+            qrCodeLink += feature.messageString!
+        }
+        imagePicker.dismiss(animated: true, completion: nil)
+        performScannedOperation(scannedURL: qrCodeLink, bounds: features[0].bounds)
+    }
 }
