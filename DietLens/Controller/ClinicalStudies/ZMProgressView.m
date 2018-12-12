@@ -94,8 +94,8 @@
     UIBezierPath* path = [UIBezierPath
                           bezierPathWithArcCenter:_circleCenter
                           radius:radius*0.9
-                          startAngle:M_PI_2
-                          endAngle:angle2Arc(self.angle)+M_PI_2
+                          startAngle:1.5 * M_PI//M_PI_2
+                          endAngle:angle2Arc(self.angle)- M_PI_2 //+ M_PI_2
                           clockwise:YES];
     [self.lineColor set];
     [path setLineCapStyle:kCGLineCapRound];
@@ -111,7 +111,7 @@
                                  endAngle:2*M_PI
                                  clockwise:YES];
     
-    [startCircle fill];
+    //[startCircle fill]; //隐藏开始点
     
     [self drawText];
    

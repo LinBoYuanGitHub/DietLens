@@ -92,19 +92,23 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print("被选中的是：\(indexPath)")
-        AlertMessageHelper.showLoadingDialog(targetController: self)
-        let groupId = studyList[indexPath.row].studyId
-        APIService.instance.getClinicalStudyDetail(groupId: groupId) { (studyDetailEntity) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
-            if studyDetailEntity == nil {
-                return
-            }
-            guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
-                return
-            }
-            self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
+
+        guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
+            return
         }
+        self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
+//        AlertMessageHelper.showLoadingDialog(targetController: self)
+//        let groupId = studyList[indexPath.row].studyId
+//        APIService.instance.getClinicalStudyDetail(groupId: groupId) { (studyDetailEntity) in
+//            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+//            if studyDetailEntity == nil {
+//                return
+//            }
+//            guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
+//                return
+//            }
+//            self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
+//        }
     }
 
 }
