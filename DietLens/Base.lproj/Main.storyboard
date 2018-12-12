@@ -8634,19 +8634,19 @@ Scan QR code to join a study.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcX-I5-e60">
-                                <rect key="frame" x="20" y="595" width="335" height="32"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcX-I5-e60">
+                                <rect key="frame" x="20" y="594" width="335" height="33"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.16078431372549018" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="dxP-Dp-Wp0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Agree">
-                                    <color key="titleColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -8658,7 +8658,7 @@ Scan QR code to join a study.</string>
                         <constraints>
                             <constraint firstItem="CC6-kO-Mgq" firstAttribute="top" secondItem="dGw-V3-4ne" secondAttribute="bottom" constant="20" id="4II-vi-ZEe"/>
                             <constraint firstItem="P7v-RF-9Yy" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="20" id="5fe-ns-JWy"/>
-                            <constraint firstItem="dcX-I5-e60" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="20" id="7qa-mc-RKH"/>
+                            <constraint firstItem="dcX-I5-e60" firstAttribute="leading" secondItem="P7v-RF-9Yy" secondAttribute="leading" id="AMY-Zo-xAU"/>
                             <constraint firstAttribute="trailing" secondItem="dGw-V3-4ne" secondAttribute="trailing" constant="20" id="AST-JP-mBa"/>
                             <constraint firstAttribute="trailing" secondItem="YGR-UU-MnG" secondAttribute="trailing" constant="20" id="GO7-Lt-JMe"/>
                             <constraint firstItem="P7v-RF-9Yy" firstAttribute="top" secondItem="NFx-mN-Ce3" secondAttribute="bottom" constant="20" id="J63-it-KOg"/>
@@ -8667,7 +8667,6 @@ Scan QR code to join a study.</string>
                             <constraint firstItem="YGR-UU-MnG" firstAttribute="top" secondItem="CC6-kO-Mgq" secondAttribute="bottom" constant="20" id="N40-gb-Vit"/>
                             <constraint firstAttribute="trailing" secondItem="NFx-mN-Ce3" secondAttribute="trailing" constant="80" id="ORA-xr-KFQ"/>
                             <constraint firstItem="dGw-V3-4ne" firstAttribute="top" secondItem="UPc-sZ-ap9" secondAttribute="bottom" constant="20" id="TOL-tW-dUK"/>
-                            <constraint firstAttribute="trailing" secondItem="dcX-I5-e60" secondAttribute="trailing" constant="20" id="Tbj-K3-qYr"/>
                             <constraint firstItem="UPc-sZ-ap9" firstAttribute="centerX" secondItem="OYf-rp-Zqo" secondAttribute="centerX" id="bCt-iR-MGz"/>
                             <constraint firstItem="UPc-sZ-ap9" firstAttribute="top" secondItem="P7v-RF-9Yy" secondAttribute="bottom" constant="20" id="ec1-VC-Jrt"/>
                             <constraint firstItem="NFx-mN-Ce3" firstAttribute="top" secondItem="OYf-rp-Zqo" secondAttribute="top" constant="100" id="eq7-ro-dND"/>
@@ -8676,6 +8675,7 @@ Scan QR code to join a study.</string>
                             <constraint firstAttribute="bottom" secondItem="dcX-I5-e60" secondAttribute="bottom" constant="40" id="hkv-B8-7wB"/>
                             <constraint firstAttribute="trailing" secondItem="CC6-kO-Mgq" secondAttribute="trailing" constant="20" id="rOk-UR-NXl"/>
                             <constraint firstItem="YGR-UU-MnG" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="20" id="vLc-kl-3Lw"/>
+                            <constraint firstItem="dcX-I5-e60" firstAttribute="trailing" secondItem="P7v-RF-9Yy" secondAttribute="trailing" id="zYi-lB-hGe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="suu-cS-9Lx"/>
