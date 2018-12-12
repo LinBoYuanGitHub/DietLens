@@ -55,7 +55,7 @@ class PersonalFavouriteFoodViewController: BaseViewController {
             }
             self.popularFoodList = results
             self.popularCollectionView.reloadData()
-        }, nextPageCompletion: { (nextLink) in
+        }, nextPageCompletion: { (_) in
             //consider next page scenario
         })
     }

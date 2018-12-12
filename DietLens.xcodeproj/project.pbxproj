@@ -232,10 +232,10 @@
 		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 		EC14599721B9079600A8D27F /* ClinicStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */; };
 		EC14599921B9091100A8D27F /* ClinicalStudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */; };
-		EC79FA6721BE31A5004ADAED /* ScannedResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA6621BE31A5004ADAED /* ScannedResultViewController.swift */; };
 		EC79FA7121BE3A4A004ADAED /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA7021BE3A4A004ADAED /* DescriptionViewController.swift */; };
 		EC79FA7321BE3B01004ADAED /* EligibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA7221BE3B01004ADAED /* EligibilityViewController.swift */; };
 		EC79FA7521BE3BBE004ADAED /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA7421BE3BBE004ADAED /* ContactViewController.swift */; };
+		ECAE914F21C0D45E00577865 /* ScannedResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAE914E21C0D45E00577865 /* ScannedResultViewController.swift */; };
 		ECC10ED421BA1705007574CC /* EConsentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED321BA1705007574CC /* EConsentViewController.swift */; };
 		ECC10ED821BA1DB3007574CC /* VerificationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */; };
 		ECC10EDA21BA1E43007574CC /* AsunBasicAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */; };
@@ -506,10 +506,10 @@
 		EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicStudyEntity.swift; sourceTree = "<group>"; };
 		EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyTableViewCell.swift; sourceTree = "<group>"; };
 		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EC79FA6621BE31A5004ADAED /* ScannedResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedResultViewController.swift; sourceTree = "<group>"; };
 		EC79FA7021BE3A4A004ADAED /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		EC79FA7221BE3B01004ADAED /* EligibilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibilityViewController.swift; sourceTree = "<group>"; };
 		EC79FA7421BE3BBE004ADAED /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		ECAE914E21C0D45E00577865 /* ScannedResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedResultViewController.swift; sourceTree = "<group>"; };
 		ECC10ED321BA1705007574CC /* EConsentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EConsentViewController.swift; sourceTree = "<group>"; };
 		ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeView.swift; sourceTree = "<group>"; };
 		ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsunBasicAttributes.swift; sourceTree = "<group>"; };
@@ -1187,10 +1187,10 @@
 				ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */,
 				ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */,
 				ECC10EE621BA526F007574CC /* QRScannerController.swift */,
-				EC79FA6621BE31A5004ADAED /* ScannedResultViewController.swift */,
 				EC79FA7021BE3A4A004ADAED /* DescriptionViewController.swift */,
 				EC79FA7221BE3B01004ADAED /* EligibilityViewController.swift */,
 				EC79FA7421BE3BBE004ADAED /* ContactViewController.swift */,
+				ECAE914E21C0D45E00577865 /* ScannedResultViewController.swift */,
 			);
 			path = ClinicalStudies;
 			sourceTree = "<group>";
@@ -1373,9 +1373,9 @@
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
 				"${BUILT_PRODUCTS_DIR}/JPSVolumeButtonHandler/JPSVolumeButtonHandler.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
@@ -1408,9 +1408,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPSVolumeButtonHandler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
@@ -1672,6 +1672,7 @@
 				3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */,
 				EC79FA7521BE3BBE004ADAED /* ContactViewController.swift in Sources */,
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
+				ECAE914F21C0D45E00577865 /* ScannedResultViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
 				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				EC79FA7321BE3B01004ADAED /* EligibilityViewController.swift in Sources */,
@@ -1749,7 +1750,6 @@
 				3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */,
 				3F5608F120F30C010007B3AF /* EmojiInputView.swift in Sources */,
 				5841A5071FCE5939006201C5 /* Notification.swift in Sources */,
-				EC79FA6721BE31A5004ADAED /* ScannedResultViewController.swift in Sources */,
 				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
 				3F9BFE5C1FF0D4E40011845B /* StepCounterViewController.swift in Sources */,
 				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,

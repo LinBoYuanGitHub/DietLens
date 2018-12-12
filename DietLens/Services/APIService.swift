@@ -1551,12 +1551,16 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save food diary failed due to : \(String(describing: response.result.error))")
-                    completion(false, nil)
+                    //need to be checked
+                    let jsonObject = JSON()
+                    completion(false, jsonObject)
                     return
                 }
                 guard let result = response.result.value else {
                     print("Save food diary failed due to : Server Data Type Error")
-                    completion(false, nil)
+                    let jsonObject = JSON()
+                    completion(false, jsonObject)
+                   // completion(false, nil)
                     return
                 }
                 let jsonObject = JSON(result)

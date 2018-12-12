@@ -13,15 +13,6 @@ class ContactViewController: UIViewController, IndicatorInfoProvider {
 
     var itemInfo: IndicatorInfo = "Contact"
 
-    init(itemInfo: IndicatorInfo) {
-        self.itemInfo = itemInfo
-        super.init(nibName: nil, bundle: nil)
-    }
-    required init(coder aDecoder: NSCoder!) { super.init(coder: aDecoder)!}
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.navigationController?.isNavigationBarHidden = true

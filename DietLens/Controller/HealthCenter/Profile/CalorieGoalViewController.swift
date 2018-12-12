@@ -83,7 +83,7 @@ class CalorieGoalViewController: BaseViewController {
         }
         let preference = UserDefaults.standard
         preference.bool(forKey: FirstTimeFlag.shouldPopUpProfilingDialog)
-        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (isSuccess) in
+        APIService.instance.setCalorieGoal(calorieGoal: calorieValue) { (_) in
             if self.isInRegistrationFlow {
                 if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
                     self.present(controller, animated: true, completion: nil)
