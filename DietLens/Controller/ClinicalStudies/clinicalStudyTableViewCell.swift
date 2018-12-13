@@ -28,7 +28,7 @@ class ClinicalStudyTableViewCell: UITableViewCell {
 
     func setUpCell(studyStatus: StudyStatus, name: String) {
         studyName.text = name
-        icon.image = UIImage(imageLiteralResourceName: "more_clinical studies_icon")
+        icon.image = UIImage(imageLiteralResourceName: "white_clinical studies_icon")
         //change color according to
         switch studyStatus {
         case .pending:
@@ -36,13 +36,13 @@ class ClinicalStudyTableViewCell: UITableViewCell {
             containview.backgroundColor = UIColor.ThemeColor.dietLensPendingYellow
         case .process:
             statusText.text = "process"
-            containview.backgroundColor = UIColor.ThemeColor.dietLensAcceptedGreen
+            containview.backgroundColor = UIColor.ThemeColor.dietLensAcceptedRed
         case .completed:
             statusText.text = "completed"
-            containview.backgroundColor = UIColor.ThemeColor.dietLensCompletedRed
+            containview.backgroundColor = UIColor.ThemeColor.dietLensCompletedGreen
         case .expiry:
             statusText.text = "expiry"
-            containview.backgroundColor = UIColor.ThemeColor.dietLensCompletedRed
+            containview.backgroundColor = UIColor.ThemeColor.dietLensAcceptedRed
         default: break
         }
 //        studyName.text = study_Name

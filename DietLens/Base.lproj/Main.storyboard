@@ -374,7 +374,7 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuButtonCell" rowHeight="60" id="vuB-lb-UEO" customClass="SideMenuCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuButtonCell" rowHeight="60" id="vuB-lb-UEO" customClass="SideMenuCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="250" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vuB-lb-UEO" id="7Mh-vc-IBk">
@@ -602,7 +602,7 @@
                                 <color key="separatorColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarSectionHeader" rowHeight="40" id="jnO-Gu-86c" customClass="FoodCalendarSectionHeader" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarSectionHeader" rowHeight="40" id="jnO-Gu-86c" customClass="FoodCalendarSectionHeader" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="377" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jnO-Gu-86c" id="9xd-1W-sOO">
@@ -638,7 +638,7 @@
                                             <outlet property="titleLabel" destination="kJq-pU-xZa" id="B6T-se-KyQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodDiaryRecordViewCell" rowHeight="56" id="22F-ea-try" customClass="FoodDiaryRecordViewCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodDiaryRecordViewCell" rowHeight="56" id="22F-ea-try" customClass="FoodDiaryRecordViewCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="95.5" width="377" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="22F-ea-try" id="Lbs-SQ-i02">
@@ -685,7 +685,7 @@
                                             <outlet property="foodImageView" destination="C23-6r-ShA" id="6Vu-5D-SRp"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addMoreCell" rowHeight="56" id="r8Z-Xf-XQk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addMoreCell" rowHeight="56" id="r8Z-Xf-XQk">
                                         <rect key="frame" x="0.0" y="151.5" width="377" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r8Z-Xf-XQk" id="9Mr-dg-f7U">
@@ -958,7 +958,7 @@
                                 <rect key="frame" x="15" y="90.5" width="345" height="556.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="bQs-gl-SZu" customClass="FoodDiaryHeaderCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="40" id="bQs-gl-SZu" customClass="FoodDiaryHeaderCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="345" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bQs-gl-SZu" id="0P2-TY-CBt">
@@ -992,7 +992,7 @@
                                             <outlet property="titleLabel" destination="4RX-x6-yyv" id="2m2-cb-xVQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodItem" rowHeight="100" id="mtE-pT-6Sd" customClass="FoodDiaryCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodItem" rowHeight="100" id="mtE-pT-6Sd" customClass="FoodDiaryCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="95.5" width="345" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mtE-pT-6Sd" id="Q3O-vM-UFQ">
@@ -1184,13 +1184,13 @@ Click add to record food~</string>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYT-3h-LKE" userLabel="ImageInfoView">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tjx-y8-93J">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                                 </imageView>
                                                 <view alpha="0.20000000000000001" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBr-xW-Gz0" userLabel="CoverView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6jE-pj-2LE">
@@ -1227,13 +1227,13 @@ Click add to record food~</string>
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kUm-Jq-bUm">
-                                            <rect key="frame" x="16" y="200" width="568" height="394"/>
+                                            <rect key="frame" x="16" y="200" width="343" height="394"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kjY-HZ-agy" userLabel="Stack View dishname">
-                                                    <rect key="frame" x="0.0" y="0.0" width="568" height="91"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dish Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIh-JD-cOs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="EbG-Fj-ug6"/>
                                                             </constraints>
@@ -1242,10 +1242,10 @@ Click add to record food~</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VdL-JQ-87c">
-                                                            <rect key="frame" x="0.0" y="45" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="45" width="343" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dish name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bnp-zW-poH">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="563" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="nGr-j2-Phe"/>
                                                                     </constraints>
@@ -1254,7 +1254,7 @@ Click add to record food~</string>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:cwH-LN-qPh:image" translatesAutoresizingMaskIntoConstraints="NO" id="cwH-LN-qPh">
-                                                                    <rect key="frame" x="563" y="12.5" width="5" height="5"/>
+                                                                    <rect key="frame" x="338" y="12.5" width="5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="5" id="gl4-Eh-gki"/>
                                                                         <constraint firstAttribute="width" constant="5" id="qex-3n-Qpv"/>
@@ -1266,7 +1266,7 @@ Click add to record food~</string>
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xey-Jd-pCf" userLabel="grayLine">
-                                                            <rect key="frame" x="0.0" y="90" width="568" height="1"/>
+                                                            <rect key="frame" x="0.0" y="90" width="343" height="1"/>
                                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="lNG-bm-1dq"/>
@@ -1278,10 +1278,10 @@ Click add to record food~</string>
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TvS-U4-PIw" userLabel="Stack View mealtype">
-                                                    <rect key="frame" x="0.0" y="101" width="568" height="91"/>
+                                                    <rect key="frame" x="0.0" y="101" width="343" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" text="This is my" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SaS-6D-d0T">
-                                                            <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="ZHb-SR-cH2"/>
                                                             </constraints>
@@ -1290,10 +1290,10 @@ Click add to record food~</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="g2O-Hq-FB5">
-                                                            <rect key="frame" x="0.0" y="45" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="45" width="343" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Breakfast" placeholder="MealType" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MBG-6z-Hoi">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="563" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="R2y-Rk-qRW"/>
                                                                     </constraints>
@@ -1302,7 +1302,7 @@ Click add to record food~</string>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:cwH-LN-qPh:image" translatesAutoresizingMaskIntoConstraints="NO" id="FGA-JU-Njq">
-                                                                    <rect key="frame" x="563" y="12.5" width="5" height="5"/>
+                                                                    <rect key="frame" x="338" y="12.5" width="5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="5" id="xog-bn-E8p"/>
                                                                         <constraint firstAttribute="height" constant="5" id="zka-sL-BjX"/>
@@ -1314,7 +1314,7 @@ Click add to record food~</string>
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZG-dU-Zga" userLabel="grayLine">
-                                                            <rect key="frame" x="0.0" y="90" width="568" height="1"/>
+                                                            <rect key="frame" x="0.0" y="90" width="343" height="1"/>
                                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="Hd3-F4-lbu"/>
@@ -1326,10 +1326,10 @@ Click add to record food~</string>
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-l5-rs3" userLabel="Stack View quantity">
-                                                    <rect key="frame" x="0.0" y="202" width="568" height="91"/>
+                                                    <rect key="frame" x="0.0" y="202" width="343" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3Q-Ey-mKC">
-                                                            <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="RFQ-uU-lJr"/>
                                                             </constraints>
@@ -1338,10 +1338,10 @@ Click add to record food~</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="e5C-9f-fq1">
-                                                            <rect key="frame" x="0.0" y="45" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="45" width="343" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" placeholder="MealType" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wJa-m1-UUM">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="563" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="49d-p1-VbQ"/>
                                                                     </constraints>
@@ -1350,7 +1350,7 @@ Click add to record food~</string>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:lUW-JV-nxh:image" translatesAutoresizingMaskIntoConstraints="NO" id="lUW-JV-nxh">
-                                                                    <rect key="frame" x="563" y="12.5" width="5" height="5"/>
+                                                                    <rect key="frame" x="338" y="12.5" width="5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="5" id="KlE-2S-cLR"/>
                                                                         <constraint firstAttribute="height" constant="5" id="hew-dX-NsW"/>
@@ -1362,7 +1362,7 @@ Click add to record food~</string>
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cY-o0-GtO" userLabel="grayLine">
-                                                            <rect key="frame" x="0.0" y="90" width="568" height="1"/>
+                                                            <rect key="frame" x="0.0" y="90" width="343" height="1"/>
                                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="TeO-QK-Yhh"/>
@@ -1371,10 +1371,10 @@ Click add to record food~</string>
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HPv-Hr-ln6" userLabel="Stack View unit">
-                                                    <rect key="frame" x="0.0" y="303" width="568" height="91"/>
+                                                    <rect key="frame" x="0.0" y="303" width="343" height="91"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Unit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctP-uP-9Cu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="TA9-ka-BFH"/>
                                                             </constraints>
@@ -1383,10 +1383,10 @@ Click add to record food~</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PY6-hv-h8O">
-                                                            <rect key="frame" x="0.0" y="45" width="568" height="30"/>
+                                                            <rect key="frame" x="0.0" y="45" width="343" height="30"/>
                                                             <subviews>
                                                                 <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="portion" placeholder="portion" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zcC-t7-BgH">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="563" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="sLp-Kh-p4h"/>
                                                                     </constraints>
@@ -1395,7 +1395,7 @@ Click add to record food~</string>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:Rfe-pZ-PZM:image" translatesAutoresizingMaskIntoConstraints="NO" id="Rfe-pZ-PZM">
-                                                                    <rect key="frame" x="563" y="12.5" width="5" height="5"/>
+                                                                    <rect key="frame" x="338" y="12.5" width="5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="5" id="3LN-iH-dJN"/>
                                                                         <constraint firstAttribute="height" constant="5" id="uG8-4Z-4Bb"/>
@@ -1407,7 +1407,7 @@ Click add to record food~</string>
                                                             </constraints>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QD5-e8-Bex" userLabel="grayLine">
-                                                            <rect key="frame" x="0.0" y="90" width="568" height="1"/>
+                                                            <rect key="frame" x="0.0" y="90" width="343" height="1"/>
                                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="Tuc-tg-spg"/>
@@ -1432,7 +1432,7 @@ Click add to record food~</string>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asd-po-Lze" userLabel="DeleteBtn">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="34"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
                                             <color key="backgroundColor" red="1" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="yTo-cD-2Qo"/>
@@ -2105,7 +2105,7 @@ Click add to record food~</string>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="274" id="NFA-LB-FYH" customClass="NewsArticleTableCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="274" id="NFA-LB-FYH" customClass="NewsArticleTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="375" height="274"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NFA-LB-FYH" id="Yjq-kf-cRR">
@@ -2191,7 +2191,7 @@ Click add to record food~</string>
                                             <outlet property="titleLabel" destination="exx-wZ-13F" id="Hc2-bz-Ma2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="292" id="KDW-BW-GQ8" userLabel="eventCell" customClass="NewsEventCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" rowHeight="292" id="KDW-BW-GQ8" userLabel="eventCell" customClass="NewsEventCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="275" width="375" height="292"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KDW-BW-GQ8" id="fmm-2w-8di">
@@ -2353,7 +2353,7 @@ Click add to record food~</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.97252601390000004" green="0.97326189279999997" blue="0.97263997790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="663" id="VqS-x0-TIw" customClass="SinglePageArticleBodyCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleMainBody" rowHeight="663" id="VqS-x0-TIw" customClass="SinglePageArticleBodyCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="375" height="663"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VqS-x0-TIw" id="DSJ-zr-bVs">
@@ -2489,7 +2489,7 @@ Click add to record food~</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="56" id="5p7-xg-Yxh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="56" id="5p7-xg-Yxh">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5p7-xg-Yxh" id="joS-1W-1gH">
@@ -2504,7 +2504,7 @@ Click add to record food~</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="320.0kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6j-Cr-HOO">
-                                                    <rect key="frame" x="72" y="18" width="63" height="20"/>
+                                                    <rect key="frame" x="297" y="18" width="63" height="20"/>
                                                     <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
                                                     <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2518,7 +2518,7 @@ Click add to record food~</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="5FS-0Z-6Iy">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="75" id="5FS-0Z-6Iy">
                                         <rect key="frame" x="0.0" y="84" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5FS-0Z-6Iy" id="RM4-FP-CdM">
@@ -2729,7 +2729,7 @@ Click add to record food~</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%DAILY VALUE*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mc-As-B8R">
-                                            <rect key="frame" x="480.5" y="13.5" width="93.5" height="17"/>
+                                            <rect key="frame" x="255.5" y="13.5" width="93.5" height="17"/>
                                             <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -2763,7 +2763,7 @@ Complete your profile for a more accurate recommendation.
                                     <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="dailyNutritionTableCell" rowHeight="53" id="mAm-Qi-xeU" customClass="DailyNutritionTableCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="dailyNutritionTableCell" rowHeight="53" id="mAm-Qi-xeU" customClass="DailyNutritionTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mAm-Qi-xeU" id="NPu-Gy-oHa">
@@ -2825,7 +2825,7 @@ Complete your profile for a more accurate recommendation.
                                             <outlet property="valueLabel" destination="w4t-0J-oJ3" id="AQT-Rj-HA2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subItemTableCell" rowHeight="90" id="VZ9-od-g1g">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subItemTableCell" rowHeight="90" id="VZ9-od-g1g">
                                         <rect key="frame" x="0.0" y="125" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VZ9-od-g1g" id="Jx5-QD-fun">
@@ -2986,13 +2986,13 @@ Complete your profile for a more accurate recommendation.
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Investigators or Research Sites near you" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="liW-Af-eqa">
-                                        <rect key="frame" x="16" y="10" width="339" height="43"/>
+                                        <rect key="frame" x="16" y="20" width="339" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="0.87058823529999996" green="0.51764705879999995" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gL-9f-iBM">
-                                        <rect key="frame" x="16" y="65" width="339" height="57"/>
+                                        <rect key="frame" x="16" y="75" width="339" height="57"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seah Xin Yi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUm-hu-v2Q">
                                                 <rect key="frame" x="0.0" y="0.0" width="339" height="17"/>
@@ -3000,14 +3000,14 @@ Complete your profile for a more accurate recommendation.
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SGH, Singapore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eur-Dh-g8G">
-                                                <rect key="frame" x="0.0" y="34" width="339" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6326 5357" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XJ-4Y-ASC">
+                                                <rect key="frame" x="0.0" y="17" width="339" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6326 5357" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XJ-4Y-ASC">
-                                                <rect key="frame" x="0.0" y="17" width="339" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SGH, Singapore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eur-Dh-g8G">
+                                                <rect key="frame" x="0.0" y="34" width="339" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3037,7 +3037,7 @@ Complete your profile for a more accurate recommendation.
                                     <constraint firstItem="liW-Af-eqa" firstAttribute="leading" secondItem="gK8-S9-KRY" secondAttribute="leading" constant="16" id="jwX-NR-v4t"/>
                                     <constraint firstItem="0gL-9f-iBM" firstAttribute="leading" secondItem="liW-Af-eqa" secondAttribute="leading" id="k7s-Xm-iUR"/>
                                     <constraint firstItem="0gL-9f-iBM" firstAttribute="top" secondItem="liW-Af-eqa" secondAttribute="bottom" constant="12" id="kBJ-NP-aQ1"/>
-                                    <constraint firstItem="liW-Af-eqa" firstAttribute="top" secondItem="gK8-S9-KRY" secondAttribute="top" constant="10" id="xwx-yR-fwq"/>
+                                    <constraint firstItem="liW-Af-eqa" firstAttribute="top" secondItem="gK8-S9-KRY" secondAttribute="top" constant="20" id="xwx-yR-fwq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -3049,6 +3049,11 @@ Complete your profile for a more accurate recommendation.
                             <constraint firstAttribute="trailing" secondItem="gK8-S9-KRY" secondAttribute="trailing" id="YXC-Pr-aJD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="contactorLabel" destination="KUm-hu-v2Q" id="6Vd-ag-2Ee"/>
+                        <outlet property="organizationLabel" destination="eur-Dh-g8G" id="5D6-wd-cAM"/>
+                        <outlet property="phoneLabel" destination="6XJ-4Y-ASC" id="pyW-0a-j84"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E6d-pC-W5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3090,7 +3095,7 @@ Complete your profile for a more accurate recommendation.
                                 <rect key="frame" x="0.0" y="290" width="375" height="357"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="reportCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reportCell" id="mLF-uE-idS" customClass="ReportTableCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="reportCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reportCell" id="mLF-uE-idS" customClass="ReportTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mLF-uE-idS" id="8WJ-Wy-gPd">
@@ -3232,7 +3237,7 @@ Complete your profile for a more accurate recommendation.
                                 <rect key="frame" x="0.0" y="167" width="375" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCounterCell" id="JCE-gR-3gk" customClass="StepCounterCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stepCounterCell" id="JCE-gR-3gk" customClass="StepCounterCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JCE-gR-3gk" id="2km-vC-Zse">
@@ -3839,7 +3844,7 @@ Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileAvatarCell" rowHeight="66" id="tKY-3s-g7q" userLabel="AvatarCell" customClass="ProfileAvatarCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileAvatarCell" rowHeight="66" id="tKY-3s-g7q" userLabel="AvatarCell" customClass="ProfileAvatarCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tKY-3s-g7q" id="jK3-Ho-3mr">
@@ -3872,7 +3877,7 @@ Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI
                                             <outlet property="textComponent" destination="bFy-1l-eiM" id="PZn-fg-5Xk"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileTextFieldCell" id="hPb-Gw-QuG" userLabel="UserNameCell" customClass="ProfileTextFieldCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileTextFieldCell" id="hPb-Gw-QuG" userLabel="UserNameCell" customClass="ProfileTextFieldCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="94" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hPb-Gw-QuG" id="2Ez-He-RET">
@@ -3904,7 +3909,7 @@ Developed by a dedicated team at NExT++ Centre, DietLens aims to be your best AI
                                             <outlet property="txtLabel" destination="neJ-2A-ttc" id="rOK-Fr-rv5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileArrowCell" id="ty9-M7-jM6" customClass="ProfileArrowCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileArrowCell" id="ty9-M7-jM6" customClass="ProfileArrowCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="138" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ty9-M7-jM6" id="8yM-xa-jXA">
@@ -4679,7 +4684,7 @@ e.g. athlete with an almost unstoppable training schedule with multiple training
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Jll-Ly-f3u" userLabel="NotificationHeader">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Jll-Ly-f3u" userLabel="NotificationHeader">
                                         <rect key="frame" x="0.0" y="55.5" width="363" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jll-Ly-f3u" id="qUH-AV-INu">
@@ -4700,7 +4705,7 @@ e.g. athlete with an almost unstoppable training schedule with multiple training
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="70" id="6HU-kW-PnL" customClass="NotificationTableCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationCell" rowHeight="70" id="6HU-kW-PnL" customClass="NotificationTableCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.5" width="363" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6HU-kW-PnL" id="dY0-Dr-BLL">
@@ -5580,7 +5585,7 @@ What is it?</string>
                                 <rect key="frame" x="16" y="40" width="343" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthCenterMainCell" rowHeight="133" id="GDW-Qf-o3a" customClass="HealthCenterMainCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthCenterMainCell" rowHeight="133" id="GDW-Qf-o3a" customClass="HealthCenterMainCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="133"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GDW-Qf-o3a" id="BSz-4B-0zh" userLabel="ContentView">
@@ -5711,7 +5716,7 @@ What is it?</string>
                                 <rect key="frame" x="12" y="36" width="351" height="631"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="healthCenterBarCell" rowHeight="50" id="vwp-fA-ID3" customClass="HealthCenterBarCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="healthCenterBarCell" rowHeight="50" id="vwp-fA-ID3" customClass="HealthCenterBarCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="351" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vwp-fA-ID3" id="dLU-0m-kmP">
@@ -5770,7 +5775,7 @@ What is it?</string>
                                             <outlet property="valueLabel" destination="Xmi-t4-8al" id="CQa-aN-5mL"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="aoW-Ik-kd6">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="aoW-Ik-kd6">
                                         <rect key="frame" x="0.0" y="78" width="351" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aoW-Ik-kd6" id="KEB-Ju-7EG">
@@ -5876,7 +5881,7 @@ What is it?</string>
                                 <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="healthCenterAddItemTableCell" rowHeight="50" id="Nop-2b-RUK" customClass="HealthCenterTableValueCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="healthCenterAddItemTableCell" rowHeight="50" id="Nop-2b-RUK" customClass="HealthCenterTableValueCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nop-2b-RUK" id="BSc-Tm-a9A">
@@ -5962,7 +5967,7 @@ What is it?</string>
                                 <rect key="frame" x="16" y="164.5" width="343" height="482.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="registrationProfileCell" rowHeight="60" id="JNk-HB-c2E" customClass="RegistrationProfileCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="registrationProfileCell" rowHeight="60" id="JNk-HB-c2E" customClass="RegistrationProfileCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JNk-HB-c2E" id="5IO-ZZ-1rN">
@@ -6414,107 +6419,6 @@ What is it?</string>
                                     <constraint firstAttribute="height" constant="120" id="zCD-qS-aqL"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u6p-ZZ-o4H">
-                                <rect key="frame" x="0.0" y="210" width="375" height="457"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clinicalStudyCell" rowHeight="150" id="lK8-O0-g3c" customClass="ClinicalStudyTableViewCell" customModule="DietLens" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lK8-O0-g3c" id="3nU-OS-2vs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y98-dN-7H7">
-                                                    <rect key="frame" x="20" y="20" width="335" height="110"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Recommendation for thyroid disordrs" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeF-9L-UUe">
-                                                            <rect key="frame" x="100" y="20" width="215" height="48"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PGF-u4-qi8">
-                                                            <rect key="frame" x="20" y="40" width="30" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="Mcf-jT-78f"/>
-                                                                <constraint firstAttribute="width" constant="30" id="zhb-Dm-POQ"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Started on " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeI-eD-o7w">
-                                                            <rect key="frame" x="100" y="73" width="58.5" height="18"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="18" id="NFc-XX-ImQ"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Nov 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-aU-wni">
-                                                            <rect key="frame" x="158.5" y="73" width="60" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HbI-5m-Qaa">
-                                                            <rect key="frame" x="70" y="10" width="1" height="90"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="1" id="Z6B-We-I2S"/>
-                                                            </constraints>
-                                                        </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-Wf-Iji">
-                                                            <rect key="frame" x="9" y="78" width="52" height="20"/>
-                                                            <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.95294117647058818" green="0.43529411764705883" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="FOT-Wf-Iji" firstAttribute="top" secondItem="PGF-u4-qi8" secondAttribute="bottom" constant="8" id="4FX-BA-GxC"/>
-                                                        <constraint firstItem="PGF-u4-qi8" firstAttribute="leading" secondItem="Y98-dN-7H7" secondAttribute="leading" constant="20" id="530-Xj-3Jc"/>
-                                                        <constraint firstItem="EeI-eD-o7w" firstAttribute="leading" secondItem="VeF-9L-UUe" secondAttribute="leading" id="GDe-e4-Og1"/>
-                                                        <constraint firstItem="HbI-5m-Qaa" firstAttribute="top" secondItem="Y98-dN-7H7" secondAttribute="top" constant="10" id="PEr-E2-Bzv"/>
-                                                        <constraint firstItem="HbI-5m-Qaa" firstAttribute="leading" secondItem="PGF-u4-qi8" secondAttribute="trailing" constant="20" id="Ptj-4g-MgH"/>
-                                                        <constraint firstItem="yfb-aU-wni" firstAttribute="leading" secondItem="EeI-eD-o7w" secondAttribute="trailing" id="Yea-3i-ubk"/>
-                                                        <constraint firstItem="EeI-eD-o7w" firstAttribute="top" secondItem="VeF-9L-UUe" secondAttribute="bottom" constant="5" id="dz7-lx-S3z"/>
-                                                        <constraint firstItem="yfb-aU-wni" firstAttribute="top" secondItem="EeI-eD-o7w" secondAttribute="top" id="e6r-51-vH6"/>
-                                                        <constraint firstItem="VeF-9L-UUe" firstAttribute="top" secondItem="Y98-dN-7H7" secondAttribute="top" constant="20" id="fx4-NJ-MBj"/>
-                                                        <constraint firstItem="yfb-aU-wni" firstAttribute="bottom" secondItem="EeI-eD-o7w" secondAttribute="bottom" id="hmb-lQ-dDX"/>
-                                                        <constraint firstItem="PGF-u4-qi8" firstAttribute="leading" secondItem="Y98-dN-7H7" secondAttribute="leading" constant="20" id="mm6-Sl-4SR"/>
-                                                        <constraint firstAttribute="trailing" secondItem="VeF-9L-UUe" secondAttribute="trailing" constant="20" id="nrK-aD-xRl"/>
-                                                        <constraint firstItem="FOT-Wf-Iji" firstAttribute="centerX" secondItem="PGF-u4-qi8" secondAttribute="centerX" id="r9t-ly-Awm"/>
-                                                        <constraint firstItem="PGF-u4-qi8" firstAttribute="centerY" secondItem="Y98-dN-7H7" secondAttribute="centerY" id="t7C-1B-itA"/>
-                                                        <constraint firstAttribute="bottom" secondItem="HbI-5m-Qaa" secondAttribute="bottom" constant="10" id="u8s-do-FJy"/>
-                                                        <constraint firstItem="VeF-9L-UUe" firstAttribute="leading" secondItem="PGF-u4-qi8" secondAttribute="trailing" constant="50" id="xVh-X8-9rk"/>
-                                                        <constraint firstItem="yfb-aU-wni" firstAttribute="height" secondItem="EeI-eD-o7w" secondAttribute="height" id="ze5-4s-qQV"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="bottom" secondItem="3nU-OS-2vs" secondAttribute="bottom" constant="-20" id="6bN-BR-COP"/>
-                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="top" secondItem="3nU-OS-2vs" secondAttribute="top" constant="20" id="IpK-5Q-KEp"/>
-                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="trailing" secondItem="3nU-OS-2vs" secondAttribute="trailing" constant="-20" id="e7N-N3-cTR"/>
-                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="leading" secondItem="3nU-OS-2vs" secondAttribute="leading" constant="20" id="kjP-Ud-5Ql"/>
-                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="centerY" secondItem="3nU-OS-2vs" secondAttribute="centerY" id="y0K-Zk-AcB"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="containview" destination="Y98-dN-7H7" id="X7g-IV-3eC"/>
-                                            <outlet property="icon" destination="PGF-u4-qi8" id="dGF-a2-oV2"/>
-                                            <outlet property="statusText" destination="FOT-Wf-Iji" id="XZ1-cS-rWO"/>
-                                            <outlet property="studyName" destination="VeF-9L-UUe" id="MSJ-1K-BPP"/>
-                                            <outlet property="studyStartDate" destination="yfb-aU-wni" id="a0q-LV-KYQ"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty state" translatesAutoresizingMaskIntoConstraints="NO" id="NkN-FR-6sa" userLabel="empty state icon">
                                 <rect key="frame" x="110" y="265" width="155" height="155"/>
                                 <constraints>
@@ -6530,6 +6434,85 @@ Scan QR code to join a study.</string>
                                 <color key="textColor" red="0.6705882353" green="0.67450980390000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u6p-ZZ-o4H">
+                                <rect key="frame" x="0.0" y="210" width="375" height="457"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clinicalStudyCell" rowHeight="150" id="lK8-O0-g3c" customClass="ClinicalStudyTableViewCell" customModule="DietLens" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lK8-O0-g3c" id="3nU-OS-2vs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y98-dN-7H7">
+                                                    <rect key="frame" x="10" y="10" width="355" height="130"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Recommendation for thyroid disordrs" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeF-9L-UUe">
+                                                            <rect key="frame" x="75" y="20" width="260" height="50.5"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PGF-u4-qi8">
+                                                            <rect key="frame" x="20" y="50" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="Mcf-jT-78f"/>
+                                                                <constraint firstAttribute="width" constant="30" id="zhb-Dm-POQ"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HbI-5m-Qaa">
+                                                            <rect key="frame" x="62" y="10" width="1" height="110"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="1" id="Z6B-We-I2S"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-Wf-Iji">
+                                                            <rect key="frame" x="75" y="70.5" width="44.5" height="17"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.95294117647058818" green="0.43529411764705883" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="PGF-u4-qi8" firstAttribute="leading" secondItem="Y98-dN-7H7" secondAttribute="leading" constant="20" id="530-Xj-3Jc"/>
+                                                        <constraint firstItem="HbI-5m-Qaa" firstAttribute="top" secondItem="Y98-dN-7H7" secondAttribute="top" constant="10" id="PEr-E2-Bzv"/>
+                                                        <constraint firstItem="HbI-5m-Qaa" firstAttribute="leading" secondItem="PGF-u4-qi8" secondAttribute="trailing" constant="12" id="Ptj-4g-MgH"/>
+                                                        <constraint firstItem="FOT-Wf-Iji" firstAttribute="leading" secondItem="VeF-9L-UUe" secondAttribute="leading" id="YD1-fN-J5q"/>
+                                                        <constraint firstItem="VeF-9L-UUe" firstAttribute="top" secondItem="Y98-dN-7H7" secondAttribute="top" constant="20" id="fx4-NJ-MBj"/>
+                                                        <constraint firstItem="PGF-u4-qi8" firstAttribute="leading" secondItem="Y98-dN-7H7" secondAttribute="leading" constant="20" id="mm6-Sl-4SR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="VeF-9L-UUe" secondAttribute="trailing" constant="20" id="nrK-aD-xRl"/>
+                                                        <constraint firstItem="PGF-u4-qi8" firstAttribute="centerY" secondItem="Y98-dN-7H7" secondAttribute="centerY" id="t7C-1B-itA"/>
+                                                        <constraint firstAttribute="bottom" secondItem="HbI-5m-Qaa" secondAttribute="bottom" constant="10" id="u8s-do-FJy"/>
+                                                        <constraint firstItem="FOT-Wf-Iji" firstAttribute="top" secondItem="VeF-9L-UUe" secondAttribute="bottom" id="xI7-Jt-ZRA"/>
+                                                        <constraint firstItem="VeF-9L-UUe" firstAttribute="leading" secondItem="PGF-u4-qi8" secondAttribute="trailing" constant="25" id="xVh-X8-9rk"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="bottom" secondItem="3nU-OS-2vs" secondAttribute="bottom" constant="-10" id="6bN-BR-COP"/>
+                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="top" secondItem="3nU-OS-2vs" secondAttribute="top" constant="10" id="IpK-5Q-KEp"/>
+                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="trailing" secondItem="3nU-OS-2vs" secondAttribute="trailing" constant="-10" id="e7N-N3-cTR"/>
+                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="leading" secondItem="3nU-OS-2vs" secondAttribute="leading" constant="10" id="kjP-Ud-5Ql"/>
+                                                <constraint firstItem="Y98-dN-7H7" firstAttribute="centerY" secondItem="3nU-OS-2vs" secondAttribute="centerY" id="y0K-Zk-AcB"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="containview" destination="Y98-dN-7H7" id="X7g-IV-3eC"/>
+                                            <outlet property="icon" destination="PGF-u4-qi8" id="dGF-a2-oV2"/>
+                                            <outlet property="statusText" destination="FOT-Wf-Iji" id="XZ1-cS-rWO"/>
+                                            <outlet property="studyName" destination="VeF-9L-UUe" id="MSJ-1K-BPP"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -8538,33 +8521,32 @@ Scan QR code to join a study.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYq-BH-SwO" userLabel="scanView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="427"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="353.5"/>
                                 <color key="backgroundColor" red="0.87058823529411766" green="0.51764705882352935" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold your camera to a QR code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrA-OQ-jSu">
-                                <rect key="frame" x="40.5" y="510" width="294.5" height="26.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="0.6705882352941176" green="0.67450980392156867" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="84" y="461" width="207.5" height="20"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                <color key="textColor" red="0.69411764705882351" green="0.69411764705882351" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8V-8H-nUH">
-                                <rect key="frame" x="127" y="467" width="121" height="23"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="127.5" y="419.5" width="120.5" height="25.5"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="f8V-8H-nUH" firstAttribute="top" secondItem="pYq-BH-SwO" secondAttribute="bottom" constant="20" id="76F-nf-Fw9"/>
+                            <constraint firstItem="f8V-8H-nUH" firstAttribute="top" secondItem="pYq-BH-SwO" secondAttribute="bottom" constant="46" id="76F-nf-Fw9"/>
                             <constraint firstAttribute="trailing" secondItem="pYq-BH-SwO" secondAttribute="trailing" id="BLp-tF-DgQ"/>
                             <constraint firstItem="f8V-8H-nUH" firstAttribute="centerX" secondItem="iAZ-pm-CPi" secondAttribute="centerX" id="I7G-1u-rSf"/>
-                            <constraint firstItem="zrA-OQ-jSu" firstAttribute="top" secondItem="f8V-8H-nUH" secondAttribute="bottom" constant="20" id="I7j-BY-pjm"/>
-                            <constraint firstItem="pYq-BH-SwO" firstAttribute="bottom" secondItem="iAZ-pm-CPi" secondAttribute="bottom" multiplier="0.67" id="Id4-so-t41"/>
+                            <constraint firstItem="zrA-OQ-jSu" firstAttribute="top" secondItem="f8V-8H-nUH" secondAttribute="bottom" constant="16" id="I7j-BY-pjm"/>
+                            <constraint firstItem="pYq-BH-SwO" firstAttribute="bottom" secondItem="iAZ-pm-CPi" secondAttribute="bottom" multiplier="0.56" id="Id4-so-t41"/>
                             <constraint firstItem="pYq-BH-SwO" firstAttribute="leading" secondItem="iAZ-pm-CPi" secondAttribute="leading" id="QdD-5N-zdS"/>
                             <constraint firstItem="pYq-BH-SwO" firstAttribute="top" secondItem="XaR-0Y-iY9" secondAttribute="bottom" id="VQg-IL-vab"/>
                             <constraint firstItem="zrA-OQ-jSu" firstAttribute="centerX" secondItem="pYq-BH-SwO" secondAttribute="centerX" id="Yew-dh-Xj3"/>
-                            <constraint firstItem="f8V-8H-nUH" firstAttribute="top" secondItem="pYq-BH-SwO" secondAttribute="bottom" constant="20" id="dEi-bG-olq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -8588,27 +8570,29 @@ Scan QR code to join a study.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notice of Privacy Practices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFx-mN-Ce3">
-                                <rect key="frame" x="80" y="100" width="215" height="57.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <rect key="frame" x="80" y="100" width="215" height="70"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" SGH values your privacy. View the notice of privacy policy." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-RF-9Yy">
-                                <rect key="frame" x="20" y="177.5" width="335" height="43"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="20" y="195" width="335" height="50.5"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
+                                <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPc-sZ-ap9">
-                                <rect key="frame" x="151" y="240.5" width="73" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="Learn more"/>
+                                <rect key="frame" x="150.5" y="260.5" width="74" height="32"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                <state key="normal" title="Learn more">
+                                    <color key="titleColor" red="0.0" green="0.39215686274509803" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="learnMore:" destination="Bei-cE-VUY" eventType="touchUpInside" id="NiE-l9-JC9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGw-V3-4ne" userLabel="lineLabel">
-                                <rect key="frame" x="20" y="289.5" width="335" height="1"/>
+                                <rect key="frame" x="20" y="318.5" width="335" height="1"/>
                                 <color key="backgroundColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="gSN-kZ-sRj"/>
@@ -8618,7 +8602,7 @@ Scan QR code to join a study.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGR-UU-MnG" userLabel="lineLabel">
-                                <rect key="frame" x="20" y="381" width="335" height="1"/>
+                                <rect key="frame" x="20" y="418.5" width="335" height="1"/>
                                 <color key="backgroundColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="8kA-lJ-M7H"/>
@@ -8627,10 +8611,9 @@ Scan QR code to join a study.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-kO-Mgq">
-                                <rect key="frame" x="20" y="310.5" width="335" height="50.5"/>
-                                <string key="text">Click next to confirm you have reviewed, understand, and accept the terms and conditions and key in the 6 alphanumeric of you NRICS</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click agree to confirm you have reviewed, understand, and accept the Notice of Privacy Policy." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-kO-Mgq">
+                                <rect key="frame" x="20" y="339.5" width="335" height="59"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -8661,18 +8644,19 @@ Scan QR code to join a study.</string>
                             <constraint firstItem="dcX-I5-e60" firstAttribute="leading" secondItem="P7v-RF-9Yy" secondAttribute="leading" id="AMY-Zo-xAU"/>
                             <constraint firstAttribute="trailing" secondItem="dGw-V3-4ne" secondAttribute="trailing" constant="20" id="AST-JP-mBa"/>
                             <constraint firstAttribute="trailing" secondItem="YGR-UU-MnG" secondAttribute="trailing" constant="20" id="GO7-Lt-JMe"/>
-                            <constraint firstItem="P7v-RF-9Yy" firstAttribute="top" secondItem="NFx-mN-Ce3" secondAttribute="bottom" constant="20" id="J63-it-KOg"/>
+                            <constraint firstItem="P7v-RF-9Yy" firstAttribute="top" secondItem="NFx-mN-Ce3" secondAttribute="bottom" constant="25" id="J63-it-KOg"/>
                             <constraint firstAttribute="trailing" secondItem="P7v-RF-9Yy" secondAttribute="trailing" constant="20" id="MH0-zL-OW7"/>
                             <constraint firstItem="CC6-kO-Mgq" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="20" id="MtM-G3-cat"/>
                             <constraint firstItem="YGR-UU-MnG" firstAttribute="top" secondItem="CC6-kO-Mgq" secondAttribute="bottom" constant="20" id="N40-gb-Vit"/>
                             <constraint firstAttribute="trailing" secondItem="NFx-mN-Ce3" secondAttribute="trailing" constant="80" id="ORA-xr-KFQ"/>
-                            <constraint firstItem="dGw-V3-4ne" firstAttribute="top" secondItem="UPc-sZ-ap9" secondAttribute="bottom" constant="20" id="TOL-tW-dUK"/>
+                            <constraint firstItem="dGw-V3-4ne" firstAttribute="top" secondItem="UPc-sZ-ap9" secondAttribute="bottom" constant="26" id="TOL-tW-dUK"/>
                             <constraint firstItem="UPc-sZ-ap9" firstAttribute="centerX" secondItem="OYf-rp-Zqo" secondAttribute="centerX" id="bCt-iR-MGz"/>
-                            <constraint firstItem="UPc-sZ-ap9" firstAttribute="top" secondItem="P7v-RF-9Yy" secondAttribute="bottom" constant="20" id="ec1-VC-Jrt"/>
+                            <constraint firstItem="UPc-sZ-ap9" firstAttribute="top" secondItem="P7v-RF-9Yy" secondAttribute="bottom" constant="15" id="ec1-VC-Jrt"/>
                             <constraint firstItem="NFx-mN-Ce3" firstAttribute="top" secondItem="OYf-rp-Zqo" secondAttribute="top" constant="100" id="eq7-ro-dND"/>
                             <constraint firstItem="NFx-mN-Ce3" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="80" id="gBH-0u-f37"/>
                             <constraint firstItem="dGw-V3-4ne" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="20" id="grv-TG-PVr"/>
                             <constraint firstAttribute="bottom" secondItem="dcX-I5-e60" secondAttribute="bottom" constant="40" id="hkv-B8-7wB"/>
+                            <constraint firstItem="NFx-mN-Ce3" firstAttribute="centerX" secondItem="OYf-rp-Zqo" secondAttribute="centerX" id="l30-X9-IYU"/>
                             <constraint firstAttribute="trailing" secondItem="CC6-kO-Mgq" secondAttribute="trailing" constant="20" id="rOk-UR-NXl"/>
                             <constraint firstItem="YGR-UU-MnG" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="20" id="vLc-kl-3Lw"/>
                             <constraint firstItem="dcX-I5-e60" firstAttribute="trailing" secondItem="P7v-RF-9Yy" secondAttribute="trailing" id="zYi-lB-hGe"/>
@@ -8685,7 +8669,7 @@ Scan QR code to join a study.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7K-9T-F3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1399" y="1705"/>
+            <point key="canvasLocation" x="1433" y="1866"/>
         </scene>
         <!--Description View Controller-->
         <scene sceneID="UlG-k2-srz">
@@ -8703,13 +8687,13 @@ Scan QR code to join a study.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brief description of study" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAc-QO-hwm">
-                                        <rect key="frame" x="16" y="10" width="339" height="21.5"/>
+                                        <rect key="frame" x="16" y="20" width="339" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="0.87058823529999996" green="0.51764705879999995" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAb-MM-BhV">
-                                        <rect key="frame" x="16" y="45.5" width="339" height="260"/>
+                                        <rect key="frame" x="16" y="55.5" width="339" height="260"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="260" id="Y9e-dw-CBS"/>
@@ -8726,7 +8710,7 @@ Scan QR code to join a study.</string>
                                     <constraint firstItem="yAb-MM-BhV" firstAttribute="trailing" secondItem="FAc-QO-hwm" secondAttribute="trailing" id="PVU-9C-nIM"/>
                                     <constraint firstItem="yAb-MM-BhV" firstAttribute="top" secondItem="FAc-QO-hwm" secondAttribute="bottom" constant="14" id="fqw-Xs-Srj"/>
                                     <constraint firstItem="FAc-QO-hwm" firstAttribute="trailing" secondItem="Nyp-dN-cme" secondAttribute="trailing" constant="-20" id="uOv-Tf-LKG"/>
-                                    <constraint firstItem="FAc-QO-hwm" firstAttribute="top" secondItem="Nyp-dN-cme" secondAttribute="top" constant="10" id="uhS-Ev-hOf"/>
+                                    <constraint firstItem="FAc-QO-hwm" firstAttribute="top" secondItem="Nyp-dN-cme" secondAttribute="top" constant="20" id="uhS-Ev-hOf"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -8739,6 +8723,9 @@ Scan QR code to join a study.</string>
                             <constraint firstItem="Nyp-dN-cme" firstAttribute="centerX" secondItem="fEu-XU-hd4" secondAttribute="centerX" id="wSp-6u-q7E"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="studyDescTextView" destination="yAb-MM-BhV" id="b0W-m8-DrY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SXz-mN-WZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -8760,13 +8747,13 @@ Scan QR code to join a study.</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you eligible to participate in this study?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ui4-WB-yDv">
-                                        <rect key="frame" x="16" y="10" width="339" height="43"/>
+                                        <rect key="frame" x="16" y="20" width="339" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="0.87058823529999996" green="0.51764705879999995" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jxg-cb-XR7">
-                                        <rect key="frame" x="16" y="65" width="339" height="260"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxg-cb-XR7">
+                                        <rect key="frame" x="16" y="75" width="339" height="260"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="260" id="Vc0-db-Sqf"/>
@@ -8782,7 +8769,7 @@ Scan QR code to join a study.</string>
                                     <constraint firstAttribute="trailing" secondItem="Ui4-WB-yDv" secondAttribute="trailing" constant="20" id="Cvi-v7-wy3"/>
                                     <constraint firstItem="Jxg-cb-XR7" firstAttribute="top" secondItem="Ui4-WB-yDv" secondAttribute="bottom" constant="12" id="Hfn-DI-2dw"/>
                                     <constraint firstItem="Jxg-cb-XR7" firstAttribute="leading" secondItem="Ui4-WB-yDv" secondAttribute="leading" id="Yf7-R6-sq7"/>
-                                    <constraint firstItem="Ui4-WB-yDv" firstAttribute="top" secondItem="oFI-P5-gh0" secondAttribute="top" constant="10" id="j0F-bT-Jam"/>
+                                    <constraint firstItem="Ui4-WB-yDv" firstAttribute="top" secondItem="oFI-P5-gh0" secondAttribute="top" constant="20" id="j0F-bT-Jam"/>
                                     <constraint firstItem="Ui4-WB-yDv" firstAttribute="leading" secondItem="oFI-P5-gh0" secondAttribute="leading" constant="16" id="vCl-QM-yTs"/>
                                 </constraints>
                             </view>
@@ -8812,8 +8799,65 @@ Scan QR code to join a study.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWh-eV-V0Z">
+                                <rect key="frame" x="0.0" y="20" width="375" height="163"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created on " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqQ-qH-rbY">
+                                        <rect key="frame" x="16" y="22" width="76.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="November 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeS-6X-cCq">
+                                        <rect key="frame" x="92.5" y="22" width="100.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food recommendation for thyroid disorders" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKu-ep-i3Z">
+                                        <rect key="frame" x="16" y="62" width="339" height="70"/>
+                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="25"/>
+                                        <color key="textColor" red="0.92941176469999998" green="0.1647058824" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9i-8U-zGU" userLabel="SeperatorLine">
+                                        <rect key="frame" x="16" y="152" width="339" height="1"/>
+                                        <color key="backgroundColor" red="0.6705882353" green="0.67450980390000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="dfr-Lj-kpq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="m9i-8U-zGU" firstAttribute="leading" secondItem="oKu-ep-i3Z" secondAttribute="leading" id="1e1-m6-tHE"/>
+                                    <constraint firstAttribute="bottom" secondItem="m9i-8U-zGU" secondAttribute="bottom" constant="10" id="A4U-lm-lPa"/>
+                                    <constraint firstItem="m9i-8U-zGU" firstAttribute="trailing" secondItem="oKu-ep-i3Z" secondAttribute="trailing" id="RFS-lW-cWg"/>
+                                    <constraint firstItem="oKu-ep-i3Z" firstAttribute="top" secondItem="eqQ-qH-rbY" secondAttribute="bottom" constant="20" id="b0f-jx-SYf"/>
+                                    <constraint firstItem="yeS-6X-cCq" firstAttribute="leading" secondItem="eqQ-qH-rbY" secondAttribute="trailing" id="c9x-rX-7ls"/>
+                                    <constraint firstItem="yeS-6X-cCq" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="top" constant="22" id="iSj-ij-14y"/>
+                                    <constraint firstAttribute="trailing" secondItem="oKu-ep-i3Z" secondAttribute="trailing" constant="20" id="nWd-49-Rmn"/>
+                                    <constraint firstItem="eqQ-qH-rbY" firstAttribute="leading" secondItem="XWh-eV-V0Z" secondAttribute="leading" constant="16" id="oUh-Lp-ayC"/>
+                                    <constraint firstItem="m9i-8U-zGU" firstAttribute="top" secondItem="oKu-ep-i3Z" secondAttribute="bottom" constant="20" id="u6q-gh-BBc"/>
+                                    <constraint firstItem="oKu-ep-i3Z" firstAttribute="leading" secondItem="XWh-eV-V0Z" secondAttribute="leading" constant="16" id="yFb-EZ-6zp"/>
+                                    <constraint firstItem="eqQ-qH-rbY" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="top" constant="22" id="yJq-21-nkx"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPZ-Kk-lk5" userLabel="SeperatorLine">
+                                <rect key="frame" x="18" y="228" width="339" height="0.5"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.89411764705882346" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="oSC-Vn-cgW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.81568627449999997" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n9p-6O-SBc" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="171" width="375" height="45"/>
+                                <rect key="frame" x="18" y="183" width="339" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="JNA-AG-ABv"/>
@@ -8836,74 +8880,31 @@ Scan QR code to join a study.</string>
                                 </cells>
                             </collectionView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEm-S4-i0q">
-                                <rect key="frame" x="0.0" y="216" width="375" height="451"/>
+                                <rect key="frame" x="0.0" y="233" width="375" height="434"/>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWh-eV-V0Z">
-                                <rect key="frame" x="0.0" y="20" width="375" height="151"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created on " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqQ-qH-rbY">
-                                        <rect key="frame" x="16" y="22" width="75.5" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="November 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeS-6X-cCq">
-                                        <rect key="frame" x="91.5" y="22" width="103" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food recommendation for thyroid disorders" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKu-ep-i3Z">
-                                        <rect key="frame" x="16" y="59" width="339" height="57.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" red="0.92941176469999998" green="0.1647058824" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9i-8U-zGU">
-                                        <rect key="frame" x="16" y="139" width="339" height="2"/>
-                                        <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="dfr-Lj-kpq"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="m9i-8U-zGU" firstAttribute="leading" secondItem="oKu-ep-i3Z" secondAttribute="leading" id="1e1-m6-tHE"/>
-                                    <constraint firstAttribute="height" constant="151" id="8aW-SO-6jr"/>
-                                    <constraint firstAttribute="bottom" secondItem="m9i-8U-zGU" secondAttribute="bottom" constant="10" id="A4U-lm-lPa"/>
-                                    <constraint firstItem="m9i-8U-zGU" firstAttribute="trailing" secondItem="oKu-ep-i3Z" secondAttribute="trailing" id="RFS-lW-cWg"/>
-                                    <constraint firstItem="oKu-ep-i3Z" firstAttribute="top" secondItem="eqQ-qH-rbY" secondAttribute="bottom" constant="20" id="b0f-jx-SYf"/>
-                                    <constraint firstItem="yeS-6X-cCq" firstAttribute="leading" secondItem="eqQ-qH-rbY" secondAttribute="trailing" id="c9x-rX-7ls"/>
-                                    <constraint firstItem="yeS-6X-cCq" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="top" constant="22" id="iSj-ij-14y"/>
-                                    <constraint firstAttribute="trailing" secondItem="oKu-ep-i3Z" secondAttribute="trailing" constant="20" id="nWd-49-Rmn"/>
-                                    <constraint firstItem="eqQ-qH-rbY" firstAttribute="leading" secondItem="XWh-eV-V0Z" secondAttribute="leading" constant="16" id="oUh-Lp-ayC"/>
-                                    <constraint firstItem="oKu-ep-i3Z" firstAttribute="leading" secondItem="XWh-eV-V0Z" secondAttribute="leading" constant="16" id="yFb-EZ-6zp"/>
-                                    <constraint firstItem="eqQ-qH-rbY" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="top" constant="22" id="yJq-21-nkx"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="n9p-6O-SBc" secondAttribute="trailing" id="EY7-2O-Zzk"/>
-                            <constraint firstItem="n9p-6O-SBc" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="bottom" id="RU5-Bv-GEl"/>
-                            <constraint firstItem="PEm-S4-i0q" firstAttribute="top" secondItem="n9p-6O-SBc" secondAttribute="bottom" id="U8a-Up-CY5"/>
-                            <constraint firstItem="XWh-eV-V0Z" firstAttribute="top" secondItem="9ty-ij-hAK" secondAttribute="bottom" id="Zyy-5U-dZG"/>
+                            <constraint firstAttribute="trailing" secondItem="n9p-6O-SBc" secondAttribute="trailing" constant="18" id="EY7-2O-Zzk"/>
+                            <constraint firstItem="n9p-6O-SBc" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="bottom" id="Gfq-pa-WQF"/>
+                            <constraint firstItem="tPZ-Kk-lk5" firstAttribute="width" secondItem="m9i-8U-zGU" secondAttribute="width" id="J0w-qC-eF9"/>
+                            <constraint firstItem="PEm-S4-i0q" firstAttribute="top" secondItem="n9p-6O-SBc" secondAttribute="bottom" constant="5" id="U8a-Up-CY5"/>
                             <constraint firstAttribute="trailing" secondItem="XWh-eV-V0Z" secondAttribute="trailing" id="b0d-Wt-QEX"/>
                             <constraint firstItem="PEm-S4-i0q" firstAttribute="leading" secondItem="qGi-l6-rXk" secondAttribute="leading" id="cxA-g4-tZu"/>
                             <constraint firstAttribute="bottom" secondItem="PEm-S4-i0q" secondAttribute="bottom" id="dHv-5Z-ae2"/>
                             <constraint firstItem="XWh-eV-V0Z" firstAttribute="top" secondItem="9ty-ij-hAK" secondAttribute="bottom" id="gfq-qc-r6K"/>
+                            <constraint firstItem="tPZ-Kk-lk5" firstAttribute="centerX" secondItem="qGi-l6-rXk" secondAttribute="centerX" id="iY1-rW-HcL"/>
                             <constraint firstAttribute="trailing" secondItem="PEm-S4-i0q" secondAttribute="trailing" id="ilf-Ey-Mfu"/>
-                            <constraint firstItem="n9p-6O-SBc" firstAttribute="leading" secondItem="qGi-l6-rXk" secondAttribute="leading" id="mG1-H6-psB"/>
+                            <constraint firstItem="n9p-6O-SBc" firstAttribute="leading" secondItem="qGi-l6-rXk" secondAttribute="leading" constant="18" id="mG1-H6-psB"/>
                             <constraint firstItem="XWh-eV-V0Z" firstAttribute="leading" secondItem="qGi-l6-rXk" secondAttribute="leading" id="utj-GS-L13"/>
+                            <constraint firstItem="tPZ-Kk-lk5" firstAttribute="top" secondItem="n9p-6O-SBc" secondAttribute="bottom" id="uw7-M0-sfb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonBarView" destination="n9p-6O-SBc" id="3C4-DS-q7g"/>
                         <outlet property="containerView" destination="PEm-S4-i0q" id="yP4-Nw-NRi"/>
+                        <outlet property="studyStartDate" destination="yeS-6X-cCq" id="lFn-eK-GAg"/>
+                        <outlet property="studyTitle" destination="oKu-ep-i3Z" id="nRK-rI-KfW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWy-QU-OAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -9520,7 +9521,7 @@ You were selected as a possible participant for this study because this is the f
                                 <color key="separatorColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarSectionHeader" rowHeight="40" id="qo7-lj-su1" customClass="FoodCalendarSectionHeader" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="calendarSectionHeader" rowHeight="40" id="qo7-lj-su1" customClass="FoodCalendarSectionHeader" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="377" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qo7-lj-su1" id="wRo-1W-9nc">
@@ -9556,7 +9557,7 @@ You were selected as a possible participant for this study because this is the f
                                             <outlet property="titleLabel" destination="cA9-Mp-Z1P" id="9JJ-ec-1qP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodDiaryTableViewCell" rowHeight="69" id="wDd-8n-5cv" userLabel="foodDiaryCell" customClass="FoodDairyTableViewCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodDiaryTableViewCell" rowHeight="69" id="wDd-8n-5cv" userLabel="foodDiaryCell" customClass="FoodDairyTableViewCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="95.5" width="377" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wDd-8n-5cv" id="v4a-ea-Wth">
@@ -9955,18 +9956,18 @@ You were selected as a possible participant for this study because this is the f
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.66000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="YSk-bu-KS9">
-                                            <rect key="frame" x="16" y="10" width="505.5" height="2.5"/>
+                                            <rect key="frame" x="16" y="10" width="280.5" height="2.5"/>
                                             <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="progressTintColor" red="0.95686274510000002" green="0.1960784314" blue="0.3294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </progressView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieE-uZ-hpX">
-                                            <rect key="frame" x="524.5" y="-0.5" width="27.5" height="22.5"/>
+                                            <rect key="frame" x="299.5" y="-0.5" width="27.5" height="22.5"/>
                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                             <color key="textColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How active are you?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0y4-kX-UbR">
-                                            <rect key="frame" x="189.5" y="36.5" width="189.5" height="28"/>
+                                            <rect key="frame" x="77" y="36.5" width="189.5" height="28"/>
                                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="20"/>
                                             <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -9984,7 +9985,7 @@ You were selected as a possible participant for this study because this is the f
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityLevelCell" rowHeight="80" id="2qb-Xa-0eY" customClass="ActvitityLevelCell" customModule="DietLens" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityLevelCell" rowHeight="80" id="2qb-Xa-0eY" customClass="ActvitityLevelCell" customModule="DietLens" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="104" width="343" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2qb-Xa-0eY" id="No8-O6-LXv">
@@ -10537,6 +10538,6 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="L1g-pL-wT5"/>
-        <segue reference="8Rw-F9-HXm"/>
+        <segue reference="NAD-8N-HRw"/>
     </inferredMetricsTieBreakers>
 </document>

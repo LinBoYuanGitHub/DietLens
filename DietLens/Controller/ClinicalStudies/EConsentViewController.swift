@@ -11,6 +11,7 @@ import UIKit
 class EConsentViewController: UIViewController {
 
     @IBOutlet weak var nextbutton: UIButton!
+    var studyEntity: ClinicalStudyEntity?
 
     override func viewDidLoad() {
         super.viewDidLoad()

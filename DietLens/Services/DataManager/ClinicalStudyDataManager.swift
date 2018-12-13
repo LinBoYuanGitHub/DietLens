@@ -15,7 +15,10 @@ class ClinicalStudyDataManager {
 
     func assembleClinicalStudyDataEntity(jsonArr: JSON) -> [ClinicalStudyEntity] {
         var resultList = [ClinicalStudyEntity]()
-        for index in 0..<jsonArr.count {
+        guard let array = jsonArr.array else {
+            return resultList
+        }
+        for index in 0..<array.count {
             let json = jsonArr[index]
             let studyId = json["id"].stringValue
             let studyName = json["title"].stringValue

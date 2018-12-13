@@ -12,11 +12,19 @@ import XLPagerTabStrip
 class ContactViewController: UIViewController, IndicatorInfoProvider {
 
     var itemInfo: IndicatorInfo = "Contact"
+    @IBOutlet weak var contactorLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var organizationLabel: UILabel!
+
+    var contactorText: String = ""
+    var phoneText: String = ""
+    var organizationText: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.isNavigationBarHidden = true
-
+        contactorLabel.text = contactorText
+        phoneLabel.text = phoneText
+        organizationLabel.text = organizationText
     }
 
     // MARK: - IndicatorInfoProvider

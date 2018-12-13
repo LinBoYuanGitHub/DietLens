@@ -12,6 +12,9 @@ import XLPagerTabStrip
 class ScannedResultViewController: ButtonBarPagerTabStripViewController {
     var isReload = false
     var studyEntity: ClinicalStudyEntity?
+    //UI component
+    @IBOutlet weak var studyStartDate: UILabel!
+    @IBOutlet weak var studyTitle: UILabel!
 
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = .white
@@ -26,7 +29,9 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         super.viewDidLoad()
-
+        //UI setUp
+        studyTitle.text = studyEntity?.studyName
+        studyStartDate.text = DateUtil.formatMonthWithYearToString(date: (studyEntity?.content.startDate)!)
     }
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
 
@@ -35,12 +40,15 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
             storyboard?.instantiateViewController(withIdentifier: "EligibilityViewController") as? EligibilityViewController, let contactVC = storyboard?.instantiateViewController(withIdentifier: "ContactViewController")
                 as? ContactViewController
             else { return [] }
-
+        //child tab data mapping
+        descriptionVC.studyDesc = studyEntity?.content.studyDesc ?? ""
+        contactVC.contactorText = studyEntity?.owner.nickname ?? ""
+        contactVC.phoneText = studyEntity?.owner.phone ?? ""
+        contactVC.organizationText = studyEntity?.owner.organization ?? ""
         return [descriptionVC, eligibilityVC, contactVC]
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-
         self.navigationItem.hidesBackButton = true
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
@@ -56,6 +64,7 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EConsentViewController") as? EConsentViewController else {
             return
         }
+        scanresultVC.studyEntity = self.studyEntity
         self.navigationController?.pushViewController(scanresultVC, animated: true)
 
     }
