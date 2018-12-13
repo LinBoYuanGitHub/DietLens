@@ -281,7 +281,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="60" y="77" width="255.5" height="60"/>
+                                <rect key="frame" x="97.5" y="77" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -6131,7 +6131,7 @@ What is it?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Dietlens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xd-NZ-Hre">
-                                <rect key="frame" x="72.5" y="118" width="230" height="75"/>
+                                <rect key="frame" x="109.5" y="116.5" width="156" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SignPainterHouseScript" family="SignPainter HouseScript" pointSize="64"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6563,7 +6563,7 @@ Scan QR code to join a study.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaH-iz-JNq">
-                                                <rect key="frame" x="60" y="60" width="255.5" height="60"/>
+                                                <rect key="frame" x="97.5" y="60" width="180" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="YaU-Xe-SRL"/>
                                                     <constraint firstAttribute="height" constant="60" id="dhG-HU-Rea"/>
@@ -8669,7 +8669,7 @@ Scan QR code to join a study.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7K-9T-F3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1358" y="1866"/>
+            <point key="canvasLocation" x="1433" y="1866"/>
         </scene>
         <!--Description View Controller-->
         <scene sceneID="UlG-k2-srz">
@@ -8820,9 +8820,9 @@ Scan QR code to join a study.</string>
                                         <color key="textColor" red="0.92941176469999998" green="0.1647058824" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9i-8U-zGU" userLabel="SeperatorLine">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9i-8U-zGU">
                                         <rect key="frame" x="16" y="152" width="339" height="1"/>
-                                        <color key="backgroundColor" red="0.6705882353" green="0.67450980390000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="dfr-Lj-kpq"/>
                                         </constraints>
@@ -8846,16 +8846,6 @@ Scan QR code to join a study.</string>
                                     <constraint firstItem="eqQ-qH-rbY" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="top" constant="22" id="yJq-21-nkx"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPZ-Kk-lk5" userLabel="SeperatorLine">
-                                <rect key="frame" x="18" y="228" width="339" height="0.5"/>
-                                <color key="backgroundColor" red="0.8901960784313725" green="0.89411764705882346" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="oSC-Vn-cgW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.81568627449999997" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n9p-6O-SBc" customClass="ButtonBarView" customModule="XLPagerTabStrip">
                                 <rect key="frame" x="18" y="183" width="339" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -8880,15 +8870,27 @@ Scan QR code to join a study.</string>
                                 </cells>
                             </collectionView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEm-S4-i0q">
-                                <rect key="frame" x="0.0" y="233" width="375" height="434"/>
+                                <rect key="frame" x="0.0" y="228" width="375" height="439"/>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPZ-Kk-lk5" userLabel="SeperatorLine">
+                                <rect key="frame" x="18" y="228" width="339" height="0.5"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.89411764705882346" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="oSC-Vn-cgW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.8901960784313725" green="0.89411764705882346" blue="0.89803921568627454" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="tPZ-Kk-lk5" firstAttribute="leading" secondItem="n9p-6O-SBc" secondAttribute="leading" id="EX6-Xd-Ci3"/>
                             <constraint firstAttribute="trailing" secondItem="n9p-6O-SBc" secondAttribute="trailing" constant="18" id="EY7-2O-Zzk"/>
-                            <constraint firstItem="n9p-6O-SBc" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="bottom" id="Gfq-pa-WQF"/>
-                            <constraint firstItem="tPZ-Kk-lk5" firstAttribute="width" secondItem="m9i-8U-zGU" secondAttribute="width" id="J0w-qC-eF9"/>
-                            <constraint firstItem="PEm-S4-i0q" firstAttribute="top" secondItem="n9p-6O-SBc" secondAttribute="bottom" constant="5" id="U8a-Up-CY5"/>
+                            <constraint firstItem="tPZ-Kk-lk5" firstAttribute="trailing" secondItem="n9p-6O-SBc" secondAttribute="trailing" id="MRj-xg-ULG"/>
+                            <constraint firstItem="n9p-6O-SBc" firstAttribute="top" secondItem="XWh-eV-V0Z" secondAttribute="bottom" id="RU5-Bv-GEl"/>
+                            <constraint firstItem="PEm-S4-i0q" firstAttribute="top" secondItem="n9p-6O-SBc" secondAttribute="bottom" id="U8a-Up-CY5"/>
+                            <constraint firstItem="XWh-eV-V0Z" firstAttribute="top" secondItem="9ty-ij-hAK" secondAttribute="bottom" id="Zyy-5U-dZG"/>
                             <constraint firstAttribute="trailing" secondItem="XWh-eV-V0Z" secondAttribute="trailing" id="b0d-Wt-QEX"/>
                             <constraint firstItem="PEm-S4-i0q" firstAttribute="leading" secondItem="qGi-l6-rXk" secondAttribute="leading" id="cxA-g4-tZu"/>
                             <constraint firstAttribute="bottom" secondItem="PEm-S4-i0q" secondAttribute="bottom" id="dHv-5Z-ae2"/>
