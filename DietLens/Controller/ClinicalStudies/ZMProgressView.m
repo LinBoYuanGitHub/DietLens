@@ -95,7 +95,7 @@
                           bezierPathWithArcCenter:_circleCenter
                           radius:radius*0.9
                           startAngle:1.5 * M_PI//M_PI_2
-                          endAngle:angle2Arc(self.angle)- M_PI_2 //+ M_PI_2
+                          endAngle:angle2Arc(self.angle) - M_PI_2 //+ M_PI_2
                           clockwise:YES];
     [self.lineColor set];
     [path setLineCapStyle:kCGLineCapRound];
@@ -193,8 +193,10 @@
         self.value ++;
         _desValue = _value;
         _angle = self.value /100 * 360;
+        if (self.value != self.percent){
+            [self setNeedsDisplay];
+        }
         
-        [self setNeedsDisplay];
     }
     else{
         self.link.paused = YES;

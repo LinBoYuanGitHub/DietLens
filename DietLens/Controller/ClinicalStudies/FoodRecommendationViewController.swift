@@ -12,6 +12,12 @@ class FoodRecommendationViewController: BaseViewController {
     @IBOutlet weak var prograssBarView: UIView!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
+    @IBOutlet weak var studyContent: UILabel!
+    @IBOutlet weak var dataCollected: UILabel!
+    @IBOutlet weak var researcher: UILabel!
+    @IBOutlet weak var phoneNumber: UILabel!
+    @IBOutlet weak var nationality: UILabel!
+    @IBOutlet weak var studyName: UILabel!
 
     var entity = ClinicalStudyEntity.init()
 
@@ -43,6 +49,18 @@ class FoodRecommendationViewController: BaseViewController {
         let interval = zone.secondsFromGMT()
         let now = date.addingTimeInterval(TimeInterval(interval))
 
+//        //test
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MMM dd, yyyy zzz"
+//        let str = "Jan 11, 2019 GMT"
+//        let now = dateFormatter.date(from: str)!
+
+        //Check the current time
+        if now < self.entity.content.startDate {
+            return 0
+        } else if now > self.entity.content.endDate {
+            return 100
+        }
         //Calculate the percent
         let percent = Float(calculateDays(startDate: self.entity.content.startDate, endDate: now) * 100 / calculateDays(startDate: self.entity.content.startDate, endDate: self.entity.content.endDate))
 
@@ -71,6 +89,15 @@ class FoodRecommendationViewController: BaseViewController {
         return between.day!
     }
 
+    func setContect() {
+        studyName.text = entity.studyName
+        studyContent.text = entity.content.studyDesc
+
+        researcher.text =  entity.owner.nickname
+        phoneNumber.text = "Tel:" + entity.owner.phone
+        nationality.text = entity.owner.organization
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
@@ -80,6 +107,7 @@ class FoodRecommendationViewController: BaseViewController {
         self.navigationItem.title = "Study"
 
         setStartandEndDate()
+        setContect()
     }
 
     @objc func onBackPressed() {

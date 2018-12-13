@@ -9420,9 +9420,15 @@ You were selected as a possible participant for this study because this is the f
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dataCollected" destination="8I0-n2-fPx" id="y9H-70-gOu"/>
                         <outlet property="endDateLabel" destination="mab-tA-hxs" id="WtE-cq-4Jy"/>
+                        <outlet property="nationality" destination="qVj-hk-pZL" id="PgU-Fg-b9R"/>
+                        <outlet property="phoneNumber" destination="wl2-Gb-OrZ" id="LmW-L1-Cqw"/>
                         <outlet property="prograssBarView" destination="lHM-pw-OL6" id="31F-gJ-Ssc"/>
+                        <outlet property="researcher" destination="8Se-dm-zsK" id="RHT-Xv-pdj"/>
                         <outlet property="startDateLabel" destination="rQ0-cI-FCT" id="NHE-hS-RJw"/>
+                        <outlet property="studyContent" destination="ekt-iw-jR3" id="YfC-BO-CM5"/>
+                        <outlet property="studyName" destination="5c5-6K-VOf" id="c1i-Dv-qAu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bje-7Q-tWj" userLabel="First Responder" sceneMemberID="firstResponder"/>
