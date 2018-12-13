@@ -6386,7 +6386,7 @@ What is it?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1O-li-ud8" userLabel="scannerAreaView">
-                                <rect key="frame" x="0.0" y="80" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vv-rk-YgW">
                                         <rect key="frame" x="167.5" y="40" width="40" height="40"/>
@@ -6419,23 +6419,8 @@ What is it?</string>
                                     <constraint firstAttribute="height" constant="120" id="zCD-qS-aqL"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty state" translatesAutoresizingMaskIntoConstraints="NO" id="NkN-FR-6sa" userLabel="empty state icon">
-                                <rect key="frame" x="110" y="265" width="155" height="155"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="155" id="5it-Ei-AuS"/>
-                                    <constraint firstAttribute="width" constant="155" id="SW7-FS-PlV"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXn-Q1-XzX" userLabel="empty state icon text">
-                                <rect key="frame" x="0.0" y="425" width="375" height="53"/>
-                                <string key="text">No studies joined.
-Scan QR code to join a study.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="0.6705882353" green="0.67450980390000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u6p-ZZ-o4H">
-                                <rect key="frame" x="0.0" y="210" width="375" height="457"/>
+                                <rect key="frame" x="0.0" y="150" width="375" height="517"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clinicalStudyCell" rowHeight="150" id="lK8-O0-g3c" customClass="ClinicalStudyTableViewCell" customModule="DietLens" customModuleProvider="target">
@@ -6513,6 +6498,21 @@ Scan QR code to join a study.</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty state" translatesAutoresizingMaskIntoConstraints="NO" id="NkN-FR-6sa" userLabel="empty state icon">
+                                <rect key="frame" x="110" y="205" width="155" height="155"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="155" id="5it-Ei-AuS"/>
+                                    <constraint firstAttribute="width" constant="155" id="SW7-FS-PlV"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXn-Q1-XzX" userLabel="empty state icon text">
+                                <rect key="frame" x="0.0" y="365" width="375" height="53"/>
+                                <string key="text">No studies joined.
+Scan QR code to join a study.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.6705882353" green="0.67450980390000004" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -6523,7 +6523,7 @@ Scan QR code to join a study.</string>
                             <constraint firstItem="I1O-li-ud8" firstAttribute="width" secondItem="T0v-AT-IQS" secondAttribute="width" id="5b4-4B-luv"/>
                             <constraint firstItem="u6p-ZZ-o4H" firstAttribute="leading" secondItem="T0v-AT-IQS" secondAttribute="leading" id="EHf-dt-3qe"/>
                             <constraint firstItem="NkN-FR-6sa" firstAttribute="centerX" secondItem="T0v-AT-IQS" secondAttribute="centerX" id="FEH-Oo-1yx"/>
-                            <constraint firstItem="I1O-li-ud8" firstAttribute="top" secondItem="T0v-AT-IQS" secondAttribute="top" constant="80" id="G58-vQ-bGb"/>
+                            <constraint firstItem="I1O-li-ud8" firstAttribute="top" secondItem="Zxw-jD-lPJ" secondAttribute="bottom" id="G58-vQ-bGb"/>
                             <constraint firstAttribute="trailing" secondItem="dXn-Q1-XzX" secondAttribute="trailing" id="GTS-x9-dfs"/>
                             <constraint firstItem="I1O-li-ud8" firstAttribute="trailing" secondItem="T0v-AT-IQS" secondAttribute="trailing" id="JQp-hQ-ENq"/>
                             <constraint firstAttribute="trailing" secondItem="u6p-ZZ-o4H" secondAttribute="trailing" id="O4C-qU-0QQ"/>
@@ -8570,19 +8570,19 @@ Scan QR code to join a study.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notice of Privacy Practices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFx-mN-Ce3">
-                                <rect key="frame" x="80" y="100" width="215" height="70"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="25"/>
+                                <rect key="frame" x="80" y="29" width="215" height="67.5"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" SGH values your privacy. View the notice of privacy policy." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-RF-9Yy">
-                                <rect key="frame" x="20" y="195" width="335" height="50.5"/>
+                                <rect key="frame" x="20" y="121.5" width="335" height="50.5"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
                                 <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPc-sZ-ap9">
-                                <rect key="frame" x="150.5" y="260.5" width="74" height="32"/>
+                                <rect key="frame" x="150.5" y="187" width="74" height="32"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
                                 <state key="normal" title="Learn more">
                                     <color key="titleColor" red="0.0" green="0.39215686274509803" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
@@ -8592,7 +8592,7 @@ Scan QR code to join a study.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGw-V3-4ne" userLabel="lineLabel">
-                                <rect key="frame" x="20" y="318.5" width="335" height="1"/>
+                                <rect key="frame" x="20" y="245" width="335" height="1"/>
                                 <color key="backgroundColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="gSN-kZ-sRj"/>
@@ -8602,7 +8602,7 @@ Scan QR code to join a study.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGR-UU-MnG" userLabel="lineLabel">
-                                <rect key="frame" x="20" y="418.5" width="335" height="1"/>
+                                <rect key="frame" x="20" y="345" width="335" height="1"/>
                                 <color key="backgroundColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="8kA-lJ-M7H"/>
@@ -8612,7 +8612,7 @@ Scan QR code to join a study.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click agree to confirm you have reviewed, understand, and accept the Notice of Privacy Policy." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-kO-Mgq">
-                                <rect key="frame" x="20" y="339.5" width="335" height="59"/>
+                                <rect key="frame" x="20" y="266" width="335" height="59"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -8652,7 +8652,7 @@ Scan QR code to join a study.</string>
                             <constraint firstItem="dGw-V3-4ne" firstAttribute="top" secondItem="UPc-sZ-ap9" secondAttribute="bottom" constant="26" id="TOL-tW-dUK"/>
                             <constraint firstItem="UPc-sZ-ap9" firstAttribute="centerX" secondItem="OYf-rp-Zqo" secondAttribute="centerX" id="bCt-iR-MGz"/>
                             <constraint firstItem="UPc-sZ-ap9" firstAttribute="top" secondItem="P7v-RF-9Yy" secondAttribute="bottom" constant="15" id="ec1-VC-Jrt"/>
-                            <constraint firstItem="NFx-mN-Ce3" firstAttribute="top" secondItem="OYf-rp-Zqo" secondAttribute="top" constant="100" id="eq7-ro-dND"/>
+                            <constraint firstItem="NFx-mN-Ce3" firstAttribute="top" secondItem="Coc-3n-8y0" secondAttribute="bottom" constant="9" id="eq7-ro-dND"/>
                             <constraint firstItem="NFx-mN-Ce3" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="80" id="gBH-0u-f37"/>
                             <constraint firstItem="dGw-V3-4ne" firstAttribute="leading" secondItem="OYf-rp-Zqo" secondAttribute="leading" constant="20" id="grv-TG-PVr"/>
                             <constraint firstAttribute="bottom" secondItem="dcX-I5-e60" secondAttribute="bottom" constant="40" id="hkv-B8-7wB"/>
@@ -9164,7 +9164,7 @@ If you want to withdraw your consent in the future, contact the person named bel
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iko-h7-i8W" userLabel="contentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="829"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="886"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4A-FG-FIZ">
                                                 <rect key="frame" x="241" y="246" width="21" height="21"/>
@@ -9181,13 +9181,13 @@ If you want to withdraw your consent in the future, contact the person named bel
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food recommendation for thyroid disorders" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5c5-6K-VOf">
-                                                        <rect key="frame" x="16" y="18" width="343" height="57.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <rect key="frame" x="16" y="18" width="343" height="67.5"/>
+                                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="24"/>
                                                         <color key="textColor" red="0.95294117647058818" green="0.27450980392156865" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbk-0R-djJ">
-                                                        <rect key="frame" x="16" y="93.5" width="343" height="2"/>
+                                                        <rect key="frame" x="16" y="103.5" width="343" height="2"/>
                                                         <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="2" id="iVD-PH-s5N"/>
@@ -9219,13 +9219,13 @@ If you want to withdraw your consent in the future, contact the person named bel
                                                 <rect key="frame" x="16" y="293" width="343" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Started on 01 Oct 2018, 09:00, Singapore time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQ0-cI-FCT">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20"/>
+                                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                         <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwB-8i-2Z1">
-                                                        <rect key="frame" x="0.0" y="21" width="343" height="20"/>
+                                                        <rect key="frame" x="0.0" y="24" width="343" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="6Ef-0T-oFU"/>
                                                         </constraints>
@@ -9234,13 +9234,13 @@ If you want to withdraw your consent in the future, contact the person named bel
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End on 01 Feb 2018, 23.55, Singapore time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mab-tA-hxs">
-                                                        <rect key="frame" x="0.0" y="45" width="343" height="17"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <rect key="frame" x="0.0" y="48" width="343" height="20"/>
+                                                        <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                         <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJ0-vV-t5f">
-                                                        <rect key="frame" x="0.0" y="92" width="343" height="2"/>
+                                                        <rect key="frame" x="0.0" y="98" width="343" height="2"/>
                                                         <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="2" id="ju3-DY-9MQ"/>
@@ -9269,55 +9269,55 @@ If you want to withdraw your consent in the future, contact the person named bel
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What this study is about" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFU-lC-pRt">
-                                                <rect key="frame" x="16" y="411" width="343" height="21.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <rect key="frame" x="16" y="411" width="343" height="25.5"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="18"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.41176470588235292" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-iw-jR3">
-                                                <rect key="frame" x="16" y="441.5" width="343" height="184"/>
+                                                <rect key="frame" x="16" y="445.5" width="343" height="216"/>
                                                 <string key="text">For patients who are going for radioactive iodine treatment, it is important that they keep to a low-iodine diet before the treatment. The purpose of this study is to explore how a food-recognition mobile application can help in reducing patients’ anxiety and improve their satisfaction level towards radioactive iodine treatment process.
 
 You were selected as a possible participant for this study because this is the first time you are going for radioactive iodine treatment.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                 <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data that are being collected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeT-ui-dpG">
-                                                <rect key="frame" x="16" y="645.5" width="343" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <rect key="frame" x="16" y="681.5" width="343" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.41176470588235292" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Researcher/ Seah Xin Yi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Se-dm-zsK">
-                                                <rect key="frame" x="16" y="738" width="343" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <rect key="frame" x="16" y="786" width="343" height="20"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                 <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tel: 6326 5357" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wl2-Gb-OrZ">
-                                                <rect key="frame" x="16" y="760" width="343" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <rect key="frame" x="16" y="811" width="343" height="20"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                 <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SGH, Singapore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVj-hk-pZL">
-                                                <rect key="frame" x="16" y="782" width="343" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <rect key="frame" x="16" y="836" width="343" height="20"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                 <color key="textColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8I0-n2-fPx">
-                                                <rect key="frame" x="16" y="665" width="343" height="33.5"/>
+                                                <rect key="frame" x="16" y="704" width="343" height="39.5"/>
                                                 <string key="text">   Iodine level eaten
    Calories consumed</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsi-Dj-CAt">
-                                                <rect key="frame" x="16" y="718.5" width="343" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <rect key="frame" x="16" y="763.5" width="343" height="22.5"/>
+                                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.41176470588235292" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -9383,7 +9383,9 @@ You were selected as a possible participant for this study because this is the f
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="endDateLabel" destination="mab-tA-hxs" id="WtE-cq-4Jy"/>
                         <outlet property="prograssBarView" destination="lHM-pw-OL6" id="31F-gJ-Ssc"/>
+                        <outlet property="startDateLabel" destination="rQ0-cI-FCT" id="NHE-hS-RJw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bje-7Q-tWj" userLabel="First Responder" sceneMemberID="firstResponder"/>
