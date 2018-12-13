@@ -92,11 +92,12 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+//test
         guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
             return
         }
         self.navigationController?.pushViewController(foodrecommendationVC, animated: true)
+
 //        AlertMessageHelper.showLoadingDialog(targetController: self)
 //        let groupId = studyList[indexPath.row].studyId
 //        APIService.instance.getClinicalStudyDetail(groupId: groupId) { (studyDetailEntity) in

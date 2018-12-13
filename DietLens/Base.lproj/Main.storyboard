@@ -281,7 +281,7 @@
                                 <state key="normal" title="Button" image="wechat"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xk-uy-P4b">
-                                <rect key="frame" x="97.5" y="77" width="180" height="60"/>
+                                <rect key="frame" x="60" y="77" width="255.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Uij-s2-mYm"/>
                                     <constraint firstAttribute="height" constant="60" id="YF7-NV-jj2"/>
@@ -6131,7 +6131,7 @@ What is it?</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Dietlens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xd-NZ-Hre">
-                                <rect key="frame" x="109.5" y="116.5" width="156" height="76.5"/>
+                                <rect key="frame" x="72.5" y="118" width="230" height="75"/>
                                 <fontDescription key="fontDescription" name="SignPainterHouseScript" family="SignPainter HouseScript" pointSize="64"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6563,7 +6563,7 @@ Scan QR code to join a study.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaH-iz-JNq">
-                                                <rect key="frame" x="97.5" y="60" width="180" height="60"/>
+                                                <rect key="frame" x="60" y="60" width="255.5" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="YaU-Xe-SRL"/>
                                                     <constraint firstAttribute="height" constant="60" id="dhG-HU-Rea"/>
@@ -8669,7 +8669,7 @@ Scan QR code to join a study.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7K-9T-F3t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1433" y="1866"/>
+            <point key="canvasLocation" x="1358" y="1866"/>
         </scene>
         <!--Description View Controller-->
         <scene sceneID="UlG-k2-srz">
@@ -9162,7 +9162,7 @@ If you want to withdraw your consent in the future, contact the person named bel
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iko-h7-i8W" userLabel="contentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="811"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="829"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4A-FG-FIZ">
                                                 <rect key="frame" x="241" y="246" width="21" height="21"/>
@@ -9214,7 +9214,7 @@ If you want to withdraw your consent in the future, contact the person named bel
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0qz-3Y-6q2">
-                                                <rect key="frame" x="16" y="293" width="343" height="70"/>
+                                                <rect key="frame" x="16" y="293" width="343" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Started on 01 Oct 2018, 09:00, Singapore time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQ0-cI-FCT">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="17"/>
@@ -9222,14 +9222,23 @@ If you want to withdraw your consent in the future, contact the person named bel
                                                         <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwB-8i-2Z1">
+                                                        <rect key="frame" x="0.0" y="21" width="343" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="6Ef-0T-oFU"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End on 01 Feb 2018, 23.55, Singapore time" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mab-tA-hxs">
-                                                        <rect key="frame" x="0.0" y="21" width="343" height="17"/>
+                                                        <rect key="frame" x="0.0" y="45" width="343" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJ0-vV-t5f">
-                                                        <rect key="frame" x="0.0" y="62" width="343" height="2"/>
+                                                        <rect key="frame" x="0.0" y="92" width="343" height="2"/>
                                                         <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="2" id="ju3-DY-9MQ"/>
@@ -9246,21 +9255,25 @@ If you want to withdraw your consent in the future, contact the person named bel
                                                     <constraint firstItem="pJ0-vV-t5f" firstAttribute="leading" secondItem="0qz-3Y-6q2" secondAttribute="leading" id="HNO-ff-Qce"/>
                                                     <constraint firstAttribute="trailing" secondItem="pJ0-vV-t5f" secondAttribute="trailing" id="Ip0-Wx-zjp"/>
                                                     <constraint firstItem="rQ0-cI-FCT" firstAttribute="top" secondItem="0qz-3Y-6q2" secondAttribute="top" id="JpW-iG-qBn"/>
-                                                    <constraint firstItem="pJ0-vV-t5f" firstAttribute="top" secondItem="mab-tA-hxs" secondAttribute="bottom" constant="24" id="NMT-xb-MOX"/>
-                                                    <constraint firstItem="mab-tA-hxs" firstAttribute="top" secondItem="rQ0-cI-FCT" secondAttribute="bottom" constant="4" id="bES-W8-qma"/>
+                                                    <constraint firstItem="mab-tA-hxs" firstAttribute="bottom" secondItem="pJ0-vV-t5f" secondAttribute="top" constant="-30" id="W4w-N4-5tX"/>
                                                     <constraint firstAttribute="trailing" secondItem="mab-tA-hxs" secondAttribute="trailing" id="dUM-SQ-jT8"/>
+                                                    <constraint firstItem="ZwB-8i-2Z1" firstAttribute="leading" secondItem="0qz-3Y-6q2" secondAttribute="leading" id="g5i-G6-Upb"/>
                                                     <constraint firstItem="mab-tA-hxs" firstAttribute="leading" secondItem="0qz-3Y-6q2" secondAttribute="leading" id="g9B-es-J45"/>
-                                                    <constraint firstAttribute="height" constant="70" id="hry-iC-gvv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ZwB-8i-2Z1" secondAttribute="trailing" id="hNP-3F-xeP"/>
+                                                    <constraint firstAttribute="height" constant="100" id="hry-iC-gvv"/>
+                                                    <constraint firstItem="ZwB-8i-2Z1" firstAttribute="top" secondItem="rQ0-cI-FCT" secondAttribute="bottom" constant="4" id="hwy-YO-xlE"/>
+                                                    <constraint firstItem="mab-tA-hxs" firstAttribute="top" secondItem="ZwB-8i-2Z1" secondAttribute="bottom" constant="4" id="i0Q-wS-7EI"/>
+                                                    <constraint firstItem="ZwB-8i-2Z1" firstAttribute="centerX" secondItem="0qz-3Y-6q2" secondAttribute="centerX" id="jG0-7y-Bou"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What this study is about" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFU-lC-pRt">
-                                                <rect key="frame" x="16" y="384" width="343" height="21.5"/>
+                                                <rect key="frame" x="16" y="411" width="343" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.41176470588235292" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekt-iw-jR3">
-                                                <rect key="frame" x="16" y="414.5" width="343" height="184"/>
+                                                <rect key="frame" x="16" y="441.5" width="343" height="184"/>
                                                 <string key="text">For patients who are going for radioactive iodine treatment, it is important that they keep to a low-iodine diet before the treatment. The purpose of this study is to explore how a food-recognition mobile application can help in reducing patients’ anxiety and improve their satisfaction level towards radioactive iodine treatment process.
 
 You were selected as a possible participant for this study because this is the first time you are going for radioactive iodine treatment.</string>
@@ -9269,31 +9282,31 @@ You were selected as a possible participant for this study because this is the f
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data that are being collected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeT-ui-dpG">
-                                                <rect key="frame" x="16" y="618.5" width="343" height="19.5"/>
+                                                <rect key="frame" x="16" y="645.5" width="343" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.41176470588235292" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Researcher/ Seah Xin Yi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Se-dm-zsK">
-                                                <rect key="frame" x="16" y="720" width="343" height="17"/>
+                                                <rect key="frame" x="16" y="738" width="343" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tel: 6326 5357" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wl2-Gb-OrZ">
-                                                <rect key="frame" x="16" y="742" width="343" height="17"/>
+                                                <rect key="frame" x="16" y="760" width="343" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SGH, Singapore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qVj-hk-pZL">
-                                                <rect key="frame" x="16" y="764" width="343" height="17"/>
+                                                <rect key="frame" x="16" y="782" width="343" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8I0-n2-fPx">
-                                                <rect key="frame" x="16" y="647" width="343" height="33.5"/>
+                                                <rect key="frame" x="16" y="665" width="343" height="33.5"/>
                                                 <string key="text">   Iodine level eaten
    Calories consumed</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -9301,7 +9314,7 @@ You were selected as a possible participant for this study because this is the f
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="contect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsi-Dj-CAt">
-                                                <rect key="frame" x="16" y="700.5" width="343" height="19.5"/>
+                                                <rect key="frame" x="16" y="718.5" width="343" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.41176470588235292" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -9316,6 +9329,7 @@ You were selected as a possible participant for this study because this is the f
                                             <constraint firstItem="gvz-m1-0Yn" firstAttribute="leading" secondItem="Iko-h7-i8W" secondAttribute="leading" id="5xh-sE-qzE"/>
                                             <constraint firstAttribute="trailing" secondItem="0qz-3Y-6q2" secondAttribute="trailing" constant="16" id="9J2-Ta-bPU"/>
                                             <constraint firstItem="wl2-Gb-OrZ" firstAttribute="trailing" secondItem="8Se-dm-zsK" secondAttribute="trailing" id="9xH-c4-JH1"/>
+                                            <constraint firstItem="0qz-3Y-6q2" firstAttribute="centerX" secondItem="Iko-h7-i8W" secondAttribute="centerX" id="AhM-nQ-aMS"/>
                                             <constraint firstItem="8I0-n2-fPx" firstAttribute="trailing" secondItem="EeT-ui-dpG" secondAttribute="trailing" id="Bsc-3i-Rtl"/>
                                             <constraint firstItem="8Se-dm-zsK" firstAttribute="trailing" secondItem="ekt-iw-jR3" secondAttribute="trailing" id="DE4-80-fEt"/>
                                             <constraint firstItem="hsi-Dj-CAt" firstAttribute="top" secondItem="8I0-n2-fPx" secondAttribute="bottom" constant="20" id="HyQ-cf-YT8"/>
@@ -9333,7 +9347,7 @@ You were selected as a possible participant for this study because this is the f
                                             <constraint firstItem="wl2-Gb-OrZ" firstAttribute="top" secondItem="8Se-dm-zsK" secondAttribute="bottom" constant="5" id="dWe-6K-aLa"/>
                                             <constraint firstItem="8I0-n2-fPx" firstAttribute="leading" secondItem="EeT-ui-dpG" secondAttribute="leading" id="gfw-Zs-sjN"/>
                                             <constraint firstItem="c4A-FG-FIZ" firstAttribute="trailing" secondItem="lHM-pw-OL6" secondAttribute="trailing" id="iax-06-vJK"/>
-                                            <constraint firstItem="zFU-lC-pRt" firstAttribute="top" secondItem="0qz-3Y-6q2" secondAttribute="bottom" constant="21" id="jht-ed-II9"/>
+                                            <constraint firstItem="zFU-lC-pRt" firstAttribute="top" secondItem="0qz-3Y-6q2" secondAttribute="bottom" constant="18" id="jht-ed-II9"/>
                                             <constraint firstItem="zFU-lC-pRt" firstAttribute="leading" secondItem="0qz-3Y-6q2" secondAttribute="leading" id="jki-dl-jd1"/>
                                             <constraint firstItem="wl2-Gb-OrZ" firstAttribute="top" secondItem="8Se-dm-zsK" secondAttribute="bottom" constant="5" id="lch-Vn-m8j"/>
                                             <constraint firstItem="zFU-lC-pRt" firstAttribute="trailing" secondItem="0qz-3Y-6q2" secondAttribute="trailing" id="qQi-Uv-1cg"/>
@@ -9343,7 +9357,7 @@ You were selected as a possible participant for this study because this is the f
                                             <constraint firstItem="qVj-hk-pZL" firstAttribute="bottom" secondItem="Iko-h7-i8W" secondAttribute="bottom" constant="-30" id="tPl-zs-EfL"/>
                                             <constraint firstItem="8Se-dm-zsK" firstAttribute="leading" secondItem="ekt-iw-jR3" secondAttribute="leading" id="tTN-d3-s8n"/>
                                             <constraint firstAttribute="trailing" secondItem="gvz-m1-0Yn" secondAttribute="trailing" id="wvv-Kp-9Nt"/>
-                                            <constraint firstItem="8I0-n2-fPx" firstAttribute="top" secondItem="EeT-ui-dpG" secondAttribute="bottom" constant="9" id="x7w-DU-1Y3"/>
+                                            <constraint firstItem="8I0-n2-fPx" firstAttribute="top" secondItem="EeT-ui-dpG" secondAttribute="bottom" id="x7w-DU-1Y3"/>
                                             <constraint firstItem="EeT-ui-dpG" firstAttribute="leading" secondItem="ekt-iw-jR3" secondAttribute="leading" id="yWM-5v-Ptq"/>
                                         </constraints>
                                     </view>
