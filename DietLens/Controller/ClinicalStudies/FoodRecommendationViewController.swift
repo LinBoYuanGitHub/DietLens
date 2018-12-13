@@ -92,6 +92,11 @@ class FoodRecommendationViewController: BaseViewController {
     func setContect() {
         studyName.text = entity.studyName
         studyContent.text = entity.content.studyDesc
+        var dataTag: String = ""
+        for entityi in entity.dataTags {
+            dataTag += entityi.name + "\n"
+        }
+        dataCollected.text = dataTag
 
         researcher.text =  entity.owner.nickname
         phoneNumber.text = "Tel:" + entity.owner.phone
