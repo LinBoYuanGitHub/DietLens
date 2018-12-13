@@ -102,20 +102,35 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            //to text search view
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
-                dest.tabIndex = 1
+//            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
+//                dest.shouldMoveToTextTab = true
+//                if let navigator = self.navigationController {
+//                    //clear controller to Bottom & add foodCalendar Controller
+//                    let transition = CATransition()
+//                    transition.duration = 0.3
+//                    //                transition.type = kCATransitionFromTop
+//                    transition.type = kCATransitionMoveIn
+//                    transition.subtype = kCATransitionFromTop
+//                    self.view.window?.layer.add(transition, forKey: kCATransition)
+//                    navigator.pushViewController(dest, animated: false)
+//                }
+//            }
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
+                dest.addFoodDate = Date()
+                dest.isSearchMoreFlow = false
+                dest.shouldShowCancel = true
                 if let navigator = self.navigationController {
                     //clear controller to Bottom & add foodCalendar Controller
-                    let transition = CATransition()
-                    transition.duration = 0.3
-                    //                transition.type = kCATransitionFromTop
-                    transition.type = kCATransitionMoveIn
-                    transition.subtype = kCATransitionFromTop
-                    self.view.window?.layer.add(transition, forKey: kCATransition)
-                    navigator.pushViewController(dest, animated: false)
+//                    let transition = CATransition()
+//                    transition.duration = 0.3
+//                    //                transition.type = kCATransitionFromTop
+//                    transition.type = kCATransitionMoveIn
+//                    transition.subtype = kCATransitionFromTop
+//                    self.view.window?.layer.add(transition, forKey: kCATransition)
+                    navigator.pushViewController(dest, animated: true)
                 }
             }
+
         case 1:
             //to feedback page
             let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")

@@ -53,6 +53,7 @@ class TextInputViewController: BaseViewController {
     var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true
 
+    var isSearchMoreFlow: Bool = false
     var shouldShowCancel: Bool = false
     var nextPageLink: String = ""
 
@@ -358,13 +359,13 @@ class TextInputViewController: BaseViewController {
                 if dietItem?.portionInfo.count != 0 {
                     dietEntity.displayUnit = (dietItem?.portionInfo[0].sizeUnit)!
                 }
-                if self.shouldShowCancel {
+                if self.isSearchMoreFlow {
                     dietEntity.recordType = RecognitionInteger.additionText
                 } else {
                     dietEntity.recordType = RecognitionInteger.text
                 }
                 //set as new foodDiary entity
-                if !self.shouldShowCancel {
+                if !self.isSearchMoreFlow {
                     FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
                 }
                 //mealType & mealTime
@@ -381,7 +382,7 @@ class TextInputViewController: BaseViewController {
                     dest.imageKey = self.imageKey
                     dest.recordDate = self.addFoodDate
                     dest.dietItem = dietEntity
-                    if self.shouldShowCancel {
+                    if self.isSearchMoreFlow {
                         dest.recordType = RecognitionInteger.additionText
                         dest.shouldShowMealBar = false
                     } else {
@@ -451,7 +452,7 @@ extension TextInputViewController: UITableViewDelegate {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        if shouldShowCancel { //search more flow
+        if isSearchMoreFlow { //search more flow
             if appDelegate.isSearchMoreTriggered {
                 appDelegate.isSearchMoreTriggered = false
                 Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreSelectFlag, parameters: nil)

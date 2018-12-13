@@ -164,6 +164,7 @@ class FoodDiaryViewController: UIViewController {
     @objc func onAddMoreClick() {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
             dest.addFoodDate = self.recordDate
+            dest.isSearchMoreFlow = true
             dest.shouldShowCancel = true
 //            dest.cameraImage = cameraImage use sample Image
             if let navigator = self.navigationController {

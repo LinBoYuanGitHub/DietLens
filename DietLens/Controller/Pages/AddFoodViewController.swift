@@ -18,7 +18,7 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
     var mealType: String = StringConstants.MealString.breakfast
     var isSetMealByTimeRequired = true
     var isFirstTimeSetTabIndex = true
-    var tabIndex = 0
+    var shouldMoveToTextTab = false
 
     override public func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         guard let cameraViewController = storyboard?.instantiateViewController(withIdentifier: "cameraVC")
@@ -90,7 +90,13 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         //set height for bar
         buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
         buttonBarView.selectedBar.frame.size.height = 2.0
-        moveToViewController(at: tabIndex)
+        DispatchQueue.main.async {
+            if self.shouldMoveToTextTab {
+                self.moveTo(viewController: self.viewControllers[1], animated: true)
+                self.shouldMoveToTextTab = false
+            }
+
+        }
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {
