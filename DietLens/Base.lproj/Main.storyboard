@@ -1509,7 +1509,7 @@ Click add to record food~</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="240" estimatedRowHeight="230" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hye-DC-9gR">
-                                <rect key="frame" x="0.0" y="50" width="375" height="750"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="UpD-1u-XLw" userLabel="headerView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
@@ -2009,7 +2009,7 @@ Click add to record food~</string>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Xoi-Ut-71S" firstAttribute="top" secondItem="Rdz-ba-FZ3" secondAttribute="top" id="3f4-dM-heg"/>
-                            <constraint firstItem="Hye-DC-9gR" firstAttribute="top" secondItem="Xoi-Ut-71S" secondAttribute="bottom" id="58Q-1O-EXS"/>
+                            <constraint firstItem="Hye-DC-9gR" firstAttribute="top" secondItem="Rdz-ba-FZ3" secondAttribute="top" id="58Q-1O-EXS"/>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="bottom" secondItem="Rdz-ba-FZ3" secondAttribute="bottom" id="Cxo-30-QQP"/>
                             <constraint firstItem="Hye-DC-9gR" firstAttribute="trailing" secondItem="Rdz-ba-FZ3" secondAttribute="trailing" id="GQ6-W3-hVP"/>
                             <constraint firstItem="Xoi-Ut-71S" firstAttribute="centerX" secondItem="Rdz-ba-FZ3" secondAttribute="centerX" id="Hpt-rn-VEk"/>
@@ -4537,7 +4537,6 @@ e.g. athlete with an almost unstoppable training schedule with multiple training
                         <outlet property="TFHeight" destination="P6q-CW-uZy" id="G9t-Vl-Xy9"/>
                         <outlet property="TFName" destination="l7i-cz-7FS" id="EVt-KX-Ral"/>
                         <outlet property="TFWeight" destination="EAy-UD-XvT" id="CWa-ZU-QhF"/>
-                        <segue destination="11T-iJ-c2O" kind="show" identifier="toHomePage" id="x6i-Qd-8cW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSu-Vj-qFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5487,14 +5486,14 @@ What is it?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNN-rA-QiV" userLabel="Seperator">
-                                <rect key="frame" x="0.0" y="64" width="375" height="4"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="4"/>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="QYw-dJ-9fu"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oy9-b5-wJz">
-                                <rect key="frame" x="16" y="84" width="343" height="519"/>
+                                <rect key="frame" x="16" y="40" width="343" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthCenterMainCell" rowHeight="133" id="GDW-Qf-o3a" customClass="HealthCenterMainCell" customModule="DietLens" customModuleProvider="target">
@@ -7793,32 +7792,6 @@ What is it?</string>
             </objects>
             <point key="canvasLocation" x="-2298" y="-845"/>
         </scene>
-        <!--Home-->
-        <scene sceneID="npj-Fe-Kym">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="11T-iJ-c2O" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home" id="lHY-vo-JEg"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FeK-4S-CCV">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.1176470588" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" red="0.97647058819999999" green="0.1176470588" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.97647058823529409" green="0.11764705882352941" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="SignPainterHouseScript" family="SignPainter HouseScript" pointSize="28"/>
-                            <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xZk-St-05l" kind="relationship" relationship="rootViewController" id="JNu-09-oQT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lsx-qo-omz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2441" y="370"/>
-        </scene>
         <!--FoodDiary-->
         <scene sceneID="Ha1-MJ-Afa">
             <objects>
@@ -7848,11 +7821,11 @@ What is it?</string>
                         <viewControllerLayoutGuide type="bottom" id="8Ng-gp-9PQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SMm-oK-pdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7c-Q1-j6e" userLabel="TabBarContainer">
-                                <rect key="frame" x="0.0" y="573" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="509" width="375" height="50"/>
                                 <subviews>
                                     <tabBar clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwk-rC-2pe">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -7888,11 +7861,11 @@ What is it?</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJC-LL-vmH" userLabel="Container">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="573"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="viM-Lh-jPA" userLabel="SeperatorView">
-                                <rect key="frame" x="0.0" y="572.5" width="375" height="0.5"/>
+                                <rect key="frame" x="0.0" y="508.5" width="375" height="0.5"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="Mpi-Lj-19Y"/>
@@ -7907,6 +7880,7 @@ What is it?</string>
                             <constraint firstAttribute="trailing" secondItem="O7c-Q1-j6e" secondAttribute="trailing" id="7Ca-qn-iId"/>
                             <constraint firstItem="8Ng-gp-9PQ" firstAttribute="top" secondItem="O7c-Q1-j6e" secondAttribute="bottom" id="7Np-fT-IcP"/>
                             <constraint firstItem="O7c-Q1-j6e" firstAttribute="top" secondItem="viM-Lh-jPA" secondAttribute="bottom" id="Cdx-xW-uta"/>
+                            <constraint firstItem="viM-Lh-jPA" firstAttribute="top" secondItem="TJC-LL-vmH" secondAttribute="bottom" constant="-0.5" id="IrM-0t-l88"/>
                             <constraint firstItem="viM-Lh-jPA" firstAttribute="leading" secondItem="SMm-oK-pdC" secondAttribute="leading" id="LS3-JQ-Qww"/>
                             <constraint firstItem="O7c-Q1-j6e" firstAttribute="top" secondItem="TJC-LL-vmH" secondAttribute="bottom" id="h4G-Ui-MKc"/>
                             <constraint firstItem="O7c-Q1-j6e" firstAttribute="leading" secondItem="SMm-oK-pdC" secondAttribute="leading" id="i8M-tW-FwA"/>
@@ -7927,7 +7901,7 @@ What is it?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cyg-I3-JJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1585" y="354"/>
+            <point key="canvasLocation" x="1584.8" y="353.9730134932534"/>
         </scene>
         <!--More View Controller-->
         <scene sceneID="0SP-Jq-zfa">
@@ -7996,8 +7970,11 @@ What is it?</string>
                                                         <constraint firstAttribute="width" constant="20" id="p1I-RE-aXh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6i-Ua-LAq">
-                                                    <rect key="frame" x="17.5" y="68" width="69.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nutrition Database" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6i-Ua-LAq">
+                                                    <rect key="frame" x="5" y="58" width="94" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="Udb-pi-yif"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="PingFangSC-Semibold" family="PingFang SC" pointSize="15"/>
                                                     <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -8006,9 +7983,10 @@ What is it?</string>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="YIL-0s-EiY" firstAttribute="centerX" secondItem="H2L-qI-0SG" secondAttribute="centerX" id="3vr-Ow-pWV"/>
-                                            <constraint firstItem="d6i-Ua-LAq" firstAttribute="centerX" secondItem="H2L-qI-0SG" secondAttribute="centerX" id="6rK-yQ-TfX"/>
-                                            <constraint firstItem="d6i-Ua-LAq" firstAttribute="top" secondItem="YIL-0s-EiY" secondAttribute="bottom" constant="18" id="7Lk-s7-jbM"/>
+                                            <constraint firstItem="d6i-Ua-LAq" firstAttribute="top" secondItem="YIL-0s-EiY" secondAttribute="bottom" constant="8" id="7Lk-s7-jbM"/>
+                                            <constraint firstAttribute="trailing" secondItem="d6i-Ua-LAq" secondAttribute="trailing" constant="5" id="GIm-ap-c0v"/>
                                             <constraint firstItem="YIL-0s-EiY" firstAttribute="top" secondItem="H2L-qI-0SG" secondAttribute="top" constant="30" id="I83-KS-dvf"/>
+                                            <constraint firstItem="d6i-Ua-LAq" firstAttribute="leading" secondItem="H2L-qI-0SG" secondAttribute="leading" constant="5" id="ifa-Xa-db9"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="moreImageIcon" destination="YIL-0s-EiY" id="jCn-TL-zSx"/>
@@ -8050,6 +8028,7 @@ What is it?</string>
                             <constraint firstItem="fgX-YO-YUi" firstAttribute="top" secondItem="wiS-Dc-KPe" secondAttribute="top" id="MLq-NH-E0g"/>
                             <constraint firstItem="rWa-3n-Gjt" firstAttribute="top" secondItem="wiS-Dc-KPe" secondAttribute="bottom" id="OH9-fG-VxZ"/>
                             <constraint firstItem="AQV-cr-Bv3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wiS-Dc-KPe" secondAttribute="trailing" constant="8" symbolic="YES" id="S4E-ct-qk6"/>
+                            <constraint firstItem="AQV-cr-Bv3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rWa-3n-Gjt" secondAttribute="trailing" constant="8" symbolic="YES" id="SEq-nz-gge"/>
                             <constraint firstItem="Xvt-Ep-ya3" firstAttribute="top" secondItem="FLV-RX-iij" secondAttribute="bottom" constant="25" id="SY1-qF-jm9"/>
                             <constraint firstItem="rWa-3n-Gjt" firstAttribute="leading" secondItem="PHp-3f-veg" secondAttribute="leading" constant="16" id="TYK-zw-VOT"/>
                             <constraint firstItem="wiS-Dc-KPe" firstAttribute="top" secondItem="XuL-or-vF1" secondAttribute="bottom" constant="53" id="W9f-KX-VCO"/>
@@ -8075,7 +8054,7 @@ What is it?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GVT-2Z-zNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3776.8000000000002" y="1244.527736131934"/>
+            <point key="canvasLocation" x="3777" y="1119"/>
         </scene>
         <!--stepCounter-->
         <scene sceneID="egw-rf-dA1">
@@ -8143,46 +8122,8 @@ What is it?</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDi-Wh-PIR" userLabel="LeftArrowButton" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="83.5" y="75.5" width="8" height="12"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="12" id="lLN-kE-8fZ"/>
-                                    <constraint firstAttribute="width" constant="8" id="v05-fs-aui"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="calendar_left_arrow_red"/>
-                                <connections>
-                                    <action selector="onLeftArrowPressed:" destination="MIX-fr-hCj" eventType="touchUpInside" id="zKA-wl-b9d"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIg-VY-GTF" userLabel="RightArrowButton" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="283.5" y="75.5" width="8" height="12"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="8" id="2Rf-Pa-c4f"/>
-                                    <constraint firstAttribute="height" constant="12" id="h6j-zU-lRI"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="calendar_right_arrow_red"/>
-                                <connections>
-                                    <action selector="onRightArrowPressed:" destination="MIX-fr-hCj" eventType="touchUpInside" id="JcZ-GM-luf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-Bq-FnS" userLabel="calendarClickableItem">
-                                <rect key="frame" x="103.5" y="64" width="168" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="168" id="la8-pK-Bet"/>
-                                    <constraint firstAttribute="height" constant="35" id="o9y-BN-yU6"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="RedBackGroundImage"/>
-                                <connections>
-                                    <action selector="showCalendar:" destination="MIX-fr-hCj" eventType="touchUpInside" id="3MZ-dQ-Sry"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-cS-lC7" userLabel="calendarButton">
-                                <rect key="frame" x="234.5" y="70.5" width="12" height="22"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="calendar_down_arrow"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6j-4O-9Q5" userLabel="Edit" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="329" y="64" width="30" height="35"/>
+                                <rect key="frame" x="329" y="30" width="30" height="35"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                                 <state key="normal" title="Edit">
                                     <color key="titleColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -8191,14 +8132,8 @@ What is it?</string>
                                     <action selector="onEditButtonPressed:" destination="MIX-fr-hCj" eventType="touchUpInside" id="1IH-1z-Kfw"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7. April 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aec-V0-YNw">
-                                <rect key="frame" x="128.5" y="70" width="92.5" height="23"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH3-5G-M9L" userLabel="NutrtionViewContainer" customClass="RedGardientView" customModule="DietLens" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="107" width="375" height="126"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-fT-7ys">
                                         <rect key="frame" x="0.0" y="38" width="375" height="80"/>
@@ -8245,6 +8180,7 @@ What is it?</string>
                                     <constraint firstItem="9oT-fT-7ys" firstAttribute="width" secondItem="AH3-5G-M9L" secondAttribute="width" id="9Lu-L7-Jne"/>
                                     <constraint firstItem="9oT-fT-7ys" firstAttribute="centerX" secondItem="AH3-5G-M9L" secondAttribute="centerX" id="AcV-Ps-nvW"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EJq-QE-JCm" secondAttribute="trailing" constant="20" symbolic="YES" id="EH5-BV-NTw"/>
+                                    <constraint firstItem="ok0-FC-oiw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EJq-QE-JCm" secondAttribute="trailing" constant="8" symbolic="YES" id="Hie-aU-cXl"/>
                                     <constraint firstItem="EJq-QE-JCm" firstAttribute="top" secondItem="AH3-5G-M9L" secondAttribute="top" constant="9" id="IEw-k6-sEm"/>
                                     <constraint firstAttribute="height" constant="126" id="VCG-iO-EiP"/>
                                     <constraint firstAttribute="trailing" secondItem="ok0-FC-oiw" secondAttribute="trailing" constant="16" id="ehd-9N-LaU"/>
@@ -8262,7 +8198,7 @@ What is it?</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Wqf-Od-T1O">
-                                <rect key="frame" x="-1" y="233" width="377" height="433.5"/>
+                                <rect key="frame" x="-1" y="199" width="377" height="468"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -8290,6 +8226,7 @@ What is it?</string>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="cA9-Mp-Z1P" firstAttribute="leading" secondItem="wRo-1W-9nc" secondAttribute="leading" constant="16" id="5ac-au-f4K"/>
+                                                <constraint firstItem="gCW-XY-nGO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cA9-Mp-Z1P" secondAttribute="trailing" constant="8" symbolic="YES" id="aFS-5f-FSO"/>
                                                 <constraint firstItem="cA9-Mp-Z1P" firstAttribute="centerY" secondItem="wRo-1W-9nc" secondAttribute="centerY" id="gLw-Z4-hTA"/>
                                                 <constraint firstItem="gCW-XY-nGO" firstAttribute="centerY" secondItem="wRo-1W-9nc" secondAttribute="centerY" id="iFu-ZH-L8w"/>
                                                 <constraint firstAttribute="trailing" secondItem="gCW-XY-nGO" secondAttribute="trailing" constant="16" id="igB-2x-l5g"/>
@@ -8447,14 +8384,58 @@ What is it?</string>
                                     <constraint firstItem="YBc-qz-4IL" firstAttribute="top" secondItem="hc8-JX-xwm" secondAttribute="top" id="9qT-Nq-f9U"/>
                                     <constraint firstAttribute="trailing" secondItem="YBc-qz-4IL" secondAttribute="trailing" id="AgO-jW-Aqn"/>
                                     <constraint firstItem="38Y-ge-aCb" firstAttribute="centerY" secondItem="hc8-JX-xwm" secondAttribute="centerY" id="C8L-LV-p09"/>
+                                    <constraint firstItem="pwO-N5-TvB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xa0-ka-Z65" secondAttribute="trailing" constant="8" symbolic="YES" id="Dfi-dv-6RA"/>
                                     <constraint firstItem="Xa0-ka-Z65" firstAttribute="centerX" secondItem="hc8-JX-xwm" secondAttribute="centerX" id="MS5-qw-05Z"/>
                                     <constraint firstAttribute="height" constant="54" id="bk3-2h-9pe"/>
                                     <constraint firstAttribute="trailing" secondItem="pwO-N5-TvB" secondAttribute="trailing" constant="63" id="mZK-8c-hY2"/>
+                                    <constraint firstItem="Xa0-ka-Z65" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="38Y-ge-aCb" secondAttribute="trailing" constant="8" symbolic="YES" id="nIo-1H-G61"/>
                                     <constraint firstItem="Xa0-ka-Z65" firstAttribute="centerY" secondItem="hc8-JX-xwm" secondAttribute="centerY" id="nhB-Gz-o1M"/>
                                     <constraint firstItem="38Y-ge-aCb" firstAttribute="leading" secondItem="hc8-JX-xwm" secondAttribute="leading" constant="63" id="paS-kT-6JO"/>
                                     <constraint firstItem="pwO-N5-TvB" firstAttribute="centerY" secondItem="hc8-JX-xwm" secondAttribute="centerY" id="rcz-vD-cT3"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3I-Bq-FnS" userLabel="calendarClickableItem">
+                                <rect key="frame" x="103.5" y="30" width="168" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="168" id="la8-pK-Bet"/>
+                                    <constraint firstAttribute="height" constant="35" id="o9y-BN-yU6"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="RedBackGroundImage"/>
+                                <connections>
+                                    <action selector="showCalendar:" destination="MIX-fr-hCj" eventType="touchUpInside" id="3MZ-dQ-Sry"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7. April 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aec-V0-YNw">
+                                <rect key="frame" x="128.5" y="36" width="92.5" height="23"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-cS-lC7" userLabel="calendarButton">
+                                <rect key="frame" x="234.5" y="36.5" width="12" height="22"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="calendar_down_arrow"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDi-Wh-PIR" userLabel="LeftArrowButton" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
+                                <rect key="frame" x="85.5" y="41.5" width="8" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="lLN-kE-8fZ"/>
+                                </constraints>
+                                <state key="normal" image="calendar_left_arrow_red"/>
+                                <connections>
+                                    <action selector="onLeftArrowPressed:" destination="MIX-fr-hCj" eventType="touchUpInside" id="zKA-wl-b9d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIg-VY-GTF" userLabel="RightArrowButton" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
+                                <rect key="frame" x="281.5" y="41.5" width="8" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="h6j-zU-lRI"/>
+                                </constraints>
+                                <state key="normal" image="calendar_right_arrow_red"/>
+                                <connections>
+                                    <action selector="onRightArrowPressed:" destination="MIX-fr-hCj" eventType="touchUpInside" id="JcZ-GM-luf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -8463,15 +8444,14 @@ What is it?</string>
                             <constraint firstItem="Aec-V0-YNw" firstAttribute="leading" secondItem="A3I-Bq-FnS" secondAttribute="leading" constant="25" id="8r4-j8-hDh"/>
                             <constraint firstItem="q6j-4O-9Q5" firstAttribute="centerY" secondItem="Aec-V0-YNw" secondAttribute="centerY" id="95g-l9-1wk"/>
                             <constraint firstAttribute="trailing" secondItem="hc8-JX-xwm" secondAttribute="trailing" id="C73-yY-ZQa"/>
-                            <constraint firstItem="Wqf-Od-T1O" firstAttribute="top" secondItem="AH3-5G-M9L" secondAttribute="bottom" id="CwG-fX-pSd"/>
-                            <constraint firstItem="nIg-VY-GTF" firstAttribute="leading" secondItem="A3I-Bq-FnS" secondAttribute="trailing" constant="12" id="GCf-wm-TFx"/>
-                            <constraint firstItem="6bO-xB-3xy" firstAttribute="top" secondItem="Wqf-Od-T1O" secondAttribute="bottom" constant="0.5" id="H0g-sV-4mX"/>
-                            <constraint firstItem="AH3-5G-M9L" firstAttribute="top" secondItem="Aec-V0-YNw" secondAttribute="bottom" constant="14" id="MBc-bc-odg"/>
+                            <constraint firstItem="6bO-xB-3xy" firstAttribute="top" secondItem="Wqf-Od-T1O" secondAttribute="bottom" id="H0g-sV-4mX"/>
+                            <constraint firstItem="Wqf-Od-T1O" firstAttribute="top" secondItem="AH3-5G-M9L" secondAttribute="bottom" id="O2k-mt-Z8Q"/>
                             <constraint firstAttribute="leading" secondItem="Wqf-Od-T1O" secondAttribute="leading" constant="1" id="OGQ-kM-d9C"/>
                             <constraint firstItem="6bO-xB-3xy" firstAttribute="top" secondItem="hc8-JX-xwm" secondAttribute="bottom" id="PPd-TG-Nnv"/>
+                            <constraint firstItem="nIg-VY-GTF" firstAttribute="leading" secondItem="A3I-Bq-FnS" secondAttribute="trailing" constant="10" id="Rua-71-KvG"/>
                             <constraint firstItem="8N3-cS-lC7" firstAttribute="centerY" secondItem="Aec-V0-YNw" secondAttribute="centerY" id="SQ4-cE-qF9"/>
                             <constraint firstItem="Wqf-Od-T1O" firstAttribute="trailing" secondItem="ms6-ks-lNc" secondAttribute="trailing" constant="1" id="bwh-BS-Cek"/>
-                            <constraint firstItem="lDi-Wh-PIR" firstAttribute="trailing" secondItem="A3I-Bq-FnS" secondAttribute="leading" constant="-12" id="dnq-7W-Ff6"/>
+                            <constraint firstItem="AH3-5G-M9L" firstAttribute="top" secondItem="Aec-V0-YNw" secondAttribute="bottom" constant="14" id="cvE-Z9-2rE"/>
                             <constraint firstItem="hc8-JX-xwm" firstAttribute="leading" secondItem="ms6-ks-lNc" secondAttribute="leading" id="eQg-w6-JNy"/>
                             <constraint firstItem="nIg-VY-GTF" firstAttribute="centerY" secondItem="A3I-Bq-FnS" secondAttribute="centerY" id="gig-Ai-eqL"/>
                             <constraint firstItem="8N3-cS-lC7" firstAttribute="trailing" secondItem="A3I-Bq-FnS" secondAttribute="trailing" constant="-25" id="gm3-ad-jYs"/>
@@ -8480,7 +8460,8 @@ What is it?</string>
                             <constraint firstAttribute="trailing" secondItem="q6j-4O-9Q5" secondAttribute="trailing" constant="16" id="oo2-0c-z9O"/>
                             <constraint firstItem="8N3-cS-lC7" firstAttribute="centerY" secondItem="A3I-Bq-FnS" secondAttribute="centerY" id="r3S-ax-0m6"/>
                             <constraint firstAttribute="trailing" secondItem="AH3-5G-M9L" secondAttribute="trailing" id="ubs-cf-jIg"/>
-                            <constraint firstItem="A3I-Bq-FnS" firstAttribute="top" secondItem="DDK-dl-Tyx" secondAttribute="bottom" id="zt3-Ba-nem"/>
+                            <constraint firstItem="A3I-Bq-FnS" firstAttribute="leading" secondItem="lDi-Wh-PIR" secondAttribute="trailing" constant="10" id="wyz-lB-4fi"/>
+                            <constraint firstItem="A3I-Bq-FnS" firstAttribute="top" secondItem="DDK-dl-Tyx" secondAttribute="bottom" constant="10" id="zt3-Ba-nem"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Food Diary" id="beX-1R-86c">
@@ -8510,24 +8491,6 @@ What is it?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAS-et-cC3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="10255.200000000001" y="1118.5907046476761"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="FOB-wG-XnG">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ML0-ic-Tbw" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m9d-yB-4lW">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="MIX-fr-hCj" kind="relationship" relationship="rootViewController" id="Kd3-Sl-MHW"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wOd-Fk-pve" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="9316" y="1118.5907046476761"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7H3-5d-Cas">
@@ -8564,24 +8527,6 @@ What is it?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2J-Jr-udN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="210" y="-607"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="8i0-qa-Qc0">
-            <objects>
-                <navigationController storyboardIdentifier="healthCenterNavVC" automaticallyAdjustsScrollViewInsets="NO" id="yFM-DL-RYM" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Az4-U8-ge6">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="kg6-NP-hgR" kind="relationship" relationship="rootViewController" id="OTn-Mh-1ck"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PmX-SL-GEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3018" y="-2529"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="f3k-nI-6Ar">
@@ -8987,9 +8932,10 @@ What is it?</string>
             <objects>
                 <navigationController storyboardIdentifier="HomeTabNVC" automaticallyAdjustsScrollViewInsets="NO" id="DPy-B1-aPB" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pnF-wy-Ggv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="pnF-wy-Ggv">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.94901960784313721" green="0.24705882352941178" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -9059,7 +9005,6 @@ What is it?</string>
         <image name="healthCenterIcon" width="20" height="19"/>
         <image name="healthCenter_badMood" width="54" height="54"/>
         <image name="heightIcon" width="8" height="14"/>
-        <image name="home" width="22" height="22"/>
         <image name="imageView:Rfe-pZ-PZM:image" width="6" height="6">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU

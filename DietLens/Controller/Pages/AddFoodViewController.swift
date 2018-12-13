@@ -71,8 +71,10 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
             guard changeCurrentIndex == true else { return }
             guard let ref = self else { return }
             if ref.currentIndex == 0 { //cameraPage
+                self?.tabIndex = 1
                 Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickByTextTab, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: ref.mealType])
             } else if ref.currentIndex == 1 { //textPage
+                self?.tabIndex = 0
                 Analytics.logEvent(StringConstants.FireBaseAnalytic.TextClickByImageTab, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: ref.mealType])
             }
         }
@@ -88,6 +90,7 @@ class AddFoodViewController: ButtonBarPagerTabStripViewController {
         //set height for bar
         buttonBarView.selectedBar.frame.origin.y = buttonBarView.frame.size.height - 2.0
         buttonBarView.selectedBar.frame.size.height = 2.0
+        moveToViewController(at: tabIndex)
     }
 
     @IBAction func cancelAddFood(_ sender: UIButton) {

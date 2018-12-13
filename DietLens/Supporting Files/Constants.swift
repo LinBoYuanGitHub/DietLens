@@ -17,8 +17,8 @@ struct ServerConfig {
     static let baseURL = "http://47.74.189.175:8001/dl/v1"  //production environment
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
 //    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
-//    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
-    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
+    static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
+//    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
 //    static let labDeskTopURL = "http://54.169.160.107:8000/dl/v1" //mocklet test environment
 
     static let userURL = labDeskTopURL + "/users"
@@ -229,6 +229,15 @@ struct MessageType {
 extension UIColor {
     struct ThemeColor {
         static let dietLensRed = UIColor(displayP3Red: CGFloat(242.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(93.0/255.0), alpha: 1.0)
+    }
+
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 
 }
