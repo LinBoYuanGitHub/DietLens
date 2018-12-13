@@ -157,6 +157,7 @@
 		3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */; };
 		3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */; };
 		3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */; };
+		3FE16FA321C244810013354B /* EligibilityTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE16FA221C244810013354B /* EligibilityTableCell.swift */; };
 		3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC34512057D0F80060099A /* DiarySectionHeader.swift */; };
 		3FEC34542057D1380060099A /* diaryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC34532057D1380060099A /* diaryHeader.xib */; };
 		3FEC3456205A76190060099A /* FoodDiaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC3455205A76190060099A /* FoodDiaryModel.swift */; };
@@ -417,6 +418,7 @@
 		3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCalendarSectionHeader.swift; sourceTree = "<group>"; };
 		3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = foodCalendarViewHeader.xib; sourceTree = "<group>"; };
 		3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientItemCell.swift; sourceTree = "<group>"; };
+		3FE16FA221C244810013354B /* EligibilityTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibilityTableCell.swift; sourceTree = "<group>"; };
 		3FEC34512057D0F80060099A /* DiarySectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarySectionHeader.swift; sourceTree = "<group>"; };
 		3FEC34532057D1380060099A /* diaryHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = diaryHeader.xib; sourceTree = "<group>"; };
 		3FEC3455205A76190060099A /* FoodDiaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryModel.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 		3F43663E20773DF10089C63A /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				3FE16FA121C243E40013354B /* ClinicalStudyCell */,
 				3F88189A20EA566C00FE6C11 /* Profile */,
 				3FCBEC1620E661D10092948C /* HealthCenterCell */,
 				3F50DCED20B2BA3F005209B8 /* DialogCell */,
@@ -870,6 +873,14 @@
 				3F5608FA20F3DB640007B3AF /* HealthCenterBarCell.swift */,
 			);
 			path = HealthCenterCell;
+			sourceTree = "<group>";
+		};
+		3FE16FA121C243E40013354B /* ClinicalStudyCell */ = {
+			isa = PBXGroup;
+			children = (
+				3FE16FA221C244810013354B /* EligibilityTableCell.swift */,
+			);
+			path = ClinicalStudyCell;
 			sourceTree = "<group>";
 		};
 		3FEC34502057BF110060099A /* TableHeader */ = {
@@ -1732,6 +1743,7 @@
 				3F191F2C2182B28F0026A4EF /* EmailLoginViewController.swift in Sources */,
 				3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */,
 				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
+				3FE16FA321C244810013354B /* EligibilityTableCell.swift in Sources */,
 				3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */,
 				3F43663D207721EB0089C63A /* DailyNutritionInfoViewController.swift in Sources */,
 				3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */,

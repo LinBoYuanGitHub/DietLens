@@ -8752,25 +8752,59 @@ Scan QR code to join a study.</string>
                                         <color key="textColor" red="0.87058823529999996" green="0.51764705879999995" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxg-cb-XR7">
-                                        <rect key="frame" x="16" y="75" width="339" height="260"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1lO-KM-eR8">
+                                        <rect key="frame" x="16" y="81" width="339" height="566"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="260" id="Vc0-db-Sqf"/>
-                                        </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <view key="tableHeaderView" contentMode="scaleToFill" id="Bm4-Xs-hkT" userLabel="header">
+                                            <rect key="frame" x="0.0" y="0.0" width="339" height="10"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="eligibilityTableCell" rowHeight="73" id="Yq7-T0-ckP" customClass="EligibilityTableCell" customModule="DietLens" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="65.5" width="339" height="73"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yq7-T0-ckP" id="ND3-jW-v3k">
+                                                    <rect key="frame" x="0.0" y="0.0" width="339" height="73"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Condition:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxN-qb-Okf">
+                                                            <rect key="frame" x="0.0" y="26.5" width="66" height="20"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                                            <color key="textColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thyroid disease" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUl-EL-KyX">
+                                                            <rect key="frame" x="71" y="26.5" width="101" height="20"/>
+                                                            <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="14"/>
+                                                            <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="nUl-EL-KyX" firstAttribute="centerY" secondItem="mxN-qb-Okf" secondAttribute="centerY" id="Fad-ff-Ag9"/>
+                                                        <constraint firstItem="nUl-EL-KyX" firstAttribute="leading" secondItem="mxN-qb-Okf" secondAttribute="trailing" constant="5" id="Zkf-oG-RLy"/>
+                                                        <constraint firstItem="mxN-qb-Okf" firstAttribute="centerY" secondItem="ND3-jW-v3k" secondAttribute="centerY" id="exw-D9-lW4"/>
+                                                        <constraint firstItem="mxN-qb-Okf" firstAttribute="leading" secondItem="ND3-jW-v3k" secondAttribute="leading" id="lGa-Nf-U0n"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="criteriaNameLabel" destination="mxN-qb-Okf" id="Tio-I4-uHU"/>
+                                                    <outlet property="criteriaValueLabel" destination="nUl-EL-KyX" id="tbx-AL-ImL"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Jxg-cb-XR7" firstAttribute="trailing" secondItem="Ui4-WB-yDv" secondAttribute="trailing" id="92U-RG-Gg5"/>
+                                    <constraint firstAttribute="bottom" secondItem="1lO-KM-eR8" secondAttribute="bottom" id="2w4-Pl-w3k"/>
+                                    <constraint firstItem="1lO-KM-eR8" firstAttribute="leading" secondItem="oFI-P5-gh0" secondAttribute="leading" constant="16" id="593-2S-rCJ"/>
                                     <constraint firstAttribute="trailing" secondItem="Ui4-WB-yDv" secondAttribute="trailing" constant="20" id="Cvi-v7-wy3"/>
-                                    <constraint firstItem="Jxg-cb-XR7" firstAttribute="top" secondItem="Ui4-WB-yDv" secondAttribute="bottom" constant="12" id="Hfn-DI-2dw"/>
-                                    <constraint firstItem="Jxg-cb-XR7" firstAttribute="leading" secondItem="Ui4-WB-yDv" secondAttribute="leading" id="Yf7-R6-sq7"/>
+                                    <constraint firstAttribute="trailing" secondItem="1lO-KM-eR8" secondAttribute="trailing" constant="20" id="Mc0-ol-ypN"/>
                                     <constraint firstItem="Ui4-WB-yDv" firstAttribute="top" secondItem="oFI-P5-gh0" secondAttribute="top" constant="20" id="j0F-bT-Jam"/>
                                     <constraint firstItem="Ui4-WB-yDv" firstAttribute="leading" secondItem="oFI-P5-gh0" secondAttribute="leading" constant="16" id="vCl-QM-yTs"/>
+                                    <constraint firstItem="1lO-KM-eR8" firstAttribute="top" secondItem="Ui4-WB-yDv" secondAttribute="bottom" constant="18" id="xMJ-gX-tCj"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -8782,6 +8816,9 @@ Scan QR code to join a study.</string>
                             <constraint firstItem="oFI-P5-gh0" firstAttribute="top" secondItem="I9u-d4-4Qq" secondAttribute="bottom" id="ymT-rr-KAT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="criteriaTextTableView" destination="1lO-KM-eR8" id="16Q-cu-fnf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IpD-um-L17" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

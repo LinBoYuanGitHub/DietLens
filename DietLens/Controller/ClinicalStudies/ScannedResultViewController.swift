@@ -45,6 +45,8 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         contactVC.contactorText = studyEntity?.owner.nickname ?? ""
         contactVC.phoneText = studyEntity?.owner.phone ?? ""
         contactVC.organizationText = studyEntity?.owner.organization ?? ""
+        eligibilityVC.inclusiveCriteria = studyEntity?.inclusionCriteria ?? [Criteria]()
+        eligibilityVC.exclusiveCriteria = studyEntity?.exclusionCriteria ?? [Criteria]()
         return [descriptionVC, eligibilityVC, contactVC]
     }
     override func viewWillAppear(_ animated: Bool) {
