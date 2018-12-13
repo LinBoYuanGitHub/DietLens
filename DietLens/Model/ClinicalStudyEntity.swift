@@ -16,6 +16,7 @@ struct ClinicalStudyEntity {
     var owner = StudyOwner()
     var inclusionCriteria = [Criteria]()
     var exclusionCriteria = [Criteria]()
+    var dataTags  = [DataTag]()
 
     init() {}
 
@@ -44,6 +45,11 @@ struct StudyOwner {
 struct Criteria {
     var name = ""
     var value = ""
+}
+
+struct DataTag {
+    var id = ""
+    var name = ""
 }
 
 enum StudyStatus {

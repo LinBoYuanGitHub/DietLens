@@ -66,6 +66,15 @@ class ClinicalStudyDataManager {
             criteria.value = childJsonObj.1["value"].stringValue
             entity.exclusionCriteria.append(criteria)
         }
+        for childJsonObj in jsonObj["data_tag"] {
+            if childJsonObj.1.count == 0 {
+                break
+            }
+            var dataTag = DataTag()
+            dataTag.id = childJsonObj.1["id"].stringValue
+            dataTag.name = childJsonObj.1["name"].stringValue
+            entity.dataTags.append(dataTag)
+        }
         return entity
     }
 }
