@@ -42,6 +42,8 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
             else { return [] }
         //child tab data mapping
         descriptionVC.studyDesc = studyEntity?.content.studyDesc ?? ""
+        descriptionVC.dataTag = studyEntity?.dataTags ?? [DataTag]()
+
         contactVC.contactorText = studyEntity?.owner.nickname ?? ""
         contactVC.phoneText = studyEntity?.owner.phone ?? ""
         contactVC.organizationText = studyEntity?.owner.organization ?? ""
