@@ -6405,7 +6405,7 @@ What is it?</string>
                                 <rect key="frame" x="0.0" y="24" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vv-rk-YgW">
-                                        <rect key="frame" x="167.5" y="30" width="40" height="40"/>
+                                        <rect key="frame" x="167.5" y="29" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="49y-S8-Wag"/>
                                             <constraint firstAttribute="height" constant="40" id="ZRI-qM-otj"/>
@@ -6416,7 +6416,7 @@ What is it?</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-1A-QOW">
-                                        <rect key="frame" x="154.5" y="70" width="66" height="22"/>
+                                        <rect key="frame" x="154.5" y="69" width="66" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="R23-PL-fnU"/>
                                             <constraint firstAttribute="width" constant="66" id="fpF-jY-Yll"/>
@@ -6428,7 +6428,7 @@ What is it?</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="2Vv-rk-YgW" firstAttribute="bottom" secondItem="I1O-li-ud8" secondAttribute="centerY" constant="10" id="0sz-WV-DUW"/>
+                                    <constraint firstItem="2Vv-rk-YgW" firstAttribute="bottom" secondItem="I1O-li-ud8" secondAttribute="centerY" constant="9" id="0sz-WV-DUW"/>
                                     <constraint firstItem="9gy-1A-QOW" firstAttribute="centerX" secondItem="I1O-li-ud8" secondAttribute="centerX" id="3zy-mY-Wr6"/>
                                     <constraint firstItem="2Vv-rk-YgW" firstAttribute="centerX" secondItem="I1O-li-ud8" secondAttribute="centerX" id="ZWY-vs-5jy"/>
                                     <constraint firstItem="9gy-1A-QOW" firstAttribute="top" secondItem="2Vv-rk-YgW" secondAttribute="bottom" id="dN3-Tc-1eC"/>
@@ -6449,7 +6449,7 @@ What is it?</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y98-dN-7H7">
                                                     <rect key="frame" x="10" y="10" width="355" height="130"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Recommendation for thyroid disordrs" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeF-9L-UUe">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Recommendation for thyroid disordrs" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeF-9L-UUe">
                                                             <rect key="frame" x="75" y="17" width="260" height="50.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" priority="250" constant="50.5" id="Ywm-51-5Kb"/>
@@ -6472,7 +6472,7 @@ What is it?</string>
                                                                 <constraint firstAttribute="width" constant="1" id="Z6B-We-I2S"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-Wf-Iji">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOT-Wf-Iji">
                                                             <rect key="frame" x="75" y="97" width="44.5" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="4wW-4F-yr2"/>

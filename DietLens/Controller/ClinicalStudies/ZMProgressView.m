@@ -102,14 +102,14 @@
     path.lineWidth = radius* 0.1;
     [path stroke];
     
-    CGPoint StartCircleCenter  = CGPointMake(_circleCenter.x + radius*0.9 * cosf(M_PI_2),
-                                             _circleCenter.y + radius*0.9 * sinf(M_PI_2));
-    UIBezierPath* startCircle = [UIBezierPath
-                                 bezierPathWithArcCenter:StartCircleCenter
-                                 radius:radius*0.09
-                                 startAngle:0
-                                 endAngle:2*M_PI
-                                 clockwise:YES];
+//    CGPoint StartCircleCenter  = CGPointMake(_circleCenter.x + radius*0.9 * cosf(M_PI_2),
+//                                             _circleCenter.y + radius*0.9 * sinf(M_PI_2));
+//    UIBezierPath* startCircle = [UIBezierPath
+//                                 bezierPathWithArcCenter:StartCircleCenter
+//                                 radius:radius*0.09
+//                                 startAngle:0
+//                                 endAngle:2*M_PI
+//                                 clockwise:YES];
     
     //[startCircle fill]; //隐藏开始点
     
@@ -193,7 +193,7 @@
         self.value ++;
         _desValue = _value;
         _angle = self.value /100 * 360;
-        if (self.value != self.percent){
+        if (self.value != 100){//if it is equal to 100 ,it will error.
             [self setNeedsDisplay];
         }
         
