@@ -25,6 +25,7 @@ class ContactViewController: UIViewController, IndicatorInfoProvider {
         contactorLabel.text = contactorText
         phoneLabel.text = phoneText
         organizationLabel.text = organizationText
+
     }
 
     // MARK: - IndicatorInfoProvider

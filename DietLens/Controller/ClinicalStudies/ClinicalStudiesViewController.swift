@@ -26,18 +26,22 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     @objc func onScanAreaTap() {
+
         guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QRScannerController") as? QRScannerController else {
             return
         }
+
         self.navigationController?.pushViewController(scanQRVC, animated: true)
     }
 
     func getClinicalStudyList() {
         APIService.instance.getClinicalStudyList { (studyList) in
+
             if studyList.count != 0 {
                 self.emaptyIconView.isHidden = true
                 self.emptyIconText.isHidden = true
             }
+
             self.studyList = studyList
             self.studyTableView.reloadData()
         }
@@ -57,9 +61,11 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     @IBAction func scanQR(_ sender: UIButton) {
+
         guard let scanQRVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QRScannerController") as? QRScannerController else {
             return
         }
+
         self.navigationController?.pushViewController(scanQRVC, animated: true)
     }
 
@@ -79,7 +85,6 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
         if let cell = tableView.dequeueReusableCell(withIdentifier: "clinicalStudyCell") as? ClinicalStudyTableViewCell {
             let entity = studyList[indexPath.row]
             cell.setUpCell(studyStatus: entity.status, name: entity.studyName)
-            //cell.setUpCell(recordType: "Food Recommendation", study_Name: "Food Recommendation for thyroid disordrs", studyStartOnDate: "5 Nov 2018")
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
@@ -97,9 +102,11 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
         let groupId = studyList[indexPath.row].studyId
         APIService.instance.getClinicalStudyDetail(groupId: groupId) { (studyDetailEntity) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
+
             if studyDetailEntity == nil {
                 return
             }
+
             guard let foodrecommendationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodRecommendationVC") as? FoodRecommendationViewController else {
                 return
             }

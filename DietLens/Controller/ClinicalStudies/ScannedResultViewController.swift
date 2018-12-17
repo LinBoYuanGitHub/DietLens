@@ -40,6 +40,7 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
             storyboard?.instantiateViewController(withIdentifier: "EligibilityViewController") as? EligibilityViewController, let contactVC = storyboard?.instantiateViewController(withIdentifier: "ContactViewController")
                 as? ContactViewController
             else { return [] }
+
         //child tab data mapping
         descriptionVC.studyDesc = studyEntity?.content.studyDesc ?? ""
         descriptionVC.dataTag = studyEntity?.dataTags ?? [DataTag]()
@@ -65,9 +66,11 @@ class ScannedResultViewController: ButtonBarPagerTabStripViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func onJoinPressed() {
+
         guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EConsentViewController") as? EConsentViewController else {
             return
         }
+
         scanresultVC.studyEntity = self.studyEntity
         self.navigationController?.pushViewController(scanresultVC, animated: true)
 

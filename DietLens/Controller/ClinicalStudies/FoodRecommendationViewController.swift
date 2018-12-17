@@ -30,9 +30,10 @@ class FoodRecommendationViewController: BaseViewController {
         progressView.lineColor = UIColor.init(hex: 0xfa2c42)
         progressView.loopColor = UIColor.init(displayP3Red: 225 / 255, green: 225 / 255, blue: 225 / 255, alpha: 1)
         progressView.frame = CGRect(x: 0, y: 0, width: 149, height: 149)
+        progressView.percentColor = UIColor.init(hex: 0x434343)
         progressView.isAnimatable = true
         progressView.backgroundColor = UIColor.clear
-
+        //test
         progressView.percent = calculatePercent()    //set number of progress
         let percentint = Int(progressView.percent)
         //set title
@@ -72,11 +73,13 @@ class FoodRecommendationViewController: BaseViewController {
         //change the format of date
         let startDate = DateUtil.formatGMTDateToString(date: self.entity.content.startDate)
         let endDate = DateUtil.formatGMTDateToString(date: self.entity.content.endDate)
-        let startTime = DateUtil.hourMinDateToString(date: self.entity.content.startDate)
-        let endTime = DateUtil.hourMinDateToString(date: self.entity.content.endDate)
+//        let startTime = DateUtil.hourMinDateToString(date: self.entity.content.startDate)
+//        let endTime = DateUtil.hourMinDateToString(date: self.entity.content.endDate)
 
-        let start = "Started on " + startDate + "," + startTime + ",Singapore time"
-        let end = "End on " + endDate + "," + endTime + ",Singapore time"
+//        let start = "Started on " + startDate + "," + startTime + ",Singapore time"
+//        let end = "End on " + endDate + "," + endTime + ",Singapore time"
+        let start = "Started on " + startDate  + ", Singapore time"
+        let end = "End on " + endDate + ", Singapore time"
 
         //set date
         startDateLabel.text = start
@@ -94,12 +97,12 @@ class FoodRecommendationViewController: BaseViewController {
         studyContent.text = entity.content.studyDesc
         var dataTag: String = ""
         for entityi in entity.dataTags {
-            dataTag += entityi.name + "\n"
+            dataTag += "·" + entityi.name + "\n"
         }
         dataCollected.text = dataTag
 
         researcher.text =  entity.owner.nickname
-        phoneNumber.text = "Tel:" + entity.owner.phone
+        phoneNumber.text = "Tel: " + entity.owner.phone
         nationality.text = entity.owner.organization
     }
 
@@ -123,7 +126,7 @@ class FoodRecommendationViewController: BaseViewController {
        alert()
     }
     func alert() {
-        AlertMessageHelper.showDietLensMessage(targetController: self, message: "Activity completion refer to when you started on the clinical studies.", confirmText: "Okay", delegate: self)
+        AlertMessageHelper.showDietLensMessage(targetController: self, message: "Study completion is the current progress of the study, from when the study was started to when it will finish.", confirmText: "Okay", delegate: self)
 
     }
 }

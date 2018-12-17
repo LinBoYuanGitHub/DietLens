@@ -11,7 +11,8 @@ import XLPagerTabStrip
 
 class DescriptionViewController: UIViewController, IndicatorInfoProvider {
 
-    @IBOutlet weak var studyDescTextView: UITextView!
+    @IBOutlet weak var studyDescTextView: UILabel!
+
     @IBOutlet weak var dataTags: UILabel!
 
     let itemInfo: IndicatorInfo = "Description"
@@ -23,9 +24,10 @@ class DescriptionViewController: UIViewController, IndicatorInfoProvider {
         studyDescTextView.text = studyDesc
         var dataTagall: String = ""
         for entityi in dataTag {
-            dataTagall += entityi.name + "\n"
+            dataTagall += "·" + entityi.name + "\n"
         }
         dataTags.text = dataTagall
+
     }
 
     // MARK: - IndicatorInfoProvider

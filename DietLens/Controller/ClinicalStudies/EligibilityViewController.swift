@@ -40,23 +40,29 @@ extension EligibilityViewController: UITableViewDataSource, UITableViewDelegate 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         if section == 0 {
             return inclusiveCriteria.count
         } else if section == 1 {
             return exclusiveCriteria.count
         }
+
         return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         if let cell = tableView.dequeueReusableCell(withIdentifier: "eligibilityTableCell") as? EligibilityTableCell {
+
             if indexPath.section == 0 {
                 cell.setUpCell(criteriaNameText: inclusiveCriteria[indexPath.row].name, criteriaValText: inclusiveCriteria[indexPath.row].value)
             } else if indexPath.section == 1 {
                 cell.setUpCell(criteriaNameText: exclusiveCriteria[indexPath.row].name, criteriaValText: exclusiveCriteria[indexPath.row].value)
             }
+
             return cell
         }
+
         return UITableViewCell()
     }
 
@@ -67,11 +73,13 @@ extension EligibilityViewController: UITableViewDataSource, UITableViewDelegate 
         header.textLabel?.frame.origin.x = 0
         header.textLabel?.font = UIFont(name: "PingFangSC-Light", size: 14)
         header.textLabel?.numberOfLines = 3
+
         if section == 0 {
             header.textLabel?.text = "You may be eligible for this study if you meet the following criteria:"
         } else if section == 1 {
             header.textLabel?.text = "Exclusion Criteria:"
         }
+
         return header
     }
 

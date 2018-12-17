@@ -238,8 +238,6 @@
 		EC79FA7521BE3BBE004ADAED /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA7421BE3BBE004ADAED /* ContactViewController.swift */; };
 		ECAE914F21C0D45E00577865 /* ScannedResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAE914E21C0D45E00577865 /* ScannedResultViewController.swift */; };
 		ECC10ED421BA1705007574CC /* EConsentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED321BA1705007574CC /* EConsentViewController.swift */; };
-		ECC10ED821BA1DB3007574CC /* VerificationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */; };
-		ECC10EDA21BA1E43007574CC /* AsunBasicAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */; };
 		ECC10EDC21BA20DA007574CC /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */; };
 		ECC10EDE21BA4119007574CC /* FoodRecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */; };
 		ECC10EE121BA4C1E007574CC /* ZMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EE021BA4C1E007574CC /* ZMProgressView.m */; };
@@ -513,8 +511,6 @@
 		EC79FA7421BE3BBE004ADAED /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		ECAE914E21C0D45E00577865 /* ScannedResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedResultViewController.swift; sourceTree = "<group>"; };
 		ECC10ED321BA1705007574CC /* EConsentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EConsentViewController.swift; sourceTree = "<group>"; };
-		ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeView.swift; sourceTree = "<group>"; };
-		ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsunBasicAttributes.swift; sourceTree = "<group>"; };
 		ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
 		ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRecommendationViewController.swift; sourceTree = "<group>"; };
 		ECC10EDF21BA4C1E007574CC /* ZMProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZMProgressView.h; sourceTree = "<group>"; };
@@ -1193,8 +1189,6 @@
 				ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */,
 				EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */,
 				EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */,
-				ECC10ED721BA1DB3007574CC /* VerificationCodeView.swift */,
-				ECC10ED921BA1E43007574CC /* AsunBasicAttributes.swift */,
 				ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */,
 				ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */,
 				ECC10EE621BA526F007574CC /* QRScannerController.swift */,
@@ -1567,7 +1561,6 @@
 				BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */,
 				3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */,
 				3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */,
-				ECC10ED821BA1DB3007574CC /* VerificationCodeView.swift in Sources */,
 				BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */,
 				3FB6E67E20DCF19000462591 /* FoodDiaryCollectionViewCell.swift in Sources */,
 				ECC10EE721BA526F007574CC /* QRScannerController.swift in Sources */,
@@ -1601,7 +1594,6 @@
 				3F8818A020EA574900FE6C11 /* ProfileArrowCell.swift in Sources */,
 				3FD08621200DEE4B0052D54B /* DeviceRecordDetailViewController.swift in Sources */,
 				3F8B21C820D2349C006E3628 /* NotificationSection.swift in Sources */,
-				ECC10EDA21BA1E43007574CC /* AsunBasicAttributes.swift in Sources */,
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
 				58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */,
 				3F9215A420808C3F00F92ECF /* MealTypeCollectionCell.swift in Sources */,

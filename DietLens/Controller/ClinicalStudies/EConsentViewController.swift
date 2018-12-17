@@ -30,17 +30,22 @@ class EConsentViewController: UIViewController {
     }
 
     @IBAction func learnMore(_ sender: UIButton) {
+
         guard let learnmoreVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LearnMoreVC") as? LearnMoreViewController else {
             return
         }
+
         self.present(learnmoreVC, animated: true, completion: nil)
     }
 
     @IBAction func join(_ sender: UIButton) {
+
         guard let groupId = studyEntity?.studyId else {
             return
         }
+
         APIService.instance.connectToStudyGroup(groupId: groupId, completion: { (isSuccess) in
+
             if isSuccess {
                 for vc in (self.navigationController?.viewControllers)! {
                     if let clinicalVC  = vc as? ClinicalStudiesViewController {
@@ -48,6 +53,7 @@ class EConsentViewController: UIViewController {
                     }
                 }
             }
+
         }) { (errMsg) in
             AlertMessageHelper.showMessage(targetController: self, title: "", message: errMsg)
         }
