@@ -171,7 +171,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
 
     func presentCamera() {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
-            dest.tabIndex = 0
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
                 let transition = CATransition()

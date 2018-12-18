@@ -147,15 +147,15 @@ class QRScannerController: BaseViewController {
         //                self.captureSession.stopRunning()
         //            }
         //        })
-        
+
         let cancelAction = UIAlertAction(title: "Em...it doesn`t look like a dietlens QRCode", style: UIAlertActionStyle.cancel, handler: nil)
         //        alertPrompt.addAction(confirmAction)
         alertPrompt.addAction(cancelAction)
         present(alertPrompt, animated: true, completion: nil)
     }
-    
+
     func jumpToJoinGroupPage(study: ClinicalStudyEntity) {
-        guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScanResultViewController") as? ScanResultViewController else {
+        guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScannedResultViewController") as? ScannedResultViewController else {
             return
         }
         scanresultVC.studyEntity = study

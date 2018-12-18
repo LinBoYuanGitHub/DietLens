@@ -11,8 +11,6 @@ import UIKit
 class EConsentViewController: UIViewController {
 
     @IBOutlet weak var nextbutton: UIButton!
-    let code = VerificationCodeView(frame: CGRect(x: 20, y: 520, width: UIScreen.main.bounds.width - 20*2, height: 30))
-    var verificationcode: String = ""
     var studyEntity: ClinicalStudyEntity?
 
     override func viewDidLoad() {
