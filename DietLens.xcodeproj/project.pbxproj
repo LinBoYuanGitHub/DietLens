@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */; };
 		3F008AF321ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F008AF221ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift */; };
 		3F008AF721ABE33500C1E529 /* FavouriteFoodCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F008AF621ABE33500C1E529 /* FavouriteFoodCollectionCell.xib */; };
 		3F13694721086FF8007D9772 /* ActionDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F13694621086FF8007D9772 /* ActionDisabledTextField.swift */; };
@@ -172,7 +171,6 @@
 		3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB56971FB2FEFF002DCE15 /* Article.swift */; };
 		3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569B1FB6ABCE002DCE15 /* APIService.swift */; };
 		3FFB569E1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */; };
-		4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */; };
 		5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */; };
 		580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443661FB0189E00D59DFF /* SettingViewController.swift */; };
 		580443691FB0233900D59DFF /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443681FB0233900D59DFF /* AboutViewController.swift */; };
@@ -221,6 +219,8 @@
 		58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
 		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
 		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
+		A02F9852D9D3A43C63E71AF5 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1315FE419149161A3D4BEBA9 /* Pods_DietLens.framework */; };
+		A173693EDE1A6BF4EEDAFEA6 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B472A6A25AAA99B4C477E01 /* Pods_DietLensTests.framework */; };
 		BF67704F1FAA1EAC007FE5E3 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */; };
 		BF7893FF1FA4516200DA1667 /* AddFoodScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */; };
 		BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7894001FA4518200DA1667 /* CameraViewController.swift */; };
@@ -230,7 +230,6 @@
 		BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */; };
 		BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */; };
 		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
-		E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */; };
 		EC14599721B9079600A8D27F /* ClinicStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */; };
 		EC14599921B9091100A8D27F /* ClinicalStudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */; };
 		EC79FA7121BE3A4A004ADAED /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA7021BE3A4A004ADAED /* DescriptionViewController.swift */; };
@@ -243,6 +242,7 @@
 		ECC10EE121BA4C1E007574CC /* ZMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EE021BA4C1E007574CC /* ZMProgressView.m */; };
 		ECC10EE721BA526F007574CC /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10EE621BA526F007574CC /* QRScannerController.swift */; };
 		ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */; };
+		F57D32921E465DCA34844746 /* Pods_DietLensUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFAE2333D715C30AA21BF18 /* Pods_DietLensUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,7 +263,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1315FE419149161A3D4BEBA9 /* Pods_DietLens.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLens.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F008AF221ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFavouriteFoodCell.swift; sourceTree = "<group>"; };
 		3F008AF621ABE33500C1E529 /* FavouriteFoodCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteFoodCollectionCell.xib; sourceTree = "<group>"; };
 		3F13694621086FF8007D9772 /* ActionDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDisabledTextField.swift; sourceTree = "<group>"; };
@@ -431,6 +431,9 @@
 		3FFB56971FB2FEFF002DCE15 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		3FFB569B1FB6ABCE002DCE15 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		3FFB569D1FB6DE37002DCE15 /* TextSearchSuggestionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchSuggestionEntity.swift; sourceTree = "<group>"; };
+		4AC7E349C039C345CADFC86B /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4B472A6A25AAA99B4C477E01 /* Pods_DietLensTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C7C380FCAF1D9627D3C7634 /* Pods-DietLensTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.release.xcconfig"; sourceTree = "<group>"; };
 		5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePageArticleBodyCell.swift; sourceTree = "<group>"; };
 		580443661FB0189E00D59DFF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		580443681FB0233900D59DFF /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -487,11 +490,8 @@
 		58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
-		7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.release.xcconfig"; sourceTree = "<group>"; };
-		9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.release.xcconfig"; sourceTree = "<group>"; };
-		B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6EFAE2333D715C30AA21BF18 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83D025F7539DD57DEDB0099D /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BF67704E1FAA1EAC007FE5E3 /* CameraSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionManager.swift; sourceTree = "<group>"; };
 		BF7893FE1FA4516200DA1667 /* AddFoodScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddFoodScreen.storyboard; sourceTree = "<group>"; };
 		BF7894001FA4518200DA1667 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -501,11 +501,9 @@
 		BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodViewController.swift; sourceTree = "<group>"; };
 		BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
 		BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
-		C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
+		CB037DB260F784126E95BA0D /* Pods-DietLens.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.release.xcconfig"; sourceTree = "<group>"; };
 		EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicStudyEntity.swift; sourceTree = "<group>"; };
 		EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyTableViewCell.swift; sourceTree = "<group>"; };
-		EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensTests/Pods-DietLensTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EC79FA7021BE3A4A004ADAED /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		EC79FA7221BE3B01004ADAED /* EligibilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibilityViewController.swift; sourceTree = "<group>"; };
 		EC79FA7421BE3BBE004ADAED /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -517,6 +515,8 @@
 		ECC10EE021BA4C1E007574CC /* ZMProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMProgressView.m; sourceTree = "<group>"; };
 		ECC10EE621BA526F007574CC /* QRScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
 		ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudiesViewController.swift; sourceTree = "<group>"; };
+		EF6DA1100A25A8E2B351F84D /* Pods-DietLensUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F76523441C7F0523EB5EBFC4 /* Pods-DietLens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,7 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				587067AC1FE252B000660262 /* HealthKit.framework in Frameworks */,
-				4A73F1A4AE4BCD5D02179C93 /* Pods_DietLens.framework in Frameworks */,
+				A02F9852D9D3A43C63E71AF5 /* Pods_DietLens.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +533,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				046338A54A6F23DCB6214878 /* Pods_DietLensTests.framework in Frameworks */,
+				A173693EDE1A6BF4EEDAFEA6 /* Pods_DietLensTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,7 +541,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E312D3A23104034DF8E3B566 /* Pods_DietLensUITests.framework in Frameworks */,
+				F57D32921E465DCA34844746 /* Pods_DietLensUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,8 +964,8 @@
 				5877CF9E1F9D82BF0022B51E /* DietLensTests */,
 				5877CFA91F9D82BF0022B51E /* DietLensUITests */,
 				5877CF851F9D82BF0022B51E /* Products */,
-				C8B155BF22F4DE7D186C083D /* Pods */,
 				D17C6477152A12102B087091 /* Frameworks */,
+				A090137B80AB1328F379F512 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1135,6 +1135,19 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		A090137B80AB1328F379F512 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F76523441C7F0523EB5EBFC4 /* Pods-DietLens.debug.xcconfig */,
+				CB037DB260F784126E95BA0D /* Pods-DietLens.release.xcconfig */,
+				4AC7E349C039C345CADFC86B /* Pods-DietLensTests.debug.xcconfig */,
+				4C7C380FCAF1D9627D3C7634 /* Pods-DietLensTests.release.xcconfig */,
+				EF6DA1100A25A8E2B351F84D /* Pods-DietLensUITests.debug.xcconfig */,
+				83D025F7539DD57DEDB0099D /* Pods-DietLensUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BF6EF2F21FC31C0300420B2B /* TextInput */ = {
 			isa = PBXGroup;
 			children = (
@@ -1156,26 +1169,13 @@
 			path = Camera;
 			sourceTree = "<group>";
 		};
-		C8B155BF22F4DE7D186C083D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */,
-				934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */,
-				EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */,
-				7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */,
-				9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */,
-				B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		D17C6477152A12102B087091 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				587067AB1FE252B000660262 /* HealthKit.framework */,
-				3315021F7CFAC371ED60A053 /* Pods_DietLens.framework */,
-				B41FF2E801921EEAD6388D1C /* Pods_DietLensTests.framework */,
-				C2B7C08B4AFE02B3ED0E4481 /* Pods_DietLensUITests.framework */,
+				1315FE419149161A3D4BEBA9 /* Pods_DietLens.framework */,
+				4B472A6A25AAA99B4C477E01 /* Pods_DietLensTests.framework */,
+				6EFAE2333D715C30AA21BF18 /* Pods_DietLensUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1207,14 +1207,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5877CFAF1F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLens" */;
 			buildPhases = (
-				5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */,
+				9D910B895B4BA81E3A6B516D /* [CP] Check Pods Manifest.lock */,
 				5877CF801F9D82BF0022B51E /* Sources */,
 				5877CF811F9D82BF0022B51E /* Frameworks */,
 				5877CF821F9D82BF0022B51E /* Resources */,
-				297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */,
 				BF8441171FA435B200D5018F /* Run Script */,
 				3F50DCE820AD72A5005209B8 /* Run Script */,
-				79845078383FC68BDDEAFC91 /* [CP] Copy Pods Resources */,
+				67CA9D397744E37F26B6A61A /* [CP] Embed Pods Frameworks */,
+				410550F8E5C8F54E622111C9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1229,7 +1229,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5877CFB21F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensTests" */;
 			buildPhases = (
-				A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */,
+				75D94C2670A77EAB2173D586 /* [CP] Check Pods Manifest.lock */,
 				5877CF971F9D82BF0022B51E /* Sources */,
 				5877CF981F9D82BF0022B51E /* Frameworks */,
 				5877CF991F9D82BF0022B51E /* Resources */,
@@ -1248,7 +1248,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5877CFB51F9D82BF0022B51E /* Build configuration list for PBXNativeTarget "DietLensUITests" */;
 			buildPhases = (
-				D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */,
+				D9A287E22164B16B20DD0629 /* [CP] Check Pods Manifest.lock */,
 				5877CFA21F9D82BF0022B51E /* Sources */,
 				5877CFA31F9D82BF0022B51E /* Frameworks */,
 				5877CFA41F9D82BF0022B51E /* Resources */,
@@ -1360,10 +1360,48 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		297B35D40D2192BF9ABA1951 /* [CP] Embed Pods Frameworks */ = {
+		3F50DCE820AD72A5005209B8 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 566448851a07272d654803fc9127e60d182bfe34 dff43d4d9e1c04061eb6f2c97cb63eb443b2f69e3c25212cf55b18f6570e03ab\n";
+		};
+		410550F8E5C8F54E622111C9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67CA9D397744E37F26B6A61A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh",
@@ -1401,6 +1439,8 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BAFluidView.framework",
@@ -1440,68 +1480,44 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3F50DCE820AD72A5005209B8 /* Run Script */ = {
+		75D94C2670A77EAB2173D586 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 566448851a07272d654803fc9127e60d182bfe34 dff43d4d9e1c04061eb6f2c97cb63eb443b2f69e3c25212cf55b18f6570e03ab\n";
-		};
-		5E782BA90281CE2EB0B945C8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DietLens-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DietLensTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		79845078383FC68BDDEAFC91 /* [CP] Copy Pods Resources */ = {
+		9D910B895B4BA81E3A6B516D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DietLens/Pods-DietLens-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A231B088D89DE3F471746F25 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DietLensTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DietLens-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1522,16 +1538,20 @@
 			shellPath = /bin/sh;
 			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\necho \"Target architectures: $ARCHS\"\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\nFRAMEWORK_TMP_PATH=\"$FRAMEWORK_EXECUTABLE_PATH-tmp\"\n\n# remove simulator's archs if location is not simulator's directory\ncase \"${TARGET_BUILD_DIR}\" in\n*\"iphonesimulator\")\necho \"No need to remove archs\"\n;;\n*)\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"i386\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"i386\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"i386 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"x86_64\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"x86_64\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"x86_64 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\n;;\nesac\n\necho \"Completed for executable $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\ndone\n";
 		};
-		D9B1B18389F8AEB630FA54A0 /* [CP] Check Pods Manifest.lock */ = {
+		D9A287E22164B16B20DD0629 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-DietLensUITests-checkManifestLockResult.txt",
 			);
@@ -1929,7 +1949,7 @@
 		};
 		5877CFB01F9D82BF0022B51E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4F4109844F023D21D9B7C93 /* Pods-DietLens.debug.xcconfig */;
+			baseConfigurationReference = F76523441C7F0523EB5EBFC4 /* Pods-DietLens.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DietLens/DietLens.entitlements;
@@ -1958,7 +1978,7 @@
 		};
 		5877CFB11F9D82BF0022B51E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 934A01E031D1D74945C182F4 /* Pods-DietLens.release.xcconfig */;
+			baseConfigurationReference = CB037DB260F784126E95BA0D /* Pods-DietLens.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DietLens/DietLens.entitlements;
@@ -1987,7 +2007,7 @@
 		};
 		5877CFB31F9D82BF0022B51E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC4D930896516023295D38CA /* Pods-DietLensTests.debug.xcconfig */;
+			baseConfigurationReference = 4AC7E349C039C345CADFC86B /* Pods-DietLensTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2004,7 +2024,7 @@
 		};
 		5877CFB41F9D82BF0022B51E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7728F4C88DFC7E3EA3A313C8 /* Pods-DietLensTests.release.xcconfig */;
+			baseConfigurationReference = 4C7C380FCAF1D9627D3C7634 /* Pods-DietLensTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2021,7 +2041,7 @@
 		};
 		5877CFB61F9D82BF0022B51E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9223328C1AC7C4585A336FD2 /* Pods-DietLensUITests.debug.xcconfig */;
+			baseConfigurationReference = EF6DA1100A25A8E2B351F84D /* Pods-DietLensUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2037,7 +2057,7 @@
 		};
 		5877CFB71F9D82BF0022B51E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5AC0CCD7D7A596EB5F40EA7 /* Pods-DietLensUITests.release.xcconfig */;
+			baseConfigurationReference = 83D025F7539DD57DEDB0099D /* Pods-DietLensUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

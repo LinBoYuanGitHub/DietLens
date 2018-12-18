@@ -62,9 +62,6 @@ class LoginViewController: ButtonBarPagerTabStripViewController {
         containerView.isScrollEnabled = false
         // Do any additional setup after loading the view.
         hideKeyboardWhenTappedAround()
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +71,8 @@ class LoginViewController: ButtonBarPagerTabStripViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Back Arrow"), style: .plain, target: self, action: #selector(onBackPressed))
         self.navigationItem.leftBarButtonItem?.tintColor = .gray
         self.navigationItem.title = "Sign In"
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
 
     @IBAction func onBackPressed() {

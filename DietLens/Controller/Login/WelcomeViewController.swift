@@ -19,14 +19,15 @@ class WelcomeViewController: BaseViewController {
     @IBOutlet weak var googleLoginBtn: UIButton!
 
     override func viewDidLoad() {
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
 
     override func didReceiveMemoryWarning() {

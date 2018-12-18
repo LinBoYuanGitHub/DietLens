@@ -136,6 +136,7 @@ DEPENDENCIES:
   - Fabric
   - FacebookCore
   - FacebookLogin
+  - FBSDKCoreKit (from `https://github.com/facebook/facebook-objc-sdk.git`, branch `master`)
   - Firebase/Core
   - Firebase/Messaging
   - FSCalendar
@@ -168,7 +169,6 @@ SPEC REPOS:
     - Fabric
     - FacebookCore
     - FacebookLogin
-    - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
     - FirebaseAnalytics
@@ -201,6 +201,16 @@ SPEC REPOS:
     - SwiftLint
     - SwiftyJSON
     - XLPagerTabStrip
+
+EXTERNAL SOURCES:
+  FBSDKCoreKit:
+    :branch: master
+    :git: https://github.com/facebook/facebook-objc-sdk.git
+
+CHECKOUT OPTIONS:
+  FBSDKCoreKit:
+    :commit: aaa76238dc15c4c297ee9fad1fdce1bcb2fcff7b
+    :git: https://github.com/facebook/facebook-objc-sdk.git
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -247,6 +257,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: 7fc8904bf5f743b7e4b68cd9ac4fd697d94a8e82
+PODFILE CHECKSUM: e35b362a3dca27af77c0d926de581211ec1074bc
 
 COCOAPODS: 1.5.3
