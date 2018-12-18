@@ -247,7 +247,9 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         //setUp title
         self.parent?.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 242/255, green: 63/255, blue: 93/255, alpha: 1)
+//        self.parent?.navigationController?.navigationBar.isTranslucent = false
+//        self.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 242/255, green: 63/255, blue: 93/255, alpha: 1)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 80/255, blue: 110/255, alpha: 1)
 //        self.navigationController?.navigationBar.barTintColor = UIColor.UIColorFromRGB(0xF03C5A)
 
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle

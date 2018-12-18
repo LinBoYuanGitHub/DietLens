@@ -70,7 +70,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.parent?.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         loadDailyNutritionView()
         dateLabel.text = formatter.string(from: selectedDate)
         //load available date & load calendar data
