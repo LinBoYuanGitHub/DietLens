@@ -11,6 +11,8 @@ import UIKit
 class EConsentViewController: UIViewController {
 
     @IBOutlet weak var nextbutton: UIButton!
+    let code = VerificationCodeView(frame: CGRect(x: 20, y: 520, width: UIScreen.main.bounds.width - 20*2, height: 30))
+    var verificationcode: String = ""
     var studyEntity: ClinicalStudyEntity?
 
     override func viewDidLoad() {
@@ -39,13 +41,10 @@ class EConsentViewController: UIViewController {
     }
 
     @IBAction func join(_ sender: UIButton) {
-
         guard let groupId = studyEntity?.studyId else {
             return
         }
-
         APIService.instance.connectToStudyGroup(groupId: groupId, completion: { (isSuccess) in
-
             if isSuccess {
                 for vc in (self.navigationController?.viewControllers)! {
                     if let clinicalVC  = vc as? ClinicalStudiesViewController {
@@ -53,7 +52,6 @@ class EConsentViewController: UIViewController {
                     }
                 }
             }
-
         }) { (errMsg) in
             AlertMessageHelper.showMessage(targetController: self, title: "", message: errMsg)
         }
