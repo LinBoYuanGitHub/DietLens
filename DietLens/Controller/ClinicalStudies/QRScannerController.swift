@@ -215,3 +215,28 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
 }
+
+extension QRScannerController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        guard let qrcodeImg = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            print("Cannot get image from gallery")
+            imagePicker.dismiss(animated: true, completion: nil)
+            return
+        }
+        let detector: CIDetector=CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
+        let ciImage: CIImage=CIImage(image: qrcodeImg)!
+        qrcodeImage = UIImageView(frame: scanerView.bounds)
+        qrcodeImage.image = qrcodeImg
+        self.scanerView.addSubview(qrcodeImage)
+        var qrCodeLink=""
+        guard let features=detector.features(in: ciImage) as? [CIQRCodeFeature] else {
+            return
+        }
+        for feature in features {
+            qrCodeLink += feature.messageString!
+        }
+        imagePicker.dismiss(animated: true, completion: nil)
+        performScannedOperation(scannedURL: qrCodeLink, bounds: features[0].bounds)
+    }
+}
