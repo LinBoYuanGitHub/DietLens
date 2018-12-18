@@ -15,6 +15,7 @@ class ClinicalStudiesViewController: BaseViewController {
 
     @IBOutlet weak var emaptyIconView: UIImageView!
     @IBOutlet weak var emptyIconText: UILabel!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
     var studyList = [ClinicalStudyEntity]() // type changed to ClinicStudyEntity
     override func viewDidLoad() {
@@ -38,8 +39,10 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     func getClinicalStudyList() {
+        self.loadingIndicator.isHidden = false
         APIService.instance.getClinicalStudyList { (studyList) in
 
+            self.loadingIndicator.isHidden = true
             if studyList.count != 0 {
                 self.emaptyIconView.isHidden = true
                 self.emptyIconText.isHidden = true
