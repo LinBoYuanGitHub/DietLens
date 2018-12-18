@@ -77,7 +77,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
             controller.selectedDate = Date()
             self.navigationController?.pushViewController(controller, animated: true)
-            //            present(controller, animated: true, completion: nil)
         }
     }
 
@@ -125,14 +124,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
             self.requestNutritionDict(requestDate: Date())
         }
-//        APIService.instance.getDietaryGuideInfo { (guideDict) in
-//            let preferences = UserDefaults.standard
-//            preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
-//            preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
-//            preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
-//            preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
-//            self.requestNutritionDict(requestDate: Date())
-//        }
     }
 
     func loadCalorieData(todayIntakenCal: Int) {
@@ -247,10 +238,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         //setUp title
         self.parent?.navigationController?.navigationBar.isHidden = false
-//        self.parent?.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 242/255, green: 63/255, blue: 93/255, alpha: 1)
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 80/255, blue: 110/255, alpha: 1)
-//        self.navigationController?.navigationBar.barTintColor = UIColor.UIColorFromRGB(0xF03C5A)
 
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         //SignPainterHouseScript 28.0

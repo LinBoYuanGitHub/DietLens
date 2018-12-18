@@ -77,7 +77,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
 //        self.navigationItem.hidesBackButton = true
         //trigger to switch to foodDiary
-        if shouldSwitchToFoodDiary || currentIndex == 1 {
+        if shouldSwitchToFoodDiary {
             switchToFoodHistoryPage()
             shouldSwitchToFoodDiary = false
         }

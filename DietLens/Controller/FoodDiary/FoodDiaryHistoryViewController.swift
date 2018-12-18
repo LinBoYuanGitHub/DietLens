@@ -21,7 +21,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @IBOutlet weak var calendarBtn: UIButton!
     @IBOutlet weak var nutritionCollectionView: UICollectionView!
     @IBOutlet weak var foodDiaryMealTable: UITableView!
-//    @IBOutlet weak var editBtn: UIBarButtonItem!
+    //    @IBOutlet weak var editBtn: UIBarButtonItem!
     //left right arrow
     @IBOutlet weak var leftArrowButton: ExpandedUIButton!
     @IBOutlet weak var rightArrowButton: ExpandedUIButton!
@@ -131,7 +131,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
             controller.selectedDate = selectedDate
             self.navigationController?.pushViewController(controller, animated: true)
-//            present(controller, animated: true, completion: nil)
+            //            present(controller, animated: true, completion: nil)
         }
     }
 
@@ -200,10 +200,14 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     //************************************************************************************
 
     func getFoodDairyByDate(date: Date) {
+        //display empty data
+        if foodMealList.count == 0 {
+            let emptyList = [FoodDiaryEntity]()
+            self.assembleMealList(foodDiaryList: emptyList)
+        }
+        //request foodDiary data
         let dateStr = DateUtil.normalDateToString(date: date)
         APIService.instance.getFoodDiaryByDate(selectedDate: dateStr) { (foodDiaryList) in
-//            AlertMessageHelper.dismissLoadingDialog(targetController: self)
-//            self.hideLoadingDialog()
             if foodDiaryList == nil {
                 let emptyList = [FoodDiaryEntity]()
                 self.assembleMealList(foodDiaryList: emptyList)
@@ -215,14 +219,27 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     }
 
     func loadDailyNutritionView() {
+        //init nutrition view
+        if displayDict.count == 0 {
+            self.assembleInitDisplayDict()
+            self.assembleTargetDict()
+            self.nutritionCollectionView.reloadData()
+        }
+        //request nutrition data
         APIService.instance.getDailySum(source: self, date: selectedDate) { (resultDict) in
             if resultDict.count == 0 {
                 return
             }
             self.assembleDisplayDict(nutritionDict: resultDict)
-            self.assembleTargetDict()
             self.nutritionCollectionView.reloadData()
         }
+    }
+
+    func assembleInitDisplayDict() {
+        displayDict[0] = ("CALORIE", 0.0)
+        displayDict[1] = ("PROTEIN", 0.0)
+        displayDict[2] = ("FAT", 0.0)
+        displayDict[3] = ("CARB", 0.0)
     }
 
     func assembleDisplayDict(nutritionDict: [String: Double]) {
@@ -295,7 +312,7 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
             //#google analytic log part
             Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodDiaryClickAddButton, parameters: [
                 "mealtime": dest.mealType
-            ])
+                ])
         }
     }
 
@@ -311,25 +328,25 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
     }
 
     func didSelectFoodDiaryItem(foodDiary: FoodDiaryEntity) {
-            FoodDiaryDataManager.instance.foodDiaryEntity = foodDiary
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-                var imageKey = foodDiary.imageId
-                //pass correct imageId
-                if foodDiary.imageId == "" {
-                    imageKey = foodDiary.placeHolderImage
-                } else {
-                    imageKey = foodDiary.imageId
-                }
-                dest.isSetMealByTimeRequired = false
-                dest.isUpdate = true
-                dest.imageKey = imageKey
-                if imageKey == "" {
-                    dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
-                }
-                if let navigator = self.navigationController {
-                    navigator.pushViewController(dest, animated: true)
-                }
+        FoodDiaryDataManager.instance.foodDiaryEntity = foodDiary
+        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+            var imageKey = foodDiary.imageId
+            //pass correct imageId
+            if foodDiary.imageId == "" {
+                imageKey = foodDiary.placeHolderImage
+            } else {
+                imageKey = foodDiary.imageId
             }
+            dest.isSetMealByTimeRequired = false
+            dest.isUpdate = true
+            dest.imageKey = imageKey
+            if imageKey == "" {
+                dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+            }
+            if let navigator = self.navigationController {
+                navigator.pushViewController(dest, animated: true)
+            }
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -418,20 +435,22 @@ extension FoodDiaryHistoryViewController: UICollectionViewDelegate, UICollection
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nutritionCollectionCell", for: indexPath) as? NutritionCollectionCell {
-            let kvSet = displayDict[indexPath.row]
-            let targetSet = targetDict[indexPath.row]
-            var name = ""
-            var progress =  0
-            let unit  = targetSet!.0
-            if kvSet != nil || targetSet != nil {
-                if targetSet!.1 == 0 {
-                    progress = 0
-                } else {
-                    progress = Int(kvSet!.1/targetSet!.1*100)
-                }
-                name = (kvSet?.0)!
+
+            guard let kvSet = displayDict[indexPath.row] else {
+                return cell
             }
-            cell.setUpCell(nutritionName: name, percentage: Int(progress), nutritionValue: (kvSet?.1)!, unit: unit)
+
+            guard let targetSet = targetDict[indexPath.row] else {
+                return cell
+            }
+
+            let unit  = targetSet.0
+            var progress =  0
+
+            if targetSet.1 != 0 {
+                progress = Int(kvSet.1/targetSet.1*100)
+            }
+            cell.setUpCell(nutritionName: kvSet.0, percentage: progress, nutritionValue: kvSet.1, unit: unit)
             return cell
         }
         return UICollectionViewCell()
@@ -454,13 +473,14 @@ extension FoodDiaryHistoryViewController: CalendarAlertDelegate {
             self.rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
             self.dateLabel.text = self.formatter.string(from: selectedDate)
             self.getFoodDairyByDate(date: selectedDate)
+            self.assembleInitDisplayDict()
             self.loadDailyNutritionView()
             self.dismiss(animated: true, completion: nil)
         }
     }
 
     func onCalendarCurrentPageDidChange(changedDate: Date) {
-      //current page change callback
+        //current page change callback
     }
 
 }
@@ -474,7 +494,7 @@ extension FoodDiaryHistoryViewController: InternetDelegate {
     }
 
     func onLosingInternetConnection() {
-       super.showNoInternetDialog()
+        super.showNoInternetDialog()
     }
 
 }

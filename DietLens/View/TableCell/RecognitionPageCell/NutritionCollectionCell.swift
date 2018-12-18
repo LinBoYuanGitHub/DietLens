@@ -19,6 +19,7 @@ class NutritionCollectionCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpOvalView()
         setUpFluidView()
     }
 
@@ -41,7 +42,6 @@ class NutritionCollectionCell: UICollectionViewCell {
     }
 
     func setUpCell(nutritionName: String, percentage: Int, nutritionValue: Double, unit: String) {
-        setUpOvalView()
         percentageLabel.text = String(percentage) + "%"
         nutritionLabel.text = nutritionName
         if nutritionValue == floor(nutritionValue) {
