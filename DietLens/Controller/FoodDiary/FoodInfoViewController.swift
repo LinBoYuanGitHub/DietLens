@@ -131,13 +131,13 @@ class FoodInfoViewController: UIViewController {
     @IBAction func toggleStar(_ sender: Any) {
         favButton.isUserInteractionEnabled = false
         if dietItem.isFavoriteFood {//judge from the favourite attribute
-            APIService.instance.removeFavouriteFood(removeFoodId: dietItem.foodId) { (isSuccess) in
+            APIService.instance.removeFavouriteFood(removeFoodId: dietItem.foodId) { (_) in
                 self.favButton.isUserInteractionEnabled = true
                 self.favButton.isSelected = false
                 self.dietItem.isFavoriteFood = false
             }
         } else {
-            APIService.instance.setFavouriteFoodList(foodList: [dietItem.foodId]) { (isSuccess) in
+            APIService.instance.setFavouriteFoodList(foodList: [dietItem.foodId]) { (_) in
                 self.favButton.isUserInteractionEnabled = true
                 self.favButton.isSelected = true
                 self.dietItem.isFavoriteFood = true
@@ -418,23 +418,23 @@ class FoodInfoViewController: UIViewController {
             } else {
                 favTitle = StringConstants.UIString.addFavActionItem
             }
-            let favoriteAction = UIAlertAction(title: favTitle, style: .default) { (alert: UIAlertAction!) in
+            let favoriteAction = UIAlertAction(title: favTitle, style: .default) { (_: UIAlertAction!) in
                 self.favButton.isUserInteractionEnabled = false
                 if self.dietItem.isFavoriteFood {
-                    APIService.instance.removeFavouriteFood(removeFoodId: self.dietItem.foodId, completion: { (isSuccess) in
+                    APIService.instance.removeFavouriteFood(removeFoodId: self.dietItem.foodId, completion: { (_) in
                         self.favButton.isUserInteractionEnabled = true
                         self.dietItem.isFavoriteFood = false
                         self.favButton.isSelected = false
                     })
                 } else {
-                    APIService.instance.setFavouriteFoodList(foodList: [self.dietItem.foodId], completion: { (isSuccess) in
+                    APIService.instance.setFavouriteFoodList(foodList: [self.dietItem.foodId], completion: { (_) in
                         self.favButton.isUserInteractionEnabled = true
                         self.dietItem.isFavoriteFood = true
                         self.favButton.isSelected = true
                     })
                 }
             }
-            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (alert: UIAlertAction!) in
+            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (_: UIAlertAction!) in
                 self.navigationController?.popViewController(animated: true)
                 if let navigator = self.navigationController {
                     for vc in navigator.viewControllers {

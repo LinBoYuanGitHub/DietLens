@@ -152,6 +152,8 @@ struct StringConstants {
         static let monthString = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     }
 
+    static let whiteDomainList  = ["https://download.dietlens.com", "https://www.dietlens.com"]
+
     enum DateMode {
         case day
         case week

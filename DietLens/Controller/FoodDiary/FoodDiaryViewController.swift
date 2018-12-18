@@ -164,6 +164,7 @@ class FoodDiaryViewController: UIViewController {
     @objc func onAddMoreClick() {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
             dest.addFoodDate = self.recordDate
+            dest.isSearchMoreFlow = true
             dest.shouldShowCancel = true
 //            dest.cameraImage = cameraImage use sample Image
             if let navigator = self.navigationController {
@@ -185,9 +186,9 @@ class FoodDiaryViewController: UIViewController {
         if isUpdate {
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             optionMenu.view.tintColor = UIColor.ThemeColor.dietLensRed
-            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (alert: UIAlertAction!) in
+            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (_: UIAlertAction!) in
                 //delete foodDiary api flow
-                APIService.instance.deleteFoodDiary(foodDiaryId: self.foodDiaryInstance.foodDiaryId, completion: { (isSuccess) in
+                APIService.instance.deleteFoodDiary(foodDiaryId: self.foodDiaryInstance.foodDiaryId, completion: { (_) in
                     //refresh the foodDiary page if it exist in the viewController stack
                     if let navigator = self.navigationController {
                         for vc in navigator.viewControllers {
@@ -200,9 +201,9 @@ class FoodDiaryViewController: UIViewController {
                     self.navigationController?.popViewController(animated: true)
                 })
             }
-            let updateAction = UIAlertAction(title: StringConstants.UIString.updateBtnText, style: .default) { (alert: UIAlertAction!) in
+            let updateAction = UIAlertAction(title: StringConstants.UIString.updateBtnText, style: .default) { (_: UIAlertAction!) in
                 //update foodDiary api flow
-                APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess, foodDiaryEntity) in
+                APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess, _) in
                     if isSuccess {
                         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
                             if let navigator = self.navigationController {
@@ -330,14 +331,14 @@ class FoodDiaryViewController: UIViewController {
         //update food table
         foodTableView.reloadRows(at: [indexPath], with: .automatic)
         if !foodDiaryInstance.foodDiaryId.isEmpty && !foodDiaryInstance.dietItems[row].id.isEmpty {
-            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess, foodDiaryEntity) in }
+            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (_, _) in }
         }
     }
 
     //delete foodDiary
     func deleteFoodItem(row: Int) {
         if !foodDiaryInstance.foodDiaryId.isEmpty && !foodDiaryInstance.dietItems[row].id.isEmpty {
-            APIService.instance.deleteFoodItem(foodDiaryId: foodDiaryInstance.foodDiaryId, foodItemId: foodDiaryInstance.dietItems[row].id) { (isSuccess) in }
+            APIService.instance.deleteFoodItem(foodDiaryId: foodDiaryInstance.foodDiaryId, foodItemId: foodDiaryInstance.dietItems[row].id) { (_) in }
         }
         self.foodDiaryInstance.dietItems.remove(at: row)
         let indexPath = IndexPath(row: row, section: 0)
@@ -371,7 +372,7 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
             self.self.animationViewLeading.constant = destX! + CGFloat(10)
         })
         //set request to switch time
-        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess, foodDiaryEntity) in })
+        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (_, _) in })
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

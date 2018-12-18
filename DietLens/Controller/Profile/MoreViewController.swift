@@ -37,11 +37,6 @@ class MoreViewController: BaseViewController {
         Analytics.setScreenName("MorePage", screenClass: "MoreViewController")
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.parent?.navigationController?.navigationBar.isHidden = false
-    }
-
     func loadAvatar() {
         let preferences = UserDefaults.standard
         let facebookId = preferences.value(forKey: PreferenceKey.facebookId)
@@ -83,7 +78,7 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moreCollectionCell", for: indexPath) as? MoreCollectionCell {
             switch indexPath.row {
-            case 0:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_favorite_food_icon"), text: "Nutrition Database")
+            case 0:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_favorite_food_icon"), text: "Create Food")
             case 1:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_feedback_icon"), text: "Feedback")
             case 2:cell.setUpCell(icon: UIImage(imageLiteralResourceName: "more_share_icon"), text: "Share")
             default:
@@ -101,20 +96,9 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            //to text search view
-            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
-                dest.tabIndex = 1
-                if let navigator = self.navigationController {
-                    //clear controller to Bottom & add foodCalendar Controller
-                    let transition = CATransition()
-                    transition.duration = 0.3
-                    //                transition.type = kCATransitionFromTop
-                    transition.type = kCATransitionMoveIn
-                    transition.subtype = kCATransitionFromTop
-                    self.view.window?.layer.add(transition, forKey: kCATransition)
-                    navigator.pushViewController(dest, animated: false)
-                }
-            }
+            //to create food page
+            //FIXME WIP
+            AlertMessageHelper.showMessage(targetController: self, title: "work in progress", message: "")
         case 1:
             //to feedback page
             let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")

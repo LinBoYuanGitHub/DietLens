@@ -15,7 +15,7 @@ class RegistrationFavouriteFoodCell: UICollectionViewCell {
 
     func setUpCell(entity: TextSearchSuggestionEntity) {
         if entity.useExpImage {
-            favFoodImageView.kf.setImage(with: URL(string: entity.expImagePath)!, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (image, _, _, _) in
+            favFoodImageView.kf.setImage(with: URL(string: entity.expImagePath)!, placeholder: #imageLiteral(resourceName: "loading_img"), options: [], progressBlock: nil) { (_, _, _, _) in
             }
         } else {
             favFoodImageView.image = #imageLiteral(resourceName: "loading_img")

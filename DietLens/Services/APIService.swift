@@ -1551,12 +1551,16 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("Save food diary failed due to : \(String(describing: response.result.error))")
-                    completion(false, nil)
+                    //need to be checked
+                    let jsonObject = JSON()
+                    completion(false, jsonObject)
                     return
                 }
                 guard let result = response.result.value else {
                     print("Save food diary failed due to : Server Data Type Error")
-                    completion(false, nil)
+                    let jsonObject = JSON()
+                    completion(false, jsonObject)
+                   // completion(false, nil)
                     return
                 }
                 let jsonObject = JSON(result)
@@ -1935,6 +1939,63 @@ class APIService {
                 preferences.setValue(jsonObj["data"]["id"].stringValue, forKey: PreferenceKey.userIdkey)
                 preferences.setValue(jsonObj["data"]["name"].stringValue, forKey: PreferenceKey.nickNameKey)
                 preferences.setValue(token, forKey: PreferenceKey.tokenKey)
+                completion(response.result.isSuccess)
+        }
+    }
+
+    //clinical study
+
+    func getClinicalStudyList(completion: @escaping ([ClinicalStudyEntity]) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.studyListURL)!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get clinical study failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                let jsonArr = JSON(response.result.value)
+                let clinicalStudyList = ClinicalStudyDataManager.instance.assembleClinicalStudyDataEntity(jsonArr: jsonArr)
+                completion(clinicalStudyList)
+        }
+    }
+
+    func getClinicalStudyDetail(groupId: String, completion: @escaping (ClinicalStudyEntity?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.studyListURL + groupId + "/")!,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("get clinical study failed due to : \(String(describing: response.result.error))")
+                    return
+                }
+                let jsonObj = JSON(response.result.value)
+                let clinicalStudyEntity = ClinicalStudyDataManager.instance.assembleClinicalStudyDetailEntity(jsonObj: jsonObj)
+                completion(clinicalStudyEntity)
+        }
+    }
+
+    func connectToStudyGroup(groupId: String, completion: @escaping (Bool) -> Void, failedCompletion: @escaping (String) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.studyListURL)!,
+            method: .post,
+            parameters: ["study_group_id": groupId],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    print("connect to study group failed due to : \(String(describing: response.result.error))")
+                    let message = JSON(response.result.value)["message"].stringValue
+                    failedCompletion(message)
+                    return
+                }
                 completion(response.result.isSuccess)
         }
     }

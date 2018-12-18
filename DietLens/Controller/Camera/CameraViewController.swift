@@ -248,7 +248,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
                 self.hideReview()
                 self.capturePhotoButton.isEnabled = true
                 //                self.loadingScreen.alpha = 0
-                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "Image upload failed")
             }
             //upload imageToken to server to get the food recognition results
         }) { (progress) in

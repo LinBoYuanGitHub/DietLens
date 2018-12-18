@@ -70,6 +70,7 @@ class RecognitionResultViewController: BaseViewController {
         if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
             dest.cameraImage = cameraImage
             dest.imageKey = self.imageKey
+            dest.isSearchMoreFlow = true
             dest.shouldShowCancel = true
             //mealTime & mealType
             dest.mealType = self.mealType!

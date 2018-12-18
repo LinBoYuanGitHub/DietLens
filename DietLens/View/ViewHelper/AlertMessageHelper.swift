@@ -24,6 +24,21 @@ class AlertMessageHelper {
         targetController.present(alert, animated: true, completion: nil)
     }
 
+    class func showDietLensMessage(targetController: UIViewController, message: String, confirmText: String, delegate: ConfirmationDialogDelegate) {
+        guard let dialog = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "TextConfirmDialogVC") as? TextConfirmationDialog else {
+            return
+        }
+        dialog.content = message
+        dialog.confirmText = confirmText
+        dialog.delegate = delegate
+        //set transition style for showing the dialog
+        dialog.providesPresentationContextTransitionStyle = true
+        dialog.definesPresentationContext = true
+        dialog.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        dialog.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        targetController.present(dialog, animated: true, completion: nil)
+    }
+
     class func showMessage(targetController: UIViewController, title: String, message: String, confirmText: String, completion: @escaping () -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString(confirmText, comment: "Default action"), style: .`default`, handler: { _ in

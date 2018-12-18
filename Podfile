@@ -35,6 +35,7 @@ target 'DietLens' do
   #image loader
   pod 'Kingfisher', '~> 4.0'
   #facebookLogin
+  pod 'FBSDKCoreKit', :git => 'https://github.com/facebook/facebook-objc-sdk.git', :branch => 'master'
   pod 'FacebookCore'
   pod 'FacebookLogin'
   # Google Sign In

@@ -25,9 +25,7 @@ class PersonalFavouriteFoodViewController: BaseViewController {
         popularCollectionView.dataSource = self
         popularCollectionView.delegate = self
         //request popular food data
-        if popularFoodList.count == 0 {
-            getPopularFoodList(mealtime: "")
-        }
+        getPopularFoodList(mealtime: "")
         //regist nib
         registerNib()
         progressLabel.isHidden = !isInRegistrationFlow
@@ -55,7 +53,7 @@ class PersonalFavouriteFoodViewController: BaseViewController {
             }
             self.popularFoodList = results
             self.popularCollectionView.reloadData()
-        }, nextPageCompletion: { (nextLink) in
+        }, nextPageCompletion: { (_) in
             //consider next page scenario
         })
     }

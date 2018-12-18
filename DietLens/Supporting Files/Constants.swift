@@ -79,6 +79,8 @@ struct ServerConfig {
     static let phoneSendSMSURL = labDeskTopURL + "/social-acc/sms/"
     static let verifySMSURL = labDeskTopURL + "/social-acc/phone/"
     static let dietGoalURL = labDeskTopURL + "/diet-goal/"
+    //clinical qr code scan
+    static let studyListURL = labDeskTopURL + "/clinic/"
 }
 
 struct RedirectAddress {
@@ -229,6 +231,9 @@ struct MessageType {
 extension UIColor {
     struct ThemeColor {
         static let dietLensRed = UIColor(displayP3Red: CGFloat(242.0/255.0), green: CGFloat(63.0/255.0), blue: CGFloat(93.0/255.0), alpha: 1.0)
+        static let dietLensAcceptedRed = UIColor(displayP3Red: CGFloat(243/255.0), green: CGFloat(70/255.0), blue: CGFloat(90/255.0), alpha: 1.0)
+        static let dietLensPendingYellow = UIColor(displayP3Red: CGFloat(249/255.0), green: CGFloat(180/255.0), blue: CGFloat(87/255.0), alpha: 1.0)
+        static let dietLensCompletedGreen = UIColor(displayP3Red: CGFloat(128/255.0), green: CGFloat(227/255.0), blue: CGFloat(165/255.0), alpha: 1.0)
     }
 
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {
