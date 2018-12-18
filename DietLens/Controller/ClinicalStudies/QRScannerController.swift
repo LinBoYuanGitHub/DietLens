@@ -234,16 +234,21 @@ extension QRScannerController: UIImagePickerControllerDelegate, UINavigationCont
         qrcodeImage.image = qrcodeImg
 
         self.scanerView.addSubview(qrcodeImage)
-        var qrCodeLink=""
 
         guard let features=detector.features(in: ciImage) as? [CIQRCodeFeature] else {
             return
         }
 
-        for feature in features {
-            qrCodeLink += feature.messageString!
+        if features.count == 0 {
+            imagePicker.dismiss(animated: true, completion: nil)
+            self.qrcodeImage.removeFromSuperview()
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "No Qrcode detected")
+            return
         }
-
+        //get the first detected scanned qrcode
+        guard let qrCodeLink = features[0].messageString else {
+            return
+        }
         imagePicker.dismiss(animated: true, completion: nil)
         performScannedOperation(scannedURL: qrCodeLink, bounds: features[0].bounds)
     }
