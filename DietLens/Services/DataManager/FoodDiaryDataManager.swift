@@ -13,8 +13,6 @@ class FoodDiaryDataManager {
 
     static var instance = FoodDiaryDataManager()
 
-    public var mealEntity = [DiaryDailyFood]()
-
     public var foodDiaryEntity = FoodDiaryEntity() //for FoodDiary entry
     public var foodDiaryList = [FoodDiaryEntity]() //for all the foodDiary history
 

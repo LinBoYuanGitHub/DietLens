@@ -2,7 +2,6 @@ import UIKit
 import AVFoundation
 import Photos
 import XLPagerTabStrip
-import RealmSwift
 import JPSVolumeButtonHandler
 import Reachability
 import AssetsLibrary
@@ -26,8 +25,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
     private let barScannerLine = UIView()
 
     private let imagePicker = UIImagePickerController()
-
-    private var foodDiary = FoodDiaryModel()
 
     private var activityIndicator = UIActivityIndicatorView()
 
@@ -456,34 +453,7 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDetect(barcode: String) {
-        APIService.instance.getBarcodeScanResult(barcode: barcode) { (_) in
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Work in progress")
-            //            if foodInformation == nil {
-            //                DispatchQueue.main.async { [weak self] in
-            //                    guard let wSelf = self else {
-            //                        return
-            //                    }
-            //                    let alertMsg = "Result not found!"
-            //                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
-            //                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-            //                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-            //                                                            style: .cancel,
-            //                                                            handler: nil))
-            //                    wSelf.present(alertController, animated: true, completion: nil)
-            //                    }
-            //            } else {
-            //                self.loadingScreen.alpha = 0
-            //                do {
-            //                    try Realm().write {
-            //                        self.foodDiary.foodInfoList.append(foodInformation!)
-            //                    }
-            //                } catch let error as NSError {
-            //                    //handel error
-            //                }
-            //                self.recordType = RecordType.RecordByBarcode
-            //                self.performSegue(withIdentifier: "test", sender: self)
-            //            }
-        }
+        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Work in progress")
         sessionManager.set(captureMode: .photo)
     }
 }

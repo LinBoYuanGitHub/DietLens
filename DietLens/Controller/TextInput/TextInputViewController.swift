@@ -41,7 +41,6 @@ class TextInputViewController: BaseViewController {
     //    var foodResults = [FoodInfomation]()
 
     var selectedImageView: UIImage?
-    var selectedFoodDiary = FoodDiaryModel()
     var filterType = TextSearchFilterInterger.allType
     var isSearching = false
     private var lastSearchTime = Date()

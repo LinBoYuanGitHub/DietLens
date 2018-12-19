@@ -463,7 +463,6 @@ extension FoodCalendarViewController: FSCalendarDelegate, FSCalendarDataSource, 
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
         }
-        //display today`s foodDiary from local realm
     }
 
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
