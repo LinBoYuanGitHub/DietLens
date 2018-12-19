@@ -27,6 +27,7 @@ class ClinicalStudiesViewController: BaseViewController {
         //hide empty icon
         self.emaptyIconView.isHidden = true
         self.emptyIconText.isHidden = true
+        self.loadingIndicator.startAnimating()
     }
 
     @objc func onScanAreaTap() {
@@ -39,10 +40,10 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     func getClinicalStudyList() {
-        self.loadingIndicator.isHidden = false
         APIService.instance.getClinicalStudyList { (studyList) in
-
+            self.loadingIndicator.stopAnimating()
             self.loadingIndicator.isHidden = true
+
             if studyList.count != 0 {
                 self.emaptyIconView.isHidden = true
                 self.emptyIconText.isHidden = true
