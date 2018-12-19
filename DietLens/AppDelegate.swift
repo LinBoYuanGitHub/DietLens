@@ -105,8 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func clearPersonalData() {
         let preferences = UserDefaults.standard
-        let nicknameKey = "nickname"
-        preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.userIdkey)
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)

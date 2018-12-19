@@ -37,12 +37,12 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         //intial child viewController
         let homeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DietLens")
         let foodDiaryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryHistoryVC")
-//        let setpCounterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC")
+        //        let setpCounterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StepCounterVC")
         let healthCenterVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "healthCenterVC")
         let moreVC =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MoreVC")
         initChildVC(targetController: homeVC)
         initChildVC(targetController: foodDiaryVC)
-//        initChildVC(targetController: setpCounterVC)
+        //        initChildVC(targetController: setpCounterVC)
         tabViewControlers.append(UIViewController())
         initChildVC(targetController: healthCenterVC)
         initChildVC(targetController: moreVC)
@@ -97,7 +97,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     }
 
     func setSettingRightNavigationButton() {
-          let rightNavButton = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "SettingIcon_black"), style: .plain, target: self, action: #selector(toSettingPage))
+        let rightNavButton = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "SettingIcon_black"), style: .plain, target: self, action: #selector(toSettingPage))
         rightNavButton.tintColor = UIColor(red: 67/255, green: 67/255, blue: 67/255, alpha: 1)
         self.navigationItem.rightBarButtonItem = rightNavButton
         self.navigationItem.rightBarButtonItem?.isEnabled = true
@@ -110,12 +110,18 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     }
 
     @objc func toNotificationPage() {
+        if !accountCheck() {
+            return
+        }
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as? NotificationsViewController {
             self.present(dest, animated: true, completion: nil)
         }
     }
 
     @objc func toSettingPage() {
+        if !accountCheck() {
+            return
+        }
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsPage") as? SettingViewController {
             self.navigationController?.pushViewController(dest, animated: true)
         }
@@ -128,7 +134,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
             view.removeFromSuperview()
         }
         if let foodHistoryVC = tabViewControlers[currentIndex] as? FoodDiaryHistoryViewController {
-//            foodHistoryVC.shouldRefreshDiary = true
+            //            foodHistoryVC.shouldRefreshDiary = true
             foodHistoryVC.selectedDate = foodDiarySelectedDate
         }
         homeTabBar.selectedItem = homeTabBar.items?[currentIndex]
@@ -144,10 +150,16 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         if item.tag == 0 {
             setNotificationRightNavigationButton()
         } else if item.tag == 1 {
+            if !accountCheck() {
+                return
+            }
             self.navigationController?.setNavigationBarHidden(true, animated: false)
             setFoodDiaryRightNavigationButton()
         } else if item.tag == 2 {
-             //set previousItem selected item
+            if !accountCheck() {
+                return
+            }
+            //set previousItem selected item
             homeTabBar.selectedItem = homeTabBar.items?[currentIndex]
             //camera View btn
             presentCamera()
@@ -155,7 +167,10 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         } else if item.tag == 4 {
             setSettingRightNavigationButton()
         } else {
-             self.navigationItem.rightBarButtonItem = nil
+            if !accountCheck() {
+                return
+            }
+            self.navigationItem.rightBarButtonItem = nil
         }
         //page switch
         currentIndex = item.tag
@@ -174,7 +189,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
                 //clear controller to Bottom & add foodCalendar Controller
                 let transition = CATransition()
                 transition.duration = 0.3
-//                transition.type = kCATransitionFromTop
+                //                transition.type = kCATransitionFromTop
                 transition.type = kCATransitionMoveIn
                 transition.subtype = kCATransitionFromTop
                 self.view.window?.layer.add(transition, forKey: kCATransition)
@@ -199,11 +214,28 @@ extension HomeTabViewController: CoachMarksControllerDataSource, CoachMarksContr
         let interactionViews = homeTabBar.subviews.filter({$0.isUserInteractionEnabled})
         let targetViews = interactionViews.sorted(by: {$0.frame.minX < $1.frame.minX})
         return coachMarksController.helper.makeCoachMark(for: targetViews[2])
-
     }
 
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 1
     }
 
+}
+
+extension HomeTabViewController {
+
+    //judge whether userId is Exist
+    func accountCheck() -> Bool {
+        let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
+
+        if userId.isEmpty { //redirect user to welcome page
+            guard let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeVC") as? WelcomeViewController else {
+                return false
+            }
+            welcomeVC.shouldShowNavBtn = true
+            self.navigationController?.pushViewController(welcomeVC, animated: true)
+            return false
+        }
+        return true
+    }
 }

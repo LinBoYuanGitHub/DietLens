@@ -17,6 +17,9 @@ class WelcomeViewController: BaseViewController {
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var facebookLoginBtn: UIButton!
     @IBOutlet weak var googleLoginBtn: UIButton!
+    @IBOutlet weak var backBtn: UIButton!
+
+    var shouldShowNavBtn = false
 
     override func viewDidLoad() {
 
@@ -28,10 +31,15 @@ class WelcomeViewController: BaseViewController {
         self.navigationController?.navigationBar.isHidden = true
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
+        backBtn.isHidden = !shouldShowNavBtn
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    @IBAction func onBackPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func redirecToSignUpPage(_ sender: UIButton) {

@@ -157,30 +157,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         }
     }
 
-    @objc func onSideMenuClick(_ notification: NSNotification) {
-        guard let position = notification.userInfo?["position"] as? Int else {return}
-        switch position {
-        case 0:
-            //home
-            jumpToDestPage(identifyId: "DietLens", mType: HomeViewController.self)
-        case 1:
-            //to food diary page
-            jumpToDestPage(identifyId: "FoodDiaryHistoryVC", mType: FoodDiaryHistoryViewController.self)
-        case 2:
-            //to step counter page
-            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
-//            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
-        case 3:
-            //to healthCenter page
-            jumpToDestPage(identifyId: "healthCenterVC", mType: HealthCenterMainViewController.self)
-        case 4:
-            //to setting page
-            jumpToDestPage(identifyId: "SettingsPage", mType: SettingViewController.self)
-        default:
-            break
-        }
-    }
-
     func jumpToDestPage<T: UIViewController>(identifyId: String, mType: T.Type) {
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifyId) as? T {
             if let navigator = self.navigationController {

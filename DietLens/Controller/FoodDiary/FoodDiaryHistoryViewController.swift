@@ -311,7 +311,14 @@ extension FoodDiaryHistoryViewController: UITableViewDelegate, UITableViewDataSo
             dest.mealType = foodMealList[mealPos].meal
             dest.isSetMealByTimeRequired = false
             if let navigator = self.navigationController {
-                navigator.pushViewController(dest, animated: true)
+                //clear controller to Bottom & add foodCalendar Controller
+                let transition = CATransition()
+                transition.duration = 0.3
+                //                transition.type = kCATransitionFromTop
+                transition.type = kCATransitionMoveIn
+                transition.subtype = kCATransitionFromTop
+                self.view.window?.layer.add(transition, forKey: kCATransition)
+                navigator.pushViewController(dest, animated: false)
             }
             //#google analytic log part
             Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodDiaryClickAddButton, parameters: [
