@@ -16,4 +16,5 @@ extension Notification.Name {
     static let shouldRefreshMainPageNutrition = Notification.Name("shouldrefreshmainpagenutrition")
     static let shouldRefreshSideBarHeader = Notification.Name("shouldRefreshSideBarHeader")
     static let signOutErrFlag = Notification.Name("signOutErrorFlag")
+    static let shouldRefreshFoodDiary = Notification.Name("shouldRefreshFoodDiary")
 }

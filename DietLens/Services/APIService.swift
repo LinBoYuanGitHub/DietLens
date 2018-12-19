@@ -817,6 +817,9 @@ class APIService {
 
     //delete single foodItem inside foodDiary
     public func deleteFoodItem(foodDiaryId: String, foodItemId: String, completion: @escaping(Bool) -> Void) {
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietItems)!,
             method: .post,
@@ -845,6 +848,9 @@ class APIService {
 
     //delete whole foodDiary
     public func deleteFoodDiary(foodDiaryId: String, completion:@escaping(Bool) -> Void) {
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietLogs+foodDiaryId+"/")!,
             method: .delete,
@@ -905,6 +911,10 @@ class APIService {
         } else {
             param = FoodInfoDataManager.instance.paramfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
         }
+
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietLogs+foodDiary.foodDiaryId+"/")!,
             method: .put,
@@ -935,6 +945,9 @@ class APIService {
     //create a new foodDiary -> save FoodItem & success
     public func createFooDiary(foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
         let param = FoodInfoDataManager.instance.paramfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietLogs)!,
             method: .post,

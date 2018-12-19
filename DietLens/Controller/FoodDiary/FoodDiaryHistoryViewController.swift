@@ -64,18 +64,24 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         //judge whether is same date
         rightArrowButton.isEnabled = !Calendar.current.isDate(selectedDate, inSameDayAs: Date())
         registerNib()
+        NotificationCenter.default.addObserver(self, selector: #selector(setShouldRefreshFoodDiary), name: .shouldRefreshFoodDiary, object: nil)
         //analytic screen name
         Analytics.setScreenName("FoodDiaryPage", screenClass: "FoodDiaryHistoryViewController")
+    }
+
+    @objc func setShouldRefreshFoodDiary() {
+        shouldRefreshDiary = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        loadDailyNutritionView()
         dateLabel.text = formatter.string(from: selectedDate)
         //load available date & load calendar data
         if shouldRefreshDiary {
+            loadDailyNutritionView()
             refreshFoodDiaryData()
+            shouldRefreshDiary = false
         }
         self.foodDiaryMealTable.reloadData()
     }
@@ -88,8 +94,6 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         getFoodDairyByDate(date: selectedDate)
         let dateStr = DateUtil.normalDateToString(date: selectedDate)
         getAvailableDate(year: dateStr.components(separatedBy: "-")[0], month: dateStr.components(separatedBy: "-")[1])
-        //set refresh falg to false
-        shouldRefreshDiary = false
     }
 
     func registerNib() {

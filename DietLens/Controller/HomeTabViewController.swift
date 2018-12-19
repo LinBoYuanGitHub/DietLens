@@ -75,7 +75,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-//        self.navigationItem.hidesBackButton = true
         //trigger to switch to foodDiary
         if shouldSwitchToFoodDiary {
             switchToFoodHistoryPage()
@@ -129,7 +128,7 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
             view.removeFromSuperview()
         }
         if let foodHistoryVC = tabViewControlers[currentIndex] as? FoodDiaryHistoryViewController {
-            foodHistoryVC.shouldRefreshDiary = true
+//            foodHistoryVC.shouldRefreshDiary = true
             foodHistoryVC.selectedDate = foodDiarySelectedDate
         }
         homeTabBar.selectedItem = homeTabBar.items?[currentIndex]
