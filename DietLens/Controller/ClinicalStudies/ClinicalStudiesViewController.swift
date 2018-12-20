@@ -44,9 +44,9 @@ class ClinicalStudiesViewController: BaseViewController {
             self.loadingIndicator.stopAnimating()
             self.loadingIndicator.isHidden = true
 
-            if studyList.count != 0 {
-                self.emaptyIconView.isHidden = true
-                self.emptyIconText.isHidden = true
+            if studyList.count == 0 {
+                self.emaptyIconView.isHidden = false
+                self.emptyIconText.isHidden = false
             }
 
             self.studyList = studyList
