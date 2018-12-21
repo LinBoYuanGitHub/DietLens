@@ -155,11 +155,11 @@ class QRScannerController: BaseViewController {
     }
 
     func jumpToJoinGroupPage(study: ClinicalStudyEntity) {
-        guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScannedResultViewController") as? ScannedResultViewController else {
+        guard let scanResultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScannedResultViewController") as? ScannedResultViewController else {
             return
         }
-        scanresultVC.studyEntity = study
-        self.navigationController?.pushViewController(scanresultVC, animated: true)
+        scanResultVC.studyEntity = study
+        self.navigationController?.pushViewController(scanResultVC, animated: true)
         captureSession.stopRunning()
     }
 
@@ -229,14 +229,13 @@ extension QRScannerController: UIImagePickerControllerDelegate, UINavigationCont
         qrcodeImage = UIImageView(frame: scanerView.bounds)
         qrcodeImage.image = qrcodeImg
         self.scanerView.addSubview(qrcodeImage)
-        var qrCodeLink=""
         guard let features=detector.features(in: ciImage) as? [CIQRCodeFeature] else {
             return
         }
-        for feature in features {
-            qrCodeLink += feature.messageString!
+        guard let feature = features[0].messageString else {
+            return
         }
         imagePicker.dismiss(animated: true, completion: nil)
-        performScannedOperation(scannedURL: qrCodeLink, bounds: features[0].bounds)
+        performScannedOperation(scannedURL: feature, bounds: features[0].bounds)
     }
 }

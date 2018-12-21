@@ -12,7 +12,7 @@ import Instructions
 import Photos
 import FirebaseAnalytics
 
-class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
+class HomeViewController: BaseViewController, ArticleCollectionCellDelegate {
 
     @IBOutlet weak var homeTitleBar: UINavigationItem!
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!

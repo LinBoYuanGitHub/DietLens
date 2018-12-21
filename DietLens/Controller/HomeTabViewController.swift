@@ -227,7 +227,6 @@ extension HomeTabViewController {
     //judge whether userId is Exist
     func accountCheck() -> Bool {
         let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
-
         if userId.isEmpty { //redirect user to welcome page
             guard let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeVC") as? WelcomeViewController else {
                 return false

@@ -32,6 +32,7 @@ class DailyNutritionInfoViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
     }
 
@@ -116,12 +117,12 @@ extension DailyNutritionInfoViewController: UITableViewDelegate, UITableViewData
 extension DailyNutritionInfoViewController: InternetDelegate {
 
     func onInternetConnected() {
-        super.dismissNoInternetDialog()
+//        super.dismissNoInternetDialog()
         refresh()
     }
 
     func onLosingInternetConnection() {
-        super.showNoInternetDialog()
+//        super.showNoInternetDialog()
     }
 
 }

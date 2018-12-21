@@ -111,6 +111,7 @@
 		3FA73DF22178789200D145C6 /* YStepMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF12178789200D145C6 /* YStepMarkerView.swift */; };
 		3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */; };
 		3FA8C372219D0E6800E4261D /* ProfileCalorieGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */; };
+		3FA9DE2C21CC9AA400331324 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9DE2B21CC9AA400331324 /* PassThroughView.swift */; };
 		3FAD32D221B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */; };
 		3FAD32D421BA1CAE00EAA6EC /* ClinicalStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D321BA1CAE00EAA6EC /* ClinicalStudyEntity.swift */; };
 		3FAD32D721BA20E300EAA6EC /* ClinicalStudyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D621BA20E300EAA6EC /* ClinicalStudyDataManager.swift */; };
@@ -359,6 +360,7 @@
 		3FA73DF12178789200D145C6 /* YStepMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YStepMarkerView.swift; sourceTree = "<group>"; };
 		3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownTimer.swift; sourceTree = "<group>"; };
 		3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCalorieGoalViewController.swift; sourceTree = "<group>"; };
+		3FA9DE2B21CC9AA400331324 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
 		3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCalorieGoalDialog.swift; sourceTree = "<group>"; };
 		3FAD32D321BA1CAE00EAA6EC /* ClinicalStudyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyEntity.swift; sourceTree = "<group>"; };
 		3FAD32D621BA20E300EAA6EC /* ClinicalStudyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyDataManager.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 				3FB7910C2107061F000D6A94 /* LoadingButton.swift */,
 				3F13694621086FF8007D9772 /* ActionDisabledTextField.swift */,
 				3FF89509212AC04500495B0C /* BottomLabelButton.swift */,
+				3FA9DE2B21CC9AA400331324 /* PassThroughView.swift */,
 			);
 			path = CustomizedView;
 			sourceTree = "<group>";
@@ -1643,6 +1646,7 @@
 				3FC7BD5D216B86B7003F43E2 /* HomeTabViewController.swift in Sources */,
 				3F516DC62122C7E50028B0AF /* SearchResultLocationCell.swift in Sources */,
 				3F2D163320EE8A6000348160 /* CalorieGoalViewController.swift in Sources */,
+				3FA9DE2C21CC9AA400331324 /* PassThroughView.swift in Sources */,
 				3FA73DEB2177069100D145C6 /* MoreCollectionCell.swift in Sources */,
 				587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */,
 				3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */,

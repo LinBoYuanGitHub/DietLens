@@ -499,13 +499,13 @@ extension FoodDiaryHistoryViewController: CalendarAlertDelegate {
 extension FoodDiaryHistoryViewController: InternetDelegate {
 
     func onInternetConnected() {
-        super.dismissNoInternetDialog()
+//        super.dismissNoInternetDialog()
         refreshFoodDiaryData()
         loadDailyNutritionView()
     }
 
     func onLosingInternetConnection() {
-        super.showNoInternetDialog()
+//        super.showNoInternetDialog()
     }
 
 }

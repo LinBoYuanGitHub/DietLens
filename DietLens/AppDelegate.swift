@@ -42,6 +42,7 @@ import FBSDKCoreKit
 import Photos
 import FacebookLogin
 import GoogleSignIn
+import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -58,6 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isImageCaptureTriggered = false
     var isTextInputTriggered = false
     var isSearchMoreTriggered = false
+    //reachability
+    let reachability = Reachability()!
+    var connectionStatus: Reachability.Connection?
+    var noInternetNotifyView =  UIView()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -85,10 +90,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         registerForPushNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(signOut), name: .signOutErrFlag, object: nil)
+        //reachability notifier
+        noInternetNotifyView = self.noInternetConnectionView(window: self.window!)
+        reachability.whenReachable = { reachability in
+            DispatchQueue.main.async {
+                self.noInternetNotifyView.removeFromSuperview()
+            }
+            if reachability.connection != self.connectionStatus {
+                self.connectionStatus = reachability.connection
+                if reachability.connection == .wifi {
+                    print("Reachable via WiFi")
+                } else {
+                    print("Reachable via Cellular")
+                }
+            }
+
+        }
+        reachability.whenUnreachable = { reachability in
+            //global popView for notify user no Internet Connection
+            if reachability.connection != self.connectionStatus {
+                self.connectionStatus = reachability.connection
+                DispatchQueue.main.async {
+                    self.noInternetNotifyView.removeFromSuperview()
+                    self.window?.addSubview(self.noInternetNotifyView)
+                    self.window?.bringSubview(toFront: self.noInternetNotifyView)
+                }
+                print("Not reachable")
+            }
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
         return true
     }
 
     @objc func signOut() {
+    }
+
+    func noInternetConnectionView(window: UIWindow) -> UIView {
+        let size = CGSize(width: (self.window?.frame.width)!, height: 60)
+        let containerView = PassThroughView(frame: CGRect(origin: CGPoint(x: 0, y: 90), size: size))
+        containerView.backgroundColor = UIColor.red
+        containerView.alpha = 0.7
+        //warning Icon and label
+        let warningIcon = UIImageView(frame: CGRect(origin: CGPoint(x: 10, y: 15), size: CGSize(width: 30, height: 30)))
+        warningIcon.tintColor = UIColor.white
+        warningIcon.image = UIImage(imageLiteralResourceName: "About")
+        let warningLabel = UILabel(frame: CGRect(origin: CGPoint(x: 50, y: 20), size: CGSize(width: 300, height: 20)))
+        warningLabel.text = "No Internet Connection"
+        warningLabel.textColor = UIColor.white
+        //dismiss button
+        let dismissBtn = UIButton(frame: CGRect(origin: CGPoint(x: (self.window?.frame.width)! - 50, y: 15), size: CGSize(width: 40, height: 40)))
+        dismissBtn.setImage(UIImage(imageLiteralResourceName: "whiteCross"), for: .normal)
+        dismissBtn.addTarget(self, action: #selector(dismissNoInternetView), for: .touchUpInside)
+        containerView.addSubview(warningIcon)
+        containerView.addSubview(warningLabel)
+        containerView.addSubview(dismissBtn)
+        return containerView
+    }
+
+    @objc func dismissNoInternetView() {
+        self.noInternetNotifyView.removeFromSuperview()
     }
 
     func clearPersonalData() {
@@ -100,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
         preferences.setValue(nil, forKey: PreferenceKey.googleImageUrl)
         //facebook login
-        LoginManager().logOut()
+//        LoginManager().logOut()
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
@@ -338,7 +402,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Print full message
         completionHandler()
         //open the notification page from the background
-
 //        let viewController = self.window!.rootViewController!.storyboard!.instantiateViewController(withIdentifier: "DietLens") as! HomeViewController
 
     }

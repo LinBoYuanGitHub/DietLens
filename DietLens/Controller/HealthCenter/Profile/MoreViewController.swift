@@ -26,6 +26,7 @@ class MoreViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.internetDelegate = self
         moreItemCollectionView.delegate = self
         moreItemCollectionView.dataSource = self
         guestView.isHidden = accountCheck()
@@ -159,6 +160,18 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(100), height: CGFloat(100))
     }
+}
+
+extension MoreViewController: InternetDelegate {
+
+    func onInternetConnected() {
+
+    }
+
+    func onLosingInternetConnection() {
+
+    }
+
 }
 
 extension MoreViewController {

@@ -17,10 +17,7 @@ class SplashScreenViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         internetDelegate = self
-        //internet jduegement
-        if Reachability()!.connection == .none {
-            return
-        }
+        pageJumpLogic()
     }
 
     func pageJumpLogic() {
@@ -203,12 +200,12 @@ class SplashScreenViewController: BaseViewController {
 extension SplashScreenViewController: InternetDelegate {
 
     func onInternetConnected() {
-        super.dismissNoInternetDialog()
+//        super.dismissNoInternetDialog()
         pageJumpLogic()
     }
 
     func onLosingInternetConnection() {
-        super.showNoInternetDialog()
+//        super.showNoInternetDialog()
     }
 
 }
