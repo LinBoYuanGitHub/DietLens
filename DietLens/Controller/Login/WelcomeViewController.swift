@@ -18,6 +18,7 @@ class WelcomeViewController: BaseViewController {
     @IBOutlet weak var facebookLoginBtn: UIButton!
     @IBOutlet weak var googleLoginBtn: UIButton!
     @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var welcomeImageView: UIImageView!
 
     var shouldShowNavBtn = false
 

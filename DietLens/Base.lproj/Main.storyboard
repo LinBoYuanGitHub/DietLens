@@ -746,7 +746,7 @@
                                 <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-3C-4QB" userLabel="NutrtionViewContainer" customClass="RedGardientView" customModule="DietLens" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-3C-4QB" userLabel="NutrtionViewContainer">
                                 <rect key="frame" x="0.0" y="109.5" width="375" height="126"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="FBV-n6-aD7">
@@ -789,6 +789,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.23529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pMb-gg-AMK" secondAttribute="trailing" constant="20" symbolic="YES" id="20C-N6-AM8"/>
                                     <constraint firstItem="FBV-n6-aD7" firstAttribute="top" secondItem="pMb-gg-AMK" secondAttribute="bottom" constant="7" id="3Ky-8p-rJI"/>
@@ -800,14 +801,6 @@
                                     <constraint firstItem="MuO-LM-QrS" firstAttribute="centerY" secondItem="pMb-gg-AMK" secondAttribute="centerY" id="mNa-n2-lCe"/>
                                     <constraint firstAttribute="trailing" secondItem="MuO-LM-QrS" secondAttribute="trailing" constant="16" id="rYZ-Gp-WjJ"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="redtopColor">
-                                        <color key="value" red="0.96470588235294119" green="0.40000000000000002" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="redbottomColor">
-                                        <color key="value" red="0.94901960784313721" green="0.24705882352941178" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nf-ZA-eOL" userLabel="calendarButton">
                                 <rect key="frame" x="118.5" y="73.5" width="15" height="22"/>
@@ -6069,6 +6062,23 @@ What is it?</string>
                                     <constraint firstAttribute="height" constant="217" id="4yC-OZ-T44"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34n-2w-nNI" userLabel="welcomeViewContrainer">
+                                <rect key="frame" x="64" y="217" width="247" height="161"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeViewImage" translatesAutoresizingMaskIntoConstraints="NO" id="eH7-PX-ziM">
+                                        <rect key="frame" x="0.0" y="20" width="247" height="121"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="121" id="naG-aO-h9v"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="eH7-PX-ziM" firstAttribute="centerY" secondItem="34n-2w-nNI" secondAttribute="centerY" id="AEi-uP-gFo"/>
+                                    <constraint firstItem="eH7-PX-ziM" firstAttribute="width" secondItem="34n-2w-nNI" secondAttribute="width" id="lXt-0c-Fxg"/>
+                                    <constraint firstItem="eH7-PX-ziM" firstAttribute="centerX" secondItem="34n-2w-nNI" secondAttribute="centerX" id="vAa-Yb-CFp"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OMD-Ft-T9E">
                                 <rect key="frame" x="44" y="378" width="287" height="44"/>
                                 <constraints>
@@ -6168,6 +6178,8 @@ What is it?</string>
                             <constraint firstItem="M4x-BF-X0Q" firstAttribute="centerX" secondItem="pfU-lH-1u2" secondAttribute="centerX" id="2YE-vE-Y8e"/>
                             <constraint firstItem="dpm-9O-8Uf" firstAttribute="width" secondItem="M4x-BF-X0Q" secondAttribute="width" id="3Fn-g7-pyf"/>
                             <constraint firstItem="e8H-p8-8nn" firstAttribute="centerY" secondItem="pfU-lH-1u2" secondAttribute="centerY" id="59L-Qe-gL0"/>
+                            <constraint firstAttribute="trailing" secondItem="34n-2w-nNI" secondAttribute="trailing" constant="64" id="5Gm-fm-dek"/>
+                            <constraint firstItem="OMD-Ft-T9E" firstAttribute="top" secondItem="34n-2w-nNI" secondAttribute="bottom" id="8lC-E1-0AU"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="leading" secondItem="pfU-lH-1u2" secondAttribute="trailing" constant="15" id="9Qn-U3-hU8"/>
                             <constraint firstItem="0WY-xg-d0h" firstAttribute="leading" secondItem="jch-ho-g4r" secondAttribute="leading" constant="16" id="9nB-26-xZX"/>
                             <constraint firstItem="OMD-Ft-T9E" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="DFZ-IU-jih"/>
@@ -6178,6 +6190,7 @@ What is it?</string>
                             <constraint firstItem="pfU-lH-1u2" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="RpC-L0-AOa"/>
                             <constraint firstItem="KSF-LP-13f" firstAttribute="top" secondItem="7xd-NZ-Hre" secondAttribute="bottom" constant="-20" id="Sdn-fy-2vZ"/>
                             <constraint firstItem="pQj-8K-9sU" firstAttribute="top" secondItem="OMD-Ft-T9E" secondAttribute="bottom" constant="21" id="T8r-1N-4A1"/>
+                            <constraint firstItem="34n-2w-nNI" firstAttribute="top" secondItem="VOn-Dx-xO7" secondAttribute="bottom" id="ZbZ-2j-WMy"/>
                             <constraint firstItem="M4x-BF-X0Q" firstAttribute="top" secondItem="IM0-Xc-giT" secondAttribute="bottom" constant="35" id="Zwj-ZB-EeD"/>
                             <constraint firstItem="pQj-8K-9sU" firstAttribute="width" secondItem="OMD-Ft-T9E" secondAttribute="width" id="awH-60-xTg"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="trailing" secondItem="jch-ho-g4r" secondAttribute="trailingMargin" id="bkt-rs-emc"/>
@@ -6186,6 +6199,7 @@ What is it?</string>
                             <constraint firstItem="0WY-xg-d0h" firstAttribute="top" secondItem="fgw-jX-Eoe" secondAttribute="bottom" constant="8" id="cBq-2a-6Uk"/>
                             <constraint firstItem="IM0-Xc-giT" firstAttribute="centerY" secondItem="pfU-lH-1u2" secondAttribute="centerY" id="dbc-Cj-lUN"/>
                             <constraint firstItem="VOn-Dx-xO7" firstAttribute="top" secondItem="jch-ho-g4r" secondAttribute="top" id="e3P-uE-wvL"/>
+                            <constraint firstItem="M4x-BF-X0Q" firstAttribute="top" secondItem="pfU-lH-1u2" secondAttribute="bottom" constant="27" id="eL0-wV-U8H"/>
                             <constraint firstItem="7xd-NZ-Hre" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="enp-xY-eVl"/>
                             <constraint firstItem="dpm-9O-8Uf" firstAttribute="top" secondItem="M4x-BF-X0Q" secondAttribute="bottom" constant="20" id="fgK-jE-5Fz"/>
                             <constraint firstItem="pfU-lH-1u2" firstAttribute="leading" secondItem="e8H-p8-8nn" secondAttribute="trailing" constant="8" id="hog-W1-6W3"/>
@@ -6193,6 +6207,7 @@ What is it?</string>
                             <constraint firstItem="pQj-8K-9sU" firstAttribute="centerX" secondItem="jch-ho-g4r" secondAttribute="centerX" id="lsm-4w-mcL"/>
                             <constraint firstItem="UdK-na-kHq" firstAttribute="top" secondItem="dpm-9O-8Uf" secondAttribute="bottom" constant="12" id="pAK-88-CtC"/>
                             <constraint firstAttribute="trailing" secondItem="VOn-Dx-xO7" secondAttribute="trailing" id="rXD-dS-lVB"/>
+                            <constraint firstItem="34n-2w-nNI" firstAttribute="leading" secondItem="jch-ho-g4r" secondAttribute="leading" constant="64" id="wax-I4-Qjd"/>
                             <constraint firstItem="dpm-9O-8Uf" firstAttribute="centerX" secondItem="M4x-BF-X0Q" secondAttribute="centerX" id="wvn-jH-vHn"/>
                         </constraints>
                     </view>
@@ -6203,6 +6218,7 @@ What is it?</string>
                         <outlet property="googleLoginBtn" destination="dpm-9O-8Uf" id="Cdf-Cf-REG"/>
                         <outlet property="signInBtn" destination="pQj-8K-9sU" id="3Sp-8p-K3w"/>
                         <outlet property="signUpBtn" destination="OMD-Ft-T9E" id="Flg-jg-cnc"/>
+                        <outlet property="welcomeImageView" destination="eH7-PX-ziM" id="Z8x-tl-JoD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vER-F5-0cW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -9674,7 +9690,7 @@ You were selected as a possible participant for this study because this is the f
                                     <action selector="onRightArrowPressed:" destination="MIX-fr-hCj" eventType="touchUpInside" id="JcZ-GM-luf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH3-5G-M9L" userLabel="NutrtionViewContainer" customClass="RedGardientView" customModule="DietLens" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH3-5G-M9L" userLabel="NutrtionViewContainer">
                                 <rect key="frame" x="0.0" y="73" width="375" height="126"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-fT-7ys">
@@ -9718,6 +9734,7 @@ You were selected as a possible participant for this study because this is the f
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.23529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="9oT-fT-7ys" firstAttribute="width" secondItem="AH3-5G-M9L" secondAttribute="width" id="9Lu-L7-Jne"/>
                                     <constraint firstItem="9oT-fT-7ys" firstAttribute="centerX" secondItem="AH3-5G-M9L" secondAttribute="centerX" id="AcV-Ps-nvW"/>
@@ -10695,6 +10712,7 @@ AAAAAAAAAEEAAAAAAAAAAAAAAAAAAAryA
         <image name="wechat" width="50" height="50"/>
         <image name="weightIcon" width="12" height="12"/>
         <image name="welcomePageTop" width="375" height="206"/>
+        <image name="welcomeViewImage" width="204" height="109"/>
         <image name="whiteBackArrow" width="8" height="13"/>
         <image name="whiteFoodDiaryIcon" width="18" height="21"/>
         <image name="whiteSettingIcon" width="20" height="21"/>
