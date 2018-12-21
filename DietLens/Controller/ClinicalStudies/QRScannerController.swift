@@ -44,7 +44,7 @@ class QRScannerController: BaseViewController {
             deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera], mediaType: AVMediaType.video, position: .back)
         }
 
-        guard let captureDevice = deviceDiscoverySession?.devices.first else {
+        guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
             print("Failed to get the camera device")
             return
         }
