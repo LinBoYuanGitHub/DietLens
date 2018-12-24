@@ -26,9 +26,12 @@ class HealthCenterTableViewController: UIViewController {
     }
 
     func getHealthItemData() {
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         APIService.instance.getHealthLogByCategory(category: recordName) { (healthLogs) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            appdelegate.dismissLoadingDialog()
             if healthLogs == nil {
                 self.emptyViewContainer.isHidden = false
                 return

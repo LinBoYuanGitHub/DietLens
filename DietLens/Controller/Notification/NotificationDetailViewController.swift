@@ -41,10 +41,13 @@ class NotificationDetailViewController: UIViewController {
            initViews()
         } else {
             //request notification detail
-            AlertMessageHelper.showLoadingDialog(targetController: self)
             scroller.isHidden = true
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.getSingleNotification(notificationId: notificationId) { (notificationModel) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                appdelegate.dismissLoadingDialog()
                 self.scroller.isHidden = false
                 if notificationModel != nil {
                     self.notificationModel = notificationModel!

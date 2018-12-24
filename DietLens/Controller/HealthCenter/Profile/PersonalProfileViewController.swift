@@ -214,10 +214,13 @@ class PersonalProfileViewController: UIViewController {
             profile.name = cell.inptText.text!
         }
         saveBtn.isEnabled = false
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         APIService.instance.updateProfile(userId: userId!, profile: profile) { (isSuccess) in
             self.saveBtn.isEnabled = true
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            appdelegate.dismissLoadingDialog()
             if isSuccess {
                 //save only when web interface upload succeed
                 ProfileDataManager.instance.cacheUserProfile(profile: self.profile)

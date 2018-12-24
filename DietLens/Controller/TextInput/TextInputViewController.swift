@@ -31,7 +31,7 @@ class TextInputViewController: BaseViewController {
     @IBOutlet weak var animationViewLeading: NSLayoutConstraint!
 
     //indicator component
-//    let activityIndicator:NVActivityIndicatorView?
+    //    let activityIndicator:NVActivityIndicatorView?
 
     //tab item for filter the result
     var filterItem = [StringConstants.UIString.FitlerPopular, StringConstants.UIString.FilterRecent, StringConstants.UIString.FilterFavorite]
@@ -120,16 +120,16 @@ class TextInputViewController: BaseViewController {
 
     @objc func handleTap() {
         //jump to feedback page
-//        let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
-//        self.present(dest, animated: true, completion: nil)
+        //        let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
+        //        self.present(dest, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         //regist notification
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
         //only refresh cache data
         if (textSearchField.text?.isEmpty)! && currentSelectionPos != 0 {
             onFilterSelect(currentSelection: currentSelectionPos)
@@ -137,7 +137,7 @@ class TextInputViewController: BaseViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-//        textSearchField.becomeFirstResponder()
+        //        textSearchField.becomeFirstResponder()
         //set event for favFood empty label jump
         self.emptyView.addGestureRecognizer( UITapGestureRecognizer(target: self, action: #selector(redirectToFavoriteFoodPage)))
     }
@@ -169,31 +169,31 @@ class TextInputViewController: BaseViewController {
         Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreClickBack, parameters: nil)
     }
 
-//    @objc func keyboardWasShown (notification: NSNotification) {
-//        let info: NSDictionary = notification.userInfo! as NSDictionary
-//        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
-//        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-//        var contentInsets: UIEdgeInsets
-//        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-//            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-//        } else {
-//            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-//        }
-//        textSearchTable.contentInset = contentInsets
-//        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
-//    }
-//
-//    @objc func keyboardWillBeHidden () {
-//        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-//    }
+    //    @objc func keyboardWasShown (notification: NSNotification) {
+    //        let info: NSDictionary = notification.userInfo! as NSDictionary
+    //        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
+    //        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+    //        var contentInsets: UIEdgeInsets
+    //        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+    //            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+    //        } else {
+    //            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
+    //        }
+    //        textSearchTable.contentInset = contentInsets
+    //        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
+    //    }
+    //
+    //    @objc func keyboardWillBeHidden () {
+    //        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+    //    }
 
     //GoodToHave: local storage to display recent search top2 item
     func loadRecentTextSearchResult() {
         //        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
-//        let cache = OrderedDictionary<String,TextSearchSuggestionEntity>()
-//        while (cache.makeIterator().next() != nil){
-//
-//        }
+        //        let cache = OrderedDictionary<String,TextSearchSuggestionEntity>()
+        //        while (cache.makeIterator().next() != nil){
+        //
+        //        }
         textSearchTable.reloadData()
     }
 
@@ -294,7 +294,7 @@ class TextInputViewController: BaseViewController {
         }
         if isSearching {
             APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
-//            APIService.instance.cancelAllRequest()
+            //            APIService.instance.cancelAllRequest()
         }
         isSearching = true
         let searchText = textSearchField.text
@@ -302,12 +302,12 @@ class TextInputViewController: BaseViewController {
             return
         }
         //show loading indicator & create current search result
-//        self.searchLoadingView.alpha = 1
-//        self.searchResultList.removeAll()
-//        self.textSearchTable.reloadData()
+        //        self.searchLoadingView.alpha = 1
+        //        self.searchResultList.removeAll()
+        //        self.textSearchTable.reloadData()
         //request for new data
         APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
-//            self.searchLoadingView.alpha = 0
+            //            self.searchLoadingView.alpha = 0
             if textResults == nil {
                 return
             }
@@ -345,52 +345,54 @@ class TextInputViewController: BaseViewController {
             return
         }
         //request Food info
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         APIService.instance.getFoodDetail(foodId: foodEntity.id) { (dietItem) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                if dietItem == nil {
-                    return
-                }
-                //save select Item to lruCache
-                self.searchCacheLRU.setValue(foodEntity, for: foodEntity.id)
-                //dietItem operation
-                let dietEntity = dietItem!
-                if dietItem?.portionInfo.count != 0 {
-                    dietEntity.displayUnit = (dietItem?.portionInfo[0].sizeUnit)!
-                }
+            appdelegate.dismissLoadingDialog()
+            if dietItem == nil {
+                return
+            }
+            //save select Item to lruCache
+            self.searchCacheLRU.setValue(foodEntity, for: foodEntity.id)
+            //dietItem operation
+            let dietEntity = dietItem!
+            if dietItem?.portionInfo.count != 0 {
+                dietEntity.displayUnit = (dietItem?.portionInfo[0].sizeUnit)!
+            }
+            if self.isSearchMoreFlow {
+                dietEntity.recordType = RecognitionInteger.additionText
+            } else {
+                dietEntity.recordType = RecognitionInteger.text
+            }
+            //set as new foodDiary entity
+            if !self.isSearchMoreFlow {
+                FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
+            }
+            //mealType & mealTime
+            if FoodDiaryDataManager.instance.foodDiaryEntity.mealType.isEmpty {
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType
+            }
+            if FoodDiaryDataManager.instance.foodDiaryEntity.mealTime.isEmpty {
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
+            }
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                let imageUrl = foodEntity.expImagePath
+                dest.imageUrl = imageUrl
+                dest.userFoodImage = self.cameraImage
+                dest.imageKey = self.imageKey
+                dest.recordDate = self.addFoodDate
+                dest.dietItem = dietEntity
                 if self.isSearchMoreFlow {
-                    dietEntity.recordType = RecognitionInteger.additionText
+                    dest.recordType = RecognitionInteger.additionText
+                    dest.shouldShowMealBar = false
                 } else {
-                    dietEntity.recordType = RecognitionInteger.text
+                    dest.recordType = dietEntity.recordType
                 }
-                //set as new foodDiary entity
-                if !self.isSearchMoreFlow {
-                    FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
-                }
-                //mealType & mealTime
-                if FoodDiaryDataManager.instance.foodDiaryEntity.mealType.isEmpty {
-                    FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType
-                }
-                if FoodDiaryDataManager.instance.foodDiaryEntity.mealTime.isEmpty {
-                    FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.addFoodDate)
-                }
-                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-                    let imageUrl = foodEntity.expImagePath
-                    dest.imageUrl = imageUrl
-                    dest.userFoodImage = self.cameraImage
-                    dest.imageKey = self.imageKey
-                    dest.recordDate = self.addFoodDate
-                    dest.dietItem = dietEntity
-                    if self.isSearchMoreFlow {
-                        dest.recordType = RecognitionInteger.additionText
-                        dest.shouldShowMealBar = false
-                    } else {
-                        dest.recordType = dietEntity.recordType
-                    }
-                    dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                    if let navigator = self.navigationController {
-                        navigator.pushViewController(dest, animated: true)
-                    }
+                dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                if let navigator = self.navigationController {
+                    navigator.pushViewController(dest, animated: true)
                 }
             }
         }
@@ -408,10 +410,10 @@ class TextInputViewController: BaseViewController {
         } else if currentSelection == 2 {
             //show favorite WIP view
             self.getFavouriteFoods()
-//            self.textSearchTable.isHidden = true
-//            self.emptyViewLabel.text = "We are working on this feature for release in the future."
-//            self.refreshBtn.isHidden = true
-//            self.emptyView.isHidden = false
+            //            self.textSearchTable.isHidden = true
+            //            self.emptyViewLabel.text = "We are working on this feature for release in the future."
+            //            self.refreshBtn.isHidden = true
+            //            self.emptyView.isHidden = false
         }
     }
 
@@ -529,9 +531,9 @@ extension TextInputViewController: UITableViewDelegate {
             }
         }
         //#google analytic log part
-//        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
-//            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
-//        ])
+        //        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
+        //            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
+        //        ])
     }
 
 }

@@ -105,10 +105,13 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         let groupId = studyList[indexPath.row].studyId
         APIService.instance.getClinicalStudyDetail(groupId: groupId) { (studyDetailEntity) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            appdelegate.dismissLoadingDialog()
 
             if studyDetailEntity == nil {
                 return

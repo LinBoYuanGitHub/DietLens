@@ -46,43 +46,45 @@ class RegistrationViewController: UIViewController {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if (TFPassword.text?.isEmpty)! {
-             print("please fill in password")
-             AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
+            print("please fill in password")
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your email address")
             return
         } else if TFRePassword.text != TFPassword.text {
             print("please confirm password again")
             AlertMessageHelper.showMessage(targetController: self, title: "", message: "please confirm password again")
             return
         } else {
-            AlertMessageHelper.showLoadingDialog(targetController: self)
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.register(email: TFEmail.text!, password: TFPassword.text!, completion: { (isSucceed) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    if isSucceed {
-                        // save for basic authentication
-                        let preferences = UserDefaults.standard
-                        preferences.setValue(self.TFPassword.text!, forKey: PreferenceKey.passwordKey)
-                        //to main page
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
-                        self.present(viewController, animated: true, completion: nil)
-                        //save token to backend
-                        let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
-                        let userId = preferences.string(forKey: PreferenceKey.userIdkey)
-                        if userId != nil && fcmToken != nil {
-                            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
-                                if flag {
-                                    print("send device token succeed")
-                                }
-                            })
-                        }
-                    } else {
-                        print("register failed")
-                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
+                appdelegate.dismissLoadingDialog()
+                if isSucceed {
+                    // save for basic authentication
+                    let preferences = UserDefaults.standard
+                    preferences.setValue(self.TFPassword.text!, forKey: PreferenceKey.passwordKey)
+                    //to main page
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "sideLGMenuVC")
+                    self.present(viewController, animated: true, completion: nil)
+                    //save token to backend
+                    let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                    let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                    if userId != nil && fcmToken != nil {
+                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                            if flag {
+                                print("send device token succeed")
+                            }
+                        })
                     }
+                } else {
+                    print("register failed")
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
                 }
             }, failedCompletion: { (failedMsg) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                     AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: failedMsg)
                 }
             })
         }
@@ -110,14 +112,14 @@ class RegistrationViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }
 

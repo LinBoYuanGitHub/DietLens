@@ -75,10 +75,13 @@ class WelcomeViewController: BaseViewController {
                         let facebookUserId = response.dictionaryValue!["id"]
                         let facebookUserName = response.dictionaryValue!["name"]
                         //validate FacebookId
-                        AlertMessageHelper.showLoadingDialog(targetController: self)
+                        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                            return
+                        }
+                        appdelegate.showLoadingDialog()
                         guard let fbUserId = facebookUserId as? String else { return }
                         APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: fbUserId, completion: { (isSuccess, isNewUser) in
-                            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                            appdelegate.dismissLoadingDialog()
                             if isSuccess {
                                 //record userId & userName
                                 let preferences = UserDefaults.standard
@@ -109,7 +112,7 @@ class WelcomeViewController: BaseViewController {
                                 } else {
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-//                                         self.navigationController?.pushViewController(controller, animated: true)
+                                        //                                         self.navigationController?.pushViewController(controller, animated: true)
                                         self.present(controller, animated: true, completion: nil)
                                     }
                                 }
@@ -176,7 +179,7 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-//                        self.navigationController?.pushViewController(controller, animated: true)
+                        //                        self.navigationController?.pushViewController(controller, animated: true)
                         self.present(controller, animated: true, completion: nil)
                     }
                 }

@@ -122,7 +122,7 @@ class QRScannerController: BaseViewController {
     }
 
     @objc func onAlbumPressed() {
-         present(imagePicker, animated: false, completion: nil)
+        present(imagePicker, animated: false, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -202,6 +202,7 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
         if !isWhiteDomainFlag || !scannedURL.contains("?gid=") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { //delay for showing bounding box for user to confirm the scanned QR code
                 self.launchApp(decodedURL: scannedURL)
+                self.scannedFlag = false
             }
             return
         }
@@ -210,6 +211,10 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
         APIService.instance.getClinicalStudyDetail(groupId: groupId, completion: { (entity) in
             if entity != nil {
                 self.jumpToJoinGroupPage(study: entity!)
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "It's not a valid Dietlens QR code", confirmText: "OK", completion: {
+                    self.scannedFlag = false
+                })
             }
         })
     }

@@ -23,10 +23,10 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if emailFromLogin != "" {
-           emailAddr.text = emailFromLogin
+            emailAddr.text = emailFromLogin
         } /*else {
-            emailAddr.becomeFirstResponder()
-        }*/
+         emailAddr.becomeFirstResponder()
+         }*/
 
     }
 
@@ -49,18 +49,20 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cfmEmailPressed(_ sender: Any) {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
             // call backend server
-            AlertMessageHelper.showLoadingDialog(targetController: self)
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess) in
                 if isSuccess {
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
-                            if isPositive {
-                                self.dismiss(animated: true, completion: nil)
-                            } else {
-                                self.dismiss(animated: true, completion: nil)
-                            }
-                        })
-                    }
+                    appdelegate.dismissLoadingDialog()
+                    AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
+                        if isPositive {
+                            self.dismiss(animated: true, completion: nil)
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
                 } else {
                     AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                         self.alertWithTitle(title: "Error", message: "No such email found!", viewController: self, toFocus: self.emailAddr)

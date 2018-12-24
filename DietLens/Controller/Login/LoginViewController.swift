@@ -97,10 +97,13 @@ class LoginViewController: ButtonBarPagerTabStripViewController {
                         let facebookUserId = response.dictionaryValue!["id"]
                         let facebookUserName = response.dictionaryValue!["name"]
                         //validate FacebookId
-                        AlertMessageHelper.showLoadingDialog(targetController: self)
+                        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                            return
+                        }
+                        appdelegate.showLoadingDialog()
                         guard let fbUserId = facebookUserId as? String else { return }
                         APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: fbUserId, completion: { (isSuccess, isNewUser) in
-                            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                            appdelegate.dismissLoadingDialog()
                             if isSuccess {
                                 //record userId & userName
                                 let preferences = UserDefaults.standard
@@ -193,10 +196,13 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                     let facebookUserId = response.dictionaryValue!["id"]
                     let facebookUserName = response.dictionaryValue!["name"]
                     //validate FacebookId
-                    AlertMessageHelper.showLoadingDialog(targetController: self)
+                    guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                        return
+                    }
+                    appdelegate.showLoadingDialog()
                     guard let fbUserId = facebookUserId as? String else { return }
                     APIService.instance.facebookIdValidationRequest(accessToken: result.token.tokenString, uuid: fbUserId, completion: { (isSuccess, isNewUser) in
-                        AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                        appdelegate.dismissLoadingDialog()
                         if isSuccess {
                             //record userId & userName
                             let preferences = UserDefaults.standard

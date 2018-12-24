@@ -119,36 +119,42 @@ class RecognitionResultViewController: BaseViewController {
         if foodId == 0 {
             return
         }
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+//        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        delegate.showLoadingDialog()
         APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                if dietItem == nil {
-                    return
-                }
-                var entity = dietItem!
-                if entity.isMixFood {
-                    self.redirectToFoodDiaryPage()
-                    return
-                }
-                entity.recordType = self.recordType ?? RecognitionInteger.recognition
-                 //set as new foodDiary entity
-                FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
-                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
-                    dest.userFoodImage = self.cameraImage
-                    dest.recordType = entity.recordType
-                    dest.imageKey = self.imageKey
-                    dest.dietItem = entity
-                    //mealTime & mealType
-                    FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
-                    dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                    dest.recordDate = self.recordDate
-                    FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
-                    if let navigator = self.navigationController {
-                        //clear controller to Bottom & add foodCalendar Controller
-                        navigator.pushViewController(dest, animated: true)
-                    }
+            delegate.dismissLoadingDialog()
+            if dietItem == nil {
+                return
+            }
+            let entity = dietItem!
+            if entity.isMixFood {
+                self.redirectToFoodDiaryPage()
+                return
+            }
+            entity.recordType = self.recordType ?? RecognitionInteger.recognition
+            //set as new foodDiary entity
+            FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodInfoVC") as? FoodInfoViewController {
+                dest.userFoodImage = self.cameraImage
+                dest.recordType = entity.recordType
+                dest.imageKey = self.imageKey
+                dest.dietItem = entity
+                //mealTime & mealType
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
+                dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                dest.recordDate = self.recordDate
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
+                if let navigator = self.navigationController {
+                    //clear controller to Bottom & add foodCalendar Controller
+                    navigator.pushViewController(dest, animated: true)
                 }
             }
+//            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
+//               
+//            }
         }
     }
 

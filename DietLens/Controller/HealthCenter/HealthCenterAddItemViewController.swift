@@ -144,10 +144,13 @@ class HealthCenterAddItemViewController: UIViewController {
 
     @objc func addHealthItem() {
         self.navigationItem.rightBarButtonItem?.isEnabled = false
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         let recordValue = Double(round(1000*itemValue)/1000) //round value
         APIService.instance.uploadHealthCenterData(category: recordName, value: recordValue, date: dateStr, time: timeStr) { (isSuccess) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            appdelegate.dismissLoadingDialog()
             self.navigationItem.rightBarButtonItem?.isEnabled = true
             if isSuccess {
                 self.navigationController?.popViewController(animated: true)

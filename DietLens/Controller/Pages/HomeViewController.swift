@@ -227,6 +227,7 @@ class HomeViewController: BaseViewController, ArticleCollectionCellDelegate {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
         }
+
     }
 
     // calculate Nutrition Data & put into homePage

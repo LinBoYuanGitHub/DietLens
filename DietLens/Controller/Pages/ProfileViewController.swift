@@ -54,9 +54,12 @@ class ProfileViewController: UIViewController {
         let preferences = UserDefaults.standard
         let key = "userId"
         let userId = preferences.string(forKey: key)
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         APIService.instance.getProfile(userId: userId!) { (userProfile) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            appdelegate.dismissLoadingDialog()
             //set userProfile
             if userProfile == nil {
                 return
@@ -171,18 +174,20 @@ class ProfileViewController: UIViewController {
             //TODO alert fill incomplete warning
             return
         }
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         APIService.instance.updateProfile(userId: userId!, name: TFName.text!, gender: gender, height: Double(TFHeight.text!)!, weight: Double(TFWeight.text!)!, birthday: TFAge.text!) { (isSuccess) in
             NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
             NotificationCenter.default.post(name: .shouldRefreshSideBarHeader, object: nil)
             //refresh the profile sharedPreference
-            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                if isSuccess {
-                    self.dismiss(animated: true, completion: nil)
-                } else {
-                    //error alert
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
-                }
+            appdelegate.dismissLoadingDialog()
+            if isSuccess {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                //error alert
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "update profile failed")
             }
         }
     }

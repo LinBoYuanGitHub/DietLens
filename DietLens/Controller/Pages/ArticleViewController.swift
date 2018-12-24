@@ -67,17 +67,19 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
             emptyView.isHidden = false
             return
         }
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         if articleType == ArticleType.ARTICLE {
             APIService.instance.getArticleList(completion: { (articleList) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    if articleList == nil {
-                        return
-                    }
-                    self.articleDataSource = articleList!
-                    ArticleDataManager.instance.articleList = articleList!
-                    self.articleTable?.reloadData()
+                appdelegate.dismissLoadingDialog()
+                if articleList == nil {
+                    return
                 }
+                self.articleDataSource = articleList!
+                ArticleDataManager.instance.articleList = articleList!
+                self.articleTable?.reloadData()
             }) { (nextLink) in
                 if self.nextPageLink == nil {
                     self.nextPageLink = ""
@@ -119,7 +121,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "presentArticlePage", sender: self)
+        //        performSegue(withIdentifier: "presentArticlePage", sender: self)
         if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
             if articleType == ArticleType.ARTICLE {
                 dest.articleData = ArticleDataManager.instance.articleList[indexPath.row]
@@ -163,7 +165,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
                     return
                 }
                 for article in articleList! {
-                     ArticleDataManager.instance.articleList.append(article)
+                    ArticleDataManager.instance.articleList.append(article)
                 }
                 self.articleTable.reloadData()
             }, nextLinkCompletion: { (nextLink) in
@@ -177,7 +179,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil)
+        //        self.dismiss(animated: true, completion: nil)
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -188,13 +190,13 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }

@@ -71,7 +71,7 @@ class FoodCalendarViewController: BaseViewController, UIPopoverPresentationContr
             if let navigator = self.navigationController {
                 navigator.pushViewController(controller, animated: true)
             }
-//            present(controller, animated: true, completion: nil)
+            //            present(controller, animated: true, completion: nil)
         }
     }
 
@@ -103,19 +103,19 @@ class FoodCalendarViewController: BaseViewController, UIPopoverPresentationContr
 
     @IBAction func showCalendar(_ sender: Any) {
         bringInCalendar(sender)
-//        if let calendarDialog = self.storyboard?.instantiateViewController(withIdentifier: "calendarDialogVC") as? CalendarDialogViewController {
-//            calendarDialog.calendarDelegate = self
-//            calendarDialog.providesPresentationContextTransitionStyle = true
-//            calendarDialog.preferredContentSize = CGSize(width: self.view.frame.width, height: 300)
-//            calendarDialog.popoverPresentationController?.permittedArrowDirections = .down
-//            calendarDialog.modalPresentationStyle = UIModalPresentationStyle.popover
-//            //set up popover presentation controller
-//            calendarDialog.popoverPresentationController?.backgroundColor = UIColor.white
-//            calendarDialog.popoverPresentationController?.sourceView = self.calendarBtn
-//            calendarDialog.popoverPresentationController?.sourceRect = calendarBtn.bounds
-//            calendarDialog.popoverPresentationController?.delegate = self
-//            self.present(calendarDialog, animated: true, completion: nil)
-//        }
+        //        if let calendarDialog = self.storyboard?.instantiateViewController(withIdentifier: "calendarDialogVC") as? CalendarDialogViewController {
+        //            calendarDialog.calendarDelegate = self
+        //            calendarDialog.providesPresentationContextTransitionStyle = true
+        //            calendarDialog.preferredContentSize = CGSize(width: self.view.frame.width, height: 300)
+        //            calendarDialog.popoverPresentationController?.permittedArrowDirections = .down
+        //            calendarDialog.modalPresentationStyle = UIModalPresentationStyle.popover
+        //            //set up popover presentation controller
+        //            calendarDialog.popoverPresentationController?.backgroundColor = UIColor.white
+        //            calendarDialog.popoverPresentationController?.sourceView = self.calendarBtn
+        //            calendarDialog.popoverPresentationController?.sourceRect = calendarBtn.bounds
+        //            calendarDialog.popoverPresentationController?.delegate = self
+        //            self.present(calendarDialog, animated: true, completion: nil)
+        //        }
     }
 
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -123,8 +123,8 @@ class FoodCalendarViewController: BaseViewController, UIPopoverPresentationContr
     }
 
     func registerNib() {
-//        let nib = UINib(nibName: "diaryHeader", bundle: nil)
-//        foodCalendarTableView.register(nib, forHeaderFooterViewReuseIdentifier: "DiarySectionHeader")
+        //        let nib = UINib(nibName: "diaryHeader", bundle: nil)
+        //        foodCalendarTableView.register(nib, forHeaderFooterViewReuseIdentifier: "DiarySectionHeader")
         let nib = UINib(nibName: "foodCalendarViewHeader", bundle: nil)
         foodCalendarTableView.register(nib, forHeaderFooterViewReuseIdentifier: "calendarSectionHeader")
         let collectionNib = UINib(nibName: "NutritionCollectionCell", bundle: nil)
@@ -206,9 +206,12 @@ class FoodCalendarViewController: BaseViewController, UIPopoverPresentationContr
     //get foodDiary form date
     func getFoodDairyByDate(date: Date) {
         let dateStr = DateUtil.normalDateToString(date: date)
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         APIService.instance.getFoodDiaryByDate(selectedDate: dateStr) { (foodDiaryList) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            appdelegate.dismissLoadingDialog()
             if foodDiaryList == nil {
                 let emptyList = [FoodDiaryEntity]()
                 self.assembleMealList(foodDiaryList: emptyList)
@@ -294,15 +297,18 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            AlertMessageHelper.showLoadingDialog(targetController: self)
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.deleteFoodDiary(foodDiaryId: foodMealList[indexPath.section].foodEntityList[indexPath.row].foodDiaryId, completion: { (_) in
                 NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                    tableView.reloadData()
-                    self.loadDailyNutritionView()//recalculate nutrition info
-                }
+                appdelegate.dismissLoadingDialog()
+
+                self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.reloadData()
+                self.loadDailyNutritionView()//recalculate nutrition info
             })
         }
     }
@@ -384,21 +390,23 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 let imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
                 //download image from Qiniu
-                AlertMessageHelper.showLoadingDialog(targetController: self)
+                guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                    return
+                }
+                appdelegate.showLoadingDialog()
                 APIService.instance.qiniuImageDownload(imageKey: imageKey, completion: { (image) in
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                        dest.isSetMealByTimeRequired = false
-                        FoodDiaryDataManager.instance.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row] //* change the singleton foodDiaryEntity object
-                        dest.isUpdate = true
-                        dest.imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
-                        if image != nil {
-                            dest.userFoodImage = image
-                        } else {
-                            dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
-                        }
-                        if let navigator = self.navigationController {
-                            navigator.pushViewController(dest, animated: true)
-                        }
+                    appdelegate.dismissLoadingDialog()
+                    dest.isSetMealByTimeRequired = false
+                    FoodDiaryDataManager.instance.foodDiaryEntity = self.foodMealList[indexPath.section].foodEntityList[indexPath.row] //* change the singleton foodDiaryEntity object
+                    dest.isUpdate = true
+                    dest.imageKey = self.foodMealList[indexPath.section].foodEntityList[indexPath.row].imageId
+                    if image != nil {
+                        dest.userFoodImage = image
+                    } else {
+                        dest.userFoodImage = #imageLiteral(resourceName: "dietlens_sample_background")
+                    }
+                    if let navigator = self.navigationController {
+                        navigator.pushViewController(dest, animated: true)
                     }
                 })
             }

@@ -63,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let reachability = Reachability()!
     var connectionStatus: Reachability.Connection?
     var noInternetNotifyView =  UIView()
+    var fullScreenLoadingView = UIView()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -92,6 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(signOut), name: .signOutErrFlag, object: nil)
         //reachability notifier
         noInternetNotifyView = self.noInternetConnectionView(window: self.window!)
+        fullScreenLoadingView = self.initLoadingDialog(window: self.window!)
         reachability.whenReachable = { reachability in
             DispatchQueue.main.async {
                 self.noInternetNotifyView.removeFromSuperview()
@@ -129,6 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc func signOut() {
     }
 
+    //No internet banner Initlization
     func noInternetConnectionView(window: UIWindow) -> UIView {
         let size = CGSize(width: (self.window?.frame.width)!, height: 60)
         let containerView = PassThroughView(frame: CGRect(origin: CGPoint(x: 0, y: 90), size: size))
@@ -149,6 +152,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         containerView.addSubview(warningLabel)
         containerView.addSubview(dismissBtn)
         return containerView
+    }
+
+    //Loading dialog Initlization
+    func initLoadingDialog(window: UIWindow) -> UIView {
+        guard let screenWidth = self.window?.frame.width else {
+            return UIView()
+        }
+        guard let screenHeight = self.window?.frame.height else {
+            return UIView()
+        }
+        let dialogWidth = 240
+        let dialogHeight = 100
+        let size = CGSize(width: dialogWidth, height: dialogHeight)
+        //full screen background container
+        let backgroundContainer = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        backgroundContainer.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        //dialog container view
+        let containerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
+        containerView.center = CGPoint(x: screenWidth/2, y: screenHeight/2)
+        containerView.backgroundColor = UIColor.white
+        containerView.layer.cornerRadius = 10
+        //spinner view
+        let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        spinnerIndicator.center = CGPoint(x: dialogWidth/2, y: dialogHeight/2 - 15)
+        spinnerIndicator.color = UIColor.black
+        spinnerIndicator.startAnimating()
+        //loading label
+        let loadingTextLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 200, height: 20)))
+        loadingTextLabel.center = CGPoint(x: dialogWidth/2, y: dialogHeight/2 + 15)
+        loadingTextLabel.textAlignment = .center
+        loadingTextLabel.text = "Loading..."
+        loadingTextLabel.textColor = UIColor.black
+        //add subView part
+        containerView.addSubview(spinnerIndicator)
+        containerView.addSubview(loadingTextLabel)
+        backgroundContainer.addSubview(containerView)
+        return backgroundContainer
+    }
+
+    func showLoadingDialog() {
+        self.window?.addSubview(fullScreenLoadingView)
+    }
+
+    func dismissLoadingDialog() {
+        fullScreenLoadingView.removeFromSuperview()
     }
 
     @objc func dismissNoInternetView() {
