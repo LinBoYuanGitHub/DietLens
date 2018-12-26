@@ -200,10 +200,9 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
         }
         //check the gid existing part
         if !isWhiteDomainFlag || !scannedURL.contains("?gid=") {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { //delay for showing bounding box for user to confirm the scanned QR code
-                self.launchApp(decodedURL: scannedURL)
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "It's not a valid Dietlens QR code", confirmText: "OK", completion: {
                 self.scannedFlag = false
-            }
+            })
             return
         }
         let groupId = scannedURL.components(separatedBy: "?gid=")[1]
@@ -237,10 +236,11 @@ extension QRScannerController: UIImagePickerControllerDelegate, UINavigationCont
         guard let features=detector.features(in: ciImage) as? [CIQRCodeFeature] else {
             return
         }
-        guard let feature = features[0].messageString else {
-            return
-        }
         imagePicker.dismiss(animated: true, completion: nil)
-        performScannedOperation(scannedURL: feature, bounds: features[0].bounds)
+        if features.count == 0 {
+            performScannedOperation(scannedURL: "", bounds: CGRect(x: 0, y: 0, width: 0, height: 0))
+        } else {
+            performScannedOperation(scannedURL: features[0].messageString!, bounds: features[0].bounds)
+        }
     }
 }

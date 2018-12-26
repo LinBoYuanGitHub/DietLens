@@ -198,7 +198,6 @@
 		58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */; };
 		58AA521B1FA1CA3F0072779C /* HomeProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */; };
 		58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AA521C1FA2D1AA0072779C /* Constants.swift */; };
-		58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */; };
 		58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0F3E71FB6D4F1004C1B81 /* Blur.swift */; };
 		58D575F11FCE5ADB0046EA25 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */; };
 		58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */; };
@@ -207,7 +206,6 @@
 		58F2DF211F9F21AA00FF3A95 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF201F9F21AA00FF3A95 /* GradientView.swift */; };
 		58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */; };
 		58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */; };
-		58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF291F9F439100FF3A95 /* DataService.swift */; };
 		58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
 		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
 		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
@@ -459,7 +457,6 @@
 		58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryDatePicker.swift; sourceTree = "<group>"; };
 		58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressView.swift; sourceTree = "<group>"; };
 		58AA521C1FA2D1AA0072779C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		58D0F3E71FB6D4F1004C1B81 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		58D575F21FCE60AD0046EA25 /* NotificationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableCell.swift; sourceTree = "<group>"; };
@@ -468,7 +465,6 @@
 		58F2DF201F9F21AA00FF3A95 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBorderClearButton.swift; sourceTree = "<group>"; };
 		58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
-		58F2DF291F9F439100FF3A95 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
@@ -764,6 +760,15 @@
 			path = Chart;
 			sourceTree = "<group>";
 		};
+		3FA9DE2D21D0B2EE00331324 /* ZMProgress */ = {
+			isa = PBXGroup;
+			children = (
+				ECC10EDF21BA4C1E007574CC /* ZMProgressView.h */,
+				ECC10EE021BA4C1E007574CC /* ZMProgressView.m */,
+			);
+			path = ZMProgress;
+			sourceTree = "<group>";
+		};
 		3FAD32D521BA1CBE00EAA6EC /* ClinicalStudy */ = {
 			isa = PBXGroup;
 			children = (
@@ -880,7 +885,6 @@
 			children = (
 				3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */,
 				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
-				58BCDA611FA82B7900375D5F /* SideMenuViewController.swift */,
 				580443661FB0189E00D59DFF /* SettingViewController.swift */,
 				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
 				580443681FB0233900D59DFF /* AboutViewController.swift */,
@@ -1018,7 +1022,6 @@
 				3F5691E7214E890E00D9929A /* LRUCache */,
 				3F43664220774CEF0089C63A /* DBOperation */,
 				3F43664120774CC60089C63A /* DataManager */,
-				58F2DF291F9F439100FF3A95 /* DataService.swift */,
 				3FFB569B1FB6ABCE002DCE15 /* APIService.swift */,
 				3F575C322047F0D9009C096C /* DateUtil.swift */,
 				3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */,
@@ -1155,8 +1158,7 @@
 		ECE039C821B7CE2800D18173 /* ClinicalStudies */ = {
 			isa = PBXGroup;
 			children = (
-				ECC10EDF21BA4C1E007574CC /* ZMProgressView.h */,
-				ECC10EE021BA4C1E007574CC /* ZMProgressView.m */,
+				3FA9DE2D21D0B2EE00331324 /* ZMProgress */,
 				ECC10ED321BA1705007574CC /* EConsentViewController.swift */,
 				ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */,
 				EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */,
@@ -1539,7 +1541,6 @@
 				3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */,
 				3F5608F520F335480007B3AF /* HealthCenterTableValueCell.swift in Sources */,
 				3F13694721086FF8007D9772 /* ActionDisabledTextField.swift in Sources */,
-				58BCDA621FA82B7900375D5F /* SideMenuViewController.swift in Sources */,
 				3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */,
 				3F436654207DFCA00089C63A /* DisplayFoodInfo.swift in Sources */,
 				3FFB56871FB02AFA002DCE15 /* FoodDiaryDBOperation.swift in Sources */,
@@ -1714,7 +1715,6 @@
 				BF7894021FA4518200DA1667 /* CameraViewController.swift in Sources */,
 				3F191F2C2182B28F0026A4EF /* EmailLoginViewController.swift in Sources */,
 				3F25C47720440F1500DFA459 /* ConfigVariable.swift in Sources */,
-				58F2DF2A1F9F439100FF3A95 /* DataService.swift in Sources */,
 				3FE16FA321C244810013354B /* EligibilityTableCell.swift in Sources */,
 				3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */,
 				3F43663D207721EB0089C63A /* DailyNutritionInfoViewController.swift in Sources */,

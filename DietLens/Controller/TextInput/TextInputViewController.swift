@@ -30,16 +30,16 @@ class TextInputViewController: BaseViewController {
     @IBOutlet weak var emptyResultView: UIView!
     @IBOutlet weak var animationViewLeading: NSLayoutConstraint!
 
-    //indicator component
-    //    let activityIndicator:NVActivityIndicatorView?
-
     //tab item for filter the result
     var filterItem = [StringConstants.UIString.FitlerPopular, StringConstants.UIString.FilterRecent, StringConstants.UIString.FilterFavorite]
     //autoComplete & textSearchResult List
     var autoCompleteTextList = [String]()
+    //display tableView data
     var searchResultList = [TextSearchSuggestionEntity]()
-    //    var foodResults = [FoodInfomation]()
-
+//    var popularFoodList = [TextSearchSuggestionEntity]()
+//    var recentFoodList = [TextSearchSuggestionEntity]()
+//    var favoriteFoodList = [TextSearchSuggestionEntity]()
+    //UI component
     var selectedImageView: UIImage?
     var filterType = TextSearchFilterInterger.allType
     var isSearching = false
@@ -89,7 +89,7 @@ class TextInputViewController: BaseViewController {
         textSearchFilterView.delegate = self
         textSearchFilterView.dataSource = self
         textSearchField.returnKeyType = .search
-        loadRecentTextSearchResult()
+        textSearchTable.reloadData()
         if shouldShowCancel {
             showCancelBtn()
         } else {
@@ -169,34 +169,7 @@ class TextInputViewController: BaseViewController {
         Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreClickBack, parameters: nil)
     }
 
-    //    @objc func keyboardWasShown (notification: NSNotification) {
-    //        let info: NSDictionary = notification.userInfo! as NSDictionary
-    //        //use UIKeyboardFrameEndUserInfoKey,UIKeyboardFrameBeginUserInfoKey return 0
-    //        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-    //        var contentInsets: UIEdgeInsets
-    //        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-    //            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-    //        } else {
-    //            contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: (keyboardSize?.height)!, right: 0.0)
-    //        }
-    //        textSearchTable.contentInset = contentInsets
-    //        textSearchTable.scrollIndicatorInsets = textSearchTable.contentInset
-    //    }
-    //
-    //    @objc func keyboardWillBeHidden () {
-    //        textSearchTable.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-    //    }
-
     //GoodToHave: local storage to display recent search top2 item
-    func loadRecentTextSearchResult() {
-        //        historyDiaryList = FoodDiaryDBOperation.instance.getRecentAddedFoodDiary(limit: 3)
-        //        let cache = OrderedDictionary<String,TextSearchSuggestionEntity>()
-        //        while (cache.makeIterator().next() != nil){
-        //
-        //        }
-        textSearchTable.reloadData()
-    }
-
     func getPopurlarFoodLists() {
         if isSetMealByTimeRequired {
             self.mealType = getCorrectMealType()
@@ -293,21 +266,18 @@ class TextInputViewController: BaseViewController {
             self.emptyView.isHidden = true
         }
         if isSearching {
-            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
-            //            APIService.instance.cancelAllRequest()
+            APIService.instance.cancelAllRequest()
+//            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
+            print("cancel text search \(textSearchField.text)")
         }
         isSearching = true
         let searchText = textSearchField.text
         if (searchText?.isEmpty)! {
             return
         }
-        //show loading indicator & create current search result
-        //        self.searchLoadingView.alpha = 1
-        //        self.searchResultList.removeAll()
-        //        self.textSearchTable.reloadData()
         //request for new data
         APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
-            //            self.searchLoadingView.alpha = 0
+            self.isSearching = false
             if textResults == nil {
                 return
             }
@@ -408,12 +378,7 @@ class TextInputViewController: BaseViewController {
             self.textSearchTable.reloadData()
             APIService.instance.cancelAllRequest()
         } else if currentSelection == 2 {
-            //show favorite WIP view
             self.getFavouriteFoods()
-            //            self.textSearchTable.isHidden = true
-            //            self.emptyViewLabel.text = "We are working on this feature for release in the future."
-            //            self.refreshBtn.isHidden = true
-            //            self.emptyView.isHidden = false
         }
     }
 
@@ -431,7 +396,7 @@ extension TextInputViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let result  = searchResultList[indexPath.row]
+        let result = searchResultList[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
             return UITableViewCell()
         }
@@ -530,10 +495,6 @@ extension TextInputViewController: UITableViewDelegate {
                 }
             }
         }
-        //#google analytic log part
-        //        Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultScrollFoodItem, parameters: [
-        //            StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
-        //        ])
     }
 
 }

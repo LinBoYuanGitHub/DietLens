@@ -47,6 +47,9 @@ class ClinicalStudiesViewController: BaseViewController {
             if studyList.count == 0 {
                 self.emaptyIconView.isHidden = false
                 self.emptyIconText.isHidden = false
+            } else {
+                self.emaptyIconView.isHidden = true
+                self.emptyIconText.isHidden = true
             }
 
             self.studyList = studyList
