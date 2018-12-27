@@ -46,6 +46,7 @@ class DietItem {
     public var portionInfo  = [PortionInfo]()
     public var nutritionInfo = NutritionInfo()
     public var isFavoriteFood = false
+    public var iodineLevel = -2 //1: safe, 0: unknow, -1: unsafe, -2: no in study
 }
 
 class NutritionInfo {

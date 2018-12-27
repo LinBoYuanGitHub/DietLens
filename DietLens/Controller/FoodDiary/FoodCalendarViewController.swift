@@ -300,16 +300,23 @@ extension FoodCalendarViewController: UITableViewDelegate, UITableViewDataSource
             guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return
             }
-            appdelegate.showLoadingDialog()
-            APIService.instance.deleteFoodDiary(foodDiaryId: foodMealList[indexPath.section].foodEntityList[indexPath.row].foodDiaryId, completion: { (_) in
-                NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
-                appdelegate.dismissLoadingDialog()
-
+            if foodMealList[indexPath.section].foodEntityList[indexPath.row].foodDiaryId.isEmpty {
                 self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.reloadData()
                 self.loadDailyNutritionView()//recalculate nutrition info
-            })
+            } else {
+                appdelegate.showLoadingDialog()
+                APIService.instance.deleteFoodDiary(foodDiaryId: foodMealList[indexPath.section].foodEntityList[indexPath.row].foodDiaryId, completion: { (_) in
+                    NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
+                    appdelegate.dismissLoadingDialog()
+
+                    self.foodMealList[indexPath.section].foodEntityList.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    tableView.reloadData()
+                    self.loadDailyNutritionView()//recalculate nutrition info
+                })
+            }
         }
     }
 

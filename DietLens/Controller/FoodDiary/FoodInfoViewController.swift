@@ -63,8 +63,13 @@ class FoodInfoViewController: UIViewController {
     var currentIntegerPos = 1
     var currentDecimalPos = 0
     var recordDate = Date()
-    @IBOutlet weak var containerTopConstraints: NSLayoutConstraint!
     @IBOutlet weak var animationLeading: NSLayoutConstraint!
+
+    //Iodine level
+    @IBOutlet weak var iodineLevelText: UILabel!
+    @IBOutlet weak var iodineLevelImage: UIImageView!
+    @IBOutlet weak var iodineLevelView: UIView!
+    @IBOutlet weak var nutrtionToMealTimeDistance: NSLayoutConstraint!
 
     override func viewDidLoad() {
         //set up currentEditDietItem data
@@ -102,11 +107,33 @@ class FoodInfoViewController: UIViewController {
         )
         setUpQuantityPickerIndex()
         setFavImageStyle()
+        setIodineInfo()
         //analytic screen name
         if isUpdate {
             Analytics.setScreenName("AddFoodItemPage", screenClass: "FoodInfoViewController")
         } else {
             Analytics.setScreenName("EditFoodItemPage", screenClass: "FoodInfoViewController")
+        }
+    }
+
+    func setIodineInfo() {
+        switch dietItem.iodineLevel {
+        case -2:
+            iodineLevelView.removeFromSuperview()
+            nutrtionToMealTimeDistance.constant = 4
+            self.view.layoutIfNeeded()
+        case -1:
+            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[2])
+            iodineLevelText.text = StringConstants.IodineLevel.text[2]
+            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[2]))
+        case 1:
+            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[0])
+            iodineLevelText.text = StringConstants.IodineLevel.text[0]
+            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[0]))
+        default:
+            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[1])
+            iodineLevelText.text = StringConstants.IodineLevel.text[1]
+            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[1]))
         }
     }
 
@@ -583,8 +610,12 @@ class FoodInfoViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            containerTopConstraints.constant = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height - CGFloat(60)
-            //            self.container.frame.origin.y = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height
+//            containerTopConstraints.constant = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height - CGFloat(60)
+            UIView.animate(withDuration: 0.2 ) {
+                 self.container.frame.origin.y = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height + CGFloat(30)
+            }
+
+            self.nutritionDataView.isHidden = true
             DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
                 UIView.animate(withDuration: 0.2 ) {
                     self.portionDataView.frame.origin.y = CGFloat(0)
@@ -594,9 +625,9 @@ class FoodInfoViewController: UIViewController {
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        containerTopConstraints.constant = 291
-        //        self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
+        self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
         self.portionDataView.frame.origin.y =  nutritionDataView.frame.origin.y + nutritionDataView.frame.size.height + CGFloat(4)
+        self.nutritionDataView.isHidden = false
     }
 
 }

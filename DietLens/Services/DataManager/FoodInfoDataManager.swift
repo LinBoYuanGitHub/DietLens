@@ -25,6 +25,8 @@ class FoodInfoDataManager {
         dietItem.nutritionInfo.fat = jsonObject["nutrition"]["fat"].doubleValue
         dietItem.category = jsonObject["subcat"].stringValue
         dietItem.isFavoriteFood = jsonObject["is_favorite_food"].boolValue
+//        dietItem.iodineLevel = -1
+        dietItem.iodineLevel = jsonObject["iodine_level"].intValue
         for json in jsonObject["food_portion"].arrayValue {
             var portion = PortionInfo()
             portion.rank = json["rank"].intValue
