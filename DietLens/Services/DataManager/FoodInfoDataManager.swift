@@ -13,8 +13,43 @@ class FoodInfoDataManager {
     static var instance = FoodInfoDataManager()
     private init() {}
 
+    //Display the recognition result
+    public func assembleFoodInfoData(data: JSON) -> [DisplayFoodCategory] {
+        var resultList = [DisplayFoodCategory]()
+        var bestMatchCategory = DisplayFoodCategory()
+        let bestMatchs = data["best_match"].arrayValue
+        let subcats = data["subcat"].arrayValue
+        for bestMatch in bestMatchs {
+            var match = DisplayFoodInfo()
+            match.id = bestMatch["id"].intValue
+            match.displayName = bestMatch["display_name"].stringValue
+            match.exampleImgUrl = bestMatch["example_img"].stringValue
+            match.calories = bestMatch["nutrition"]["calories"].doubleValue
+            bestMatchCategory.subcateFoodList.append(match)
+        }
+        bestMatchCategory.subcatName = "Best Match" //insert a sample Image that controll by the backend will be better
+        bestMatchCategory.subcatImageUrl = ""
+        resultList.append(bestMatchCategory)
+        for subcat in subcats {
+            var subCategory = DisplayFoodCategory()
+            let foodInfos = subcat["food_info"].arrayValue
+            subCategory.subcatImageUrl = subcat["subcat_image"].stringValue
+            subCategory.subcatName = subcat["subcat"].stringValue
+            for foodInfo in foodInfos {
+                var foodObject = DisplayFoodInfo()
+                foodObject.id = foodInfo["id"].intValue
+                foodObject.displayName = foodInfo["display_name"].stringValue
+                foodObject.exampleImgUrl = foodInfo["example_img"].stringValue
+                foodObject.calories = foodInfo["nutrition"]["calories"].doubleValue
+                subCategory.subcateFoodList.append(foodObject)
+            }
+            resultList.append(subCategory)
+        }
+        return resultList
+    }
+
     func assembleDietItem(jsonObject: JSON) -> DietItem {
-        var dietItem = DietItem()
+        let dietItem = DietItem()
         dietItem.foodId = jsonObject["id"].intValue
         dietItem.isMixFood = jsonObject["is_mix_food"].boolValue
         dietItem.foodName = jsonObject["display_name"].stringValue
@@ -25,10 +60,11 @@ class FoodInfoDataManager {
         dietItem.nutritionInfo.fat = jsonObject["nutrition"]["fat"].doubleValue
         dietItem.category = jsonObject["subcat"].stringValue
         dietItem.isFavoriteFood = jsonObject["is_favorite_food"].boolValue
-//        dietItem.iodineLevel = -1
-        dietItem.iodineLevel = jsonObject["iodine_level"].intValue
+        if jsonObject["iodine_level"].exists() {
+            dietItem.iodineLevel = jsonObject["iodine_level"].intValue
+        }
         for json in jsonObject["food_portion"].arrayValue {
-            var portion = PortionInfo()
+            let portion = PortionInfo()
             portion.rank = json["rank"].intValue
             portion.sizeUnit = json["measurement_type"].stringValue
             portion.weightValue = json["weight_g"].doubleValue

@@ -31,7 +31,7 @@
 		3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2D163420F2899900348160 /* HealthCenterDataManager.swift */; };
 		3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */; };
 		3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436638206F7ACF0089C63A /* NewsEventCell.swift */; };
-		3F43663B207612B00089C63A /* CollectionTextFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43663A207612AF0089C63A /* CollectionTextFilterCell.swift */; };
+		3F43663B207612B00089C63A /* CollectionTextSearchFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43663A207612AF0089C63A /* CollectionTextSearchFilterCell.swift */; };
 		3F43663D207721EB0089C63A /* DailyNutritionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */; };
 		3F436644207758640089C63A /* DailyNutritionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436643207758640089C63A /* DailyNutritionTableCell.swift */; };
 		3F4366462079FDC70089C63A /* AutoCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4366452079FDC60089C63A /* AutoCompleteCell.swift */; };
@@ -39,22 +39,18 @@
 		3F43664B207C97320089C63A /* FoodInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43664A207C97310089C63A /* FoodInfoViewController.swift */; };
 		3F43664D207C9AE00089C63A /* RecognitionResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43664C207C9AE00089C63A /* RecognitionResultViewController.swift */; };
 		3F43664F207CA6160089C63A /* FoodDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43664E207CA6160089C63A /* FoodDiaryViewController.swift */; };
-		3F436651207CB6FA0089C63A /* FoodReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436650207CB6FA0089C63A /* FoodReportViewController.swift */; };
 		3F436654207DFCA00089C63A /* DisplayFoodInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436653207DFCA00089C63A /* DisplayFoodInfo.swift */; };
-		3F436656207E07650089C63A /* MockedUpFoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436655207E07650089C63A /* MockedUpFoodData.swift */; };
 		3F436659207EFA6A0089C63A /* RecognitionResultTableCelll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F436658207EFA690089C63A /* RecognitionResultTableCelll.swift */; };
 		3F43665B207EFA850089C63A /* FoodCategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43665A207EFA850089C63A /* FoodCategoryCollectionCell.swift */; };
 		3F438D4A209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F438D49209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift */; };
 		3F438D4D20A0956F00F4DAD9 /* homePageCPFCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F438D4C20A0956F00F4DAD9 /* homePageCPFCell.swift */; };
 		3F43DAC81FE79BC400A3685A /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC71FE79BC400A3685A /* GraphView.swift */; };
-		3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */; };
 		3F43DACC1FEB661800A3685A /* ReportEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACB1FEB661800A3685A /* ReportEntity.swift */; };
 		3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43DACD1FEBB04600A3685A /* CardView.swift */; };
 		3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */; };
 		3F46C460215224510066636F /* RegistrationProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F46C45F215224510066636F /* RegistrationProfileCell.swift */; };
 		3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */; };
 		3F4812D42137E950005F3260 /* NoInternetDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D32137E950005F3260 /* NoInternetDialog.swift */; };
-		3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */; };
 		3F4812D8213D3BA0005F3260 /* ConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */; };
 		3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4812D921424517005F3260 /* WelcomeViewController.swift */; };
 		3F4904FA209C0EF800B18CA7 /* RedGardientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */; };
@@ -78,10 +74,7 @@
 		3F5691ED214EA4AD00D9929A /* TextSuggestionCacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */; };
 		3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
-		3F6B872E20A1DEC1001063A0 /* SideMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B872D20A1DEC0001063A0 /* SideMainViewController.swift */; };
-		3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */; };
 		3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */; };
-		3F6CF82A1FD8FABC00D7556E /* PlainTextTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */; };
 		3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F73A7522109C1360031B01E /* IntroductionViewController.swift */; };
 		3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DEE20EB6195003A31DE /* RulerView.swift */; };
 		3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */; };
@@ -102,8 +95,6 @@
 		3F9BFE981FF34CF20011845B /* StepEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE971FF34CF20011845B /* StepEntity.swift */; };
 		3F9BFE9A1FF36D8A0011845B /* StepCounterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE991FF36D8A0011845B /* StepCounterCell.swift */; };
 		3F9BFE9C1FF3957C0011845B /* AlertMessageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */; };
-		3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9BFE9D20009C300011845B /* IngredientSectionHeader.swift */; };
-		3F9BFEA02000A0120011845B /* IngredientHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9BFE9F2000A0120011845B /* IngredientHeader.xib */; };
 		3FA376A7208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA376A6208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift */; };
 		3FA73DEB2177069100D145C6 /* MoreCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DEA2177069100D145C6 /* MoreCollectionCell.swift */; };
 		3FA73DEE217873DA00D145C6 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DED217873DA00D145C6 /* BalloonMarker.swift */; };
@@ -117,7 +108,6 @@
 		3FAD32D721BA20E300EAA6EC /* ClinicalStudyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D621BA20E300EAA6EC /* ClinicalStudyDataManager.swift */; };
 		3FAD32D921BE5C4400EAA6EC /* TextConfirmationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D821BE5C4400EAA6EC /* TextConfirmationDialog.swift */; };
 		3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */; };
-		3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */; };
 		3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */; };
 		3FB6E67A20DCD5A600462591 /* FoodDiaryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67920DCD5A600462591 /* FoodDiaryHistoryViewController.swift */; };
 		3FB6E67C20DCE96200462591 /* FoodDairyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E67B20DCE96200462591 /* FoodDairyTableViewCell.swift */; };
@@ -127,9 +117,6 @@
 		3FB6E68920E38ABE00462591 /* ProfileViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E68820E38ABE00462591 /* ProfileViewHeader.swift */; };
 		3FB6E68B20E38B8E00462591 /* profileViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6E68A20E38B8E00462591 /* profileViewHeader.xib */; };
 		3FB6E69020E4D55F00462591 /* RegistrationFirstStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E68F20E4D55F00462591 /* RegistrationFirstStepViewController.swift */; };
-		3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */; };
-		3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */; };
-		3FB6E69620E4D58B00462591 /* RegistrationForthStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */; };
 		3FB709E021A68DDE00C367B1 /* PersonalFavouriteFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB709DF21A68DDD00C367B1 /* PersonalFavouriteFoodViewController.swift */; };
 		3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB791082106155C000D6A94 /* LoadingFooterView.swift */; };
 		3FB7910B2106D1D4000D6A94 /* TextValidtor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB7910A2106D1D4000D6A94 /* TextValidtor.swift */; };
@@ -144,13 +131,10 @@
 		3FCBEC1520E639240092948C /* HealthCenterRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1420E639240092948C /* HealthCenterRecord.swift */; };
 		3FCBEC1820E662440092948C /* HealthCenterMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCBEC1720E662440092948C /* HealthCenterMainCell.swift */; };
 		3FD0861B200C73E60052D54B /* ExpandedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0861A200C73E60052D54B /* ExpandedUIButton.swift */; };
-		3FD0861F200DE1B20052D54B /* HealthToolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0861E200DE1B20052D54B /* HealthToolCell.swift */; };
-		3FD08627200F21460052D54B /* HealthDeviceDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */; };
 		3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD08628200F38500052D54B /* FeedBackViewController.swift */; };
 		3FD241A920931D6900F1F2EB /* EncryptionUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */; };
 		3FD6D92720921B810060B9DC /* FoodCalendarSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */; };
 		3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */; };
-		3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */; };
 		3FE16FA321C244810013354B /* EligibilityTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE16FA221C244810013354B /* EligibilityTableCell.swift */; };
 		3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC34512057D0F80060099A /* DiarySectionHeader.swift */; };
 		3FEC34542057D1380060099A /* diaryHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC34532057D1380060099A /* diaryHeader.xib */; };
@@ -167,10 +151,8 @@
 		5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */; };
 		580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443661FB0189E00D59DFF /* SettingViewController.swift */; };
 		580443691FB0233900D59DFF /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580443681FB0233900D59DFF /* AboutViewController.swift */; };
-		5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */; };
 		5804F4D51FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5804F4D41FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift */; };
 		581809B01FA868E000373763 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809AF1FA868E000373763 /* ProfileImageView.swift */; };
-		581809B21FA877D700373763 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581809B11FA877D700373763 /* SideMenuCell.swift */; };
 		5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856591FB6DB15004BEBB3 /* ArticleViewController.swift */; };
 		5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */; };
 		581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */; };
@@ -278,7 +260,7 @@
 		3F2D163420F2899900348160 /* HealthCenterDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterDataManager.swift; sourceTree = "<group>"; };
 		3F4366342069F4CF0089C63A /* ReportCountingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCountingEntity.swift; sourceTree = "<group>"; };
 		3F436638206F7ACF0089C63A /* NewsEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEventCell.swift; sourceTree = "<group>"; };
-		3F43663A207612AF0089C63A /* CollectionTextFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTextFilterCell.swift; sourceTree = "<group>"; };
+		3F43663A207612AF0089C63A /* CollectionTextSearchFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTextSearchFilterCell.swift; sourceTree = "<group>"; };
 		3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNutritionInfoViewController.swift; sourceTree = "<group>"; };
 		3F436643207758640089C63A /* DailyNutritionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNutritionTableCell.swift; sourceTree = "<group>"; };
 		3F4366452079FDC60089C63A /* AutoCompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteCell.swift; sourceTree = "<group>"; };
@@ -286,22 +268,18 @@
 		3F43664A207C97310089C63A /* FoodInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoViewController.swift; sourceTree = "<group>"; };
 		3F43664C207C9AE00089C63A /* RecognitionResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultViewController.swift; sourceTree = "<group>"; };
 		3F43664E207CA6160089C63A /* FoodDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryViewController.swift; sourceTree = "<group>"; };
-		3F436650207CB6FA0089C63A /* FoodReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodReportViewController.swift; sourceTree = "<group>"; };
 		3F436653207DFCA00089C63A /* DisplayFoodInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayFoodInfo.swift; sourceTree = "<group>"; };
-		3F436655207E07650089C63A /* MockedUpFoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedUpFoodData.swift; sourceTree = "<group>"; };
 		3F436658207EFA690089C63A /* RecognitionResultTableCelll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultTableCelll.swift; sourceTree = "<group>"; };
 		3F43665A207EFA850089C63A /* FoodCategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryCollectionCell.swift; sourceTree = "<group>"; };
 		3F438D49209C3ABD00F4DAD9 /* DisplayNutritionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNutritionEntity.swift; sourceTree = "<group>"; };
 		3F438D4C20A0956F00F4DAD9 /* homePageCPFCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homePageCPFCell.swift; sourceTree = "<group>"; };
 		3F43DAC71FE79BC400A3685A /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTableCell.swift; sourceTree = "<group>"; };
 		3F43DACB1FEB661800A3685A /* ReportEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportEntity.swift; sourceTree = "<group>"; };
 		3F43DACD1FEBB04600A3685A /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProfileViewController.swift; sourceTree = "<group>"; };
 		3F46C45F215224510066636F /* RegistrationProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProfileCell.swift; sourceTree = "<group>"; };
 		3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogController.swift; sourceTree = "<group>"; };
 		3F4812D32137E950005F3260 /* NoInternetDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetDialog.swift; sourceTree = "<group>"; };
-		3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToAlbumDialog.swift; sourceTree = "<group>"; };
 		3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationDialog.swift; sourceTree = "<group>"; };
 		3F4812D921424517005F3260 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3F4904F9209C0EF800B18CA7 /* RedGardientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedGardientView.swift; sourceTree = "<group>"; };
@@ -325,10 +303,7 @@
 		3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionCacheLRU.swift; sourceTree = "<group>"; };
 		3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActvitityLevelCell.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
-		3F6B872D20A1DEC0001063A0 /* SideMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMainViewController.swift; sourceTree = "<group>"; };
-		3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleImageMapper.swift; sourceTree = "<group>"; };
 		3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientDelegate.swift; sourceTree = "<group>"; };
-		3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextTableAdapter.swift; sourceTree = "<group>"; };
 		3F73A7522109C1360031B01E /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		3F764DEE20EB6195003A31DE /* RulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		3F764DF020EB67AC003A31DE /* RulerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerCollectionCell.swift; sourceTree = "<group>"; };
@@ -349,8 +324,6 @@
 		3F9BFE971FF34CF20011845B /* StepEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepEntity.swift; sourceTree = "<group>"; };
 		3F9BFE991FF36D8A0011845B /* StepCounterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepCounterCell.swift; sourceTree = "<group>"; };
 		3F9BFE9B1FF3957C0011845B /* AlertMessageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageHelper.swift; sourceTree = "<group>"; };
-		3F9BFE9D20009C300011845B /* IngredientSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientSectionHeader.swift; sourceTree = "<group>"; };
-		3F9BFE9F2000A0120011845B /* IngredientHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IngredientHeader.xib; sourceTree = "<group>"; };
 		3FA376A6208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryRecordViewCell.swift; sourceTree = "<group>"; };
 		3FA73DEA2177069100D145C6 /* MoreCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCollectionCell.swift; sourceTree = "<group>"; };
 		3FA73DED217873DA00D145C6 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
@@ -364,7 +337,6 @@
 		3FAD32D621BA20E300EAA6EC /* ClinicalStudyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyDataManager.swift; sourceTree = "<group>"; };
 		3FAD32D821BE5C4400EAA6EC /* TextConfirmationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConfirmationDialog.swift; sourceTree = "<group>"; };
 		3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailViewController.swift; sourceTree = "<group>"; };
-		3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryRecordViewController.swift; sourceTree = "<group>"; };
 		3FB6E67720DBA03100462591 /* CalendarDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDialogViewController.swift; sourceTree = "<group>"; };
 		3FB6E67920DCD5A600462591 /* FoodDiaryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHistoryViewController.swift; sourceTree = "<group>"; };
 		3FB6E67B20DCE96200462591 /* FoodDairyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDairyTableViewCell.swift; sourceTree = "<group>"; };
@@ -374,9 +346,6 @@
 		3FB6E68820E38ABE00462591 /* ProfileViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewHeader.swift; sourceTree = "<group>"; };
 		3FB6E68A20E38B8E00462591 /* profileViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileViewHeader.xib; sourceTree = "<group>"; };
 		3FB6E68F20E4D55F00462591 /* RegistrationFirstStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationFirstStepViewController.swift; sourceTree = "<group>"; };
-		3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSecondStepViewController.swift; sourceTree = "<group>"; };
-		3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationThirdStepViewController.swift; sourceTree = "<group>"; };
-		3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationForthStepViewController.swift; sourceTree = "<group>"; };
 		3FB709DF21A68DDD00C367B1 /* PersonalFavouriteFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalFavouriteFoodViewController.swift; sourceTree = "<group>"; };
 		3FB791082106155C000D6A94 /* LoadingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingFooterView.swift; sourceTree = "<group>"; };
 		3FB7910A2106D1D4000D6A94 /* TextValidtor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextValidtor.swift; sourceTree = "<group>"; };
@@ -391,14 +360,10 @@
 		3FCBEC1420E639240092948C /* HealthCenterRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterRecord.swift; sourceTree = "<group>"; };
 		3FCBEC1720E662440092948C /* HealthCenterMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterMainCell.swift; sourceTree = "<group>"; };
 		3FD0861A200C73E60052D54B /* ExpandedUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedUIButton.swift; sourceTree = "<group>"; };
-		3FD0861C200DACA40052D54B /* HealthCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthCenterViewController.swift; sourceTree = "<group>"; };
-		3FD0861E200DE1B20052D54B /* HealthToolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthToolCell.swift; sourceTree = "<group>"; };
-		3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDeviceDataCell.swift; sourceTree = "<group>"; };
 		3FD08628200F38500052D54B /* FeedBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedBackViewController.swift; sourceTree = "<group>"; };
 		3FD241A820931D6900F1F2EB /* EncryptionUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionUtil.swift; sourceTree = "<group>"; };
 		3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCalendarSectionHeader.swift; sourceTree = "<group>"; };
 		3FD6D9282092210A0060B9DC /* foodCalendarViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = foodCalendarViewHeader.xib; sourceTree = "<group>"; };
-		3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientItemCell.swift; sourceTree = "<group>"; };
 		3FE16FA221C244810013354B /* EligibilityTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibilityTableCell.swift; sourceTree = "<group>"; };
 		3FEC34512057D0F80060099A /* DiarySectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiarySectionHeader.swift; sourceTree = "<group>"; };
 		3FEC34532057D1380060099A /* diaryHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = diaryHeader.xib; sourceTree = "<group>"; };
@@ -418,10 +383,8 @@
 		5800A5DE1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePageArticleBodyCell.swift; sourceTree = "<group>"; };
 		580443661FB0189E00D59DFF /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		580443681FB0233900D59DFF /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
-		5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarTitle.swift; sourceTree = "<group>"; };
 		5804F4D41FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCollectionCellDelegate.swift; sourceTree = "<group>"; };
 		581809AF1FA868E000373763 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
-		581809B11FA877D700373763 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		581856591FB6DB15004BEBB3 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		5818565B1FB6DB89004BEBB3 /* NewsArticleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableCell.swift; sourceTree = "<group>"; };
 		581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPaddingTextView.swift; sourceTree = "<group>"; };
@@ -539,19 +502,14 @@
 				58D575ED1FCE5A8A0046EA25 /* NotificationPageCell */,
 				5818565D1FB6DB97004BEBB3 /* ArticlePageCell */,
 				58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */,
-				3FD08626200F21460052D54B /* HealthDeviceDataCell.swift */,
-				3FDB0B4D2016D8E000BDB714 /* IngredientItemCell.swift */,
 				58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */,
 				58E425E71FA0915500C542D9 /* NewsArticleCell.swift */,
-				581809B11FA877D700373763 /* SideMenuCell.swift */,
-				3F43DAC91FEA492B00A3685A /* ReportTableCell.swift */,
 				3F9BFE991FF36D8A0011845B /* StepCounterCell.swift */,
-				3FD0861E200DE1B20052D54B /* HealthToolCell.swift */,
 				3F7DACA620134B1A009E4DB6 /* FoodNameCell.swift */,
 				3F14CC43201854D40032CC77 /* HistoryFoodDiaryCell.swift */,
 				3F4906EE2020387D00D1F388 /* EventCell.swift */,
 				3F436638206F7ACF0089C63A /* NewsEventCell.swift */,
-				3F43663A207612AF0089C63A /* CollectionTextFilterCell.swift */,
+				3F43663A207612AF0089C63A /* CollectionTextSearchFilterCell.swift */,
 				3F436643207758640089C63A /* DailyNutritionTableCell.swift */,
 				3F4366452079FDC60089C63A /* AutoCompleteCell.swift */,
 				3F4366472079FDEC0089C63A /* SearchResultCell.swift */,
@@ -571,7 +529,6 @@
 				58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */,
 				58AA521A1FA1CA3F0072779C /* HomeProgressView.swift */,
 				581809AF1FA868E000373763 /* ProfileImageView.swift */,
-				5804436C1FB02B4700D59DFF /* CustomNavigationBarTitle.swift */,
 				58A1B27D1FB44ED2009FB4B1 /* DiaryDatePicker.swift */,
 				BFA26C0D1FC3DFF7009D4208 /* DesignableUITextField.swift */,
 				3F43DAC71FE79BC400A3685A /* GraphView.swift */,
@@ -595,7 +552,6 @@
 				3F50DCEB20AEA4B2005209B8 /* SingleOptionViewController.swift */,
 				3F4812D12137DC19005F3260 /* ConfirmDialogController.swift */,
 				3F4812D32137E950005F3260 /* NoInternetDialog.swift */,
-				3F4812D521394437005F3260 /* SaveToAlbumDialog.swift */,
 				3F4812D7213D3B9F005F3260 /* ConfirmationDialog.swift */,
 				3FAD32D821BE5C4400EAA6EC /* TextConfirmationDialog.swift */,
 			);
@@ -631,10 +587,7 @@
 				3F43664A207C97310089C63A /* FoodInfoViewController.swift */,
 				3F43664C207C9AE00089C63A /* RecognitionResultViewController.swift */,
 				3F43664E207CA6160089C63A /* FoodDiaryViewController.swift */,
-				3F436650207CB6FA0089C63A /* FoodReportViewController.swift */,
-				3F436655207E07650089C63A /* MockedUpFoodData.swift */,
 				3F1AC23D2088D1E7008F5BF2 /* FoodCalendarViewController.swift */,
-				3FB6E67420DB9F0E00462591 /* FoodDiaryRecordViewController.swift */,
 				3FB6E67920DCD5A600462591 /* FoodDiaryHistoryViewController.swift */,
 			);
 			path = FoodDiary;
@@ -689,22 +642,6 @@
 				3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */,
 			);
 			path = LRUCache;
-			sourceTree = "<group>";
-		};
-		3F6B872C20A1DE49001063A0 /* SideMenu */ = {
-			isa = PBXGroup;
-			children = (
-				3F6B872D20A1DEC0001063A0 /* SideMainViewController.swift */,
-			);
-			path = SideMenu;
-			sourceTree = "<group>";
-		};
-		3F6CF8221FD5197A00D7556E /* Adapter */ = {
-			isa = PBXGroup;
-			children = (
-				3F6CF8291FD8FABC00D7556E /* PlainTextTableAdapter.swift */,
-			);
-			path = Adapter;
 			sourceTree = "<group>";
 		};
 		3F73A7512109C0B00031B01E /* IntroductionPage */ = {
@@ -780,6 +717,7 @@
 		3FAED17A20C9264F0096B12F /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */,
 				3FAED17B20C926BA0096B12F /* NotificationDetailViewController.swift */,
 			);
 			path = Notification;
@@ -804,9 +742,6 @@
 			children = (
 				3FB6E68020E370AA00462591 /* PersonalProfileViewController.swift */,
 				3FB6E68F20E4D55F00462591 /* RegistrationFirstStepViewController.swift */,
-				3FB6E69120E4D57000462591 /* RegistrationSecondStepViewController.swift */,
-				3FB6E69320E4D57D00462591 /* RegistrationThirdStepViewController.swift */,
-				3FB6E69520E4D58B00462591 /* RegistrationForthStepViewController.swift */,
 				3F2D162C20ECBE9300348160 /* ProfileActivityLvlViewController.swift */,
 				3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */,
 				3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */,
@@ -814,7 +749,8 @@
 				3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */,
 				3FB709DF21A68DDD00C367B1 /* PersonalFavouriteFoodViewController.swift */,
 			);
-			path = Profile;
+			name = Profile;
+			path = HealthCenter/Profile;
 			sourceTree = "<group>";
 		};
 		3FB6E68220E3822800462591 /* Profile */ = {
@@ -829,7 +765,6 @@
 		3FCBEC0C20E632090092948C /* HealthCenter */ = {
 			isa = PBXGroup;
 			children = (
-				3FB6E67F20E3701300462591 /* Profile */,
 				3FCBEC0D20E632750092948C /* HealthCenterAddItemViewController.swift */,
 				3FCBEC0F20E632A40092948C /* HealthCenterTableViewController.swift */,
 				3FCBEC1120E632CB0092948C /* HealthCenterMainViewController.swift */,
@@ -868,8 +803,6 @@
 		3FEC34502057BF110060099A /* TableHeader */ = {
 			isa = PBXGroup;
 			children = (
-				3F9BFE9D20009C300011845B /* IngredientSectionHeader.swift */,
-				3F9BFE9F2000A0120011845B /* IngredientHeader.xib */,
 				3FEC34512057D0F80060099A /* DiarySectionHeader.swift */,
 				3FEC34532057D1380060099A /* diaryHeader.xib */,
 				3FD6D92620921B800060B9DC /* FoodCalendarSectionHeader.swift */,
@@ -894,11 +827,9 @@
 				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
 				587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
 				3F1B628D1FC66D56006A38FE /* WebViewController.swift */,
-				58D575F01FCE5ADB0046EA25 /* NotificationsViewController.swift */,
 				58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */,
 				589424AF1FD7B1B1009AEA4C /* SplashScreenViewController.swift */,
 				3F9BFE5B1FF0D4E40011845B /* StepCounterViewController.swift */,
-				3FD0861C200DACA40052D54B /* HealthCenterViewController.swift */,
 				3FD08628200F38500052D54B /* FeedBackViewController.swift */,
 				3F7D77E32148F0EF000B8C6B /* StepChartViewController.swift */,
 			);
@@ -1071,12 +1002,11 @@
 			children = (
 				ECE039C821B7CE2800D18173 /* ClinicalStudies */,
 				3F73A7512109C0B00031B01E /* IntroductionPage */,
+				3FB6E67F20E3701300462591 /* Profile */,
 				3FCBEC0C20E632090092948C /* HealthCenter */,
 				3FB6E67620DBA01B00462591 /* Dialog */,
 				3FAED17A20C9264F0096B12F /* Notification */,
-				3F6B872C20A1DE49001063A0 /* SideMenu */,
 				3F436649207C968A0089C63A /* FoodDiary */,
-				3F6CF8221FD5197A00D7556E /* Adapter */,
 				BF6EF2F21FC31C0300420B2B /* TextInput */,
 				5861249E2043E27700E727B2 /* Login */,
 				58199C871FB1D63A003F6104 /* Delegate */,
@@ -1128,7 +1058,6 @@
 			isa = PBXGroup;
 			children = (
 				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
-				3F6CF8231FD58BAB00D7556E /* SampleImageMapper.swift */,
 			);
 			path = TextInput;
 			sourceTree = "<group>";
@@ -1313,7 +1242,6 @@
 				3F8A69E61FE267E8005B83B0 /* GoogleService-Info.plist in Resources */,
 				3FD6D9292092210A0060B9DC /* foodCalendarViewHeader.xib in Resources */,
 				3F008AF721ABE33500C1E529 /* FavouriteFoodCollectionCell.xib in Resources */,
-				3F9BFEA02000A0120011845B /* IngredientHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1554,14 +1482,11 @@
 				3FB6E69020E4D55F00462591 /* RegistrationFirstStepViewController.swift in Sources */,
 				3FAD32D921BE5C4400EAA6EC /* TextConfirmationDialog.swift in Sources */,
 				581809B01FA868E000373763 /* ProfileImageView.swift in Sources */,
-				3F6CF82A1FD8FABC00D7556E /* PlainTextTableAdapter.swift in Sources */,
-				3F436651207CB6FA0089C63A /* FoodReportViewController.swift in Sources */,
 				3FA376A7208DDBE000D3F7AE /* FoodDiaryRecordViewCell.swift in Sources */,
 				580443671FB0189E00D59DFF /* SettingViewController.swift in Sources */,
 				3FBA55BB20F883C600258808 /* BaseViewController.swift in Sources */,
 				3FB6E68920E38ABE00462591 /* ProfileViewHeader.swift in Sources */,
 				58D0F3E81FB6D4F1004C1B81 /* Blur.swift in Sources */,
-				3FB6E69420E4D57D00462591 /* RegistrationThirdStepViewController.swift in Sources */,
 				3F17943D1FDF84EC0047F9C1 /* NotificationName.swift in Sources */,
 				5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */,
 				3FD0861B200C73E60052D54B /* ExpandedUIButton.swift in Sources */,
@@ -1576,7 +1501,6 @@
 				58E425EA1FA0993B00C542D9 /* NewsArticle.swift in Sources */,
 				3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */,
 				3FFB56941FB2F833002DCE15 /* ArticleDataManager.swift in Sources */,
-				581809B21FA877D700373763 /* SideMenuCell.swift in Sources */,
 				3F8818A020EA574900FE6C11 /* ProfileArrowCell.swift in Sources */,
 				3F8B21C820D2349C006E3628 /* NotificationSection.swift in Sources */,
 				5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */,
@@ -1590,7 +1514,6 @@
 				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
 				3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */,
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
-				3F6CF8241FD58BAB00D7556E /* SampleImageMapper.swift in Sources */,
 				3F9BFE9C1FF3957C0011845B /* AlertMessageHelper.swift in Sources */,
 				3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */,
 				3F25C4752043EC7700DFA459 /* StringConstants.swift in Sources */,
@@ -1613,7 +1536,6 @@
 				3F43664B207C97320089C63A /* FoodInfoViewController.swift in Sources */,
 				58A1B27E1FB44ED2009FB4B1 /* DiaryDatePicker.swift in Sources */,
 				3F5608F720F3357D0007B3AF /* HealthCenterEmojiCell.swift in Sources */,
-				3F6B872E20A1DEC1001063A0 /* SideMainViewController.swift in Sources */,
 				3F9215A82086262500F92ECF /* FoodDiaryEntity.swift in Sources */,
 				3F7DACA720134B1A009E4DB6 /* FoodNameCell.swift in Sources */,
 				3F4366462079FDC70089C63A /* AutoCompleteCell.swift in Sources */,
@@ -1623,17 +1545,13 @@
 				3F14CC44201854D40032CC77 /* HistoryFoodDiaryCell.swift in Sources */,
 				3F250A75215616DA009A5F5E /* TextSearchDataManager.swift in Sources */,
 				3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */,
-				3F9BFE9E20009C310011845B /* IngredientSectionHeader.swift in Sources */,
 				3F88189C20EA569E00FE6C11 /* ProfileTextFieldCell.swift in Sources */,
 				BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */,
 				3F50DCEC20AEA4B2005209B8 /* SingleOptionViewController.swift in Sources */,
 				BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */,
 				58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */,
-				3FD08627200F21460052D54B /* HealthDeviceDataCell.swift in Sources */,
 				3FCBEC1220E632CB0092948C /* HealthCenterMainViewController.swift in Sources */,
-				5804436D1FB02B4700D59DFF /* CustomNavigationBarTitle.swift in Sources */,
 				5818565A1FB6DB15004BEBB3 /* ArticleViewController.swift in Sources */,
-				3FB6E69620E4D58B00462591 /* RegistrationForthStepViewController.swift in Sources */,
 				58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */,
 				3FD08629200F38500052D54B /* FeedBackViewController.swift in Sources */,
 				3F5691ED214EA4AD00D9929A /* TextSuggestionCacheLRU.swift in Sources */,
@@ -1641,7 +1559,6 @@
 				3FFB56921FB2F68B002DCE15 /* FoodDiaryDataManager.swift in Sources */,
 				581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */,
 				3FB6E68120E370AA00462591 /* PersonalProfileViewController.swift in Sources */,
-				3FD0861F200DE1B20052D54B /* HealthToolCell.swift in Sources */,
 				3F4906ED201E119900D1F388 /* NotificationDataManager.swift in Sources */,
 				3F88189920E9D80F00FE6C11 /* LoginViewController.swift in Sources */,
 				3FC7BD5D216B86B7003F43E2 /* HomeTabViewController.swift in Sources */,
@@ -1654,7 +1571,6 @@
 				3F2D162F20EE15D200348160 /* RulerInputView.swift in Sources */,
 				3FF8950A212AC04500495B0C /* BottomLabelButton.swift in Sources */,
 				58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */,
-				3F4812D621394437005F3260 /* SaveToAlbumDialog.swift in Sources */,
 				EC79FA7521BE3BBE004ADAED /* ContactViewController.swift in Sources */,
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				ECAE914F21C0D45E00577865 /* ScannedResultViewController.swift in Sources */,
@@ -1674,20 +1590,18 @@
 				3F764DF120EB67AC003A31DE /* RulerCollectionCell.swift in Sources */,
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
 				3FCBEC1820E662440092948C /* HealthCenterMainCell.swift in Sources */,
-				3F43663B207612B00089C63A /* CollectionTextFilterCell.swift in Sources */,
+				3F43663B207612B00089C63A /* CollectionTextSearchFilterCell.swift in Sources */,
 				586124A22043E2EA00E727B2 /* ForgetPasswordMainViewController.swift in Sources */,
 				3F9BFE981FF34CF20011845B /* StepEntity.swift in Sources */,
 				3F43664F207CA6160089C63A /* FoodDiaryViewController.swift in Sources */,
 				3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */,
 				ECC10ED421BA1705007574CC /* EConsentViewController.swift in Sources */,
-				3F436656207E07650089C63A /* MockedUpFoodData.swift in Sources */,
 				3FFB56981FB2FEFF002DCE15 /* Article.swift in Sources */,
 				3FA73DF02178740400D145C6 /* XYMarkerView.swift in Sources */,
 				3F516DC42122C1830028B0AF /* RecognitionResultLocatonCell.swift in Sources */,
 				58D575F31FCE60AD0046EA25 /* NotificationTableCell.swift in Sources */,
 				3F5677A8215E1E4900A4E282 /* profileSection.swift in Sources */,
 				3F5608EF20F309590007B3AF /* HealthCenterItem.swift in Sources */,
-				3FDB0B4E2016D8E100BDB714 /* IngredientItemCell.swift in Sources */,
 				3F008AF321ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift in Sources */,
 				3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */,
 				3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */,
@@ -1701,9 +1615,7 @@
 				5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */,
 				3FAD32D721BA20E300EAA6EC /* ClinicalStudyDataManager.swift in Sources */,
 				3FCBEC1020E632A40092948C /* HealthCenterTableViewController.swift in Sources */,
-				3FB6E67520DB9F0E00462591 /* FoodDiaryRecordViewController.swift in Sources */,
 				3F4812DA21424518005F3260 /* WelcomeViewController.swift in Sources */,
-				3F43DACA1FEA492B00A3685A /* ReportTableCell.swift in Sources */,
 				EC14599921B9091100A8D27F /* ClinicalStudyTableViewCell.swift in Sources */,
 				ECE039CC21B7D57E00D18173 /* ClinicalStudiesViewController.swift in Sources */,
 				5818565C1FB6DB89004BEBB3 /* NewsArticleTableCell.swift in Sources */,
@@ -1718,7 +1630,6 @@
 				3FE16FA321C244810013354B /* EligibilityTableCell.swift in Sources */,
 				3F46C45E2151EBF90066636F /* RegistrationProfileViewController.swift in Sources */,
 				3F43663D207721EB0089C63A /* DailyNutritionInfoViewController.swift in Sources */,
-				3FB6E69220E4D57000462591 /* RegistrationSecondStepViewController.swift in Sources */,
 				5804F4D51FD7C1E90000FCB8 /* ArticleCollectionCellDelegate.swift in Sources */,
 				3F9215A62085A18F00F92ECF /* FoodItemListCell.swift in Sources */,
 				3F43DACE1FEBB04600A3685A /* CardView.swift in Sources */,

@@ -117,23 +117,14 @@ class FoodInfoViewController: UIViewController {
     }
 
     func setIodineInfo() {
-        switch dietItem.iodineLevel {
-        case -2:
+        if dietItem.iodineLevel == -999 {
             iodineLevelView.removeFromSuperview()
             nutrtionToMealTimeDistance.constant = 4
             self.view.layoutIfNeeded()
-        case -1:
-            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[2])
-            iodineLevelText.text = StringConstants.IodineLevel.text[2]
-            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[2]))
-        case 1:
-            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[0])
-            iodineLevelText.text = StringConstants.IodineLevel.text[0]
-            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[0]))
-        default:
-            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[1])
-            iodineLevelText.text = StringConstants.IodineLevel.text[1]
-            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[1]))
+        } else {
+            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[dietItem.iodineLevel])
+            iodineLevelText.text = StringConstants.IodineLevel.text[dietItem.iodineLevel]
+            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[dietItem.iodineLevel]))
         }
     }
 

@@ -13,8 +13,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var TFEmail: UITextField!
     @IBOutlet weak var TFPassword: UITextField!
 
-    @IBAction func unwindToMainPage(segue: UIStoryboardSegue) {}
-
     @IBAction func onLoginBtnClicked(_ sender: Any) {
         if (TFEmail.text?.isEmpty)! {
             AlertMessageHelper.showMessage(targetController: self, title: "", message: " Please enter your email address")
@@ -23,7 +21,6 @@ class MainViewController: UIViewController {
              AlertMessageHelper.showMessage(targetController: self, title: "", message: "Please enter your password")
             return
         }
-//        AlertMessageHelper.showLoadingDialog(targetController: self)
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
@@ -59,9 +56,6 @@ class MainViewController: UIViewController {
                 }
             }
         }
-
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
 
 }

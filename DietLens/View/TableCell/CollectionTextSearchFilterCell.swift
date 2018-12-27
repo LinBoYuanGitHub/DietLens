@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class CollectionTextFilterCell: UICollectionViewCell {
+class CollectionTextSearchFilterCell: UICollectionViewCell {
 
     @IBOutlet weak var filterLabel: UILabel!
 

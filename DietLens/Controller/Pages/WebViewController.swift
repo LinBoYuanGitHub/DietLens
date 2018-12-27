@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import WebKit
-//import PBRevealViewController
 import SnapKit
 
 class WebViewController: UIViewController, WKNavigationDelegate {
@@ -24,13 +23,6 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         webView = WKWebView(frame: CGRect(x: 0, y: 0, width: webViewContainer.frame.width, height: webViewContainer.frame.height))
         webView.navigationDelegate = self
-
-//        webView.snp.makeConstraints { make in
-//            make.bottom.equalToSuperview()
-//            make.left.equalToSuperview()
-//            make.right.equalToSuperview()
-//            make.top.equalToSuperview()
-//        }
 
         self.webViewContainer.addSubview(webView)
         configWebView()

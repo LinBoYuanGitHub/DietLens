@@ -135,7 +135,6 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
         if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
             controller.selectedDate = selectedDate
             self.navigationController?.pushViewController(controller, animated: true)
-            //            present(controller, animated: true, completion: nil)
         }
     }
 
@@ -146,8 +145,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @objc func switchToEditStatus() {
         currentEditStatus = FoodDiaryStatus.edit
         foodDiaryMealTable.reloadData()
-        self.parent?.navigationItem.rightBarButtonItem?.title = nil
-        distanceToBottom.constant = 54
+//        distanceToBottom.constant = 54
         dialogContainer.isHidden = false
         editBtn.isHidden = true
     }
@@ -155,7 +153,7 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     @IBAction func switchToNormalStatus(_ sender: Any) {
         currentEditStatus = FoodDiaryStatus.normal
         foodDiaryMealTable.reloadData()
-        distanceToBottom.constant = 0
+//        distanceToBottom.constant = 0
         dialogContainer.isHidden = true
         editBtn.isHidden = false
         //remove all the trash items

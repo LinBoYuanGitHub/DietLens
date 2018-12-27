@@ -1012,7 +1012,7 @@ class APIService {
                 })
                 upload.responseJSON { response in
                     let resultObj = JSON(response.value)
-                    let resultList = MockedUpFoodData.instance.assembleFoodInfoData(data: resultObj["data"])
+                    let resultList = FoodInfoDataManager.instance.assembleFoodInfoData(data: resultObj["data"])
                     //                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
                     //                    let imageId = resultObj["data"]["id"].intValue
                     completion(resultList)

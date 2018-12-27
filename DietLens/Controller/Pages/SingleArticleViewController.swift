@@ -82,15 +82,6 @@ class SingleArticleViewController: BaseViewController, UITableViewDataSource, UI
         return contentHeight
     }
 
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if let tableView = scrollView as? UITableView {
-//            for cell in tableView.visibleCells {
-//                guard let cell = cell as? SinglePageArticleBodyCell else { continue }
-//                cell.webView?.setNeedsLayout()
-//            }
-//        }
-//    }
-
     func setupParallaxHeader() {
         //let image = newsArticle.newsImage
         let imageView = UIImageView()

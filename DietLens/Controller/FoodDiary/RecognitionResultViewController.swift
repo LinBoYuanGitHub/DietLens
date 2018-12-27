@@ -36,8 +36,6 @@ class RecognitionResultViewController: BaseViewController {
     var previousOffset: CGFloat = CGFloat(0)
 
     override func viewDidLoad() {
-        //get mockup data
-//        mockUpCategoryData()
         foodImage.image = cameraImage
         foodOptionTable.delegate = self
         foodOptionTable.dataSource = self
@@ -59,10 +57,6 @@ class RecognitionResultViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-    }
-
-    func mockUpCategoryData() {
-        foodCategoryList = MockedUpFoodData.instance.createMockedUpFoodData()
     }
 
     @IBAction func toTextSearchPage(_ sender: Any) {
@@ -153,7 +147,7 @@ class RecognitionResultViewController: BaseViewController {
                 }
             }
 //            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-//               
+//
 //            }
         }
     }

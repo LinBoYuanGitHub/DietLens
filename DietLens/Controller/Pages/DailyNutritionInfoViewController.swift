@@ -19,7 +19,6 @@ class DailyNutritionInfoViewController: BaseViewController {
     var targetDict = [Int: (String, Double)]()
     //passed value
     var selectedDate = Date()
-//    var noInternetAlert: NoInternetDialog?
 
     override func viewDidLoad() {
         internetDelegate = self
