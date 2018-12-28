@@ -34,8 +34,7 @@ class EConsentViewController: UIViewController {
         guard let learnmoreVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LearnMoreVC") as? LearnMoreViewController else {
             return
         }
-
-        self.present(learnmoreVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(learnmoreVC, animated: true)
     }
 
     @IBAction func join(_ sender: UIButton) {
