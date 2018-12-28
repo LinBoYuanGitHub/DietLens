@@ -463,7 +463,7 @@ class APIService {
     }
 
     public func getFoodSearchResult(filterType: Int, keywords: String, latitude: Double, longitude: Double, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
-        let url = ServerConfig.foodFullTextSearchURL //+ "?category=" + String(filterType)
+        let url = ServerConfig.foodFullTextSearchURL
         self.getFoodSearchResult(requestUrl: url, keywords: keywords, latitude: latitude, longitude: longitude, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
@@ -541,6 +541,10 @@ class APIService {
                     print("Get search result failed due to : \(String(describing: response.result.error))")
                     if response.response?.statusCode == 401 {
                         self.popOutToLoginPage()
+                        return
+                    }
+                    //return only when the search is cancelled
+                    if (response.error as NSError?)?.code == NSURLErrorCancelled {
                         return
                     }
                     completion(nil)

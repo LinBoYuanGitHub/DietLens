@@ -122,7 +122,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //        performSegue(withIdentifier: "presentArticlePage", sender: self)
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? ArticleDetailViewController {
             if articleType == ArticleType.ARTICLE {
                 dest.articleData = ArticleDataManager.instance.articleList[indexPath.row]
             } else {
@@ -185,7 +185,7 @@ class ArticleViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let article: Article = articleDataSource[(articleTable.indexPathForSelectedRow?.row)!]
-        if let dest = segue.destination as? SingleArticleViewController {
+        if let dest = segue.destination as? ArticleDetailViewController {
             dest.articleData = article
         }
     }

@@ -78,27 +78,6 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation emailFromForgetPw
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
-            if segue.identifier == "GoToForgetVerify"{
-                if let verificationCodePage = segue.destination as? ForgetPasswordVerifyViewController {
-                    verificationCodePage.emailFromForgetPw = emailAddrText
-                }
-            }
-            if segue.identifier == "GoToForgetPwMain"{
-                if let changePwPage = segue.destination as? ForgetPasswordMainViewController {
-                    changePwPage.emailToDisplay = emailAddrText
-                }
-            }
-        }
-
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
     func alertWithTitle(title: String!, message: String, viewController: UIViewController, toFocus: UITextField) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: {_ in
@@ -112,7 +91,7 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
 
 extension ForgetPasswordEmailViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }

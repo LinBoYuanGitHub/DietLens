@@ -11,7 +11,7 @@ import ParallaxHeader
 import SnapKit
 import WebKit
 
-class SingleArticleViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, WKNavigationDelegate {
+class ArticleDetailViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var article: UITableView!
     weak var parallaxHeaderView: UIView?

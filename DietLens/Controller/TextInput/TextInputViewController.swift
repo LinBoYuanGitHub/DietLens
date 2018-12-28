@@ -33,12 +33,12 @@ class TextInputViewController: BaseViewController {
     //tab item for filter the result
     var filterItem = [StringConstants.UIString.FitlerPopular, StringConstants.UIString.FilterRecent, StringConstants.UIString.FilterFavorite]
     //autoComplete & textSearchResult List
-    var autoCompleteTextList = [String]()
+    //    var autoCompleteTextList = [String]()
     //display tableView data
     var searchResultList = [TextSearchSuggestionEntity]()
-//    var popularFoodList = [TextSearchSuggestionEntity]()
-//    var recentFoodList = [TextSearchSuggestionEntity]()
-//    var favoriteFoodList = [TextSearchSuggestionEntity]()
+    var popularFoodList = [TextSearchSuggestionEntity]()
+    var recentFoodList = [TextSearchSuggestionEntity]()
+    var favoriteFoodList = [TextSearchSuggestionEntity]()
     //UI component
     var selectedImageView: UIImage?
     var filterType = TextSearchFilterInterger.allType
@@ -119,17 +119,11 @@ class TextInputViewController: BaseViewController {
     }
 
     @objc func handleTap() {
-        //jump to feedback page
-        //        let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
-        //        self.present(dest, animated: true, completion: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        //regist notification
-        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWasShown), name: .UIKeyboardDidShow, object: nil)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: .UIKeyboardWillHide, object: nil)
         //only refresh cache data
         if (textSearchField.text?.isEmpty)! && currentSelectionPos != 0 {
             onFilterSelect(currentSelection: currentSelectionPos)
@@ -137,7 +131,6 @@ class TextInputViewController: BaseViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        //        textSearchField.becomeFirstResponder()
         //set event for favFood empty label jump
         self.emptyView.addGestureRecognizer( UITapGestureRecognizer(target: self, action: #selector(redirectToFavoriteFoodPage)))
     }
@@ -175,7 +168,7 @@ class TextInputViewController: BaseViewController {
             self.mealType = getCorrectMealType()
         }
         APIService.instance.getFoodSearchPopularity(mealtime: mealType.lowercased(), completion: { (textResults) in
-            if textResults == nil { // excpetion + cancelled
+            guard let results = textResults else { // excpetion + cancelled
                 self.emptyView.isHidden = false
                 self.textSearchTable.isHidden = true
                 return
@@ -183,7 +176,7 @@ class TextInputViewController: BaseViewController {
             self.emptyResultView.isHidden = true
             self.emptyView.isHidden = true
             self.textSearchTable.isHidden = false
-            self.searchResultList = textResults!
+            self.popularFoodList = results
             self.textSearchTable.reloadData()
         }) { (nextPageLink) in
             self.nextPageLink = nextPageLink!
@@ -206,7 +199,7 @@ class TextInputViewController: BaseViewController {
             self.emptyResultView.isHidden = true
             self.emptyView.isHidden = true
             self.textSearchTable.isHidden = false
-            self.searchResultList = textResults!
+            self.favoriteFoodList = textResults!
             self.textSearchTable.reloadData()
         }, nextPageCompletion: { (nextPageLink) in
             self.nextPageLink = nextPageLink!
@@ -245,12 +238,13 @@ class TextInputViewController: BaseViewController {
             textSearchFilterView.isHidden = false
             animationView.isHidden = false
             onFilterSelect(currentSelection: currentSelectionPos)
-        } else {
-            tableTopConstants.constant = 0
-            textSearchFilterView.isHidden = true
-            animationView.isHidden = true
+            return
         }
         //load suggestion from net, set time
+        tableTopConstants.constant = 0
+        textSearchFilterView.isHidden = true
+        animationView.isHidden = true
+
         if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
             lastSearchTime = Date()
             performTextSearch()
@@ -262,12 +256,11 @@ class TextInputViewController: BaseViewController {
         if Reachability()?.connection == .none && currentSelectionPos != 2 {
             self.emptyView.isHidden = false
             return
-        } else {
-            self.emptyView.isHidden = true
         }
+        self.emptyView.isHidden = true
         if isSearching {
-            APIService.instance.cancelAllRequest()
-//            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
+            //            APIService.instance.cancelAllRequest()
+            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
             print("cancel text search \(textSearchField.text)")
         }
         isSearching = true
@@ -276,26 +269,29 @@ class TextInputViewController: BaseViewController {
             return
         }
         //request for new data
-        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { (textResults) in
-            self.isSearching = false
+        APIService.instance.getFoodSearchResult(filterType: filterType, keywords: searchText!, latitude: latitude, longitude: longitude, completion: { [weak self] (textResults) in
+            guard let service = self else {
+                return
+            }
+            service.isSearching = false
             if textResults == nil {
                 return
             }
             if textResults?.count == 0 {
-                self.emptyResultView.isHidden = false
+                service.emptyResultView.isHidden = false
             } else {
-                self.emptyResultView.isHidden = true
-                if self.searchResultList.count != 0 {
+                service.emptyResultView.isHidden = true
+                if service.searchResultList.count != 0 {
                     DispatchQueue.main.async {
-                        self.textSearchTable.reloadData()
+                        service.textSearchTable.reloadData()
                         let indexPath = IndexPath(row: 0, section: 0)
-                        self.textSearchTable.scrollToRow(at: indexPath, at: .bottom, animated: false)
+                        service.textSearchTable.scrollToRow(at: indexPath, at: .bottom, animated: false)
                     }
                 }
             }
-            self.emptyView.isHidden = true
-            self.searchResultList = textResults!
-            self.textSearchTable.reloadData()
+            service.emptyView.isHidden = true
+            service.searchResultList = textResults!
+            service.textSearchTable.reloadData()
         }) { (nextPageLink) in
             self.nextPageLink = nextPageLink!
         }
@@ -369,14 +365,15 @@ class TextInputViewController: BaseViewController {
     }
 
     func onFilterSelect(currentSelection: Int) {
+        APIService.instance.cancelAllRequest()
+        self.textSearchTable.reloadData()
         if currentSelection == 0 {
             self.getPopurlarFoodLists()
         } else if currentSelection == 1 {
             //load recent search result
             self.textSearchTable.isHidden = false
-            self.searchResultList = self.searchCacheLRU.getAllValue()
+            self.recentFoodList = self.searchCacheLRU.getAllValue()
             self.textSearchTable.reloadData()
-            APIService.instance.cancelAllRequest()
         } else if currentSelection == 2 {
             self.getFavouriteFoods()
         }
@@ -392,11 +389,28 @@ extension TextInputViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResultList.count
+        if !(textSearchField.text?.isEmpty)! {
+            return searchResultList.count
+        } else if currentSelectionPos == 0 {
+            return popularFoodList.count
+        } else if currentSelectionPos == 1 {
+            return recentFoodList.count
+        } else {
+            return favoriteFoodList.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let result = searchResultList[indexPath.row]
+        var result = TextSearchSuggestionEntity()
+        if !(textSearchField.text?.isEmpty)! {
+            result = searchResultList[indexPath.row]
+        } else if currentSelectionPos == 0 {
+            result = popularFoodList[indexPath.row]
+        } else if currentSelectionPos == 1 {
+            result = recentFoodList[indexPath.row]
+        } else {
+            result = favoriteFoodList[indexPath.row]
+        }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "textSearchCell") as? SearchResultCell else {
             return UITableViewCell()
         }
@@ -411,7 +425,16 @@ extension TextInputViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //loading to get food text search detail
-        let textSearchEntity = searchResultList[indexPath.row]
+        var textSearchEntity = TextSearchSuggestionEntity()
+        if !(textSearchField.text?.isEmpty)! {
+            textSearchEntity = searchResultList[indexPath.row]
+        } else if currentSelectionPos == 0 {
+            textSearchEntity = popularFoodList[indexPath.row]
+        } else if currentSelectionPos == 1 {
+            textSearchEntity = recentFoodList[indexPath.row]
+        } else {
+            textSearchEntity = favoriteFoodList[indexPath.row]
+        }
         requestForDietInformation(foodEntity: textSearchEntity)
         //# Firebase Analytic log
         Analytics.logEvent(StringConstants.FireBaseAnalytic.TextResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
@@ -459,8 +482,9 @@ extension TextInputViewController: UITableViewDelegate {
             //show loading indicator
             textSearchTable.tableFooterView?.isHidden = false
             self.isLoading = true
-            if (textSearchField.text?.isEmpty)! && currentSelectionPos == 0 { //popularLists
-                APIService.instance.getFoodSearchPopularity(requestUrl: self.nextPageLink, mealtime: mealType.lowercased(), completion: { (resultList) in
+            //API pagination
+            if !(self.textSearchField.text?.isEmpty)! {
+                APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
                     self.textSearchTable.tableFooterView?.isHidden = true
                     self.isLoading = false
                     if resultList == nil {
@@ -477,21 +501,44 @@ extension TextInputViewController: UITableViewDelegate {
                     }
                 }
             } else {
-                APIService.instance.getFoodSearchResult(requestUrl: self.nextPageLink, keywords: textSearchField.text!, latitude: latitude, longitude: longitude, completion: { (resultList) in
-                    self.textSearchTable.tableFooterView?.isHidden = true
-                    self.isLoading = false
-                    if resultList == nil {
-                        return
+                switch self.currentSelectionPos {
+                case 0:
+                    APIService.instance.getFoodSearchPopularity(requestUrl: self.nextPageLink, mealtime: mealType, completion: { (resultList) in
+                        self.textSearchTable.tableFooterView?.isHidden = true
+                        self.isLoading = false
+                        if resultList == nil {
+                            return
+                        }
+                        self.popularFoodList.append(contentsOf: resultList!)
+                        self.textSearchTable.reloadData()
+                    }, nextPageCompletion: { (nextPageLink) in
+                        if nextPageLink == nil {
+                            // last page
+                            self.nextPageLink = ""
+                        } else {
+                            self.nextPageLink = nextPageLink!
+                        }
+                    })
+                case 1:
+                    break
+                case 2:
+                    APIService.instance.getFavouriteFoodList(requestUrl: self.nextPageLink, completion: { (resultList) in
+                        self.textSearchTable.tableFooterView?.isHidden = true
+                        self.isLoading = false
+                        if resultList == nil {
+                            return
+                        }
+                        self.favoriteFoodList.append(contentsOf: resultList!)
+                        self.textSearchTable.reloadData()
+                    }) { (nextPageLink) in
+                        if nextPageLink == nil {
+                            self.nextPageLink = ""
+                        } else {
+                            self.nextPageLink = nextPageLink!
+                        }
                     }
-                    self.searchResultList.append(contentsOf: resultList!)
-                    self.textSearchTable.reloadData()
-                }) { (nextPageLink) in
-                    if nextPageLink == nil {
-                        // last page
-                        self.nextPageLink = ""
-                    } else {
-                        self.nextPageLink = nextPageLink!
-                    }
+                default:
+                    break
                 }
             }
         }

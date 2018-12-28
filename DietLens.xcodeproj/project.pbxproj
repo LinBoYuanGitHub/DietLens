@@ -100,7 +100,6 @@
 		3FA73DF02178740400D145C6 /* XYMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DEF2178740400D145C6 /* XYMarkerView.swift */; };
 		3FA73DF22178789200D145C6 /* YStepMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF12178789200D145C6 /* YStepMarkerView.swift */; };
 		3FA73DF4217ED1DA00D145C6 /* CountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */; };
-		3FA8C372219D0E6800E4261D /* ProfileCalorieGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */; };
 		3FA9DE2C21CC9AA400331324 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9DE2B21CC9AA400331324 /* PassThroughView.swift */; };
 		3FAD32D221B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */; };
 		3FAD32D421BA1CAE00EAA6EC /* ClinicalStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD32D321BA1CAE00EAA6EC /* ClinicalStudyEntity.swift */; };
@@ -157,16 +156,13 @@
 		581856611FB6ED6C004BEBB3 /* NoPaddingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581856601FB6ED6C004BEBB3 /* NoPaddingTextView.swift */; };
 		58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */; };
 		58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */; };
-		58410CAE1FCE8C5400CF4958 /* SingleNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */; };
+		58410CAE1FCE8C5400CF4958 /* PlainNotificationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58410CAD1FCE8C5400CF4958 /* PlainNotificationDetailViewController.swift */; };
 		5841A5071FCE5939006201C5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5841A5061FCE5939006201C5 /* Notification.swift */; };
 		5847D3E61FB1DBA7002DDF98 /* DairyDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */; };
-		585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */; };
 		586124A02043E29A00E727B2 /* ForgetPasswordEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5861249F2043E29A00E727B2 /* ForgetPasswordEmailViewController.swift */; };
-		586124A22043E2EA00E727B2 /* ForgetPasswordMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */; };
-		586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */; };
 		587067AC1FE252B000660262 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587067AB1FE252B000660262 /* HealthKit.framework */; };
 		587067AE1FE2534300660262 /* HealthKitSetupAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587067AD1FE2534300660262 /* HealthKitSetupAssistant.swift */; };
-		587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */; };
+		587684671FB6F42B0055FE2C /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587684661FB6F42B0055FE2C /* ArticleDetailViewController.swift */; };
 		5877CF881F9D82BF0022B51E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF871F9D82BF0022B51E /* AppDelegate.swift */; };
 		5877CF8D1F9D82BF0022B51E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5877CF8B1F9D82BF0022B51E /* Main.storyboard */; };
 		5877CF901F9D82BF0022B51E /* DietLens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5877CF8E1F9D82BF0022B51E /* DietLens.xcdatamodeld */; };
@@ -188,7 +184,6 @@
 		58F2DF231F9F26F100FF3A95 /* WhiteBorderClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */; };
 		58F2DF251F9F2F0000FF3A95 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */; };
 		58F2DF2C1F9F43AE00FF3A95 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */; };
-		58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */; };
 		58FCCFF31F9D8A7100E4F421 /* SignPainter HouseScript Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */; };
 		A02F9852D9D3A43C63E71AF5 /* Pods_DietLens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1315FE419149161A3D4BEBA9 /* Pods_DietLens.framework */; };
 		A173693EDE1A6BF4EEDAFEA6 /* Pods_DietLensTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B472A6A25AAA99B4C477E01 /* Pods_DietLensTests.framework */; };
@@ -328,7 +323,6 @@
 		3FA73DEF2178740400D145C6 /* XYMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XYMarkerView.swift; sourceTree = "<group>"; };
 		3FA73DF12178789200D145C6 /* YStepMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YStepMarkerView.swift; sourceTree = "<group>"; };
 		3FA73DF3217ED1DA00D145C6 /* CountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownTimer.swift; sourceTree = "<group>"; };
-		3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCalorieGoalViewController.swift; sourceTree = "<group>"; };
 		3FA9DE2B21CC9AA400331324 /* PassThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
 		3FAD32D121B4CA7F00EAA6EC /* RecommendCalorieGoalDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCalorieGoalDialog.swift; sourceTree = "<group>"; };
 		3FAD32D321BA1CAE00EAA6EC /* ClinicalStudyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyEntity.swift; sourceTree = "<group>"; };
@@ -389,17 +383,14 @@
 		58199C881FB1D65D003F6104 /* DiaryCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCellDelegate.swift; sourceTree = "<group>"; };
 		58199C8C1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDiaryHeaderCell.swift; sourceTree = "<group>"; };
 		582F650F1FB438E200786E74 /* FSCalendar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-Bridging-Header.h"; sourceTree = "<group>"; };
-		58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleNotificationViewController.swift; sourceTree = "<group>"; };
+		58410CAD1FCE8C5400CF4958 /* PlainNotificationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainNotificationDetailViewController.swift; sourceTree = "<group>"; };
 		5841A5061FCE5939006201C5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		5847D3E51FB1DBA7002DDF98 /* DairyDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DairyDailyModel.swift; sourceTree = "<group>"; };
-		585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		5861249F2043E29A00E727B2 /* ForgetPasswordEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordEmailViewController.swift; sourceTree = "<group>"; };
-		586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordMainViewController.swift; sourceTree = "<group>"; };
-		586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordVerifyViewController.swift; sourceTree = "<group>"; };
 		587067AA1FE252B000660262 /* DietLens.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DietLens.entitlements; sourceTree = "<group>"; };
 		587067AB1FE252B000660262 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		587067AD1FE2534300660262 /* HealthKitSetupAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssistant.swift; sourceTree = "<group>"; };
-		587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleArticleViewController.swift; sourceTree = "<group>"; };
+		587684661FB6F42B0055FE2C /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
 		5877CF841F9D82BF0022B51E /* DietLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5877CF871F9D82BF0022B51E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5877CF8C1F9D82BF0022B51E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -427,7 +418,6 @@
 		58F2DF221F9F26F100FF3A95 /* WhiteBorderClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBorderClearButton.swift; sourceTree = "<group>"; };
 		58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		58F2DF2B1F9F43AE00FF3A95 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
-		58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		58FCCFF21F9D8A6D00E4F421 /* SignPainter HouseScript Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SignPainter HouseScript Regular.ttf"; sourceTree = "<group>"; };
 		6EFAE2333D715C30AA21BF18 /* Pods_DietLensUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietLensUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D025F7539DD57DEDB0099D /* Pods-DietLensUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLensUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLensUITests/Pods-DietLensUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -582,6 +572,7 @@
 		3F436649207C968A0089C63A /* FoodDiary */ = {
 			isa = PBXGroup;
 			children = (
+				3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */,
 				3F43664A207C97310089C63A /* FoodInfoViewController.swift */,
 				3F43664C207C9AE00089C63A /* RecognitionResultViewController.swift */,
 				3F43664E207CA6160089C63A /* FoodDiaryViewController.swift */,
@@ -703,6 +694,15 @@
 			path = ZMProgress;
 			sourceTree = "<group>";
 		};
+		3FA9DE2E21D5D28500331324 /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
+				587684661FB6F42B0055FE2C /* ArticleDetailViewController.swift */,
+			);
+			path = Article;
+			sourceTree = "<group>";
+		};
 		3FAD32D521BA1CBE00EAA6EC /* ClinicalStudy */ = {
 			isa = PBXGroup;
 			children = (
@@ -743,7 +743,6 @@
 				3F2D163220EE8A6000348160 /* CalorieGoalViewController.swift */,
 				3F46C45D2151EBF90066636F /* RegistrationProfileViewController.swift */,
 				3FF5B7EB2176D942003B8509 /* MoreViewController.swift */,
-				3FA8C371219D0E6800E4261D /* ProfileCalorieGoalViewController.swift */,
 				3FB709DF21A68DDD00C367B1 /* PersonalFavouriteFoodViewController.swift */,
 			);
 			name = Profile;
@@ -813,18 +812,13 @@
 		580443611FB0176700D59DFF /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				3F43663C207721EB0089C63A /* DailyNutritionInfoViewController.swift */,
 				58F2DF241F9F2F0000FF3A95 /* HomeViewController.swift */,
 				580443661FB0189E00D59DFF /* SettingViewController.swift */,
-				58FCCFEE1F9D88D500E4F421 /* MainViewController.swift */,
 				580443681FB0233900D59DFF /* AboutViewController.swift */,
-				585EE88D1FB195C6002AF768 /* RegistrationViewController.swift */,
 				5892437A1FB532B3009DA2E2 /* ProfileViewController.swift */,
-				581856591FB6DB15004BEBB3 /* ArticleViewController.swift */,
 				BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */,
-				587684661FB6F42B0055FE2C /* SingleArticleViewController.swift */,
 				3F1B628D1FC66D56006A38FE /* WebViewController.swift */,
-				58410CAD1FCE8C5400CF4958 /* SingleNotificationViewController.swift */,
+				58410CAD1FCE8C5400CF4958 /* PlainNotificationDetailViewController.swift */,
 				589424AF1FD7B1B1009AEA4C /* SplashScreenViewController.swift */,
 				3F9BFE5B1FF0D4E40011845B /* StepCounterViewController.swift */,
 				3FD08628200F38500052D54B /* FeedBackViewController.swift */,
@@ -857,8 +851,6 @@
 			isa = PBXGroup;
 			children = (
 				5861249F2043E29A00E727B2 /* ForgetPasswordEmailViewController.swift */,
-				586124A12043E2EA00E727B2 /* ForgetPasswordMainViewController.swift */,
-				586124A32043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift */,
 				3F88189820E9D80F00FE6C11 /* LoginViewController.swift */,
 				3F4812D921424517005F3260 /* WelcomeViewController.swift */,
 				3F191F2B2182B28F0026A4EF /* EmailLoginViewController.swift */,
@@ -997,6 +989,7 @@
 		58FCCFED1F9D886E00E4F421 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3FA9DE2E21D5D28500331324 /* Article */,
 				ECE039C821B7CE2800D18173 /* ClinicalStudies */,
 				3F73A7512109C0B00031B01E /* IntroductionPage */,
 				3FB6E67F20E3701300462591 /* Profile */,
@@ -1535,9 +1528,8 @@
 				3F9215A82086262500F92ECF /* FoodDiaryEntity.swift in Sources */,
 				3F7DACA720134B1A009E4DB6 /* FoodNameCell.swift in Sources */,
 				3F4366462079FDC70089C63A /* AutoCompleteCell.swift in Sources */,
-				58410CAE1FCE8C5400CF4958 /* SingleNotificationViewController.swift in Sources */,
+				58410CAE1FCE8C5400CF4958 /* PlainNotificationDetailViewController.swift in Sources */,
 				3FB7910B2106D1D4000D6A94 /* TextValidtor.swift in Sources */,
-				58FCCFEF1F9D88D500E4F421 /* MainViewController.swift in Sources */,
 				3F14CC44201854D40032CC77 /* HistoryFoodDiaryCell.swift in Sources */,
 				3F250A75215616DA009A5F5E /* TextSearchDataManager.swift in Sources */,
 				3FEC34522057D0F80060099A /* DiarySectionHeader.swift in Sources */,
@@ -1571,7 +1563,6 @@
 				3F436639206F7AD00089C63A /* NewsEventCell.swift in Sources */,
 				ECAE914F21C0D45E00577865 /* ScannedResultViewController.swift in Sources */,
 				58E425E81FA0915500C542D9 /* NewsArticleCell.swift in Sources */,
-				586124A42043EAE600E727B2 /* ForgetPasswordVerifyViewController.swift in Sources */,
 				EC79FA7321BE3B01004ADAED /* EligibilityViewController.swift in Sources */,
 				3F4812D22137DC19005F3260 /* ConfirmDialogController.swift in Sources */,
 				3F5691E9214E893000D9929A /* DoublyLinkedList.swift in Sources */,
@@ -1587,7 +1578,6 @@
 				BFA26C0E1FC3DFF7009D4208 /* DesignableUITextField.swift in Sources */,
 				3FCBEC1820E662440092948C /* HealthCenterMainCell.swift in Sources */,
 				3F43663B207612B00089C63A /* CollectionTextSearchFilterCell.swift in Sources */,
-				586124A22043E2EA00E727B2 /* ForgetPasswordMainViewController.swift in Sources */,
 				3F9BFE981FF34CF20011845B /* StepEntity.swift in Sources */,
 				3F43664F207CA6160089C63A /* FoodDiaryViewController.swift in Sources */,
 				3F4366352069F4CF0089C63A /* ReportCountingEntity.swift in Sources */,
@@ -1601,7 +1591,6 @@
 				3F008AF321ABDB9100C1E529 /* RegistrationFavouriteFoodCell.swift in Sources */,
 				3FB791092106155D000D6A94 /* LoadingFooterView.swift in Sources */,
 				3FB7910D2107061F000D6A94 /* LoadingButton.swift in Sources */,
-				3FA8C372219D0E6800E4261D /* ProfileCalorieGoalViewController.swift in Sources */,
 				3FFB569C1FB6ABCE002DCE15 /* APIService.swift in Sources */,
 				3F7D77E42148F0EF000B8C6B /* StepChartViewController.swift in Sources */,
 				3F191F2E2182B2DA0026A4EF /* SMSLoginViewController.swift in Sources */,
@@ -1641,11 +1630,10 @@
 				3F14CC46201C78B70032CC77 /* UserProfile.swift in Sources */,
 				3F5608F120F30C010007B3AF /* EmojiInputView.swift in Sources */,
 				5841A5071FCE5939006201C5 /* Notification.swift in Sources */,
-				587684671FB6F42B0055FE2C /* SingleArticleViewController.swift in Sources */,
+				587684671FB6F42B0055FE2C /* ArticleDetailViewController.swift in Sources */,
 				3F9BFE5C1FF0D4E40011845B /* StepCounterViewController.swift in Sources */,
 				58199C8D1FB1D6D1003F6104 /* FoodDiaryHeaderCell.swift in Sources */,
 				3FC13058213690AC000605E3 /* HttpExtension.swift in Sources */,
-				585EE88E1FB195C6002AF768 /* RegistrationViewController.swift in Sources */,
 				3FAD32D421BA1CAE00EAA6EC /* ClinicalStudyEntity.swift in Sources */,
 				3FB6E67820DBA03100462591 /* CalendarDialogViewController.swift in Sources */,
 				3F14CC48201C79FF0032CC77 /* ProfileDataManager.swift in Sources */,

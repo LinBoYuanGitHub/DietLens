@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SingleNotificationViewController: UIViewController {
+class PlainNotificationDetailViewController: UIViewController {
 
     @IBOutlet weak var notificationTitle: UILabel!
     @IBOutlet weak var dateTime: UILabel!

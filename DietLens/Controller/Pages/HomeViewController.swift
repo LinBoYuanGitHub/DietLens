@@ -242,7 +242,7 @@ class HomeViewController: BaseViewController, ArticleCollectionCellDelegate {
     func didPressArticle(_ indexOfArticleList: Int) {
         articleType = ArticleType.ARTICLE
         whichArticleIndex = indexOfArticleList
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? ArticleDetailViewController {
 //            dest.articleType = self.articleType
             dest.articleData = ArticleDataManager.instance.articleList[indexOfArticleList]
             if let navigator = self.navigationController {
@@ -253,7 +253,7 @@ class HomeViewController: BaseViewController, ArticleCollectionCellDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? SingleArticleViewController {
+        if let dest = segue.destination as? ArticleDetailViewController {
             if articleType == ArticleType.ARTICLE {
                 dest.articleData = ArticleDataManager.instance.articleList[whichArticleIndex]
             } else {
@@ -292,7 +292,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         //navigate to article page
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? ArticleDetailViewController {
             dest.articleData = ArticleDataManager.instance.eventList[indexPath.row - 1]
             if let navigator = self.navigationController {
                 navigator.pushViewController(dest, animated: true)
