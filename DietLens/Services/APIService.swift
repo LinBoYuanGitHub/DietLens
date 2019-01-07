@@ -728,6 +728,59 @@ class APIService {
         }
     }
 
+    public func postForMixVegResults(imgData: Data, completion: @escaping (FoodDiaryEntity?) -> Void) {
+        Alamofire.upload(multipartFormData: { multipart in
+            multipart.append(imgData, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
+        }, to: ServerConfig.uploadMixVegDishURL, method: .post, headers: getTokenHeader()) { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.response { result in
+                    let jsonObj = JSON(result.data)
+                    let foodDiary = FoodInfoDataManager.instance.assembleFoodDiaryEntity(jsonObject: jsonObj)
+                    completion(foodDiary)
+                }
+                upload.uploadProgress { _ in
+                    //call progress callback here if you need it
+                }
+            case .failure(let encodingError):
+                print("multipart upload encodingError: \(encodingError)")
+            }
+        }
+    }
+
+    public func postForMixVegResults(imageKey: String, completion:@escaping (FoodDiaryEntity?) -> Void) {
+        Alamofire.request(
+            URL(string: ServerConfig.uploadMixVegDishURL)!,
+            method: .post,
+            parameters: ["key": imageKey],
+            encoding: JSONEncoding.default,
+            headers: getTokenHeader())
+            .validate()
+            .responseJSON { (response) -> Void in
+                guard response.result.isSuccess else {
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    print("get food detail failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
+                    return
+                }
+                guard let scanResult = response.result.value else {
+                    print("get food detail failed due to : Server Data Type Error")
+                    completion(nil)
+                    return
+                }
+                let jsonObject = JSON(scanResult)
+                if jsonObject.count == 0 {
+                    completion(nil)
+                } else {
+                    let foodDiaryEntity = FoodInfoDataManager.instance.assembleMixVegFoodDiaryEntity(jsonObject: jsonObject)
+                    completion(foodDiaryEntity)
+                }
+        }
+    }
+
     //get food detail infomation(nutrition & portion)
     public func getFoodDetail(foodId: Int, completion: @escaping (DietItem?) -> Void) {
         Alamofire.request(

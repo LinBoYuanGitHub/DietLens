@@ -116,23 +116,37 @@ class FoodInfoDataManager {
     }
 
     func assembleFoodDiaryEntity(jsonObject: JSON) -> FoodDiaryEntity {
-        var foodDiaryEntity = FoodDiaryEntity()
+        let foodDiaryEntity = FoodDiaryEntity()
         foodDiaryEntity.foodDiaryId = jsonObject["id"].stringValue
         foodDiaryEntity.imageId = jsonObject["image"].stringValue
         foodDiaryEntity.mealTime = jsonObject["meal_time"].stringValue
         foodDiaryEntity.mealType = jsonObject["meal_type"].stringValue
-        if(jsonObject["latitude"].stringValue != "" && jsonObject["longitude"].stringValue != "") {
+        if jsonObject["latitude"].stringValue != "" && jsonObject["longitude"].stringValue != "" {
             foodDiaryEntity.latitude = Double(jsonObject["latitude"].stringValue)!
             foodDiaryEntity.longitude = Double(jsonObject["longitude"].stringValue)!
         }
         for index in 0..<jsonObject["details"].count {
-            var foodItem = DietItem()
+            let foodItem = DietItem()
             var job = jsonObject["details"][index]
             foodItem.foodId = job["id"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.quantity = Double(job["quantity"].doubleValue)
             foodItem.displayUnit = job["measurement_type"].stringValue
             foodItem.recordType = job["search_type"].stringValue
+            foodDiaryEntity.dietItems.append(foodItem)
+        }
+        return foodDiaryEntity
+    }
+
+    func assembleMixVegFoodDiaryEntity(jsonObject: JSON) -> FoodDiaryEntity {
+        let foodDiaryEntity = FoodDiaryEntity()
+        for jsonObj in jsonObject.arrayValue {
+            let foodItem = DietItem()
+            foodItem.foodId = jsonObj["id"].intValue
+            foodItem.foodName = jsonObj["name"].stringValue
+            foodItem.quantity = Double(jsonObj["quantity"].doubleValue)
+            foodItem.displayUnit = jsonObj["measurement_type"].stringValue
+            foodItem.recordType = jsonObj["search_type"].stringValue
             foodDiaryEntity.dietItems.append(foodItem)
         }
         return foodDiaryEntity

@@ -146,9 +146,6 @@ class RecognitionResultViewController: BaseViewController {
                     navigator.pushViewController(dest, animated: true)
                 }
             }
-//            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-//
-//            }
         }
     }
 
@@ -194,21 +191,33 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
     }
 
     func redirectToFoodDiaryPage() {
-        if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-            dest.userFoodImage = self.cameraImage
-            dest.imageKey = self.imageKey
-            dest.isMixVeg = true
-            dest.isUpdate = false
-            dest.recordDate = recordDate
-            //mealTime & mealType
-            FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
-            dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-            FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
-            if let navigator = self.navigationController {
-                //clear controller to Bottom & add foodCalendar Controller
-                navigator.pushViewController(dest, animated: true)
+        //request the mix veg API then to FoodDiaryVC
+        guard let appDelegate = UIApplication.shared.delegate else {
+            return
+        }
+        APIService.instance.postForMixVegResults(imageKey: imageKey!) { (foodDiaryEntity) in
+            if foodDiaryEntity == nil {
+                return
+            }
+            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+                dest.userFoodImage = self.cameraImage
+                dest.imageKey = self.imageKey
+                dest.isMixVeg = true
+                dest.isUpdate = false
+                dest.recordDate = self.recordDate
+                //put the mix veg foodDiary into data manager
+                FoodDiaryDataManager.instance.foodDiaryEntity = foodDiaryEntity!
+                //mealTime & mealType
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
+                dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
+                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
+                if let navigator = self.navigationController {
+                    //clear controller to Bottom & add foodCalendar Controller
+                    navigator.pushViewController(dest, animated: true)
+                }
             }
         }
+
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -250,14 +259,5 @@ extension RecognitionResultViewController: UICollectionViewDelegate, UICollectio
         //table reload data
         foodOptionTable.reloadData()
     }
-
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        animationView.center.x += previousOffset - scrollView.contentOffset.x
-//        previousOffset = scrollView.contentOffset.x
-//        //#google analytic log part
-//        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultScrollFoodCategory, parameters: [
-//            "mealTime": mealType
-//        ])
-//    }
 
 }

@@ -57,6 +57,7 @@ class TextInputViewController: BaseViewController {
     var nextPageLink: String = ""
 
     var isLoading = false
+    var isInTextSearch = false
 
     @IBOutlet weak var tableTopConstants: NSLayoutConstraint!
 
@@ -237,30 +238,28 @@ class TextInputViewController: BaseViewController {
             tableTopConstants.constant = 50
             textSearchFilterView.isHidden = false
             animationView.isHidden = false
+            self.isInTextSearch = false
             onFilterSelect(currentSelection: currentSelectionPos)
-            return
-        }
-        //load suggestion from net, set time
-        tableTopConstants.constant = 0
-        textSearchFilterView.isHidden = true
-        animationView.isHidden = true
-
-        if Double(Date().timeIntervalSince(lastSearchTime)) > 0.1 {
-            lastSearchTime = Date()
+        } else {
+            //load suggestion from net, set time
+            tableTopConstants.constant = 0
+            textSearchFilterView.isHidden = true
+            animationView.isHidden = true
             performTextSearch()
         }
 
     }
 
     func performTextSearch() {
-        if Reachability()?.connection == .none && currentSelectionPos != 2 {
+        if Reachability()?.connection == Reachability.Connection.none && currentSelectionPos != 2 {
+            self.textSearchTable.isHidden = true
             self.emptyView.isHidden = false
             return
         }
         self.emptyView.isHidden = true
         if isSearching {
-            //            APIService.instance.cancelAllRequest()
-            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
+            APIService.instance.cancelAllRequest()
+//            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
             print("cancel text search \(textSearchField.text)")
         }
         isSearching = true
@@ -292,6 +291,7 @@ class TextInputViewController: BaseViewController {
             service.emptyView.isHidden = true
             service.searchResultList = textResults!
             service.textSearchTable.reloadData()
+            service.isInTextSearch = true
         }) { (nextPageLink) in
             self.nextPageLink = nextPageLink!
         }
@@ -389,7 +389,7 @@ extension TextInputViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !(textSearchField.text?.isEmpty)! {
+        if isInTextSearch {
             return searchResultList.count
         } else if currentSelectionPos == 0 {
             return popularFoodList.count
@@ -402,8 +402,10 @@ extension TextInputViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var result = TextSearchSuggestionEntity()
-        if !(textSearchField.text?.isEmpty)! {
-            result = searchResultList[indexPath.row]
+        if isInTextSearch {
+            if indexPath.row < searchResultList.count {
+                result = searchResultList[indexPath.row]
+            }
         } else if currentSelectionPos == 0 {
             result = popularFoodList[indexPath.row]
         } else if currentSelectionPos == 1 {
@@ -426,7 +428,7 @@ extension TextInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //loading to get food text search detail
         var textSearchEntity = TextSearchSuggestionEntity()
-        if !(textSearchField.text?.isEmpty)! {
+        if isInTextSearch {
             textSearchEntity = searchResultList[indexPath.row]
         } else if currentSelectionPos == 0 {
             textSearchEntity = popularFoodList[indexPath.row]
