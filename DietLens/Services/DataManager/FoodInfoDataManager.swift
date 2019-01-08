@@ -141,12 +141,8 @@ class FoodInfoDataManager {
     func assembleMixVegFoodDiaryEntity(jsonObject: JSON) -> FoodDiaryEntity {
         let foodDiaryEntity = FoodDiaryEntity()
         for jsonObj in jsonObject.arrayValue {
-            let foodItem = DietItem()
-            foodItem.foodId = jsonObj["id"].intValue
-            foodItem.foodName = jsonObj["name"].stringValue
-            foodItem.quantity = Double(jsonObj["quantity"].doubleValue)
-            foodItem.displayUnit = jsonObj["measurement_type"].stringValue
-            foodItem.recordType = jsonObj["search_type"].stringValue
+            let foodItem = assembleDietItem(jsonObject: jsonObj)
+            foodItem.displayUnit = foodItem.portionInfo[0].sizeUnit
             foodDiaryEntity.dietItems.append(foodItem)
         }
         return foodDiaryEntity

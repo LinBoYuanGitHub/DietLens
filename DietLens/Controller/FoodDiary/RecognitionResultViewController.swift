@@ -119,8 +119,8 @@ class RecognitionResultViewController: BaseViewController {
         }
         delegate.showLoadingDialog()
         APIService.instance.getFoodDetail(foodId: foodId) { (dietItem) in
-            delegate.dismissLoadingDialog()
             if dietItem == nil {
+                delegate.dismissLoadingDialog()
                 return
             }
             let entity = dietItem!
@@ -128,6 +128,7 @@ class RecognitionResultViewController: BaseViewController {
                 self.redirectToFoodDiaryPage()
                 return
             }
+            delegate.dismissLoadingDialog()
             entity.recordType = self.recordType ?? RecognitionInteger.recognition
             //set as new foodDiary entity
             FoodDiaryDataManager.instance.foodDiaryEntity = FoodDiaryEntity()
@@ -192,25 +193,25 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func redirectToFoodDiaryPage() {
         //request the mix veg API then to FoodDiaryVC
-        guard let appDelegate = UIApplication.shared.delegate else {
-            return
-        }
         APIService.instance.postForMixVegResults(imageKey: imageKey!) { (foodDiaryEntity) in
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appDelegate.dismissLoadingDialog()
             if foodDiaryEntity == nil {
                 return
             }
+            FoodDiaryDataManager.instance.foodDiaryEntity.dietItems = foodDiaryEntity!.dietItems
+            FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
+            FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
                 dest.userFoodImage = self.cameraImage
                 dest.imageKey = self.imageKey
                 dest.isMixVeg = true
                 dest.isUpdate = false
                 dest.recordDate = self.recordDate
-                //put the mix veg foodDiary into data manager
-                FoodDiaryDataManager.instance.foodDiaryEntity = foodDiaryEntity!
                 //mealTime & mealType
-                FoodDiaryDataManager.instance.foodDiaryEntity.mealTime = DateUtil.normalDateToString(date: self.recordDate)
                 dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired
-                FoodDiaryDataManager.instance.foodDiaryEntity.mealType = self.mealType!
                 if let navigator = self.navigationController {
                     //clear controller to Bottom & add foodCalendar Controller
                     navigator.pushViewController(dest, animated: true)

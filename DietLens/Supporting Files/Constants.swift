@@ -18,7 +18,7 @@ struct ServerConfig {
     static let testBaseURL = "http://47.88.223.32:8001/dl/v1"  //testing environment
 //    static let labDeskTopURL = "http://47.88.223.32:8002/dl/v1"
     static let labDeskTopURL = "http://172.29.32.226:8000/dl/v1" //cyrus local
-//    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"
+//    static let labDeskTopURL = "https://backend.dietlens.com/dl/v1"a@!
 //    static let labDeskTopURL = "http://54.169.160.107:8000/dl/v1" //mocklet test environment
 
     static let userURL = labDeskTopURL + "/users"
@@ -53,7 +53,8 @@ struct ServerConfig {
     static let feedBackURL = labDeskTopURL + "/feedback/email/"
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 //    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"
-    static let uploadImageKeyURL = labDeskTopURL+"/foodinfo/recognition/"
+    static let uploadImageKeyURL = labDeskTopURL + "/foodinfo/recognition/"
+    static let uploadMixVegDishURL = labDeskTopURL + "/foodinfo/mix-dish/"
     //health center log
     static let uploadHealthCenterData = labDeskTopURL + "/healthlogs/"
     //foodDiary CRUD

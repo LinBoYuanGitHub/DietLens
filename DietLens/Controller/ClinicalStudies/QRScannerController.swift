@@ -206,18 +206,16 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             return
         }
         let groupId = scannedURL.components(separatedBy: "?gid=")[1]
-        let entity = ClinicalStudyEntity(studyId: "", studyName: "hard code study", status: .pending)
-        self.jumpToJoinGroupPage(study: entity)
         //perform study detail requet
-//        APIService.instance.getClinicalStudyDetail(groupId: groupId, completion: { (entity) in
-//            if entity != nil {
-//                self.jumpToJoinGroupPage(study: entity!)
-//            } else {
-//                AlertMessageHelper.showMessage(targetController: self, title: "", message: "It's not a valid Dietlens QR code", confirmText: "OK", completion: {
-//                    self.scannedFlag = false
-//                })
-//            }
-//        })
+        APIService.instance.getClinicalStudyDetail(groupId: groupId, completion: { (entity) in
+            if entity != nil {
+                self.jumpToJoinGroupPage(study: entity!)
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "It's not a valid Dietlens QR code", confirmText: "OK", completion: {
+                    self.scannedFlag = false
+                })
+            }
+        })
     }
 
 }

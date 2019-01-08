@@ -775,7 +775,7 @@ class APIService {
                 if jsonObject.count == 0 {
                     completion(nil)
                 } else {
-                    let foodDiaryEntity = FoodInfoDataManager.instance.assembleMixVegFoodDiaryEntity(jsonObject: jsonObject)
+                    let foodDiaryEntity = FoodInfoDataManager.instance.assembleMixVegFoodDiaryEntity(jsonObject: jsonObject["data"])
                     completion(foodDiaryEntity)
                 }
         }
