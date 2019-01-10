@@ -28,6 +28,7 @@ class RecognitionResultViewController: BaseViewController {
     var isSetMealByTimeRequired = false
     var mealType: String?
     var recordType: String?
+    var taskId: String?
 
     //dataSource
     var foodCategoryList = [DisplayFoodCategory]()
@@ -193,7 +194,10 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func redirectToFoodDiaryPage() {
         //request the mix veg API then to FoodDiaryVC
-        APIService.instance.postForMixVegResults(imageKey: imageKey!) { (foodDiaryEntity) in
+        if taskId == nil {
+            return
+        }
+        APIService.instance.postForMixVegResults(taskId: taskId!) { (foodDiaryEntity) in
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return
             }

@@ -241,7 +241,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
-        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: appDelegate.latitude, longitude: appDelegate.longitude, uploadSpeed: uploadTime, completion: { (resultList) in
+        APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: appDelegate.latitude, longitude: appDelegate.longitude, uploadSpeed: uploadTime, completion: { (resultList, taskId) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true
             if resultList == nil || resultList?.count == 0 {
@@ -256,6 +256,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
                         dest.cameraImage = self.chosenImageView.image!
                     }
                     dest.imageKey = imageKey
+                    dest.taskId = taskId
                     dest.foodCategoryList = self.displayList
                     //pass display value
                     dest.isSetMealByTimeRequired = self.isSetMealByTimeRequired

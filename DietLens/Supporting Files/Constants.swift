@@ -54,7 +54,7 @@ struct ServerConfig {
     static let uploadRecognitionURL = "http://172.29.32.226:8000/dl/v1/foodrecognition/photo/"
 //    static let uploadImageKeyURL = "http://172.29.31.44:8003/webHook"
     static let uploadImageKeyURL = labDeskTopURL + "/foodinfo/recognition/"
-    static let uploadMixVegDishURL = labDeskTopURL + "/foodinfo/mix-dish/"
+    static let uploadMixVegDishURL = labDeskTopURL + "/foodinfo/mix-dish-result/"
     //health center log
     static let uploadHealthCenterData = labDeskTopURL + "/healthlogs/"
     //foodDiary CRUD

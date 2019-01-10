@@ -642,14 +642,15 @@ class APIService {
      * param: imageKey,latitude,longitude
      * return: List of DisplayFoodCategory
      */
-    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
+    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?, _ taskId: String) -> Void) {
         postRequest(url: ServerConfig.uploadImageKeyURL, params: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed], successCompletion: { (result) in
             let jsonObject = result["data"]
+            let taskId = result["task_id"].stringValue
             let displayCategory = FoodInfoDataManager.instance.assembleDisplayFoodCategoryData(data: jsonObject)
-            completion(displayCategory)
+            completion(displayCategory, taskId)
             print("success")
         }) { (_) in
-            completion(nil)
+            completion(nil, "")
         }
     }
 
@@ -673,11 +674,11 @@ class APIService {
         }
     }
 
-    public func postForMixVegResults(imageKey: String, completion:@escaping (FoodDiaryEntity?) -> Void) {
+    public func postForMixVegResults(taskId: String, completion:@escaping (FoodDiaryEntity?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.uploadMixVegDishURL)!,
             method: .post,
-            parameters: ["key": imageKey],
+            parameters: ["task_id": taskId],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
