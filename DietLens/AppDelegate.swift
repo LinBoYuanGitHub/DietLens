@@ -440,18 +440,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     dest.notificationId = notificationId
                     window?.rootViewController?.present(dest, animated: true, completion: nil)
                 }
-                //to notification detail
-//                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as?  NotificationsViewController {
-//                    window?.rootViewController?.sideMenuController?.rootViewController?.present(dest, animated: true, completion: nil)
-//                }
 
             }
         }
         // Print full message
         completionHandler()
-        //open the notification page from the background
-//        let viewController = self.window!.rootViewController!.storyboard!.instantiateViewController(withIdentifier: "DietLens") as! HomeViewController
-
     }
 }
 // [END ios_10_message_handling]

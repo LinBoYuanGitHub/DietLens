@@ -4597,7 +4597,7 @@ Scan QR code to join a study.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DietLens" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaH-iz-JNq">
-                                                <rect key="frame" x="60" y="60" width="255.5" height="60"/>
+                                                <rect key="frame" x="97.5" y="60" width="180" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="YaU-Xe-SRL"/>
                                                     <constraint firstAttribute="height" constant="60" id="dhG-HU-Rea"/>
@@ -6835,6 +6835,9 @@ You were selected as a possible participant for this study because this is the f
                                 <rect key="frame" x="234.5" y="36.5" width="12" height="22"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="calendar_down_arrow"/>
+                                <connections>
+                                    <action selector="onCalendarArrowClicked:" destination="MIX-fr-hCj" eventType="touchUpInside" id="B7c-1k-rKD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDi-Wh-PIR" userLabel="LeftArrowButton" customClass="ExpandedUIButton" customModule="DietLens" customModuleProvider="target">
                                 <rect key="frame" x="85.5" y="41.5" width="8" height="12"/>

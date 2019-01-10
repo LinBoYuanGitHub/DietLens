@@ -111,6 +111,10 @@ class FoodDiaryHistoryViewController: BaseViewController, UIPopoverPresentationC
     // UI IBAction Area
     //************************************************************************************
 
+    @IBAction func onCalendarArrowClicked(_ sender: Any) {
+        showCalendar(sender)
+    }
+
     @IBAction func showCalendar(_ sender: Any) {
         if let calendarDialog = self.storyboard?.instantiateViewController(withIdentifier: "calendarDialogVC") as? CalendarDialogViewController {
             calendarDialog.calendarDelegate = self
