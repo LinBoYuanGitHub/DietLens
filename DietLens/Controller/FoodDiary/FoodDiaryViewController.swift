@@ -312,6 +312,8 @@ class FoodDiaryViewController: UIViewController {
                 if foodDiaryEntity != nil && isSuccess {
                     //refresh foodDiaryEntity
                     self.foodDiaryInstance = foodDiaryEntity!
+                } else {
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "add food item failed")
                 }
             }
         }
@@ -333,7 +335,11 @@ class FoodDiaryViewController: UIViewController {
         //update food table
         foodTableView.reloadRows(at: [indexPath], with: .automatic)
         if !foodDiaryInstance.foodDiaryId.isEmpty && !foodDiaryInstance.dietItems[row].id.isEmpty {
-            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (_, _) in }
+            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess, _) in
+                if !isSuccess {
+                     AlertMessageHelper.showMessage(targetController: self, title: "", message: "update food item failed")
+                }
+            }
         }
     }
 
@@ -374,7 +380,11 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
             self.self.animationViewLeading.constant = destX! + CGFloat(10)
         })
         //set request to switch time
-        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (_, _) in })
+        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess, _) in
+            if !isSuccess {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "update meal time failed")
+            }
+        })
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -527,6 +527,8 @@ class FoodInfoViewController: UIViewController {
                             navigator.popToRootViewController(animated: true)
                         })
                     }
+                } else {
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "create foodDiary failed")
                 }
             })
             //#google analytic log part

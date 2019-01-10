@@ -244,7 +244,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: appDelegate.latitude, longitude: appDelegate.longitude, uploadSpeed: uploadTime, completion: { (resultList) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true
-            //            self.loadingScreen.alpha = 0
             if resultList == nil || resultList?.count == 0 {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
             } else {

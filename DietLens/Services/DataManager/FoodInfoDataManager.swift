@@ -77,44 +77,6 @@ class FoodInfoDataManager {
         return dietItem
     }
 
-    func assembleIngredientInfo(jsonObject: JSON) -> Ingredient {
-        var ingredient = Ingredient()
-        ingredient.ingredientId = jsonObject["ID"].intValue
-        ingredient.longDesc = jsonObject["Name"].stringValue
-        if jsonObject["Carbohydrate"].stringValue == "null" {
-            ingredient.carbs = "0.0"
-        } else {
-            ingredient.carbs = jsonObject["Carbohydrate"].stringValue
-        }
-        if jsonObject["Energy"].stringValue == "null" {
-            ingredient.energyKcal = "0.0"
-        } else {
-            ingredient.energyKcal = jsonObject["Energy"].stringValue
-        }
-        if jsonObject["Protein"].stringValue == "null" {
-            ingredient.protein = "0.0"
-        } else {
-            ingredient.protein = jsonObject["Protein"].stringValue
-        }
-        ingredient.fat = String(jsonObject["Total_fat"].doubleValue)
-        if jsonObject["Sugar"].stringValue == "null" {
-            ingredient.sugarsTotal = "0.0"
-        } else {
-            ingredient.sugarsTotal = jsonObject["Sugar"].stringValue
-        }
-        for index in 0..<jsonObject["unit_list"].count {
-            var unit = IngredientUnit()
-            var job = jsonObject["unit_list"][index]
-            unit.unitId = job["id"].intValue
-            unit.seq = job["seq"].stringValue
-            unit.amount = job["amount"].stringValue
-            unit.unit = job["unit"].stringValue
-            unit.weight = job["weight_g"].stringValue
-            ingredient.ingredientUnit.append(unit)
-        }
-        return ingredient
-    }
-
     func assembleFoodDiaryEntity(jsonObject: JSON) -> FoodDiaryEntity {
         let foodDiaryEntity = FoodDiaryEntity()
         foodDiaryEntity.foodDiaryId = jsonObject["id"].stringValue
