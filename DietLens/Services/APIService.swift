@@ -21,33 +21,32 @@ class APIService {
 
     }
 
-    public func getUUIDRequest(userId: String, completion: @escaping (_ userId: String) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.getUUidURL)!,
-            method: .post,
-            parameters: ["id": userId],
-            encoding: JSONEncoding.default,
-            headers: [:])
+    public func postRequest(url: String, params: [String: Any], successCompletion:@escaping (_ result: JSON) -> Void, failureCompletion: @escaping (_ errorMessage: String) -> Void) {
+        guard let urlLink: URL = URL(string: url) else {
+            return
+        }
+        Alamofire.request(urlLink,
+                          method: .post,
+                          parameters: params,
+                          encoding: JSONEncoding.default,
+                          headers: getTokenHeader())
             .validate()
-            .responseJSON { (response) -> Void in
+            .responseJSON {(response) -> Void in
                 guard response.result.isSuccess else {
-                    print("request UUID Failed due to : \(String(describing: response.result.error))")
-                    completion("")
+                    print("request failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    //get error message from the err json data
+                    if let errorJsonString = String(data: response.data!, encoding: String.Encoding.utf8) {
+                        let errJSON = errorJsonString.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
+                        failureCompletion(errJSON["message"].stringValue)
+                    }
                     return
                 }
-                guard let value = response.result.value else {
-                    print("Login Failed due to : Server Data Type Error")
-                    completion("")
-                    return
-                }
-                let jsonObj = JSON(value)
-                if jsonObj["status"].stringValue == "HTTP_200_OK"{
-                    let userId = jsonObj["data"]["id"].stringValue
-                    completion(userId)
-                } else {
-                    completion("")
-                }
-
+                let result = JSON(response.result.value)
+                successCompletion(result)
         }
     }
 
@@ -478,24 +477,10 @@ class APIService {
     }
 
     public func removeFavouriteFood(removeFoodId: Int, completion: @escaping(Bool) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.favouriteFoodURL + "remover/")!,
-            method: .post,
-            parameters: ["food": removeFoodId],
-            encoding: JSONEncoding.default,
-            headers: getTokenHeader())
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Get search result failed due to : \(String(describing: response.result.error))")
-                    if response.response?.statusCode == 401 {
-                        self.popOutToLoginPage()
-                        return
-                    }
-                    completion(false)
-                    return
-                }
-                completion(true)
+        postRequest(url: ServerConfig.favouriteFoodURL + "remover/", params: ["food": removeFoodId], successCompletion: { (_) in
+            completion(true)
+        }) { (_) in
+            completion(false)
         }
     }
 
@@ -564,20 +549,10 @@ class APIService {
     }
 
     public func setFavouriteFoodList(foodList: [Int], completion: @escaping (Bool) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.favouriteFoodURL)!,
-            method: .post,
-            parameters: ["food": foodList],
-            encoding: JSONEncoding.default,
-            headers: getTokenHeader())
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("post favourite food failed due to : \(String(describing: response.result.error))")
-                    completion(false)
-                    return
-                }
-                completion(true)
+        postRequest(url: ServerConfig.favouriteFoodURL, params: ["food": foodList], successCompletion: { (_) in
+            completion(true)
+        }) { (_) in
+            completion(false)
         }
     }
 
@@ -607,32 +582,6 @@ class APIService {
                     foodSearchList.append(entity)
                 }
                 completion(foodSearchList)
-        }
-    }
-
-    public func getIngredientSearchDetailResult(foodId: Int, completion: @escaping (Ingredient?) -> Void) {
-        let url = ServerConfig.ingredientSearchURL+"?id="+String(foodId)
-        Alamofire.request(
-            URL(string: url)!,
-            method: .get,
-            parameters: ["id": foodId],
-            encoding: JSONEncoding.default,
-            headers: [:])
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Get food detail failed due to : \(String(describing: response.result.error))")
-                    completion(nil)
-                    return
-                }
-                guard let detail = response.result.value else {
-                    print("Get food detail failed due to : Server Data Type Error")
-                    completion(nil)
-                    return
-                }
-                let jsonObj = JSON(detail)["data"]
-                let ingredient = FoodInfoDataManager.instance.assembleIngredientInfo(jsonObject: jsonObj)
-                completion(ingredient)
         }
     }
 
@@ -694,37 +643,13 @@ class APIService {
      * return: List of DisplayFoodCategory
      */
     public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.uploadImageKeyURL)!,
-            method: .post,
-            parameters: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed],
-            encoding: JSONEncoding.default,
-            headers: getTokenHeader())
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Get recognition result failed due to : \(String(describing: response.result.error))")
-                    if response.response?.statusCode == 401 {
-                        self.popOutToLoginPage()
-                        return
-                    }
-                    completion(nil)
-                    return
-                }
-                guard let recogResult = response.result.value else {
-                    print("Get recognition failed due to : Server Data Type Error")
-                    completion(nil)
-                    return
-                }
-                let jsonObject = JSON(recogResult)["data"]
-                let displayCategory = FoodInfoDataManager.instance.assembleDisplayFoodCategoryData(data: jsonObject)
-                if jsonObject == JSON.null {
-                    //not json data, return null
-                    completion(nil)
-                } else {
-                    //assemble FoodInfo to return recognition result
-                    completion(displayCategory)
-                }
+        postRequest(url: ServerConfig.uploadImageKeyURL, params: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed], successCompletion: { (result) in
+            let jsonObject = result["data"]
+            let displayCategory = FoodInfoDataManager.instance.assembleDisplayFoodCategoryData(data: jsonObject)
+            completion(displayCategory)
+            print("success")
+        }) { (_) in
+            completion(nil)
         }
     }
 
@@ -1872,6 +1797,10 @@ class APIService {
         }
     }
 
+    /**********************************************************
+     APIService Task
+    **********************************************************/
+
     //cancel task
     func cancelRequest(requestURL: String) {
         Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
@@ -1927,12 +1856,6 @@ class APIService {
             return appName + "/" + appVersion + " (iOS; " + "build:" + buildVersion + "; system version " + systemIOSVersion + ")" + modelName
         }
         return ""
-    }
-
-    //special header for webhook
-    func getHardCodeBasicAuthenticationHeader() -> [String: String] {
-        let header = ["Authorization": "Basic YThkMjM2MzYxZmRkZjJmZTlmZmYxNjE2ZTAzNzU1NDI6ODYwMzBiZWVkMjEyNGY0YmRjZmU3MGU3YzE4YTA1YmI="]
-        return header
     }
 
     func popOutToLoginPage() {
