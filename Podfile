@@ -12,7 +12,6 @@ target 'DietLens' do
   pod 'SwiftyJSON'
   pod 'Socket.IO-Client-Swift'
   pod 'SwiftLint'
-  pod 'RealmSwift'
   pod 'FSCalendar'
   pod 'ParallaxHeader', '~> 2.0.0'
   pod 'SnapKit', '~> 4.0'

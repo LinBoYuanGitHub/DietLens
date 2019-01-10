@@ -72,8 +72,7 @@ class SettingViewController: BaseViewController {
 
     func clearPersonalData() {
         let preferences = UserDefaults.standard
-        let nicknameKey = "nickname"
-        preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.userIdkey)
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
@@ -85,14 +84,5 @@ class SettingViewController: BaseViewController {
         //facebook login
 //        LoginManager().logOut()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

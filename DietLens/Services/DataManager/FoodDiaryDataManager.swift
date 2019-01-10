@@ -13,8 +13,6 @@ class FoodDiaryDataManager {
 
     static var instance = FoodDiaryDataManager()
 
-    public var mealEntity = [DiaryDailyFood]()
-
     public var foodDiaryEntity = FoodDiaryEntity() //for FoodDiary entry
     public var foodDiaryList = [FoodDiaryEntity]() //for all the foodDiary history
 
@@ -40,6 +38,9 @@ class FoodDiaryDataManager {
             foodItem.foodId = job["food"].intValue
             foodItem.foodName = job["name"].stringValue
             foodItem.sampleImageUrl = job["example_img"].stringValue
+            if job["iodine_level"].exists() {
+                foodItem.iodineLevel = job["iodine_level"].intValue
+            }
             foodItem.isFavoriteFood = job["is_favorite_food"].boolValue
             //prevent quantity equals zero
             if job["quantity"].doubleValue == 0 {

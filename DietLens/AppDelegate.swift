@@ -35,7 +35,6 @@ import UIKit
 import CoreData
 import UserNotifications
 import Firebase
-import RealmSwift
 import Fabric
 import Crashlytics
 import HealthKit
@@ -43,6 +42,7 @@ import FBSDKCoreKit
 import Photos
 import FacebookLogin
 import GoogleSignIn
+import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -59,6 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isImageCaptureTriggered = false
     var isTextInputTriggered = false
     var isSearchMoreTriggered = false
+    //reachability
+    let reachability = Reachability()!
+    var connectionStatus: Reachability.Connection?
+    var noInternetNotifyView =  UIView()
+    var fullScreenLoadingView = UIView()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -86,90 +91,128 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         registerForPushNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(signOut), name: .signOutErrFlag, object: nil)
+        //reachability notifier
+        noInternetNotifyView = self.noInternetConnectionView(window: self.window!)
+        fullScreenLoadingView = self.initLoadingDialog(window: self.window!)
+        reachability.whenReachable = { reachability in
+            DispatchQueue.main.async {
+                self.noInternetNotifyView.removeFromSuperview()
+            }
+            if reachability.connection != self.connectionStatus {
+                self.connectionStatus = reachability.connection
+                if reachability.connection == .wifi {
+                    print("Reachable via WiFi")
+                } else {
+                    print("Reachable via Cellular")
+                }
+            }
+
+        }
+        reachability.whenUnreachable = { reachability in
+            //global popView for notify user no Internet Connection
+            if reachability.connection != self.connectionStatus {
+                self.connectionStatus = reachability.connection
+                DispatchQueue.main.async {
+                    self.noInternetNotifyView.removeFromSuperview()
+                    self.window?.addSubview(self.noInternetNotifyView)
+                    self.window?.bringSubview(toFront: self.noInternetNotifyView)
+                }
+                print("Not reachable")
+            }
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
         return true
     }
 
     @objc func signOut() {
-//        APIService.instance.logOut(completion: { (_) in
-//            //signOut no matter request succeed or not
-//            DispatchQueue.main.async {
-//                self.clearPersonalData()
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                if let destController = storyboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginViewController {
-//                    self.window?.rootViewController?.present(destController, animated: true, completion: nil)
-//
-//                }
-//            }
-//        })
+    }
+
+    //No internet banner Initlization
+    func noInternetConnectionView(window: UIWindow) -> UIView {
+        let size = CGSize(width: (self.window?.frame.width)!, height: 60)
+        let containerView = PassThroughView(frame: CGRect(origin: CGPoint(x: 0, y: 90), size: size))
+        containerView.backgroundColor = UIColor.red
+        containerView.alpha = 0.7
+        //warning Icon and label
+        let warningIcon = UIImageView(frame: CGRect(origin: CGPoint(x: 10, y: 15), size: CGSize(width: 30, height: 30)))
+        warningIcon.tintColor = UIColor.white
+        warningIcon.image = UIImage(imageLiteralResourceName: "About")
+        let warningLabel = UILabel(frame: CGRect(origin: CGPoint(x: 50, y: 20), size: CGSize(width: 300, height: 20)))
+        warningLabel.text = "No Internet Connection"
+        warningLabel.textColor = UIColor.white
+        //dismiss button
+        let dismissBtn = UIButton(frame: CGRect(origin: CGPoint(x: (self.window?.frame.width)! - 50, y: 15), size: CGSize(width: 40, height: 40)))
+        dismissBtn.setImage(UIImage(imageLiteralResourceName: "whiteCross"), for: .normal)
+        dismissBtn.addTarget(self, action: #selector(dismissNoInternetView), for: .touchUpInside)
+        containerView.addSubview(warningIcon)
+        containerView.addSubview(warningLabel)
+        containerView.addSubview(dismissBtn)
+        return containerView
+    }
+
+    //Loading dialog Initlization
+    func initLoadingDialog(window: UIWindow) -> UIView {
+        guard let screenWidth = self.window?.frame.width else {
+            return UIView()
+        }
+        guard let screenHeight = self.window?.frame.height else {
+            return UIView()
+        }
+        let dialogWidth = 240
+        let dialogHeight = 100
+        let size = CGSize(width: dialogWidth, height: dialogHeight)
+        //full screen background container
+        let backgroundContainer = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        backgroundContainer.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        //dialog container view
+        let containerView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
+        containerView.center = CGPoint(x: screenWidth/2, y: screenHeight/2)
+        containerView.backgroundColor = UIColor.white
+        containerView.layer.cornerRadius = 10
+        //spinner view
+        let spinnerIndicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        spinnerIndicator.center = CGPoint(x: dialogWidth/2, y: dialogHeight/2 - 15)
+        spinnerIndicator.color = UIColor.black
+        spinnerIndicator.startAnimating()
+        //loading label
+        let loadingTextLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 200, height: 20)))
+        loadingTextLabel.center = CGPoint(x: dialogWidth/2, y: dialogHeight/2 + 15)
+        loadingTextLabel.textAlignment = .center
+        loadingTextLabel.text = "Loading..."
+        loadingTextLabel.textColor = UIColor.black
+        //add subView part
+        containerView.addSubview(spinnerIndicator)
+        containerView.addSubview(loadingTextLabel)
+        backgroundContainer.addSubview(containerView)
+        return backgroundContainer
+    }
+
+    func showLoadingDialog() {
+        self.window?.addSubview(fullScreenLoadingView)
+    }
+
+    func dismissLoadingDialog() {
+        fullScreenLoadingView.removeFromSuperview()
+    }
+
+    @objc func dismissNoInternetView() {
+        self.noInternetNotifyView.removeFromSuperview()
     }
 
     func clearPersonalData() {
         let preferences = UserDefaults.standard
-        let nicknameKey = "nickname"
-        preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.userIdkey)
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
         preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
         preferences.setValue(nil, forKey: PreferenceKey.googleImageUrl)
         //facebook login
-        LoginManager().logOut()
-    }
-
-    func realmSetting(_ application: UIApplication) {
-        let config = Realm.Configuration(
-            // Set the new schema version. This must be greater than the previously used
-            // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 1,
-
-            // Set the block which will be called automatically when opening a Realm with
-            // a schema version lower than the one set above
-            migrationBlock: { _, _ in
-//                migration.deleteData(forType: FoodDiary.className())
-//                migration.deleteData(forType: IngredientDiary.className())
-//                migration.deleteData(forType: FoodInfomation.className())
-//                migration.deleteData(forType: Portion.className())
-//                if oldSchemaVersion <= 1 {
-//                    migration.enumerateObjects(ofType: IngredientDiary.className()) { oldObject, newObject in
-//                        newObject?["quantity"] = Double(oldObject?["quantity"] as! Int)
-//                    }
-//                }
-//                if oldSchemaVersion <= 2 {
-//                    migration.enumerateObjects(ofType: FoodDiary.className()) { _, newObject in
-//                        newObject?["quantity"] = 1.0
-//                        newObject?["unit"] = "portion"
-//                    }
-//                }
-//                if oldSchemaVersion <= 3 {
-//                    migration.enumerateObjects(ofType: FoodDiary.className()) { oldObject, newObject in
-////                        let foodInfoList = newObject?.dynamicList("foodInfoList")
-//                        let foodInfoList =  newObject?["foodInfoList"] as! List<MigrationObject>
-//                        let foodInfo = migration.create(FoodInfomation.className(), value: FoodInfomation())
-////                        let foodInfo = MigrationObject()
-//                        foodInfo["foodId"] = oldObject?["foodId"]
-//                        foodInfo["foodName"] = oldObject?["foodName"]
-//                        foodInfo["carbohydrate"] = oldObject?["carbohydrate"]
-//                        foodInfo["protein"] = oldObject?["protein"]
-//                        foodInfo["fat"] = oldObject?["fat"]
-//                        foodInfo["calorie"] = oldObject?["calorie"]
-//                        foodInfo["category"] = oldObject?["category"]
-//                        foodInfo["sampleImagePath"] = oldObject?["imagePath"]
-//                        foodInfoList.append(foodInfo)
-//                        //portion part
-//                        let portionList = foodInfo["portionList"] as! List<MigrationObject>
-//                        let portion = migration.create(Portion.className(), value: Portion())
-//                        portion["weightValue"] = 100
-//                        portion["sizeUnit"] = oldObject?["unit"]
-//                        portionList.append(portion)
-//                        //changing part
-//                        newObject?["quantity"] = 1
-//                        newObject?["selectedFoodInfoPos"] = 0
-//                        newObject?["selectedPortionPos"] = 0
-//                    }
-//                }
-
-        })
-        Realm.Configuration.defaultConfiguration = config
+//        LoginManager().logOut()
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
@@ -397,19 +440,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     dest.notificationId = notificationId
                     window?.rootViewController?.present(dest, animated: true, completion: nil)
                 }
-                //to notification detail
-//                if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "notificationListVC") as?  NotificationsViewController {
-//                    window?.rootViewController?.sideMenuController?.rootViewController?.present(dest, animated: true, completion: nil)
-//                }
 
             }
         }
         // Print full message
         completionHandler()
-        //open the notification page from the background
-
-//        let viewController = self.window!.rootViewController!.storyboard!.instantiateViewController(withIdentifier: "DietLens") as! HomeViewController
-
     }
 }
 // [END ios_10_message_handling]

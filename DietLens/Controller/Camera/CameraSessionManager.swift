@@ -172,6 +172,9 @@ class CameraSessionManager {
     }
 
     func focus(at point: CGPoint) {
+        if videoInput == nil {//consider the case not input
+            return
+        }
         guard videoInput.device.isFocusPointOfInterestSupported, videoInput.device.isExposurePointOfInterestSupported else {
             return
         }

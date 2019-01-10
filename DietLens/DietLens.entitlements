@@ -7,6 +7,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:dietlens.com</string>
+		<string>applinks:www.dietlens.com</string>
 	</array>
 	<key>com.apple.developer.healthkit</key>
 	<true/>

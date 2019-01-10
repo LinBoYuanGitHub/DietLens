@@ -15,21 +15,25 @@ class MoreViewController: BaseViewController {
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var moreItemCollectionView: UICollectionView!
     @IBOutlet weak var rightArrow: UIImageView!
+    @IBOutlet weak var guestView: UIView!
 
-//    let columnLayout = ColumnFlowLayout(
-//        cellsPerRow: 4,
-//        minimumInteritemSpacing: 10,
-//        minimumLineSpacing: 10,
-//        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-//    )
+    //    let columnLayout = ColumnFlowLayout(
+    //        cellsPerRow: 4,
+    //        minimumInteritemSpacing: 10,
+    //        minimumLineSpacing: 10,
+    //        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    //    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.internetDelegate = self
         moreItemCollectionView.delegate = self
         moreItemCollectionView.dataSource = self
-//        moreItemCollectionView.collectionViewLayout = columnLayout
+        guestView.isHidden = accountCheck()
+        guestView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(redirectToWelcomePage)))
+        //        moreItemCollectionView.collectionViewLayout = columnLayout
         protraitImageView.isUserInteractionEnabled = true
-//        rightArrow.addGestureRecognizer(tapGestureRecognizer)
+        //        rightArrow.addGestureRecognizer(tapGestureRecognizer)
         refreshUserName()
         loadAvatar()
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshUserName), name: .shouldRefreshSideBarHeader, object: nil)
@@ -40,6 +44,14 @@ class MoreViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.parent?.navigationController?.navigationBar.isHidden = false
+    }
+
+    @objc func redirectToWelcomePage() {
+        guard let welcomeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeVC") as? WelcomeViewController else {
+            return
+        }
+        welcomeVC.shouldShowNavBtn = true
+        self.navigationController?.pushViewController(welcomeVC, animated: true)
     }
 
     func loadAvatar() {
@@ -102,37 +114,25 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-//            if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateInitialViewController() as? AddFoodViewController {
-//                dest.shouldMoveToTextTab = true
-//                if let navigator = self.navigationController {
-//                    //clear controller to Bottom & add foodCalendar Controller
-//                    let transition = CATransition()
-//                    transition.duration = 0.3
-//                    //                transition.type = kCATransitionFromTop
-//                    transition.type = kCATransitionMoveIn
-//                    transition.subtype = kCATransitionFromTop
-//                    self.view.window?.layer.add(transition, forKey: kCATransition)
-//                    navigator.pushViewController(dest, animated: false)
-//                }
-//            }
+            if !accountCheck() {
+                redirectToWelcomePage()
+                return
+            }
             if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "textInputVC") as? TextInputViewController {
                 dest.addFoodDate = Date()
                 dest.isSearchMoreFlow = false
                 dest.shouldShowCancel = true
                 if let navigator = self.navigationController {
-                    //clear controller to Bottom & add foodCalendar Controller
-//                    let transition = CATransition()
-//                    transition.duration = 0.3
-//                    //                transition.type = kCATransitionFromTop
-//                    transition.type = kCATransitionMoveIn
-//                    transition.subtype = kCATransitionFromTop
-//                    self.view.window?.layer.add(transition, forKey: kCATransition)
                     navigator.pushViewController(dest, animated: true)
                 }
             }
 
         case 1:
             //to feedback page
+            if !accountCheck() {
+                redirectToWelcomePage()
+                return
+            }
             let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feedbackVC")
             self.present(dest, animated: true, completion: nil)
         case 2:
@@ -141,8 +141,12 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let shareText = "Welcome to dietlens"
             let shareActController = UIActivityViewController(activityItems: [shareURL, shareText], applicationActivities: nil)
             self.present(shareActController, animated: true, completion: nil)
-            //clinical studies
+        //clinical studies
         case 3:
+            if !accountCheck() {
+                redirectToWelcomePage()
+                return
+            }
             guard let clinicalstudies = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "clinicalstudiesVC") as? ClinicalStudiesViewController else {
                 return
             }
@@ -155,5 +159,30 @@ extension MoreViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(100), height: CGFloat(100))
+    }
+}
+
+extension MoreViewController: InternetDelegate {
+
+    func onInternetConnected() {
+
+    }
+
+    func onLosingInternetConnection() {
+
+    }
+
+}
+
+extension MoreViewController {
+
+    //judge whether userId is Exist
+    func accountCheck() -> Bool {
+        let userId = UserDefaults.standard.string(forKey: PreferenceKey.userIdkey) ?? ""
+
+        if userId.isEmpty {
+            return false
+        }
+        return true
     }
 }

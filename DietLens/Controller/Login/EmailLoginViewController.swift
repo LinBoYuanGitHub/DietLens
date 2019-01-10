@@ -54,37 +54,39 @@ class EmailLoginViewController: UIViewController {
             TFEmail.errorMessage = "INVALID EMAIL"
             return
         }
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         //login request
         APIService.instance.loginRequest(userEmail: TFEmail.text!, password: TFPassword.text!, completion: { (isSuccess) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                if isSuccess {
-                    // save for basic authentication
-                    let preferences = UserDefaults.standard
-                    let pwdKey = PreferenceKey.passwordKey
-                    preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
-                    //upload the device token to server
-                    let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
-                    let userId = preferences.string(forKey: PreferenceKey.userIdkey)
-                    if userId != nil && fcmToken != nil {
-                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
-                            if flag {
-                                print("send device token succeed")
-                            }
-                        })
-                    }
-                    DispatchQueue.main.async {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC")
-                            as? UINavigationController {
-                            //                            self.navigationController?.pushViewController(controller, animated: true)
-                            self.present(controller, animated: true, completion: nil)
+            appdelegate.dismissLoadingDialog()
+            if isSuccess {
+                // save for basic authentication
+                let preferences = UserDefaults.standard
+                let pwdKey = PreferenceKey.passwordKey
+                preferences.setValue(self.TFPassword.text!, forKey: pwdKey)
+                //upload the device token to server
+                let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                if userId != nil && fcmToken != nil {
+                    APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                        if flag {
+                            print("send device token succeed")
                         }
-                    }
-                } else {
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
-                    print("Login failed")
+                    })
                 }
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC")
+                        as? UINavigationController {
+                        //                            self.navigationController?.pushViewController(controller, animated: true)
+                        self.present(controller, animated: true, completion: nil)
+                    }
+                }
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: StringConstants.ErrMsg.loginErrMsg)
+                print("Login failed")
             }
         }) { (errMsg) in
             AlertMessageHelper.dismissLoadingDialog(targetController: self)
@@ -114,7 +116,7 @@ extension EmailLoginViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        keyboardWillShow()
+        //        keyboardWillShow()
         if textField == TFEmail {
             TFEmail.errorMessage = ""
         } else {
@@ -129,7 +131,7 @@ extension EmailLoginViewController: UITextFieldDelegate {
         } else {
             TFEmail.errorMessage = ""
         }
-//        keyboardWillHide()
+        //        keyboardWillHide()
         return true
     }
 }
@@ -137,7 +139,7 @@ extension EmailLoginViewController: UITextFieldDelegate {
 extension EmailLoginViewController {
 
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EmailLoginViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }

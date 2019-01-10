@@ -23,10 +23,10 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if emailFromLogin != "" {
-           emailAddr.text = emailFromLogin
+            emailAddr.text = emailFromLogin
         } /*else {
-            emailAddr.becomeFirstResponder()
-        }*/
+         emailAddr.becomeFirstResponder()
+         }*/
 
     }
 
@@ -49,18 +49,20 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cfmEmailPressed(_ sender: Any) {
         if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
             // call backend server
-            AlertMessageHelper.showLoadingDialog(targetController: self)
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.resetPwRequest(userEmail: emailAddrText) { (isSuccess) in
                 if isSuccess {
-                    AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                        AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
-                            if isPositive {
-                                self.dismiss(animated: true, completion: nil)
-                            } else {
-                                self.dismiss(animated: true, completion: nil)
-                            }
-                        })
-                    }
+                    appdelegate.dismissLoadingDialog()
+                    AlertMessageHelper.showOkCancelDialog(targetController: self, title: "", message: "reset password email has already been sent", postiveText: "confirm", negativeText: "cancel", callback: { (isPositive) in
+                        if isPositive {
+                            self.dismiss(animated: true, completion: nil)
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
                 } else {
                     AlertMessageHelper.dismissLoadingDialog(targetController: self) {
                         self.alertWithTitle(title: "Error", message: "No such email found!", viewController: self, toFocus: self.emailAddr)
@@ -76,27 +78,6 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation emailFromForgetPw
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let emailAddrText = emailAddr.text, !emailAddrText.isEmpty {
-            if segue.identifier == "GoToForgetVerify"{
-                if let verificationCodePage = segue.destination as? ForgetPasswordVerifyViewController {
-                    verificationCodePage.emailFromForgetPw = emailAddrText
-                }
-            }
-            if segue.identifier == "GoToForgetPwMain"{
-                if let changePwPage = segue.destination as? ForgetPasswordMainViewController {
-                    changePwPage.emailToDisplay = emailAddrText
-                }
-            }
-        }
-
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
     func alertWithTitle(title: String!, message: String, viewController: UIViewController, toFocus: UITextField) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: {_ in
@@ -110,7 +91,7 @@ class ForgetPasswordEmailViewController: UIViewController, UITextFieldDelegate {
 
 extension ForgetPasswordEmailViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }

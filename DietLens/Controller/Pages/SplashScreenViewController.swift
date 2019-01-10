@@ -17,10 +17,7 @@ class SplashScreenViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         internetDelegate = self
-        //internet jduegement
-        if Reachability()!.connection == .none {
-            return
-        }
+        pageJumpLogic()
     }
 
     func pageJumpLogic() {
@@ -31,11 +28,14 @@ class SplashScreenViewController: BaseViewController {
             let token = preferences.string(forKey: PreferenceKey.tokenKey)
             if token == nil {
                 //redirect to login page
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let controller = storyboard.instantiateViewController(withIdentifier: "WelcomeNVC")
-                    self.present(controller, animated: true, completion: nil)
-                }
+                    if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                        controller.modalPresentationStyle = .custom
+                        controller.modalTransitionStyle = .crossDissolve
+                        self.present(controller, animated: true, completion: nil)
+                    }
+                })
             } else {
                 //redirect to home page
                 getArticleListToMainPage()
@@ -44,6 +44,8 @@ class SplashScreenViewController: BaseViewController {
         } else {
             if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as? IntroductionViewController {
                 DispatchQueue.main.async {
+                    dest.modalPresentationStyle = .custom
+                    dest.modalTransitionStyle = .crossDissolve
                     self.present(dest, animated: true, completion: nil)
                 }
                 preferences.setValue(true, forKey: FirstTimeFlag.isFirstTimeLogin)
@@ -58,6 +60,8 @@ class SplashScreenViewController: BaseViewController {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                            controller.modalPresentationStyle = .custom
+                            controller.modalTransitionStyle = .crossDissolve
                             self.present(controller, animated: true, completion: nil)
                         }
                     })
@@ -66,6 +70,8 @@ class SplashScreenViewController: BaseViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
+                        controller.modalPresentationStyle = .custom
+                        controller.modalTransitionStyle = .crossDissolve
                         self.present(controller, animated: true, completion: nil)
                     }
                 })
@@ -194,12 +200,12 @@ class SplashScreenViewController: BaseViewController {
 extension SplashScreenViewController: InternetDelegate {
 
     func onInternetConnected() {
-        super.dismissNoInternetDialog()
+//        super.dismissNoInternetDialog()
         pageJumpLogic()
     }
 
     func onLosingInternetConnection() {
-        super.showNoInternetDialog()
+//        super.showNoInternetDialog()
     }
 
 }

@@ -30,12 +30,8 @@ class BaseViewController: UIViewController {
     let textLabelWidth: CGFloat = 200
     let textLabelHeight: CGFloat = 20
 
-    var noInternetAlert: NoInternetDialog! // no Internet dialog reference
-
     weak var internetDelegate: InternetDelegate?
     var connectionStatus: Reachability.Connection?
-
-    //reachability
     let reachability = Reachability()!
 
     override func viewDidLoad() {
@@ -49,11 +45,11 @@ class BaseViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as? [NSAttributedStringKey: Any] {
-             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
+            self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
         }
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.barTintColor = UIColor.white
-        //reachability setting
+//        reachability setting
         reachability.whenReachable = { reachability in
             if reachability.connection != self.connectionStatus {
                 self.connectionStatus = reachability.connection
@@ -66,9 +62,9 @@ class BaseViewController: UIViewController {
                     print("Reachable via Cellular")
                 }
             }
-
         }
         reachability.whenUnreachable = { reachability in
+            //global popView for notify user no Internet Connection
             if reachability.connection != self.connectionStatus {
                 self.connectionStatus = reachability.connection
                 print("Not reachable")
@@ -110,22 +106,6 @@ class BaseViewController: UIViewController {
 
     func hideLoadingDialog() {
         loadingView.removeFromSuperview()
-    }
-
-    func dismissNoInternetDialog() {
-        if noInternetAlert != nil {
-            noInternetAlert.dismiss(animated: true, completion: nil)
-        }
-    }
-
-    func showNoInternetDialog() {
-        let storyboard = UIStoryboard(name: "AddFoodScreen", bundle: nil)
-        if let noInternetAlert =  storyboard.instantiateViewController(withIdentifier: "NoInternetVC") as? NoInternetDialog {
-            self.noInternetAlert = noInternetAlert
-            noInternetAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            noInternetAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            present(noInternetAlert, animated: true, completion: nil)
-        }
     }
 
 }

@@ -111,11 +111,6 @@ PODS:
   - Protobuf (3.6.1)
   - QiniuUpload (3.0.0)
   - ReachabilitySwift (4.3.0)
-  - Realm (3.12.0):
-    - Realm/Headers (= 3.12.0)
-  - Realm/Headers (3.12.0)
-  - RealmSwift (3.12.0):
-    - Realm (= 3.12.0)
   - ScrollableGraphView (4.0.6)
   - SkyFloatingLabelTextField (3.6.0)
   - SnapKit (4.2.0)
@@ -148,7 +143,6 @@ DEPENDENCIES:
   - ParallaxHeader (~> 2.0.0)
   - QiniuUpload
   - ReachabilitySwift
-  - RealmSwift
   - ScrollableGraphView
   - SkyFloatingLabelTextField
   - SnapKit (~> 4.0)
@@ -191,8 +185,6 @@ SPEC REPOS:
     - Protobuf
     - QiniuUpload
     - ReachabilitySwift
-    - Realm
-    - RealmSwift
     - ScrollableGraphView
     - SkyFloatingLabelTextField
     - SnapKit
@@ -246,8 +238,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   QiniuUpload: b1b3dda4883b9bacf9e2efc9e28978cdd6a26c70
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  Realm: cdaef23c4ddb36ab1ddffed23f5a7f3332fc5585
-  RealmSwift: 5576324033f0aa5ef1e0a839a3da2281dff47a7f
   ScrollableGraphView: 4af35d4ea9ecdec665d34a74da51da161ddff8ac
   SkyFloatingLabelTextField: 38164979b79512f9ff9288ad8acfc4bbf5d843e3
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
@@ -257,6 +247,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: e35b362a3dca27af77c0d926de581211ec1074bc
+PODFILE CHECKSUM: 27d55ab55f193c5930cbc9212a20e06e8a7d4b0b
 
 COCOAPODS: 1.5.3

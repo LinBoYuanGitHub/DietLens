@@ -27,6 +27,7 @@ class ClinicalStudiesViewController: BaseViewController {
         //hide empty icon
         self.emaptyIconView.isHidden = true
         self.emptyIconText.isHidden = true
+        self.loadingIndicator.startAnimating()
     }
 
     @objc func onScanAreaTap() {
@@ -39,11 +40,14 @@ class ClinicalStudiesViewController: BaseViewController {
     }
 
     func getClinicalStudyList() {
-        self.loadingIndicator.isHidden = false
         APIService.instance.getClinicalStudyList { (studyList) in
-
+            self.loadingIndicator.stopAnimating()
             self.loadingIndicator.isHidden = true
-            if studyList.count != 0 {
+
+            if studyList.count == 0 {
+                self.emaptyIconView.isHidden = false
+                self.emptyIconText.isHidden = false
+            } else {
                 self.emaptyIconView.isHidden = true
                 self.emptyIconText.isHidden = true
             }
@@ -104,10 +108,13 @@ extension ClinicalStudiesViewController: UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        AlertMessageHelper.showLoadingDialog(targetController: self)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
         let groupId = studyList[indexPath.row].studyId
         APIService.instance.getClinicalStudyDetail(groupId: groupId) { (studyDetailEntity) in
-            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+            appdelegate.dismissLoadingDialog()
 
             if studyDetailEntity == nil {
                 return

@@ -70,7 +70,7 @@ class ProfileActivityLvlViewController: BaseViewController {
                             dest.popularFoodList = results
                             self.navigationController?.pushViewController(dest, animated: true)
                         }
-                    }, nextPageCompletion: { (nextLink) in
+                    }, nextPageCompletion: { (_) in
                         //consider next page scenario
                     })
                 }

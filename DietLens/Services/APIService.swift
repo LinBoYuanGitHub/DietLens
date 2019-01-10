@@ -21,33 +21,32 @@ class APIService {
 
     }
 
-    public func getUUIDRequest(userId: String, completion: @escaping (_ userId: String) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.getUUidURL)!,
-            method: .post,
-            parameters: ["id": userId],
-            encoding: JSONEncoding.default,
-            headers: [:])
+    public func postRequest(url: String, params: [String: Any], successCompletion:@escaping (_ result: JSON) -> Void, failureCompletion: @escaping (_ errorMessage: String) -> Void) {
+        guard let urlLink: URL = URL(string: url) else {
+            return
+        }
+        Alamofire.request(urlLink,
+                          method: .post,
+                          parameters: params,
+                          encoding: JSONEncoding.default,
+                          headers: getTokenHeader())
             .validate()
-            .responseJSON { (response) -> Void in
+            .responseJSON {(response) -> Void in
                 guard response.result.isSuccess else {
-                    print("request UUID Failed due to : \(String(describing: response.result.error))")
-                    completion("")
+                    print("request failed due to : \(String(describing: response.result.error))")
+                    if response.response?.statusCode == 401 {
+                        self.popOutToLoginPage()
+                        return
+                    }
+                    //get error message from the err json data
+                    if let errorJsonString = String(data: response.data!, encoding: String.Encoding.utf8) {
+                        let errJSON = errorJsonString.data(using: String.Encoding.utf8).flatMap({try? JSON(data: $0)}) ?? JSON(NSNull())
+                        failureCompletion(errJSON["message"].stringValue)
+                    }
                     return
                 }
-                guard let value = response.result.value else {
-                    print("Login Failed due to : Server Data Type Error")
-                    completion("")
-                    return
-                }
-                let jsonObj = JSON(value)
-                if jsonObj["status"].stringValue == "HTTP_200_OK"{
-                    let userId = jsonObj["data"]["id"].stringValue
-                    completion(userId)
-                } else {
-                    completion("")
-                }
-
+                let result = JSON(response.result.value)
+                successCompletion(result)
         }
     }
 
@@ -463,7 +462,7 @@ class APIService {
     }
 
     public func getFoodSearchResult(filterType: Int, keywords: String, latitude: Double, longitude: Double, completion: @escaping ([TextSearchSuggestionEntity]?) -> Void, nextPageCompletion: @escaping (String?) -> Void) {
-        let url = ServerConfig.foodFullTextSearchURL //+ "?category=" + String(filterType)
+        let url = ServerConfig.foodFullTextSearchURL
         self.getFoodSearchResult(requestUrl: url, keywords: keywords, latitude: latitude, longitude: longitude, completion: completion, nextPageCompletion: nextPageCompletion)
     }
 
@@ -478,24 +477,10 @@ class APIService {
     }
 
     public func removeFavouriteFood(removeFoodId: Int, completion: @escaping(Bool) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.favouriteFoodURL + "remover/")!,
-            method: .post,
-            parameters: ["food": removeFoodId],
-            encoding: JSONEncoding.default,
-            headers: getTokenHeader())
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Get search result failed due to : \(String(describing: response.result.error))")
-                    if response.response?.statusCode == 401 {
-                        self.popOutToLoginPage()
-                        return
-                    }
-                    completion(false)
-                    return
-                }
-                completion(true)
+        postRequest(url: ServerConfig.favouriteFoodURL + "remover/", params: ["food": removeFoodId], successCompletion: { (_) in
+            completion(true)
+        }) { (_) in
+            completion(false)
         }
     }
 
@@ -543,6 +528,10 @@ class APIService {
                         self.popOutToLoginPage()
                         return
                     }
+                    //return only when the search is cancelled
+                    if (response.error as NSError?)?.code == NSURLErrorCancelled {
+                        return
+                    }
                     completion(nil)
                     return
                 }
@@ -560,20 +549,10 @@ class APIService {
     }
 
     public func setFavouriteFoodList(foodList: [Int], completion: @escaping (Bool) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.favouriteFoodURL)!,
-            method: .post,
-            parameters: ["food": foodList],
-            encoding: JSONEncoding.default,
-            headers: getTokenHeader())
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("post favourite food failed due to : \(String(describing: response.result.error))")
-                    completion(false)
-                    return
-                }
-                completion(true)
+        postRequest(url: ServerConfig.favouriteFoodURL, params: ["food": foodList], successCompletion: { (_) in
+            completion(true)
+        }) { (_) in
+            completion(false)
         }
     }
 
@@ -603,90 +582,6 @@ class APIService {
                     foodSearchList.append(entity)
                 }
                 completion(foodSearchList)
-        }
-    }
-
-    public func getFoodSearchDetailResult(foodId: Int, completion: @escaping (FoodInfomationModel?) -> Void) {
-        let url = ServerConfig.foodSearchListURL+"?id="+String(foodId)
-        Alamofire.request(
-            URL(string: url)!,
-            method: .get,
-            parameters: ["id": foodId],
-            encoding: JSONEncoding.default,
-            headers: getTokenHeader())
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Get food detail failed due to : \(String(describing: response.result.error))")
-                    if response.response?.statusCode == 401 {
-                        self.popOutToLoginPage()
-                        return
-                    }
-                    completion(nil)
-                    return
-                }
-                guard let detail = response.result.value else {
-                    print("Get food detail failed due to : Server Data Type Error")
-                    completion(nil)
-                    return
-                }
-                let jsonObj = JSON(detail)["data"]
-                let foodInfo = FoodInfoDataManager.instance.assembleTextFoodInfo(jsonObject: jsonObj)
-                completion(foodInfo)
-        }
-    }
-
-    public func getIngredientSearchDetailResult(foodId: Int, completion: @escaping (Ingredient?) -> Void) {
-        let url = ServerConfig.ingredientSearchURL+"?id="+String(foodId)
-        Alamofire.request(
-            URL(string: url)!,
-            method: .get,
-            parameters: ["id": foodId],
-            encoding: JSONEncoding.default,
-            headers: [:])
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Get food detail failed due to : \(String(describing: response.result.error))")
-                    completion(nil)
-                    return
-                }
-                guard let detail = response.result.value else {
-                    print("Get food detail failed due to : Server Data Type Error")
-                    completion(nil)
-                    return
-                }
-                let jsonObj = JSON(detail)["data"]
-                let ingredient = FoodInfoDataManager.instance.assembleIngredientInfo(jsonObject: jsonObj)
-                completion(ingredient)
-        }
-    }
-
-    public func getBarcodeScanResult(barcode: String, completion: @escaping (FoodInfomationModel?) -> Void) {
-        Alamofire.request(
-            URL(string: ServerConfig.barcodeSearchURL+"?id="+barcode)!,
-            method: .get,
-            encoding: JSONEncoding.default,
-            headers: [:])
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Get search result failed due to : \(String(describing: response.result.error))")
-                    completion(nil)
-                    return
-                }
-                guard let scanResult = response.result.value else {
-                    print("Get searchResult failed due to : Server Data Type Error")
-                    completion(nil)
-                    return
-                }
-                let jsonObject = JSON(scanResult)["data"]
-                if jsonObject == nil {
-                    completion(nil)
-                } else {
-                    let barcodeScanResult = FoodInfoDataManager.instance.assembleBarcodeFoodInfo(jsonObject: jsonObject)
-                    completion(barcodeScanResult)
-                }
         }
     }
 
@@ -748,36 +643,65 @@ class APIService {
      * return: List of DisplayFoodCategory
      */
     public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
+        postRequest(url: ServerConfig.uploadImageKeyURL, params: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed], successCompletion: { (result) in
+            let jsonObject = result["data"]
+            let displayCategory = FoodInfoDataManager.instance.assembleDisplayFoodCategoryData(data: jsonObject)
+            completion(displayCategory)
+            print("success")
+        }) { (_) in
+            completion(nil)
+        }
+    }
+
+    public func postForMixVegResults(imgData: Data, completion: @escaping (FoodDiaryEntity?) -> Void) {
+        Alamofire.upload(multipartFormData: { multipart in
+            multipart.append(imgData, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
+        }, to: ServerConfig.uploadMixVegDishURL, method: .post, headers: getTokenHeader()) { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.response { result in
+                    let jsonObj = JSON(result.data)
+                    let foodDiary = FoodInfoDataManager.instance.assembleFoodDiaryEntity(jsonObject: jsonObj)
+                    completion(foodDiary)
+                }
+                upload.uploadProgress { _ in
+                    //call progress callback here if you need it
+                }
+            case .failure(let encodingError):
+                print("multipart upload encodingError: \(encodingError)")
+            }
+        }
+    }
+
+    public func postForMixVegResults(imageKey: String, completion:@escaping (FoodDiaryEntity?) -> Void) {
         Alamofire.request(
-            URL(string: ServerConfig.uploadImageKeyURL)!,
+            URL(string: ServerConfig.uploadMixVegDishURL)!,
             method: .post,
-            parameters: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed],
+            parameters: ["key": imageKey],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
-                    print("Get recognition result failed due to : \(String(describing: response.result.error))")
                     if response.response?.statusCode == 401 {
                         self.popOutToLoginPage()
                         return
                     }
+                    print("get food detail failed due to : \(String(describing: response.result.error))")
                     completion(nil)
                     return
                 }
-                guard let recogResult = response.result.value else {
-                    print("Get recognition failed due to : Server Data Type Error")
+                guard let scanResult = response.result.value else {
+                    print("get food detail failed due to : Server Data Type Error")
                     completion(nil)
                     return
                 }
-                let jsonObject = JSON(recogResult)["data"]
-                let displayCategory = FoodInfoDataManager.instance.assembleDisplayFoodCategoryData(data: jsonObject)
-                if jsonObject == JSON.null {
-                    //not json data, return null
+                let jsonObject = JSON(scanResult)
+                if jsonObject.count == 0 {
                     completion(nil)
                 } else {
-                    //assemble FoodInfo to return recognition result
-                    completion(displayCategory)
+                    let foodDiaryEntity = FoodInfoDataManager.instance.assembleMixVegFoodDiaryEntity(jsonObject: jsonObject["data"])
+                    completion(foodDiaryEntity)
                 }
         }
     }
@@ -817,6 +741,9 @@ class APIService {
 
     //delete single foodItem inside foodDiary
     public func deleteFoodItem(foodDiaryId: String, foodItemId: String, completion: @escaping(Bool) -> Void) {
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietItems)!,
             method: .post,
@@ -845,6 +772,9 @@ class APIService {
 
     //delete whole foodDiary
     public func deleteFoodDiary(foodDiaryId: String, completion:@escaping(Bool) -> Void) {
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietLogs+foodDiaryId+"/")!,
             method: .delete,
@@ -905,6 +835,10 @@ class APIService {
         } else {
             param = FoodInfoDataManager.instance.paramfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
         }
+
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietLogs+foodDiary.foodDiaryId+"/")!,
             method: .put,
@@ -935,6 +869,9 @@ class APIService {
     //create a new foodDiary -> save FoodItem & success
     public func createFooDiary(foodDiary: FoodDiaryEntity, completion:@escaping(Bool) -> Void) {
         let param = FoodInfoDataManager.instance.paramfyFoodDiaryEntity(foodDiaryEntity: foodDiary)
+        //UI update observer notify
+        NotificationCenter.default.post(name: .shouldRefreshFoodDiary, object: nil)
+        //request part
         Alamofire.request(
             URL(string: ServerConfig.foodDiaryDietLogs)!,
             method: .post,
@@ -1057,7 +994,7 @@ class APIService {
                 })
                 upload.responseJSON { response in
                     let resultObj = JSON(response.value)
-                    let resultList = MockedUpFoodData.instance.assembleFoodInfoData(data: resultObj["data"])
+                    let resultList = FoodInfoDataManager.instance.assembleFoodInfoData(data: resultObj["data"])
                     //                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
                     //                    let imageId = resultObj["data"]["id"].intValue
                     completion(resultList)
@@ -1065,42 +1002,6 @@ class APIService {
             case .failure(let encodingError):
                 print(encodingError)
                 completion(nil)
-            }
-        }
-    }
-
-    /**
-     * upload image to private server
-     * param: imageData, userId, latitude, longitude
-     * return: foodCategory,progressCompeletion
-     */
-    public func uploadRecognitionImage(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping (Int, [FoodInfomationModel]?) -> Void, progressCompletion: @escaping (Int) -> Void) {
-        let parameters = ["user_id": userId]
-        Alamofire.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
-            for (key, value) in parameters {
-                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-            }
-        }, to: ServerConfig.imageUploadURL) {
-            (result) in
-            switch result {
-            case .success(let upload, _, _):
-                upload.uploadProgress(closure: { (progress) in
-                    #if DEBUG
-                    print("Upload Progress: \(progress.fractionCompleted)")
-                    progressCompletion(Int(progress.fractionCompleted*100))
-                    #endif
-                })
-                upload.responseJSON { response in
-                    let resultObj = JSON(response.value)
-                    let resultList = FoodInfoDataManager.instance.assembleFoodInfos(jsonObj: resultObj)
-                    let imageId = resultObj["data"]["id"].intValue
-                    completion(imageId, resultList)
-                    //                    print(response.result.value)
-                }
-            case .failure(let encodingError):
-                print(encodingError)
-                completion(0, nil)
             }
         }
     }
@@ -1500,111 +1401,6 @@ class APIService {
         }
     }
 
-    public func updateFoodDiary(foodDiary: FoodDiaryModel, completion: @escaping(Bool) -> Void) {
-
-        let params: Dictionary = ["food_name": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].foodName, "image_id": foodDiary.imageId, "meal_type": foodDiary.mealType, "nutrient": assembleNutrtionString(foodDiary: foodDiary), "ingredient": assembleIngredientString(foodDiary: foodDiary), "search_type": foodDiary.recordType, "rank": String(foodDiary.selectedFoodInfoPos+1), "quantity": foodDiary.quantity, "unit": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightUnit] as [String: Any]
-        Alamofire.request(
-            URL(string: ServerConfig.foodDiaryURL+String(foodDiary.id)+"/")!,
-            method: .put,
-            parameters: params,
-            encoding: JSONEncoding.default,
-            headers: [:])
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("update food diary failed due to : \(String(describing: response.result.error))")
-                    completion(false)
-                    return
-                }
-                guard let result = response.result.value else {
-                    print("update food diary failed due to : Server Data Type Error")
-                    completion(false)
-                    return
-                }
-                //                let jsonObject = JSON(result)
-                completion(true)
-        }
-    }
-
-    //swiftlint:disable function_parameter_count
-    /// save FoodDiary API
-    ///
-    /// - Parameters:
-    ///   - foodDiary: foodDiary
-    ///   - imageUrl: food imageURl need to send to backend
-    ///   - fileName: image local storage filename
-    ///   - mealTime: dd MM yyyy foodDiary date
-    ///   - mealType: breakfast|lunch|dinner|snacks
-    ///   - recordType: Image|Text|Barcode|Customize
-    ///   - category: food category
-    ///   - ratio: portion ratio
-    ///   - completion: for passing callback
-    public func saveFoodDiary(userId: String, foodDiary: FoodDiaryModel, completion: @escaping (Bool, JSON) -> Void) {
-        let params: Dictionary = ["food_name": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].foodName, "image_id": foodDiary.imageId, "meal_type": foodDiary.mealType, "nutrient": assembleNutrtionString(foodDiary: foodDiary), "ingredient": assembleIngredientString(foodDiary: foodDiary), "search_type": foodDiary.recordType, "rank": String(foodDiary.selectedFoodInfoPos+1), "quantity": foodDiary.quantity, "unit": foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].portionList[foodDiary.selectedPortionPos].weightUnit] as [String: Any]
-        Alamofire.request(
-            URL(string: ServerConfig.foodDiaryURL+"?user_id="+userId)!,
-            method: .post,
-            parameters: params,
-            encoding: JSONEncoding.default,
-            headers: [:])
-            .validate()
-            .responseJSON { (response) -> Void in
-                guard response.result.isSuccess else {
-                    print("Save food diary failed due to : \(String(describing: response.result.error))")
-                    //need to be checked
-                    let jsonObject = JSON()
-                    completion(false, jsonObject)
-                    return
-                }
-                guard let result = response.result.value else {
-                    print("Save food diary failed due to : Server Data Type Error")
-                    let jsonObject = JSON()
-                    completion(false, jsonObject)
-                   // completion(false, nil)
-                    return
-                }
-                let jsonObject = JSON(result)
-                completion(true, jsonObject)
-        }
-    }
-
-    func assembleNutrtionString(foodDiary: FoodDiaryModel) -> String {
-        let nutrientJson: JSON = [
-            NutrtionData.calorieText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].calorie,
-            NutrtionData.carbohydrateText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].carbohydrate,
-            NutrtionData.proteinText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].protein,
-            NutrtionData.fatText: foodDiary.foodInfoList[foodDiary.selectedFoodInfoPos].fat
-        ]
-        return nutrientJson.rawString()!
-    }
-
-    func assembleIngredientString(foodDiary: FoodDiaryModel) -> String {
-        var ingredientString = ""
-        if foodDiary.ingredientList.count == 0 {
-            ingredientString = "[]"
-        } else {
-            ingredientString = "["
-            for ingredient in  foodDiary.ingredientList {
-                let json: JSON = [
-                    "id": ingredient.id,
-                    "ingredientId": ingredient.ingredientId,
-                    "ingredientName": ingredient.ingredientName,
-                    "calorie": ingredient.calorie,
-                    "carbs": ingredient.carbs,
-                    "protein": ingredient.protein,
-                    "fat": ingredient.fat,
-                    "quantity": ingredient.quantity,
-                    "unit": ingredient.unit,
-                    "weight": ingredient.weight
-                ]
-                ingredientString += json.rawString()! + ","
-            }
-            ingredientString = ingredientString.substring(to: ingredientString.index(before: ingredientString.endIndex))
-            ingredientString += "]"
-        }
-        return ingredientString
-    }
-
     public func uploadStepData(stepList: [StepEntity], completion: @escaping (Bool) -> Void) {
         var params = [String: Any]()
         var steps = [params]
@@ -1973,6 +1769,7 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("get clinical study failed due to : \(String(describing: response.result.error))")
+                    completion(nil)
                     return
                 }
                 let jsonObj = JSON(response.result.value)
@@ -1999,6 +1796,10 @@ class APIService {
                 completion(response.result.isSuccess)
         }
     }
+
+    /**********************************************************
+     APIService Task
+    **********************************************************/
 
     //cancel task
     func cancelRequest(requestURL: String) {
@@ -2057,12 +1858,6 @@ class APIService {
         return ""
     }
 
-    //special header for webhook
-    func getHardCodeBasicAuthenticationHeader() -> [String: String] {
-        let header = ["Authorization": "Basic YThkMjM2MzYxZmRkZjJmZTlmZmYxNjE2ZTAzNzU1NDI6ODYwMzBiZWVkMjEyNGY0YmRjZmU3MGU3YzE4YTA1YmI="]
-        return header
-    }
-
     func popOutToLoginPage() {
         let preferences = UserDefaults.standard
         let token = preferences.string(forKey: PreferenceKey.tokenKey)
@@ -2087,8 +1882,7 @@ class APIService {
 
     func clearPersonalData() {
         let preferences = UserDefaults.standard
-        let nicknameKey = "nickname"
-        preferences.setValue(nil, forKey: nicknameKey)
+        preferences.setValue(nil, forKey: PreferenceKey.userIdkey)
         preferences.setValue(nil, forKey: PreferenceKey.facebookId)
         preferences.setValue(nil, forKey: PreferenceKey.tokenKey)
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)

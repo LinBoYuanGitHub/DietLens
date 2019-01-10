@@ -35,10 +35,6 @@ class RegistrationFirstStepViewController: UIViewController {
     }
 
     func setUpSkyFloatingLabel() {
-        //username
-//        TFuserName.placeholder = "Nickname"
-//        TFuserName.font = UIFont(name: "PingFang SC-Light", size: 16)
-//        TFuserName.title = "Nickname"
         //email
         TFemail.placeholder = "Email"
         TFemail.font = UIFont(name: "PingFang SC-Light", size: 16)
@@ -87,7 +83,7 @@ class RegistrationFirstStepViewController: UIViewController {
         }
         APIService.instance.emailValidationRequest(userEmail: email, completion: { (isSuccess) in
             self.redTick.isHidden = !isSuccess
-//            self.emailCheckerLabel.isHidden = isSuccess
+            //            self.emailCheckerLabel.isHidden = isSuccess
         }) { (errMessage) in
             self.TFemail.errorMessage = errMessage
             self.redTick.isHidden = true
@@ -126,35 +122,37 @@ class RegistrationFirstStepViewController: UIViewController {
             return
         } else {
             //email format validator
-            AlertMessageHelper.showLoadingDialog(targetController: self)
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.register(email: TFemail.text!, password: TFpassword.text!, completion: { (isSucceed) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    if isSucceed {
-                        // save for basic authentication
-                        let preferences = UserDefaults.standard
-                        preferences.setValue(self.TFpassword.text!, forKey: PreferenceKey.passwordKey)
-                        //set up profile
-//                        self.profile.name = self.TFuserName.text!
-                        self.profile.email = self.TFemail.text!
-                        //to registration profile page
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
-                            dest.profile = self.profile
-                            self.navigationController?.pushViewController(dest, animated: true)
-                        }
-                        //save token to backend
-                        let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
-                        let userId = preferences.string(forKey: PreferenceKey.userIdkey)
-                        if userId != nil && fcmToken != nil {
-                            APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
-                                if flag {
-                                    print("send device token succeed")
-                                }
-                            })
-                        }
-                    } else {
-                        print("register failed")
-                        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
+                appdelegate.dismissLoadingDialog()
+                if isSucceed {
+                    // save for basic authentication
+                    let preferences = UserDefaults.standard
+                    preferences.setValue(self.TFpassword.text!, forKey: PreferenceKey.passwordKey)
+                    //set up profile
+                    //                        self.profile.name = self.TFuserName.text!
+                    self.profile.email = self.TFemail.text!
+                    //to registration profile page
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
+                        dest.profile = self.profile
+                        self.navigationController?.pushViewController(dest, animated: true)
                     }
+                    //save token to backend
+                    let fcmToken = preferences.string(forKey: PreferenceKey.fcmTokenKey)
+                    let userId = preferences.string(forKey: PreferenceKey.userIdkey)
+                    if userId != nil && fcmToken != nil {
+                        APIService.instance.saveDeviceToken(uuid: userId!, fcmToken: fcmToken!, status: true, completion: { (flag) in
+                            if flag {
+                                print("send device token succeed")
+                            }
+                        })
+                    }
+                } else {
+                    print("register failed")
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "Registration fail")
                 }
             }, failedCompletion: { (failedMsg) in
                 AlertMessageHelper.dismissLoadingDialog(targetController: self) {
@@ -189,10 +187,10 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == TFemail {
             TFpassword.becomeFirstResponder()
-//            keyboardWillShow()
+            //            keyboardWillShow()
         } else if textField == TFpassword {
             TFconfirmPassword.becomeFirstResponder()
-//            keyboardWillShow()
+            //            keyboardWillShow()
         } else {
             textField.resignFirstResponder()
         }
@@ -200,7 +198,7 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        keyboardWillShow()
+        //        keyboardWillShow()
         if textField == TFemail {
             TFemail.errorMessage = ""
         } else {
@@ -214,22 +212,11 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
         if textField == TFemail {
             checkEmail(email: TFemail.text!)
         }
-//        keyboardWillHide()
+        //        keyboardWillHide()
         return true
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString str: String) -> Bool {
-//        if let text = textField.text {
-//            //Email validator
-//            if textField == TFemail {
-//                let validationString = textField.text! + str
-//                if text.count > 3 && !TextValidtor.isValidEmail(testStr: validationString) {
-//                    TFemail.errorMessage = "Invalid email"
-//                } else {
-//                    TFemail.errorMessage = ""
-//                }
-//            }
-//        }
         return true
     }
 
@@ -237,7 +224,7 @@ extension RegistrationFirstStepViewController: UITextFieldDelegate {
 
 extension RegistrationFirstStepViewController {
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegistrationFirstStepViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }

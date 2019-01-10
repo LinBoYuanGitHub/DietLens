@@ -9,18 +9,12 @@
 import Foundation
 import UIKit
 import Alamofire
-import RealmSwift
 
 public enum Meal: Int {
     case breakfast
     case lunch
     case dinner
     case snack
-}
-
-struct DiaryDailyFood {
-    var mealOfDay: Meal = .breakfast
-    var foodConsumed = [FoodDiaryModel]()
 }
 
 struct FoodDiaryMealEntity {

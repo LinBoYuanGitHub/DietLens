@@ -41,7 +41,7 @@ class FoodInfoViewController: UIViewController {
     let redUnderLine: UIView = UIView(frame: CGRect(x: 12, y: 32, width: 50, height: 2))
 
     //data source
-//    var foodInfoModel = FoodInfomationModel()
+    //    var foodInfoModel = FoodInfomationModel()
     var quantity = 1.0
     var quantityIntegerArray = [0]
     var decimalArray = [0, 0.25, 0.5, 0.75]
@@ -52,8 +52,8 @@ class FoodInfoViewController: UIViewController {
     var userFoodImage: UIImage? //previous viewController need to pass the display image
     var isSetMealByTimeRequired: Bool = false
     var recordType = RecognitionInteger.recognition
-//    var isAddIntoFoodList = false
-//    var isAccumulatedDiary: Bool = false
+    //    var isAddIntoFoodList = false
+    //    var isAccumulatedDiary: Bool = false
     var imageKey: String?
     var imageUrl: String?
 
@@ -63,8 +63,13 @@ class FoodInfoViewController: UIViewController {
     var currentIntegerPos = 1
     var currentDecimalPos = 0
     var recordDate = Date()
-    @IBOutlet weak var containerTopConstraints: NSLayoutConstraint!
     @IBOutlet weak var animationLeading: NSLayoutConstraint!
+
+    //Iodine level
+    @IBOutlet weak var iodineLevelText: UILabel!
+    @IBOutlet weak var iodineLevelImage: UIImageView!
+    @IBOutlet weak var iodineLevelView: UIView!
+    @IBOutlet weak var nutrtionToMealTimeDistance: NSLayoutConstraint!
 
     override func viewDidLoad() {
         //set up currentEditDietItem data
@@ -102,11 +107,24 @@ class FoodInfoViewController: UIViewController {
         )
         setUpQuantityPickerIndex()
         setFavImageStyle()
+        setIodineInfo()
         //analytic screen name
         if isUpdate {
             Analytics.setScreenName("AddFoodItemPage", screenClass: "FoodInfoViewController")
         } else {
             Analytics.setScreenName("EditFoodItemPage", screenClass: "FoodInfoViewController")
+        }
+    }
+
+    func setIodineInfo() {
+        if dietItem.iodineLevel == -999 {
+            iodineLevelView.removeFromSuperview()
+            nutrtionToMealTimeDistance.constant = 4
+            self.view.layoutIfNeeded()
+        } else {
+            iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[dietItem.iodineLevel])
+            iodineLevelText.text = StringConstants.IodineLevel.text[dietItem.iodineLevel]
+            iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[dietItem.iodineLevel]))
         }
     }
 
@@ -145,9 +163,9 @@ class FoodInfoViewController: UIViewController {
         }
     }
 
-/********************************************************
-    Data setting Up part
-********************************************************/
+    /********************************************************
+     Data setting Up part
+     ********************************************************/
     func initFoodInfo() {
         if shouldShowMealBar {
             setCorrectMealType()
@@ -184,7 +202,7 @@ class FoodInfoViewController: UIViewController {
         let carbohydrateStr = String(format: "%.1f", dietItem.nutritionInfo.carbohydrate * portionRate)+StringConstants.UIString.diaryIngredientUnit
         let carbohydrateText = NSMutableAttributedString.init(string: carbohydrateStr)
         carbohydrateText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
-                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: carbohydrateStr.count - 1, length: 1))
+                                        kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: carbohydrateStr.count - 1, length: 1))
         carbohydrateValueLabel.attributedText = carbohydrateText
         //protein
         let proteinStr = String(format: "%.1f", dietItem.nutritionInfo.protein * portionRate) + StringConstants.UIString.diaryIngredientUnit
@@ -196,13 +214,13 @@ class FoodInfoViewController: UIViewController {
         let fatStr =  String(format: "%.1f", dietItem.nutritionInfo.fat * portionRate) + StringConstants.UIString.diaryIngredientUnit
         let fatText = NSMutableAttributedString.init(string: fatStr)
         fatText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
-                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: fatStr.count - 1, length: 1))
+                               kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: fatStr.count - 1, length: 1))
         fatValueLabel.attributedText = fatText
     }
 
-/********************************************************
-    View setting Up part
-********************************************************/
+    /********************************************************
+     View setting Up part
+     ********************************************************/
     func setUpViews() {
         setUpImage()
         quantityValue.inputAccessoryView = setUpPickerToolBar()
@@ -211,12 +229,12 @@ class FoodInfoViewController: UIViewController {
         if isUpdate {
             //match portion by text
             for portion in dietItem.portionInfo where portion.sizeUnit == dietItem.displayUnit {
-                    unitValue.text = portion.sizeUnit
+                unitValue.text = portion.sizeUnit
             }
         } else if dietItem.portionInfo.count == 0 {
-             unitValue.text = "portion"
+            unitValue.text = "portion"
         } else {
-             unitValue.text = String(dietItem.portionInfo[dietItem.selectedPos].sizeUnit)
+            unitValue.text = String(dietItem.portionInfo[dietItem.selectedPos].sizeUnit)
         }
 
     }
@@ -275,9 +293,9 @@ class FoodInfoViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         //navigation controller
         self.navigationController?.navigationBar.isHidden = false
-//        self.navigationItem.title = "Food"
+        //        self.navigationItem.title = "Food"
         if isUpdate {
-//            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
+            //            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
             self.navigationItem.rightBarButtonItem?.image = UIImage(imageLiteralResourceName: "more_dots")
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
@@ -295,7 +313,7 @@ class FoodInfoViewController: UIViewController {
         if destX != nil {
             UIView.animate(withDuration: 0.1, delay: 0.1,
                            usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.animationLeading.constant = destX! + CGFloat(10)
+                            self.animationLeading.constant = destX! + CGFloat(10)
             })
         }
     }
@@ -492,30 +510,32 @@ class FoodInfoViewController: UIViewController {
         } else {
             //redirect to foodDiary page
             FoodDiaryDataManager.instance.foodDiaryEntity.dietItems.append(dietItem)
-            AlertMessageHelper.showLoadingDialog(targetController: self)
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.createFooDiary(foodDiary: FoodDiaryDataManager.instance.foodDiaryEntity, completion: { (isSuccess) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    if isSuccess {
-                        //TODO need to switch the date in the foodDiary page
-                        //                            dest.selectedDate = DateUtil.normalStringToDate(dateStr: self.foodDiaryEntity.mealTime)
-                        if let navigator = self.navigationController {
-                            //pop to home tabPage
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                if let dest =  navigator.viewControllers.first as? HomeTabViewController {
-                                    dest.shouldSwitchToFoodDiary = true
-                                    dest.foodDiarySelectedDate = self.recordDate
-                                }
-                                navigator.popToRootViewController(animated: true)
-                            })
-                        }
+                appdelegate.dismissLoadingDialog()
+                if isSuccess {
+                    if let navigator = self.navigationController {
+                        //pop to home tabPage
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                            if let dest =  navigator.viewControllers.first as? HomeTabViewController {
+                                dest.shouldSwitchToFoodDiary = true
+                                dest.foodDiarySelectedDate = self.recordDate
+                            }
+                            navigator.popToRootViewController(animated: true)
+                        })
                     }
+                } else {
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "create foodDiary failed")
                 }
             })
             //#google analytic log part
             Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodPageAddSaveButton, parameters: [
                 "recordType": recordType,
                 "mealtime": FoodDiaryDataManager.instance.foodDiaryEntity.mealType
-            ])
+                ])
             switch recordType {
             case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
             case RecognitionInteger.gallery: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
@@ -526,8 +546,8 @@ class FoodInfoViewController: UIViewController {
     }
 
     @IBAction func onBackPressed(_ sender: Any) {
-//        dismiss(animated: true, completion: nil)
-//        self.navigationController?.popViewController(animated: true)
+        //        dismiss(animated: true, completion: nil)
+        //        self.navigationController?.popViewController(animated: true)
         //perform foodItem change when done
         if let navigator = self.navigationController {
             for viewController in (navigator.viewControllers) {
@@ -541,7 +561,7 @@ class FoodInfoViewController: UIViewController {
             }
         }
 
-//        self.navigationController?.popViewController(animated: true)
+        //        self.navigationController?.popViewController(animated: true)
         //#Google Analytic part
         Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodItemClickBack, parameters: nil)
     }
@@ -583,8 +603,12 @@ class FoodInfoViewController: UIViewController {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
-            containerTopConstraints.constant = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height - CGFloat(60)
-//            self.container.frame.origin.y = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height
+//            containerTopConstraints.constant = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height - CGFloat(60)
+            UIView.animate(withDuration: 0.2 ) {
+                 self.container.frame.origin.y = self.view.frame.height - keyboardHeight - self.portionDataView.frame.size.height + CGFloat(30)
+            }
+
+            self.nutritionDataView.isHidden = true
             DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
                 UIView.animate(withDuration: 0.2 ) {
                     self.portionDataView.frame.origin.y = CGFloat(0)
@@ -594,9 +618,9 @@ class FoodInfoViewController: UIViewController {
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        containerTopConstraints.constant = 291
-//        self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
+        self.container.frame.origin.y = foodSampleImage.frame.origin.y + foodSampleImage.frame.size.height + CGFloat(4)
         self.portionDataView.frame.origin.y =  nutritionDataView.frame.origin.y + nutritionDataView.frame.size.height + CGFloat(4)
+        self.nutritionDataView.isHidden = false
     }
 
 }
@@ -642,8 +666,8 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
-                cell.setUpCell(isHightLight: false, mealStr: mealStringArray[indexPath.row])
-                return cell
+            cell.setUpCell(isHightLight: false, mealStr: mealStringArray[indexPath.row])
+            return cell
         }
         return UICollectionViewCell()
     }
@@ -652,12 +676,12 @@ extension FoodInfoViewController: UICollectionViewDelegate, UICollectionViewData
         //change the mealType block selection
         currentMealIndex = indexPath.row
         if !isUpdate {
-             FoodDiaryDataManager.instance.foodDiaryEntity.mealType = mealStringArray[indexPath.row]
+            FoodDiaryDataManager.instance.foodDiaryEntity.mealType = mealStringArray[indexPath.row]
         }
         //switch collection selection
         let destX = collectionView.cellForItem(at: indexPath)?.center.x
         UIView.animate(withDuration: 0.2, delay: 0.1, usingSpringWithDamping: 0.0, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-             self.animationLeading.constant = destX! + CGFloat(10)
+            self.animationLeading.constant = destX! + CGFloat(10)
         })
     }
 

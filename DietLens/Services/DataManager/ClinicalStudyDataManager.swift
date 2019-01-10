@@ -37,13 +37,13 @@ class ClinicalStudyDataManager {
         entity.studyName = jsonObj["title"].stringValue
         //content part
         entity.content.studyDesc = jsonObj["description"].stringValue
-        entity.content.startDate = DateUtil.standardZStringToDate(dateStr: jsonObj["start_time"].stringValue)
-        entity.content.endDate = DateUtil.standardZStringToDate(dateStr: jsonObj["end_time"].stringValue)
+        entity.content.startDate = DateUtil.normalStringToDate(dateStr: jsonObj["start_time"].stringValue)
+        entity.content.endDate = DateUtil.normalStringToDate(dateStr: jsonObj["end_time"].stringValue)
         entity.content.timeZone = jsonObj["timezone"].stringValue
         //owner part
         entity.owner.ownerId = jsonObj["owner"]["id"].stringValue
         entity.owner.email = jsonObj["owner"]["email"].stringValue
-        entity.owner.nickname = jsonObj["owner"]["nickname"].stringValue
+        entity.owner.nickname = jsonObj["owner"]["first_name"].stringValue + " " + jsonObj["owner"]["last_name"].stringValue
         entity.owner.organization = jsonObj["owner"]["organization"].stringValue
         entity.owner.phone = jsonObj["owner"]["phone"].stringValue
         //inclusion criteria part

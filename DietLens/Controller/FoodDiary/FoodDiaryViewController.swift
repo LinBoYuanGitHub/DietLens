@@ -144,14 +144,14 @@ class FoodDiaryViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.title = "Meal"
         if isUpdate {
-//            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
-             self.navigationItem.rightBarButtonItem?.image = UIImage(imageLiteralResourceName: "more_dots")
+            //            self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.moreBtnText
+            self.navigationItem.rightBarButtonItem?.image = UIImage(imageLiteralResourceName: "more_dots")
         } else {
             self.navigationItem.rightBarButtonItem?.title = StringConstants.UIString.saveBtnText
         }
         let textColor = UIColor(red: CGFloat(67/255), green: CGFloat(67/255), blue: CGFloat(67/255), alpha: 1.0)
         if let attributeGroup = [NSAttributedStringKey.foregroundColor: textColor, kCTFontAttributeName: UIFont(name: "PingFangSC-Regular", size: 18)!] as?  [NSAttributedStringKey: Any] {
-             self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
+            self.navigationController?.navigationBar.titleTextAttributes = attributeGroup
         }
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
@@ -166,7 +166,7 @@ class FoodDiaryViewController: UIViewController {
             dest.addFoodDate = self.recordDate
             dest.isSearchMoreFlow = true
             dest.shouldShowCancel = true
-//            dest.cameraImage = cameraImage use sample Image
+            //            dest.cameraImage = cameraImage use sample Image
             if let navigator = self.navigationController {
                 //clear controller to Bottom & add foodCalendar Controller
                 navigator.pushViewController(dest, animated: true)
@@ -227,19 +227,21 @@ class FoodDiaryViewController: UIViewController {
             optionMenu.addAction(cancelAction)
             self.present(optionMenu, animated: true, completion: nil)
         } else {
-            AlertMessageHelper.showLoadingDialog(targetController: self)
+            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            appdelegate.showLoadingDialog()
             APIService.instance.createFooDiary(foodDiary: foodDiaryInstance, completion: { (isSuccess) in
-                AlertMessageHelper.dismissLoadingDialog(targetController: self) {
-                    if isSuccess {
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
-                            if let navigator = self.navigationController {
-                                //pop to home tabPage
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                                    dest.shouldSwitchToFoodDiary = true
-                                    dest.foodDiarySelectedDate = self.recordDate
-                                    navigator.popToRootViewController(animated: true)
-                                })
-                            }
+                appdelegate.dismissLoadingDialog()
+                if isSuccess {
+                    if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabVC") as? HomeTabViewController {
+                        if let navigator = self.navigationController {
+                            //pop to home tabPage
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                                dest.shouldSwitchToFoodDiary = true
+                                dest.foodDiarySelectedDate = self.recordDate
+                                navigator.popToRootViewController(animated: true)
+                            })
                         }
                     }
                 }
@@ -310,6 +312,8 @@ class FoodDiaryViewController: UIViewController {
                 if foodDiaryEntity != nil && isSuccess {
                     //refresh foodDiaryEntity
                     self.foodDiaryInstance = foodDiaryEntity!
+                } else {
+                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "add food item failed")
                 }
             }
         }
@@ -331,7 +335,11 @@ class FoodDiaryViewController: UIViewController {
         //update food table
         foodTableView.reloadRows(at: [indexPath], with: .automatic)
         if !foodDiaryInstance.foodDiaryId.isEmpty && !foodDiaryInstance.dietItems[row].id.isEmpty {
-            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (_, _) in }
+            APIService.instance.updateFoodDiary(isPartialUpdate: false, foodDiary: foodDiaryInstance) { (isSuccess, _) in
+                if !isSuccess {
+                     AlertMessageHelper.showMessage(targetController: self, title: "", message: "update food item failed")
+                }
+            }
         }
     }
 
@@ -356,8 +364,8 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealTypeCell", for: indexPath) as? MealTypeCollectionCell {
-                cell.setUpCell(isHightLight: false, mealStr: mealStringArray[indexPath.row])
-                return cell
+            cell.setUpCell(isHightLight: false, mealStr: mealStringArray[indexPath.row])
+            return cell
         }
         return UICollectionViewCell()
     }
@@ -372,7 +380,11 @@ extension FoodDiaryViewController: UICollectionViewDelegate, UICollectionViewDat
             self.self.animationViewLeading.constant = destX! + CGFloat(10)
         })
         //set request to switch time
-        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (_, _) in })
+        APIService.instance.updateFoodDiary(isPartialUpdate: true, foodDiary: self.foodDiaryInstance, completion: { (isSuccess, _) in
+            if !isSuccess {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "update meal time failed")
+            }
+        })
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -432,12 +444,12 @@ extension FoodDiaryViewController: CoachMarksControllerDataSource, CoachMarksCon
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-//        coachViews.bodyView.nextLabel.textColor = UIColor.white
-//        coachViews.bodyView.hintLabel.textColor = UIColor.white
-//        let dietlensRed =  UIColor(red: 242/255, green: 64/255, blue: 93/255, alpha: 1.0)
-//        coachViews.bodyView.tintColor = dietlensRed
-//        coachViews.bodyView.hintLabel.backgroundColor = dietlensRed
-//        coachViews.bodyView.nextLabel.backgroundColor = dietlensRed
+        //        coachViews.bodyView.nextLabel.textColor = UIColor.white
+        //        coachViews.bodyView.hintLabel.textColor = UIColor.white
+        //        let dietlensRed =  UIColor(red: 242/255, green: 64/255, blue: 93/255, alpha: 1.0)
+        //        coachViews.bodyView.tintColor = dietlensRed
+        //        coachViews.bodyView.hintLabel.backgroundColor = dietlensRed
+        //        coachViews.bodyView.nextLabel.backgroundColor = dietlensRed
         coachViews.bodyView.nextLabel.text = "Got it"
         coachViews.bodyView.hintLabel.text = "Add side dishes to complete your meal"
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)

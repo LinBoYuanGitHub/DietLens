@@ -153,6 +153,12 @@ struct StringConstants {
     }
 
     static let whiteDomainList  = ["https://download.dietlens.com", "https://www.dietlens.com"]
+    struct IodineLevel {
+
+        static let text = ["We have not found the iodine level for this food. It is likely that it has a low or negligible iodine level, however, you may want to contact your healthcare provider.", "Not suitable to eat: significant iodine content", "Safe to eat: low/no iodine"]
+        static let icon = ["iodine_unknown_icon", "iodine_warning_icon", "iodine_ok_icon"]
+        static let color = [0xe25d5f, 0xea2040, 0x80bd57]
+    }
 
     enum DateMode {
         case day

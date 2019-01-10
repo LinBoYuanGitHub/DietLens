@@ -15,13 +15,11 @@ class FeedBackViewController: UIViewController {
 
     override func viewDidLoad() {//sendFeedBack
         feedBackTextView.becomeFirstResponder()
-//        feedBackTextView.selectedTextRange = feedBackTextView.textRange(from: feedBackTextView.beginningOfDocument, to: feedBackTextView.beginningOfDocument)
         feedBackTextView.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .default
-//        feedBackTextView.text = "Input your suggestion here…"
         feedBackTextView.textColor = UIColor.lightGray
     }
 
@@ -76,30 +74,6 @@ class FeedBackViewController: UIViewController {
 
 extension FeedBackViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // Combine the textView text and the replacement text to
-        // create the updated text string
-//        let currentText = textView.text
-//        let typeCasteToStringFirst = textView.text as NSString?
-//        let updatedText = typeCasteToStringFirst?.replacingCharacters(in: range, with: text)
-//
-//        // If updated text view will be empty, add the placeholder
-//        // and set the cursor to the beginning of the text view
-//        if (updatedText?.isEmpty)! {
-////            textView.text = "Input your suggestion here…"
-//            textView.textColor = UIColor.lightGray
-//
-//            textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-//            return false
-//        }
-            // Else if the text view's placeholder is showing and the
-            // length of the replacement string is greater than 0, clear
-            // the text view and set its color to black to prepare for
-            // the user's entry
-
-//        else if textView.textColor == UIColor.lightGray && !text.isEmpty {
-//            textView.text = nil
-//            textView.textColor = UIColor.black
-//        }
         return true
     }
 

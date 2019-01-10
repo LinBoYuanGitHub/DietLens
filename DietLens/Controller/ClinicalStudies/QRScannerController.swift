@@ -44,7 +44,7 @@ class QRScannerController: BaseViewController {
             deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera], mediaType: AVMediaType.video, position: .back)
         }
 
-        guard let captureDevice = deviceDiscoverySession?.devices.first else {
+        guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
             print("Failed to get the camera device")
             return
         }
@@ -122,7 +122,7 @@ class QRScannerController: BaseViewController {
     }
 
     @objc func onAlbumPressed() {
-         present(imagePicker, animated: false, completion: nil)
+        present(imagePicker, animated: false, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -147,19 +147,19 @@ class QRScannerController: BaseViewController {
         //                self.captureSession.stopRunning()
         //            }
         //        })
-        
+
         let cancelAction = UIAlertAction(title: "Em...it doesn`t look like a dietlens QRCode", style: UIAlertActionStyle.cancel, handler: nil)
         //        alertPrompt.addAction(confirmAction)
         alertPrompt.addAction(cancelAction)
         present(alertPrompt, animated: true, completion: nil)
     }
-    
+
     func jumpToJoinGroupPage(study: ClinicalStudyEntity) {
-        guard let scanresultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScanResultViewController") as? ScanResultViewController else {
+        guard let scanResultVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScannedResultViewController") as? ScannedResultViewController else {
             return
         }
-        scanresultVC.studyEntity = study
-        self.navigationController?.pushViewController(scanresultVC, animated: true)
+        scanResultVC.studyEntity = study
+        self.navigationController?.pushViewController(scanResultVC, animated: true)
         captureSession.stopRunning()
     }
 
@@ -200,9 +200,9 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
         }
         //check the gid existing part
         if !isWhiteDomainFlag || !scannedURL.contains("?gid=") {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { //delay for showing bounding box for user to confirm the scanned QR code
-                self.launchApp(decodedURL: scannedURL)
-            }
+            AlertMessageHelper.showMessage(targetController: self, title: "", message: "It's not a valid Dietlens QR code", confirmText: "OK", completion: {
+                self.scannedFlag = false
+            })
             return
         }
         let groupId = scannedURL.components(separatedBy: "?gid=")[1]
@@ -210,6 +210,10 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
         APIService.instance.getClinicalStudyDetail(groupId: groupId, completion: { (entity) in
             if entity != nil {
                 self.jumpToJoinGroupPage(study: entity!)
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "It's not a valid Dietlens QR code", confirmText: "OK", completion: {
+                    self.scannedFlag = false
+                })
             }
         })
     }
@@ -219,32 +223,24 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
 extension QRScannerController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-
-        //
         guard let qrcodeImg = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             print("Cannot get image from gallery")
             imagePicker.dismiss(animated: true, completion: nil)
             return
         }
-
         let detector: CIDetector=CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])!
         let ciImage: CIImage=CIImage(image: qrcodeImg)!
-
         qrcodeImage = UIImageView(frame: scanerView.bounds)
         qrcodeImage.image = qrcodeImg
-
         self.scanerView.addSubview(qrcodeImage)
-        var qrCodeLink=""
-
         guard let features=detector.features(in: ciImage) as? [CIQRCodeFeature] else {
             return
         }
-
-        for feature in features {
-            qrCodeLink += feature.messageString!
-        }
-
         imagePicker.dismiss(animated: true, completion: nil)
-        performScannedOperation(scannedURL: qrCodeLink, bounds: features[0].bounds)
+        if features.count == 0 {
+            performScannedOperation(scannedURL: "", bounds: CGRect(x: 0, y: 0, width: 0, height: 0))
+        } else {
+            performScannedOperation(scannedURL: features[0].messageString!, bounds: features[0].bounds)
+        }
     }
 }

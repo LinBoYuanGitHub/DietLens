@@ -2,7 +2,6 @@ import UIKit
 import AVFoundation
 import Photos
 import XLPagerTabStrip
-import RealmSwift
 import JPSVolumeButtonHandler
 import Reachability
 import AssetsLibrary
@@ -27,8 +26,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     private let imagePicker = UIImagePickerController()
 
-    private var foodDiary = FoodDiaryModel()
-
     private var activityIndicator = UIActivityIndicatorView()
 
     @IBOutlet weak var loadingScreen: UIView!
@@ -39,7 +36,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
 
     private var recordType: String = RecognitionInteger.recognition
 
-    //    @IBOutlet weak var focusViewImg: UIImageView!
     var imageId: Int = 0
 
     var pinchGestureRecognizer = UIPinchGestureRecognizer()
@@ -58,8 +54,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
                          "sample/5_Chicken_Chop.png", "sample/1_Satay.png"]
     var currentImageIndex = 0
 
-    //    var volumeHandler: JPSVolumeButtonHandler?
-
     var focusIndicator: UIImageView?
     var timer: Timer?
 
@@ -74,19 +68,13 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         previewContainer.addGestureRecognizer(pinchGestureRecognizer)
         previewContainer.addGestureRecognizer(tapGestureRecognizer)
         //view gesture recognizer
-//        self.view.addGestureRecognizer(tapGestureRecognizer)
-//        self.view.addGestureRecognizer(pinchGestureRecognizer)
-//        sessionManager.previewView.addGestureRecognizer(pinchGestureRecognizer)
-//        sessionManager.previewView.addGestureRecognizer(tapGestureRecognizer)
         sessionManager.viewControllerDelegate = self
         sessionManager.setup()
 
-        //        self.volumeHandler = JPSVolumeButtonHandler(up: {self.sessionManager.capturePhoto()}, downBlock: {self.sessionManager.capturePhoto()})
         let previewLayer = previewView.videoPreviewLayer
         previewLayer.videoGravity = .resizeAspectFill
 
         previewContainer.layer.addSublayer(previewLayer)
-        //previewContainer.bringSubview(toFront: focusViewImg)
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = false
@@ -154,10 +142,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         previewView.videoPreviewLayer.frame.size = previewContainer.frame.size
     }
 
-    //    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-    //        sessionManager.onViewWillAppear()
-    //    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
@@ -202,10 +186,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
             StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
         ])
     }
-
-    //    @IBAction func switchToBarcode(_ sender: UIButton) {
-    //        sessionManager.set(captureMode: .barcode)
-    //    }
 
     @IBAction func switchToGallery(_ sender: UIButton) {
         present(imagePicker, animated: false, completion: nil)
@@ -264,7 +244,6 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
         APIService.instance.postForRecognitionResult(imageKey: imageKey, latitude: appDelegate.latitude, longitude: appDelegate.longitude, uploadSpeed: uploadTime, completion: { (resultList) in
             self.hideReview()
             self.capturePhotoButton.isEnabled = true
-            //            self.loadingScreen.alpha = 0
             if resultList == nil || resultList?.count == 0 {
                 AlertMessageHelper.showMessage(targetController: self, title: "", message: "Recognized failed")
             } else {
@@ -386,15 +365,6 @@ extension CameraViewController: CameraViewControllerDelegate {
             capturePhotoButton.isHidden = true
             addBarScannerLine()
         }
-        //        let allButtons = [photoButton]
-        //        let inactiveButtons = allButtons.filter { $0 != activeButton }
-        //
-        //        for button in inactiveButtons {
-        //            button?.isEnabled = true
-        //            button?.backgroundColor = .clear
-        //        }
-        //        activeButton.setTitleColor(UIColor.red, for: .disabled)
-        //        activeButton.isEnabled = false
     }
 
     func onCameraInput(isAvailable: Bool) {
@@ -442,13 +412,6 @@ extension CameraViewController: CameraViewControllerDelegate {
         let height: CGFloat = aPoint.y * originalWidth - bPoint.y * originalWidth
 
         let cropRect = CGRect(x: posX, y: posY, width: width, height: height)
-        //        let metaRect = previewLayer.metadataOutputRectConverted(fromLayerRect: previewView.bounds)
-        //        let finalcropRect: CGRect =
-        //        CGRect( x: metaRect.origin.x * original.size.width,
-        //        y: metaRect.origin.y * original.size.height,
-        //        width: metaRect.size.width * original.size.width,
-        //        height: metaRect.size.height * original.size.height)
-        //        print(metaRect)
         if let imageRef = original.cgImage?.cropping(to: cropRect) {
             image = UIImage(cgImage: imageRef, scale: original.scale, orientation: original.imageOrientation)
         }
@@ -456,34 +419,7 @@ extension CameraViewController: CameraViewControllerDelegate {
     }
 
     func onDetect(barcode: String) {
-        APIService.instance.getBarcodeScanResult(barcode: barcode) { (_) in
-            AlertMessageHelper.showMessage(targetController: self, title: "", message: "Work in progress")
-            //            if foodInformation == nil {
-            //                DispatchQueue.main.async { [weak self] in
-            //                    guard let wSelf = self else {
-            //                        return
-            //                    }
-            //                    let alertMsg = "Result not found!"
-            //                    let message = NSLocalizedString("Barcode result not found in database", comment: alertMsg)
-            //                    let alertController = UIAlertController(title: "DietLens", message: message, preferredStyle: .alert)
-            //                    alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-            //                                                            style: .cancel,
-            //                                                            handler: nil))
-            //                    wSelf.present(alertController, animated: true, completion: nil)
-            //                    }
-            //            } else {
-            //                self.loadingScreen.alpha = 0
-            //                do {
-            //                    try Realm().write {
-            //                        self.foodDiary.foodInfoList.append(foodInformation!)
-            //                    }
-            //                } catch let error as NSError {
-            //                    //handel error
-            //                }
-            //                self.recordType = RecordType.RecordByBarcode
-            //                self.performSegue(withIdentifier: "test", sender: self)
-            //            }
-        }
+        AlertMessageHelper.showMessage(targetController: self, title: "", message: "Work in progress")
         sessionManager.set(captureMode: .photo)
     }
 }
@@ -519,10 +455,6 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageClickGalleryButton, parameters: [
             StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType
         ])
-        //        let imgData = UIImagePNGRepresentation(image)!
-        //        APIService.instance.uploadRecognitionImage(imgData: imgData, userId: "1") {(_) in
-        //            // upload result and callback
-        //        }
 
     }
 
@@ -548,7 +480,6 @@ extension CameraViewController {
         capturePhotoButton.showLoading()
         capturePhotoButton.isEnabled = false
         capturePhotoButton.setImage(nil, for: .normal)
-        //        reviewImagePalette.isHidden = false
     }
 
     private func hideReview() {
@@ -557,7 +488,6 @@ extension CameraViewController {
         capturePhotoButton.hideLoading()
         capturePhotoButton.isEnabled = true
         capturePhotoButton.setImage(#imageLiteral(resourceName: "capture"), for: .normal)
-        //        reviewImagePalette.isHidden = true
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

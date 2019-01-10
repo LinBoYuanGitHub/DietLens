@@ -17,6 +17,10 @@ class WelcomeViewController: BaseViewController {
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var facebookLoginBtn: UIButton!
     @IBOutlet weak var googleLoginBtn: UIButton!
+    @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var welcomeImageView: UIImageView!
+
+    var shouldShowNavBtn = false
 
     override func viewDidLoad() {
 
@@ -28,10 +32,15 @@ class WelcomeViewController: BaseViewController {
         self.navigationController?.navigationBar.isHidden = true
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
+        backBtn.isHidden = !shouldShowNavBtn
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    @IBAction func onBackPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func redirecToSignUpPage(_ sender: UIButton) {
@@ -66,10 +75,13 @@ class WelcomeViewController: BaseViewController {
                         let facebookUserId = response.dictionaryValue!["id"]
                         let facebookUserName = response.dictionaryValue!["name"]
                         //validate FacebookId
-                        AlertMessageHelper.showLoadingDialog(targetController: self)
+                        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+                            return
+                        }
+                        appdelegate.showLoadingDialog()
                         guard let fbUserId = facebookUserId as? String else { return }
                         APIService.instance.facebookIdValidationRequest(accessToken: accessToken.authenticationToken, uuid: fbUserId, completion: { (isSuccess, isNewUser) in
-                            AlertMessageHelper.dismissLoadingDialog(targetController: self)
+                            appdelegate.dismissLoadingDialog()
                             if isSuccess {
                                 //record userId & userName
                                 let preferences = UserDefaults.standard
@@ -100,7 +112,7 @@ class WelcomeViewController: BaseViewController {
                                 } else {
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-//                                         self.navigationController?.pushViewController(controller, animated: true)
+                                        //                                         self.navigationController?.pushViewController(controller, animated: true)
                                         self.present(controller, animated: true, completion: nil)
                                     }
                                 }
@@ -167,7 +179,7 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 } else {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-//                        self.navigationController?.pushViewController(controller, animated: true)
+                        //                        self.navigationController?.pushViewController(controller, animated: true)
                         self.present(controller, animated: true, completion: nil)
                     }
                 }

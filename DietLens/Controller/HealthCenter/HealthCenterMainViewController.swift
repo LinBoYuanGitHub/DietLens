@@ -9,15 +9,15 @@
 import UIKit
 import FirebaseAnalytics
 
-class HealthCenterMainViewController: UIViewController {
+class HealthCenterMainViewController: BaseViewController {
 
     @IBOutlet weak var healthCenterTable: UITableView!
     //data part
-//    let iconArray = []
     var healthCenterItemList = [HealthCenterItem]() // 3 latest item
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.internetDelegate = self
         healthCenterTable.delegate = self
         healthCenterTable.dataSource = self
         healthCenterTable.tableFooterView = UIView()
@@ -37,6 +37,7 @@ class HealthCenterMainViewController: UIViewController {
         //set rightBarButtonItem disapear
         self.navigationItem.rightBarButtonItem = nil
         self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.internetDelegate = self
     }
 
     /**
@@ -101,6 +102,18 @@ extension HealthCenterMainViewController: UITableViewDelegate, UITableViewDataSo
                 self.navigationController?.pushViewController(dest, animated: true)
             }
         }
+    }
+
+}
+
+extension HealthCenterMainViewController: InternetDelegate {
+
+    func onInternetConnected() {
+        getLatestHealthCenterItemValue()
+    }
+
+    func onLosingInternetConnection() {
+
     }
 
 }

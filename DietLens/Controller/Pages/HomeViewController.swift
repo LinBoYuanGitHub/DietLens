@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import RealmSwift
 import BAFluidView
 import Instructions
 import Photos
 import FirebaseAnalytics
 
-class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
+class HomeViewController: BaseViewController, ArticleCollectionCellDelegate {
 
     @IBOutlet weak var homeTitleBar: UINavigationItem!
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
@@ -77,7 +76,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         if let controller = storyboard.instantiateViewController(withIdentifier: "nutritionInfoVC") as? DailyNutritionInfoViewController {
             controller.selectedDate = Date()
             self.navigationController?.pushViewController(controller, animated: true)
-            //            present(controller, animated: true, completion: nil)
         }
     }
 
@@ -125,14 +123,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
             self.requestNutritionDict(requestDate: Date())
         }
-//        APIService.instance.getDietaryGuideInfo { (guideDict) in
-//            let preferences = UserDefaults.standard
-//            preferences.setValue(guideDict["energy"], forKey: PreferenceKey.calorieTarget)
-//            preferences.setValue(guideDict["carbohydrate"], forKey: PreferenceKey.carbohydrateTarget)
-//            preferences.setValue(guideDict["protein"], forKey: PreferenceKey.proteinTarget)
-//            preferences.setValue(guideDict["fat"], forKey: PreferenceKey.fatTarget)
-//            self.requestNutritionDict(requestDate: Date())
-//        }
     }
 
     func loadCalorieData(todayIntakenCal: Int) {
@@ -163,30 +153,6 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             self.assembleTargetDict()
             self.cpfCollectionView.reloadData()
             self.loadCalorieData(todayIntakenCal: Int(resultDict["energy"]!))
-        }
-    }
-
-    @objc func onSideMenuClick(_ notification: NSNotification) {
-        guard let position = notification.userInfo?["position"] as? Int else {return}
-        switch position {
-        case 0:
-            //home
-            jumpToDestPage(identifyId: "DietLens", mType: HomeViewController.self)
-        case 1:
-            //to food diary page
-            jumpToDestPage(identifyId: "FoodDiaryHistoryVC", mType: FoodDiaryHistoryViewController.self)
-        case 2:
-            //to step counter page
-            jumpToDestPage(identifyId: "StepCounterVC", mType: StepCounterViewController.self)
-//            jumpToDestPage(identifyId: "StepChartVC", mType: StepChartViewController.self)
-        case 3:
-            //to healthCenter page
-            jumpToDestPage(identifyId: "healthCenterVC", mType: HealthCenterMainViewController.self)
-        case 4:
-            //to setting page
-            jumpToDestPage(identifyId: "SettingsPage", mType: SettingViewController.self)
-        default:
-            break
         }
     }
 
@@ -247,8 +213,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         //setUp title
         self.parent?.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.barTintColor = UIColor(displayP3Red: 242/255, green: 63/255, blue: 93/255, alpha: 1)
-//        self.navigationController?.navigationBar.barTintColor = UIColor.UIColorFromRGB(0xF03C5A)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 80/255, blue: 110/255, alpha: 1)
 
         self.navigationController?.navigationBar.topItem?.title = StringConstants.NavigatorTitle.dietlensTitle
         //SignPainterHouseScript 28.0
@@ -262,6 +227,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
             loadNutritionTarget()
             shouldRefreshMainPageNutrition = false
         }
+
     }
 
     // calculate Nutrition Data & put into homePage
@@ -276,7 +242,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     func didPressArticle(_ indexOfArticleList: Int) {
         articleType = ArticleType.ARTICLE
         whichArticleIndex = indexOfArticleList
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? ArticleDetailViewController {
 //            dest.articleType = self.articleType
             dest.articleData = ArticleDataManager.instance.articleList[indexOfArticleList]
             if let navigator = self.navigationController {
@@ -287,7 +253,7 @@ class HomeViewController: UIViewController, ArticleCollectionCellDelegate {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let dest = segue.destination as? SingleArticleViewController {
+        if let dest = segue.destination as? ArticleDetailViewController {
             if articleType == ArticleType.ARTICLE {
                 dest.articleData = ArticleDataManager.instance.articleList[whichArticleIndex]
             } else {
@@ -326,7 +292,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         //navigate to article page
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? SingleArticleViewController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "singleArticleVC") as? ArticleDetailViewController {
             dest.articleData = ArticleDataManager.instance.eventList[indexPath.row - 1]
             if let navigator = self.navigationController {
                 navigator.pushViewController(dest, animated: true)
