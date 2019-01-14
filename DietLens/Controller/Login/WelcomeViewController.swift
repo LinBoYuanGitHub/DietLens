@@ -66,7 +66,7 @@ class WelcomeViewController: BaseViewController {
                 print(error)
             case .cancelled:
                 print("user cancelled login.")
-            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+            case .success( _, _, let accessToken):
                 print("Logged in!")
                 let request = FBProfileRequest()
                 request.start({ (_, result) in

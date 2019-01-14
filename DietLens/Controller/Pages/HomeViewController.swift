@@ -8,7 +8,7 @@
 
 import UIKit
 import BAFluidView
-import Instructions
+//import Instructions
 import Photos
 import FirebaseAnalytics
 
@@ -411,21 +411,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 }
 
-extension HomeViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
-
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-        coachViews.bodyView.nextLabel.text = "Got it"
-        coachViews.bodyView.hintLabel.text = " Tap to start "
-        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        return coachMarksController.helper.makeCoachMark(for: homePlusButton)
-    }
-
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-        return 1
-    }
-
-}
+//extension HomeViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+//
+//    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+//        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+//        coachViews.bodyView.nextLabel.text = "Got it"
+//        coachViews.bodyView.hintLabel.text = " Tap to start "
+//        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+//    }
+//
+//    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+//        return coachMarksController.helper.makeCoachMark(for: homePlusButton)
+//    }
+//
+//    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+//        return 1
+//    }
+//
+//}

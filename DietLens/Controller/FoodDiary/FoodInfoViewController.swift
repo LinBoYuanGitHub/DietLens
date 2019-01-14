@@ -69,6 +69,7 @@ class FoodInfoViewController: UIViewController {
     @IBOutlet weak var iodineLevelText: UILabel!
     @IBOutlet weak var iodineLevelImage: UIImageView!
     @IBOutlet weak var iodineLevelView: UIView!
+    @IBOutlet weak var iodinePendingText: UILabel!
     @IBOutlet weak var nutrtionToMealTimeDistance: NSLayoutConstraint!
 
     override func viewDidLoad() {
@@ -122,6 +123,11 @@ class FoodInfoViewController: UIViewController {
             nutrtionToMealTimeDistance.constant = 4
             self.view.layoutIfNeeded()
         } else {
+            if dietItem.iodineLevel == 0 {
+                iodinePendingText.isHidden = false
+            } else {
+                iodinePendingText.isHidden = true
+            }
             iodineLevelImage.image = UIImage(imageLiteralResourceName: StringConstants.IodineLevel.icon[dietItem.iodineLevel])
             iodineLevelText.text = StringConstants.IodineLevel.text[dietItem.iodineLevel]
             iodineLevelText.textColor = UIColor.init(hex: Int32(StringConstants.IodineLevel.color[dietItem.iodineLevel]))
@@ -425,6 +431,8 @@ class FoodInfoViewController: UIViewController {
         if !isDietItemValied() {
             return
         }
+        //save food also to album
+        CustomPhotoAlbum.sharedInstance.saveImage(image: userFoodImage!)
         NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
         if isUpdate {
             FoodDiaryDataManager.instance.foodDiaryEntity.dietItems[indexFromUpdate] = dietItem

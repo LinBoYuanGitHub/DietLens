@@ -80,6 +80,19 @@ class HealthCenterTableViewController: UIViewController {
             self.navigationController?.pushViewController(dest, animated: true)
         }
     }
+
+    func deleteHealthItem(row: Int) {
+        APIService.instance.deleteHealthCenterData(healthItemId: recordList[row].id) { (isSuccess) in
+            if isSuccess {
+                self.recordList.remove(at: row)
+                let indexPath = IndexPath(row: row, section: 0)
+                self.healthCenterBarTable.deleteRows(at: [indexPath], with: .automatic)
+                if self.recordList.count == 0 {
+                    self.emptyViewContainer.isHidden = false
+                }
+            }
+        }
+    }
 }
 
 extension HealthCenterTableViewController: UITableViewDataSource, UITableViewDelegate {
@@ -90,6 +103,13 @@ extension HealthCenterTableViewController: UITableViewDataSource, UITableViewDel
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //API delete item
+            deleteHealthItem(row: indexPath.row)
+        }
     }
 
     func findMaxValue(recordList: [HealthCenterItem]) -> Float {

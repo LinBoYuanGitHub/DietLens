@@ -382,9 +382,9 @@ extension CameraViewController: CameraViewControllerDelegate {
         self.recordType = RecognitionInteger.recognition
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
         let saveToAblumFlag = UserDefaults.standard.bool(forKey: PreferenceKey.saveToAlbumFlag)
-        if saveToAblumFlag && !(Reachability()!.connection == .none) { //with network & save to album flag
-            CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
-        }
+//        if saveToAblumFlag && !(Reachability()!.connection == .none) { //with network & save to album flag
+//            CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
+//        }
         showReview(image: croppedImage)
         approveImage(image: croppedImage)
     }
