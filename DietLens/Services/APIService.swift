@@ -1788,6 +1788,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("get clinical study failed due to : \(String(describing: response.result.error))")
+                    let list = [ClinicalStudyEntity]()
+                    completion(list)
                     return
                 }
                 let jsonArr = JSON(response.result.value)

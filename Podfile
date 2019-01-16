@@ -45,7 +45,8 @@ target 'DietLens' do
   #swift reachability
   pod 'ReachabilitySwift'
   pod 'Charts'
-  
+  #facebook texture asyncDisplay
+  pod 'Texture'
 
   target 'DietLensTests' do
     inherit! :search_paths

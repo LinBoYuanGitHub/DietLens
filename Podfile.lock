@@ -96,7 +96,6 @@ PODS:
   - GoogleUtilities/UserDefaults (5.3.6):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
-  - Instructions (1.2.2)
   - JPSVolumeButtonHandler (1.0.5)
   - Kingfisher (4.10.1)
   - nanopb (0.3.901):
@@ -108,6 +107,21 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.4.0)
   - NVActivityIndicatorView/Presenter (4.4.0)
   - ParallaxHeader (2.0.0)
+  - PINCache (3.0.1-beta.6):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
+    - PINCache/Core (= 3.0.1-beta.6)
+  - PINCache/Arc-exception-safe (3.0.1-beta.6):
+    - PINCache/Core
+  - PINCache/Core (3.0.1-beta.6):
+    - PINOperation (~> 1.1.0)
+  - PINOperation (1.1.1)
+  - PINRemoteImage/Core (3.0.0-beta.13):
+    - PINOperation
+  - PINRemoteImage/iOS (3.0.0-beta.13):
+    - PINRemoteImage/Core
+  - PINRemoteImage/PINCache (3.0.0-beta.13):
+    - PINCache (= 3.0.1-beta.6)
+    - PINRemoteImage/Core
   - Protobuf (3.6.1)
   - QiniuUpload (3.0.0)
   - ReachabilitySwift (4.3.0)
@@ -119,6 +133,13 @@ PODS:
   - Starscream (3.0.6)
   - SwiftLint (0.29.1)
   - SwiftyJSON (4.2.0)
+  - Texture (2.7):
+    - Texture/PINRemoteImage (= 2.7)
+  - Texture/Core (2.7)
+  - Texture/PINRemoteImage (2.7):
+    - PINRemoteImage/iOS (= 3.0.0-beta.13)
+    - PINRemoteImage/PINCache
+    - Texture/Core
   - XLPagerTabStrip (8.1.0)
 
 DEPENDENCIES:
@@ -136,7 +157,6 @@ DEPENDENCIES:
   - Firebase/Messaging
   - FSCalendar
   - GoogleSignIn
-  - Instructions (~> 1.2.0)
   - JPSVolumeButtonHandler
   - Kingfisher (~> 4.0)
   - NVActivityIndicatorView
@@ -149,6 +169,7 @@ DEPENDENCIES:
   - Socket.IO-Client-Swift
   - SwiftLint
   - SwiftyJSON
+  - Texture
   - XLPagerTabStrip (~> 8.0)
 
 SPEC REPOS:
@@ -176,12 +197,14 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GoogleUtilities
     - GTMSessionFetcher
-    - Instructions
     - JPSVolumeButtonHandler
     - Kingfisher
     - nanopb
     - NVActivityIndicatorView
     - ParallaxHeader
+    - PINCache
+    - PINOperation
+    - PINRemoteImage
     - Protobuf
     - QiniuUpload
     - ReachabilitySwift
@@ -192,6 +215,7 @@ SPEC REPOS:
     - Starscream
     - SwiftLint
     - SwiftyJSON
+    - Texture
     - XLPagerTabStrip
 
 EXTERNAL SOURCES:
@@ -229,12 +253,14 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
-  Instructions: baff1b8ac41e195556c2b3453be1fcdd92e18612
   JPSVolumeButtonHandler: 53110330c9168ed325def93eabff39f0fe3e8082
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
   ParallaxHeader: fb6ee97915626454f3c029a97b424f79a777c642
+  PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
+  PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
+  PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   QiniuUpload: b1b3dda4883b9bacf9e2efc9e28978cdd6a26c70
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
@@ -245,8 +271,9 @@ SPEC CHECKSUMS:
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: 27d55ab55f193c5930cbc9212a20e06e8a7d4b0b
+PODFILE CHECKSUM: 84aecaa7510e08c37857448e797c8a9b93dfd716
 
 COCOAPODS: 1.5.3
