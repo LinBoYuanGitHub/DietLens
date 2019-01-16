@@ -76,7 +76,7 @@ class RecognitionResultViewController: BaseViewController {
                 navigator.pushViewController(dest, animated: true)
             }
             //#Google Analytic part
-            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType])
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType ?? ""])
             //trigger search more
             Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreFlag, parameters: nil)
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -179,7 +179,7 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
         requestForDietInformation(foodId: selectedFoodInfo.id)
         //# Firebase Analytic log
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType ?? "", "rank": indexPath.row])
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             if appDelegate.isImageCaptureTriggered {
                 Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectFlag, parameters: nil)

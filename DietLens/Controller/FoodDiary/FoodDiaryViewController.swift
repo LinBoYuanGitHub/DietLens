@@ -282,22 +282,22 @@ class FoodDiaryViewController: UIViewController {
         let fatStr =  String(format: "%.1f", accumulatedFat) + StringConstants.UIString.diaryIngredientUnit
         //calorieValue
         let calorieText = NSMutableAttributedString.init(string: calorieStr)
-        calorieText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        calorieText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                    kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: calorieStr.count - 4, length: 4))
         calorieValueLabel.attributedText = calorieText
         //carbohydrateValue
         let carbohydrateText = NSMutableAttributedString.init(string: carbohydrateStr)
-        carbohydrateText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        carbohydrateText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                         kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: carbohydrateStr.count - 1, length: 1))
         carbohydrateLabel.attributedText = carbohydrateText
         //protein
         let proteinText = NSMutableAttributedString.init(string: proteinStr)
-        proteinText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        proteinText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                    kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: proteinStr.count - 1, length: 1))
         proteinValueLable.attributedText = proteinText
         //fat
         let fatText = NSMutableAttributedString.init(string: fatStr)
-        fatText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        fatText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: fatStr.count - 1, length: 1))
         fatValueLabel.attributedText = fatText
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol activitySelectDelegate {
+protocol activitySelectDelegate: class {
     func onActivitySelect(index: Int)
 }
 
@@ -18,7 +18,7 @@ class ProfileActivityLvlViewController: BaseViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var progressText: UILabel!
 
-    var activitySelectDelegate: activitySelectDelegate?
+    weak var activitySelectDelegate: activitySelectDelegate?
     var indexValue: Int  = 1
 
     //registration flow param
@@ -65,7 +65,8 @@ class ProfileActivityLvlViewController: BaseViewController {
                         guard let results =  popularList else {
                             return
                         }
-                        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PersonalFavouriteFoodVC") as? PersonalFavouriteFoodViewController {
+                        if let dest = UIStoryboard(name: "Main", bundle: nil)
+                            .instantiateViewController(withIdentifier: "PersonalFavouriteFoodVC") as? PersonalFavouriteFoodViewController {
                             dest.isInRegistrationFlow = self.isInRegistrationFlow
                             dest.popularFoodList = results
                             self.navigationController?.pushViewController(dest, animated: true)

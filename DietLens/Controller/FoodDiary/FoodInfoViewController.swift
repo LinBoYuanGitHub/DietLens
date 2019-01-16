@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAnalytics
 
+// swiftlint:disable all
 class FoodInfoViewController: UIViewController {
 
     @IBOutlet weak var foodSampleImage: UIImageView!
@@ -25,19 +26,16 @@ class FoodInfoViewController: UIViewController {
     @IBOutlet weak var proteinValueLable: UILabel!
     @IBOutlet weak var fatValueLabel: UILabel!
     @IBOutlet weak var carbohydrateValueLabel: UILabel!
-
     //container
     @IBOutlet weak var container: UIView!
     //pickerView
     var quantityPickerView = UIPickerView()
-
+    //meal component
     @IBOutlet weak var mealIconView: UIImageView!
     @IBOutlet weak var mealViewHeight: NSLayoutConstraint!
     @IBOutlet weak var favButton: UIButton!
-
     //editing data
     var dietItem: DietItem!
-
     let redUnderLine: UIView = UIView(frame: CGRect(x: 12, y: 32, width: 50, height: 2))
 
     //data source
@@ -198,30 +196,18 @@ class FoodInfoViewController: UIViewController {
         if dietItem.portionInfo.count != 0 {
             portionRate = Double(dietItem.quantity) * dietItem.portionInfo[dietItem.selectedPos].weightValue/100
         }
-        //calorieValue
-        let calorieStr = String(Int(dietItem.nutritionInfo.calorie * portionRate))+StringConstants.UIString.calorieUnit
-        let calorieText = NSMutableAttributedString.init(string: calorieStr)
-        calorieText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
-                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: calorieStr.count - 4, length: 4))
-        calorieValueLabel.attributedText = calorieText
-        //carbohydrateValue
-        let carbohydrateStr = String(format: "%.1f", dietItem.nutritionInfo.carbohydrate * portionRate)+StringConstants.UIString.diaryIngredientUnit
-        let carbohydrateText = NSMutableAttributedString.init(string: carbohydrateStr)
-        carbohydrateText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
-                                        kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: carbohydrateStr.count - 1, length: 1))
-        carbohydrateValueLabel.attributedText = carbohydrateText
-        //protein
-        let proteinStr = String(format: "%.1f", dietItem.nutritionInfo.protein * portionRate) + StringConstants.UIString.diaryIngredientUnit
-        let proteinText = NSMutableAttributedString.init(string: proteinStr)
-        proteinText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
-                                   kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: proteinStr.count - 1, length: 1))
-        proteinValueLable.attributedText = proteinText
-        //fat
-        let fatStr =  String(format: "%.1f", dietItem.nutritionInfo.fat * portionRate) + StringConstants.UIString.diaryIngredientUnit
-        let fatText = NSMutableAttributedString.init(string: fatStr)
-        fatText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
-                               kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: fatStr.count - 1, length: 1))
-        fatValueLabel.attributedText = fatText
+        setUpNutritionText(nutritionLabel: calorieValueLabel, nutritionValue: dietItem.nutritionInfo.calorie, portionRate: portionRate, unit: StringConstants.UIString.calorieUnit,format:"%.0f",strRange:4)
+        setUpNutritionText(nutritionLabel: carbohydrateValueLabel, nutritionValue: dietItem.nutritionInfo.carbohydrate, portionRate: portionRate, unit: StringConstants.UIString.diaryIngredientUnit,format:"%.1f",strRange:1)
+        setUpNutritionText(nutritionLabel: proteinValueLable, nutritionValue: dietItem.nutritionInfo.protein, portionRate: portionRate, unit: StringConstants.UIString.diaryIngredientUnit,format:"%.1f",strRange:1)
+        setUpNutritionText(nutritionLabel: fatValueLabel, nutritionValue: dietItem.nutritionInfo.fat, portionRate: portionRate, unit: StringConstants.UIString.diaryIngredientUnit,format:"%.1f",strRange:1)
+    }
+    
+    func setUpNutritionText(nutritionLabel:UILabel,nutritionValue:Double,portionRate:Double,unit:String,format:String,strRange:Int){
+        let nutritionStr =  String(format: format, nutritionValue * portionRate) + unit
+        let nutritionText = NSMutableAttributedString.init(string: nutritionStr)
+        nutritionText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
+                               kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: nutritionStr.count - strRange, length: strRange))
+        nutritionLabel.attributedText = nutritionText
     }
 
     /********************************************************
@@ -269,9 +255,7 @@ class FoodInfoViewController: UIViewController {
     @IBAction func onUnitBtnClicked(_ sender: Any) {
         showUnitSelectionDialog()
     }
-
     //used only when isNotAccumulatFood
-
     @objc func showUnitSelectionDialog() {
         if let singleOptionAlert = self.storyboard?.instantiateViewController(withIdentifier: "SingleSelectionVC") as? SingleOptionViewController {
             singleOptionAlert.delegate = self
@@ -435,121 +419,135 @@ class FoodInfoViewController: UIViewController {
         CustomPhotoAlbum.sharedInstance.saveImage(image: userFoodImage!)
         NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
         if isUpdate {
-            FoodDiaryDataManager.instance.foodDiaryEntity.dietItems[indexFromUpdate] = dietItem
-            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            optionMenu.view.tintColor = UIColor.ThemeColor.dietLensRed
-            var favTitle = ""
-            if dietItem.isFavoriteFood {
-                favTitle = StringConstants.UIString.removeFavActionItem
-            } else {
-                favTitle = StringConstants.UIString.addFavActionItem
-            }
-            let favoriteAction = UIAlertAction(title: favTitle, style: .default) { (_: UIAlertAction!) in
-                self.favButton.isUserInteractionEnabled = false
-                if self.dietItem.isFavoriteFood {
-                    APIService.instance.removeFavouriteFood(removeFoodId: self.dietItem.foodId, completion: { (_) in
-                        self.favButton.isUserInteractionEnabled = true
-                        self.dietItem.isFavoriteFood = false
-                        self.favButton.isSelected = false
-                    })
-                } else {
-                    APIService.instance.setFavouriteFoodList(foodList: [self.dietItem.foodId], completion: { (_) in
-                        self.favButton.isUserInteractionEnabled = true
-                        self.dietItem.isFavoriteFood = true
-                        self.favButton.isSelected = true
-                    })
-                }
-            }
-            let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (_: UIAlertAction!) in
-                self.navigationController?.popViewController(animated: true)
-                if let navigator = self.navigationController {
-                    for vc in navigator.viewControllers {
-                        if let foodDiaryVC = vc as? FoodDiaryViewController {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                                let indexPath = IndexPath(item: self.indexFromUpdate, section: 0)
-                                foodDiaryVC.deleteFoodItem(row: indexPath.row)
-                            })
-                        }
-                    }
-                }
-            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            optionMenu.addAction(favoriteAction)
-            optionMenu.addAction(deleteAction)
-            optionMenu.addAction(cancelAction)
-            self.present(optionMenu, animated: true, completion: nil)
+            //update menu
+            setUpUpdateOptionMenu()
         } else if recordType == RecognitionInteger.additionText {
             //data operation
-            FoodDiaryDataManager.instance.foodDiaryEntity.dietItems.append(dietItem)
-            //1.multiple times TextSearchItem 2.first time TextSearchItem
-            if let navigator = self.navigationController {
-                //pop otherView
-                if navigator.viewControllers.contains(where: {
-                    return $0 is FoodDiaryViewController
-                }) {
-                    //add foodItem into foodDiaryVC
-                    for viewController in (self.navigationController?.viewControllers)! {
-                        if let foodDiaryVC = viewController as? FoodDiaryViewController {
-                            //perform updating foodDiary by adding foodItem
-                            foodDiaryVC.addFoodIntoItem()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                navigator.popToViewController(foodDiaryVC, animated: true)
-                            }
-                        }
-                    }
-                } else {
-                    //firstTime
-                    if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
-                        FoodDiaryDataManager.instance.foodDiaryEntity.imageId = imageKey!
-                        dest.isUpdate = false
-                        dest.isSetMealByTimeRequired = false
-                        dest.recordDate = recordDate
-                        dest.imageKey = imageKey
-                        dest.userFoodImage = userFoodImage
-                        //pop searchView & foodInfoView
-                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-                            navigator.popViewController(animated: false)
-                            navigator.popViewController(animated: false)
-                            navigator.pushViewController(dest, animated: true)
-                        }
-                    }
-                }
-            }
+            addAdditionalTextItem()
         } else {
-            //redirect to foodDiary page
-            FoodDiaryDataManager.instance.foodDiaryEntity.dietItems.append(dietItem)
-            guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
+            //redirect to foodDiary
+            redirectToFoodDiaryPage()
+        }
+    }
+
+    func setUpUpdateOptionMenu() {
+        FoodDiaryDataManager.instance.foodDiaryEntity.dietItems[indexFromUpdate] = dietItem
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        optionMenu.view.tintColor = UIColor.ThemeColor.dietLensRed
+        var favTitle = ""
+        if dietItem.isFavoriteFood {
+            favTitle = StringConstants.UIString.removeFavActionItem
+        } else {
+            favTitle = StringConstants.UIString.addFavActionItem
+        }
+        let favoriteAction = UIAlertAction(title: favTitle, style: .default) { (_: UIAlertAction!) in
+            self.favButton.isUserInteractionEnabled = false
+            if self.dietItem.isFavoriteFood {
+                APIService.instance.removeFavouriteFood(removeFoodId: self.dietItem.foodId, completion: { (_) in
+                    self.favButton.isUserInteractionEnabled = true
+                    self.dietItem.isFavoriteFood = false
+                    self.favButton.isSelected = false
+                })
+            } else {
+                APIService.instance.setFavouriteFoodList(foodList: [self.dietItem.foodId], completion: { (_) in
+                    self.favButton.isUserInteractionEnabled = true
+                    self.dietItem.isFavoriteFood = true
+                    self.favButton.isSelected = true
+                })
             }
-            appdelegate.showLoadingDialog()
-            APIService.instance.createFooDiary(foodDiary: FoodDiaryDataManager.instance.foodDiaryEntity, completion: { (isSuccess) in
-                appdelegate.dismissLoadingDialog()
-                if isSuccess {
-                    if let navigator = self.navigationController {
-                        //pop to home tabPage
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                            if let dest =  navigator.viewControllers.first as? HomeTabViewController {
-                                dest.shouldSwitchToFoodDiary = true
-                                dest.foodDiarySelectedDate = self.recordDate
-                            }
-                            navigator.popToRootViewController(animated: true)
+        }
+        let deleteAction = UIAlertAction(title: StringConstants.UIString.deleteActionItem, style: .default) { (_: UIAlertAction!) in
+            self.navigationController?.popViewController(animated: true)
+            if let navigator = self.navigationController {
+                for vc in navigator.viewControllers {
+                    if let foodDiaryVC = vc as? FoodDiaryViewController {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                            let indexPath = IndexPath(item: self.indexFromUpdate, section: 0)
+                            foodDiaryVC.deleteFoodItem(row: indexPath.row)
                         })
                     }
-                } else {
-                    AlertMessageHelper.showMessage(targetController: self, title: "", message: "create foodDiary failed")
                 }
-            })
-            //#google analytic log part
-            Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodPageAddSaveButton, parameters: [
-                "recordType": recordType,
-                "mealtime": FoodDiaryDataManager.instance.foodDiaryEntity.mealType
-                ])
-            switch recordType {
-            case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
-            case RecognitionInteger.gallery: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
-            case RecognitionInteger.text: Analytics.logEvent(StringConstants.FireBaseAnalytic.TextAddFlag, parameters: nil)
-            default:break
             }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        optionMenu.addAction(favoriteAction)
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+
+    func addAdditionalTextItem() {
+        FoodDiaryDataManager.instance.foodDiaryEntity.dietItems.append(dietItem)
+        //1.multiple times TextSearchItem 2.first time TextSearchItem
+        if let navigator = self.navigationController {
+            //pop otherView
+            if navigator.viewControllers.contains(where: {
+                return $0 is FoodDiaryViewController
+            }) {
+                //add foodItem into foodDiaryVC
+                for viewController in (self.navigationController?.viewControllers)! {
+                    if let foodDiaryVC = viewController as? FoodDiaryViewController {
+                        //perform updating foodDiary by adding foodItem
+                        foodDiaryVC.addFoodIntoItem()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            navigator.popToViewController(foodDiaryVC, animated: true)
+                        }
+                    }
+                }
+            } else {
+                //firstTime
+                if let dest = UIStoryboard(name: "AddFoodScreen", bundle: nil).instantiateViewController(withIdentifier: "FoodDiaryVC") as? FoodDiaryViewController {
+                    FoodDiaryDataManager.instance.foodDiaryEntity.imageId = imageKey!
+                    dest.isUpdate = false
+                    dest.isSetMealByTimeRequired = false
+                    dest.recordDate = recordDate
+                    dest.imageKey = imageKey
+                    dest.userFoodImage = userFoodImage
+                    //pop searchView & foodInfoView
+                    DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                        navigator.popViewController(animated: false)
+                        navigator.popViewController(animated: false)
+                        navigator.pushViewController(dest, animated: true)
+                    }
+                }
+            }
+        }
+    }
+
+    func redirectToFoodDiaryPage() {
+        //redirect to foodDiary page
+        FoodDiaryDataManager.instance.foodDiaryEntity.dietItems.append(dietItem)
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        appdelegate.showLoadingDialog()
+        APIService.instance.createFooDiary(foodDiary: FoodDiaryDataManager.instance.foodDiaryEntity, completion: { (isSuccess) in
+            appdelegate.dismissLoadingDialog()
+            if isSuccess {
+                if let navigator = self.navigationController {
+                    //pop to home tabPage
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        if let dest =  navigator.viewControllers.first as? HomeTabViewController {
+                            dest.shouldSwitchToFoodDiary = true
+                            dest.foodDiarySelectedDate = self.recordDate
+                        }
+                        navigator.popToRootViewController(animated: true)
+                    })
+                }
+            } else {
+                AlertMessageHelper.showMessage(targetController: self, title: "", message: "create foodDiary failed")
+            }
+        })
+        //#google analytic log part
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.FoodPageAddSaveButton, parameters: [
+            "recordType": recordType,
+            "mealtime": FoodDiaryDataManager.instance.foodDiaryEntity.mealType
+            ])
+        switch recordType {
+        case RecognitionInteger.recognition: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
+        case RecognitionInteger.gallery: Analytics.logEvent(StringConstants.FireBaseAnalytic.imageAddFlag, parameters: nil)
+        case RecognitionInteger.text: Analytics.logEvent(StringConstants.FireBaseAnalytic.TextAddFlag, parameters: nil)
+        default:break
         }
     }
 

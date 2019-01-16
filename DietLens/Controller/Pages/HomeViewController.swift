@@ -206,7 +206,7 @@ class HomeViewController: BaseViewController, ArticleCollectionCellDelegate {
             }
         }
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //set status bar appearance

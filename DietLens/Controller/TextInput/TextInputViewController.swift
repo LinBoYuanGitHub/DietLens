@@ -122,6 +122,7 @@ class TextInputViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
         //only refresh cache data
         if (textSearchField.text?.isEmpty)! && currentSelectionPos != 0 {

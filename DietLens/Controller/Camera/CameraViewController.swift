@@ -145,6 +145,7 @@ class CameraViewController: BaseViewController, UINavigationControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        UIApplication.shared.statusBarStyle = .lightContent
         //        volumeHandler?.start(true)
         sessionManager.onViewWillAppear()
     }
@@ -381,10 +382,6 @@ extension CameraViewController: CameraViewControllerDelegate {
         //set record type to capture
         self.recordType = RecognitionInteger.recognition
         let croppedImage = cropCameraImage(image, previewLayer: previewView.videoPreviewLayer)!
-        let saveToAblumFlag = UserDefaults.standard.bool(forKey: PreferenceKey.saveToAlbumFlag)
-//        if saveToAblumFlag && !(Reachability()!.connection == .none) { //with network & save to album flag
-//            CustomPhotoAlbum.sharedInstance.saveImage(image: croppedImage)
-//        }
         showReview(image: croppedImage)
         approveImage(image: croppedImage)
     }

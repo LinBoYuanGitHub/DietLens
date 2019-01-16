@@ -39,10 +39,11 @@ class QRScannerController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Get the back-facing camera for capturing videos
-        var deviceDiscoverySession: AVCaptureDevice.DiscoverySession?
-        if #available(iOS 10.2, *) {
-            deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera], mediaType: AVMediaType.video, position: .back)
-        }
+//        var deviceDiscoverySession: AVCaptureDevice.DiscoverySession?
+//        if #available(iOS 10.2, *) {
+//            deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera],
+//                                                                      mediaType: AVMediaType.video, position: .back)
+//        }
 
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) else {
             print("Failed to get the camera device")

@@ -78,6 +78,7 @@ class NotificationsViewController: UIViewController {
             }
         }
     }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         //set status bar appearance

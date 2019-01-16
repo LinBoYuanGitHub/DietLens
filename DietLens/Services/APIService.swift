@@ -13,6 +13,7 @@ import QiniuUpload
 import Kingfisher
 import GoogleSignIn
 
+// swiftlint:disable all
 class APIService {
 
     static var instance = APIService()
