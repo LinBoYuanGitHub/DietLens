@@ -178,10 +178,6 @@ class TextInputViewController: BaseViewController {
             self.textSearchTable.isHidden = false
             self.popularFoodList = results
             self.textSearchTable.reloadData()
-            //testing part
-//            let testTextVC = TextSearchTableViewController()
-//            testTextVC.textSerchResultList = textResults!
-//            self.navigationController?.pushViewController(testTextVC, animated: true)
         }) { (nextPageLink) in
             self.nextPageLink = nextPageLink!
         }
@@ -263,7 +259,6 @@ class TextInputViewController: BaseViewController {
         self.emptyView.isHidden = true
         if isSearching {
             APIService.instance.cancelAllRequest()
-//            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
             print("cancel text search \(textSearchField.text ?? "")")
         }
         isSearching = true

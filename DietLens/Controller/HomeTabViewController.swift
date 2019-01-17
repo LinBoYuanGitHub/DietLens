@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import Instructions
 import FirebaseAnalytics
 
 class HomeTabViewController: UIViewController, UITabBarDelegate {
@@ -23,9 +22,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
     var shouldSwitchToFoodDiary = false
     var shouldSwitchToMorePage = false
     var foodDiarySelectedDate = Date()
-
-    //add coachMarks
-//    let coachMarksController = CoachMarksController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +49,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         tabViewControlers[currentIndex].navigationController?.navigationBar.topItem?.title = titles[currentIndex]
         homeTabBar.selectedItem = homeTabBar.items?.first
         setNotificationRightNavigationButton()
-        //init coachMark
-//        self.coachMarksController.dataSource = self
-//        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -64,7 +57,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         let preferences = UserDefaults.standard
         let shouldShowCoachMark = !preferences.bool(forKey: FirstTimeFlag.isNotFirstTimeViewHome)
         if shouldShowCoachMark {
-//            self.coachMarksController.start(on: self)
             preferences.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewHome)
         }
     }
@@ -216,27 +208,6 @@ class HomeTabViewController: UIViewController, UITabBarDelegate {
         Analytics.logEvent(StringConstants.FireBaseAnalytic.HomeClickCameraButton, parameters: nil)
     }
 }
-
-//extension HomeTabViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
-//
-//    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-//        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-//        coachViews.bodyView.nextLabel.text = "Got it"
-//        coachViews.bodyView.hintLabel.text = " Tap to start "
-//        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-//    }
-//
-//    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-//        let interactionViews = homeTabBar.subviews.filter({$0.isUserInteractionEnabled})
-//        let targetViews = interactionViews.sorted(by: {$0.frame.minX < $1.frame.minX})
-//        return coachMarksController.helper.makeCoachMark(for: targetViews[2])
-//    }
-//
-//    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-//        return 1
-//    }
-//
-//}
 
 extension HomeTabViewController {
 

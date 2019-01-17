@@ -28,7 +28,6 @@ class WelcomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
@@ -183,7 +182,6 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                     }
                 } else {
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-                        //                        self.navigationController?.pushViewController(controller, animated: true)
                         self.present(controller, animated: true, completion: nil)
                     }
                 }

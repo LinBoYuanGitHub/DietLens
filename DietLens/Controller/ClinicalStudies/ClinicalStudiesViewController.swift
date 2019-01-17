@@ -22,7 +22,6 @@ class ClinicalStudiesViewController: BaseViewController {
         super.viewDidLoad()
         studyTableView.delegate = self
         studyTableView.dataSource = self
-//        studyDataMockedUp()
         scannerAreaView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onScanAreaTap)))
         //hide empty icon
         self.emaptyIconView.isHidden = true

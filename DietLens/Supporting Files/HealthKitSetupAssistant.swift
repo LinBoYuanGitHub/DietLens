@@ -168,7 +168,6 @@ extension HKHealthStore {
             let startDate = calendar.date(from: components)
             guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate!)
                 else {
-//                    fatalError("*** Unable to calculate the start date ***")
                     if completionHandler != nil {
                         completionHandler!([], error)
                     }
@@ -199,16 +198,12 @@ extension HKHealthStore {
         var interval = DateComponents()
         interval.day = 1
         var anchorComponents = calendar.dateComponents([.day, .month, .year, .weekday], from: Date())
-//        let offset = (7 + anchorComponents.weekday! - 2) % 7
-//        anchorComponents.day! -= offset
         anchorComponents.hour = 0
         guard let anchorDate = calendar.date(from: anchorComponents) else {
             return
-//            fatalError("*** unable to create a valid date from the given components ***")
         }
         guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
             return
-//            fatalError("*** Unable to create a step count type ***")
         }
         // Create the query
         let query = HKStatisticsCollectionQuery(quantityType: quantityType,
@@ -222,7 +217,6 @@ extension HKHealthStore {
 
             guard let statsCollection = results else {
                 // Perform proper error handling here
-//                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
                 if completionHandler != nil {
                     completionHandler!([], error)
                 }
@@ -253,8 +247,6 @@ extension HKHealthStore {
         var interval = DateComponents()
         interval.day = 1
         var anchorComponents = calendar.dateComponents([.day, .month, .year], from: Date())
-        //        let offset = (7 + anchorComponents.weekday! - 2) % 7
-        //        anchorComponents.day! -= offset
         anchorComponents.hour = 0
         guard let anchorDate = calendar.date(from: anchorComponents) else {
             fatalError("*** unable to create a valid date from the given components ***")
@@ -274,7 +266,6 @@ extension HKHealthStore {
 
             guard let statsCollection = results else {
                 // Perform proper error handling here
-//                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
                 if completionHandler != nil {
                     completionHandler!([], error)
                 }
@@ -327,7 +318,6 @@ extension HKHealthStore {
 
             guard let statsCollection = results else {
                 // Perform proper error handling here
-//                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
                 if completionHandler != nil {
                     completionHandler!([], error)
                 }

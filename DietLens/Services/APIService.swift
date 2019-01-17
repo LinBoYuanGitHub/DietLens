@@ -122,10 +122,6 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("facebook uid validation failed")
-//                    if response.response?.statusCode == 401 {
-//                        self.popOutToLoginPage()
-//                        return
-//                    }
                     completion(false, false)
                     return
                 }
@@ -1878,7 +1874,6 @@ class APIService {
 
     //for all the new token
     func getTokenHeader() -> [String: String] {
-        //        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
         let preferences = UserDefaults.standard
         var header = ["User-Agent": getUserAgentString()]
         if let token = preferences.string(forKey: PreferenceKey.tokenKey) {
@@ -1890,7 +1885,6 @@ class APIService {
     func getUserAgentString() -> String {
         if let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as? String,
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-             //        let appIdentifier = Bundle.main.bundleIdentifier!
             let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
             let systemIOSVersion = UIDevice.current.systemVersion
             let modelName = UIDevice.modelName

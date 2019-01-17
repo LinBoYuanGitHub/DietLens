@@ -41,7 +41,6 @@ target 'DietLens' do
   pod 'GoogleSignIn'
   #sky floating label
   pod 'SkyFloatingLabelTextField'
-#  pod 'Instructions', '~> 1.2.0'
   #swift reachability
   pod 'ReachabilitySwift'
   pod 'Charts'

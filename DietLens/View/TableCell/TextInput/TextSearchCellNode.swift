@@ -73,7 +73,6 @@ class TextSearchCellNode: ASCellNode {
         foodNameVerticalSpec.flexWrap = .wrap
         let calorieVerticalSpec = ASStackLayoutSpec(direction: .vertical, spacing: 5, justifyContent: .center, alignItems: .center, children: [calorieTextNode, calorieUnitNode])
         let finalSpec = ASStackLayoutSpec(direction: .horizontal, spacing: 10, justifyContent: .start, alignItems: .start, children: [sampleImageNode, foodNameVerticalSpec, calorieVerticalSpec])
-//        let finalSpec = ASAbsoluteLayoutSpec(children: [sampleImageNode, foodNameVerticalSpec, calorieVerticalSpec])
         finalSpec.style.alignSelf = .stretch
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), child: finalSpec)
     }

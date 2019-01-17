@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import Instructions
 import FirebaseAnalytics
 
 class FoodDiaryViewController: UIViewController {
@@ -36,8 +35,6 @@ class FoodDiaryViewController: UIViewController {
     var currentMealIndex = 0
     var isSetMealByTimeRequired: Bool = false
     @IBOutlet weak var animationViewLeading: NSLayoutConstraint!
-    //add coachMarks
-//    let coachMarksController = CoachMarksController()
 
     var recordDate = Date()
 
@@ -56,9 +53,6 @@ class FoodDiaryViewController: UIViewController {
         let addMoreGesture = UITapGestureRecognizer(target: self, action: #selector(onAddMoreClick))
         addMore.addGestureRecognizer(addMoreGesture)
         loadImage()
-        //set instruction label dataSource
-//        self.coachMarksController.dataSource = self
-//        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
         //analytic screen name
         if isUpdate {
             Analytics.setScreenName("AddFoodListPage", screenClass: "FoodDiaryViewController")
@@ -92,7 +86,6 @@ class FoodDiaryViewController: UIViewController {
         let preference = UserDefaults.standard
         let showCoachMarkFlag = !preference.bool(forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
         if isMixVeg && showCoachMarkFlag {
-//            self.coachMarksController.start(on: self)
             preference.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
         }
     }
@@ -443,22 +436,3 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-//extension FoodDiaryViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
-//
-//    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-//        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-//
-//        coachViews.bodyView.nextLabel.text = "Got it"
-//        coachViews.bodyView.hintLabel.text = "Add side dishes to complete your meal"
-//        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-//    }
-//
-//    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-//        return coachMarksController.helper.makeCoachMark(for: foodTableView.tableFooterView)
-//    }
-//
-//    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-//        return 1
-//    }
-//
-//}
