@@ -88,7 +88,7 @@ class LoginViewController: ButtonBarPagerTabStripViewController {
                 print(error)
             case .cancelled:
                 print("user cancelled login.")
-            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+            case .success(_, _, let accessToken):
                 print("Logged in!")
                 let request = FBProfileRequest()
                 request.start({ (_, result) in
@@ -266,7 +266,8 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 preferences.setValue(user.userID, forKey: PreferenceKey.googleUserId)
                 preferences.setValue(user.profile.name, forKey: PreferenceKey.nickNameKey)
                 //tmp use
-                if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString
+                if !avatarUrl.isEmpty {
                     preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
                 }
                 //tmp use
@@ -276,7 +277,8 @@ extension LoginViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                         if let name = user.profile.name {
                             profile.name = name
                         }
-                        if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                        let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString
+                        if !avatarUrl.isEmpty {
                             preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
                         }
                         if let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {

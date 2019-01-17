@@ -28,6 +28,7 @@ class RecognitionResultViewController: BaseViewController {
     var isSetMealByTimeRequired = false
     var mealType: String?
     var recordType: String?
+    var taskId: String?
 
     //dataSource
     var foodCategoryList = [DisplayFoodCategory]()
@@ -75,7 +76,7 @@ class RecognitionResultViewController: BaseViewController {
                 navigator.pushViewController(dest, animated: true)
             }
             //#Google Analytic part
-            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType])
+            Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultClickSearchMoreButton, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType ?? ""])
             //trigger search more
             Analytics.logEvent(StringConstants.FireBaseAnalytic.SearchMoreFlag, parameters: nil)
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -178,7 +179,7 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
         selectedFoodInfo = foodCategoryList[categoryIndex].subcateFoodList[indexPath.row]
         requestForDietInformation(foodId: selectedFoodInfo.id)
         //# Firebase Analytic log
-        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType, "rank": indexPath.row])
+        Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageResultSelectFoodItem, parameters: [StringConstants.FireBaseAnalytic.Parameter.MealTime: mealType ?? "", "rank": indexPath.row])
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             if appDelegate.isImageCaptureTriggered {
                 Analytics.logEvent(StringConstants.FireBaseAnalytic.ImageSelectFlag, parameters: nil)
@@ -193,7 +194,10 @@ extension RecognitionResultViewController: UITableViewDelegate, UITableViewDataS
 
     func redirectToFoodDiaryPage() {
         //request the mix veg API then to FoodDiaryVC
-        APIService.instance.postForMixVegResults(imageKey: imageKey!) { (foodDiaryEntity) in
+        if taskId == nil {
+            return
+        }
+        APIService.instance.postForMixVegResults(taskId: taskId!) { (foodDiaryEntity) in
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
                 return
             }

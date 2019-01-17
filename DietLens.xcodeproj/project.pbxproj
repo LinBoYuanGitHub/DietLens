@@ -73,6 +73,8 @@
 		3F5691ED214EA4AD00D9929A /* TextSuggestionCacheLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */; };
 		3F5691EF214FADE600D9929A /* ActvitityLevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */; };
 		3F575C332047F0D9009C096C /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F575C322047F0D9009C096C /* DateUtil.swift */; };
+		3F5E2D6421EC8E6800A9E670 /* TextSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5E2D6321EC8E6800A9E670 /* TextSearchTableViewController.swift */; };
+		3F5E2D6721EDB57900A9E670 /* TextSearchCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5E2D6621EDB57900A9E670 /* TextSearchCellNode.swift */; };
 		3F6CF8281FD7D27D00D7556E /* AddIngredientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */; };
 		3F73A7532109C1360031B01E /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F73A7522109C1360031B01E /* IntroductionViewController.swift */; };
 		3F764DEF20EB6195003A31DE /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F764DEE20EB6195003A31DE /* RulerView.swift */; };
@@ -196,7 +198,6 @@
 		BFD388B51FB6D4CD005A5C32 /* AddFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B41FB6D4CD005A5C32 /* AddFoodViewController.swift */; };
 		BFD388B81FB6DC12005A5C32 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */; };
 		BFFED3A01FB2D2CD00ADCAB3 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */; };
-		EC14599721B9079600A8D27F /* ClinicStudyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */; };
 		EC14599921B9091100A8D27F /* ClinicalStudyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */; };
 		EC79FA7121BE3A4A004ADAED /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA7021BE3A4A004ADAED /* DescriptionViewController.swift */; };
 		EC79FA7321BE3B01004ADAED /* EligibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC79FA7221BE3B01004ADAED /* EligibilityViewController.swift */; };
@@ -296,6 +297,8 @@
 		3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSuggestionCacheLRU.swift; sourceTree = "<group>"; };
 		3F5691EE214FADE500D9929A /* ActvitityLevelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActvitityLevelCell.swift; sourceTree = "<group>"; };
 		3F575C322047F0D9009C096C /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		3F5E2D6321EC8E6800A9E670 /* TextSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchTableViewController.swift; sourceTree = "<group>"; };
+		3F5E2D6621EDB57900A9E670 /* TextSearchCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSearchCellNode.swift; sourceTree = "<group>"; };
 		3F6CF8271FD7D27D00D7556E /* AddIngredientDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientDelegate.swift; sourceTree = "<group>"; };
 		3F73A7522109C1360031B01E /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		3F764DEE20EB6195003A31DE /* RulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
@@ -431,7 +434,6 @@
 		BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
 		BFFED39F1FB2D2CD00ADCAB3 /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		CB037DB260F784126E95BA0D /* Pods-DietLens.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietLens.release.xcconfig"; path = "Pods/Target Support Files/Pods-DietLens/Pods-DietLens.release.xcconfig"; sourceTree = "<group>"; };
-		EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicStudyEntity.swift; sourceTree = "<group>"; };
 		EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalStudyTableViewCell.swift; sourceTree = "<group>"; };
 		EC79FA7021BE3A4A004ADAED /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		EC79FA7221BE3B01004ADAED /* EligibilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EligibilityViewController.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 		3F43663E20773DF10089C63A /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				3F5E2D6521EDB51B00A9E670 /* TextInput */,
 				3FE16FA121C243E40013354B /* ClinicalStudyCell */,
 				3F88189A20EA566C00FE6C11 /* Profile */,
 				3FCBEC1620E661D10092948C /* HealthCenterCell */,
@@ -630,6 +633,14 @@
 				3F5691EC214EA4AD00D9929A /* TextSuggestionCacheLRU.swift */,
 			);
 			path = LRUCache;
+			sourceTree = "<group>";
+		};
+		3F5E2D6521EDB51B00A9E670 /* TextInput */ = {
+			isa = PBXGroup;
+			children = (
+				3F5E2D6621EDB57900A9E670 /* TextSearchCellNode.swift */,
+			);
+			path = TextInput;
 			sourceTree = "<group>";
 		};
 		3F73A7512109C0B00031B01E /* IntroductionPage */ = {
@@ -1048,6 +1059,7 @@
 			isa = PBXGroup;
 			children = (
 				BFD388B71FB6DC12005A5C32 /* TextInputViewController.swift */,
+				3F5E2D6321EC8E6800A9E670 /* TextSearchTableViewController.swift */,
 			);
 			path = TextInput;
 			sourceTree = "<group>";
@@ -1080,7 +1092,6 @@
 				3FA9DE2D21D0B2EE00331324 /* ZMProgress */,
 				ECC10ED321BA1705007574CC /* EConsentViewController.swift */,
 				ECE039CB21B7D57E00D18173 /* ClinicalStudiesViewController.swift */,
-				EC14599621B9079600A8D27F /* ClinicStudyEntity.swift */,
 				EC14599821B9091100A8D27F /* ClinicalStudyTableViewCell.swift */,
 				ECC10EDB21BA20DA007574CC /* LearnMoreViewController.swift */,
 				ECC10EDD21BA4119007574CC /* FoodRecommendationViewController.swift */,
@@ -1104,7 +1115,7 @@
 				5877CF801F9D82BF0022B51E /* Sources */,
 				5877CF811F9D82BF0022B51E /* Frameworks */,
 				5877CF821F9D82BF0022B51E /* Resources */,
-				BF8441171FA435B200D5018F /* Run Script */,
+				3F5E2D6821EF025A00A9E670 /* ShellScript */,
 				3F50DCE820AD72A5005209B8 /* Run Script */,
 				67CA9D397744E37F26B6A61A /* [CP] Embed Pods Frameworks */,
 				410550F8E5C8F54E622111C9 /* [CP] Copy Pods Resources */,
@@ -1171,6 +1182,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -1266,6 +1280,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 566448851a07272d654803fc9127e60d182bfe34 dff43d4d9e1c04061eb6f2c97cb63eb443b2f69e3c25212cf55b18f6570e03ab\n";
 		};
+		3F5E2D6821EF025A00A9E670 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		410550F8E5C8F54E622111C9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1311,10 +1342,12 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Instructions/Instructions.framework",
 				"${BUILT_PRODUCTS_DIR}/JPSVolumeButtonHandler/JPSVolumeButtonHandler.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
 				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QiniuUpload/QiniuUpload.framework",
@@ -1325,6 +1358,7 @@
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -1346,10 +1380,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instructions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JPSVolumeButtonHandler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QiniuUpload.framework",
@@ -1360,6 +1396,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -1411,20 +1448,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		BF8441171FA435B200D5018F /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\necho \"Target architectures: $ARCHS\"\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\nFRAMEWORK_TMP_PATH=\"$FRAMEWORK_EXECUTABLE_PATH-tmp\"\n\n# remove simulator's archs if location is not simulator's directory\ncase \"${TARGET_BUILD_DIR}\" in\n*\"iphonesimulator\")\necho \"No need to remove archs\"\n;;\n*)\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"i386\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"i386\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"i386 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\nif $(lipo \"$FRAMEWORK_EXECUTABLE_PATH\" -verify_arch \"x86_64\") ; then\nlipo -output \"$FRAMEWORK_TMP_PATH\" -remove \"x86_64\" \"$FRAMEWORK_EXECUTABLE_PATH\"\necho \"x86_64 architecture removed\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_TMP_PATH\" \"$FRAMEWORK_EXECUTABLE_PATH\"\nfi\n;;\nesac\n\necho \"Completed for executable $FRAMEWORK_EXECUTABLE_PATH\"\necho $(lipo -info \"$FRAMEWORK_EXECUTABLE_PATH\")\n\ndone\n";
 		};
 		D9A287E22164B16B20DD0629 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1502,18 +1525,19 @@
 				589424B01FD7B1B1009AEA4C /* SplashScreenViewController.swift in Sources */,
 				58199C891FB1D65D003F6104 /* DiaryCellDelegate.swift in Sources */,
 				3F2D163520F2899A00348160 /* HealthCenterDataManager.swift in Sources */,
+				3F5E2D6421EC8E6800A9E670 /* TextSearchTableViewController.swift in Sources */,
 				580443691FB0233900D59DFF /* AboutViewController.swift in Sources */,
 				3F9BFE9C1FF3957C0011845B /* AlertMessageHelper.swift in Sources */,
 				3FAED17C20C926BA0096B12F /* NotificationDetailViewController.swift in Sources */,
 				3F25C4752043EC7700DFA459 /* StringConstants.swift in Sources */,
 				3F436644207758640089C63A /* DailyNutritionTableCell.swift in Sources */,
 				3F43665B207EFA850089C63A /* FoodCategoryCollectionCell.swift in Sources */,
-				EC14599721B9079600A8D27F /* ClinicStudyEntity.swift in Sources */,
 				58AA521D1FA2D1AA0072779C /* Constants.swift in Sources */,
 				3F46C460215224510066636F /* RegistrationProfileCell.swift in Sources */,
 				EC79FA7121BE3A4A004ADAED /* DescriptionViewController.swift in Sources */,
 				3F436659207EFA6A0089C63A /* RecognitionResultTableCelll.swift in Sources */,
 				ECC10EE121BA4C1E007574CC /* ZMProgressView.m in Sources */,
+				3F5E2D6721EDB57900A9E670 /* TextSearchCellNode.swift in Sources */,
 				5800A5DF1FB8A11800B0D3E7 /* SinglePageArticleBodyCell.swift in Sources */,
 				3F575C332047F0D9009C096C /* DateUtil.swift in Sources */,
 				3F1AC2302087377B008F5BF2 /* NutritionCollectionCell.swift in Sources */,

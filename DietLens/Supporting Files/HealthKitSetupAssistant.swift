@@ -89,7 +89,9 @@ extension HKHealthStore {
             }
         }
 
-        let query = HKStatisticsQuery(quantityType: HKQuantityType.quantityType(forIdentifier: .stepCount)!, quantitySamplePredicate: predicate, options: HKStatisticsOptions.cumulativeSum, completionHandler: completionHandler)
+        let query = HKStatisticsQuery(
+            quantityType: HKQuantityType.quantityType(forIdentifier: .stepCount)!,
+            quantitySamplePredicate: predicate, options: HKStatisticsOptions.cumulativeSum, completionHandler: completionHandler)
 
         self.execute(query)
     }
@@ -166,14 +168,14 @@ extension HKHealthStore {
             let startDate = calendar.date(from: components)
             guard let endDate = calendar.date(byAdding: .day, value: 1, to: startDate!)
                 else {
-                    fatalError("*** Unable to calculate the start date ***")
                     if completionHandler != nil {
                         completionHandler!([], error)
                     }
+                    return
             }
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
-            statsCollection.enumerateStatistics(from: startDate!, to: endDate) { [unowned self] statistics, _ in
+            statsCollection.enumerateStatistics(from: startDate!, to: endDate) { statistics, _ in
 
                 let date = statistics.startDate
                 if let quantity = statistics.sumQuantity() {
@@ -196,16 +198,12 @@ extension HKHealthStore {
         var interval = DateComponents()
         interval.day = 1
         var anchorComponents = calendar.dateComponents([.day, .month, .year, .weekday], from: Date())
-//        let offset = (7 + anchorComponents.weekday! - 2) % 7
-//        anchorComponents.day! -= offset
         anchorComponents.hour = 0
         guard let anchorDate = calendar.date(from: anchorComponents) else {
             return
-//            fatalError("*** unable to create a valid date from the given components ***")
         }
         guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
             return
-//            fatalError("*** Unable to create a step count type ***")
         }
         // Create the query
         let query = HKStatisticsCollectionQuery(quantityType: quantityType,
@@ -219,7 +217,6 @@ extension HKHealthStore {
 
             guard let statsCollection = results else {
                 // Perform proper error handling here
-//                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
                 if completionHandler != nil {
                     completionHandler!([], error)
                 }
@@ -227,7 +224,7 @@ extension HKHealthStore {
             }
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
-            statsCollection.enumerateStatistics(from: date.beginOfWeek!, to: date.endOfWeek!) { [unowned self] statistics, _ in
+            statsCollection.enumerateStatistics(from: date.beginOfWeek!, to: date.endOfWeek!) { statistics, _ in
 
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate
@@ -250,8 +247,6 @@ extension HKHealthStore {
         var interval = DateComponents()
         interval.day = 1
         var anchorComponents = calendar.dateComponents([.day, .month, .year], from: Date())
-        //        let offset = (7 + anchorComponents.weekday! - 2) % 7
-        //        anchorComponents.day! -= offset
         anchorComponents.hour = 0
         guard let anchorDate = calendar.date(from: anchorComponents) else {
             fatalError("*** unable to create a valid date from the given components ***")
@@ -271,10 +266,10 @@ extension HKHealthStore {
 
             guard let statsCollection = results else {
                 // Perform proper error handling here
-                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
                 if completionHandler != nil {
                     completionHandler!([], error)
                 }
+                return
             }
             let components = calendar.dateComponents([.month, .year ], from: date)
             let startOfMonth = calendar.date(from: components)
@@ -284,7 +279,7 @@ extension HKHealthStore {
             let endOfMonth = calendar.date(byAdding: comps2, to: startOfMonth!)
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
-            statsCollection.enumerateStatistics(from: startOfMonth!, to: endOfMonth!) { [unowned self] statistics, _ in
+            statsCollection.enumerateStatistics(from: startOfMonth!, to: endOfMonth!) { statistics, _ in
 
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate
@@ -323,10 +318,10 @@ extension HKHealthStore {
 
             guard let statsCollection = results else {
                 // Perform proper error handling here
-                fatalError("*** An error occurred while calculating the statistics: \(error?.localizedDescription) ***")
                 if completionHandler != nil {
                     completionHandler!([], error)
                 }
+                return
             }
             let components = calendar.dateComponents([.year], from: date)
             let startOfYear = calendar.date(from: components)
@@ -336,7 +331,7 @@ extension HKHealthStore {
             let endOfYear = calendar.date(byAdding: comps2, to: startOfYear!)
             var stepList = [StepEntity]()
             // Plot the weekly step counts over the past 3 months
-            statsCollection.enumerateStatistics(from: startOfYear!, to: endOfYear!) { [unowned self] statistics, _ in
+            statsCollection.enumerateStatistics(from: startOfYear!, to: endOfYear!) { statistics, _ in
 
                 if let quantity = statistics.sumQuantity() {
                     let date = statistics.startDate

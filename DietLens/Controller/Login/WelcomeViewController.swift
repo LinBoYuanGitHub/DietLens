@@ -28,11 +28,14 @@ class WelcomeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         backBtn.isHidden = !shouldShowNavBtn
+    }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +69,7 @@ class WelcomeViewController: BaseViewController {
                 print(error)
             case .cancelled:
                 print("user cancelled login.")
-            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+            case .success( _, _, let accessToken):
                 print("Logged in!")
                 let request = FBProfileRequest()
                 request.start({ (_, result) in
@@ -112,7 +115,6 @@ class WelcomeViewController: BaseViewController {
                                 } else {
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-                                        //                                         self.navigationController?.pushViewController(controller, animated: true)
                                         self.present(controller, animated: true, completion: nil)
                                     }
                                 }
@@ -148,7 +150,8 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                 preferences.setValue(user.userID, forKey: PreferenceKey.googleUserId)
                 preferences.setValue(user.profile.name, forKey: PreferenceKey.nickNameKey)
                 //tmp use
-                if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString
+                if !avatarUrl.isEmpty {
                     preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
                 }
                 //save token to backend
@@ -168,7 +171,8 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                         if let name = user.profile.name {
                             profile.name = name
                         }
-                        if let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString as? String {
+                        let avatarUrl = user.profile.imageURL(withDimension: 100).absoluteString
+                        if !avatarUrl.isEmpty {
                             preferences.setValue(avatarUrl, forKey: PreferenceKey.googleImageUrl)
                         }
                         if let destVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegistrationProfileVC") as? RegistrationProfileViewController {
@@ -177,9 +181,7 @@ extension WelcomeViewController: GIDSignInDelegate, GIDSignInUIDelegate {
                         }
                     }
                 } else {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
-                        //                        self.navigationController?.pushViewController(controller, animated: true)
                         self.present(controller, animated: true, completion: nil)
                     }
                 }

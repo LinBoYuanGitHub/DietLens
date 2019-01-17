@@ -63,19 +63,21 @@ class LoadingButton: UIButton {
     }
 
     private func centerActivityIndicatorInButton() {
-        let xCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: loadingImageView, attribute: .centerX, multiplier: 1, constant: 0)
+        let xCenterConstraint = NSLayoutConstraint(item: self,
+                                                   attribute: .centerX, relatedBy: .equal, toItem: loadingImageView, attribute: .centerX, multiplier: 1, constant: 0)
         self.addConstraint(xCenterConstraint)
 
-        let yCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: loadingImageView, attribute: .centerY, multiplier: 1, constant: 0)
+        let yCenterConstraint = NSLayoutConstraint(item: self,
+                                                   attribute: .centerY, relatedBy: .equal, toItem: loadingImageView, attribute: .centerY, multiplier: 1, constant: 0)
         self.addConstraint(yCenterConstraint)
     }
 
     func rotate(imageView: UIImageView) {
         let rotation: CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotation.toValue = NSNumber(value: M_PI * 2)
+        rotation.toValue = NSNumber(value: Double.pi * 2)
         rotation.duration = 1
         rotation.isCumulative = true
-        rotation.repeatCount = FLT_MAX
+        rotation.repeatCount = Float.greatestFiniteMagnitude
         imageView.layer.add(rotation, forKey: "rotationAnimation")
     }
 }

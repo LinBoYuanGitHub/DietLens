@@ -58,7 +58,7 @@ class IntroductionViewController: UIViewController {
     }
 
     func redirectToWelcomePage() {
-        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeNVC") as? UINavigationController {
+        if let dest = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController {
              self.present(dest, animated: true, completion: nil)
         }
     }

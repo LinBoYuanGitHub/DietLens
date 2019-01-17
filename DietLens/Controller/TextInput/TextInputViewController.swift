@@ -32,8 +32,6 @@ class TextInputViewController: BaseViewController {
 
     //tab item for filter the result
     var filterItem = [StringConstants.UIString.FitlerPopular, StringConstants.UIString.FilterRecent, StringConstants.UIString.FilterFavorite]
-    //autoComplete & textSearchResult List
-    //    var autoCompleteTextList = [String]()
     //display tableView data
     var searchResultList = [TextSearchSuggestionEntity]()
     var popularFoodList = [TextSearchSuggestionEntity]()
@@ -124,6 +122,7 @@ class TextInputViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.navigationBar.isHidden = true
         //only refresh cache data
         if (textSearchField.text?.isEmpty)! && currentSelectionPos != 0 {
@@ -245,6 +244,7 @@ class TextInputViewController: BaseViewController {
             tableTopConstants.constant = 0
             textSearchFilterView.isHidden = true
             animationView.isHidden = true
+            self.isInTextSearch = true
             performTextSearch()
         }
 
@@ -259,8 +259,7 @@ class TextInputViewController: BaseViewController {
         self.emptyView.isHidden = true
         if isSearching {
             APIService.instance.cancelAllRequest()
-//            APIService.instance.cancelRequest(requestURL: ServerConfig.foodFullTextSearchURL + "?category=0")
-            print("cancel text search \(textSearchField.text)")
+            print("cancel text search \(textSearchField.text ?? "")")
         }
         isSearching = true
         let searchText = textSearchField.text
@@ -291,7 +290,6 @@ class TextInputViewController: BaseViewController {
             service.emptyView.isHidden = true
             service.searchResultList = textResults!
             service.textSearchTable.reloadData()
-            service.isInTextSearch = true
         }) { (nextPageLink) in
             self.nextPageLink = nextPageLink!
         }
@@ -365,7 +363,6 @@ class TextInputViewController: BaseViewController {
     }
 
     func onFilterSelect(currentSelection: Int) {
-        APIService.instance.cancelAllRequest()
         self.textSearchTable.reloadData()
         if currentSelection == 0 {
             self.getPopurlarFoodLists()

@@ -62,8 +62,10 @@ class SettingViewController: BaseViewController {
                     DispatchQueue.main.async {
                         self.clearPersonalData()
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let controller = storyboard.instantiateViewController(withIdentifier: "WelcomeNVC")
-                        self.present(controller, animated: true, completion: nil)
+                        guard let controller = storyboard.instantiateViewController(withIdentifier: "HomeTabNVC") as? UINavigationController else {
+                            return
+                        }
+                        self.present(controller, animated: false, completion: nil)
                     }
                 })
             }
@@ -79,10 +81,10 @@ class SettingViewController: BaseViewController {
         preferences.setValue(nil, forKey: PreferenceKey.nickNameKey)
         preferences.setValue(nil, forKey: PreferenceKey.googleUserId)
         preferences.setValue(nil, forKey: PreferenceKey.googleImageUrl)
-        //google login
+        //google log out
         GIDSignIn.sharedInstance().signOut()
-        //facebook login
-//        LoginManager().logOut()
+        //facebook log out
+        LoginManager(loginBehavior: .systemAccount, defaultAudience: .everyone).logOut()
     }
 
 }

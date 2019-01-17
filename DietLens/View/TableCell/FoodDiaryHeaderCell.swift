@@ -40,8 +40,6 @@ class FoodDiaryHeaderCell: UITableViewCell {
             titleLabel.text = "Dinner"
         case .snack:
             titleLabel.text = "Snack"
-        default:
-            titleLabel.text = "None"
         }
     }
 

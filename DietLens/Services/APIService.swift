@@ -13,6 +13,7 @@ import QiniuUpload
 import Kingfisher
 import GoogleSignIn
 
+// swiftlint:disable all
 class APIService {
 
     static var instance = APIService()
@@ -45,7 +46,11 @@ class APIService {
                     }
                     return
                 }
-                let result = JSON(response.result.value)
+                guard let parseResult = response.result.value else {
+                    failureCompletion("Json parse error")
+                    return
+                }
+                let result = JSON(parseResult)
                 successCompletion(result)
         }
     }
@@ -117,10 +122,6 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("facebook uid validation failed")
-//                    if response.response?.statusCode == 401 {
-//                        self.popOutToLoginPage()
-//                        return
-//                    }
                     completion(false, false)
                     return
                 }
@@ -164,11 +165,16 @@ class APIService {
                 let token = response.response!.allHeaderFields["token"]
                 preferences.setValue(token, forKey: PreferenceKey.tokenKey)
                 //get userId
-                let userId = JSON(response.result.value)["data"]["id"].stringValue
+                guard let parseResult = response.result.value else {
+                    completion(false, false)
+                    return
+                }
+                let userId = JSON(parseResult)["data"]["id"].stringValue
                 preferences.setValue(userId, forKey: PreferenceKey.userIdkey)
                 //get isNewUser flag
-                let isNewUser = JSON(response.result.value)["data"]["is_new_user"].boolValue
+                let isNewUser = JSON(parseResult)["data"]["is_new_user"].boolValue
                 completion(true, isNewUser)
+
         }
     }
 
@@ -186,7 +192,11 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObj = JSON(response.result.value)
+                guard let parseResult = response.result.value else {
+                    completion(false)
+                    return
+                }
+                let jsonObj = JSON(parseResult)
                 let status = jsonObj["status"].intValue
                 if status == 1 {
                     completion(true)
@@ -217,7 +227,11 @@ class APIService {
                     print("Get Token failed")
                     return
                 }
-                let jsonObj = JSON(response.result.value)
+                guard let parseResult = response.result.value else {
+                    completion(false)
+                    return
+                }
+                let jsonObj = JSON(parseResult)
                 let errMsg = jsonObj["error_message"].stringValue
                 if jsonObj["error_message"].stringValue != "" {
                     failedCompletion(errMsg)
@@ -255,16 +269,11 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let value = response.result.value as? JSON else {
+                guard (response.result.value as? JSON) != nil else {
                     print("Login Failed due to : Server Data Type Error")
                     completion(false)
                     return
                 }
-                //                let userId = value["id"].stringValue
-                //                let nickname = value["nickname"].stringValue
-                //                let rooms = rows.flatMap({ (roomDict) -> RemoteRoom? in
-                //                    return RemoteRoom(jsonData: roomDict)
-                //                })
                 completion(true)
         }
     }
@@ -282,7 +291,11 @@ class APIService {
                     completion(false)
                     return
                 }
-                let jsonObj = JSON(response.result.value)
+                guard let parseResult = response.result.value else {
+                    completion(false)
+                    return
+                }
+                let jsonObj = JSON(parseResult)
                 if jsonObj["error_message"] != JSON.null {
                     failedCompletion(jsonObj["error_message"].stringValue)
                     return
@@ -642,14 +655,15 @@ class APIService {
      * param: imageKey,latitude,longitude
      * return: List of DisplayFoodCategory
      */
-    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?) -> Void) {
+    public func postForRecognitionResult(imageKey: String, latitude: Double, longitude: Double, uploadSpeed: TimeInterval, completion: @escaping ([DisplayFoodCategory]?, _ taskId: String) -> Void) {
         postRequest(url: ServerConfig.uploadImageKeyURL, params: ["key": imageKey, "latitude": latitude, "longitude": longitude, "upload_speed": uploadSpeed], successCompletion: { (result) in
             let jsonObject = result["data"]
+            let taskId = result["task_id"].stringValue
             let displayCategory = FoodInfoDataManager.instance.assembleDisplayFoodCategoryData(data: jsonObject)
-            completion(displayCategory)
+            completion(displayCategory, taskId)
             print("success")
         }) { (_) in
-            completion(nil)
+            completion(nil, "")
         }
     }
 
@@ -660,7 +674,8 @@ class APIService {
             switch encodingResult {
             case .success(let upload, _, _):
                 upload.response { result in
-                    let jsonObj = JSON(result.data)
+                    guard let data = result.data else { return }
+                    let jsonObj = JSON(data)
                     let foodDiary = FoodInfoDataManager.instance.assembleFoodDiaryEntity(jsonObject: jsonObj)
                     completion(foodDiary)
                 }
@@ -673,11 +688,11 @@ class APIService {
         }
     }
 
-    public func postForMixVegResults(imageKey: String, completion:@escaping (FoodDiaryEntity?) -> Void) {
+    public func postForMixVegResults(taskId: String, completion:@escaping (FoodDiaryEntity?) -> Void) {
         Alamofire.request(
             URL(string: ServerConfig.uploadMixVegDishURL)!,
             method: .post,
-            parameters: ["key": imageKey],
+            parameters: ["task_id": taskId],
             encoding: JSONEncoding.default,
             headers: getTokenHeader())
             .validate()
@@ -889,7 +904,7 @@ class APIService {
                     completion(false)
                     return
                 }
-                guard let scanResult = response.result.value else {
+                guard response.result.value != nil else {
                     print("create foodDiary failed due to : Server Data Type Error")
                     completion(false)
                     return
@@ -982,8 +997,7 @@ class APIService {
     public func uploadImageForMatrix(imgData: Data, userId: String, latitude: Double, longitude: Double, completion: @escaping ( [DisplayFoodCategory]?) -> Void, progressCompletion: @escaping (Int) -> Void) {
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "image_file", fileName: "temp.png", mimeType: "image/png")
-        }, to: ServerConfig.uploadRecognitionURL) {
-            (result) in
+        }, to: ServerConfig.uploadRecognitionURL) { (result) in
             switch result {
             case .success(let upload, _, _):
                 upload.uploadProgress(closure: { (progress) in
@@ -1545,6 +1559,26 @@ class APIService {
         }
     }
 
+    func deleteHealthCenterData(healthItemId: String, completion: @escaping (Bool) -> Void) {
+        Alamofire.request(URL(string: ServerConfig.uploadHealthCenterData + healthItemId + "/")!,
+                          method: .delete,
+                          encoding: JSONEncoding.default,
+                          headers: getTokenHeader())
+        .validate()
+        .responseJSON { (response) -> Void in
+            guard response.result.isSuccess else {
+                print("Save exercise data failed due to : \(String(describing: response.result.error))")
+                if response.response?.statusCode == 401 {
+                    self.popOutToLoginPage()
+                    return
+                }
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
+
     func uploadHealthCenterData(category: String, value: Double, date: String, time: String, completion: @escaping (Bool) -> Void) {
         let params = ["category": category, "value": value, "date": date, "time": time] as [String: Any]
         Alamofire.request(URL(string: ServerConfig.uploadHealthCenterData)!,
@@ -1751,6 +1785,8 @@ class APIService {
             .responseJSON { (response) -> Void in
                 guard response.result.isSuccess else {
                     print("get clinical study failed due to : \(String(describing: response.result.error))")
+                    let list = [ClinicalStudyEntity]()
+                    completion(list)
                     return
                 }
                 let jsonArr = JSON(response.result.value)
@@ -1838,18 +1874,17 @@ class APIService {
 
     //for all the new token
     func getTokenHeader() -> [String: String] {
-        //        let header = ["Authorization": "Token 5b6f69c1ffb0b02413901dda8d01d088e8d31b43"]
         let preferences = UserDefaults.standard
-        let token = preferences.string(forKey: PreferenceKey.tokenKey) ?? ""
-        //        let userAgent = "DietLens/1.1 (com.sg.next.wellness.DietLens; build:1.0.3; iOS 11.4.0) Alamofire/4.7.3"
-        let header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]
+        var header = ["User-Agent": getUserAgentString()]
+        if let token = preferences.string(forKey: PreferenceKey.tokenKey) {
+            header = ["Authorization": "Token "+token, "User-Agent": getUserAgentString()]
+        }
         return header
     }
 
     func getUserAgentString() -> String {
         if let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as? String,
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-             //        let appIdentifier = Bundle.main.bundleIdentifier!
             let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
             let systemIOSVersion = UIDevice.current.systemVersion
             let modelName = UIDevice.modelName

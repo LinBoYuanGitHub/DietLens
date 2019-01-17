@@ -43,12 +43,7 @@ class ClinicalStudyTableViewCell: UITableViewCell {
         case .expiry:
             statusText.text = "expiry"
             containview.backgroundColor = UIColor.ThemeColor.dietLensAcceptedRed
-        default: break
         }
-//        studyName.text = study_Name
-//        self.icon.image = #imageLiteral(resourceName: "healthCenter_weight")
-//        studyStartDate.text = studyStartOnDate
-//        containview.backgroundColor = UIColor(red: 248/255, green: 105/255, blue: 82/255, alpha: 1)
     }
 
 }

@@ -210,7 +210,7 @@
 -(CADisplayLink *)link{
     if (_link == nil && self.animatable == YES) {
         _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(animateprecent)];
-        _link.frameInterval = 1 ;
+        _link.preferredFramesPerSecond = 1 ;
         [_link addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
     return _link;

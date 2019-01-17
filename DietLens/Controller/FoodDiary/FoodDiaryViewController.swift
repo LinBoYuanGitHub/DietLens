@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Instructions
 import FirebaseAnalytics
 
 class FoodDiaryViewController: UIViewController {
@@ -36,8 +35,6 @@ class FoodDiaryViewController: UIViewController {
     var currentMealIndex = 0
     var isSetMealByTimeRequired: Bool = false
     @IBOutlet weak var animationViewLeading: NSLayoutConstraint!
-    //add coachMarks
-    let coachMarksController = CoachMarksController()
 
     var recordDate = Date()
 
@@ -56,9 +53,6 @@ class FoodDiaryViewController: UIViewController {
         let addMoreGesture = UITapGestureRecognizer(target: self, action: #selector(onAddMoreClick))
         addMore.addGestureRecognizer(addMoreGesture)
         loadImage()
-        //set instruction label dataSource
-        self.coachMarksController.dataSource = self
-        self.coachMarksController.overlay.color = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(0), alpha: 0.52)
         //analytic screen name
         if isUpdate {
             Analytics.setScreenName("AddFoodListPage", screenClass: "FoodDiaryViewController")
@@ -92,7 +86,6 @@ class FoodDiaryViewController: UIViewController {
         let preference = UserDefaults.standard
         let showCoachMarkFlag = !preference.bool(forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
         if isMixVeg && showCoachMarkFlag {
-            self.coachMarksController.start(on: self)
             preference.set(true, forKey: FirstTimeFlag.isNotFirstTimeViewMixFood)
         }
     }
@@ -183,6 +176,8 @@ class FoodDiaryViewController: UIViewController {
     //save(from text Search) or update foodDiary
     @IBAction func onTopRightBtnPressed(_ sender: Any) {
         NotificationCenter.default.post(name: .shouldRefreshMainPageNutrition, object: nil)
+        //save food also to album
+        CustomPhotoAlbum.sharedInstance.saveImage(image: userFoodImage!)
         if isUpdate {
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             optionMenu.view.tintColor = UIColor.ThemeColor.dietLensRed
@@ -280,22 +275,22 @@ class FoodDiaryViewController: UIViewController {
         let fatStr =  String(format: "%.1f", accumulatedFat) + StringConstants.UIString.diaryIngredientUnit
         //calorieValue
         let calorieText = NSMutableAttributedString.init(string: calorieStr)
-        calorieText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        calorieText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                    kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: calorieStr.count - 4, length: 4))
         calorieValueLabel.attributedText = calorieText
         //carbohydrateValue
         let carbohydrateText = NSMutableAttributedString.init(string: carbohydrateStr)
-        carbohydrateText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        carbohydrateText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                         kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: carbohydrateStr.count - 1, length: 1))
         carbohydrateLabel.attributedText = carbohydrateText
         //protein
         let proteinText = NSMutableAttributedString.init(string: proteinStr)
-        proteinText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        proteinText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                    kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: proteinStr.count - 1, length: 1))
         proteinValueLable.attributedText = proteinText
         //fat
         let fatText = NSMutableAttributedString.init(string: fatStr)
-        fatText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0),
+        fatText.setAttributes([NSAttributedStringKey.font: UIFont(name: "PingFangSC-Light", size: 14.0)!,
                                kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.gray], range: NSRange(location: fatStr.count - 1, length: 1))
         fatValueLabel.attributedText = fatText
     }
@@ -312,6 +307,7 @@ class FoodDiaryViewController: UIViewController {
                 if foodDiaryEntity != nil && isSuccess {
                     //refresh foodDiaryEntity
                     self.foodDiaryInstance = foodDiaryEntity!
+                    self.foodTableView.reloadData()
                 } else {
                     AlertMessageHelper.showMessage(targetController: self, title: "", message: "add food item failed")
                 }
@@ -440,27 +436,3 @@ extension FoodDiaryViewController: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-extension FoodDiaryViewController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
-
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-        //        coachViews.bodyView.nextLabel.textColor = UIColor.white
-        //        coachViews.bodyView.hintLabel.textColor = UIColor.white
-        //        let dietlensRed =  UIColor(red: 242/255, green: 64/255, blue: 93/255, alpha: 1.0)
-        //        coachViews.bodyView.tintColor = dietlensRed
-        //        coachViews.bodyView.hintLabel.backgroundColor = dietlensRed
-        //        coachViews.bodyView.nextLabel.backgroundColor = dietlensRed
-        coachViews.bodyView.nextLabel.text = "Got it"
-        coachViews.bodyView.hintLabel.text = "Add side dishes to complete your meal"
-        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        return coachMarksController.helper.makeCoachMark(for: foodTableView.tableFooterView)
-    }
-
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-        return 1
-    }
-
-}
