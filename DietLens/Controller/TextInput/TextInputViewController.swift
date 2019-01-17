@@ -363,7 +363,6 @@ class TextInputViewController: BaseViewController {
     }
 
     func onFilterSelect(currentSelection: Int) {
-//        APIService.instance.cancelAllRequest()
         self.textSearchTable.reloadData()
         if currentSelection == 0 {
             self.getPopurlarFoodLists()
