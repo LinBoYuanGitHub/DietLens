@@ -129,5 +129,12 @@ extension HealthCenterTableViewController: UITableViewDataSource, UITableViewDel
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        var deleteBtnFrame = tableView.subviews[1].frame
+        deleteBtnFrame.origin.y += 2.75
+        deleteBtnFrame.size.height = 51
+        tableView.subviews[1].frame = deleteBtnFrame
+    }
 
 }
