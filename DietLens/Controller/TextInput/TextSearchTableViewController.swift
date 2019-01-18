@@ -95,7 +95,6 @@ extension TextSearchTableViewController: ASTableDataSource, ASTableDelegate {
                 self.delegate?.onTextSearchItemSelect(dietItem: dietItem!)
             } else {
                 //error flow
-                
             }
         }
     }
@@ -110,9 +109,6 @@ extension TextSearchTableViewController: ASTableDataSource, ASTableDelegate {
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
-//            if status == .fectchingMore {
-//                return
-//            }
             delegate?.onLoadMore()
         }
     }
