@@ -1,8 +1,0 @@
-stages:
-  - deploy
-
-Git MIRROR:
-  stage: deploy
-  script:
-    - echo $CI_JOB_ID
-    - git push --mirror https://Singgee:$bitbucketPassword@bitbucket.org/wellnessai/demoapp.git
