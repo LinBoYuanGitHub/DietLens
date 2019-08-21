@@ -7,17 +7,17 @@
 
 ## Features & Project Structure
 - Service: 
-- APIService: 
-- **Alamofire**: communicate with backend writing down here.
-- **QiniuUpload**: QiniuConfig used here for image uploading.
-- LRU cache: text search **Recent Tab** recent history functionality,currently use TextSuggestionCacheLRU only.
-- DataManager: all the **Data parsing** logic writing down here.
-- CountDownTimer: service for **SMS timer count down**.
-- CustomPhotoAlbum: save images to **Album** after photo taking.
+    - APIService: 
+        - **Alamofire**: communicate with backend writing down here.
+        - **QiniuUpload**: QiniuConfig used here for image uploading.
+    - LRU cache: text search **Recent Tab** recent history functionality,currently use TextSuggestionCacheLRU only.
+    - DataManager: all the **Data parsing** logic writing down here.
+    - CountDownTimer: service for **SMS timer count down**.
+    - CustomPhotoAlbum: save images to **Album** after photo taking.
 - View:
-- CustomizedView: **customized UI component** used here.
-- TableHeader:put all the customized **tableview header** logic code & xib here.
-- TableCell:put all the customized tableCell logic code here.
+    - CustomizedView: **customized UI component** used here.
+    - TableHeader:put all the customized **tableview header** logic code & xib here.
+    - TableCell:put all the customized tableCell logic code here.
 - Controller: all the view controller( View logic ) writing down here.
 - Model: all the POJO structue define here.
 
